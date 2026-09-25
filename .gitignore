@@ -1,0 +1,19 @@
+# Переменные окружения (никогда не коммитим)
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (если будешь использовать)
+node_modules/
+npm-debug.log
+yarn-error.log
