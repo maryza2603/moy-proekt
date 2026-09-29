@@ -32,7 +32,7 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .head p{color:var(--muted);max-width:380px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .card{background:var(--card);border:1px solid var(--line)}
-.card .img{aspect-ratio:4/3}
+.card .img{aspect-ratio:4/3;overflow:hidden}.card .img svg{display:block}
 .card .body{padding:28px}
 .card h3{font-size:28px;margin-bottom:8px}
 .card p{color:var(--muted);font-size:15px}
@@ -96,15 +96,15 @@ footer{padding:40px 0;border-top:1px solid var(--line);color:var(--muted);font-s
   <p>Проектируем под ваш дом, изготавливаем на своём производстве и монтируем за 3-5 дней. Дуб, ясень, бук.</p>
   <a class="btn" href="#form">Рассчитать стоимость</a>
  </div>
- <div class="stair" id="stair"></div>
+ <div class="stair" style="background:url(kosour.jpg) center/cover"></div>
 </div>
 
 <section id="cat"><div class="wrap">
  <div class="head"><h2>Типы лестниц</h2><p>Подберём конструкцию под планировку и интерьер. Цена - ориентир за готовую лестницу с монтажом.</p></div>
  <div class="grid">
-  <div class="card"><div class="img" style="background:linear-gradient(135deg,#d8c7b2,#a57b55)"></div><div class="body"><h3>Маршевые</h3><p>Классика для загородного дома. Удобный шаг, простой монтаж.</p><div class="price">от 180 000 ₽</div></div></div>
-  <div class="card"><div class="img" style="background:linear-gradient(135deg,#cfc5b8,#6d5a48)"></div><div class="body"><h3>На косоуре</h3><p>Металл и дерево. Лёгкий силуэт для современных интерьеров.</p><div class="price">от 240 000 ₽</div></div></div>
-  <div class="card"><div class="img" style="background:linear-gradient(135deg,#e2d6c6,#8a5a36)"></div><div class="body"><h3>Винтовые</h3><p>Когда места мало. Занимают от 1,5 м² площади.</p><div class="price">от 150 000 ₽</div></div></div>
+  <div class="card"><div class="img" style="background:url(marsh.jpg) center/cover"></div><div class="body"><h3>Маршевые</h3><p>Классика для загородного дома. Удобный шаг, простой монтаж.</p><div class="price">от 180 000 ₽</div></div></div>
+  <div class="card"><div class="img" style="background:url(kosour.jpg) center/cover"></div><div class="body"><h3>На косоуре</h3><p>Металл и дерево. Лёгкий силуэт для современных интерьеров.</p><div class="price">от 240 000 ₽</div></div></div>
+  <div class="card"><div class="img" id="spcard" style="background:#efe8de"></div><div class="body"><h3>Винтовые</h3><p>Когда места мало. Занимают от 1,5 м² площади.</p><div class="price">от 150 000 ₽</div></div></div>
  </div>
 </div></section>
 
@@ -140,18 +140,20 @@ footer{padding:40px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 
 <footer><div class="wrap">© STUPEN' · Демо-макет для отклика</div></footer>
 <script>
-for(let k=0;k<9;k++){const s=document.createElement('i');s.style.bottom=(k*10+4)+'%';s.style.width=(30+k*7)+'%';stair.appendChild(s)}
 document.querySelectorAll('.menu a').forEach(a=>a.onclick=()=>menu.classList.remove('open'));
 </script>
 <script>
-const BASE=120000,N=12,X0=50,Y0=320,W=26,H=18;
+const BASE=180000,N=12,X0=50,Y0=320,W=26,H=18;
+const CX=230,sp=st=>st.frame.id==="spiral",spt=i=>({x:CX+85*Math.cos(i*.62),y:Y0-(i+1)*H});
 const step=(i)=>({x:X0+i*W,y:Y0-(i+1)*H});
 const GROUPS=[
  {key:"frame",title:"Конструкция",layer:"L-frame",options:[
   {id:"tetiva",name:"На тетивах",price:0},
   {id:"kosour",name:"Металлический косоур",price:60000},
-  {id:"konsol",name:"Консольная (парящая)",price:95000}],
+  {id:"konsol",name:"Консольная (парящая)",price:95000},
+  {id:"spiral",name:"Винтовая",price:-30000}],
   render:(o,st)=>{const c=st.wood.c;
+   if(o.id==="spiral")return `<rect x="${CX-5}" y="${Y0-N*H-80}" width="10" height="${N*H+80}" fill="#2b2826"/>`;
    if(o.id==="tetiva")return `<polygon points="${X0-6},${Y0} ${X0+N*W},${Y0-N*H} ${X0+N*W},${Y0-N*H+34} ${X0+20},${Y0}" fill="${c}" opacity=".9" filter="brightness(.85)"/>`;
    if(o.id==="kosour"){let d=`M${X0+4} ${Y0}`;for(let i=0;i<N;i++){const p=step(i);d+=` L${p.x+4} ${p.y+6} L${p.x+W+4} ${p.y+6}`}return `<path d="${d}" fill="none" stroke="#2b2826" stroke-width="7" stroke-linejoin="round"/>`}
    return `<rect x="${X0+N*W}" y="${Y0-N*H-10}" width="10" height="${N*H+10}" fill="#d9d0c4"/>`}},
@@ -160,19 +162,22 @@ const GROUPS=[
   {id:"beech",name:"Бук",price:35000,c:"#c98f5c"},
   {id:"ash",name:"Ясень",price:48000,c:"#d8c09a"},
   {id:"oak",name:"Дуб",price:70000,c:"#9b6a43"}],
-  render:(o)=>{let r="";for(let i=0;i<N;i++){const p=step(i);r+=`<rect x="${p.x-4}" y="${p.y}" width="${W+10}" height="7" rx="1" fill="${o.c}" stroke="rgba(0,0,0,.18)"/>`}return r}},
+  render:(o,st)=>{let r="";if(sp(st)){for(let i=0;i<N;i++){const q=spt(i),x=Math.min(CX,q.x);r+=`<rect x="${x}" y="${q.y}" width="${Math.abs(q.x-CX)+4}" height="7" rx="1" fill="${o.c}" stroke="rgba(0,0,0,.18)"/>`}return r}for(let i=0;i<N;i++){const p=step(i);r+=`<rect x="${p.x-4}" y="${p.y}" width="${W+10}" height="7" rx="1" fill="${o.c}" stroke="rgba(0,0,0,.18)"/>`}return r}},
  {key:"riser",title:"Подступенки",layer:"L-riser",options:[
   {id:"no",name:"Без подступенков",price:0},
   {id:"yes",name:"С подступенками",price:22000}],
-  render:(o,st)=>{if(o.id==="no")return "";let r="";for(let i=0;i<N;i++){const p=step(i);r+=`<rect x="${p.x}" y="${p.y+7}" width="4" height="${H-7}" fill="${st.wood.c}" filter="brightness(.9)"/>`}return r}},
+  render:(o,st)=>{if(o.id==="no"||sp(st))return "";let r="";for(let i=0;i<N;i++){const p=step(i);r+=`<rect x="${p.x}" y="${p.y+7}" width="4" height="${H-7}" fill="${st.wood.c}" filter="brightness(.9)"/>`}return r}},
  {key:"rail",title:"Ограждение",layer:"L-rail",options:[
   {id:"wood",name:"Деревянные балясины",price:0},
   {id:"metal",name:"Металл, лофт",price:28000},
   {id:"glass",name:"Закалённое стекло",price:65000}],
-  render:(o,st)=>{const a=step(0),b=step(N-1),hr=90;let r="";
+  render:(o,st)=>{const hr=90;let r="";const hc=o.id==="metal"?"#2b2826":st.wood.c;
+   if(sp(st)){const pts=[];for(let i=0;i<N;i++){const q=spt(i);pts.push(`${q.x},${q.y-hr}`);if(o.id!=="glass")r+=`<line x1="${q.x}" y1="${q.y}" x2="${q.x}" y2="${q.y-hr}" stroke="${o.id==="metal"?"#2b2826":st.wood.c}" stroke-width="3"/>`}
+    if(o.id==="glass")r+=`<polyline points="${pts.join(" ")}" fill="none" stroke="#bcd6dc" stroke-width="70" opacity=".35" transform="translate(0,40)"/>`;
+    return r+`<polyline points="${pts.join(" ")}" fill="none" stroke="${hc}" stroke-width="6" stroke-linejoin="round"/>`}
+   const a=step(0),b=step(N-1);
    if(o.id==="glass")r+=`<polygon points="${a.x+8},${a.y} ${b.x+18},${b.y} ${b.x+18},${b.y-hr+6} ${a.x+8},${a.y-hr+6}" fill="#bcd6dc" opacity=".45" stroke="#9fbcc2"/>`;
    else for(let i=0;i<N;i++){const p=step(i);r+= o.id==="wood"?`<rect x="${p.x+10}" y="${p.y-hr+6}" width="4" height="${hr-6}" fill="${st.wood.c}"/>`:`<line x1="${p.x+12}" y1="${p.y}" x2="${p.x+12}" y2="${p.y-hr+6}" stroke="#2b2826" stroke-width="2"/>`}
-   const hc=o.id==="metal"?"#2b2826":st.wood.c;
    return r+`<line x1="${a.x+4}" y1="${a.y-hr}" x2="${b.x+22}" y2="${b.y-hr}" stroke="${hc}" stroke-width="8" stroke-linecap="round"/>`}},
  {key:"finish",title:"Покрытие",layer:null,options:[
   {id:"oil",name:"Масло с воском",price:0},
@@ -184,10 +189,11 @@ const fmt=n=>n.toLocaleString("ru-RU")+" ₽";
 function draw(){GROUPS.forEach(g=>{if(g.layer)document.getElementById(g.layer).innerHTML=g.render(st[g.key],st)});
  let t=BASE;GROUPS.forEach(g=>t+=st[g.key].price);sum.textContent=fmt(t);
  stairs.style.filter=st.finish.id==="ton"?"sepia(.35) saturate(1.2)":st.finish.id==="lak"?"contrast(1.05)":"none"}
-panel.innerHTML=GROUPS.map(g=>`<div class="grp"><h4>${g.title}</h4><div class="opts">${g.options.map((o,i)=>`<button class="opt${i?"":" on"}" data-g="${g.key}" data-i="${i}">${o.c?`<i style="background:${o.c}"></i>`:""}${o.name}${o.price?` <small>+${(o.price/1000)} тыс.</small>`:""}</button>`).join("")}</div></div>`).join("");
+panel.innerHTML=GROUPS.map(g=>`<div class="grp"><h4>${g.title}</h4><div class="opts">${g.options.map((o,i)=>`<button class="opt${i?"":" on"}" data-g="${g.key}" data-i="${i}">${o.c?`<i style="background:${o.c}"></i>`:""}${o.name}${o.price?` <small>${o.price>0?"+":"−"}${Math.abs(o.price/1000)} тыс.</small>`:""}</button>`).join("")}</div></div>`).join("");
 panel.onclick=e=>{const b=e.target.closest(".opt");if(!b)return;const g=GROUPS.find(x=>x.key===b.dataset.g);st[g.key]=g.options[b.dataset.i];
  b.parentNode.querySelectorAll(".opt").forEach(x=>x.classList.toggle("on",x===b));draw()};
 draw();
+{const o=Object.assign({},st,{frame:GROUPS[0].options[3],wood:GROUPS[1].options[3],rail:GROUPS[3].options[1]});spcard.innerHTML=`<svg viewBox="100 0 260 330" width="100%" height="100%">${GROUPS[0].render(o.frame,o)}${GROUPS[1].render(o.wood,o)}${GROUPS[3].render(o.rail,o)}</svg>`}
 </script>
 </body>
 </html>
