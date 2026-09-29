@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Анна Светлова - фотограф</title>
+<meta name="description" content="Демо лендинга фотографа: портреты, love story, семейные съемки">
+<link rel="preconnect" href="https://picsum.photos">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf9f7;--fg:#1a1a1a;--muted:#77726b;--line:#e6e2dc;--card:#fff;--accent:#1a1a1a;--accent-fg:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121212;--fg:#eeeae4;--muted:#9a948c;--line:#2a2826;--card:#1a1918;--accent:#eeeae4;--accent-fg:#121212}}
+:root[data-theme="dark"]{--bg:#121212;--fg:#eeeae4;--muted:#9a948c;--line:#2a2826;--card:#1a1918;--accent:#eeeae4;--accent-fg:#121212}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{background:var(--bg);color:var(--fg);font:300 16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover;background:var(--line)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;line-height:1.1}
+h2{font-size:clamp(34px,6vw,56px);margin-bottom:40px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+section{padding:96px 0;border-top:1px solid var(--line)}
+.eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+/* header */
+header{position:fixed;inset:0 0 auto;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:"Cormorant Garamond",serif;font-size:24px}
+.menu{display:flex;gap:28px;font-size:14px}
+.menu a{color:var(--muted);transition:color .2s}.menu a:hover{color:var(--fg)}
+.burger{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;color:var(--fg)}
+.burger span{display:block;width:22px;height:1px;background:currentColor;margin:6px auto;transition:.3s}
+@media(max-width:820px){
+ .burger{display:block}
+ .menu{position:fixed;top:60px;left:0;right:0;bottom:0;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:32px;font-size:22px;opacity:0;pointer-events:none;transition:opacity .3s}
+ .menu a{color:var(--fg)}
+ body.open .menu{opacity:1;pointer-events:auto}
+ body.open .burger span:first-child{transform:translateY(3.5px) rotate(45deg)}
+ body.open .burger span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+}
+/* hero */
+.hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;padding-top:60px;border:0}
+.hero-text{display:flex;flex-direction:column;justify-content:center;padding:48px 16px 48px max(16px,calc((100vw - 1200px)/2 + 16px))}
+.hero h1{font-size:clamp(46px,7vw,92px);margin-bottom:24px}
+.hero p{color:var(--muted);max-width:420px;margin-bottom:36px}
+.hero-img{position:relative;overflow:hidden}
+.btn{display:inline-block;padding:16px 32px;background:var(--accent);color:var(--accent-fg);font-size:14px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--accent);transition:.25s;cursor:pointer;font-family:inherit;text-align:center}
+.btn:hover{background:transparent;color:var(--fg)}
+.btn-ghost{background:transparent;color:var(--fg)}.btn-ghost:hover{background:var(--accent);color:var(--accent-fg)}
+@media(max-width:820px){.hero{grid-template-columns:1fr;min-height:auto}.hero-img{order:-1;height:62svh}.hero-text{padding:40px 16px 56px}}
+/* gallery */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.filters button{background:none;border:1px solid var(--line);color:var(--muted);padding:9px 18px;border-radius:40px;font:inherit;font-size:14px;cursor:pointer;transition:.2s}
+.filters button.on,.filters button:hover{border-color:var(--fg);color:var(--fg)}
+.grid{columns:3 280px;column-gap:12px}
+.grid figure{break-inside:avoid;margin-bottom:12px;overflow:hidden;cursor:zoom-in;position:relative}
+.grid img{height:auto;aspect-ratio:var(--r);transition:transform .6s,opacity .5s;opacity:0}
+.grid img.ld{opacity:1}
+.grid figure:hover img{transform:scale(1.03)}
+.grid figure.hide{display:none}
+@media(max-width:600px){.grid{columns:2;column-gap:8px}.grid figure{margin-bottom:8px}}
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(10,10,10,.96);display:none;align-items:center;justify-content:center;touch-action:pan-y}
+.lb.on{display:flex}
+.lb img{max-width:94vw;max-height:86svh;width:auto;height:auto;object-fit:contain;background:none}
+.lb button{position:absolute;background:none;border:0;color:#fff;font-size:34px;width:56px;height:56px;cursor:pointer;opacity:.7}
+.lb button:hover{opacity:1}
+.lb .x{top:8px;right:8px}.lb .pv{left:4px;top:50%;transform:translateY(-50%)}.lb .nx{right:4px;top:50%;transform:translateY(-50%)}
+.lb .cnt{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#aaa;font-size:13px}
+/* about */
+.about{display:grid;grid-template-columns:5fr 6fr;gap:64px;align-items:center}
+.about .ph{aspect-ratio:4/5}
+.about p{margin-bottom:18px;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px;padding-top:28px;border-top:1px solid var(--line)}
+.facts b{display:block;font-family:"Cormorant Garamond",serif;font-weight:400;font-size:40px;line-height:1}
+.facts span{font-size:13px;color:var(--muted)}
+@media(max-width:820px){.about{grid-template-columns:1fr;gap:36px}}
+/* prices */
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--line);padding:36px 28px;display:flex;flex-direction:column}
+.card.top{border-color:var(--fg)}
+.card h3{font-size:30px;margin-bottom:6px}
+.card .pr{font-size:28px;font-family:"Cormorant Garamond",serif;margin:18px 0 22px}
+.card ul{list-style:none;flex:1;margin-bottom:28px}
+.card li{padding:9px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--muted)}
+.tag{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+@media(max-width:900px){.prices{grid-template-columns:1fr}}
+/* reviews */
+.rv{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;scrollbar-width:thin}
+.rv article{flex:0 0 min(420px,86%);scroll-snap-align:start;background:var(--card);border:1px solid var(--line);padding:32px 28px}
+.rv q{display:block;font-family:"Cormorant Garamond",serif;font-size:22px;line-height:1.4;margin-bottom:24px;quotes:none}
+.who{display:flex;align-items:center;gap:14px;font-size:14px}
+.who img{width:48px;height:48px;border-radius:50%}
+.who small{display:block;color:var(--muted)}
+/* contacts */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.links a{display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--line);transition:padding .25s}
+.links a:hover{padding-left:8px}
+.links span{color:var(--muted)}
+form{display:grid;gap:14px}
+input,select,textarea{width:100%;padding:15px 16px;background:var(--card);border:1px solid var(--line);color:var(--fg);font:inherit;font-size:16px;border-radius:0;-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--fg)}
+.ok{display:none;padding:16px;border:1px solid var(--fg)}
+@media(max-width:820px){.contact{grid-template-columns:1fr;gap:40px}section{padding:72px 0}}
+footer{padding:32px 0;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.demo{position:fixed;bottom:12px;left:12px;z-index:40;font-size:11px;background:var(--accent);color:var(--accent-fg);padding:5px 10px;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}.fade.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.fade{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+ <a href="#top" class="logo">Анна Светлова</a>
+ <nav class="menu" id="menu">
+  <a href="#gallery">Галерея</a><a href="#about">Обо мне</a><a href="#prices">Цены</a><a href="#reviews">Отзывы</a><a href="#contacts">Контакты</a>
+ </nav>
+ <button class="burger" id="burger" aria-label="Меню"><span></span><span></span></button>
+</div></header>
+
+<main id="top">
+<section class="hero">
+ <div class="hero-text">
+  <div class="eyebrow">Фотограф · Москва</div>
+  <h1>Живые кадры<br>о важном</h1>
+  <p>Портреты, love story и семейные съемки. Снимаю естественно, без зажатых поз - так, чтобы через десять лет хотелось пересматривать.</p>
+  <div><a href="#contacts" class="btn">Забронировать дату</a></div>
+ </div>
+ <div class="hero-img">
+  <img src="https://picsum.photos/seed/heroph/900/1100.webp"
+   srcset="https://picsum.photos/seed/heroph/600/740.webp 600w, https://picsum.photos/seed/heroph/900/1100.webp 900w, https://picsum.photos/seed/heroph/1300/1600.webp 1300w"
+   sizes="(max-width:820px) 100vw, 50vw" alt="Портретная съемка" fetchpriority="high" decoding="async">
+ </div>
+</section>
+
+<section id="gallery"><div class="wrap">
+ <div class="eyebrow fade">Портфолио</div>
+ <h2 class="fade">Галерея</h2>
+ <div class="filters" id="filters">
+  <button class="on" data-f="all">Все</button><button data-f="portrait">Портреты</button><button data-f="love">Love story</button><button data-f="family">Семья</button>
+ </div>
+ <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="about"><div class="wrap about">
+ <div class="ph fade"><img loading="lazy" decoding="async" src="https://picsum.photos/seed/aboutme/700/875.webp" srcset="https://picsum.photos/seed/aboutme/500/625.webp 500w, https://picsum.photos/seed/aboutme/900/1125.webp 900w" sizes="(max-width:820px) 100vw, 45vw" alt="Фотограф Анна"></div>
+ <div class="fade">
+  <div class="eyebrow">Обо мне</div>
+  <h2>Привет, я Анна</h2>
+  <p>Снимаю людей больше восьми лет. Люблю мягкий дневной свет, настоящие эмоции и истории, которые складываются сами - нужно только вовремя нажать на кнопку.</p>
+  <p>На съемке я подскажу, как встать и куда деть руки, но не превращу вас в манекен. Результат - кадры, в которых вы узнаёте себя.</p>
+  <div class="facts"><div><b>8</b><span>лет в профессии</span></div><div><b>600+</b><span>съемок</span></div><div><b>14</b><span>дней на обработку</span></div></div>
+ </div>
+</div></section>
+
+<section id="prices"><div class="wrap">
+ <div class="eyebrow fade">Стоимость</div>
+ <h2 class="fade">Цены</h2>
+ <div class="prices">
+  <div class="card fade"><span class="tag">Коротко</span><h3>Портрет</h3><div class="pr">от 8 000 ₽</div>
+   <ul><li>1 час съемки</li><li>30 фото в обработке</li><li>Помощь с образом</li><li>Готово за 10 дней</li></ul><a href="#contacts" class="btn btn-ghost" data-pk="Портрет">Выбрать</a></div>
+  <div class="card top fade"><span class="tag">Популярный</span><h3>Love story</h3><div class="pr">от 14 000 ₽</div>
+   <ul><li>2 часа, 1-2 локации</li><li>60 фото в обработке</li><li>Подбор локаций</li><li>Готово за 14 дней</li></ul><a href="#contacts" class="btn" data-pk="Love story">Выбрать</a></div>
+  <div class="card fade"><span class="tag">Для всех</span><h3>Семейная</h3><div class="pr">от 12 000 ₽</div>
+   <ul><li>1,5 часа съемки</li><li>50 фото в обработке</li><li>Дома или на природе</li><li>Готово за 14 дней</li></ul><a href="#contacts" class="btn btn-ghost" data-pk="Семейная">Выбрать</a></div>
+ </div>
+</div></section>
+
+<section id="reviews"><div class="wrap">
+ <div class="eyebrow fade">Отзывы</div>
+ <h2 class="fade">Что говорят клиенты</h2>
+ <div class="rv">
+  <article><q>Я всегда ненавидела фотографироваться, а тут впервые понравилась себе на всех кадрах. Анна - волшебница.</q><div class="who"><img loading="lazy" src="https://picsum.photos/seed/rv1/96/96.webp" alt=""><div>Ольга<small>Портретная съемка</small></div></div></article>
+  <article><q>Снимали love story к годовщине. Было легко и весело, а фото получились как кадры из фильма.</q><div class="who"><img loading="lazy" src="https://picsum.photos/seed/rv2/96/96.webp" alt=""><div>Катя и Дима<small>Love story</small></div></div></article>
+  <article><q>С двумя детьми до пяти лет - и ни одной истерики. Анна нашла подход к каждому, получилось очень тепло.</q><div class="who"><img loading="lazy" src="https://picsum.photos/seed/rv3/96/96.webp" alt=""><div>Семья Громовых<small>Семейная съемка</small></div></div></article>
+ </div>
+</div></section>
+
+<section id="contacts"><div class="wrap contact">
+ <div class="fade">
+  <div class="eyebrow">Контакты</div>
+  <h2>Давайте снимем вашу историю</h2>
+  <div class="links">
+   <a href="#">Telegram <span>@username →</span></a>
+   <a href="#">WhatsApp <span>+7 900 000-00-00 →</span></a>
+   <a href="#">Instagram <span>@username →</span></a>
+  </div>
+ </div>
+ <form class="fade" id="form">
+  <input required name="name" placeholder="Ваше имя" autocomplete="name">
+  <input required name="phone" type="tel" placeholder="Телефон или Telegram" autocomplete="tel">
+  <select name="pk" id="pk"><option>Портрет</option><option>Love story</option><option>Семейная</option><option>Другое</option></select>
+  <input name="date" type="date" aria-label="Желаемая дата">
+  <textarea name="msg" rows="3" placeholder="Пара слов о съемке"></textarea>
+  <button class="btn" type="submit">Отправить заявку</button>
+  <div class="ok" id="ok">Спасибо! Я свяжусь с вами в течение дня.</div>
+ </form>
+</div></section>
+</main>
+<footer><div class="wrap"><span>© 2026 Анна Светлова</span><span>Демо-версия сайта</span></div></footer>
+<div class="demo">Демо</div>
+
+<div class="lb" id="lb"><button class="x" aria-label="Закрыть">×</button><button class="pv" aria-label="Назад">‹</button><img alt=""><button class="nx" aria-label="Вперед">›</button><div class="cnt"></div></div>
+
+<script>
+const cats=['portrait','love','family'],ratios=['4/5','3/4','1/1','4/3','2/3','4/5'];
+const items=Array.from({length:15},(_,i)=>({c:cats[i%3],r:ratios[i%6],s:'ph'+i}));
+const grid=document.getElementById('grid');
+const dims=r=>{const[a,b]=r.split('/').map(Number);return w=>`${w}/${Math.round(w*b/a)}`};
+grid.innerHTML=items.map((it,i)=>{const d=dims(it.r),u=w=>`https://picsum.photos/seed/${it.s}/${d(w)}.webp`;
+ return `<figure data-c="${it.c}" data-i="${i}"><img loading="lazy" decoding="async" style="--r:${it.r}" src="${u(600)}" srcset="${u(400)} 400w, ${u(600)} 600w, ${u(900)} 900w" sizes="(max-width:600px) 50vw, 33vw" alt="Фото ${i+1}"></figure>`}).join('');
+grid.querySelectorAll('img').forEach(im=>{im.complete?im.classList.add('ld'):im.onload=()=>im.classList.add('ld')});
+document.getElementById('filters').onclick=e=>{const b=e.target.closest('button');if(!b)return;
+ document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===b));
+ grid.querySelectorAll('figure').forEach(f=>f.classList.toggle('hide',b.dataset.f!=='all'&&f.dataset.c!==b.dataset.f))};
+// lightbox
+const lb=document.getElementById('lb'),lbi=lb.querySelector('img'),cnt=lb.querySelector('.cnt');let cur=0,vis=[];
+function show(k){cur=(k+vis.length)%vis.length;const it=items[vis[cur]],d=dims(it.r);lbi.src=`https://picsum.photos/seed/${it.s}/${d(1400)}.webp`;cnt.textContent=`${cur+1} / ${vis.length}`}
+grid.onclick=e=>{const f=e.target.closest('figure');if(!f)return;vis=[...grid.querySelectorAll('figure:not(.hide)')].map(x=>+x.dataset.i);show(vis.indexOf(+f.dataset.i));lb.classList.add('on');document.body.style.overflow='hidden'};
+const close=()=>{lb.classList.remove('on');document.body.style.overflow=''};
+lb.querySelector('.x').onclick=close;lb.querySelector('.pv').onclick=()=>show(cur-1);lb.querySelector('.nx').onclick=()=>show(cur+1);
+lb.onclick=e=>{if(e.target===lb)close()};
+addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1)});
+let tx=0;lb.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+lb.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)show(cur+(dx<0?1:-1))});
+// menu
+document.getElementById('burger').onclick=()=>document.body.classList.toggle('open');
+document.getElementById('menu').onclick=e=>{if(e.target.tagName==='A')document.body.classList.remove('open')};
+// package -> form
+document.querySelectorAll('[data-pk]').forEach(a=>a.addEventListener('click',()=>document.getElementById('pk').value=a.dataset.pk));
+document.getElementById('form').onsubmit=e=>{e.preventDefault();document.getElementById('ok').style.display='block';e.target.reset()};
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
+document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
