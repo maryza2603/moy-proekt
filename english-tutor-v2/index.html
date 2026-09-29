@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anna's English Club</title>
+<meta name="description" content="Репетитор по английскому языку онлайн. Бесплатное пробное занятие.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Manrope:wght@400;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b2553;--red:#c8102e;--cream:#f6efe2;--paper:#fffaf1;--ink:#14213d;--muted:#5b6478;--gold:#c9a24b;--line:#e4d9c4;--card:#fffdf8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--cream:#0e1629;--paper:#121c33;--ink:#f3ecdf;--muted:#aab3c7;--line:#26324f;--card:#16213b;--navy:#8fb0ff}}
+:root[data-theme="dark"]{--cream:#0e1629;--paper:#121c33;--ink:#f3ecdf;--muted:#aab3c7;--line:#26324f;--card:#16213b;--navy:#8fb0ff}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;font-size:17px;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 16px}
+.serif{font-family:"Playfair Display",Georgia,serif}
+.hand{font-family:Caveat,cursive;color:var(--red);font-size:26px;line-height:1}
+/* stripes */
+.stripe{height:8px;background:linear-gradient(90deg,var(--red) 0 33.3%,#fff 33.3% 66.6%,#0b2553 66.6%)}
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--cream) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:"Playfair Display",serif;font-weight:800;font-size:21px}
+.logo svg{width:38px;height:24px;border-radius:3px}
+nav a{margin-left:22px;text-decoration:none;color:var(--muted);font-size:15px}nav a:hover{color:var(--red)}
+@media(max-width:880px){nav{display:none}}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;padding:15px 28px;border-radius:999px;text-decoration:none;font:600 16px Manrope,sans-serif;border:0;cursor:pointer;box-shadow:0 6px 0 #8d0b20;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(2px);box-shadow:0 4px 0 #8d0b20}
+.btn.navy{background:#0b2553;box-shadow:0 6px 0 #061634}
+.btn.sm{padding:10px 18px;font-size:14px;box-shadow:0 4px 0 #8d0b20}
+section{padding:84px 0}
+h2{font-family:"Playfair Display",serif;font-size:clamp(30px,4.6vw,46px);line-height:1.12;margin-bottom:12px}
+h2 em{color:var(--red);font-style:italic}
+.kicker{display:flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.14em;font-size:13px;font-weight:700;color:var(--red);margin-bottom:12px}
+.kicker:before{content:"";width:28px;height:2px;background:var(--red)}
+.sub{color:var(--muted);max-width:620px;margin-bottom:40px}
+
+/* HERO */
+.hero{position:relative;padding:56px 0 90px;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+@media(max-width:880px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-family:"Playfair Display",serif;font-size:clamp(38px,6.4vw,70px);line-height:1.04;font-weight:800}
+.hero h1 .u{position:relative;white-space:nowrap}
+.hero h1 .u svg{position:absolute;left:0;bottom:-6px;width:100%;height:14px}
+.hero h1 i{color:var(--red)}
+.hero p.lead{font-size:19px;color:var(--muted);margin:22px 0 32px;max-width:520px}
+.hero .row{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.hero .hint{display:flex;align-items:center;gap:6px}
+.stamp-wrap{position:relative;max-width:440px;margin:0 auto;width:100%}
+.stamp{background:#fff;padding:14px;transform:rotate(2.5deg);box-shadow:0 20px 50px rgba(11,37,83,.18);;outline:7px dotted var(--cream);outline-offset:-3px}
+.stamp .ph{aspect-ratio:4/5;background:linear-gradient(170deg,#1c3d7a,#0b2553);position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.stamp .ph .ben{position:absolute;right:10%;bottom:0;width:26%;opacity:.35}
+.stamp .ph .person{width:70%;position:relative}
+.stamp .cap{display:flex;justify-content:space-between;align-items:center;padding:12px 4px 2px;color:#0b2553;font-family:"Playfair Display",serif;font-weight:800}
+.stamp .cap span{color:#c8102e}
+.postmark{position:absolute;z-index:3;left:-26px;top:30px;width:120px;transform:rotate(-14deg);opacity:.85}
+.badge{position:absolute;right:-10px;bottom:40px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;box-shadow:0 10px 30px rgba(0,0,0,.1);font-size:14px;transform:rotate(-3deg)}
+.badge b{display:block;font-family:"Playfair Display",serif;font-size:24px;color:var(--red)}
+.note-ph{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.9);color:#0b2553;font-size:12px;padding:3px 10px;border-radius:999px;z-index:2}
+.bg-flag{position:absolute;right:-200px;top:-80px;width:720px;opacity:.06;pointer-events:none}
+@media(max-width:880px){.postmark{left:-6px;width:90px}.badge{right:0}}
+
+/* ticker */
+.ticker{background:#0b2553;color:#fff;overflow:hidden;white-space:nowrap;padding:14px 0;font-family:"Playfair Display",serif;font-size:20px;font-style:italic}
+.ticker div{display:inline-block;animation:run 40s linear infinite}
+.ticker span{margin:0 26px}.ticker b{color:var(--gold);font-style:normal}
+@keyframes run{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ticker div{animation:none}}
+
+/* directions */
+.dir{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:880px){.dir{grid-template-columns:1fr 1fr}}@media(max-width:560px){.dir{grid-template-columns:1fr}}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;position:relative;overflow:hidden;transition:transform .2s}
+.dcard:hover{transform:translateY(-4px)}
+.dcard .num{position:absolute;right:18px;top:10px;font-family:"Playfair Display",serif;font-size:56px;color:var(--line);font-weight:800}
+.dcard .ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:26px;margin-bottom:16px;background:#fbe3e6}
+.dcard:nth-child(even) .ic{background:#e2e8f6}
+.dcard h3{font-family:"Playfair Display",serif;font-size:22px;margin-bottom:6px}
+.dcard p{color:var(--muted);font-size:15px}
+.dcard .en{font-family:Caveat,cursive;color:var(--red);font-size:20px;margin-top:8px}
+
+/* about */
+.about{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.about .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+@media(max-width:880px){.about .wrap{grid-template-columns:1fr}}
+.polaroids{position:relative;height:420px}
+.pol{position:absolute;background:#fff;padding:12px 12px 44px;box-shadow:0 14px 34px rgba(0,0,0,.14);width:58%}
+.pol div{aspect-ratio:1;display:grid;place-items:center}
+.pol p{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-family:Caveat,cursive;font-size:22px;color:#14213d}
+.pol.a{left:0;top:10px;transform:rotate(-6deg)}.pol.a div{background:linear-gradient(160deg,#c8102e,#7a0a1c)}
+.pol.b{right:0;top:90px;transform:rotate(5deg)}.pol.b div{background:linear-gradient(160deg,#1c3d7a,#0b2553)}
+.pol svg{width:60%}
+.creds{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+@media(max-width:560px){.creds{grid-template-columns:1fr}}
+.cred{border-left:3px solid var(--red);padding:6px 0 6px 14px}
+.cred b{display:block;font-family:"Playfair Display",serif;font-size:19px}.cred span{color:var(--muted);font-size:14px}
+
+/* reviews */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:880px){.revs{grid-template-columns:1fr}}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:6px 22px 22px 22px;padding:30px 26px 24px;position:relative}
+.rev:before{content:"“";position:absolute;top:-22px;left:18px;font-family:"Playfair Display",serif;font-size:90px;color:var(--red);line-height:1}
+.rev p{font-size:15.5px;margin-bottom:18px}
+.rev .who{display:flex;align-items:center;gap:12px;font-weight:700;font-size:15px}
+.rev .av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;background:#0b2553}
+.rev:nth-child(2) .av{background:#c8102e}.rev:nth-child(3) .av{background:var(--gold)}
+.rev .who small{display:block;color:var(--muted);font-weight:400}
+.score{margin-left:auto;font-family:"Playfair Display",serif;color:var(--red);font-size:20px}
+
+/* prices - tickets */
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+@media(max-width:880px){.prices{grid-template-columns:1fr}}
+.ticket{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px 26px;position:relative;display:flex;flex-direction:column}
+.ticket:before,.ticket:after{content:"";position:absolute;width:26px;height:26px;border-radius:50%;background:var(--cream);top:92px;border:1px solid var(--line)}
+.ticket:before{left:-14px}.ticket:after{right:-14px}
+.ticket .t{text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:700;color:var(--muted)}
+.ticket .sum{font-family:"Playfair Display",serif;font-size:42px;font-weight:800;margin:6px 0 20px;padding-bottom:20px;border-bottom:2px dashed var(--line)}
+.ticket .sum small{font:400 15px Manrope,sans-serif;color:var(--muted)}
+.ticket ul{list-style:none;margin-bottom:24px;flex:1}.ticket li{padding:5px 0 5px 26px;position:relative;font-size:15px}
+.ticket li:before{content:"✦";position:absolute;left:0;color:var(--red)}
+.ticket .btn{justify-content:center}
+.ticket.hit{background:#0b2553;color:#fff;border-color:#0b2553}
+.ticket.hit .t,.ticket.hit .sum small{color:#b9c6e4}.ticket.hit .sum{border-color:#2a4478}.ticket.hit li:before{color:var(--gold)}
+.ticket .flag{position:absolute;top:-14px;right:22px;background:var(--gold);color:#0b2553;font-weight:700;font-size:13px;padding:4px 12px;border-radius:999px}
+
+/* faq */
+.faq{display:grid;grid-template-columns:1fr 1.6fr;gap:48px}
+@media(max-width:880px){.faq{grid-template-columns:1fr}}
+details{border-bottom:1px solid var(--line);padding:20px 0}
+summary{cursor:pointer;font-family:"Playfair Display",serif;font-size:20px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--red);color:var(--red);display:grid;place-items:center;font:600 18px Manrope}
+details[open] summary:after{content:"−";background:var(--red);color:#fff}
+details p{color:var(--muted);margin-top:10px}
+
+/* form - letter */
+.letter{background:#0b2553;color:#fff;border-radius:28px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;position:relative;overflow:hidden}
+.letter:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,#c8102e 0 16px,transparent 16px 32px,#fff 32px 48px,transparent 48px 64px);-webkit-mask:linear-gradient(#000,#000) top/100% 10px no-repeat,linear-gradient(#000,#000) bottom/100% 10px no-repeat;mask:linear-gradient(#000,#000) top/100% 10px no-repeat,linear-gradient(#000,#000) bottom/100% 10px no-repeat;opacity:.9}
+@media(max-width:880px){.letter{grid-template-columns:1fr;padding:34px 20px}}
+.letter h2{color:#fff}.letter h2 em{color:#ff8a98}
+.letter p{color:#c5d0ea}
+.letter .hand{color:#ffd37a}
+form{background:var(--paper);color:var(--ink);border-radius:18px;padding:26px;display:grid;gap:12px;position:relative}
+input,select{font:inherit;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);width:100%}
+input:focus,select:focus{outline:2px solid var(--red);outline-offset:1px}
+.agree{font-size:13px;color:var(--muted);display:flex;gap:8px}.agree input{width:auto;margin-top:3px}
+.ok{display:none;text-align:center;padding:30px 10px}.ok b{font-family:"Playfair Display",serif;font-size:26px;display:block}
+.msg{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.msg a{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff}
+.msg a:hover{background:rgba(255,255,255,.2)}
+.msg i{width:10px;height:10px;border-radius:50%}
+.float{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:10px;z-index:20}
+.float a{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.float svg{width:26px;height:26px;fill:#fff}
+footer{padding:36px 0 100px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="stripe"></div>
+<header><div class="wrap">
+  <a class="logo" href="#"><svg viewBox="0 0 60 30"><clipPath id="c"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#c)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg>Anna's English</a>
+  <nav><a href="#directions">Направления</a><a href="#about">Обо мне</a><a href="#reviews">Отзывы</a><a href="#prices">Цены</a><a href="#faq">FAQ</a></nav>
+  <a class="btn sm" href="#form">Пробный урок</a>
+</div></header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hand">Hello there! 👋</div>
+      <h1 style="margin-top:14px">Английский, на котором вы <span class="u"><i>заговорите</i><svg viewBox="0 0 200 14" preserveAspectRatio="none"><path d="M2 10C50 2 150 2 198 8" stroke="#c8102e" stroke-width="4" fill="none" stroke-linecap="round"/></svg></span> уже через месяц</h1>
+      <p class="lead">Я Анна - репетитор с 8-летним опытом и сертификатом Cambridge C2. Помогаю снять языковой барьер, сдать экзамены и уверенно общаться за границей.</p>
+      <div class="row">
+        <a class="btn" href="#form">Записаться на бесплатный урок →</a>
+        <span class="hint hand" style="font-size:22px">it's free!</span>
+      </div>
+    </div>
+    <div class="stamp-wrap">
+      <svg class="postmark" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" fill="none" stroke="#c8102e" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#c8102e" stroke-width="1.5"/><path id="arc" d="M60 60m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0" fill="none"/><text font-size="11" font-weight="700" fill="#c8102e" letter-spacing="3"><textPath href="#arc">LONDON · ENGLISH · ONLINE ·</textPath></text><text x="60" y="66" text-anchor="middle" font-size="18" font-weight="800" fill="#c8102e" font-family="Georgia">C2</text></svg>
+      <div class="stamp">
+        <div class="ph">
+          <span class="note-ph">Здесь будет ваше фото</span>
+          <svg class="ben" viewBox="0 0 40 160" aria-hidden="true"><path d="M20 0l6 22H14z" fill="#fff"/><rect x="11" y="22" width="18" height="40" fill="#fff"/><circle cx="20" cy="42" r="6" fill="#0b2553"/><rect x="8" y="62" width="24" height="98" fill="#fff"/></svg>
+          <svg class="person" viewBox="0 0 200 220" aria-hidden="true"><circle cx="100" cy="80" r="44" fill="#f6efe2"/><path d="M20 220c0-52 36-86 80-86s80 34 80 86z" fill="#f6efe2"/></svg>
+        </div>
+        <div class="cap">Anna Smirnova <span>£ ENGLISH</span></div>
+      </div>
+      <div class="badge"><b>300+</b>учеников заговорили</div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div>
+  <span>Speaking</span><b>✦</b><span>IELTS</span><b>✦</b><span>Business English</span><b>✦</b><span>ОГЭ / ЕГЭ</span><b>✦</b><span>Travel</span><b>✦</b><span>Grammar without tears</span><b>✦</b>
+  <span>Speaking</span><b>✦</b><span>IELTS</span><b>✦</b><span>Business English</span><b>✦</b><span>ОГЭ / ЕГЭ</span><b>✦</b><span>Travel</span><b>✦</b><span>Grammar without tears</span><b>✦</b>
+</div></div>
+
+<section id="directions" class="wrap">
+  <div class="kicker">What we do</div>
+  <h2>Направления <em>занятий</em></h2>
+  <p class="sub">Программа под вашу цель - не учебник от корки до корки, а то, что нужно именно вам.</p>
+  <div class="dir">
+    <div class="dcard"><span class="num">01</span><div class="ic">💬</div><h3>Разговорный</h3><p>Снимаем барьер и учимся говорить свободно на любые темы.</p><div class="en">Let's talk!</div></div>
+    <div class="dcard"><span class="num">02</span><div class="ic">🎓</div><h3>ОГЭ и ЕГЭ</h3><p>Все разделы экзамена, пробники с разбором ошибок.</p><div class="en">Exam ready</div></div>
+    <div class="dcard"><span class="num">03</span><div class="ic">🌍</div><h3>IELTS и TOEFL</h3><p>Стратегии для каждой части теста и работа над эссе.</p><div class="en">Band 7+</div></div>
+    <div class="dcard"><span class="num">04</span><div class="ic">💼</div><h3>Business English</h3><p>Переписка, созвоны, собеседования и презентации.</p><div class="en">Get the job</div></div>
+    <div class="dcard"><span class="num">05</span><div class="ic">🧒</div><h3>Для школьников</h3><p>Подтянуть оценки и полюбить язык через игры и темы.</p><div class="en">Fun & easy</div></div>
+    <div class="dcard"><span class="num">06</span><div class="ic">✈️</div><h3>Для путешествий</h3><p>Аэропорт, отель, кафе - быстрый курс нужных фраз.</p><div class="en">Bon voyage</div></div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <div class="polaroids">
+      <div class="pol a"><div><svg viewBox="0 0 100 100"><rect x="18" y="30" width="64" height="40" rx="6" fill="#fff"/><rect x="24" y="36" width="12" height="10" fill="#c8102e"/><rect x="40" y="36" width="12" height="10" fill="#c8102e"/><rect x="56" y="36" width="12" height="10" fill="#c8102e"/><circle cx="32" cy="72" r="6" fill="#fff"/><circle cx="68" cy="72" r="6" fill="#fff"/></svg></div><p>Стажировка в Лондоне</p></div>
+      <div class="pol b"><div><svg viewBox="0 0 100 100"><path d="M30 70h40l-4-30H34z" fill="#fff"/><path d="M70 48c10 0 10 14 0 14" stroke="#fff" stroke-width="4" fill="none"/><path d="M42 30c0-6 6-6 6-12M52 30c0-6 6-6 6-12" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div><p>Уроки с чашкой чая ☕</p></div>
+    </div>
+    <div>
+      <div class="kicker">About me</div>
+      <h2>Привет, я <em>Анна</em></h2>
+      <p style="color:var(--muted)">Окончила МГЛУ, стажировалась в Лондоне и сдала CPE на уровень C2. На уроках мы не зубрим правила, а сразу используем язык в живой речи. Для каждого ученика - своя программа под цель и сроки.</p>
+      <div class="creds">
+        <div class="cred"><b>8 лет</b><span>преподаю английский</span></div>
+        <div class="cred"><b>CPE, C2</b><span>сертификат Cambridge</span></div>
+        <div class="cred"><b>89 баллов</b><span>средний ЕГЭ учеников</span></div>
+        <div class="cred"><b>Онлайн</b><span>Zoom + интерактивная доска</span></div>
+      </div>
+      <p class="hand" style="margin-top:26px">See you in class! - Anna</p>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="wrap">
+  <div class="kicker">Reviews</div>
+  <h2>Что говорят <em>ученики</em></h2>
+  <p class="sub">Реальные результаты - от первых фраз до поступления за границу.</p>
+  <div class="revs">
+    <div class="rev"><p>За полгода сдала IELTS на 7.0 и поступила в магистратуру в Нидерландах. Спасибо за терпение и чёткую систему!</p><div class="who"><span class="av">Е</span><span>Екатерина<small>IELTS</small></span><span class="score">7.0</span></div></div>
+    <div class="rev"><p>Сын сдал ЕГЭ на 94 балла. Занимался с удовольствием, что для него большая редкость.</p><div class="who"><span class="av">О</span><span>Ольга<small>мама ученика</small></span><span class="score">94</span></div></div>
+    <div class="rev"><p>Перестала бояться созвонов с иностранными коллегами. Уроки проходят легко и с пользой.</p><div class="who"><span class="av">М</span><span>Марина<small>Business English</small></span><span class="score">B2</span></div></div>
+  </div>
+</section>
+
+<section id="prices" class="wrap">
+  <div class="kicker">Prices</div>
+  <h2>Стоимость <em>занятий</em></h2>
+  <p class="sub">Без скрытых доплат. Все материалы входят в стоимость.</p>
+  <div class="prices">
+    <div class="ticket"><div class="t">Trial lesson</div><div class="sum">0 ₽ <small>/ 30 мин</small></div><ul><li>Определю ваш уровень</li><li>Обсудим цели</li><li>Составлю план обучения</li></ul><a class="btn navy" href="#form">Записаться</a></div>
+    <div class="ticket hit"><span class="flag">Выгодно</span><div class="t">Пакет 8 уроков</div><div class="sum">14 400 ₽ <small>/ 1 800 за урок</small></div><ul><li>2 занятия в неделю</li><li>Домашние задания с проверкой</li><li>Поддержка в Telegram</li></ul><a class="btn" href="#form">Выбрать пакет</a></div>
+    <div class="ticket"><div class="t">Single lesson</div><div class="sum">2 000 ₽ <small>/ 60 мин</small></div><ul><li>Индивидуально, онлайн</li><li>Гибкое расписание</li><li>Материалы после урока</li></ul><a class="btn navy" href="#form">Записаться</a></div>
+  </div>
+</section>
+
+<section id="faq" class="wrap faq">
+  <div><div class="kicker">FAQ</div><h2>Частые <em>вопросы</em></h2><p class="hand" style="margin-top:14px">Any questions? Just ask!</p></div>
+  <div>
+    <details open><summary>Как проходит пробное занятие?</summary><p>Знакомимся, определяю ваш уровень, обсуждаем цели и составляем план. Это бесплатно и ни к чему не обязывает.</p></details>
+    <details><summary>С какого уровня можно начать?</summary><p>С любого - занимаюсь и с нуля, и с продвинутыми учениками.</p></details>
+    <details><summary>Где проходят занятия?</summary><p>Онлайн в Zoom. Нужны компьютер или планшет и наушники.</p></details>
+    <details><summary>Можно ли перенести урок?</summary><p>Да, если предупредить минимум за 12 часов.</p></details>
+    <details><summary>Как оплачивать?</summary><p>Переводом на карту или по СБП перед занятием или пакетом.</p></details>
+  </div>
+</section>
+
+<section id="form" class="wrap">
+  <div class="letter">
+    <div>
+      <div class="hand">Let's start!</div>
+      <h2 style="margin-top:10px">Запишитесь на <em>бесплатный</em> пробный урок</h2>
+      <p>Оставьте заявку - свяжусь в течение часа и подберу удобное время. Или напишите сразу:</p>
+      <div class="msg">
+        <a href="https://t.me/" target="_blank" rel="noopener"><i style="background:#229ed9"></i>Telegram</a>
+        <a href="https://wa.me/" target="_blank" rel="noopener"><i style="background:#25d366"></i>WhatsApp</a>
+        <a href="#"><i style="background:#8b6cff"></i>MAX</a>
+      </div>
+    </div>
+    <form id="lead">
+      <input required name="name" placeholder="Ваше имя">
+      <input required name="phone" type="tel" placeholder="Телефон или @ник в Telegram">
+      <select name="goal"><option>Цель занятий</option><option>Разговорный</option><option>ОГЭ / ЕГЭ</option><option>IELTS / TOEFL</option><option>Для работы</option><option>Для ребёнка</option></select>
+      <label class="agree"><input type="checkbox" required> Согласен(на) на обработку персональных данных</label>
+      <button class="btn" type="submit" style="justify-content:center">Отправить заявку ✉</button>
+      <div class="ok" id="ok"><b>Thank you! 🇬🇧</b>Заявка отправлена, скоро свяжусь с вами.</div>
+    </form>
+  </div>
+</section>
+</main>
+
+<div class="float">
+  <a href="https://t.me/" target="_blank" rel="noopener" aria-label="Telegram" style="background:#229ed9"><svg viewBox="0 0 24 24"><path d="M21.5 3.5 2.8 10.7c-1 .4-1 1.6 0 1.9l4.7 1.5 1.8 5.6c.3.8 1.3 1 1.8.4l2.6-2.6 4.8 3.5c.7.5 1.7.1 1.9-.8l3-15c.2-1.1-.9-2-1.9-1.7zM9.6 14.2l8.4-7.4-6.8 8.7-.3 3z"/></svg></a>
+  <a href="https://wa.me/" target="_blank" rel="noopener" aria-label="WhatsApp" style="background:#25d366"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.6-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.2 1.1z"/></svg></a>
+</div>
+
+<div class="stripe"></div>
+<footer><div class="wrap"><span>© Anna's English - репетитор по английскому онлайн</span><span>Демо-версия: тексты и фото условные</span></div></footer>
+
+<script>
+document.getElementById('lead').addEventListener('submit',function(e){e.preventDefault();[...this.children].forEach(function(el){if(el.id!=='ok')el.style.display='none'});document.getElementById('ok').style.display='block';});
+</script>
+</body>
+</html>
