@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Анна Соколова - психолог</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f4ef;--card:#fff;--ink:#2f3a36;--muted:#6b7570;--accent:#7c9a8a;--accent-d:#5f7d6d;--soft:#e7eee9;--line:#e3ddd3}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif}
+h1,h2,h3{font-family:Lora,serif;font-weight:500;line-height:1.25}
+h2{font-size:clamp(26px,4vw,36px);margin-bottom:28px}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+header{position:sticky;top:0;z-index:20;background:rgba(247,244,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font-family:Lora,serif;font-size:20px;text-decoration:none}
+nav{display:flex;gap:22px;font-size:14px}
+nav a{text-decoration:none;color:var(--muted)}nav a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:40px;padding:12px 26px;font:600 15px Inter,sans-serif;text-decoration:none;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--accent-d)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:64px 0}
+.hero h1{font-size:clamp(34px,5vw,54px);margin:10px 0 18px}
+.tag{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-d)}
+.hero p{color:var(--muted);font-size:18px;max-width:520px;margin-bottom:28px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.chips span{background:var(--soft);border-radius:30px;padding:6px 14px;font-size:14px}
+.photo{aspect-ratio:4/5;border-radius:200px 200px 24px 24px;background:linear-gradient(160deg,#cfdcd3,#e9e1d4);display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.photo svg{width:78%}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px}
+.list li{list-style:none;padding:12px 0;border-bottom:1px solid var(--line)}
+.list li:last-child{border:0}.list b{display:block;font-weight:600}.list small{color:var(--muted)}
+.stats{display:flex;gap:28px;margin-top:22px}.stats b{font-family:Lora,serif;font-size:32px;display:block;color:var(--accent-d)}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.services .card{display:flex;flex-direction:column}
+.services h3{font-size:21px;margin-bottom:8px}
+.services p{color:var(--muted);flex:1;margin-bottom:18px}
+.price{font-size:22px;font-weight:600;margin-bottom:14px}.price small{font-size:14px;color:var(--muted);font-weight:400}
+.alt{background:var(--soft)}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.reviews p{font-style:italic;margin-bottom:14px}.reviews span{color:var(--muted);font-size:14px}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:12px}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--accent-d);font-size:20px}details[open] summary::after{content:"−"}
+details p{margin-top:10px;color:var(--muted)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+input,select,textarea{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:12px;font:15px Inter,sans-serif;background:#fff;color:var(--ink)}
+textarea,form .full{grid-column:1/-1}
+.note{font-size:13px;color:var(--muted)}
+.ok{display:none;background:var(--soft);padding:18px;border-radius:12px;margin-top:14px}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.fab{position:fixed;right:20px;bottom:20px;z-index:30;box-shadow:0 8px 24px rgba(60,80,70,.3)}
+@media(max-width:860px){
+ nav{display:none}
+ .hero,.about{grid-template-columns:1fr}
+ .photo{max-width:340px;margin:0 auto;order:-1}
+ .services,.reviews{grid-template-columns:1fr}
+ form{grid-template-columns:1fr}
+ section{padding:52px 0}
+ header .btn{display:none}
+ .fab{left:16px;right:16px;bottom:14px;text-align:center}
+ footer{padding-bottom:90px}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+ <a class="logo" href="#">Анна Соколова</a>
+ <nav><a href="#about">Обо мне</a><a href="#services">Услуги</a><a href="#reviews">Отзывы</a><a href="#faq">Вопросы</a><a href="#book">Контакты</a></nav>
+ <a class="btn" href="#book">Записаться</a>
+</div></header>
+
+<main>
+<div class="wrap hero">
+ <div>
+  <div class="tag">Психолог · онлайн и очно</div>
+  <h1>Помогаю вернуть опору, когда внутри тревожно</h1>
+  <p>Работаю с тревогой, выгоранием, трудностями в отношениях и самооценкой. Бережно, без оценок, в вашем темпе.</p>
+  <div class="chips"><span>Тревога</span><span>Выгорание</span><span>Отношения</span><span>Самооценка</span><span>Кризисы</span></div>
+  <a class="btn" href="#book">Записаться на консультацию</a>
+  <a class="btn ghost" href="#services" style="margin-left:8px">Услуги и цены</a>
+ </div>
+ <div class="photo" aria-label="Место для фото психолога">
+  <svg viewBox="0 0 200 220" fill="#a9bdb0"><circle cx="100" cy="70" r="42"/><path d="M20 220c0-55 36-90 80-90s80 35 80 90z"/></svg>
+ </div>
+</div>
+
+<section id="about"><div class="wrap">
+ <h2>Обо мне</h2>
+ <div class="about">
+  <div>
+   <p>Я практикующий психолог с опытом более 8 лет. Моя задача - создать безопасное пространство, где можно говорить о самом важном и находить свои ответы.</p>
+   <p style="margin-top:14px;color:var(--muted)">Работаю в когнитивно-поведенческом подходе и схема-терапии. Регулярно прохожу супервизию и личную терапию.</p>
+   <div class="stats"><div><b>8+</b>лет практики</div><div><b>600+</b>клиентов</div><div><b>3000+</b>часов консультаций</div></div>
+  </div>
+  <div class="card"><ul class="list">
+   <li><b>МГУ им. Ломоносова</b><small>Факультет психологии, клиническая психология</small></li>
+   <li><b>Когнитивно-поведенческая терапия</b><small>Профессиональная переподготовка</small></li>
+   <li><b>Схема-терапия</b><small>Сертификационная программа</small></li>
+   <li><b>Член профессиональной ассоциации</b><small>Соблюдаю этический кодекс</small></li>
+  </ul></div>
+ </div>
+</div></section>
+
+<section id="services" class="alt"><div class="wrap">
+ <h2>Услуги и цены</h2>
+ <div class="services">
+  <div class="card"><h3>Знакомство</h3><p>Первая встреча: обсудим запрос, ваши цели и формат работы.</p><div class="price">2 000 ₽ <small>/ 30 мин</small></div><a class="btn" href="#book">Записаться</a></div>
+  <div class="card"><h3>Индивидуальная сессия</h3><p>Онлайн или очно. Работа с тревогой, выгоранием, самооценкой.</p><div class="price">4 500 ₽ <small>/ 50 мин</small></div><a class="btn" href="#book">Записаться</a></div>
+  <div class="card"><h3>Консультация пары</h3><p>Для пар, которые хотят лучше слышать друг друга и выйти из конфликтов.</p><div class="price">6 500 ₽ <small>/ 80 мин</small></div><a class="btn" href="#book">Записаться</a></div>
+ </div>
+</div></section>
+
+<section id="reviews"><div class="wrap">
+ <h2>Отзывы</h2>
+ <div class="reviews">
+  <div class="card"><p>«Впервые за долгое время перестала просыпаться с тревогой. Спасибо за терпение и тепло.»</p><span>Елена, 34 года</span></div>
+  <div class="card"><p>«Пришёл с выгоранием, думал - это навсегда. Через пару месяцев снова радуюсь работе.»</p><span>Дмитрий, 41 год</span></div>
+  <div class="card"><p>«Мы с мужем научились разговаривать без ссор. Очень бережный и профессиональный подход.»</p><span>Ольга и Игорь</span></div>
+ </div>
+</div></section>
+
+<section id="faq" class="alt"><div class="wrap" style="max-width:780px">
+ <h2>Частые вопросы</h2>
+ <details><summary>Как проходит первая встреча?</summary><p>Мы знакомимся, вы рассказываете, что вас беспокоит, а я объясняю, как может выглядеть наша работа. Ни к чему не обязывает.</p></details>
+ <details><summary>Сколько нужно сессий?</summary><p>Зависит от запроса. Краткосрочная работа - 5-10 встреч, глубинная - от нескольких месяцев.</p></details>
+ <details><summary>Это конфиденциально?</summary><p>Да. Всё, что звучит на сессии, остаётся между нами, за исключением случаев угрозы жизни.</p></details>
+ <details><summary>Можно ли заниматься онлайн?</summary><p>Да, через Zoom или Telegram. Эффективность онлайн-консультаций сопоставима с очными.</p></details>
+ <details><summary>Как отменить или перенести встречу?</summary><p>Предупредите минимум за 24 часа - перенесём без оплаты.</p></details>
+</div></section>
+
+<section id="book"><div class="wrap" style="max-width:780px">
+ <h2>Запись на консультацию</h2>
+ <div class="card">
+  <form id="f">
+   <input required placeholder="Ваше имя">
+   <input required type="tel" placeholder="Телефон или Telegram">
+   <select class="full"><option>Знакомство - 30 мин</option><option>Индивидуальная сессия</option><option>Консультация пары</option></select>
+   <select><option>Онлайн</option><option>Очно</option></select>
+   <input type="date">
+   <textarea rows="3" placeholder="Коротко о запросе (необязательно)"></textarea>
+   <label class="note full"><input type="checkbox" required style="width:auto;margin-right:6px">Согласна(ен) на обработку персональных данных</label>
+   <button class="btn full">Отправить заявку</button>
+  </form>
+  <div class="ok" id="ok">Спасибо! Я свяжусь с вами в течение дня, чтобы подобрать время.</div>
+ </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">© Анна Соколова, психолог · Демо-макет, данные условные</div></footer>
+<a class="btn fab" href="#book">Записаться</a>
+<script>
+document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();e.target.style.display='none';document.getElementById('ok').style.display='block'})
+</script>
+</body>
+</html>
