@@ -11,6 +11,8 @@
 <meta property="og:description" content="Разбирайте фантастические технологии с точки зрения реальной науки.">
 <meta property="og:url" content="https://tr555.ru/lending/weapons/">
 <meta name="theme-color" content="#1E1E1E">
+<link rel="preload" as="image" href="assets/hero.webp" media="(min-width:768px)">
+<link rel="preload" as="image" href="assets/hero-m.webp" media="(max-width:767px)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -42,8 +44,14 @@ header .wrap{display:flex;justify-content:space-between;align-items:center;heigh
 header .btn{padding:9px 16px;font-size:15px}
 /* hero */
 .hero{position:relative;overflow:hidden;padding:96px 0 104px;border-bottom:1px solid #333}
-.hero-bg{position:absolute;inset:0;opacity:.14;pointer-events:none;background-image:linear-gradient(#4A4A4A 1px,transparent 1px),linear-gradient(90deg,#4A4A4A 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse at 70% 40%,#000 20%,transparent 75%)}
+.hero-bg{position:absolute;inset:0;opacity:.10;pointer-events:none;background-image:linear-gradient(#4A4A4A 1px,transparent 1px),linear-gradient(90deg,#4A4A4A 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse at 70% 40%,#000 20%,transparent 75%)}
 .formula{position:absolute;font-family:"JetBrains Mono",monospace;color:#8a8a8a;font-size:15px;opacity:.55;pointer-events:none;white-space:nowrap}
+.hero-photo{position:absolute;inset:0;background:url(assets/hero-m.webp) center/cover no-repeat}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(30,30,30,.94) 0%,rgba(30,30,30,.82) 45%,rgba(30,30,30,.55) 100%)}
+@media (min-width:768px){.hero-photo{background-image:url(assets/hero.webp)}}
+.split{display:grid;gap:32px;align-items:center}
+.split img{width:100%;height:auto;border-radius:var(--r);border:1px solid #3a3a3a;display:block;filter:saturate(.8)}
+@media (min-width:900px){.split{grid-template-columns:1.2fr 1fr;gap:56px}}
 .hero .wrap{position:relative}
 .hero p.lead{font-size:clamp(18px,2.2vw,21px);color:var(--muted);max-width:640px;margin:24px 0 36px}
 /* cards */
@@ -102,6 +110,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--acc)}
 </style>
 </head>
 <body>
+<!-- Фото: Unsplash (ThisisEngineering), лицензия Unsplash -->
 <!-- Яндекс.Метрика: вставить код счётчика заказчика, заменив XXXXXXXX -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
  <symbol id="i-atom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2-2-.5-7.8-5.6-12.8S4 -.2 3.8 3.8s.5 7.8 5.6 12.8 8.9 5.6 10.8 3.6Z"/><path d="M15.7 15.7c5-5.1 7.5-10.8 5.5-12.8s-7.8.5-12.8 5.6S.8 18.2 2.8 20.2s7.8-.5 12.9-4.5Z"/></symbol>
@@ -122,6 +131,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--acc)}
 
 <main id="top">
  <section class="hero" aria-labelledby="h1">
+  <div class="hero-photo" role="img" aria-label="Учёные в белых халатах работают в лаборатории"></div>
   <div class="hero-bg" aria-hidden="true"></div>
   <span class="formula" style="top:14%;right:6%" aria-hidden="true">σ = F / A</span>
   <span class="formula" style="top:38%;right:14%" aria-hidden="true">E = ½ m v²</span>
@@ -136,9 +146,12 @@ footer a{text-decoration:none}footer a:hover{color:var(--acc)}
  </section>
 
  <section class="about rv" aria-labelledby="h-about">
-  <div class="wrap">
+  <div class="wrap split">
+   <div>
    <h2 id="h-about">О чём здесь думают</h2>
    <p>Вы когда-нибудь задумывались, возможен ли меч толщиной в один атом? Почему в фантастике так часто нарушают законы физики? Как графен может изменить представление об оружии? Если вам интересно искать ответы на такие вопросы - вы попали по адресу. Здесь можно разложить любую фантастическую идею по полочкам: проверить её на прочность, найти реальные прототипы и поделиться своими выводами.</p>
+   </div>
+   <img src="assets/engineer.webp" width="900" height="700" loading="lazy" decoding="async" alt="Инженер работает за ноутбуком у экспериментальной установки">
   </div>
  </section>
 
@@ -160,7 +173,9 @@ footer a{text-decoration:none}footer a:hover{color:var(--acc)}
  </section>
 
  <section aria-labelledby="h-how">
-  <div class="wrap">
+  <div class="wrap split">
+   <div>
+   
    <h2 id="h-how" class="rv">Как здесь работают</h2>
    <ol class="steps">
     <li class="rv"><div><b>Регистрация</b><span class="muted">30 секунд, доступ к базовым инструментам бесплатно.</span></div></li>
@@ -169,6 +184,8 @@ footer a{text-decoration:none}footer a:hover{color:var(--acc)}
     <li class="rv"><div><b>Отправка на модерацию</b><span class="muted">Проверка на соответствие теме и научную состоятельность.</span></div></li>
     <li class="rv"><div><b>Публикация</b><span class="muted">Ваш разбор видят читатели. Лучшие авторы попадают в пул экспертов для корпоративных проектов.</span></div></li>
    </ol>
+   </div>
+   <img class="rv" src="assets/blueprint.webp" width="900" height="700" loading="lazy" decoding="async" alt="Человек чертит инженерные схемы за рабочим столом">
   </div>
  </section>
 
