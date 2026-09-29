@@ -104,7 +104,7 @@ footer{padding:40px 0;border-top:1px solid var(--line);color:var(--muted);font-s
  <div class="grid">
   <div class="card"><div class="img" style="background:url(marsh.jpg) center/cover"></div><div class="body"><h3>Маршевые</h3><p>Классика для загородного дома. Удобный шаг, простой монтаж.</p><div class="price">от 180 000 ₽</div></div></div>
   <div class="card"><div class="img" style="background:url(kosour.jpg) center/cover"></div><div class="body"><h3>На косоуре</h3><p>Металл и дерево. Лёгкий силуэт для современных интерьеров.</p><div class="price">от 240 000 ₽</div></div></div>
-  <div class="card"><div class="img" id="spcard" style="background:#efe8de"></div><div class="body"><h3>Винтовые</h3><p>Когда места мало. Занимают от 1,5 м² площади.</p><div class="price">от 150 000 ₽</div></div></div>
+  <div class="card"><div class="img" style="background:url(vint.jpg) center/cover"></div><div class="body"><h3>Винтовые</h3><p>Когда места мало. Занимают от 1,5 м² площади.</p><div class="price">от 150 000 ₽</div></div></div>
  </div>
 </div></section>
 
@@ -148,8 +148,8 @@ const CX=230,sp=st=>st.frame.id==="spiral",spt=i=>({x:CX+85*Math.cos(i*.62),y:Y0
 const step=(i)=>({x:X0+i*W,y:Y0-(i+1)*H});
 const GROUPS=[
  {key:"frame",title:"Конструкция",layer:"L-frame",options:[
-  {id:"tetiva",name:"На тетивах",price:0},
-  {id:"kosour",name:"Металлический косоур",price:60000},
+  {id:"tetiva",name:"Маршевая",price:0},
+  {id:"kosour",name:"На косоуре",price:60000},
   {id:"konsol",name:"Консольная (парящая)",price:95000},
   {id:"spiral",name:"Винтовая",price:-30000}],
   render:(o,st)=>{const c=st.wood.c;
@@ -193,7 +193,6 @@ panel.innerHTML=GROUPS.map(g=>`<div class="grp"><h4>${g.title}</h4><div class="o
 panel.onclick=e=>{const b=e.target.closest(".opt");if(!b)return;const g=GROUPS.find(x=>x.key===b.dataset.g);st[g.key]=g.options[b.dataset.i];
  b.parentNode.querySelectorAll(".opt").forEach(x=>x.classList.toggle("on",x===b));draw()};
 draw();
-{const o=Object.assign({},st,{frame:GROUPS[0].options[3],wood:GROUPS[1].options[3],rail:GROUPS[3].options[1]});spcard.innerHTML=`<svg viewBox="100 0 260 330" width="100%" height="100%">${GROUPS[0].render(o.frame,o)}${GROUPS[1].render(o.wood,o)}${GROUPS[3].render(o.rail,o)}</svg>`}
 </script>
 </body>
 </html>
