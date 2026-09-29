@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Katrin Goldfish</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: тихая роскошь - светлый слоновая кость + глубокий эспрессо, много воздуха, одна крупная типографика на экран */
+:root{
+  --ivory:#F6F1E9; --paper:#FBF8F3; --ink:#1F1A16; --ink-2:#4A4038; --muted:#8A7D70;
+  --gold:#B08A4F; --gold-lt:#E3C893; --line:#E2D8CA; --line-dk:#3A322B;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:clamp(16px,4vw,48px)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.05;margin:0;text-wrap:balance}
+p{margin:0}
+.eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500}
+em.g{font-style:italic;color:var(--gold)}
+a{color:inherit}
+.btn{display:inline-flex;align-items:center;gap:14px;padding:18px 30px;background:var(--ink);color:var(--paper);text-decoration:none;font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;border:1px solid var(--ink);transition:background .3s,color .3s}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn.light{background:var(--gold-lt);color:var(--ink);border-color:var(--gold-lt)}
+.btn.light:hover{background:transparent;color:var(--gold-lt)}
+.link{font-size:13px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:4px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:78px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.brand svg{width:44px;height:44px;flex:none}
+.brand b{display:block;font-family:var(--serif);font-weight:500;font-size:22px;letter-spacing:.06em;line-height:1}
+.brand small{display:block;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+.menu{display:flex;gap:34px;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.menu a{text-decoration:none;color:var(--ink-2)}
+.menu a:hover{color:var(--gold)}
+.nav .btn{padding:13px 22px;font-size:12px}
+@media (max-width:980px){.menu{display:none}}
+@media (max-width:560px){.nav .btn{display:none}.brand small{display:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(32px,5vw,72px);align-items:center;padding-block:clamp(48px,8vw,110px)}
+.hero h1{font-size:clamp(46px,7vw,96px);letter-spacing:-.01em;margin-top:26px}
+.hero .lead{font-size:clamp(17px,1.5vw,20px);color:var(--ink-2);max-width:30em;margin-top:30px;font-weight:300}
+.hero .cta{display:flex;flex-wrap:wrap;align-items:center;gap:30px;margin-top:44px}
+.photo{position:relative;min-width:0}
+.photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%}
+.photo::before{content:"";position:absolute;inset:-18px 18px 18px -18px;border:1px solid var(--gold);z-index:-1}
+.photo figcaption{position:absolute;left:-1px;bottom:28px;background:var(--paper);padding:14px 20px;font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.3}
+.photo figcaption span{display:block;font-family:var(--sans);font-style:normal;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:860px){.hero{grid-template-columns:1fr}.photo{order:-1;margin-inline:18px 0}}
+
+/* facts */
+.facts{border-block:1px solid var(--line)}
+.facts .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.fact{padding:38px 24px;border-left:1px solid var(--line)}
+.fact:first-child{border-left:0;padding-left:0}
+.fact b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(40px,4.5vw,58px);line-height:1;font-variant-numeric:lining-nums}
+.fact span{display:block;margin-top:10px;font-size:14px;color:var(--muted)}
+@media (max-width:760px){.facts .wrap{grid-template-columns:1fr 1fr}.fact{padding:28px 16px}.fact:nth-child(3){border-left:0;padding-left:0}.fact:nth-child(n+3){border-top:1px solid var(--line)}}
+
+section{padding-block:clamp(72px,10vw,140px)}
+.head{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:end;margin-bottom:64px}
+.head h2{font-size:clamp(38px,5vw,64px)}
+.head p{color:var(--ink-2);font-weight:300;max-width:34em}
+@media (max-width:860px){.head{grid-template-columns:1fr;gap:20px;margin-bottom:44px}}
+
+/* barriers - dark */
+.dark{background:var(--ink);color:var(--ivory)}
+.dark .head p{color:#C9BDAE}
+.split{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,6vw,90px);align-items:start}
+.split img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:60% 30%;filter:saturate(.85)}
+.barriers{list-style:none;margin:0;padding:0;counter-reset:b}
+.barriers li{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:26px 0;border-top:1px solid var(--line-dk)}
+.barriers li:last-child{border-bottom:1px solid var(--line-dk)}
+.barriers h3{font-size:30px;color:var(--gold-lt)}
+.barriers p{color:#C9BDAE;font-weight:300;font-size:16px}
+.barriers .k{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#8F8173;padding-top:10px}
+@media (max-width:860px){.split{grid-template-columns:1fr}.split img{aspect-ratio:4/3}.barriers li{grid-template-columns:1fr;gap:6px}}
+
+/* shift */
+.shift{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.shift div{padding:26px 0;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:18px}
+.shift .from{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line);font-weight:300}
+.shift .to{font-family:var(--serif);font-size:28px;padding-left:28px;border-left:1px solid var(--line)}
+.shift .to::before{content:"→";font-family:var(--sans);font-size:16px;color:var(--gold)}
+.shift .th{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);text-decoration:none}
+@media (max-width:640px){.shift .to{font-size:22px;padding-left:16px}}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--ivory)}
+.step{padding:44px 32px 48px;border-left:1px solid var(--line)}
+.step:first-child{border-left:0}
+.step i{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--gold)}
+.step h3{font-size:30px;margin-top:40px}
+.step p{margin-top:14px;color:var(--ink-2);font-size:15px;font-weight:300}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}.step:nth-child(3){border-left:0}.step:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}.step{border-left:0;border-top:1px solid var(--line);padding:32px 24px}.step:first-child{border-top:0}.step h3{margin-top:18px}}
+
+/* directions */
+.dirs{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.dir{position:relative;background:var(--ivory);display:flex;flex-direction:column;min-width:0}
+.dir img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.dir .body{padding:40px;display:flex;flex-direction:column;gap:20px;flex:1}
+.dir h3{font-size:clamp(34px,3.6vw,46px)}
+.dir ul{margin:0;padding:0;list-style:none;color:var(--ink-2);font-weight:300}
+.dir li{padding:10px 0;border-top:1px solid var(--line)}
+.dir .link{align-self:flex-start;margin-top:auto}
+@media (max-width:760px){.dirs{grid-template-columns:1fr}.dir .body{padding:28px 22px}}
+
+/* quote/reviews */
+.quote{text-align:center;max-width:900px;margin:0 auto}
+.quote blockquote{margin:30px 0 0;font-family:var(--serif);font-style:italic;font-size:clamp(28px,3.6vw,44px);line-height:1.25}
+.quote .who{margin-top:30px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.note{display:inline-block;margin-top:34px;font-size:13px;color:var(--gold);border:1px dashed var(--gold);padding:10px 16px}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px)}
+.contact h2{font-size:clamp(42px,5.4vw,72px)}
+.contact .lead{color:#C9BDAE;font-weight:300;margin-top:26px;max-width:26em}
+.form{display:flex;flex-direction:column;gap:30px}
+.field label{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#8F8173}
+.field input,.field textarea{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line-dk);color:var(--ivory);font:inherit;font-size:19px;padding:12px 0;outline:none;resize:vertical}
+.field input:focus,.field textarea:focus{border-color:var(--gold-lt)}
+.form small{color:#8F8173;font-size:13px}
+.form .ok{color:var(--gold-lt);font-family:var(--serif);font-size:24px;font-style:italic}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:90px;padding-top:40px;border-top:1px solid var(--line-dk);font-size:15px;color:#C9BDAE;font-weight:300}
+.info b{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#8F8173;font-weight:500;margin-bottom:10px}
+@media (max-width:860px){.contact{grid-template-columns:1fr}.info{grid-template-columns:1fr}}
+
+footer{background:var(--ink);color:#8F8173;border-top:1px solid var(--line-dk);font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 40px;padding-block:32px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--gold-lt)}
+footer nav{display:flex;flex-wrap:wrap;gap:24px}
+
+@keyframes rise{from{opacity:.001;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero > *{animation:rise 1.1s cubic-bezier(.2,.7,.2,1) both}
+.hero .photo{animation-delay:.15s}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="kg" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="14" fill="#1F1A16"/>
+    <circle cx="32" cy="32" r="23" fill="none" stroke="#C9A46A" stroke-width="1.2"/>
+    <text x="32" y="41.5" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="28" font-style="italic" fill="#E3C893" letter-spacing="-1">KG</text>
+  </symbol>
+</svg>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Katrin Goldfish - на главную">
+      <svg><use href="#kg"/></svg>
+      <span><b>KATRIN GOLDFISH</b><small>Екатерина Власова</small></span>
+    </a>
+    <nav class="menu" aria-label="Основное меню">
+      <a href="#about">Подход</a><a href="#process">Как я работаю</a><a href="#services">Направления</a><a href="#reviews">Отзывы</a><a href="#contact">Контакты</a>
+    </nav>
+    <a class="btn" href="#contact">Записаться</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow">Психология лидера · для собственников и руководителей</div>
+      <h1>Масштаб бизнеса начинается <em class="g">с масштаба личности</em></h1>
+      <p class="lead">Помогаю собственникам выйти за пределы внутренних ограничений, выстроить стратегию роста и создать бизнес, который отражает ваш масштаб и ценности.</p>
+      <div class="cta">
+        <a class="btn" href="#contact">Стратегическая сессия <span aria-hidden="true">→</span></a>
+        <a class="link" href="#process">Как проходит работа</a>
+      </div>
+    </div>
+    <figure class="photo">
+      <img src="hero.jpg" alt="Екатерина Власова за рабочим столом">
+      <figcaption><span>Екатерина Власова</span>психолог, стратегический коуч</figcaption>
+    </figure>
+  </div>
+
+  <div class="facts">
+    <div class="wrap">
+      <div class="fact"><b>21+</b><span>год в бизнесе и управлении</span></div>
+      <div class="fact"><b>1500+</b><span>часов практики с клиентами</span></div>
+      <div class="fact"><b>100+</b><span>стратегических сессий с собственниками</span></div>
+      <div class="fact"><b>5,0</b><span>рейтинг на 2ГИС</span></div>
+    </div>
+  </div>
+
+  <section class="dark" id="about">
+    <div class="wrap split">
+      <img src="portrait.jpg" alt="Портрет Екатерины Власовой" loading="lazy">
+      <div>
+        <div class="eyebrow">Что мешает расти</div>
+        <h2 style="font-size:clamp(38px,5vw,64px);margin:20px 0 44px">Потолок компании - <em class="g">это потолок её лидера</em></h2>
+        <ul class="barriers">
+          <li><span class="k">Масштаб</span><div><h3>Страх роста</h3><p>Следующий шаг понятен на бумаге, но решение откладывается месяцами.</p></div></li>
+          <li><span class="k">Контроль</span><div><h3>Всё держится на вас</h3><p>Гиперконтроль и недоверие к команде съедают время на стратегию.</p></div></li>
+          <li><span class="k">Энергия</span><div><h3>Выгорание</h3><p>Результаты есть, а радости от них уже нет.</p></div></li>
+          <li><span class="k">Деньги</span><div><h3>Денежный потолок</h3><p>Доход упирается в одну и ту же цифру, как бы вы ни старались.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head">
+        <div><div class="eyebrow">Результат работы</div><h2 style="margin-top:18px">Что меняется</h2></div>
+        <p>Мы работаем одновременно с мышлением и со стратегией. Поэтому изменения видны и в самочувствии, и в цифрах бизнеса.</p>
+      </div>
+      <div class="shift">
+        <div class="th">Было</div><div class="th" style="padding-left:28px;border-left:1px solid var(--line)">Стало</div>
+        <div class="from">Постоянное напряжение</div><div class="to">Внутреннее спокойствие</div>
+        <div class="from">Страх делегирования</div><div class="to">Сильная команда</div>
+        <div class="from">Работа 24/7</div><div class="to">Свобода во времени</div>
+        <div class="from">Потолок дохода</div><div class="to">Масштабирование дохода</div>
+        <div class="from">Хаос и отсутствие системы</div><div class="to">Чёткая стратегия и фокус</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="eyebrow">Метод</div><h2 style="margin-top:18px">Как проходит работа</h2></div>
+        <p>Четыре этапа, от честной диагностики до плана, который вы реализуете.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><i>I</i><h3>Диагностика</h3><p>Глубокий анализ вашей ситуации и запроса.</p></div>
+        <div class="step"><i>II</i><h3>Глубинная работа</h3><p>Работа с мышлением, установками и ограничениями.</p></div>
+        <div class="step"><i>III</i><h3>Стратегия</h3><p>План роста и конкретные шаги.</p></div>
+        <div class="step"><i>IV</i><h3>Результат</h3><p>Реализация стратегии и выход на новый уровень.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="eyebrow">Направления</div><h2 style="margin-top:18px">Лидер и команда</h2></div>
+        <p>Личная работа с первым лицом и отдельное направление для компаний.</p>
+      </div>
+      <div class="dirs">
+        <article class="dir">
+          <img src="hero.jpg" alt="" loading="lazy" style="object-position:50% 25%">
+          <div class="body">
+            <div class="eyebrow">Личная работа с лидером</div>
+            <h3>Katrin Goldfish</h3>
+            <ul><li>Психология лидера</li><li>Стратегические сессии</li><li>VIP-сопровождение</li><li>Личная трансформация</li></ul>
+            <a class="link" href="#contact">Подробнее</a>
+          </div>
+        </article>
+        <article class="dir">
+          <img src="office.jpg" alt="Переговорная комната" loading="lazy">
+          <div class="body">
+            <div class="eyebrow">Работа с компаниями</div>
+            <h3>Компас решений</h3>
+            <ul><li>Стратегические сессии</li><li>Командный коучинг</li><li>Корпоративная культура</li><li>Фасилитации и тренинги</li></ul>
+            <a class="link" href="#contact">Перейти на сайт</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" style="background:var(--ivory)">
+    <div class="wrap quote">
+      <div class="eyebrow">Отзывы</div>
+      <blockquote>«Здесь будет короткая цитата клиента: что изменилось в бизнесе и в жизни после работы»</blockquote>
+      <div class="who">Имя Фамилия · собственник, сфера бизнеса</div>
+      <div class="note">Место для 2-3 реальных отзывов собственников с фото или видео</div>
+    </div>
+  </section>
+
+  <section class="dark" id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <div class="eyebrow">Первый шаг</div>
+          <h2 style="margin-top:20px">Запишитесь на <em class="g">стратегическую сессию</em></h2>
+          <p class="lead">45 минут, чтобы разобрать вашу ситуацию и получить индивидуальный план действий. Конфиденциально.</p>
+        </div>
+        <form class="form" id="lead">
+          <div class="field"><label for="f-name">Ваше имя</label><input id="f-name" required autocomplete="name"></div>
+          <div class="field"><label for="f-phone">Телефон или Telegram</label><input id="f-phone" required autocomplete="tel"></div>
+          <div class="field"><label for="f-msg">Какая задача сейчас главная</label><textarea id="f-msg" rows="2"></textarea></div>
+          <div><button class="btn light" type="submit">Отправить заявку <span aria-hidden="true">→</span></button></div>
+          <small>Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.</small>
+          <p class="ok" id="ok" hidden>Это демо-макет: в рабочей версии заявка уйдёт Екатерине.</p>
+        </form>
+      </div>
+      <div class="info">
+        <div><b>Офис</b>Новосибирск, ул. Большевистская, 43, офис 501<br>6 минут от м. «Речной вокзал»</div>
+        <div><b>Связь</b>+7 (913) 914-34-14<br>Ежедневно 10:00-20:00, по записи</div>
+        <div><b>Онлайн</b>Консультации и сопровождение клиентов в любой точке мира</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Katrin Goldfish · ИП Власова Екатерина Валерьевна · ОГРН 320547600059670</span>
+    <nav><a href="#">Политика конфиденциальности</a><a href="#">Договор-оферта</a><a href="#">Telegram</a><a href="#">VK</a><a href="#">YouTube</a></nav>
+  </div>
+</footer>
+
+
+<script>
+document.getElementById('lead').addEventListener('submit',e=>{e.preventDefault();document.getElementById('ok').hidden=false;});
+</script>
+</body>
+</html>
