@@ -17,7 +17,7 @@ nav a{margin-left:18px;text-decoration:none;font-weight:600;font-size:15px}
 .phone{font-weight:800;text-decoration:none;white-space:nowrap}
 .btn{display:inline-block;background:var(--acc);color:#fff;border:0;border-radius:10px;padding:14px 22px;font:600 16px Manrope;text-decoration:none;cursor:pointer}
 .btn.ghost{background:transparent;border:2px solid #fff}
-.hero{background:linear-gradient(rgba(20,25,22,.55),rgba(20,25,22,.7)),url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=70) center/cover;color:#fff;padding:110px 0 90px}
+.hero{background:linear-gradient(rgba(20,25,22,.55),rgba(20,25,22,.7)),url(img/1600585154340-be6161a56a0c.jpg) center/cover;color:#fff;padding:110px 0 90px}
 .hero h1{font-size:clamp(30px,5vw,54px);line-height:1.1;margin:0 0 16px;max-width:760px}
 .hero p{font-size:19px;max-width:600px;opacity:.92}.hero .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:50px}
@@ -69,10 +69,10 @@ footer{padding:26px 0;font-size:14px;color:var(--muted)}
 <section id="uslugi"><div class="wrap">
 <h2>Что строим</h2>
 <div class="grid">
-<div class="card"><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=70" alt=""><div class="in"><h3>Дома</h3><p>Каркасные, из бруса, газобетона. Проект, фундамент, коробка, кровля, инженерка.</p><div class="price">от 25 000 ₽/м²</div></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=70" alt=""><div class="in"><h3>Бани</h3><p>Из бруса и бревна, с парной, мойкой и комнатой отдыха. Печь под ключ.</p><div class="price">от 450 000 ₽</div></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=800&q=70" alt=""><div class="in"><h3>Гаражи</h3><p>Из блоков и каркасные, на 1-2 машины, с воротами и светом.</p><div class="price">от 350 000 ₽</div></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=70" alt=""><div class="in"><h3>Другое</h3><p>Беседки, террасы, хозблоки, фундаменты и кровля отдельно.</p><div class="price">по смете</div></div></div>
+<div class="card"><img src="img/1568605114967-8130f3a36994.jpg" alt=""><div class="in"><h3>Дома</h3><p>Каркасные, из бруса, газобетона. Проект, фундамент, коробка, кровля, инженерка.</p><div class="price">от 25 000 ₽/м²</div></div></div>
+<div class="card"><img src="img/1600566753086-00f18fb6b3ea.jpg" alt=""><div class="in"><h3>Бани</h3><p>Из бруса и бревна, с парной, мойкой и комнатой отдыха. Печь под ключ.</p><div class="price">от 450 000 ₽</div></div></div>
+<div class="card"><img src="img/1558036117-15d82a90b9b1.jpg" alt=""><div class="in"><h3>Гаражи</h3><p>Из блоков и каркасные, на 1-2 машины, с воротами и светом.</p><div class="price">от 350 000 ₽</div></div></div>
+<div class="card"><img src="img/1600607687939-ce8a6c25118c.jpg" alt=""><div class="in"><h3>Другое</h3><p>Беседки, террасы, хозблоки, фундаменты и кровля отдельно.</p><div class="price">по смете</div></div></div>
 </div></div></section>
 
 <section id="portfolio" style="background:#efe9df"><div class="wrap">
@@ -117,7 +117,7 @@ footer{padding:26px 0;font-size:14px;color:var(--muted)}
 <script>
 const P=[["dom","1600585154340-be6161a56a0c","Дом 140 м², газобетон"],["banya","1600566753086-00f18fb6b3ea","Баня 6×4, брус"],["dom","1568605114967-8130f3a36994","Дом 110 м², каркас"],["garage","1558036117-15d82a90b9b1","Гараж на 2 машины"],["dom","1600607687939-ce8a6c25118c","Дом 160 м², брус"],["banya","1600585154526-990dced4db0d","Баня с террасой"],["dom","1570129477492-45c003edd2be","Дом 95 м²"],["garage","1600047509807-ba8f99d2cdde","Гараж с навесом"]];
 const g=document.getElementById('gal');
-function show(f){g.innerHTML=P.filter(p=>f=='all'||p[0]==f).map(p=>`<figure data-s="https://images.unsplash.com/photo-${p[1]}?w=1400&q=75"><img loading="lazy" src="https://images.unsplash.com/photo-${p[1]}?w=600&q=70" alt="${p[2]}"><figcaption>${p[2]}</figcaption></figure>`).join('')}
+function show(f){g.innerHTML=P.filter(p=>f=='all'||p[0]==f).map(p=>`<figure data-s="img/${p[1]}.jpg"><img loading="lazy" src="img/${p[1]}.jpg" alt="${p[2]}"><figcaption>${p[2]}</figcaption></figure>`).join('')}
 show('all');
 tabs.onclick=e=>{if(e.target.dataset.f){[...tabs.children].forEach(b=>b.classList.remove('on'));e.target.classList.add('on');show(e.target.dataset.f)}};
 g.onclick=e=>{const f=e.target.closest('figure');if(f){lbi.src=f.dataset.s;lb.style.display='grid'}};
