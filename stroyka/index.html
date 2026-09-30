@@ -70,9 +70,9 @@ footer{padding:26px 0;font-size:14px;color:var(--muted)}
 <h2>Что строим</h2>
 <div class="grid">
 <div class="card"><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=70" alt=""><div class="in"><h3>Дома</h3><p>Каркасные, из бруса, газобетона. Проект, фундамент, коробка, кровля, инженерка.</p><div class="price">от 25 000 ₽/м²</div></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=70" alt=""><div class="in"><h3>Бани</h3><p>Из бруса и бревна, с парной, мойкой и комнатой отдыха. Печь под ключ.</p><div class="price">от 450 000 ₽</div></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=800&q=70" alt=""><div class="in"><h3>Гаражи</h3><p>Из блоков и каркасные, на 1-2 машины, с воротами и светом.</p><div class="price">от 350 000 ₽</div></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=70" alt=""><div class="in"><h3>Другое</h3><p>Беседки, террасы, хозблоки, фундаменты и кровля отдельно.</p><div class="price">по смете</div></div></div>
+<div class="card"><img src="img/banya1.jpg" alt=""><div class="in"><h3>Бани</h3><p>Из бруса и бревна, с парной, мойкой и комнатой отдыха. Печь под ключ.</p><div class="price">от 450 000 ₽</div></div></div>
+<div class="card"><img src="img/garage1.jpg" alt=""><div class="in"><h3>Гаражи</h3><p>Из блоков и каркасные, на 1-2 машины, с воротами и светом.</p><div class="price">от 350 000 ₽</div></div></div>
+<div class="card"><img src="img/besedka.jpg" alt=""><div class="in"><h3>Другое</h3><p>Беседки, террасы, хозблоки, фундаменты и кровля отдельно.</p><div class="price">по смете</div></div></div>
 </div></div></section>
 
 <section id="portfolio" style="background:#efe9df"><div class="wrap">
@@ -115,9 +115,10 @@ footer{padding:26px 0;font-size:14px;color:var(--muted)}
 <div class="float"><a href="https://t.me/" style="background:#229ED9" aria-label="Telegram">✈</a><a href="tel:+79990000000" style="background:var(--acc)" aria-label="Позвонить">📞</a></div>
 <div class="lb" id="lb" onclick="this.style.display='none'"><img id="lbi" alt=""></div>
 <script>
-const P=[["dom","1600585154340-be6161a56a0c","Дом 140 м², газобетон"],["banya","1600566753086-00f18fb6b3ea","Баня 6×4, брус"],["dom","1568605114967-8130f3a36994","Дом 110 м², каркас"],["garage","1558036117-15d82a90b9b1","Гараж на 2 машины"],["dom","1600607687939-ce8a6c25118c","Дом 160 м², брус"],["banya","1600585154526-990dced4db0d","Баня с террасой"],["dom","1570129477492-45c003edd2be","Дом 95 м²"],["garage","1600047509807-ba8f99d2cdde","Гараж с навесом"]];
+const P=[["dom","1600585154340-be6161a56a0c","Дом 140 м², газобетон"],["banya","img/banya1.jpg","Баня 6×4, брус"],["dom","1568605114967-8130f3a36994","Дом 110 м², каркас"],["garage","img/garage1.jpg","Гараж на 2 машины"],["dom","img/brus.jpg","Дом 160 м², брус"],["banya","img/banya2.jpg","Баня с террасой"],["dom","1570129477492-45c003edd2be","Дом 95 м²"],["garage","img/garage2.jpg","Гараж с навесом"]];
 const g=document.getElementById('gal');
-function show(f){g.innerHTML=P.filter(p=>f=='all'||p[0]==f).map(p=>`<figure data-s="https://images.unsplash.com/photo-${p[1]}?w=1400&q=75"><img loading="lazy" src="https://images.unsplash.com/photo-${p[1]}?w=600&q=70" alt="${p[2]}"><figcaption>${p[2]}</figcaption></figure>`).join('')}
+const src=(id,w)=>id.startsWith("img/")?id:`https://images.unsplash.com/photo-${id}?w=${w}&q=70`;
+function show(f){g.innerHTML=P.filter(p=>f=='all'||p[0]==f).map(p=>`<figure data-s="${src(p[1],1400)}"><img loading="lazy" src="${src(p[1],600)}" alt="${p[2]}"><figcaption>${p[2]}</figcaption></figure>`).join('')}
 show('all');
 tabs.onclick=e=>{if(e.target.dataset.f){[...tabs.children].forEach(b=>b.classList.remove('on'));e.target.classList.add('on');show(e.target.dataset.f)}};
 g.onclick=e=>{const f=e.target.closest('figure');if(f){lbi.src=f.dataset.s;lb.style.display='grid'}};
