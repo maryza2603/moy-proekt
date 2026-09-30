@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Чистый Дом - демо</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;600;700&display=swap">
 <style>
@@ -32,7 +37,8 @@ button:focus-visible,.svc:focus-visible{outline:2px solid var(--warn);outline-of
 .tabs span{flex:1;text-align:center;padding:10px;font-size:.75rem;color:var(--muted)}
 .tabs span.a{color:var(--accent);font-weight:700}
 </style>
-
+</head>
+<body>
 <h1>Чистый Дом - демо двух приложений</h1>
 <p class="lead">Слева приложение клиента, справа - сотрудника. Выберите услуги, оформите и «оплатите» заказ - он сразу появится у клинера. Меняйте статус справа и смотрите, как он обновляется у клиента. Оплата тестовая.</p>
 
@@ -79,3 +85,5 @@ function staff(){const c=document.getElementById('staff');
  c.querySelectorAll('button').forEach(b=>b.onclick=()=>{const o=orders.find(x=>x.id==b.dataset.o);o.st++;staff();if(o===mine)client()})}
 client();staff();
 </script>
+</body>
+</html>
