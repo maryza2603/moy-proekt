@@ -48,8 +48,9 @@ header.solid{background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-fi
 .hero h1{font-size:clamp(44px,7vw,92px);margin-bottom:28px}
 .hero .lead{margin-bottom:40px}
 .hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+.hero-media{position:relative;padding-bottom:28px}
 .hero-img{position:relative;aspect-ratio:4/5;border-radius:220px 220px 8px 8px;overflow:hidden}
-.hero-badge{position:absolute;left:24px;bottom:24px;background:var(--card);padding:20px 24px;border-radius:8px;box-shadow:0 20px 50px rgba(35,32,28,.12)}
+.hero-badge{position:absolute;left:24px;bottom:0;z-index:2;background:var(--card);padding:20px 24px;border-radius:8px;box-shadow:0 20px 50px rgba(35,32,28,.12)}
 .hero-badge b{display:block;font-family:"Playfair Display",serif;font-size:34px;font-weight:400;line-height:1}
 .hero-badge small{color:var(--muted);font-size:13px}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:72px;padding-top:36px;border-top:1px solid var(--line)}
@@ -175,7 +176,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .hero{padding-top:110px;min-height:auto}
   .hero-grid,.about-grid,.faq-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
   .hero-img{aspect-ratio:4/4.3;border-radius:180px 180px 8px 8px}
-  .hero-badge{left:16px;bottom:16px;padding:14px 18px}
+  .hero-badge{left:16px;bottom:0;padding:14px 18px}
   .hero-badge b{font-size:28px}
   .stats{grid-template-columns:1fr 1fr;row-gap:28px;margin-top:48px}
   .case-grid{grid-template-columns:1fr}
@@ -224,8 +225,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <a href="#cases" class="btn ghost">Смотреть проекты</a>
         </div>
       </div>
-      <div class="hero-img rv">
-        <img src="img/hero.jpg" alt="Светлая гостиная с панорамными окнами">
+      <div class="hero-media rv">
+        <div class="hero-img"><img src="img/hero.jpg" alt="Светлая гостиная с панорамными окнами"></div>
         <div class="hero-badge"><b>12 лет</b><small>создаём интерьеры</small></div>
       </div>
     </div>
