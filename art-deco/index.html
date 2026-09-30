@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Арт Деко - Премиум салон красоты в Томске</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2a2a2a;
+            --accent: #c9a961;
+            --light: #f5f5f5;
+            --text: #333;
+            --border: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #3a3a3a 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--accent);
+        }
+
+        .header-contacts {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .phone {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .phone a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .phone a:hover {
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #d4b975;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(201, 169, 97, 0.1);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(42, 42, 42, 0.7), rgba(42, 42, 42, 0.7)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="dots" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="%23c9a961" opacity="0.3"/></pattern></defs><rect width="1200" height="600" fill="%232a2a2a"/><rect width="1200" height="600" fill="url(%23dots)"/></svg>');
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .hero .accent-text {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .hero .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #d4b975;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(201, 169, 97, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 15px 40px;
+            border: 2px solid var(--accent);
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .rating {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        section {
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-top: 4px solid var(--accent);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .service-card h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .service-card p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .about-section {
+            background: linear-gradient(135deg, var(--light) 0%, #ffffff 100%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .about-content p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .highlight-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .highlight-item strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .info-section {
+            background: white;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .info-card {
+            text-align: center;
+        }
+
+        .info-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .info-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 22px;
+        }
+
+        .info-card p {
+            color: #666;
+        }
+
+        .specialists {
+            background: var(--light);
+        }
+
+        .specialists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .specialist-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .specialist-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .specialist-avatar {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--accent) 0%, #d4b975 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .specialist-info {
+            padding: 20px;
+        }
+
+        .specialist-info h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .specialist-info p {
+            color: var(--accent);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .specialist-info .experience {
+            color: #666;
+            font-size: 14px;
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .footer-section a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(201, 169, 97, 0.3);
+            padding-top: 20px;
+            opacity: 0.7;
+        }
+
+        .gallery {
+            background: var(--light);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .header-contacts {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-content {
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .hero .buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">АРТ ДЕКО</div>
+                <div class="header-contacts">
+                    <div class="phone">
+                        <a href="tel:+73822565056">+7 (3822) 56-50-56</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://wa.me/79090000000" class="social-link" title="WhatsApp" target="_blank">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.6 6.3C16.4 5 14.7 4.2 12.9 4.2c-4.5 0-8.2 3.7-8.2 8.2 0 1.4.4 2.8 1.1 4l-1.2 4.4 4.5-1.2c1.2.6 2.5 1 3.8 1 4.5 0 8.2-3.7 8.2-8.2 0-2.2-.8-4.3-2.3-5.9zM12.9 19c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.3.6.6-2.3-.2-.2c-.6-1-1-2.3-1-3.6 0-3.7 3-6.8 6.8-6.8 1.8 0 3.5.7 4.8 2 1.2 1.2 2 2.9 2 4.7 0 3.7-3 6.8-6.8 6.8zm3.7-5.1c-.2-.1-1.1-.5-1.3-.6-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-.8-.3-1.5-.9-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4.1-.1.2-.3.3-.4.1-.1.1-.2.2-.3.1-.2 0-.3 0-.4-.1-.1-.4-1-.6-1.4-.1-.4-.3-.3-.4-.3h-.4c-.1 0-.3.1-.4.2-.2.2-.7.7-.7 1.7 0 1 .7 2 .8 2.2.1.2 1.4 2.2 3.5 3 .5.2 1 .4 1.3.5.5.2 1 .1 1.4-.1.4-.2 1.1-.9 1.3-1.7.2-.8.2-1.5.1-1.7-.1-.2-.3-.3-.5-.4z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <a href="https://vk.com" class="social-link" title="ВКонтакте" target="_blank">
+                            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="24" height="24" fill="#4665AD" rx="2"/>
+                                <text x="12" y="17" font-size="14" font-weight="bold" fill="white" text-anchor="middle" font-family="Arial">VK</text>
+                            </svg>
+                        </a>
+                    </div>
+                    <button class="cta-button">Записаться онлайн</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="rating">⭐ 4.8 / 5.0 · 163 оценки</div>
+            <h1>Салон красоты <span class="accent-text">Арт Деко</span></h1>
+            <p>Премиум услуги красоты и ухода в центре Томска</p>
+            <div class="buttons">
+                <button class="btn-primary">Записаться к мастеру</button>
+                <button class="btn-secondary">Подробнее услуги</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="info-section">
+        <div class="container">
+            <h2 class="section-title">Основные услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>✂️ Парикмахерские услуги</h3>
+                    <p>Профессиональная стрижка и окрашивание волос для мужчин и женщин</p>
+                    <div class="price">от 1000 ₽</div>
+                </div>
+
+                <div class="service-card">
+                    <h3>💅 Маникюр и педикюр</h3>
+                    <p>Японский маникюр, гель-лак, аппаратный маникюр, педикюр</p>
+                    <div class="price">от 500 ₽</div>
+                </div>
+
+                <div class="service-card">
+                    <h3>🧴 Косметология</h3>
+                    <p>Биоревитализация, ботокс, мезотерапия, anti-age процедуры</p>
+                    <div class="price">по запросу</div>
+                </div>
+
+                <div class="service-card">
+                    <h3>👁️ Услуги ресниц и бровей</h3>
+                    <p>Наращивание ресниц, окрашивание и коррекция бровей, татуаж</p>
+                    <div class="price">от 800 ₽</div>
+                </div>
+
+                <div class="service-card">
+                    <h3>🏥 Аппаратная косметология</h3>
+                    <p>Лифтинг кожи, миостимуляция, коррекция фигуры, пилинг</p>
+                    <div class="price">по запросу</div>
+                </div>
+
+                <div class="service-card">
+                    <h3>💆 Массаж и уход</h3>
+                    <p>Массаж лица и тела, уход за кожей, очищение</p>
+                    <div class="price">по запросу</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">О нас</h2>
+            <div class="about-content">
+                <div>
+                    <h2>Добро пожаловать в Арт Деко</h2>
+                    <p>Салон красоты «Арт Деко» - это место, где мастерство встречается с современными технологиями. Мы работаем в центре Томска уже много лет, завоевав доверие и любовь тысяч клиентов.</p>
+                    <p>Наш коллектив - это высокопрофессиональные мастера, которые постоянно совершенствуют свои навыки и следят за последними тенденциями в индустрии красоты.</p>
+                    <p>Мы используем только качественную косметику и оборудование, чтобы обеспечить безопасность и лучший результат для каждого клиента.</p>
+                </div>
+                <div class="highlights">
+                    <div class="highlight-item">
+                        <strong>📍 Удобное местоположение</strong>
+                        <p>ул. Косарева, 33 в центре Томска</p>
+                    </div>
+                    <div class="highlight-item">
+                        <strong>🕐 Время работы</strong>
+                        <p>С 09:00 ежедневно</p>
+                    </div>
+                    <div class="highlight-item">
+                        <strong>👥 Опытный персонал</strong>
+                        <p>Мастера с многолетним опытом</p>
+                    </div>
+                    <div class="highlight-item">
+                        <strong>⭐ Высокие оценки</strong>
+                        <p>4.8/5 от 163 клиентов</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают нас</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">🎯</div>
+                    <h3>Индивидуальный подход</h3>
+                    <p>Каждая процедура подбирается с учётом особенностей кожи и волос клиента</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">🔬</div>
+                    <h3>Современные технологии</h3>
+                    <p>Используем передовое оборудование и проверенные методики</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">✨</div>
+                    <h3>Качественная косметика</h3>
+                    <p>Только проверенные бренды и профессиональные препараты</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">🏆</div>
+                    <h3>Гарантия результата</h3>
+                    <p>Мы стоим за результатом каждой процедуры</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">😌</div>
+                    <h3>Комфортная атмосфера</h3>
+                    <p>Уютный салон, где вы будете чувствовать себя как дома</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">💼</div>
+                    <h3>Профессионализм</h3>
+                    <p>Мастера постоянно повышают свою квалификацию</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialists Section -->
+    <section class="specialists">
+        <div class="container">
+            <h2 class="section-title">Наши специалисты</h2>
+            <div class="specialists-grid">
+                <div class="specialist-card">
+                    <div class="specialist-avatar">💇</div>
+                    <div class="specialist-info">
+                        <h3>Мастер стилист</h3>
+                        <p>Парикмахерские услуги</p>
+                        <div class="experience">Опыт работы: 8+ лет</div>
+                    </div>
+                </div>
+
+                <div class="specialist-card">
+                    <div class="specialist-avatar">💅</div>
+                    <div class="specialist-info">
+                        <h3>Мастер ногтевого сервиса</h3>
+                        <p>Маникюр и педикюр</p>
+                        <div class="experience">Опыт работы: 6+ лет</div>
+                    </div>
+                </div>
+
+                <div class="specialist-card">
+                    <div class="specialist-avatar">🧴</div>
+                    <div class="specialist-info">
+                        <h3>Косметолог</h3>
+                        <p>Косметологические процедуры</p>
+                        <div class="experience">Опыт работы: 10+ лет</div>
+                    </div>
+                </div>
+
+                <div class="specialist-card">
+                    <div class="specialist-avatar">👁️</div>
+                    <div class="specialist-info">
+                        <h3>Мастер ресниц и бровей</h3>
+                        <p>Лаш и браулифт услуги</p>
+                        <div class="experience">Опыт работы: 5+ лет</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">Наша работа</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/IRpKcoRQP1bV.jpg" alt="Интерьер салона">
+                    <div class="gallery-overlay">
+                        <span>Интерьер салона</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/Fwzd1KUU7l9M.jpg" alt="Интерьер">
+                    <div class="gallery-overlay">
+                        <span>Рабочее место</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/DG1zwZa5WfsK.jpg" alt="Входная дверь">
+                    <div class="gallery-overlay">
+                        <span>Входная группа</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/kpSG2rOuAhCM.jpg" alt="Вывеска">
+                    <div class="gallery-overlay">
+                        <span>Фасад салона</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/Br3q-iI3vW_5.jpg" alt="SPA процедуры">
+                    <div class="gallery-overlay">
+                        <span>SPA и массаж</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/zM05gjkrwNzH.jpg" alt="Портрет">
+                    <div class="gallery-overlay">
+                        <span>Окрашивание</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/q342kIYm59Qu.jpg" alt="Маникюр">
+                    <div class="gallery-overlay">
+                        <span>Маникюр</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/H9a8i2FUDXpa.jpg" alt="Результат">
+                    <div class="gallery-overlay">
+                        <span>До и после</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/-hsueeXPBCeQ.jpg" alt="Ресницы">
+                    <div class="gallery-overlay">
+                        <span>Наращивание ресниц</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/t_hH22tnmA7F.jpg" alt="Волосы">
+                    <div class="gallery-overlay">
+                        <span>Укладка волос</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/Ytc85vZvpzCp.jpg" alt="Красный маникюр">
+                    <div class="gallery-overlay">
+                        <span>Красивый маникюр</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/3qt209qu8wyl.jpg" alt="Интерьер">
+                    <div class="gallery-overlay">
+                        <span>Зона ожидания</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/ngFOqowx2hRN.jpg" alt="Вывеска">
+                    <div class="gallery-overlay">
+                        <span>Вывеска Арт Деко</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/1-JaUPlqMiAj.jpg" alt="Фасад">
+                    <div class="gallery-overlay">
+                        <span>Фасад салона</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/PyQ1v_Y1zcor.jpg" alt="Интерьер">
+                    <div class="gallery-overlay">
+                        <span>Цветочное оформление</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/2cU5dcGCwYIv.jpg" alt="Комната">
+                    <div class="gallery-overlay">
+                        <span>Процедурный кабинет</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://connect.moineiroseti.ru/f/j_LmxO46L6FF.jpg" alt="Фасад">
+                    <div class="gallery-overlay">
+                        <span>Фасад Арт Деко</span>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; color: #666; margin-top: 30px;">
+                Посмотрите наши работы и убедитесь в высоком качестве услуг
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="info-section">
+        <div class="container">
+            <h2 class="section-title">Как связаться с нами</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">📍</div>
+                    <h3>Адрес</h3>
+                    <p>ул. Косарева, 33<br>Томск, 634000</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">📞</div>
+                    <h3>Телефон</h3>
+                    <p><a href="tel:+73822565056" style="color: var(--accent); text-decoration: none; font-weight: bold;">+7 (3822) 56-50-56</a></p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">🕐</div>
+                    <h3>Время работы</h3>
+                    <p>Пн-Вс: с 09:00<br>Ежедневно</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">💬</div>
+                    <h3>WhatsApp</h3>
+                    <p>Быстрая связь через мессенджер</p>
+                    <p style="margin-top: 10px;">
+                        <a href="https://wa.me/79090000000" style="display: inline-block; padding: 8px 20px; background: #25D366; color: white; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; transition: all 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Написать</a>
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">👥</div>
+                    <h3>ВКонтакте</h3>
+                    <p>Новости, акции и отзывы</p>
+                    <p style="margin-top: 10px;">
+                        <a href="https://vk.com" style="display: inline-block; padding: 8px 20px; background: #4665AD; color: white; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; transition: all 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Перейти</a>
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">✏️</div>
+                    <h3>Онлайн запись</h3>
+                    <p>Забронируйте время удобно для вас</p>
+                    <p style="margin-top: 10px;">
+                        <a href="#" style="display: inline-block; padding: 8px 20px; background: var(--accent); color: var(--primary); border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; transition: all 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Записаться</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>О салоне</h4>
+                    <p>Салон красоты Арт Деко - ваш выбор в Томске</p>
+                    <p><a href="tel:+73822565056">+7 (3822) 56-50-56</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Услуги</h4>
+                    <p>Парикмахерские услуги</p>
+                    <p>Маникюр и педикюр</p>
+                    <p>Косметология</p>
+                    <p>Ресницы и брови</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Информация</h4>
+                    <p><a href="#">О нас</a></p>
+                    <p><a href="#">Контакты</a></p>
+                    <p><a href="#">Записаться онлайн</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Адрес</h4>
+                    <p>ул. Косарева, 33<br>Томск, 634000</p>
+                    <p>⭐ 4.8 / 5.0</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Мы в соцсетях</h4>
+                    <div style="display: flex; gap: 15px; margin-top: 15px;">
+                        <a href="https://wa.me/79090000000" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(201, 169, 97, 0.2); border-radius: 50%; color: #25D366; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.background='#25D366'; this.style.color='white'" onmouseout="this.style.background='rgba(201, 169, 97, 0.2)'; this.style.color='#25D366'">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.6 6.3C16.4 5 14.7 4.2 12.9 4.2c-4.5 0-8.2 3.7-8.2 8.2 0 1.4.4 2.8 1.1 4l-1.2 4.4 4.5-1.2c1.2.6 2.5 1 3.8 1 4.5 0 8.2-3.7 8.2-8.2 0-2.2-.8-4.3-2.3-5.9zM12.9 19c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.3.6.6-2.3-.2-.2c-.6-1-1-2.3-1-3.6 0-3.7 3-6.8 6.8-6.8 1.8 0 3.5.7 4.8 2 1.2 1.2 2 2.9 2 4.7 0 3.7-3 6.8-6.8 6.8zm3.7-5.1c-.2-.1-1.1-.5-1.3-.6-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-.8-.3-1.5-.9-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4.1-.1.2-.3.3-.4.1-.1.1-.2.2-.3.1-.2 0-.3 0-.4-.1-.1-.4-1-.6-1.4-.1-.4-.3-.3-.4-.3h-.4c-.1 0-.3.1-.4.2-.2.2-.7.7-.7 1.7 0 1 .7 2 .8 2.2.1.2 1.4 2.2 3.5 3 .5.2 1 .4 1.3.5.5.2 1 .1 1.4-.1.4-.2 1.1-.9 1.3-1.7.2-.8.2-1.5.1-1.7-.1-.2-.3-.3-.5-.4z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <a href="https://vk.com" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(201, 169, 97, 0.2); border-radius: 50%; color: #4665AD; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.background='#4665AD'; this.style.color='white'" onmouseout="this.style.background='rgba(201, 169, 97, 0.2)'; this.style.color='#4665AD'">
+                            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="24" height="24" fill="#4665AD" rx="2"/>
+                                <text x="12" y="17" font-size="14" font-weight="bold" fill="white" text-anchor="middle" font-family="Arial">VK</text>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Салон красоты Арт Деко. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
