@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linea - студия дизайна интерьера</title>
+<meta name="description" content="Демо одностраничного сайта студии дизайна интерьера: услуги, кейсы, FAQ, форма заявки">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f0ea;--bg2:#ebe5dc;--fg:#23201c;--muted:#7a7166;--line:#d9d1c5;--card:#fbf9f5;--accent:#9a6b4a;--dark:#23201c;--dark-fg:#f4f0ea}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.65 Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover;background:var(--bg2)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;font-weight:400;line-height:1.1;letter-spacing:-.01em}
+h1 em,h2 em{font-style:italic;color:var(--accent)}
+h2{font-size:clamp(34px,5.4vw,60px);margin-bottom:24px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+section{padding:112px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.eyebrow:before{content:"";width:28px;height:1px;background:currentColor}
+.lead{font-size:18px;color:var(--muted);max-width:560px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:17px 30px;border-radius:40px;background:var(--dark);color:var(--dark-fg);font-weight:500;font-size:15px;border:1px solid var(--dark);cursor:pointer;transition:.25s;font-family:inherit}
+.btn:hover{background:var(--accent);border-color:var(--accent)}
+.btn.ghost{background:transparent;color:var(--fg)}
+.btn.ghost:hover{background:var(--fg);color:var(--bg)}
+.btn.light{background:var(--dark-fg);color:var(--dark);border-color:var(--dark-fg)}
+.btn.light:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+/* header */
+header{position:fixed;inset:0 0 auto;z-index:50;transition:.3s}
+header.solid{background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:"Playfair Display",serif;font-size:26px;letter-spacing:.04em}
+.logo span{color:var(--accent)}
+.menu{display:flex;gap:30px;font-size:14px}
+.menu a{position:relative}
+.menu a:after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--accent);transition:.25s}
+.menu a:hover:after{width:100%}
+.nav .btn{padding:11px 22px;font-size:14px}
+.burger{display:none;background:none;border:0;width:40px;height:40px;cursor:pointer;color:var(--fg)}
+.burger span{display:block;width:24px;height:1.5px;background:currentColor;margin:6px auto;transition:.3s}
+/* hero */
+.hero{padding:140px 0 60px;min-height:100vh;display:flex;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(44px,7vw,92px);margin-bottom:28px}
+.hero .lead{margin-bottom:40px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+.hero-img{position:relative;aspect-ratio:4/5;border-radius:220px 220px 8px 8px;overflow:hidden}
+.hero-badge{position:absolute;left:-28px;bottom:48px;background:var(--card);padding:20px 24px;border-radius:8px;box-shadow:0 20px 50px rgba(35,32,28,.12)}
+.hero-badge b{display:block;font-family:"Playfair Display",serif;font-size:34px;font-weight:400;line-height:1}
+.hero-badge small{color:var(--muted);font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:72px;padding-top:36px;border-top:1px solid var(--line)}
+.stats b{display:block;font-family:"Playfair Display",serif;font-size:clamp(32px,4vw,46px);font-weight:400;line-height:1}
+.stats span{color:var(--muted);font-size:14px}
+/* about */
+.about{background:var(--card)}
+.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center}
+.about-img{aspect-ratio:1/1.1;border-radius:8px;overflow:hidden}
+.about p+p{margin-top:16px}
+.about .lead{margin-bottom:20px}
+.sign{margin-top:32px;display:flex;gap:40px;flex-wrap:wrap}
+.sign div b{display:block;font-weight:600}
+.sign div span{color:var(--muted);font-size:14px}
+/* services */
+.head-row{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:56px;flex-wrap:wrap}
+.head-row h2{margin:0}
+.services{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.srv{padding:40px 32px 40px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column}
+.srv:not(:nth-child(3n+1)){padding-left:32px;border-left:1px solid var(--line)}
+.srv .n{font-size:13px;color:var(--accent);font-weight:600;margin-bottom:28px}
+.srv h3{font-size:28px;margin-bottom:14px}
+.srv p{color:var(--muted);font-size:15px;flex:1}
+.srv ul{list-style:none;margin:20px 0;font-size:14px}
+.srv li{padding:6px 0;border-top:1px dashed var(--line)}
+.srv .price{font-weight:600;font-size:17px}
+.srv .price small{font-weight:400;color:var(--muted);font-size:13px}
+/* cases */
+.cases{background:var(--dark);color:var(--dark-fg)}
+.cases .lead{color:#b3aa9e}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{background:none;border:1px solid #4a443c;color:var(--dark-fg);padding:9px 18px;border-radius:30px;font:inherit;font-size:14px;cursor:pointer;transition:.2s}
+.filters button.on,.filters button:hover{background:var(--dark-fg);color:var(--dark)}
+.case-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.case{grid-column:span 2;cursor:pointer}
+.case:nth-child(1),.case:nth-child(2){grid-column:span 3}
+.case .ph{aspect-ratio:4/3;overflow:hidden;border-radius:6px;margin-bottom:16px}
+.case .ph img{transition:transform .8s}
+.case:hover .ph img{transform:scale(1.05)}
+.case h3{font-size:24px;margin-bottom:6px}
+.case .meta{font-size:14px;color:#b3aa9e;display:flex;gap:14px;flex-wrap:wrap}
+.case.hide{display:none}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(20,18,15,.8);z-index:100;display:none;align-items:center;justify-content:center;padding:16px}
+.modal.open{display:flex}
+.modal-box{background:var(--card);color:var(--fg);max-width:960px;width:100%;max-height:92vh;overflow:auto;border-radius:8px;display:grid;grid-template-columns:1.2fr 1fr}
+.modal-box .ph{min-height:320px}
+.modal-box .txt{padding:40px 32px}
+.modal-box h3{font-size:32px;margin-bottom:14px}
+.modal-box dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px;margin:20px 0;font-size:14px}
+.modal-box dt{color:var(--muted)}
+.modal-close{position:absolute;top:16px;right:20px;background:none;border:0;color:#fff;font-size:36px;cursor:pointer;line-height:1}
+/* why */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.why{background:var(--card);padding:36px 28px;border-radius:8px;transition:.3s}
+.why:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(35,32,28,.08)}
+.why svg{width:40px;height:40px;stroke:var(--accent);fill:none;stroke-width:1.3;margin-bottom:28px}
+.why h3{font-size:22px;margin-bottom:10px}
+.why p{color:var(--muted);font-size:15px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:72px;counter-reset:s}
+.step{padding:24px 20px 0 0;border-top:1px solid var(--fg);position:relative}
+.step:before{counter-increment:s;content:"0" counter(s);position:absolute;top:-11px;left:0;background:var(--bg);padding-right:10px;font-size:13px;font-weight:600;color:var(--accent)}
+.step b{display:block;margin:6px 0 4px}
+.step span{font-size:14px;color:var(--muted)}
+/* faq */
+.faq{background:var(--card)}
+.faq-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:80px}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:26px 44px 26px 0;font-size:19px;font-weight:500;position:relative}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:28px;font-weight:300;color:var(--accent);transition:.3s}
+details[open] summary:after{transform:translateY(-50%) rotate(45deg)}
+details p{padding:0 44px 26px 0;color:var(--muted)}
+/* cta */
+.cta{position:relative;color:#fff;padding:160px 0;text-align:center;overflow:hidden}
+.cta>img{position:absolute;inset:0;z-index:-2}
+.cta:before{content:"";position:absolute;inset:0;background:rgba(25,22,18,.58);z-index:-1}
+.cta h2{max-width:820px;margin:0 auto 22px}
+.cta h2 em{color:#e3c3a5}
+.cta p{max-width:520px;margin:0 auto 40px;color:#e6dfd5;font-size:18px}
+/* contacts */
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px}
+.cinfo{margin-top:36px;display:grid;gap:22px}
+.cinfo small{display:block;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:2px}
+.cinfo a,.cinfo p{font-size:20px}
+.cinfo a:hover{color:var(--accent)}
+form{background:var(--card);padding:44px;border-radius:8px;display:grid;gap:18px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+label{font-size:13px;color:var(--muted);display:grid;gap:6px}
+input,select,textarea{font:inherit;font-size:16px;color:var(--fg);background:transparent;border:0;border-bottom:1px solid var(--line);padding:10px 0;outline:none;border-radius:0;transition:.2s;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+textarea{resize:vertical;min-height:80px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{display:block}
+.chips input{display:none}
+.chips span{display:inline-block;padding:8px 16px;border:1px solid var(--line);border-radius:30px;font-size:14px;color:var(--fg);cursor:pointer;transition:.2s}
+.chips input:checked+span{background:var(--dark);color:var(--dark-fg);border-color:var(--dark)}
+.agree{font-size:12px;color:var(--muted)}
+.ok{display:none;text-align:center;padding:40px 0}
+.ok h3{font-size:30px;margin-bottom:10px}
+footer{padding:36px 0;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+/* reveal */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .9s,transform .9s}
+.rv.in{opacity:1;transform:none}
+@media (max-width:1024px){
+  .why-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr 1fr;row-gap:36px}
+  .services{grid-template-columns:1fr 1fr}
+  .srv,.srv:not(:nth-child(3n+1)){padding:36px 24px 36px 0;border-left:0}
+  .srv:nth-child(2n){padding-left:24px;border-left:1px solid var(--line)}
+}
+@media (max-width:860px){
+  section{padding:80px 0}
+  .menu{position:fixed;inset:72px 0 auto;flex-direction:column;background:var(--bg);padding:24px 20px 32px;gap:18px;font-size:18px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:.35s;z-index:-1}
+  .menu.open{transform:none}
+  .nav .btn{display:none}
+  .burger{display:block}
+  .burger.x span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+  .burger.x span:nth-child(2){opacity:0}
+  .burger.x span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+  header{background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px)}
+  .hero{padding-top:110px;min-height:auto}
+  .hero-grid,.about-grid,.faq-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
+  .hero-img{aspect-ratio:4/4.3;border-radius:180px 180px 8px 8px}
+  .hero-badge{left:16px;bottom:16px}
+  .stats{grid-template-columns:1fr 1fr;row-gap:28px;margin-top:48px}
+  .case-grid{grid-template-columns:1fr}
+  .case,.case:nth-child(1),.case:nth-child(2){grid-column:auto}
+  .modal-box{grid-template-columns:1fr}
+  .modal-box .ph{min-height:240px;height:240px}
+}
+@media (max-width:600px){
+  .services,.why-grid{grid-template-columns:1fr}
+  .srv,.srv:nth-child(2n),.srv:not(:nth-child(3n+1)){padding:32px 0;border-left:0}
+  .steps{grid-template-columns:1fr 1fr}
+  .row2{grid-template-columns:1fr}
+  form{padding:28px 20px}
+  .cta{padding:110px 0}
+  summary{font-size:17px}
+}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#top" class="logo">Linea<span>.</span></a>
+    <nav class="menu" id="menu">
+      <a href="#about">О студии</a>
+      <a href="#services">Услуги</a>
+      <a href="#cases">Проекты</a>
+      <a href="#why">Почему мы</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a href="#contacts" class="btn">Обсудить проект</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow rv">Студия дизайна интерьера</div>
+        <h1 class="rv">Интерьеры, в&nbsp;которых <em>хочется жить</em></h1>
+        <p class="lead rv">Проектируем квартиры, дома и коммерческие пространства под ваш образ жизни. Ведём проект от первого замера до расстановки последней вазы.</p>
+        <div class="hero-actions rv">
+          <a href="#contacts" class="btn">Получить консультацию →</a>
+          <a href="#cases" class="btn ghost">Смотреть проекты</a>
+        </div>
+      </div>
+      <div class="hero-img rv">
+        <img src="img/hero.jpg" alt="Светлая гостиная с панорамными окнами">
+        <div class="hero-badge"><b>12 лет</b><small>создаём интерьеры</small></div>
+      </div>
+    </div>
+    <div class="stats rv">
+      <div><b>240+</b><span>реализованных проектов</span></div>
+      <div><b>38 000 м²</b><span>спроектированной площади</span></div>
+      <div><b>95%</b><span>клиентов приходят по рекомендации</span></div>
+      <div><b>14</b><span>публикаций в профильных изданиях</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-img rv"><img src="img/about.jpg" alt="Интерьер гостиной, проект студии" loading="lazy"></div>
+    <div>
+      <div class="eyebrow rv">О студии</div>
+      <h2 class="rv">Спокойный дизайн <em>без лишнего</em></h2>
+      <p class="lead rv">Мы верим, что хороший интерьер не кричит - он работает. Удобно, красиво и долго.</p>
+      <div class="rv">
+        <p>Linea - команда из архитекторов, дизайнеров и комплектаторов. Мы начинаем не с мудборда, а с того, как вы проводите утро, где храните вещи и сколько гостей обычно приходит на ужин.</p>
+        <p>Каждое решение просчитываем до сантиметра, а смету фиксируем заранее, чтобы ремонт не превратился в бесконечную стройку.</p>
+      </div>
+      <div class="sign rv">
+        <div><b>Анна Орлова</b><span>основатель, архитектор</span></div>
+        <div><b>Илья Данилов</b><span>руководитель реализации</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="head-row">
+      <div><div class="eyebrow rv">Услуги</div><h2 class="rv">Что мы <em>делаем</em></h2></div>
+      <p class="lead rv">Можно заказать полный цикл или отдельный этап - подберём формат под задачу и бюджет.</p>
+    </div>
+    <div class="services">
+      <div class="srv rv">
+        <div class="n">01</div><h3>Дизайн-проект</h3>
+        <p>Полный комплект чертежей и визуализаций, по которому строители сделают ровно то, что вы увидели на картинке.</p>
+        <ul><li>Планировочные решения</li><li>3D-визуализации всех помещений</li><li>Рабочая документация</li></ul>
+        <div class="price">от 3 500 ₽ <small>/ м²</small></div>
+      </div>
+      <div class="srv rv">
+        <div class="n">02</div><h3>Авторский надзор</h3>
+        <p>Выезжаем на объект, контролируем соответствие проекту и решаем вопросы с подрядчиками за вас.</p>
+        <ul><li>Выезды по графику</li><li>Приёмка скрытых работ</li><li>Фотоотчёты в чате</li></ul>
+        <div class="price">от 40 000 ₽ <small>/ мес</small></div>
+      </div>
+      <div class="srv rv">
+        <div class="n">03</div><h3>Комплектация</h3>
+        <p>Подбираем и заказываем мебель, свет, отделку. Скидки партнёров часто окупают стоимость услуги.</p>
+        <ul><li>Спецификации и сметы</li><li>Закупка и логистика</li><li>Скидки до 25% у партнёров</li></ul>
+        <div class="price">от 10% <small>от бюджета</small></div>
+      </div>
+      <div class="srv rv">
+        <div class="n">04</div><h3>Планировка</h3>
+        <p>Быстрый старт: 2-3 варианта планировки с расстановкой мебели. Подходит для покупки квартиры.</p>
+        <ul><li>Обмерный план</li><li>3 варианта зонирования</li><li>Срок - от 7 дней</li></ul>
+        <div class="price">от 900 ₽ <small>/ м²</small></div>
+      </div>
+      <div class="srv rv">
+        <div class="n">05</div><h3>Декорирование</h3>
+        <p>Преобразим готовое пространство без ремонта: текстиль, свет, декор, искусство.</p>
+        <ul><li>Концепция стилизации</li><li>Подбор и закупка</li><li>Финальная расстановка</li></ul>
+        <div class="price">от 60 000 ₽</div>
+      </div>
+      <div class="srv rv">
+        <div class="n">06</div><h3>Коммерческие интерьеры</h3>
+        <p>Кафе, офисы, шоу-румы и салоны - интерьер, который работает на бренд и продажи.</p>
+        <ul><li>Концепция под бренд</li><li>Согласование с арендодателем</li><li>Реализация под ключ</li></ul>
+        <div class="price">по запросу</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cases" id="cases">
+  <div class="wrap">
+    <div class="head-row">
+      <div><div class="eyebrow rv">Кейсы</div><h2 class="rv">Избранные <em>проекты</em></h2></div>
+      <div class="filters rv" id="filters">
+        <button class="on" data-f="all">Все</button>
+        <button data-f="flat">Квартиры</button>
+        <button data-f="house">Дома</button>
+        <button data-f="bed">Спальни</button>
+      </div>
+    </div>
+    <div class="case-grid" id="caseGrid"></div>
+  </div>
+</section>
+
+<div class="modal" id="modal">
+  <button class="modal-close" id="mClose" aria-label="Закрыть">×</button>
+  <div class="modal-box" id="mBox"></div>
+</div>
+
+<section id="why">
+  <div class="wrap">
+    <div class="head-row">
+      <div><div class="eyebrow rv">Почему выбирают нас</div><h2 class="rv">Спокойствие <em>на каждом этапе</em></h2></div>
+    </div>
+    <div class="why-grid">
+      <div class="why rv"><svg viewBox="0 0 40 40"><rect x="6" y="6" width="28" height="28" rx="2"/><path d="M13 20l5 5 9-10"/></svg><h3>Фиксированная цена</h3><p>Стоимость проекта прописана в договоре и не меняется по ходу работы.</p></div>
+      <div class="why rv"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><path d="M20 11v9l6 4"/></svg><h3>Сроки по договору</h3><p>Каждый этап с датой. За просрочку по нашей вине - неустойка.</p></div>
+      <div class="why rv"><svg viewBox="0 0 40 40"><path d="M8 32V14l12-7 12 7v18z"/><path d="M16 32v-9h8v9"/></svg><h3>Реализуемость</h3><p>Проектируем с учётом бюджета и реальных материалов, а не «картинку для журнала».</p></div>
+      <div class="why rv"><svg viewBox="0 0 40 40"><path d="M7 11h26v17H17l-7 6v-6H7z"/></svg><h3>Всегда на связи</h3><p>Личный менеджер и общий чат. Отвечаем в течение часа в рабочее время.</p></div>
+    </div>
+    <div class="steps rv">
+      <div class="step"><b>Знакомство</b><span>Встреча, замер, бриф</span></div>
+      <div class="step"><b>Концепция</b><span>Планировка и стиль</span></div>
+      <div class="step"><b>Визуализация</b><span>3D каждой комнаты</span></div>
+      <div class="step"><b>Чертежи</b><span>Документация для строителей</span></div>
+      <div class="step"><b>Реализация</b><span>Надзор и комплектация</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap faq-grid">
+    <div>
+      <div class="eyebrow rv">FAQ</div>
+      <h2 class="rv">Частые <em>вопросы</em></h2>
+      <p class="lead rv">Не нашли ответ? Напишите нам - расскажем подробно.</p>
+    </div>
+    <div class="rv">
+      <details open><summary>Сколько времени занимает дизайн-проект?</summary><p>Для квартиры 60-100 м² - в среднем 6-8 недель. Точный график мы фиксируем в договоре после замера.</p></details>
+      <details><summary>Можно ли работать удалённо, если я в другом городе?</summary><p>Да. Замер может сделать наш партнёр или ваш прораб по нашему ТЗ, а все встречи проходят онлайн. Мы работаем с клиентами по всей России.</p></details>
+      <details><summary>Что входит в стоимость дизайн-проекта?</summary><p>Обмеры, планировочные решения, 3D-визуализации всех помещений, полный комплект рабочих чертежей и спецификация отделочных материалов.</p></details>
+      <details><summary>Вы делаете ремонт?</summary><p>Мы не строим сами, но работаем с проверенными бригадами и ведём авторский надзор, чтобы результат совпал с проектом.</p></details>
+      <details><summary>Сколько правок можно внести?</summary><p>На этапе концепции - без ограничений, пока вы не будете довольны. На визуализациях - 2 круга правок по каждому помещению.</p></details>
+      <details><summary>Как происходит оплата?</summary><p>Поэтапно: 30% при подписании договора, дальше - по мере сдачи этапов. Можно оплатить по счёту для юрлиц.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <img src="img/cta.jpg" alt="" loading="lazy">
+  <div class="wrap">
+    <h2 class="rv">Первая консультация и <em>выезд на замер</em> - бесплатно</h2>
+    <p class="rv">Обсудим ваши задачи, покажем похожие проекты и назовём ориентировочную стоимость за одну встречу.</p>
+    <a href="#contacts" class="btn light rv">Записаться на встречу →</a>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="eyebrow rv">Контакты</div>
+      <h2 class="rv">Расскажите <em>о проекте</em></h2>
+      <p class="lead rv">Оставьте заявку - перезвоним в течение 30 минут и подберём удобное время для встречи.</p>
+      <div class="cinfo rv">
+        <div><small>Телефон</small><a href="tel:+70000000000">+7 (000) 000-00-00</a></div>
+        <div><small>Email</small><a href="mailto:hello@linea.studio">hello@linea.studio</a></div>
+        <div><small>Адрес студии</small><p>Москва, ул. Примерная, 12, офис 4</p></div>
+        <div><small>Мессенджеры</small><p><a href="#">Telegram</a> · <a href="#">WhatsApp</a></p></div>
+      </div>
+    </div>
+    <form id="form" class="rv">
+      <div id="fBody" style="display:grid;gap:18px">
+        <label>Тип объекта
+          <div class="chips">
+            <label><input type="radio" name="t" checked><span>Квартира</span></label>
+            <label><input type="radio" name="t"><span>Дом</span></label>
+            <label><input type="radio" name="t"><span>Коммерция</span></label>
+          </div>
+        </label>
+        <div class="row2">
+          <label>Имя<input required name="name" placeholder="Как к вам обращаться"></label>
+          <label>Телефон<input required name="phone" type="tel" placeholder="+7 ___ ___-__-__"></label>
+        </div>
+        <div class="row2">
+          <label>Площадь, м²<input name="area" type="number" min="1" placeholder="например, 75"></label>
+          <label>Услуга<select name="srv"><option>Дизайн-проект</option><option>Проект + надзор</option><option>Планировка</option><option>Декорирование</option><option>Пока не знаю</option></select></label>
+        </div>
+        <label>Комментарий<textarea name="msg" placeholder="Коротко о задаче, сроках, стиле"></textarea></label>
+        <button class="btn" type="submit">Отправить заявку →</button>
+        <p class="agree">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+      </div>
+      <div class="ok" id="ok"><h3>Спасибо!</h3><p class="lead" style="margin:0 auto">Заявка принята. Мы свяжемся с вами в ближайшее время.</p></div>
+    </form>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>© Linea, студия дизайна интерьера</span><span>Демо-версия сайта</span></div></footer>
+
+<script>
+const cases=[
+ {img:'c1.jpg',t:'Квартира на Патриарших',c:'flat',area:'96 м²',year:'2025',style:'Джапанди',d:'Светлая квартира для пары с собакой. Убрали коридор, объединили кухню с гостиной и спрятали всё хранение в встроенные шкафы.'},
+ {img:'c4.jpg',t:'Дом в Павловской Слободе',c:'house',area:'240 м²',year:'2025',style:'Современная классика',d:'Загородный дом для семьи с тремя детьми: второй свет в гостиной, камин и отдельная гостевая зона.'},
+ {img:'c2.jpg',t:'Спальня в ЖК «Остров»',c:'bed',area:'22 м²',year:'2024',style:'Неоклассика',d:'Спальня с гардеробной и тёмными стенами. Мягкое изголовье, многоуровневый свет и шторы блэкаут.'},
+ {img:'c3.jpg',t:'Апартаменты в Хамовниках',c:'flat',area:'64 м²',year:'2024',style:'Минимализм',d:'Компактные апартаменты под сдачу: нейтральная база, натуральные фактуры и мебель, которая выдерживает нагрузку.'},
+ {img:'c5.jpg',t:'Гостевая спальня',c:'bed',area:'16 м²',year:'2023',style:'Бохо',d:'Уютная комната с живыми растениями, лёгким текстилем и акцентным светом.'}
+];
+const grid=document.getElementById('caseGrid');
+grid.innerHTML=cases.map((c,i)=>`<article class="case rv" data-c="${c.c}" data-i="${i}"><div class="ph"><img src="img/${c.img}" alt="${c.t}" loading="lazy"></div><h3>${c.t}</h3><div class="meta"><span>${c.area}</span><span>${c.style}</span><span>${c.year}</span></div></article>`).join('');
+document.getElementById('filters').onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.case').forEach(el=>el.classList.toggle('hide',b.dataset.f!=='all'&&el.dataset.c!==b.dataset.f));
+};
+const modal=document.getElementById('modal'),mBox=document.getElementById('mBox');
+grid.onclick=e=>{
+  const el=e.target.closest('.case');if(!el)return;const c=cases[el.dataset.i];
+  mBox.innerHTML=`<div class="ph"><img src="img/${c.img}" alt="${c.t}"></div><div class="txt"><div class="eyebrow">Проект</div><h3>${c.t}</h3><p style="color:var(--muted)">${c.d}</p><dl><dt>Площадь</dt><dd>${c.area}</dd><dt>Стиль</dt><dd>${c.style}</dd><dt>Год</dt><dd>${c.year}</dd></dl><a href="#contacts" class="btn" onclick="closeM()">Хочу похожий</a></div>`;
+  modal.classList.add('open');document.body.style.overflow='hidden';
+};
+function closeM(){modal.classList.remove('open');document.body.style.overflow=''}
+document.getElementById('mClose').onclick=closeM;
+modal.onclick=e=>{if(e.target===modal)closeM()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+// header & menu
+const hdr=document.getElementById('hdr'),menu=document.getElementById('menu'),burger=document.getElementById('burger');
+addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40),{passive:true});
+burger.onclick=()=>{menu.classList.toggle('open');burger.classList.toggle('x')};
+menu.onclick=e=>{if(e.target.tagName==='A'){menu.classList.remove('open');burger.classList.remove('x')}};
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+// form
+document.getElementById('form').onsubmit=e=>{e.preventDefault();document.getElementById('fBody').style.display='none';document.getElementById('ok').style.display='block'};
+</script>
+</body>
+</html>
