@@ -1,0 +1,31 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Склад - остатки - СтальРесурс</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="wrap nav"><a class="logo" href="index.html">СТАЛЬ<span>РЕСУРС</span></a>
+<nav><a href="index.html" >Главная</a><a href="sklad.html" class="on">Склад</a><a href="kontakty.html" >Контакты</a></nav>
+<a class="phone" href="tel:+70000000000">+7 (000) 000-00-00</a></div></header>
+<div class="page-h"><div class="wrap"><h1>Склад - актуальные остатки</h1><p>Обновлено: <span id="upd"></span></p></div></div>
+<section style="padding-top:28px"><div class="wrap">
+<div class="filters"><input id="q" placeholder="Поиск: например, «20Б1» или «40×20»"><select id="cat"><option value="">Все категории</option></select>
+<select id="av"><option value="">Любое наличие</option><option value="1">Только в наличии</option></select></div>
+<div class="tbl"><table><thead><tr><th data-k="1">Наименование ↕</th><th data-k="2">Размер</th><th data-k="3">Марка стали</th><th data-k="4">Остаток ↕</th><th data-k="6">Цена ↕</th><th>Статус</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="note" id="cnt"></p><p class="note">Цены указаны с НДС. Резка в размер, доставка и изготовление - по запросу.</p>
+</div></section>
+<div class="modal" id="m"><form class="card" onsubmit="event.preventDefault();this.innerHTML='<h3>Заявка отправлена</h3><p>Менеджер перезвонит в течение 15 минут.</p>';setTimeout(()=>location.reload(),1800)">
+<h3 style="margin:0">Заявка на позицию</h3><p id="mp" class="note" style="margin:0"></p>
+<input placeholder="Нужное количество" required><input placeholder="Ваше имя" required><input type="tel" placeholder="Телефон" required>
+<button class="btn">Отправить</button><button type="button" class="btn ghost" style="color:var(--ink);border-color:var(--line)" onclick="m.classList.remove('on')">Отмена</button></form></div>
+<script src="data.js"></script><script>
+const f=n=>n.toLocaleString('ru-RU');let sk=1,dir=1;
+upd.textContent=new Date().toLocaleDateString('ru-RU');
+[...new Set(STOCK.map(r=>r[0]))].forEach(c=>cat.add(new Option(c,c)));
+const pc=new URLSearchParams(location.search).get('c');if(pc)cat.value=pc;
+function st(r){const q=r[4];if(!q)return'<span class="st no">Нет в наличии</span>';const low=r[5]=='т'?q<3:r[5]=='м'?q<100:q<5;return low?'<span class="st low">Мало</span>':'<span class="st ok">В наличии</span>'}
+function draw(){const s=q.value.toLowerCase();let rows=STOCK.filter(r=>(!cat.value||r[0]==cat.value)&&(!av.value||r[4]>0)&&(r.join(' ').toLowerCase().includes(s)));
+rows.sort((a,b)=>(a[sk]>b[sk]?1:a[sk]<b[sk]?-1:0)*dir);
+tb.innerHTML=rows.map(r=>`<tr><td><b>${r[1]}</b><br><span class="note">${r[0]}</span></td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]?f(r[4])+' '+r[5]:'-'}</td><td><b>${f(r[6])} ₽</b>/${r[5]}</td><td>${st(r)}</td><td><button class="btn" onclick="ask('${r[1]}')">${r[4]?'Заказать':'Под заказ'}</button></td></tr>`).join('');
+cnt.textContent='Найдено позиций: '+rows.length}
+function ask(n){mp.textContent=n;m.classList.add('on')}
+document.querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{const k=+th.dataset.k;dir=sk==k?-dir:1;sk=k;draw()});
+[q,cat,av].forEach(e=>e.oninput=draw);draw();
+</script>
+<footer><div class="wrap">© 2026 СтальРесурс - демо-версия сайта. Данные и цены условные.</div></footer></body></html>
