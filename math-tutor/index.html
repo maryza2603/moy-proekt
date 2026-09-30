@@ -8,7 +8,7 @@
 <meta property="og:title" content="Репетитор по математике - ОГЭ, ЕГЭ, школьная программа">
 <meta property="og:description" content="Понятно объясняю, закрываю пробелы, готовлю к экзаменам. Запишитесь на пробное занятие.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f6f7fb;--card:#fff;--ink:#1c2233;--muted:#5d6477;--acc:#3d5afe;--acc-d:#2c46e0;--soft:#e8ecff;--yel:#ffd54a;--line:#e3e6ef}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -72,6 +72,25 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);border-colo
 footer{padding:32px 0;color:var(--muted);font-size:14px}footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 @media(max-width:900px){nav{display:none}.hero .wrap,.about,.cta{grid-template-columns:1fr}.g3,.g4{grid-template-columns:1fr 1fr}.photo{max-width:420px}.cta{padding:30px 22px}}
 @media(max-width:600px){section{padding:56px 0}.g2,.g3,.g4,.facts{grid-template-columns:1fr}.hero{padding:36px 0 56px}.actions .btn{width:100%;text-align:center}header .btn{display:none}}
+
+.nb-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:center}
+.nb{perspective:1600px;max-width:560px;width:100%;justify-self:center}
+.sheet{position:relative;min-height:380px;background:#fffdf5;border-radius:6px 18px 18px 6px;padding:34px 30px 30px 54px;box-shadow:0 20px 50px rgba(28,34,51,.15),inset 8px 0 12px -8px rgba(0,0,0,.15);
+background-image:linear-gradient(90deg,transparent 40px,#f3a0a0 40px,#f3a0a0 42px,transparent 42px),linear-gradient(#dfe6f5 1px,transparent 1px),linear-gradient(90deg,#dfe6f5 1px,transparent 1px);background-size:100% 100%,22px 22px,22px 22px;transform-origin:left center;transition:transform .35s ease-in,opacity .35s;font-family:"Caveat",Manrope,cursive}
+.sheet.out{transform:rotateY(-90deg);opacity:.4}.sheet.back{transform:rotateY(90deg);opacity:.4}
+.rings{position:absolute;left:-12px;top:24px;bottom:24px;display:flex;flex-direction:column;justify-content:space-between}.rings i{width:24px;height:10px;border-radius:6px;background:linear-gradient(#c9ced9,#8b93a6)}
+.sheet .th{font-size:15px;font-family:Manrope,sans-serif;color:var(--acc);font-weight:700;margin-bottom:6px}
+.sheet h3{font-size:34px;font-weight:700;margin-bottom:12px;color:var(--ink)}
+.fml{font-size:34px;color:#1b3fbf;margin:6px 0 14px;line-height:1.3}
+.sheet p{font-size:23px;color:#444;line-height:1.3}
+.quiz{margin-top:14px;font-family:Manrope,sans-serif;font-size:15px}
+.quiz button{border:1px dashed var(--acc);background:var(--soft);color:var(--acc);font:700 14px Manrope,sans-serif;border-radius:10px;padding:8px 14px;cursor:pointer}
+.ans{display:none;margin-top:8px;font-family:Caveat,cursive;font-size:26px;color:#16a34a}.ans.show{display:block}
+.pnum{position:absolute;right:20px;bottom:12px;font-size:20px;color:#999}
+.nb-ctrl{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px}
+.nb-ctrl button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:20px;cursor:pointer;color:var(--ink)}.nb-ctrl button:hover{border-color:var(--acc);color:var(--acc)}
+.dots{display:flex;gap:6px}.dots span{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer}.dots span.on{background:var(--acc);width:22px;border-radius:4px}
+@media(max-width:900px){.nb-wrap{grid-template-columns:1fr}.sheet{padding:28px 20px 30px 52px;min-height:360px}.fml{font-size:28px}}
 </style>
 </head>
 <body>
@@ -142,6 +161,20 @@ footer{padding:32px 0;color:var(--muted);font-size:14px}footer .wrap{display:fle
   </div>
 </div></section>
 
+<!-- БЛОК: Тетрадка с формулами -->
+<section id="notebook"><div class="wrap nb-wrap">
+  <div>
+    <span class="tag">Интерактив</span>
+    <h2>Полистайте мою тетрадку</h2>
+    <p class="sub">Формулы, которые чаще всего спасают на ОГЭ и ЕГЭ. На каждой странице - мини-задача: попробуйте решить и проверьте ответ. Листайте стрелками или свайпом.</p>
+    <a class="btn" href="#form">Хочу разобраться так же</a>
+  </div>
+  <div class="nb">
+    <div class="sheet" id="sheet"><div class="rings"><i></i><i></i><i></i><i></i><i></i><i></i></div><div id="page"></div></div>
+    <div class="nb-ctrl"><button id="prev" aria-label="Назад">←</button><div class="dots" id="dots"></div><button id="next" aria-label="Вперёд">→</button></div>
+  </div>
+</div></section>
+
 <!-- БЛОК: Отзывы -->
 <section id="reviews"><div class="wrap rev">
   <h2>Результаты учеников</h2>
@@ -203,6 +236,24 @@ footer{padding:32px 0;color:var(--muted);font-size:14px}footer .wrap{display:fle
 <script>
 // Демо: в рабочей версии заявка уходит в Telegram-бот или на почту
 document.getElementById('f').addEventListener('submit',function(e){e.preventDefault();document.getElementById('fields').style.display='none';document.getElementById('ok').style.display='block';});
+</script>
+<script>
+// Страницы тетрадки: меняйте тексты здесь
+const pages=[
+ {t:'Алгебра · 8 класс',h:'Квадратное уравнение',f:'D = b² − 4ac<br>x = (−b ± √D) / 2a',p:'Если D &lt; 0 - корней нет.',q:'x² − 5x + 6 = 0',a:'D = 1, x₁ = 2, x₂ = 3 ✓'},
+ {t:'Геометрия · 8 класс',h:'Теорема Пифагора',f:'c² = a² + b²',p:'Работает только в прямоугольном треугольнике.',q:'Катеты 6 и 8. Найдите гипотенузу.',a:'c = √(36 + 64) = 10 ✓'},
+ {t:'Алгебра · 9 класс · ОГЭ',h:'Арифметическая прогрессия',f:'aₙ = a₁ + d(n − 1)<br>Sₙ = (a₁ + aₙ)·n / 2',p:'d - разность соседних членов.',q:'a₁ = 3, d = 4. Найдите a₁₀.',a:'a₁₀ = 3 + 4·9 = 39 ✓'},
+ {t:'Алгебра · 10 класс · ЕГЭ',h:'Логарифмы',f:'logₐ(xy) = logₐx + logₐy<br>logₐxⁿ = n·logₐx',p:'Логарифм - это показатель степени.',q:'log₂ 8 + log₂ 4 = ?',a:'3 + 2 = 5 ✓'},
+ {t:'Тригонометрия · ЕГЭ',h:'Главное тождество',f:'sin²α + cos²α = 1',p:'Отсюда находим sin, если знаем cos.',q:'cos α = 0,6, α в I четверти. sin α = ?',a:'sin α = √(1 − 0,36) = 0,8 ✓'},
+ {t:'Алгебра · 11 класс · ЕГЭ',h:'Производная',f:'(xⁿ)′ = n·xⁿ⁻¹<br>(sin x)′ = cos x',p:'Производная - скорость изменения функции.',q:'f(x) = x³. Найдите f′(2).',a:'f′(x) = 3x², f′(2) = 12 ✓'}
+];
+let cur=0,busy=false;const pg=document.getElementById('page'),sh=document.getElementById('sheet'),dots=document.getElementById('dots');
+pages.forEach((_,i)=>{const d=document.createElement('span');d.onclick=()=>go(i);dots.appendChild(d)});
+function render(){const p=pages[cur];pg.innerHTML=`<div class="th">${p.t}</div><h3>${p.h}</h3><div class="fml">${p.f}</div><p>${p.p}</p><div class="quiz">✏ Попробуйте: <b>${p.q}</b><br><br><button onclick="this.nextElementSibling.classList.toggle('show')">Показать ответ</button><div class="ans">${p.a}</div></div><div class="pnum">${cur+1} / ${pages.length}</div>`;[...dots.children].forEach((d,i)=>d.classList.toggle('on',i==cur))}
+function go(n){if(busy||n==cur)return;n=(n+pages.length)%pages.length;busy=true;const fwd=n>cur;sh.classList.add(fwd?'out':'back');setTimeout(()=>{cur=n;render();sh.style.transition='none';sh.classList.remove('out','back');sh.classList.add(fwd?'back':'out');sh.offsetWidth;sh.style.transition='';sh.classList.remove('out','back');setTimeout(()=>busy=false,350)},350)}
+document.getElementById('prev').onclick=()=>go(cur-1);document.getElementById('next').onclick=()=>go(cur+1);
+let x0=null;sh.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});sh.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(cur+(dx<0?1:-1));x0=null});
+render();
 </script>
 </body>
 </html>
