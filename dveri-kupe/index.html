@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Двери-купе и шкафы-купе в Сочи</title>
+<meta name="description" content="Двери-купе и шкафы-купе по индивидуальным размерам в Сочи. Калькулятор стоимости, фото работ, отзывы.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0d0d;--bg2:#161616;--card:#1d1d1d;--line:#2c2c2c;--text:#f2f0ec;--muted:#a3a09a;--gold:#c9a96a;--gold2:#e2c98f}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-family:"Cormorant Garamond",serif;font-weight:600;line-height:1.15}
+h2{font-size:clamp(30px,4vw,44px);margin-bottom:12px}
+.sub{color:var(--muted);max-width:620px;margin-bottom:36px}
+section{padding:80px 0}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:40px;font-weight:700;font-size:15px;cursor:pointer;border:0;transition:.2s}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,169,106,.3)}
+.btn-line{border:1px solid var(--gold);color:var(--gold);background:none}
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo i{width:52px;height:52px;border-radius:50%;background:#000 url(logo.jpg) center/auto 145% no-repeat;border:1px solid var(--line);flex:none}
+.logo b{font-family:"Cormorant Garamond",serif;font-size:22px;letter-spacing:.5px}
+.logo small{display:block;font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+nav{display:flex;gap:26px;font-size:14px;color:var(--muted)}
+nav a:hover{color:var(--gold)}
+.phone{font-weight:700;white-space:nowrap}
+@media(max-width:900px){nav{display:none}}
+@media(max-width:560px){.phone{display:none}}
+/* hero */
+.hero{padding:90px 0 70px;background:radial-gradient(ellipse at 80% 20%,rgba(201,169,106,.14),transparent 60%)}
+.hero-g{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.tag{color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-size:12px;margin-bottom:16px}
+.hero h1{font-size:clamp(38px,5.5vw,64px);margin-bottom:20px}
+.hero p{color:var(--muted);font-size:17px;margin-bottom:32px;max-width:520px}
+.hero .btns{display:flex;flex-wrap:wrap;gap:12px}
+.facts{display:flex;gap:32px;margin-top:40px;flex-wrap:wrap}
+.facts b{display:block;font-family:"Cormorant Garamond",serif;font-size:34px;color:var(--gold)}
+.facts span{font-size:13px;color:var(--muted)}
+.door-vis{aspect-ratio:4/5;border-radius:6px;border:10px solid #3a3a3a;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:#3a3a3a;box-shadow:0 30px 60px rgba(0,0,0,.6)}
+.door-vis div{border-radius:2px}
+@media(max-width:820px){.hero-g{grid-template-columns:1fr}.door-vis{max-width:360px;margin:0 auto}}
+/* fillings */
+.f-mirror{background:linear-gradient(115deg,#8d99a3,#dfe6ea 35%,#9aa6ae 50%,#e9eef1 70%,#8f9ba4)}
+.f-wood{background:repeating-linear-gradient(92deg,#7a5534 0 7px,#8a6240 7px 11px,#6d4a2c 11px 19px)}
+.f-white{background:linear-gradient(#efece6,#dcd8d0)}
+.f-lacobel{background:linear-gradient(160deg,#1a1a1a,#3b3b3b 55%,#141414)}
+.f-graphite{background:linear-gradient(160deg,#4a4c4f,#6a6d70 50%,#44464a)}
+.f-sand{background:linear-gradient(160deg,#cdbb9b,#e2d4b8 50%,#c7b491)}
+/* advantages */
+.adv{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.adv div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px}
+.adv b{display:block;font-size:17px;margin:12px 0 6px}
+.adv p{color:var(--muted);font-size:14px}
+.adv em{font-style:normal;font-size:26px}
+@media(max-width:900px){.adv{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.adv{grid-template-columns:1fr}}
+/* services */
+.srv{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.srv article{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.srv .pic{height:220px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:18px;background:#262626}
+.srv .pic.w{grid-template-columns:1fr 1fr 1fr 1fr}
+.srv .in{padding:24px}
+.srv h3{font-size:28px;margin-bottom:8px}
+.srv p{color:var(--muted);font-size:15px;margin-bottom:16px}
+.srv .price{color:var(--gold);font-weight:700}
+@media(max-width:760px){.srv{grid-template-columns:1fr}}
+/* calc */
+.calc{background:var(--bg2)}
+.cg{display:grid;grid-template-columns:1.2fr .8fr;gap:28px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px}
+.row{margin-bottom:22px}
+.row label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input[type=number]{width:100%;background:#111;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:12px 14px;font:inherit}
+input[type=number]:focus{outline:1px solid var(--gold)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{background:#111;border:1px solid var(--line);color:var(--text);border-radius:30px;padding:9px 16px;font:inherit;font-size:14px;cursor:pointer}
+.chips button.on{border-color:var(--gold);color:var(--gold);background:rgba(201,169,106,.08)}
+.row .sw{text-transform:none;letter-spacing:0;color:var(--text);display:flex;align-items:center;gap:10px;cursor:pointer;font-size:15px;margin-bottom:10px}
+.sw input{accent-color:var(--gold);width:18px;height:18px}
+.preview{height:230px;display:grid;gap:4px;padding:8px;border-radius:6px;margin-bottom:22px;transition:.3s}
+.preview div{border-radius:2px;transition:.3s}
+.total small{color:var(--muted);font-size:13px}
+.total b{display:block;font-family:"Cormorant Garamond",serif;font-size:46px;color:var(--gold);line-height:1.1;margin:4px 0 14px}
+.lines{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-bottom:20px}
+.lines div{display:flex;justify-content:space-between;gap:10px;padding:3px 0}
+.send{display:grid;gap:10px}
+.note{font-size:12px;color:var(--muted);margin-top:14px}
+@media(max-width:860px){.cg{grid-template-columns:1fr}}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gal figure{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer}
+.gal .ph{height:240px;display:grid;gap:4px;padding:14px;background:#2a2a2a;transition:.3s}
+.gal figure:hover .ph{transform:scale(1.03)}
+.gal figcaption{padding:14px 18px;font-size:14px}
+.gal figcaption span{display:block;color:var(--muted);font-size:13px}
+.filt{margin-bottom:24px}
+@media(max-width:860px){.gal{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.gal{grid-template-columns:1fr}}
+/* reviews */
+.rev{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rev div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.stars{color:var(--gold);letter-spacing:2px;margin-bottom:10px}
+.rev p{font-size:15px;margin-bottom:14px}
+.rev b{font-size:14px}.rev span{display:block;color:var(--muted);font-size:13px}
+@media(max-width:860px){.rev{grid-template-columns:1fr}}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+.steps div{border-top:1px solid var(--gold);padding-top:18px}
+.steps div::before{counter-increment:s;content:"0" counter(s);font-family:"Cormorant Garamond",serif;font-size:36px;color:var(--gold)}
+.steps b{display:block;margin:6px 0}
+.steps p{color:var(--muted);font-size:14px}
+@media(max-width:760px){.steps{grid-template-columns:1fr 1fr}}
+/* contact */
+.cta{text-align:center;background:radial-gradient(ellipse at center,rgba(201,169,106,.12),transparent 70%)}
+.cta .sub{margin:0 auto 30px}
+.msg{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+.wa{background:#25d366;color:#fff}.tg{background:#2aabee;color:#fff}.mx{background:#6c3cf5;color:#fff}.ph2{background:var(--text);color:#111}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+/* floating */
+.float{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;flex-direction:column;gap:10px}
+.float a{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.5);font-size:22px;color:#fff}
+.float svg{width:26px;height:26px;fill:#fff}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;place-items:center;z-index:90;padding:16px}
+.modal.on{display:grid}
+.modal .ph{width:min(520px,100%);height:min(620px,80vh);display:grid;gap:5px;padding:18px;background:#2a2a2a;border-radius:10px}
+.modal p{text-align:center;margin-top:12px}
+.demo{background:var(--gold);color:#111;text-align:center;font-size:13px;padding:6px 16px;font-weight:500}
+</style>
+</head>
+<body>
+<div class="demo">Демо-версия сайта. Цены, фото и отзывы - примеры, заменим на ваши</div>
+<header><div class="wrap hd">
+  <a href="#" class="logo"><i></i><div><b>Купе Сочи</b><small>двери и шкафы</small></div></a>
+  <nav><a href="#services">Услуги</a><a href="#calc">Калькулятор</a><a href="#works">Работы</a><a href="#reviews">Отзывы</a><a href="#contacts">Контакты</a></nav>
+  <a class="phone" href="tel:+79000000000">+7 (900) 000-00-00</a>
+</div></header>
+
+<section class="hero"><div class="wrap hero-g">
+  <div>
+    <div class="tag">Сочи · Адлер · Хоста · Дагомыс</div>
+    <h1>Двери-купе и шкафы-купе по вашим размерам</h1>
+    <p>Замер бесплатно. Собственное производство. Посчитайте цену за минуту в калькуляторе - и напишите нам в удобный мессенджер.</p>
+    <div class="btns"><a href="#calc" class="btn btn-gold">Рассчитать стоимость</a><a href="#works" class="btn btn-line">Смотреть работы</a></div>
+    <div class="facts"><div><b>от 7 дней</b><span>срок изготовления</span></div><div><b>0 ₽</b><span>замер и дизайн-проект</span></div><div><b>2 года</b><span>гарантия</span></div></div>
+  </div>
+  <div class="door-vis"><div class="f-mirror"></div><div class="f-wood"></div><div class="f-mirror"></div></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Почему выбирают нас</h2>
+  <p class="sub">Делаем под размер ниши, а не подгоняем нишу под типовой шкаф.</p>
+  <div class="adv">
+    <div><em>📐</em><b>Любые размеры</b><p>Под потолок, в нишу, под скос. Замер - бесплатно, по всему Большому Сочи.</p></div>
+    <div><em>🪞</em><b>Много наполнений</b><p>Зеркало, ЛДСП, лакобель, фотопечать, комбинированные двери.</p></div>
+    <div><em>⚙️</em><b>Надёжные системы</b><p>Алюминиевый профиль, плавный ход, доводчики по желанию.</p></div>
+    <div><em>🛠</em><b>Монтаж под ключ</b><p>Привезём, соберём, уберём за собой. Гарантия 2 года.</p></div>
+  </div>
+</div></section>
+
+<section id="services" style="padding-top:0"><div class="wrap">
+  <h2>Что мы делаем</h2>
+  <p class="sub">Можно заказать только двери в готовую нишу - или шкаф целиком с наполнением.</p>
+  <div class="srv">
+    <article><div class="pic"><div class="f-mirror"></div><div class="f-graphite"></div><div class="f-mirror"></div></div>
+      <div class="in"><h3>Двери-купе</h3><p>В нишу, гардеробную, как межкомнатная перегородка. Подберём профиль и наполнение под интерьер.</p><div class="price">от 9 000 ₽ за м²</div></div></article>
+    <article><div class="pic w"><div class="f-wood"></div><div class="f-white"></div><div class="f-white"></div><div class="f-wood"></div></div>
+      <div class="in"><h3>Шкафы-купе на заказ</h3><p>Корпус, полки, штанги, ящики - спроектируем внутреннее наполнение под ваши вещи.</p><div class="price">от 18 000 ₽ за погонный метр</div></div></article>
+  </div>
+</div></section>
+
+<section class="calc" id="calc"><div class="wrap">
+  <h2>Калькулятор стоимости</h2>
+  <p class="sub">Выберите параметры - цена и превью меняются сразу. Точную сумму назовём после замера.</p>
+  <div class="cg">
+    <div class="panel">
+      <div class="row"><label>Что считаем</label><div class="chips" id="type"><button class="on" data-v="doors">Только двери</button><button data-v="wardrobe">Шкаф целиком</button></div></div>
+      <div class="row two">
+        <div><label>Ширина, см</label><input type="number" id="w" value="180" min="60" max="600"></div>
+        <div><label>Высота, см</label><input type="number" id="h" value="250" min="150" max="300"></div>
+      </div>
+      <div class="row" id="depthRow" style="display:none"><label>Глубина, см</label><input type="number" id="d" value="60" min="35" max="80"></div>
+      <div class="row"><label>Количество дверей</label><div class="chips" id="cnt"><button data-v="2">2</button><button class="on" data-v="3">3</button><button data-v="4">4</button></div></div>
+      <div class="row"><label>Наполнение</label><div class="chips" id="fill">
+        <button class="on" data-v="mirror" data-p="9000">Зеркало</button>
+        <button data-v="wood" data-p="7500">ЛДСП дерево</button>
+        <button data-v="white" data-p="7500">ЛДСП белый</button>
+        <button data-v="lacobel" data-p="11000">Лакобель</button>
+        <button data-v="sand" data-p="13000">Фотопечать</button>
+        <button data-v="combo" data-p="10000">Комбинированная</button>
+      </div></div>
+      <div class="row"><label>Профиль</label><div class="chips" id="prof">
+        <button class="on" data-v="#b9bcc0" data-p="0">Серебро</button>
+        <button data-v="#1b1b1b" data-p="1500">Чёрный</button>
+        <button data-v="#b8955a" data-p="2000">Золото</button>
+        <button data-v="#6b4a33" data-p="1500">Бронза</button>
+      </div></div>
+      <div class="row"><label>Дополнительно</label>
+        <label class="sw"><input type="checkbox" id="closer"> Доводчики (2 500 ₽ на дверь)</label>
+        <label class="sw"><input type="checkbox" id="light"> LED-подсветка (6 000 ₽)</label>
+        <label class="sw"><input type="checkbox" id="mount" checked> Доставка и монтаж по Сочи (5 000 ₽)</label>
+      </div>
+    </div>
+    <div class="panel total">
+      <div class="preview" id="prev"></div>
+      <small>Примерная стоимость</small>
+      <b id="sum">0 ₽</b>
+      <div class="lines" id="lines"></div>
+      <div class="send">
+        <a class="btn wa" id="sendWa" target="_blank">Отправить расчёт в WhatsApp</a>
+        <a class="btn tg" id="sendTg" target="_blank">Отправить в Telegram</a>
+      </div>
+      <p class="note">Замер и дизайн-проект - бесплатно. Цены в демо примерные, их легко поменять.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="works"><div class="wrap">
+  <h2>Наши работы</h2>
+  <p class="sub">Здесь будут ваши фото. Галерею можно пополнять самостоятельно.</p>
+  <div class="chips filt" id="gf"><button class="on" data-v="all">Все</button><button data-v="doors">Двери-купе</button><button data-v="wardrobe">Шкафы-купе</button></div>
+  <div class="gal" id="gal"></div>
+</div></section>
+
+<section class="calc" id="reviews"><div class="wrap">
+  <h2>Отзывы клиентов</h2>
+  <p class="sub">Можно подключить отзывы с Яндекс Карт или 2ГИС, чтобы они подтягивались сами.</p>
+  <div class="rev">
+    <div><div class="stars">★★★★★</div><p>Заказывали шкаф в прихожую под потолок. Замерили на следующий день, через 10 дней уже стоял. Зеркало во всю стену - прихожая стала в два раза больше.</p><b>Ольга</b><span>Адлер, шкаф-купе 2,4 м</span></div>
+    <div><div class="stars">★★★★★</div><p>Нужны были только двери в нишу в спальне. Помогли подобрать лакобель под цвет пола, ход очень мягкий. Монтаж за 2 часа, без мусора.</p><b>Андрей</b><span>Сочи, центр, двери-купе</span></div>
+    <div><div class="stars">★★★★★</div><p>Сделали гардеробную с перегородкой-купе. Посчитала цену в калькуляторе, итог после замера почти не отличался. Рекомендую.</p><b>Марина</b><span>Хоста, гардеробная</span></div>
+  </div>
+  <div style="text-align:center;margin-top:28px"><a class="btn btn-line" href="#contacts">Оставить отзыв</a></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Как мы работаем</h2>
+  <div class="steps" style="margin-top:30px">
+    <div><b>Заявка</b><p>Пишете в мессенджер или отправляете расчёт из калькулятора.</p></div>
+    <div><b>Замер</b><p>Бесплатно приезжаем, показываем образцы, делаем проект.</p></div>
+    <div><b>Изготовление</b><p>От 7 рабочих дней на своём производстве.</p></div>
+    <div><b>Монтаж</b><p>Устанавливаем, проверяем ход, даём гарантию 2 года.</p></div>
+  </div>
+</div></section>
+
+<section class="cta" id="contacts"><div class="wrap">
+  <h2>Напишите нам - ответим за 15 минут</h2>
+  <p class="sub">Пришлите размеры или фото ниши - сразу назовём ориентировочную цену.</p>
+  <div class="msg">
+    <a class="btn wa" href="https://wa.me/79000000000" target="_blank">WhatsApp</a>
+    <a class="btn tg" href="https://t.me/username" target="_blank">Telegram</a>
+    <a class="btn mx" href="#" onclick="alert('Здесь будет ссылка на ваш MAX');return false">MAX</a>
+    <a class="btn ph2" href="tel:+79000000000">Позвонить</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><span>© Купе Сочи. Двери-купе и шкафы-купе на заказ</span><span>г. Сочи · ежедневно 9:00-20:00</span></div></footer>
+
+<div class="float">
+  <a href="https://wa.me/79000000000" target="_blank" class="wa" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg></a>
+  <a href="https://t.me/username" target="_blank" class="tg" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.5 13.2l-4.7-1.5c-1-.3-1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3z"/></svg></a>
+  <a href="tel:+79000000000" class="ph2" aria-label="Позвонить" style="color:#111">📞</a>
+</div>
+
+<div class="modal" id="modal" onclick="this.classList.remove('on')"><div><div class="ph" id="mph"></div><p id="mcap"></p></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const fmt=n=>Math.round(n).toLocaleString('ru-RU')+' ₽';
+const PHONE='79000000000', TG='username';
+const st={type:'doors',cnt:3,fill:'mirror',fillP:9000,fillN:'Зеркало',prof:'#b9bcc0',profP:0,profN:'Серебро'};
+function chips(id,cb){$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{$(id).querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');cb(b);calc()})}
+chips('type',b=>{st.type=b.dataset.v;$('depthRow').style.display=st.type=='wardrobe'?'block':'none'});
+chips('cnt',b=>st.cnt=+b.dataset.v);
+chips('fill',b=>{st.fill=b.dataset.v;st.fillP=+b.dataset.p;st.fillN=b.textContent});
+chips('prof',b=>{st.prof=b.dataset.v;st.profP=+b.dataset.p;st.profN=b.textContent});
+['w','h','d','closer','light','mount'].forEach(i=>$(i).oninput=calc);
+function panelClass(i){if(st.fill=='combo')return i%2?'f-wood':'f-mirror';return 'f-'+st.fill}
+function calc(){
+  const w=Math.min(Math.max(+$('w').value||0,60),600),h=Math.min(Math.max(+$('h').value||0,150),300),d=+$('d').value||60;
+  const area=w*h/10000;
+  const doors=area*st.fillP+st.cnt*st.profP;
+  const L=[['Двери: '+st.cnt+' шт., '+st.fillN+', '+area.toFixed(2)+' м²',area*st.fillP]];
+  if(st.profP)L.push(['Профиль '+st.profN,st.cnt*st.profP]);
+  if(st.type=='wardrobe'){const k=d>65?1.15:1;L.push(['Корпус и наполнение, '+(w/100).toFixed(2)+' пог. м',w/100*12000*k])}
+  if($('closer').checked)L.push(['Доводчики',st.cnt*2500]);
+  if($('light').checked)L.push(['LED-подсветка',6000]);
+  if($('mount').checked)L.push(['Доставка и монтаж',5000]);
+  const sum=L.reduce((s,x)=>s+x[1],0);
+  $('sum').textContent=fmt(sum);
+  $('lines').innerHTML=L.map(x=>`<div><span>${x[0]}</span><span>${fmt(x[1])}</span></div>`).join('');
+  const p=$('prev');p.style.background=st.prof;p.style.gridTemplateColumns=`repeat(${st.cnt},1fr)`;
+  p.style.aspectRatio=`${w}/${h}`;p.style.height='auto';p.style.maxHeight='260px';p.style.maxWidth='100%';p.style.margin='0 auto 22px';
+  p.innerHTML=Array.from({length:st.cnt},(_,i)=>`<div class="${panelClass(i)}"></div>`).join('');
+  const t=`Здравствуйте! Посчитал(а) на сайте:\n${st.type=='wardrobe'?'Шкаф-купе':'Двери-купе'} ${w}×${h} см, ${st.cnt} двери\nНаполнение: ${st.fillN}, профиль: ${st.profN}\nПримерно: ${fmt(sum)}\nХочу записаться на замер.`;
+  $('sendWa').href='https://wa.me/'+PHONE+'?text='+encodeURIComponent(t);
+  $('sendTg').href='https://t.me/'+TG;
+  $('sendTg').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(t)};
+}
+calc();
+const works=[
+ ['doors','Двери-купе в спальню','Зеркало + серебро, Сочи',['mirror','mirror','mirror']],
+ ['wardrobe','Шкаф в прихожую','ЛДСП дуб, Адлер',['wood','white','wood','white']],
+ ['doors','Перегородка в гардеробную','Лакобель чёрный, Хоста',['lacobel','lacobel']],
+ ['wardrobe','Шкаф под потолок','Графит + зеркало, Дагомыс',['graphite','mirror','graphite']],
+ ['doors','Двери в нишу','Фотопечать, Сочи',['sand','sand','sand']],
+ ['wardrobe','Шкаф в детскую','Белый ЛДСП, Мацеста',['white','white','white','white']]];
+function renderGal(f){$('gal').innerHTML=works.filter(x=>f=='all'||x[0]==f).map((x)=>`<figure data-i="${works.indexOf(x)}"><div class="ph" style="grid-template-columns:repeat(${x[3].length},1fr)">${x[3].map(c=>`<div class="f-${c}"></div>`).join('')}</div><figcaption>${x[1]}<span>${x[2]}</span></figcaption></figure>`).join('');
+ $('gal').querySelectorAll('figure').forEach(fg=>fg.onclick=()=>{const x=works[fg.dataset.i];$('mph').style.gridTemplateColumns=`repeat(${x[3].length},1fr)`;$('mph').innerHTML=x[3].map(c=>`<div class="f-${c}"></div>`).join('');$('mcap').textContent=x[1]+' - '+x[2];$('modal').classList.add('on')})}
+$('gf').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('gf').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderGal(b.dataset.v)});
+renderGal('all');
+</script>
+</body>
+</html>
