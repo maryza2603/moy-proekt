@@ -1,0 +1,43 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<title>Курсы SkillWave</title></head><body>
+<header><div class="wrap nav"><a class="logo" href="index.html"><i>✦</i><span>Skill<b>Wave</b></span></a>
+<nav class="menu" id="menu"><a href="index.html" class="">Главная</a><a href="courses.html" class="on">Курсы</a><a href="index.html#about">О школе</a><a href="#contacts">Контакты</a></nav>
+<a class="btn btn-p" href="courses.html#form">Оставить заявку</a>
+<button class="burger" aria-label="Меню" onclick="document.getElementById('menu').classList.toggle('open')"><span></span><span></span><span></span></button></div></header>
+<section class="hero" style="padding-bottom:56px"><div class="wrap"><span class="badge">9 программ обучения</span>
+<h1>Все курсы <span class="grad">онлайн-школы</span></h1>
+<p class="lead">Выберите направление, посмотрите программу и оставьте заявку. Поможем определиться, если сомневаетесь.</p>
+<div class="filter"><input id="q" placeholder="🔍  Найти курс"><select id="lv"><option value="">Любой уровень</option><option>С нуля</option><option>Средний</option><option>Продвинутый</option></select><a class="btn btn-p" href="#list">Показать</a></div></div></section>
+<section id="list" style="padding-top:24px"><div class="wrap">
+<div class="chips" id="chips"><button class="chip on" data-c="">Все</button><button class="chip" data-c="Дизайн">Дизайн</button><button class="chip" data-c="Языки">Языки</button><button class="chip" data-c="Маркетинг">Маркетинг</button><button class="chip" data-c="IT">IT</button></div>
+<div class="grid g3" id="grid"></div><p class="empty" id="empty">Ничего не нашлось - попробуйте изменить фильтр</p></div></section>
+<section class="soft" id="form"><div class="wrap"><div class="form-box"><div><h2>Записаться на курс</h2><p>Здесь будет уже готовая форма заявки с сайта. Выберите курс - менеджер свяжется с вами и ответит на вопросы.</p></div>
+<form onsubmit="event.preventDefault();this.innerHTML='<h3 style=color:#0d1b2e>Спасибо! Заявка принята</h3>'"><input required placeholder="Ваше имя"><input required type="tel" placeholder="Телефон"><select id="pick"><option>Выберите курс</option></select><button class="btn btn-p">Отправить заявку</button></form></div></div></section>
+<footer id="contacts"><div class="wrap foot"><div><a class="logo" href="index.html"><i>✦</i><span>Skill<b>Wave</b></span></a><p style="margin-top:14px;max-width:300px">Онлайн-школа практических профессий</p></div>
+<div><b style="color:var(--ink)">Контакты</b><a href="tel:+70000000000">+7 (000) 000-00-00</a><a href="mailto:hello@school.ru">hello@school.ru</a></div>
+<div><b style="color:var(--ink)">Мы в соцсетях</b><a href="#">Telegram</a><a href="#">ВКонтакте</a></div></div></footer>
+<div class="note">Демо-макет: тексты, фото и контакты заменятся материалами со старого сайта</div>
+<script>
+const C=[["🎨","Дизайн","Графический дизайн","С нуля","3 месяца","48 уроков","24 900",["Основы композиции и цвета","Figma с нуля","Типографика","Логотип и фирменный стиль","Итоговое портфолио"]],
+["🖥️","Дизайн","Веб-дизайн","Средний","2 месяца","32 урока","19 900",["UX-исследование","Прототипы","Адаптивные макеты","Передача в разработку"]],
+["💬","Языки","Английский для работы","Средний","4 месяца","64 урока","29 900",["Деловая переписка","Созвоны и презентации","Собеседование на английском","Разговорный клуб"]],
+["🌍","Языки","Английский с нуля","С нуля","6 месяцев","96 уроков","34 900",["Алфавит и произношение","Базовая грамматика","Повседневные диалоги","Путешествия"]],
+["📈","Маркетинг","Интернет-маркетинг","С нуля","3 месяца","40 уроков","27 900",["Стратегия продвижения","Контекстная реклама","Веб-аналитика","Email-маркетинг"]],
+["📱","Маркетинг","SMM-специалист","Средний","2 месяца","28 уроков","17 900",["Контент-план","Визуал и тексты","Таргет","Работа с блогерами"]],
+["🐍","IT","Python для начинающих","С нуля","4 месяца","56 уроков","32 900",["Синтаксис и типы данных","Функции и модули","Работа с файлами","Телеграм-бот - итоговый проект"]],
+["🧪","IT","Тестировщик ПО","С нуля","3 месяца","42 урока","26 900",["Виды тестирования","Тест-кейсы и баг-репорты","Postman и API","Основы SQL"]],
+["⚙️","IT","No-code разработка","Продвинутый","6 недель","20 уроков","14 900",["Tilda и Wix","Интеграции и формы","Автоматизация","Запуск проекта"]]];
+const g=grid,p=document.getElementById('pick');let cat="";
+C.forEach(c=>p.insertAdjacentHTML('beforeend',`<option>${c[2]}</option>`));
+function draw(){const q=document.getElementById('q').value.toLowerCase(),l=lv.value;
+const f=C.filter(c=>(!cat||c[1]==cat)&&(!l||c[3]==l)&&c[2].toLowerCase().includes(q));
+g.innerHTML=f.map(c=>`<div class="card course"><div class="top"><span class="tag">${c[1]}</span><span class="lvl">${c[3]}</span></div>
+<div class="ic">${c[0]}</div><h3>${c[2]}</h3><details><summary>Программа курса ↓</summary><ol>${c[7].map(x=>`<li>${x}</li>`).join('')}</ol></details>
+<div class="meta"><span>🗓 ${c[4]}</span><span>▶ ${c[5]}</span></div>
+<div class="row"><span class="price">${c[6]} ₽</span><a class="btn btn-p" style="padding:12px 20px" href="#form" onclick="pick.value='${c[2]}'">Записаться</a></div></div>`).join('');
+empty.style.display=f.length?'none':'block'}
+chips.onclick=e=>{if(!e.target.dataset)return;if(e.target.tagName!='BUTTON')return;cat=e.target.dataset.c;[...chips.children].forEach(b=>b.classList.toggle('on',b==e.target));draw()};
+q.oninput=draw;lv.onchange=draw;draw();
+</script></body></html>
