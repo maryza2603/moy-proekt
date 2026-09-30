@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Чистый Дом - демо</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;600;700&display=swap">
+<style>
+/* Layout: две "телефонные" рамки рядом - клиент и сотрудник, общий поток заказа между ними */
+:root{--bg:#eef3f2;--card:#fff;--fg:#14302c;--muted:#5f7a75;--accent:#0f8a78;--accent2:#e6f4f1;--line:#d5e2df;--warn:#c7801a;
+--display:"Unbounded",system-ui,sans-serif;--body:"Manrope",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1917;--card:#16241f;--fg:#e2efec;--muted:#8fa9a3;--accent:#3cc2a9;--accent2:#1d332e;--line:#28403a;--warn:#e5a54a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1917;--card:#16241f;--fg:#e2efec;--muted:#8fa9a3;--accent:#3cc2a9;--accent2:#1d332e;--line:#28403a;--warn:#e5a54a;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);padding:24px 16px}
+h1{font-family:var(--display);font-size:1.4rem;margin:0 0 6px;text-wrap:balance}
+.lead{color:var(--muted);max-width:62ch;margin:0 0 20px;line-height:1.5}
+.wrap{display:flex;flex-wrap:wrap;gap:28px;justify-content:center}
+.phone{width:340px;max-width:100%;border:10px solid var(--fg);border-radius:36px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;height:640px}
+.bar{padding:14px 16px;background:var(--accent);color:#fff;font-family:var(--display);font-size:.9rem;display:flex;justify-content:space-between}
+.scr{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:12px}
+.lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.svc{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:12px;cursor:pointer;gap:8px}
+.svc.on{border-color:var(--accent);background:var(--accent2)}
+.svc small{color:var(--muted);display:block}
+.pr{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+select,input{width:100%;padding:9px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:inherit;box-sizing:border-box}
+.row{display:flex;gap:8px}
+button{font:inherit;font-weight:700;border:0;border-radius:12px;padding:12px;background:var(--accent);color:#fff;cursor:pointer}
+button.ghost{background:var(--accent2);color:var(--accent)}
+button:focus-visible,.svc:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
+.total{display:flex;justify-content:space-between;font-family:var(--display);font-size:1rem}
+.ord{border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.pill{align-self:flex-start;font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--accent2);color:var(--accent)}
+.pill.w{color:var(--warn)}
+.muted{color:var(--muted);font-size:.85rem}
+.tabs{display:flex;border-top:1px solid var(--line)}
+.tabs span{flex:1;text-align:center;padding:10px;font-size:.75rem;color:var(--muted)}
+.tabs span.a{color:var(--accent);font-weight:700}
+</style>
+</head>
+<body>
+<h1>Чистый Дом - демо двух приложений</h1>
+<p class="lead">Слева приложение клиента, справа - сотрудника. Выберите услуги, оформите и «оплатите» заказ - он сразу появится у клинера. Меняйте статус справа и смотрите, как он обновляется у клиента. Оплата тестовая.</p>
+
+<div class="wrap">
+ <div class="phone">
+  <div class="bar"><span>Чистый Дом</span><span>Клиент</span></div>
+  <div class="scr" id="client"></div>
+  <div class="tabs"><span class="a">Заказ</span><span>Мои уборки</span><span>Профиль</span></div>
+ </div>
+ <div class="phone">
+  <div class="bar"><span>Чистый Дом PRO</span><span>Сотрудник</span></div>
+  <div class="scr" id="staff"></div>
+  <div class="tabs"><span class="a">Заказы</span><span>График</span><span>Доход</span></div>
+ </div>
+</div>
+
+<script>
+const S=[{id:'base',n:'Поддерживающая уборка',d:'1-комн. квартира, 2-3 часа',p:3200},
+{id:'gen',n:'Генеральная уборка',d:'полы, пыль, кухня, санузел',p:6900},
+{id:'win',n:'Мытьё окон',d:'за 1 створку',p:450,q:1},
+{id:'fri',n:'Холодильник внутри',d:'разморозка и мойка',p:900},
+{id:'ove',n:'Духовка внутри',p:900,d:'с обезжириванием'},
+{id:'iron',n:'Глажка белья',d:'за 1 час',p:700,q:1}];
+let sel={base:1},qty={win:4,iron:1},orders=[{id:1041,addr:'ул. Ленина, 12-45',when:'2 окт, 10:00',sum:4100,items:'Поддерживающая, Холодильник',st:1}],step='form',mine=null;
+const ST=['Новый','Принят','Клинер в пути','Идёт уборка','Готово'];
+const rub=v=>v.toLocaleString('ru-RU')+' ₽';
+function total(){return S.reduce((s,x)=>s+(sel[x.id]?x.p*(x.q?qty[x.id]:1):0),0)}
+function client(){const c=document.getElementById('client');
+ if(step==='form'){c.innerHTML=`<div class="lbl">Выберите услуги</div>`+S.map(x=>`<div class="svc ${sel[x.id]?'on':''}" tabindex="0" data-s="${x.id}"><div>${x.n}<small>${x.d}</small></div><span class="pr">${x.q&&sel[x.id]?qty[x.id]+' × ':''}${rub(x.p)}</span></div>`).join('')+
+ `<div class="lbl">Адрес и время</div><input id="addr" value="пр. Мира, 7-18"><div class="row"><select id="day"><option>1 окт</option><option>2 окт</option><option>3 окт</option></select><select id="tm"><option>09:00</option><option>12:00</option><option>15:00</option></select></div>
+ <div class="total"><span>Итого</span><span>${rub(total())}</span></div><button id="go" ${total()?'':'disabled'}>Перейти к оплате</button>`;
+ c.querySelectorAll('.svc').forEach(e=>e.onclick=()=>{const k=e.dataset.s;sel[k]?delete sel[k]:sel[k]=1;client()});
+ c.querySelector('#go').onclick=()=>{mine={id:1042+orders.length,addr:c.querySelector('#addr').value,when:c.querySelector('#day').value+', '+c.querySelector('#tm').value,sum:total(),items:S.filter(x=>sel[x.id]).map(x=>x.n.split(' ')[0]).join(', '),st:0};step='pay';client()}}
+ else if(step==='pay'){c.innerHTML=`<div class="lbl">Оплата</div><div class="ord"><b>Заказ №${mine.id}</b><span class="muted">${mine.items}<br>${mine.addr} · ${mine.when}</span></div>
+ <input id="card" value="2200 0000 0000 0004"><div class="row"><input id="exp" value="12/28"><input id="cvc" value="123"></div>
+ <div class="total"><span>К оплате</span><span>${rub(mine.sum)}</span></div><button id="pay">Оплатить картой</button><button class="ghost" id="sbp">Оплатить через СБП</button><button class="ghost" id="back">Назад</button>`;
+ const done=()=>{orders.unshift(mine);step='track';client();staff()};c.querySelector('#pay').onclick=done;c.querySelector('#sbp').onclick=done;c.querySelector('#back').onclick=()=>{step='form';client()}}
+ else{c.innerHTML=`<div class="lbl">Заказ №${mine.id} оплачен</div><div class="ord"><span class="pill ${mine.st<4?'w':''}">${ST[mine.st]}</span><b>${rub(mine.sum)}</b><span class="muted">${mine.items}<br>${mine.addr} · ${mine.when}</span></div>`+
+ ST.map((s,i)=>`<div class="muted" style="${i<=mine.st?'color:var(--accent);font-weight:700':''}">${i<=mine.st?'●':'○'} ${s}</div>`).join('')+
+ (mine.st===4?`<div class="lbl">Оцените уборку</div><div class="row">${[1,2,3,4,5].map(n=>`<button class="ghost">★${n}</button>`).join('')}</div>`:'')+`<button class="ghost" id="new">Новый заказ</button>`;
+ c.querySelector('#new').onclick=()=>{step='form';client()}}}
+function staff(){const c=document.getElementById('staff');
+ c.innerHTML=`<div class="lbl">Смена: Анна К. · сегодня ${orders.length} заказа</div>`+orders.map(o=>`<div class="ord"><span class="pill ${o.st<4?'w':''}">${ST[o.st]}</span><b>№${o.id} · ${rub(o.sum)}</b><span class="muted">${o.items}<br>${o.addr} · ${o.when}</span>${o.st<4?`<button data-o="${o.id}">${['Принять заказ','Выехал','Начать уборку','Завершить + фото'][o.st]}</button>`:'<span class="muted">Выплата: '+rub(Math.round(o.sum*.6))+'</span>'}</div>`).join('');
+ c.querySelectorAll('button').forEach(b=>b.onclick=()=>{const o=orders.find(x=>x.id==b.dataset.o);o.st++;staff();if(o===mine)client()})}
+client();staff();
+</script>
+</body>
+</html>
