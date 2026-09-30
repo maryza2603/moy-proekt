@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ЮгДом Анапа - дома под ключ</title>
+<meta name="description" content="Строим частные дома под ключ в Анапе и районе. 12 лет на рынке. Рассчитайте стоимость дома онлайн за 1 минуту.">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f4ef;--card:#fff;--ink:#1f2a2e;--muted:#5d6a6e;--acc:#d9772b;--acc2:#1f5c5a;--line:#e4ddd2}
+*{box-sizing:border-box}body{margin:0;font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+.wrap{max-width:1140px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;background:rgba(247,244,239,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:10}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.logo{font-weight:800;font-size:20px}.logo span{color:var(--acc)}
+nav a{color:var(--ink);text-decoration:none;margin-left:20px;font-weight:600;font-size:15px}
+.phone{font-weight:800;color:var(--acc2);text-decoration:none;white-space:nowrap}
+.btn{display:inline-block;background:var(--acc);color:#fff;border:0;border-radius:12px;padding:15px 26px;font:700 16px Manrope,sans-serif;cursor:pointer;text-decoration:none}
+.btn:hover{filter:brightness(1.07)}
+.hero{background:linear-gradient(90deg,rgba(20,35,38,.88),rgba(20,35,38,.35)),url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=70) center/cover;color:#fff;padding:90px 0}
+.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.1;margin:0 0 18px;max-width:720px}
+.hero p{font-size:19px;max-width:600px;opacity:.92}
+.facts{display:flex;gap:32px;flex-wrap:wrap;margin:32px 0}.facts b{display:block;font-size:30px;color:#ffb877}
+section{padding:72px 0}h2{font-size:clamp(26px,4vw,38px);margin:0 0 12px}.sub{color:var(--muted);margin:0 0 36px;font-size:17px}
+.calc{display:grid;grid-template-columns:1.4fr 1fr;gap:24px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px}
+.q{margin-bottom:24px}.q>label{font-weight:700;display:block;margin-bottom:10px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts input{display:none}.opts label{border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;font-size:15px}
+.opts input:checked+label{border-color:var(--acc);background:#fdf1e7;font-weight:700}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.res{position:sticky;top:84px;align-self:start;background:var(--acc2);color:#fff}
+.price{font-size:40px;font-weight:800;margin:6px 0}.res small{opacity:.8}
+.res ul{padding-left:18px;font-size:15px;opacity:.95}
+form input{width:100%;padding:14px;border-radius:10px;border:0;margin-bottom:10px;font:16px Manrope,sans-serif}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.proj img{width:100%;height:210px;object-fit:cover;border-radius:14px}
+.proj h3{margin:12px 0 4px}.muted{color:var(--muted)}
+.steps{counter-reset:s}.steps .box{position:relative;padding-top:52px}
+.steps .box:before{counter-increment:s;content:counter(s);position:absolute;top:18px;left:28px;font-weight:800;color:var(--acc);font-size:24px}
+.cta{background:var(--ink);color:#fff;border-radius:22px;padding:44px;text-align:center}
+footer{padding:30px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+.ok{display:none;background:#e8f5ee;color:#1d5b3a;padding:14px;border-radius:10px;margin-top:10px}
+.demo{background:#fff3cd;text-align:center;font-size:13px;padding:6px}
+@media(max-width:860px){.calc,.grid{grid-template-columns:1fr}nav{display:none}.res{position:static}.hero{padding:60px 0}}
+</style>
+</head>
+<body>
+<div class="demo">Демо-макет. Цены, фото и контакты условные - заменяются на данные компании.</div>
+<header><div class="wrap"><div class="logo">Юг<span>Дом</span></div>
+<nav><a href="#calc">Калькулятор</a><a href="#projects">Проекты</a><a href="#steps">Как работаем</a></nav>
+<a class="phone" href="tel:+79000000000">+7 900 000-00-00</a></div></header>
+
+<div class="hero"><div class="wrap">
+<h1>Дом у моря под ключ в Анапе - с фиксированной ценой в договоре</h1>
+<p>Посчитайте стоимость своего дома за 1 минуту. Смета не вырастет после подписания договора.</p>
+<div class="facts"><div><b>12 лет</b>строим в Анапе</div><div><b>200+</b>сданных домов</div><div><b>5 лет</b>гарантии</div></div>
+<a class="btn" href="#calc">Рассчитать стоимость дома</a>
+</div></div>
+
+<section id="calc"><div class="wrap">
+<h2>Калькулятор стоимости дома</h2><p class="sub">Выберите параметры - цена пересчитается сразу</p>
+<div class="calc"><div class="box">
+<div class="q"><label>Площадь дома: <span id="aV">120</span> м²</label><input type="range" id="area" min="60" max="300" step="5" value="120"></div>
+<div class="q"><label>Этажность</label><div class="opts" data-n="floors">
+<input type="radio" name="floors" id="f1" value="1" checked><label for="f1">1 этаж</label>
+<input type="radio" name="floors" id="f2" value="0.95"><label for="f2">2 этажа</label>
+<input type="radio" name="floors" id="f3" value="1.05"><label for="f3">Этаж + мансарда</label></div></div>
+<div class="q"><label>Материал стен</label><div class="opts">
+<input type="radio" name="wall" id="w1" value="42000" checked><label for="w1">Газобетон</label>
+<input type="radio" name="wall" id="w2" value="48000"><label for="w2">Керамический блок</label>
+<input type="radio" name="wall" id="w3" value="52000"><label for="w3">Кирпич</label>
+<input type="radio" name="wall" id="w4" value="36000"><label for="w4">Каркас</label></div></div>
+<div class="q"><label>Готовность</label><div class="opts">
+<input type="radio" name="ready" id="r1" value="0.6"><label for="r1">Коробка</label>
+<input type="radio" name="ready" id="r2" value="0.85"><label for="r2">Предчистовая</label>
+<input type="radio" name="ready" id="r3" value="1" checked><label for="r3">Под ключ</label></div></div>
+<div class="q"><label>Кровля</label><div class="opts">
+<input type="radio" name="roof" id="k1" value="0" checked><label for="k1">Металлочерепица</label>
+<input type="radio" name="roof" id="k2" value="1500"><label for="k2">Гибкая черепица</label>
+<input type="radio" name="roof" id="k3" value="3000"><label for="k3">Керамическая</label></div></div>
+<div class="q"><label>Дополнительно</label><div class="opts">
+<input type="checkbox" id="x1" data-fix="450000"><label for="x1">Терраса</label>
+<input type="checkbox" id="x2" data-fix="350000"><label for="x2">Навес для авто</label>
+<input type="checkbox" id="x3" data-fix="280000"><label for="x3">Септик</label>
+<input type="checkbox" id="x4" data-m2="2500"><label for="x4">Тёплый пол</label></div></div>
+</div>
+<div class="box res"><small>Ориентировочная стоимость</small>
+<div class="price" id="price">-</div><small id="pm2"></small>
+<ul id="sum"></ul>
+<form id="lead"><input required placeholder="Ваше имя"><input required type="tel" placeholder="Телефон">
+<button class="btn" style="width:100%">Получить точную смету</button></form>
+<div class="ok" id="ok">Спасибо! Инженер перезвонит в течение 15 минут и пришлёт смету.</div>
+</div></div></div></section>
+
+<section id="projects" style="background:#fff"><div class="wrap">
+<h2>Популярные проекты</h2><p class="sub">Любой можно изменить под ваш участок</p>
+<div class="grid">
+<div class="proj"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&q=70" alt="Дом 98 м²"><h3>«Бриз» - 98 м²</h3><div class="muted">1 этаж, 3 спальни, газобетон</div></div>
+<div class="proj"><img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=700&q=70" alt="Дом 146 м²"><h3>«Лиман» - 146 м²</h3><div class="muted">2 этажа, терраса, керамоблок</div></div>
+<div class="proj"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=70" alt="Дом 210 м²"><h3>«Витязево» - 210 м²</h3><div class="muted">2 этажа, панорамные окна, кирпич</div></div>
+</div></div></section>
+
+<section><div class="wrap"><h2>Почему нам доверяют</h2><p class="sub">Строим с учётом сейсмики и грунтов Анапского района</p>
+<div class="grid">
+<div class="box"><h3>Цена фиксируется</h3><p class="muted">Смета в договоре не меняется, даже если материалы подорожают.</p></div>
+<div class="box"><h3>Оплата по этапам</h3><p class="muted">Платите только за выполненный этап, после приёмки.</p></div>
+<div class="box"><h3>Онлайн-контроль</h3><p class="muted">Фото и видео со стройки каждую неделю, если вы живёте в другом городе.</p></div>
+</div></div></section>
+
+<section id="steps" style="background:#fff"><div class="wrap"><h2>Как мы работаем</h2><p class="sub">От заявки до ключей - 4-6 месяцев</p>
+<div class="grid steps">
+<div class="box"><h3>Расчёт и выезд</h3><p class="muted">Бесплатно смотрим участок и считаем точную смету.</p></div>
+<div class="box"><h3>Договор</h3><p class="muted">Фиксируем цену, сроки и график оплат.</p></div>
+<div class="box"><h3>Стройка и сдача</h3><p class="muted">Строим, принимаете по этапам, получаете ключи.</p></div>
+</div></div></section>
+
+<section><div class="wrap"><div class="cta"><h2>Узнайте точную цену своего дома</h2>
+<p style="opacity:.85">Бесплатный выезд инженера на участок в Анапе и районе</p>
+<a class="btn" href="#calc">Рассчитать в калькуляторе</a></div></div></section>
+<footer><div class="wrap">© ЮгДом, Анапа · Демо-макет</div></footer>
+<script>
+const $=s=>document.querySelector(s),fmt=n=>Math.round(n/1000)*1000;
+function v(n){return +document.querySelector('input[name='+n+']:checked').value}
+function lab(n){return document.querySelector('label[for='+document.querySelector('input[name='+n+']:checked').id+']').textContent}
+function calc(){const a=+$('#area').value;$('#aV').textContent=a;
+let m2=(v('wall')+v('roof'))*v('floors')*v('ready'),extra=0,ex=[];
+document.querySelectorAll('input[type=checkbox]:checked').forEach(c=>{if(c.dataset.fix)extra+=+c.dataset.fix;if(c.dataset.m2)m2+=+c.dataset.m2;ex.push($('label[for='+c.id+']').textContent)});
+const t=fmt(m2*a+extra);$('#price').textContent=t.toLocaleString('ru-RU')+' ₽';
+$('#pm2').textContent='≈ '+Math.round(t/a).toLocaleString('ru-RU')+' ₽ за м²';
+$('#sum').innerHTML=[a+' м², '+lab('floors'),lab('wall'),lab('ready'),lab('roof')].concat(ex).map(x=>'<li>'+x+'</li>').join('')}
+document.querySelectorAll('input').forEach(i=>i.addEventListener('input',calc));calc();
+$('#lead').onsubmit=e=>{e.preventDefault();$('#lead').style.display='none';$('#ok').style.display='block'};
+</script>
+</body></html>
