@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.webkit.CookieManager
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
@@ -19,14 +18,12 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
-    private lateinit var swipe: SwipeRefreshLayout
     private var fileCallback: ValueCallback<Array<Uri>>? = null
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -34,8 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         webView = WebView(this)
-        swipe = SwipeRefreshLayout(this).apply { addView(webView) }
-        setContentView(swipe)
+        setContentView(webView)
 
         CookieManager.getInstance().apply {
             setAcceptCookie(true)
@@ -45,26 +41,32 @@ class MainActivity : AppCompatActivity() {
         webView.settings.apply {
             javaScriptEnabled = true
             domStorageEnabled = true
-            loadWithOverviewMode = true
-            useWideViewPort = true
-            builtInZoomControls = true
-            displayZoomControls = false
+            databaseEnabled = true
+            javaScriptCanOpenWindowsAutomatically = true
+            mediaPlaybackRequiresUserGesture = false
+            // Убираем пометку "wv", чтобы сайт считал приложение обычным Chrome
+            userAgentString = userAgentString.replace("; wv", "")
         }
 
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
                 val url = request.url
+                val scheme = url.scheme ?: return false
+                // tg:, mailto:, tel:, intent: и т.п. - отдаём системе, иначе WebView показывает ошибку
+                if (scheme != "http" && scheme != "https") {
+                    openExternal(url)
+                    return true
+                }
                 val host = url.host ?: return false
                 // Страницы FL.ru и входа через соцсети открываем внутри, остальное - в браузере
                 if (host.endsWith("fl.ru") || host.contains("vk.com") || host.contains("yandex") ||
                     host.contains("google") || host.contains("mail.ru")
                 ) return false
-                startActivity(Intent(Intent.ACTION_VIEW, url))
+                openExternal(url)
                 return true
             }
 
             override fun onPageFinished(view: WebView, url: String) {
-                swipe.isRefreshing = false
                 CookieManager.getInstance().flush()
             }
         }
@@ -86,10 +88,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        swipe.setOnRefreshListener { webView.reload() }
-        // Тянуть вниз для обновления - только когда страница прокручена в самый верх
-        swipe.setOnChildScrollUpCallback { _, _ -> webView.scrollY > 0 }
-
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (webView.canGoBack()) webView.goBack() else finish()
@@ -106,6 +104,16 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         webView.loadUrl(startUrl(intent))
+    }
+
+    private fun openExternal(url: Uri) {
+        try {
+            val i = if (url.scheme == "intent") Intent.parseUri(url.toString(), Intent.URI_INTENT_SCHEME)
+            else Intent(Intent.ACTION_VIEW, url)
+            startActivity(i)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Не получилось открыть ссылку", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun startUrl(intent: Intent?): String =
