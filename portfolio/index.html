@@ -288,6 +288,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .photo::before{inset:16px -12px -16px 12px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+.totop{position:fixed;right:24px;bottom:24px;z-index:60;width:54px;height:54px;border-radius:50%;border:0;background:var(--terra);color:#fff;cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 24px rgba(207,102,64,.35);opacity:0;visibility:hidden;transform:translateY(16px);transition:.3s}
+.totop.on{opacity:1;visibility:visible;transform:none}
+.totop:hover{background:var(--terra-d);transform:translateY(-3px)}
+.totop svg{width:22px;height:22px}
+@media (max-width:600px){.totop{right:16px;bottom:16px;width:48px;height:48px}}
 </style>
 </head>
 <body>
@@ -440,6 +445,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <div class="lb" id="lb"><button class="x" aria-label="Закрыть">×</button><button class="pv" aria-label="Назад">‹</button><img alt=""><button class="nx" aria-label="Вперёд">›</button><div class="cap"></div></div>
 
+<button class="totop" id="totop" aria-label="Наверх"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <script>
 const GH='https://maryza2603.github.io/moy-proekt/';
 const W=[
@@ -534,7 +540,8 @@ document.addEventListener('keydown',e=>{if(!$('#lb').classList.contains('on'))re
 // меню, шапка, появление блоков
 $('#burger').onclick=()=>$('#menu').classList.toggle('open');
 $('#menu').onclick=e=>{if(e.target.tagName==='A')$('#menu').classList.remove('open')};
-addEventListener('scroll',()=>$('header').classList.toggle('scrolled',scrollY>10),{passive:true});
+addEventListener('scroll',()=>{$('header').classList.toggle('scrolled',scrollY>10);$('#totop').classList.toggle('on',scrollY>500)},{passive:true});
+$('#totop').onclick=()=>scrollTo({top:0,behavior:'smooth'});
 const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
