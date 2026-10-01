@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Конфигуратор входной двери</title>
+<meta name="description" content="Демо: конструктор входной двери со слоевой картинкой и расчётом цены">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ec;
+    --card: #ffffff;
+    --ink: #1e1c1a;
+    --muted: #7a746c;
+    --line: #e4ded5;
+    --accent: #b5562b;
+    --accent-soft: #f6e6dc;
+    --stage: #ebe6de;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Manrope", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 20px 8px;
+  }
+  header .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
+  header h1 { font-size: clamp(26px, 4vw, 38px); margin: 12px 0 6px; font-weight: 800; letter-spacing: -.02em; }
+  header p { margin: 0; color: var(--muted); max-width: 620px; line-height: 1.5; }
+
+  .app {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+    gap: 24px;
+    align-items: start;
+  }
+  .stage {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 20px;
+    position: sticky;
+    top: 16px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 30px rgba(60,40,20,.06);
+  }
+  .stage-inner {
+    background: radial-gradient(ellipse at 50% 30%, #f7f3ee 0%, var(--stage) 70%);
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    padding: 16px 0 0;
+    overflow: hidden;
+  }
+  .stage svg { width: 100%; max-width: 380px; height: auto; display: block; }
+  .stage svg g { transition: opacity .25s; }
+  .layers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--muted);
+    align-items: center;
+  }
+  .layers span.chip {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 3px 9px;
+    transition: background .3s, border-color .3s, color .3s;
+  }
+  .layers span.chip.flash { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+  .panel { display: flex; flex-direction: column; gap: 14px; }
+  .group {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .group h3 {
+    margin: 0 0 12px;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .group h3 small { font-weight: 500; color: var(--muted); font-size: 13px; text-align: right; }
+  .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .opt {
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1.5px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    border-radius: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color .15s, background .15s;
+  }
+  .opt:hover { border-color: #cfc6ba; }
+  .opt.active { border-color: var(--accent); background: var(--accent-soft); }
+  .opt .sw { width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(0,0,0,.15); flex: none; }
+  .opt .pr { color: var(--muted); font-weight: 500; font-size: 12px; }
+
+  .total {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .total .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .total .sum { font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
+  .total ul { list-style: none; padding: 0; margin: 12px 0 14px; font-size: 13px; color: #c9c2b8; }
+  .total li { display: flex; justify-content: space-between; gap: 10px; padding: 3px 0; border-bottom: 1px dashed rgba(255,255,255,.12); }
+  .total form { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .total input {
+    font: inherit; font-size: 14px;
+    padding: 11px 12px; border-radius: 10px; border: 0;
+    min-width: 0;
+  }
+  .total button {
+    grid-column: 1 / -1;
+    font: inherit; font-weight: 700; font-size: 15px;
+    background: var(--accent); color: #fff;
+    border: 0; border-radius: 10px; padding: 13px;
+    cursor: pointer;
+  }
+  .total button:hover { filter: brightness(1.08); }
+  .done { font-size: 14px; color: #e8d9cc; margin-top: 10px; display: none; }
+
+  footer { text-align: center; color: var(--muted); font-size: 12px; padding: 10px 16px 30px; }
+
+  @media (max-width: 860px) {
+    .app { grid-template-columns: 1fr; padding: 16px; }
+    header { padding: 20px 16px 0; }
+    .stage { position: static; padding: 12px; }
+    .stage svg { max-width: 300px; }
+    .total form { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="tag">Демо-проект</span>
+  <h1>Соберите свою входную дверь</h1>
+  <p>Каждый выбор меняет отдельный слой изображения, а цена пересчитывается сразу. Попробуйте пощёлкать опции.</p>
+</header>
+
+<main class="app">
+  <section class="stage">
+    <div class="stage-inner">
+      <svg id="door" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg" aria-label="Изображение двери">
+        <defs>
+          <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e2dcd2"/><stop offset="1" stop-color="#d6cfc3"/>
+          </linearGradient>
+          <linearGradient id="shade" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#000" stop-opacity=".18"/>
+            <stop offset=".12" stop-color="#000" stop-opacity="0"/>
+            <stop offset=".88" stop-color="#000" stop-opacity="0"/>
+            <stop offset="1" stop-color="#000" stop-opacity=".22"/>
+          </linearGradient>
+          <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#dfe9ee"/><stop offset=".5" stop-color="#b9cdd6"/><stop offset="1" stop-color="#8fa9b5"/>
+          </linearGradient>
+          <linearGradient id="metalChrome" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#8d9399"/><stop offset=".45" stop-color="#f4f6f8"/><stop offset="1" stop-color="#7c8288"/>
+          </linearGradient>
+          <linearGradient id="metalGold" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#9a7430"/><stop offset=".45" stop-color="#f3d98c"/><stop offset="1" stop-color="#8a6526"/>
+          </linearGradient>
+          <linearGradient id="metalBlack" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#111"/><stop offset=".45" stop-color="#4a4a4a"/><stop offset="1" stop-color="#0c0c0c"/>
+          </linearGradient>
+          <pattern id="grain" width="220" height="12" patternUnits="userSpaceOnUse">
+            <path d="M0 3 Q55 1 110 4 T220 3" stroke="#000" stroke-opacity=".07" fill="none"/>
+            <path d="M0 9 Q70 11 140 8 T220 9" stroke="#fff" stroke-opacity=".05" fill="none"/>
+          </pattern>
+          <clipPath id="leafClip"><rect x="95" y="70" width="210" height="460" rx="3"/></clipPath>
+        </defs>
+
+        <!-- Слой 0: стена и пол (статичный фон) -->
+        <g id="L-bg">
+          <rect width="400" height="600" fill="url(#wallGrad)"/>
+          <rect y="560" width="400" height="40" fill="#bfb6a8"/>
+          <ellipse cx="200" cy="562" rx="150" ry="8" fill="#000" opacity=".12"/>
+        </g>
+        <!-- Слой 1: наличник -->
+        <g id="L-casing"></g>
+        <!-- Слой 2: полотно (цвет/отделка) -->
+        <g id="L-leaf"></g>
+        <!-- Слой 3: фрезеровка -->
+        <g id="L-mill" clip-path="url(#leafClip)"></g>
+        <!-- Слой 4: стекло -->
+        <g id="L-glass"></g>
+        <!-- Слой 5: замок -->
+        <g id="L-lock"></g>
+        <!-- Слой 6: ручка -->
+        <g id="L-handle"></g>
+      </svg>
+    </div>
+    <div class="layers" id="layers"><span>Слои:</span></div>
+  </section>
+
+  <section class="panel" id="panel"></section>
+</main>
+
+<footer>Демо-конфигуратор. Графика и цены условные - в рабочем проекте подставляются реальные изображения и прайс.</footer>
+
+<script>
+const LEAF = { x: 95, y: 70, w: 210, h: 460 };
+
+const GROUPS = [
+  {
+    key: "color", title: "Цвет полотна", layer: "L-leaf", chip: "Полотно",
+    options: [
+      { id: "wenge",   name: "Венге",   price: 0,    sw: "#4a3426", c: "#4a3426", wood: true },
+      { id: "walnut",  name: "Орех",    price: 1500, sw: "#8a5a3a", c: "#8a5a3a", wood: true },
+      { id: "oak",     name: "Дуб светлый", price: 1500, sw: "#c7a57a", c: "#c7a57a", wood: true },
+      { id: "graphite",name: "Графит",  price: 2500, sw: "#3a3d42", c: "#3a3d42" },
+      { id: "white",   name: "Белый матовый", price: 3000, sw: "#ece9e2", c: "#ece9e2" },
+      { id: "wine",    name: "Бордо",   price: 3000, sw: "#5e1f24", c: "#5e1f24" }
+    ],
+    render: o => `
+      <rect x="${LEAF.x}" y="${LEAF.y}" width="${LEAF.w}" height="${LEAF.h}" rx="3" fill="${o.c}"/>
+      ${o.wood ? `<rect x="${LEAF.x}" y="${LEAF.y}" width="${LEAF.w}" height="${LEAF.h}" rx="3" fill="url(#grain)"/>` : ""}
+      <rect x="${LEAF.x}" y="${LEAF.y}" width="${LEAF.w}" height="${LEAF.h}" rx="3" fill="url(#shade)"/>`
+  },
+  {
+    key: "mill", title: "Фрезеровка", layer: "L-mill", chip: "Фрезеровка",
+    options: [
+      { id: "flat",    name: "Гладкая",  price: 0 },
+      { id: "classic", name: "Классика", price: 2200 },
+      { id: "lines",   name: "Линии",    price: 1800 },
+      { id: "rhomb",   name: "Ромб",     price: 2600 },
+      { id: "frame",   name: "Рамка",    price: 1600 }
+    ],
+    render: o => {
+      const g = (d) => `<path d="${d}" fill="none" stroke="#000" stroke-opacity=".32" stroke-width="3"/>
+                        <path d="${d}" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="1.5" transform="translate(1.5 1.5)"/>`;
+      const R = (x, y, w, h, r = 4) => `M${x + r} ${y}H${x + w - r}Q${x + w} ${y} ${x + w} ${y + r}V${y + h - r}Q${x + w} ${y + h} ${x + w - r} ${y + h}H${x + r}Q${x} ${y + h} ${x} ${y + h - r}V${y + r}Q${x} ${y} ${x + r} ${y}Z`;
+      switch (o.id) {
+        case "classic": return g(R(122, 100, 156, 170)) + g(R(122, 300, 156, 200)) + g(R(134, 112, 132, 146)) + g(R(134, 312, 132, 176));
+        case "lines": { let s = ""; for (let y = 110; y < 520; y += 34) s += `M115 ${y}H285`; return g(s); }
+        case "rhomb": return g("M200 110L280 300L200 490L120 300Z") + g("M200 150L262 300L200 450L138 300Z");
+        case "frame": return g(R(115, 92, 170, 416, 2));
+        default: return "";
+      }
+    }
+  },
+  {
+    key: "glass", title: "Стеклянная вставка", layer: "L-glass", chip: "Стекло",
+    options: [
+      { id: "none",  name: "Без стекла", price: 0 },
+      { id: "strip", name: "Полоса",     price: 3500 },
+      { id: "arch",  name: "Арка",       price: 4800 },
+      { id: "three", name: "Три окна",   price: 5200 }
+    ],
+    render: o => {
+      const glass = (d) => `<path d="${d}" fill="#1b1b1b"/><path d="${d}" fill="url(#glassGrad)" transform="translate(0 0)" opacity=".92"/>
+        <path d="${d}" fill="none" stroke="#1b1b1b" stroke-width="4"/>`;
+      const hl = (x, y, h) => `<path d="M${x} ${y}l14 -18M${x + 8} ${y + 10}l22 -28" stroke="#fff" stroke-opacity=".55" stroke-width="3" stroke-linecap="round"/>`;
+      switch (o.id) {
+        case "strip": return glass("M188 100H212V500H188Z") + hl(192, 150);
+        case "arch":  return glass("M150 250V180A50 50 0 0 1 250 180V250Z") + hl(170, 200);
+        case "three": return glass("M180 120H220V180H180Z") + glass("M180 200H220V260H180Z") + glass("M180 280H220V340H180Z") + hl(186, 150);
+        default: return "";
+      }
+    }
+  },
+  {
+    key: "handle", title: "Ручка", layer: "L-handle", chip: "Ручка",
+    options: [
+      { id: "chrome", name: "Нажимная, хром",    price: 0,    sw: "#d7dbdf" },
+      { id: "gold",   name: "Нажимная, золото",  price: 1200, sw: "#d9b25a" },
+      { id: "bar",    name: "Скоба, чёрная",     price: 2900, sw: "#222" },
+      { id: "barc",   name: "Скоба, хром",       price: 2900, sw: "#b8bec4" }
+    ],
+    render: o => {
+      if (o.id === "bar" || o.id === "barc") {
+        const m = o.id === "bar" ? "metalBlack" : "metalChrome";
+        return `<rect x="268" y="185" width="12" height="230" rx="6" fill="url(#${m})"/>
+                <rect x="262" y="195" width="10" height="10" rx="2" fill="url(#${m})"/>
+                <rect x="262" y="395" width="10" height="10" rx="2" fill="url(#${m})"/>
+                <rect x="271" y="190" width="3" height="220" rx="1.5" fill="#fff" opacity=".25"/>`;
+      }
+      const m = o.id === "gold" ? "metalGold" : "metalChrome";
+      return `<rect x="262" y="286" width="22" height="58" rx="11" fill="url(#${m})" stroke="#000" stroke-opacity=".15"/>
+              <path d="M273 300H232a8 8 0 0 0 0 16H273Z" fill="url(#${m})" stroke="#000" stroke-opacity=".2"/>
+              <circle cx="273" cy="308" r="7" fill="url(#${m})" stroke="#000" stroke-opacity=".2"/>`;
+    }
+  },
+  {
+    key: "lock", title: "Замок", layer: "L-lock", chip: "Замок",
+    options: [
+      { id: "one",  name: "Один цилиндр",  price: 0 },
+      { id: "two",  name: "Два замка",     price: 3400 },
+      { id: "smart",name: "Электронный",   price: 12900 }
+    ],
+    render: o => {
+      const cyl = (y) => `<rect x="264" y="${y}" width="18" height="30" rx="9" fill="url(#metalChrome)" stroke="#000" stroke-opacity=".2"/>
+                          <rect x="271" y="${y + 8}" width="4" height="14" rx="2" fill="#555"/>`;
+      if (o.id === "two") return cyl(360) + cyl(230);
+      if (o.id === "smart") return `<rect x="256" y="200" width="34" height="62" rx="6" fill="#141414"/>
+        <rect x="261" y="206" width="24" height="10" rx="2" fill="#2e6e8e" opacity=".9"/>
+        ${[0,1,2].map(r => [0,1,2].map(c => `<circle cx="${265 + c * 8}" cy="${225 + r * 11}" r="2.6" fill="#8fd3ff" opacity=".85"/>`).join("")).join("")}
+        ` + cyl(360);
+      return cyl(360);
+    }
+  },
+  {
+    key: "casing", title: "Наличник", layer: "L-casing", chip: "Наличник",
+    options: [
+      { id: "match",    name: "В цвет полотна", price: 0 },
+      { id: "dark",     name: "Тёмный контраст", price: 1400, sw: "#1f1d1b" },
+      { id: "light",    name: "Светлый контраст", price: 1400, sw: "#f3f0ea" },
+      { id: "wide",     name: "Широкий, в цвет", price: 2400 }
+    ],
+    render: (o, st) => {
+      const col = o.id === "dark" ? "#1f1d1b" : o.id === "light" ? "#f3f0ea" : st.color.c;
+      const pad = o.id === "wide" ? 30 : 18;
+      return `<rect x="${95 - pad}" y="${70 - pad}" width="${210 + pad * 2}" height="${490 + pad}" fill="${col}"/>
+              <rect x="${95 - pad}" y="${70 - pad}" width="${210 + pad * 2}" height="${490 + pad}" fill="url(#shade)" opacity=".7"/>
+              <rect x="${95 - pad}" y="${70 - pad}" width="${210 + pad * 2}" height="${490 + pad}" fill="none" stroke="#000" stroke-opacity=".18"/>
+              <rect x="91" y="66" width="218" height="494" fill="#000" opacity=".35"/>`;
+    }
+  }
+];
+
+const BASE = 24900;
+const state = {};
+GROUPS.forEach(g => state[g.key] = g.options[0]);
+
+const fmt = n => n.toLocaleString("ru-RU") + " ₽";
+const panel = document.getElementById("panel");
+const layersEl = document.getElementById("layers");
+
+function renderLayer(g) {
+  document.getElementById(g.layer).innerHTML = g.render(state[g.key], state);
+}
+
+function flash(key) {
+  const chip = layersEl.querySelector(`[data-k="${key}"]`);
+  if (!chip) return;
+  chip.classList.add("flash");
+  setTimeout(() => chip.classList.remove("flash"), 700);
+}
+
+function buildPanel() {
+  GROUPS.forEach(g => {
+    const box = document.createElement("div");
+    box.className = "group";
+    box.innerHTML = `<h3>${g.title}<small data-sel="${g.key}"></small></h3><div class="opts"></div>`;
+    const opts = box.querySelector(".opts");
+    g.options.forEach(o => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "opt";
+      b.innerHTML = `${o.sw ? `<span class="sw" style="background:${o.sw}"></span>` : ""}${o.name}${o.price ? `<span class="pr">+${o.price.toLocaleString("ru-RU")}</span>` : ""}`;
+      b.addEventListener("click", () => {
+        state[g.key] = o;
+        opts.querySelectorAll(".opt").forEach(x => x.classList.toggle("active", x === b));
+        renderLayer(g);
+        if (g.key === "color") renderLayer(GROUPS.find(x => x.key === "casing"));
+        flash(g.key);
+        update();
+      });
+      if (o === state[g.key]) b.classList.add("active");
+      opts.appendChild(b);
+    });
+    panel.appendChild(box);
+
+    const chip = document.createElement("span");
+    chip.className = "chip"; chip.dataset.k = g.key; chip.textContent = g.chip;
+    layersEl.appendChild(chip);
+  });
+
+  const total = document.createElement("div");
+  total.className = "total";
+  total.innerHTML = `
+    <div class="row"><span>Итого</span><span class="sum" id="sum"></span></div>
+    <ul id="spec"></ul>
+    <form id="lead">
+      <input required name="name" placeholder="Ваше имя" autocomplete="name">
+      <input required name="phone" type="tel" placeholder="Телефон" autocomplete="tel">
+      <button type="submit">Отправить заявку</button>
+    </form>
+    <div class="done" id="done">Спасибо! Это демо, поэтому заявка никуда не ушла. В рабочей версии она придёт вам в Telegram или на почту вместе с выбранной комплектацией.</div>`;
+  panel.appendChild(total);
+  total.querySelector("#lead").addEventListener("submit", e => {
+    e.preventDefault();
+    e.target.style.display = "none";
+    document.getElementById("done").style.display = "block";
+  });
+}
+
+function update() {
+  let sum = BASE;
+  const rows = [`<li><span>Базовая дверь</span><span>${fmt(BASE)}</span></li>`];
+  GROUPS.forEach(g => {
+    const o = state[g.key];
+    sum += o.price;
+    document.querySelector(`[data-sel="${g.key}"]`).textContent = o.name;
+    rows.push(`<li><span>${g.title}: ${o.name}</span><span>${o.price ? "+" + fmt(o.price) : "-"}</span></li>`);
+  });
+  document.getElementById("sum").textContent = fmt(sum);
+  document.getElementById("spec").innerHTML = rows.join("");
+}
+
+buildPanel();
+GROUPS.forEach(renderLayer);
+update();
+</script>
+</body>
+</html>
