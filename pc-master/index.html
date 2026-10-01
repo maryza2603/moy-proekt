@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PCMaster - сборка ПК на заказ</title>
+<meta name="description" content="Сборка игровых, рабочих и бюджетных компьютеров на заказ, подбор комплектующих, апгрейд и ремонт ПК.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1117;--card:#161b24;--line:#252c3a;--text:#e8ecf3;--muted:#9aa4b5;--acc:#3ee08f;--acc2:#38bdf8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:10;background:rgba(13,17,23,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:800;font-size:20px}.logo span{color:var(--acc)}
+.nav nav a{margin-left:24px;color:var(--muted);font-weight:600}.nav nav a:hover{color:var(--text)}
+.btn{display:inline-block;background:var(--acc);color:#06120b;font-weight:800;padding:14px 26px;border-radius:12px;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(62,224,143,.3)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.hero{padding:80px 0 60px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.tag{display:inline-block;color:var(--acc);border:1px solid rgba(62,224,143,.35);padding:6px 14px;border-radius:99px;font-size:14px;margin-bottom:18px}
+h1{font-size:48px;line-height:1.1;font-weight:800;margin-bottom:18px}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);font-size:18px;margin-bottom:28px}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:flex;gap:32px;margin-top:36px}
+.stats b{display:block;font-size:28px;color:var(--text)}.stats span{color:var(--muted);font-size:14px}
+.pc{width:100%;max-width:400px;justify-self:center}
+section{padding:70px 0}
+h2{font-size:34px;font-weight:800;margin-bottom:10px}
+.sub{color:var(--muted);margin-bottom:36px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;transition:.2s}
+.card:hover{border-color:rgba(62,224,143,.5)}
+.ico{width:48px;height:48px;border-radius:12px;background:rgba(62,224,143,.12);display:grid;place-items:center;font-size:24px;margin-bottom:16px}
+.card h3{font-size:20px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:15px}
+.price{margin-top:16px;font-weight:800;color:var(--acc)}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.step{position:relative;padding-top:56px}
+.step:before{counter-increment:s;content:"0" counter(s);position:absolute;top:0;font-size:36px;font-weight:800;color:var(--acc)}
+.step h3{font-size:18px;margin-bottom:6px}.step p{color:var(--muted);font-size:15px}
+.why li{list-style:none;padding:14px 0 14px 34px;border-bottom:1px solid var(--line);position:relative}
+.why li:before{content:"✓";position:absolute;left:0;color:var(--acc);font-weight:800}
+.contacts{background:linear-gradient(135deg,#132a20,#121b2b);border:1px solid var(--line);border-radius:24px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.clist a{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px;font-weight:600;transition:.2s}
+.clist a:hover{border-color:var(--acc)}
+.clist small{display:block;color:var(--muted);font-weight:400;font-size:13px}
+.clist .i{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-weight:800;flex-shrink:0}
+form input,form select,form textarea{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:14px;font:inherit;margin-bottom:12px}
+form button{width:100%;border:0;cursor:pointer;font:inherit}
+.ok{display:none;color:var(--acc);font-weight:600;margin-top:10px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px;text-align:center}
+@media(max-width:860px){
+ .hero,.contacts{grid-template-columns:1fr}.grid,.grid2{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}
+ h1{font-size:34px}h2{font-size:28px}.nav nav{display:none}.hero{padding-top:40px}.contacts{padding:28px}
+ .pc{max-width:280px;order:-1}.stats{gap:20px}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+ <a class="logo" href="#">PC<span>Master</span></a>
+ <nav><a href="#services">Услуги</a><a href="#builds">Сборки</a><a href="#how">Как работаю</a><a href="#contacts">Контакты</a></nav>
+</div></header>
+
+<div class="wrap hero">
+ <div>
+  <div class="tag">Сборка ПК на заказ</div>
+  <h1>Соберу компьютер <em>под ваши задачи</em> и бюджет</h1>
+  <p>Игровые, рабочие и бюджетные ПК. Подберу комплектующие, соберу, протестирую. Также делаю апгрейд и ремонт.</p>
+  <div class="actions"><a class="btn" href="#contacts">Обсудить сборку</a><a class="btn ghost" href="#services">Услуги и цены</a></div>
+  <div class="stats"><div><b>300+</b><span>собранных ПК</span></div><div><b>7 лет</b><span>опыта</span></div><div><b>1 год</b><span>гарантии на сборку</span></div></div>
+ </div>
+ <svg class="pc" viewBox="0 0 300 340" fill="none">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3ee08f"/><stop offset="1" stop-color="#38bdf8"/></linearGradient></defs>
+  <rect x="40" y="10" width="220" height="320" rx="18" fill="#161b24" stroke="#252c3a" stroke-width="2"/>
+  <rect x="60" y="30" width="180" height="200" rx="10" fill="#0d1117" stroke="url(#g)" stroke-width="2" opacity=".9"/>
+  <circle cx="110" cy="85" r="32" stroke="url(#g)" stroke-width="3"/><circle cx="110" cy="85" r="8" fill="url(#g)"/>
+  <circle cx="110" cy="170" r="32" stroke="url(#g)" stroke-width="3"/><circle cx="110" cy="170" r="8" fill="url(#g)"/>
+  <rect x="160" y="55" width="62" height="62" rx="6" fill="#1d2430" stroke="#3ee08f" stroke-width="1.5"/>
+  <rect x="150" y="150" width="78" height="22" rx="4" fill="url(#g)" opacity=".85"/>
+  <rect x="150" y="182" width="78" height="10" rx="3" fill="#252c3a"/>
+  <rect x="60" y="250" width="180" height="8" rx="4" fill="#252c3a"/><rect x="60" y="268" width="120" height="8" rx="4" fill="#252c3a"/>
+  <circle cx="220" cy="300" r="9" stroke="#3ee08f" stroke-width="2"/>
+ </svg>
+</div>
+
+<section id="services"><div class="wrap">
+ <h2>Услуги</h2><p class="sub">Всё, что нужно вашему компьютеру - от выбора деталей до ремонта</p>
+ <div class="grid">
+  <div class="card"><div class="ico">🎮</div><h3>Игровые ПК</h3><p>Сборки под конкретные игры и мониторы: высокий FPS, тишина, правильное охлаждение.</p><div class="price">сборка от 3 000 ₽</div></div>
+  <div class="card"><div class="ico">💼</div><h3>Рабочие станции</h3><p>Для монтажа, 3D, программирования и офиса. Упор на надёжность и стабильность.</p><div class="price">сборка от 3 000 ₽</div></div>
+  <div class="card"><div class="ico">💰</div><h3>Бюджетные ПК</h3><p>Максимум производительности за минимальные деньги. Подскажу, на чём можно сэкономить.</p><div class="price">сборка от 2 000 ₽</div></div>
+  <div class="card"><div class="ico">🧩</div><h3>Подбор комплектующих</h3><p>Составлю конфигурацию под задачи и бюджет, проверю совместимость, подскажу, где купить выгоднее.</p><div class="price">от 1 000 ₽</div></div>
+  <div class="card"><div class="ico">⚡</div><h3>Апгрейд</h3><p>Замена видеокарты, процессора, памяти, SSD. Вдохну новую жизнь в старый компьютер.</p><div class="price">от 1 500 ₽</div></div>
+  <div class="card"><div class="ico">🔧</div><h3>Ремонт и обслуживание</h3><p>Диагностика, чистка от пыли, замена термопасты, установка Windows и драйверов.</p><div class="price">диагностика бесплатно</div></div>
+ </div>
+</div></section>
+
+<section id="builds"><div class="wrap">
+ <h2>Примеры сборок</h2><p class="sub">Ориентиры по бюджету - точную конфигурацию подберу под вас</p>
+ <div class="grid">
+  <div class="card"><h3>Старт</h3><p>Офис, учёба, лёгкие игры. Тихий и компактный.</p><div class="price">от 45 000 ₽</div></div>
+  <div class="card"><h3>Геймер</h3><p>Современные игры в Full HD и 2K на высоких настройках.</p><div class="price">от 100 000 ₽</div></div>
+  <div class="card"><h3>Про</h3><p>Игры в 4K, стриминг, монтаж и 3D без компромиссов.</p><div class="price">от 200 000 ₽</div></div>
+ </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+ <h2>Как я работаю</h2><p class="sub">Просто и прозрачно</p>
+ <div class="steps">
+  <div class="step"><h3>Заявка</h3><p>Пишете, для чего нужен ПК и какой бюджет.</p></div>
+  <div class="step"><h3>Подбор</h3><p>Присылаю конфигурацию с ценами и объясняю выбор.</p></div>
+  <div class="step"><h3>Сборка</h3><p>Аккуратно собираю, укладываю кабели, ставлю систему.</p></div>
+  <div class="step"><h3>Тесты и выдача</h3><p>Стресс-тесты, отчёт о температурах, гарантия.</p></div>
+ </div>
+</div></section>
+
+<section><div class="wrap grid2">
+ <div><h2>Почему мне доверяют</h2><p class="sub">Собираю так, как собрал бы себе</p></div>
+ <ul class="why">
+  <li>Честный подбор - без навязывания лишнего</li>
+  <li>Проверка каждой сборки стресс-тестами</li>
+  <li>Аккуратный кабель-менеджмент</li>
+  <li>Гарантия на работу и помощь после покупки</li>
+ </ul>
+</div></section>
+
+<section id="contacts"><div class="wrap contacts">
+ <div>
+  <h2>Контакты</h2><p class="sub">Напишите - отвечу в течение часа</p>
+  <div class="clist">
+   <a href="tel:+79990000000"><span class="i" style="background:#3ee08f22;color:#3ee08f">☎</span><div>+7 (999) 000-00-00<small>Звонки с 10:00 до 21:00</small></div></a>
+   <a href="https://t.me/" target="_blank"><span class="i" style="background:#2aabee22;color:#2aabee">TG</span><div>Telegram<small>@pcmaster</small></div></a>
+   <a href="https://vk.com/" target="_blank"><span class="i" style="background:#0077ff22;color:#4c9bff">VK</span><div>ВКонтакте<small>vk.com/pcmaster</small></div></a>
+   <a href="https://wa.me/" target="_blank"><span class="i" style="background:#25d36622;color:#25d366">WA</span><div>WhatsApp<small>+7 (999) 000-00-00</small></div></a>
+  </div>
+ </div>
+ <form onsubmit="event.preventDefault();this.reset();document.querySelector('.ok').style.display='block'">
+  <h3 style="margin-bottom:16px;font-size:22px">Оставить заявку</h3>
+  <input placeholder="Ваше имя" required>
+  <input placeholder="Телефон или Telegram" required>
+  <select><option>Сборка ПК</option><option>Подбор комплектующих</option><option>Апгрейд</option><option>Ремонт</option></select>
+  <textarea rows="3" placeholder="Задачи и бюджет"></textarea>
+  <button class="btn">Отправить</button>
+  <div class="ok">Спасибо! Свяжусь с вами в ближайшее время.</div>
+ </form>
+</div></section>
+
+<footer>© 2026 PCMaster - сборка и ремонт компьютеров</footer>
+</body>
+</html>
