@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ФЕРРУМ ЦЕХ - металлообработка и склад металла</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0f11;--bg2:#16181b;--line:#2a2d32;--txt:#e9e6df;--mut:#8d9097;--acc:#ff5a1f;--acc2:#ffb020;--ok:#3ecf8e;--low:#ffb020;--no:#ff4d4d}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font:16px/1.55 Manrope,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.w{max-width:1200px;margin:0 auto;padding:0 20px}
+.mono{font-family:'JetBrains Mono',monospace}
+h1,h2,h3{font-family:Unbounded,sans-serif;line-height:1.1}
+h2{font-size:clamp(28px,4vw,46px);margin-bottom:14px}
+.tag{display:inline-block;font:500 12px 'JetBrains Mono';color:var(--acc);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--acc);color:#111;font-weight:700;padding:15px 26px;border:0;cursor:pointer;font-size:15px;clip-path:polygon(0 0,100% 0,100% 70%,92% 100%,0 100%);transition:.2s}
+.btn:hover{background:var(--acc2)}
+.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line);clip-path:none}
+.btn.ghost:hover{border-color:var(--acc);color:var(--acc)}
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(14,15,17,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .w{display:flex;align-items:center;justify-content:space-between;height:66px;gap:20px}
+.logo{font:900 18px Unbounded;display:flex;align-items:center;gap:10px}
+.logo i{width:30px;height:30px;background:var(--acc);clip-path:polygon(0 0,100% 0,100% 100%,30% 100%,0 70%)}
+nav{display:flex;gap:26px;font-size:14px;color:var(--mut)}
+nav a:hover{color:var(--txt)}
+.hphone{font:500 14px 'JetBrains Mono'}
+@media(max-width:860px){nav{display:none}.hphone{display:none}}
+/* hero */
+.hero{position:relative;padding:90px 0 70px;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(var(--line) 1px,transparent 1px) 0 0/60px 60px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/60px 60px;opacity:.35;mask:radial-gradient(ellipse at 70% 40%,#000 10%,transparent 70%)}
+.hero .w{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(36px,6vw,74px);font-weight:900;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero p{color:var(--mut);font-size:18px;max-width:540px;margin:22px 0 32px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+.stats{display:flex;gap:34px;margin-top:46px;flex-wrap:wrap}
+.stats b{display:block;font:700 30px Unbounded}
+.stats span{font-size:13px;color:var(--mut)}
+.part{position:relative;aspect-ratio:1}
+.part svg{width:100%;height:100%}
+.spark{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--acc2);box-shadow:0 0 8px var(--acc);animation:fly 1.4s linear infinite}
+@keyframes fly{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--x),var(--y))}}
+.laser{animation:cut 6s linear infinite;stroke-dasharray:1400;stroke-dashoffset:1400}
+@keyframes cut{to{stroke-dashoffset:0}}
+@media(max-width:860px){.hero .w{grid-template-columns:1fr}.part{max-width:340px;margin:0 auto}}
+/* ticker */
+.ticker{overflow:hidden;border-bottom:1px solid var(--line);background:var(--bg2)}
+.ticker div{display:flex;gap:50px;white-space:nowrap;padding:14px 0;animation:tk 40s linear infinite;font:500 13px 'JetBrains Mono';color:var(--mut)}
+.ticker b{color:var(--acc)}
+@keyframes tk{to{transform:translateX(-50%)}}
+section{padding:90px 0}
+.lead{color:var(--mut);max-width:620px;margin-bottom:44px}
+/* services */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.svc div{padding:30px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:.25s;position:relative}
+.svc div:hover{background:var(--bg2)}
+.svc div:hover h3{color:var(--acc)}
+.svc .n{font:500 12px 'JetBrains Mono';color:var(--mut)}
+.svc h3{font-size:19px;margin:16px 0 10px;transition:.2s}
+.svc p{color:var(--mut);font-size:14px}
+.svc .pr{margin-top:16px;font:500 13px 'JetBrains Mono';color:var(--acc2)}
+@media(max-width:860px){.svc{grid-template-columns:1fr}}
+/* calc */
+#calc{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cgrid{display:grid;grid-template-columns:1.3fr .7fr;gap:30px}
+.box{border:1px solid var(--line);background:var(--bg);padding:28px}
+.row{margin-bottom:22px}
+.row>label{display:block;font:500 12px 'JetBrains Mono';color:var(--mut);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{background:transparent;border:1px solid var(--line);color:var(--txt);padding:9px 14px;cursor:pointer;font:500 14px Manrope;transition:.15s}
+.chips button.on{background:var(--acc);border-color:var(--acc);color:#111}
+.chips button:hover:not(.on){border-color:var(--acc)}
+.two{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.two input,select,.search{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:12px;font:500 15px 'JetBrains Mono';outline:none}
+.two input:focus,select:focus,.search:focus{border-color:var(--acc)}
+.two small{display:block;font-size:12px;color:var(--mut);margin-bottom:6px}
+.ops label{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);cursor:pointer;font-size:15px}
+.ops input{accent-color:var(--acc);width:18px;height:18px}
+.ops span{margin-left:auto;font:500 13px 'JetBrains Mono';color:var(--mut)}
+.sum{position:sticky;top:90px;align-self:start}
+.sum .big{font:900 clamp(34px,4vw,46px) Unbounded;color:var(--acc);margin:6px 0 4px}
+.sum ul{list-style:none;margin:20px 0;font-size:14px}
+.sum li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);color:var(--mut);gap:10px}
+.sum li b{color:var(--txt);font:500 14px 'JetBrains Mono';white-space:nowrap}
+.sum .note{font-size:12px;color:var(--mut);margin-top:14px}
+.sum .btn{width:100%;justify-content:center;margin-top:16px}
+@media(max-width:860px){.cgrid{grid-template-columns:1fr}.two{grid-template-columns:1fr 1fr}.sum{position:static}}
+/* stock */
+.bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px;align-items:center}
+.bar .search{flex:1;min-width:220px}
+.bar select{width:auto}
+.tbl{border:1px solid var(--line)}
+.tr{display:grid;grid-template-columns:2.2fr 1fr 1fr 1.1fr 1fr 130px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);gap:12px;font-size:14px;transition:.15s}
+.tr:last-child{border-bottom:0}
+.tr:not(.th):hover{background:var(--bg2)}
+.th{font:500 11px 'JetBrains Mono';color:var(--mut);text-transform:uppercase;letter-spacing:.08em;background:var(--bg2)}
+.tr .nm b{display:block;font-weight:700}
+.tr .nm small{color:var(--mut);font-size:12px}
+.tr .m{font-family:'JetBrains Mono'}
+.st{font:500 12px 'JetBrains Mono';display:flex;align-items:center;gap:7px}
+.st:before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.st.ok{color:var(--ok)}.st.low{color:var(--low)}.st.no{color:var(--no)}
+.add{background:transparent;border:1px solid var(--line);color:var(--txt);padding:8px 10px;cursor:pointer;font:600 12px Manrope;transition:.15s}
+.add:hover{border-color:var(--acc);color:var(--acc)}
+.add.in{background:var(--acc);border-color:var(--acc);color:#111}
+.empty{padding:40px;text-align:center;color:var(--mut)}
+.cnt{font:500 13px 'JetBrains Mono';color:var(--mut)}
+@media(max-width:860px){.th{display:none}.tr{grid-template-columns:1fr 1fr;row-gap:8px}.tr .nm{grid-column:1/-1}.tr .add{grid-column:1/-1}.tr [data-l]:before{content:attr(data-l);display:block;font:500 10px 'JetBrains Mono';color:var(--mut);text-transform:uppercase}}
+/* cart */
+.cart{position:fixed;right:20px;bottom:20px;z-index:60;background:var(--acc);color:#111;padding:14px 20px;font-weight:700;cursor:pointer;display:none;box-shadow:0 10px 30px rgba(255,90,31,.35)}
+.cart.show{display:block}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:70;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+.modal .box{width:100%;max-width:520px;max-height:90vh;overflow:auto}
+.modal h3{margin-bottom:16px}
+.ci{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;align-items:center}
+.ci input{width:70px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:6px;font-family:'JetBrains Mono'}
+.x{background:none;border:0;color:var(--mut);cursor:pointer;font-size:18px}
+.form input{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:13px;margin-bottom:10px;font:15px Manrope}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
+.steps div{border-top:2px solid var(--acc);padding-top:20px}
+.steps div:before{counter-increment:s;content:"0" counter(s);font:700 38px Unbounded;color:var(--line)}
+.steps h3{font-size:17px;margin:10px 0 8px}
+.steps p{color:var(--mut);font-size:14px}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--bg2)}
+.fg{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end}
+.fg h2 em{font-style:normal;color:var(--acc)}
+.fc p{font:500 15px 'JetBrains Mono';margin-bottom:8px}
+.fc p span{color:var(--mut)}
+.copy{margin-top:50px;font-size:12px;color:var(--mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+@media(max-width:860px){.fg{grid-template-columns:1fr}}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(100px);background:var(--txt);color:#111;padding:12px 22px;font-weight:700;z-index:90;transition:.3s}
+.toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header><div class="w">
+  <a class="logo" href="#"><i></i>ФЕРРУМ ЦЕХ</a>
+  <nav><a href="#svc">Услуги</a><a href="#calc">Калькулятор</a><a href="#stock">Склад</a><a href="#how">Как работаем</a></nav>
+  <a class="hphone" href="tel:+70000000000">+7 (000) 000-00-00</a>
+</div></header>
+
+<section class="hero" style="padding-top:90px"><div class="w">
+  <div>
+    <span class="tag">// металлообработка + склад металла</span>
+    <h1>Режем, гнём<br>и варим <em>металл</em><br>под ваш чертёж</h1>
+    <p>Лазерная резка, гибка, сварка и покраска - плюс собственный склад листа и проката. Стоимость считается онлайн за минуту, наличие видно в реальном времени.</p>
+    <div class="cta"><a class="btn" href="#calc">Рассчитать заказ →</a><a class="btn ghost" href="#stock">Смотреть склад</a></div>
+    <div class="stats"><div><b>24 ч</b><span>срочный заказ</span></div><div><b>650+ т</b><span>металла на складе</span></div><div><b>±0,1 мм</b><span>точность реза</span></div></div>
+  </div>
+  <div class="part" id="part">
+    <svg viewBox="0 0 400 400" fill="none">
+      <rect x="40" y="40" width="320" height="320" stroke="#2a2d32" stroke-dasharray="4 6"/>
+      <path d="M80 110h180l60 60v130H80z" fill="#16181b" stroke="#3a3e45" stroke-width="2"/>
+      <circle cx="140" cy="170" r="26" fill="#0e0f11" stroke="#3a3e45" stroke-width="2"/>
+      <circle cx="140" cy="250" r="14" fill="#0e0f11" stroke="#3a3e45" stroke-width="2"/>
+      <rect x="200" y="200" width="80" height="60" rx="8" fill="#0e0f11" stroke="#3a3e45" stroke-width="2"/>
+      <path class="laser" d="M80 110h180l60 60v130H80z M166 170a26 26 0 1 1-52 0a26 26 0 1 1 52 0 M208 200h64a8 8 0 0 1 8 8v44a8 8 0 0 1-8 8h-64a8 8 0 0 1-8-8v-44a8 8 0 0 1 8-8" stroke="#ff5a1f" stroke-width="2.5"/>
+      <text x="80" y="330" fill="#8d9097" font-family="JetBrains Mono" font-size="11">ДЕТАЛЬ-014 · СТ3 · 4 ММ</text>
+      <text x="270" y="100" fill="#8d9097" font-family="JetBrains Mono" font-size="11">240</text>
+    </svg>
+  </div>
+</div></section>
+
+<div class="ticker"><div id="tk"></div></div>
+
+<section id="svc"><div class="w">
+  <span class="tag">// услуги</span>
+  <h2>Полный цикл в одном цехе</h2>
+  <p class="lead">От листа на складе до готовой окрашенной детали. Не нужно искать отдельно поставщика металла и подрядчика на обработку.</p>
+  <div class="svc">
+    <div><span class="n">01</span><h3>Лазерная резка</h3><p>Сталь до 20 мм, нержавейка до 12 мм, алюминий до 10 мм. Любой контур по DXF.</p><div class="pr">от 25 ₽ / пог. м</div></div>
+    <div><span class="n">02</span><h3>Гибка листа</h3><p>Листогиб с ЧПУ, длина гиба до 3 м. Короба, кронштейны, корпуса.</p><div class="pr">от 15 ₽ / гиб</div></div>
+    <div><span class="n">03</span><h3>Сварка</h3><p>MIG/MAG и TIG - чёрный металл, нержавейка, алюминий. Металлоконструкции.</p><div class="pr">от 300 ₽ / пог. м</div></div>
+    <div><span class="n">04</span><h3>Порошковая покраска</h3><p>Камера до 6 м, любой цвет по RAL, матовые и глянцевые покрытия.</p><div class="pr">от 350 ₽ / м²</div></div>
+    <div><span class="n">05</span><h3>Рубка и резка проката</h3><p>Ленточная пила, гильотина. Нарезаем трубу, уголок, швеллер в размер.</p><div class="pr">от 40 ₽ / рез</div></div>
+    <div><span class="n">06</span><h3>Продажа металла</h3><p>Лист, труба, уголок, арматура со склада. Доставка своим транспортом.</p><div class="pr">от 75 ₽ / кг</div></div>
+  </div>
+</div></section>
+
+<section id="calc"><div class="w">
+  <span class="tag">// онлайн-калькулятор</span>
+  <h2>Сколько стоит ваш заказ</h2>
+  <p class="lead">Выберите металл, размеры и операции - цена пересчитывается сразу. Точную стоимость подтвердит инженер после проверки чертежа.</p>
+  <div class="cgrid">
+    <div class="box">
+      <div class="row"><label>Материал</label><div class="chips" id="mat"></div></div>
+      <div class="row"><label>Толщина, мм</label><div class="chips" id="thk"></div></div>
+      <div class="row"><label>Размер детали и тираж</label>
+        <div class="two">
+          <div><small>Длина, мм</small><input type="number" id="len" value="500" min="10"></div>
+          <div><small>Ширина, мм</small><input type="number" id="wid" value="300" min="10"></div>
+          <div><small>Кол-во, шт</small><input type="number" id="qty" value="10" min="1"></div>
+        </div>
+      </div>
+      <div class="row"><label>Операции</label>
+        <div class="ops">
+          <label><input type="checkbox" data-op="cut" checked>Лазерная резка по контуру<span>₽ / пог. м</span></label>
+          <label><input type="checkbox" data-op="bend">Гибка (4 гиба на деталь)<span>₽ / гиб</span></label>
+          <label><input type="checkbox" data-op="weld">Сварка (0,5 м шва на деталь)<span>₽ / пог. м</span></label>
+          <label><input type="checkbox" data-op="paint">Порошковая покраска<span>₽ / м²</span></label>
+        </div>
+      </div>
+      <div class="row" style="margin:0"><label>Срочность</label><div class="chips" id="urg"></div></div>
+    </div>
+    <div class="box sum">
+      <span class="tag" style="margin:0">// итого</span>
+      <div class="big mono" id="total">0 ₽</div>
+      <div class="cnt" id="per"></div>
+      <ul id="lines"></ul>
+      <button class="btn" id="order">Отправить на расчёт</button>
+      <p class="note">Расчёт предварительный. Металл берётся с нашего склада по актуальной цене.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="stock"><div class="w">
+  <span class="tag">// склад онлайн</span>
+  <h2>Наличие и цены</h2>
+  <p class="lead">Остатки обновляются из учётной системы. Добавьте позиции в заявку - менеджер зарезервирует металл и выставит счёт.</p>
+  <div class="bar">
+    <input class="search" id="q" placeholder="Поиск: лист 3 мм, труба 40х20, уголок...">
+    <select id="cat"><option value="">Все категории</option></select>
+    <select id="avail"><option value="">Любое наличие</option><option value="ok">Только в наличии</option></select>
+    <span class="cnt" id="found"></span>
+  </div>
+  <div class="tbl" id="tbl"></div>
+</div></section>
+
+<section id="how" style="border-top:1px solid var(--line)"><div class="w">
+  <span class="tag">// как работаем</span>
+  <h2>От заявки до отгрузки</h2>
+  <div class="steps" style="margin-top:40px">
+    <div><h3>Заявка</h3><p>Калькулятор или чертёж в DXF / PDF / фото эскиза.</p></div>
+    <div><h3>Расчёт за 1 час</h3><p>Инженер проверит раскрой и пришлёт точную цену.</p></div>
+    <div><h3>Производство</h3><p>Металл со своего склада - без ожидания поставки.</p></div>
+    <div><h3>Отгрузка</h3><p>Самовывоз или доставка манипулятором по городу.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="w">
+  <div class="fg">
+    <h2>Есть чертёж?<br><em>Посчитаем сегодня.</em></h2>
+    <div class="fc"><p><span>тел.</span> +7 (000) 000-00-00</p><p><span>почта</span> zakaz@ferrum-ceh.ru</p><p><span>адрес</span> Промзона, ул. Заводская, 12</p><p><span>часы</span> пн-сб 8:00-20:00</p></div>
+  </div>
+  <div class="copy"><span>© ФЕРРУМ ЦЕХ - демо-проект. Цены и остатки условные.</span><span>Дизайн и разработка - Мария, @luminoso89</span></div>
+</div></footer>
+
+<div class="cart" id="cart">Заявка: <span id="cc">0</span> поз. →</div>
+<div class="modal" id="modal"><div class="box">
+  <h3>Заявка на металл</h3>
+  <div id="cl"></div>
+  <p class="mono" style="margin:16px 0;font-size:18px">Итого: <b id="ct" style="color:var(--acc)"></b></p>
+  <div class="form"><input placeholder="Имя"><input placeholder="Телефон"></div>
+  <button class="btn" id="send" style="width:100%;justify-content:center">Отправить заявку</button>
+  <button class="btn ghost" id="close" style="width:100%;justify-content:center;margin-top:10px">Закрыть</button>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s),fmt=n=>Math.round(n).toLocaleString('ru-RU')+' ₽';
+// ---------- калькулятор ----------
+const MAT={st3:{n:'Сталь Ст3',d:7.85,kg:78,cut:1},nerj:{n:'Нержавейка AISI 304',d:7.9,kg:320,cut:2.2},al:{n:'Алюминий АМг',d:2.7,kg:390,cut:1.6},ocink:{n:'Оцинковка',d:7.85,kg:98,cut:1.1}};
+const THK=[1,2,3,4,6,8,10];
+const URG={std:{n:'Стандарт · 5 дней',k:1},fast:{n:'Быстро · 2 дня',k:1.25},asap:{n:'Срочно · 24 ч',k:1.5}};
+let st={mat:'st3',thk:3,urg:'std'};
+function chips(el,obj,key,lab){const e=$(el);e.innerHTML='';Object.entries(obj).forEach(([k,v])=>{const b=document.createElement('button');b.textContent=lab(v,k);if(String(st[key])==String(Array.isArray(obj)?v:k))b.className='on';b.onclick=()=>{st[key]=Array.isArray(obj)?v:k;draw();calc()};e.appendChild(b)})}
+function draw(){chips('#mat',MAT,'mat',v=>v.n);chips('#thk',THK,'thk',v=>v+' мм');chips('#urg',URG,'urg',v=>v.n)}
+function calc(){
+  const m=MAT[st.mat],t=st.thk,L=+$('#len').value||0,W=+$('#wid').value||0,q=Math.max(1,+$('#qty').value||1);
+  const area=L*W/1e6, kg=area*t/1000*m.d*1000, metal=kg*m.kg*1.15; // +15% на раскрой
+  const per=(L+W)*2/1000*1.3, lines=[['Металл ('+(kg*q).toFixed(1)+' кг)',metal*q]];
+  const op=k=>document.querySelector('[data-op='+k+']').checked;
+  if(op('cut'))lines.push(['Лазерная резка',per*(18+t*7)*m.cut*q]);
+  if(op('bend'))lines.push(['Гибка',4*(12+t*3)*q]);
+  if(op('weld'))lines.push(['Сварка',0.5*(300*m.cut)*q]);
+  if(op('paint'))lines.push(['Покраска',Math.max(area*2,.05)*380*q]);
+  let sum=lines.reduce((a,b)=>a+b[1],0); const k=URG[st.urg].k;
+  if(k>1)lines.push(['Наценка за срочность',sum*(k-1)]),sum*=k;
+  if(q>=50)lines.push(['Скидка за тираж 50+ шт',-sum*.1]),sum*=.9;
+  $('#lines').innerHTML=lines.map(l=>`<li>${l[0]}<b>${fmt(l[1])}</b></li>`).join('');
+  $('#total').textContent=fmt(sum);$('#per').textContent='≈ '+fmt(sum/q)+' за 1 деталь · '+q+' шт';
+}
+document.querySelectorAll('#calc input').forEach(i=>i.addEventListener('input',calc));
+draw();calc();
+$('#order').onclick=()=>toast('Заявка на расчёт отправлена (демо)');
+// ---------- склад ----------
+const S=[
+['Лист','Лист г/к Ст3 2 мм','1250×2500','т',82500,14.2],['Лист','Лист г/к Ст3 3 мм','1500×3000','т',79900,22.8],['Лист','Лист г/к Ст3 4 мм','1500×6000','т',78900,3.1],
+['Лист','Лист х/к 1 мм','1250×2500','т',91500,8.4],['Лист','Лист нерж. AISI 304 1,5 мм','1250×2500','т',318000,1.2],['Лист','Лист оцинк. 0,7 мм','1250×2500','т',97000,0],
+['Лист','Лист АМг2 3 мм','1500×3000','т',389000,0.6],['Труба','Труба проф. 20×20×1,5','6 м','м',118,4200],['Труба','Труба проф. 40×20×2','6 м','м',195,2650],
+['Труба','Труба проф. 60×60×3','6 м','м',520,180],['Труба','Труба круглая 57×3,5','12 м','м',410,0],['Уголок','Уголок 40×40×4','12 м','м',205,3100],
+['Уголок','Уголок 63×63×5','12 м','м',360,90],['Швеллер','Швеллер 10П','12 м','м',780,640],['Швеллер','Швеллер 16П','12 м','м',1250,0],
+['Арматура','Арматура А500С 12 мм','11,7 м','м',68,15400],['Арматура','Арматура А500С 16 мм','11,7 м','м',118,7200],['Круг','Круг Ст45 30 мм','6 м','м',540,260],['Полоса','Полоса 40×4','6 м','м',115,1800]];
+const unitMin={т:1,м:500};
+S.forEach(r=>{if(![...$('#cat').options].some(o=>o.value==r[0]))$('#cat').add(new Option(r[0],r[0]))});
+let cart={};
+function status(r){const v=r[5];if(!v)return['no','Под заказ'];if(v<unitMin[r[3]])return['low','Мало: '+v.toLocaleString('ru-RU')+' '+r[3]];return['ok',v.toLocaleString('ru-RU')+' '+r[3]]}
+function renderStock(){
+  const q=$('#q').value.toLowerCase().replace(/[xх]/g,'×'),c=$('#cat').value,a=$('#avail').value;
+  const rows=S.map((r,i)=>[r,i]).filter(([r])=>(!c||r[0]==c)&&(!a||r[5]>0)&&(!q||(r[1]+' '+r[2]).toLowerCase().includes(q)));
+  $('#found').textContent='найдено: '+rows.length;
+  $('#tbl').innerHTML='<div class="tr th"><span>Позиция</span><span>Размер</span><span>Цена</span><span>Наличие</span><span>Категория</span><span></span></div>'+
+   (rows.length?rows.map(([r,i])=>{const[s,t]=status(r);return`<div class="tr"><div class="nm"><b>${r[1]}</b><small>арт. FC-${1000+i}</small></div><span class="m" data-l="Размер">${r[2]}</span><span class="m" data-l="Цена">${r[4].toLocaleString('ru-RU')} ₽/${r[3]}</span><span class="st ${s}" data-l="Наличие">${t}</span><span data-l="Категория">${r[0]}</span><button class="add ${cart[i]?'in':''}" data-i="${i}">${cart[i]?'✓ В заявке':r[5]?'+ В заявку':'+ Заказать'}</button></div>`}).join(''):'<div class="empty">Ничего не нашлось - уточните запрос или оставьте заявку, привезём под заказ</div>');
+}
+$('#tbl').onclick=e=>{const b=e.target.closest('.add');if(!b)return;const i=+b.dataset.i;if(cart[i])delete cart[i];else cart[i]=S[i][3]=='т'?1:6;renderStock();upd()};
+['#q','#cat','#avail'].forEach(s=>$(s).addEventListener('input',renderStock));
+function upd(){const n=Object.keys(cart).length;$('#cc').textContent=n;$('#cart').classList.toggle('show',n>0)}
+function renderCart(){let tot=0;$('#cl').innerHTML=Object.entries(cart).map(([i,v])=>{const r=S[i];tot+=r[4]*v;return`<div class="ci"><span>${r[1]}</span><span><input type="number" min="1" value="${v}" data-c="${i}"> ${r[3]}</span><button class="x" data-d="${i}">×</button></div>`}).join('')||'<p style="color:var(--mut)">Пусто</p>';$('#ct').textContent=fmt(tot)}
+$('#cart').onclick=()=>{renderCart();$('#modal').classList.add('show')};
+$('#close').onclick=()=>$('#modal').classList.remove('show');
+$('#cl').oninput=e=>{if(e.target.dataset.c){cart[e.target.dataset.c]=Math.max(1,+e.target.value||1);let t=0;for(const i in cart)t+=S[i][4]*cart[i];$('#ct').textContent=fmt(t)}};
+$('#cl').onclick=e=>{if(e.target.dataset.d){delete cart[e.target.dataset.d];renderCart();renderStock();upd()}};
+$('#send').onclick=()=>{$('#modal').classList.remove('show');cart={};renderStock();upd();toast('Заявка отправлена - металл зарезервирован (демо)')};
+renderStock();
+// тикер
+const tk=S.filter(r=>r[5]).slice(0,10).map(r=>`${r[1]} <b>${r[4].toLocaleString('ru-RU')} ₽/${r[3]}</b>`).join(' · ');$('#tk').innerHTML=tk+' · '+tk+' · ';
+// искры
+const part=$('#part');for(let i=0;i<14;i++){const s=document.createElement('i');s.className='spark';s.style.cssText=`left:${20+Math.random()*10}%;top:${27+Math.random()*4}%;--x:${(Math.random()*120-60)}px;--y:${Math.random()*120}px;animation-delay:${Math.random()*1.4}s`;part.appendChild(s)}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2600)}
+</script>
+</body>
+</html>
