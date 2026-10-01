@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Анна Смирнова - психолог</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f4ef;--card:#fff;--ink:#2f3a36;--muted:#6b7570;--accent:#5f8a76;--accent2:#e8efe9;--line:#e4ded4}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,sans-serif}
+h1,h2,h3{font-family:Lora,serif;font-weight:600;line-height:1.25}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;background:rgba(247,244,239,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:5}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font-family:Lora,serif;font-size:20px}
+nav a{color:var(--muted);text-decoration:none;margin-left:24px;font-size:15px}
+nav a:hover{color:var(--accent)}
+.btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:999px;padding:14px 28px;font:600 16px Inter;cursor:pointer;text-decoration:none;transition:.2s}
+.btn:hover{background:#4c7461}
+.hero{padding:72px 0}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero h1{font-size:44px;margin-bottom:20px}
+.hero p{color:var(--muted);font-size:18px;margin-bottom:32px}
+.photo{aspect-ratio:4/5;border-radius:28px;background:linear-gradient(160deg,#cfdcd3,#a9c2b4);display:flex;align-items:flex-end;padding:24px;color:#fff;font-size:14px}
+.facts{display:flex;gap:32px;margin-top:36px}
+.facts b{display:block;font-family:Lora,serif;font-size:28px;color:var(--accent)}
+.facts span{font-size:14px;color:var(--muted)}
+section{padding:64px 0}
+h2{font-size:34px;margin-bottom:12px}
+.lead{color:var(--muted);margin-bottom:36px;max-width:620px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px}
+.card h3{font-size:20px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:15px}
+.price{font-family:Lora,serif;font-size:26px;color:var(--accent);margin:14px 0 4px}
+.steps{counter-reset:s}
+.steps .card h3::before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--accent2);color:var(--accent);margin-right:10px;font-size:16px}
+.alt{background:var(--accent2)}
+.reviews .card p{font-style:italic;color:var(--ink)}
+.reviews .card span{display:block;margin-top:14px;color:var(--muted);font-size:14px}
+.form-box{background:var(--card);border-radius:28px;padding:44px;display:grid;grid-template-columns:1fr 1fr;gap:40px;border:1px solid var(--line)}
+form{display:grid;gap:14px}
+input,select,textarea{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:14px;font:15px Inter;background:var(--bg);color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);border-color:transparent}
+label.ok{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start}
+label.ok input{width:auto;margin-top:4px}
+.done{display:none;background:var(--accent2);border-radius:16px;padding:24px;text-align:center}
+.tg{margin-top:20px;background:#1f2a26;color:#d9e6df;border-radius:16px;padding:16px;font:13px/1.5 monospace;display:none;white-space:pre-line}
+footer{padding:36px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer a{color:var(--accent)}
+@media(max-width:820px){
+ nav{display:none}
+ .hero{padding:40px 0}.hero .wrap,.form-box{grid-template-columns:1fr}
+ .hero h1{font-size:32px}.photo{aspect-ratio:4/3}
+ .grid{grid-template-columns:1fr}h2{font-size:28px}.form-box{padding:28px 20px}
+ .facts{gap:20px}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="logo">Анна Смирнова</div>
+<nav><a href="#help">С чем работаю</a><a href="#how">Как проходит</a><a href="#price">Стоимость</a><a href="#reviews">Отзывы</a><a href="#form">Запись</a></nav></div></header>
+
+<div class="hero"><div class="wrap">
+ <div>
+  <h1>Помогу разобраться в себе и вернуть спокойствие</h1>
+  <p>Практикующий психолог. Бережно, без оценок и давления. Онлайн и очно в Москве.</p>
+  <a href="#form" class="btn">Записаться на первую консультацию</a>
+  <div class="facts"><div><b>8 лет</b><span>практики</span></div><div><b>600+</b><span>клиентов</span></div><div><b>МГУ</b><span>образование</span></div></div>
+ </div>
+ <div class="photo">Здесь будет фото специалиста</div>
+</div></div>
+
+<section id="help"><div class="wrap">
+ <h2>С чем можно прийти</h2><p class="lead">Если узнаёте себя хотя бы в одном пункте - давайте поговорим.</p>
+ <div class="grid">
+  <div class="card"><h3>Тревога и стресс</h3><p>Постоянное напряжение, трудно расслабиться и уснуть.</p></div>
+  <div class="card"><h3>Отношения</h3><p>Конфликты с партнёром, родителями, сложности в общении.</p></div>
+  <div class="card"><h3>Выгорание</h3><p>Нет сил и желания, работа перестала радовать.</p></div>
+  <div class="card"><h3>Самооценка</h3><p>Неуверенность, страх ошибиться, сравнение с другими.</p></div>
+  <div class="card"><h3>Кризисы</h3><p>Переезд, развод, потеря - когда опора ушла из-под ног.</p></div>
+  <div class="card"><h3>Поиск себя</h3><p>Непонятно, чего хочется и куда двигаться дальше.</p></div>
+ </div>
+</div></section>
+
+<section id="how" class="alt"><div class="wrap">
+ <h2>Как проходит работа</h2><p class="lead">Всё просто и прозрачно с первого шага.</p>
+ <div class="grid steps">
+  <div class="card"><h3>Заявка</h3><p>Оставляете контакт - я пишу в течение пары часов и подбираем время.</p></div>
+  <div class="card"><h3>Знакомство</h3><p>Первая встреча 50 минут: разбираем запрос и решаем, как двигаться.</p></div>
+  <div class="card"><h3>Работа</h3><p>Встречи раз в неделю. Всё, что вы рассказываете, остаётся между нами.</p></div>
+ </div>
+</div></section>
+
+<section id="price"><div class="wrap">
+ <h2>Стоимость</h2><p class="lead">Без скрытых доплат. Перенос встречи - бесплатно за 24 часа.</p>
+ <div class="grid">
+  <div class="card"><h3>Первая консультация</h3><div class="price">2 500 ₽</div><p>50 минут, онлайн или очно</p></div>
+  <div class="card"><h3>Индивидуальная сессия</h3><div class="price">4 000 ₽</div><p>50 минут, онлайн или очно</p></div>
+  <div class="card"><h3>Пакет 5 сессий</h3><div class="price">18 000 ₽</div><p>Экономия 2 000 ₽</p></div>
+ </div>
+</div></section>
+
+<section id="reviews" class="alt reviews"><div class="wrap">
+ <h2>Отзывы</h2><p class="lead">Публикуются с согласия клиентов.</p>
+ <div class="grid">
+  <div class="card"><p>«Впервые за долгое время почувствовала, что меня слышат. Тревога стала намного тише.»</p><span>Екатерина, 34</span></div>
+  <div class="card"><p>«Шёл с выгоранием, а разобрались гораздо глубже. Очень спокойно и без нравоучений.»</p><span>Дмитрий, 41</span></div>
+  <div class="card"><p>«Помогла пережить развод и снова начать строить планы. Спасибо!»</p><span>Ольга, 38</span></div>
+ </div>
+</div></section>
+
+<section id="form"><div class="wrap"><div class="form-box">
+ <div><h2>Запишитесь на первую консультацию</h2><p class="lead">Оставьте контакт - я свяжусь с вами и подберём удобное время. Это ни к чему не обязывает.</p>
+  <div class="tg" id="tg"></div></div>
+ <div>
+  <form id="f">
+   <input name="name" placeholder="Ваше имя" required>
+   <input name="phone" type="tel" placeholder="Телефон или @telegram" required>
+   <select name="format"><option>Онлайн</option><option>Очно в Москве</option></select>
+   <textarea name="msg" rows="3" placeholder="Коротко о запросе (необязательно)"></textarea>
+   <label class="ok"><input type="checkbox" required> Согласна(сен) на обработку персональных данных</label>
+   <button class="btn">Отправить заявку</button>
+  </form>
+  <div class="done" id="done"><h3>Спасибо!</h3><p>Заявка принята. Свяжусь с вами в ближайшее время.</p></div>
+ </div>
+</div></div></section>
+
+<footer><div class="wrap"><span>© 2026 Анна Смирнова, психолог</span><span><a href="#">Telegram</a> · <a href="#">WhatsApp</a> · +7 900 000-00-00</span></div></footer>
+
+<script>
+document.getElementById('f').addEventListener('submit',e=>{
+ e.preventDefault();const d=new FormData(e.target);
+ e.target.style.display='none';document.getElementById('done').style.display='block';
+ const t=document.getElementById('tg');t.style.display='block';
+ t.textContent='📩 Так заявка придёт в Telegram:\n\nНовая заявка с сайта\nИмя: '+d.get('name')+'\nКонтакт: '+d.get('phone')+'\nФормат: '+d.get('format')+'\nЗапрос: '+(d.get('msg')||'-');
+});
+</script>
+</body>
+</html>
