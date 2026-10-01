@@ -134,6 +134,26 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
 .agree{font-size:13px;color:var(--muted)}
 .ok{display:none;background:#e5f6ea;color:#1b6b3a;padding:16px;border-radius:14px;font-weight:600}
 
+/* мини-тест */
+.quiz{background:var(--soft);border-radius:30px;padding:46px;display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:center}
+.quiz-body{background:var(--card);border-radius:var(--r);padding:30px;box-shadow:0 14px 34px rgba(59,76,202,.1);min-height:330px}
+.q-progress{height:6px;background:var(--soft);border-radius:6px;margin-bottom:22px;overflow:hidden}
+#qbar{height:100%;width:0;background:var(--accent);transition:.4s}
+.q-meta{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.q-text{font-size:20px;font-weight:700;margin-bottom:20px}
+.q-text .m{font-family:Georgia,serif;font-style:italic;white-space:nowrap}
+.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.q-opts button{padding:15px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);font:700 18px Manrope,sans-serif;cursor:pointer;color:var(--ink);transition:.15s}
+.q-opts button:hover:not(:disabled){border-color:var(--accent)}
+.q-opts .right{background:#e5f6ea;border-color:#2f9e6e;color:#1b6b3a}
+.q-opts .wrong{background:#fdeaea;border-color:#d44;color:#a22}
+.q-hint{margin-top:16px;font-size:15px;color:var(--muted);min-height:48px}
+.q-next{margin-top:8px}
+.q-res b{font-family:Unbounded;font-size:52px;color:var(--accent);display:block;line-height:1.1}
+.q-res h3{font-size:20px;margin:10px 0}
+.q-res p{color:var(--muted);margin-bottom:22px}
+@media(max-width:960px){.quiz{grid-template-columns:1fr;padding:28px 18px;gap:24px}.quiz-body{padding:22px}}
+
 footer{padding:30px 0;color:var(--muted);font-size:14px;text-align:center}
 
 /* адаптив */
@@ -244,6 +264,23 @@ footer{padding:30px 0;color:var(--muted);font-size:14px;text-align:center}
         <h3>Подготовка к ЕГЭ</h3>
         <p>Базовый и профильный уровень. Цель - стабильные 80+ на профиле.</p>
         <ul><li>Профиль и база</li><li>Задачи с развёрнутым ответом</li><li>Тренировка на реальных вариантах</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== МИНИ-ТЕСТ ========== -->
+<section id="quiz" style="padding-top:0">
+  <div class="wrap">
+    <div class="quiz">
+      <div class="quiz-head">
+        <span class="tag">Интерактив</span>
+        <h2>Проверьте себя за 2 минуты</h2>
+        <p class="lead" style="margin-bottom:0">5 задач в формате ОГЭ и ЕГЭ. В конце увидите результат и совет, с чего начать.</p>
+      </div>
+      <div class="quiz-body">
+        <div class="q-progress"><div id="qbar"></div></div>
+        <div id="qbox"></div>
       </div>
     </div>
   </div>
@@ -381,6 +418,35 @@ footer{padding:30px 0;color:var(--muted);font-size:14px;text-align:center}
 
 <script>
 function send(e){e.preventDefault();document.getElementById('ok').style.display='block';e.target.querySelectorAll('input,textarea').forEach(i=>i.value='');return false}
+/* ===== Задачи мини-теста - можно менять ===== */
+const QUIZ=[
+ {lvl:'ОГЭ · 7-9 класс',q:'Найдите значение выражения <span class="m">2,4 · 5 − 3,5</span>',o:['8,5','12','10,5','7,5'],a:0,h:'2,4 · 5 = 12, затем 12 − 3,5 = 8,5.'},
+ {lvl:'ОГЭ · алгебра',q:'Решите уравнение <span class="m">3x − 7 = 11</span>',o:['x = 4','x = 6','x = 18','x = 3'],a:1,h:'3x = 18, значит x = 6.'},
+ {lvl:'ОГЭ · геометрия',q:'Катеты прямоугольного треугольника 6 и 8. Найдите гипотенузу.',o:['14','12','10','9'],a:2,h:'По теореме Пифагора: √(36 + 64) = √100 = 10.'},
+ {lvl:'ЕГЭ · база',q:'Футболка стоила 800 ₽, её цена снизилась на 15%. Сколько она стоит теперь?',o:['785 ₽','680 ₽','720 ₽','650 ₽'],a:1,h:'15% от 800 = 120, 800 − 120 = 680 ₽.'},
+ {lvl:'ЕГЭ · профиль',q:'Найдите значение <span class="m">log₂ 32 + log₃ 9</span>',o:['5','6','7','41'],a:2,h:'log₂ 32 = 5, log₃ 9 = 2, всего 7.'}
+];
+let qi=0,qs=0;const qbox=document.getElementById('qbox'),qbar=document.getElementById('qbar');
+function qRender(){
+  qbar.style.width=(qi/QUIZ.length*100)+'%';
+  if(qi>=QUIZ.length)return qResult();
+  const t=QUIZ[qi];
+  qbox.innerHTML=`<div class="q-meta">Задача ${qi+1} из ${QUIZ.length} · ${t.lvl}</div><div class="q-text">${t.q}</div><div class="q-opts">${t.o.map((o,i)=>`<button data-i="${i}">${o}</button>`).join('')}</div><div class="q-hint" id="qh"></div>`;
+  qbox.querySelectorAll('.q-opts button').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i,ok=i===t.a;if(ok)qs++;
+    qbox.querySelectorAll('.q-opts button').forEach(x=>{x.disabled=true;if(+x.dataset.i===t.a)x.classList.add('right')});
+    if(!ok)b.classList.add('wrong');
+    document.getElementById('qh').innerHTML=(ok?'✅ Верно! ':'❌ Не совсем. ')+t.h+`<div class="q-next"><button class="btn" style="padding:12px 22px;margin-top:12px" onclick="qi++;qRender()">${qi+1<QUIZ.length?'Дальше →':'Узнать результат'}</button></div>`;
+  });
+}
+function qResult(){
+  const r=qs===5?['Отличный уровень!','База уверенная - можно сразу браться за сложные задачи второй части и целиться в высокий балл.']
+   :qs>=3?['Хорошая база','Есть темы, которые стоит подтянуть. На пробном занятии найдём пробелы и составим план.']
+   :['Есть над чем поработать','Это нормально - пробелы закрываются быстрее, чем кажется. Начнём с понятного объяснения основ.'];
+  qbox.innerHTML=`<div class="q-res"><b>${qs} из ${QUIZ.length}</b><h3>${r[0]}</h3><p>${r[1]}</p><a href="#form" class="btn">Записаться на пробное занятие</a> <button class="btn ghost" style="margin-top:10px" onclick="qi=0;qs=0;qRender()">Пройти заново</button></div>`;
+}
+qRender();
+
 document.querySelectorAll('.menu a').forEach(a=>a.onclick=()=>document.getElementById('menu').classList.remove('open'));
 </script>
 </body>
