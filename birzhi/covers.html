@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<link href="fonts/fonts.css" rel="stylesheet">
+<style>
+:root{--cream:#FAF6F1;--paper:#FFFDFA;--beige:#EFE4D8;--terra:#CF6640;--ink:#1E1D1B;--muted:#6E655D;--line:#E4D9CD}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#ddd;font-family:Manrope,sans-serif;color:var(--ink)}
+.cover{width:660px;height:440px;position:relative;overflow:hidden;background:var(--cream);margin:0 0 20px}
+.b1{position:absolute;left:-190px;top:-150px;width:250px;height:250px;background:var(--terra);border-radius:0 0 60% 40%/0 0 55% 45%;transform:rotate(-8deg)}
+.b2{position:absolute;right:-90px;bottom:-110px;width:330px;height:260px;background:var(--beige);border-radius:55% 45% 50% 50%}
+.grid{position:absolute;right:14px;top:14px;width:120px;height:120px;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:20px 20px;-webkit-mask:linear-gradient(225deg,#000 30%,transparent 80%)}
+.txt{position:absolute;left:44px;top:72px;width:290px;z-index:2}
+.kicker{color:var(--terra);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:"PT Serif",serif;font-weight:700;font-size:38px;line-height:1.08}
+h1 i{font-weight:400;color:var(--terra)}
+.sub{max-width:250px;color:var(--muted);font-size:14px;line-height:1.45;margin-top:14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.tag{padding:5px 11px;border:1px solid var(--line);border-radius:99px;background:var(--paper);font-size:12px;font-weight:600}
+.tag::before{content:"✦ ";color:var(--terra)}
+.sign{position:absolute;left:44px;bottom:26px;display:flex;align-items:center;gap:9px;z-index:2;font-size:12px;color:var(--muted)}
+.sign img{width:30px;height:30px;border-radius:50%}
+.sign b{font-family:"PT Serif",serif;color:var(--ink);font-size:14px;display:block;line-height:1}
+.win{position:absolute;background:var(--paper);border:1.5px solid #CFC4B8;border-radius:12px;padding:9px;box-shadow:0 10px 30px -12px rgba(80,45,25,.3);z-index:2}
+.win .bar{display:flex;gap:5px;margin-bottom:7px}
+.win .bar i{width:7px;height:7px;border-radius:50%;border:1.5px solid #B9AEA3}
+.win .bar i:first-child{background:var(--terra);border-color:var(--terra)}
+.win .bar i:nth-child(2){background:#A89584;border-color:#A89584}
+.win img{display:block;border-radius:5px;width:100%;height:100%;object-fit:cover;object-position:top}
+.win .im{overflow:hidden;border-radius:5px}
+.dots{position:absolute;display:grid;grid-template-columns:repeat(3,5px);gap:9px;z-index:1}
+.dots i{width:4px;height:4px;border-radius:50%;background:var(--terra);opacity:.75}
+</style></head><body>
+
+<!-- 1. Сайты на коде -->
+<div class="cover" id="c1"><div class="b1"></div><div class="b2"></div><div class="grid"></div>
+ <div class="txt"><div class="kicker">Сайт под ключ</div>
+  <h1>Сайт на коде <i>с характером</i></h1>
+  <p class="sub">Лендинг или визитка с анимациями и адаптивом. Без абонентской платы.</p>
+  <div class="tags"><span class="tag">Дизайн + код</span><span class="tag">Демо за день</span></div></div>
+ <div class="win" style="width:300px;right:22px;top:40px;transform:rotate(2deg)"><div class="bar"><i></i><i></i><i></i></div><div class="im" style="height:175px"><img src="../portfolio/img/sites/dveri.jpg"></div></div>
+ <div class="win" style="width:250px;right:120px;top:215px;transform:rotate(-3deg)"><div class="bar"><i></i><i></i><i></i></div><div class="im" style="height:145px"><img src="../portfolio/img/sites/psy-w.jpg"></div></div>
+ <div class="dots" style="right:30px;bottom:40px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+ <div class="sign"><img src="../portfolio/img/logo.png"><span><b>Мария</b>Дизайн с характером</span></div></div>
+
+<!-- 2. Tilda -->
+<div class="cover" id="c2"><div class="b1"></div><div class="b2"></div><div class="grid"></div>
+ <div class="txt"><div class="kicker">Tilda</div>
+  <h1>Лендинг на Tilda, <i>который продаёт</i></h1>
+  <p class="sub">Для курсов, услуг и экспертов. Потом легко править самой.</p>
+  <div class="tags"><span class="tag">Адаптив</span><span class="tag">Свой дизайн</span></div></div>
+ <div class="win" style="width:300px;right:22px;top:40px;transform:rotate(2deg)"><div class="bar"><i></i><i></i><i></i></div><div class="im" style="height:175px"><img src="../portfolio/img/sites/t-akvarel.jpg"></div></div>
+ <div class="win" style="width:250px;right:120px;top:215px;transform:rotate(-3deg)"><div class="bar"><i></i><i></i><i></i></div><div class="im" style="height:145px"><img src="../portfolio/img/sites/t-burger.jpg"></div></div>
+ <div class="dots" style="right:30px;bottom:40px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+ <div class="sign"><img src="../portfolio/img/logo.png"><span><b>Мария</b>Дизайн с характером</span></div></div>
+
+<!-- 3. Маркетплейсы -->
+<div class="cover" id="c3"><div class="b1"></div><div class="b2"></div><div class="grid"></div>
+ <div class="txt"><div class="kicker">WB и Ozon</div>
+  <h1>Карточки, <i>которые замечают</i></h1>
+  <p class="sub">Инфографика и фото товара, которые выделяются в ленте маркетплейса.</p>
+  <div class="tags"><span class="tag">Инфографика</span><span class="tag">Ретушь</span></div></div>
+ <div class="win" style="width:170px;right:150px;top:70px;transform:rotate(-4deg)"><div class="bar"><i></i><i></i><i></i></div><div class="im" style="height:220px"><img src="../portfolio/img/design/mp/01.jpg"></div></div>
+ <div class="win" style="width:170px;right:24px;top:110px;transform:rotate(3deg)"><div class="bar"><i></i><i></i><i></i></div><div class="im" style="height:220px"><img src="../portfolio/img/design/mp/04.jpg"></div></div>
+ <div class="dots" style="right:30px;bottom:30px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+ <div class="sign"><img src="../portfolio/img/logo.png"><span><b>Мария</b>Дизайн с характером</span></div></div>
+
+<!-- 4. Логотипы -->
+<div class="cover" id="c4"><div class="b1"></div><div class="b2"></div><div class="grid"></div>
+ <div class="txt"><div class="kicker">Айдентика</div>
+  <h1>Логотип, <i>который узнают</i></h1>
+  <p class="sub">Знак, цвета и шрифты, которые отражают характер бренда.</p>
+  <div class="tags"><span class="tag">Несколько вариантов</span><span class="tag">Исходники</span></div></div>
+ <div class="win" style="width:190px;right:140px;top:60px;transform:rotate(-4deg)"><div class="bar"><i></i><i></i><i></i></div><div class="im" style="height:170px"><img src="../portfolio/img/design/logo/01.jpg"></div></div>
+ <div class="win" style="width:190px;right:24px;top:190px;transform:rotate(3deg)"><div class="bar"><i></i><i></i><i></i></div><div class="im" style="height:170px"><img src="../portfolio/img/design/logo/03.jpg"></div></div>
+ <div class="dots" style="right:250px;bottom:30px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+ <div class="sign"><img src="../portfolio/img/logo.png"><span><b>Мария</b>Дизайн с характером</span></div></div>
+</body></html>
