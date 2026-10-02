@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Сад по плану - конструктор участка</title>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAF6F1;--card:#FFFDFA;--ink:#1E1D1B;--muted:#6E655D;--line:#E8DFD4;--acc:#CF6640;--acc2:#B4532F;--soft:#F4E7DC;--green:#6F8B4E}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 Manrope,system-ui,sans-serif}
+h1,h2,h3{font-family:'PT Serif',serif;font-weight:700}
+i.a{color:var(--acc);font-style:italic;font-weight:400}
+header{padding:36px 24px 22px;max-width:1360px;margin:auto;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between}
+header h1{font-size:clamp(30px,4vw,48px);line-height:1.05}
+header p{color:var(--muted);margin-top:8px;max-width:560px}
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+button,.btn{font:600 14px Manrope;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:40px;cursor:pointer;transition:.15s}
+button:hover{border-color:var(--acc);color:var(--acc)}
+.pri{background:var(--acc);color:#fff;border-color:var(--acc)}.pri:hover{background:var(--acc2);color:#fff}
+main{max-width:1360px;margin:auto;padding:0 24px 120px;display:grid;grid-template-columns:300px 1fr 330px;gap:20px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:20px}
+.card h3{font-size:19px;margin-bottom:12px}
+.lbl{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin:14px 0 8px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+input[type=number],input[type=text],input[type=tel]{width:100%;font:500 15px Manrope;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+input:focus{outline:2px solid var(--acc);border-color:transparent}
+.zbtn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border-radius:12px;margin-bottom:6px;padding:8px 12px}
+.sw{width:16px;height:16px;border-radius:5px;flex:none;border:1px solid rgba(0,0,0,.12)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:6px 12px;font-size:13px;border-radius:30px}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.planwrap{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px}
+svg#plan{width:100%;height:auto;display:block;touch-action:none;user-select:none;background:#F3EDE4;border-radius:14px}
+.hint{font-size:13px;color:var(--muted);margin-top:10px}
+.zlist{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.zi{display:flex;gap:8px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:12px;font-size:13px;cursor:pointer;background:#fff}
+.zi b{margin-left:auto}
+.zi.sel{border-color:var(--acc);box-shadow:0 0 0 2px var(--soft)}
+.est table{width:100%;border-collapse:collapse;font-size:14px}
+.est td{padding:6px 0;border-bottom:1px dashed var(--line);vertical-align:top}
+.est td:last-child{text-align:right;white-space:nowrap;font-weight:600}
+.est .sec td{border:0;padding-top:12px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.est .q{color:var(--muted);font-size:12px}
+.tot{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;font-family:'PT Serif';font-size:26px}
+.tot b{color:var(--acc)}
+label.ck{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px}
+label.ck input{accent-color:var(--acc);width:17px;height:17px;margin-top:2px}
+label.ck span.p{margin-left:auto;color:var(--muted);font-size:13px;white-space:nowrap}
+.cat{grid-column:1/-1}
+.cathead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-end}
+.cathead h2{font-size:32px}
+.bar{height:8px;background:var(--soft);border-radius:8px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--green)}
+.plants{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin-top:18px}
+.pl{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.pl.off{opacity:.5}
+.pic{height:130px;display:grid;place-items:center}
+.pl .b{padding:14px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
+.pl h4{font-family:'PT Serif';font-size:18px}
+.pl .lat{font-style:italic;color:var(--muted);font-size:13px}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0}
+.tags span{font-size:11px;background:var(--soft);padding:3px 8px;border-radius:20px}
+.pl .d{font-size:13px;color:var(--muted);flex:1}
+.pl .f{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.qty{display:flex;align-items:center;gap:6px}.qty button{width:30px;height:30px;padding:0}
+.warn{font-size:12px;color:var(--acc2)}
+.sticky{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;z-index:5}
+.sticky .in{max-width:1360px;margin:auto;padding:14px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.sticky .sum{font-family:'PT Serif';font-size:28px}.sticky small{opacity:.7;display:block;font-size:13px;font-family:Manrope}
+.sticky .sp{flex:1}
+.modal{position:fixed;inset:0;background:rgba(30,29,27,.5);display:none;place-items:center;z-index:9;padding:16px}
+.modal.on{display:grid}
+.modal .card{max-width:420px;width:100%}
+.modal .card>*+*{margin-top:10px}
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:30px;opacity:0;transition:.3s;z-index:10;pointer-events:none}
+.toast.on{opacity:1}
+@media(max-width:1100px){main{grid-template-columns:1fr 1fr}.mid{grid-column:1/-1;order:-1}}
+@media(max-width:700px){main{grid-template-columns:1fr;padding:0 16px 140px}header{padding:24px 16px}}
+@media print{header .tools,.sticky,.side,.cat,.modal,.hint,.zlist{display:none!important}main{display:block}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Сад <i class="a">по плану</i></h1><p>Нарисуйте участок, разложите зоны, выберите растения - смета считается сразу, пока вы планируете.</p></div>
+  <div class="tools">
+    <button onclick="share()">Ссылка на проект</button>
+    <button onclick="saveFile()">Сохранить в файл</button>
+    <button onclick="fileIn.click()">Открыть файл</button>
+    <button onclick="if(confirm('Начать заново?')){S=demo();render()}">Начать заново</button>
+    <input type="file" id="fileIn" accept=".json" hidden>
+  </div>
+</header>
+
+<main>
+  <aside class="side">
+    <div class="card">
+      <h3>Участок</h3>
+      <div class="row2"><div><div class="lbl" style="margin-top:0">Длина, м</div><input type="number" id="W" min="5" max="100"></div>
+      <div><div class="lbl" style="margin-top:0">Ширина, м</div><input type="number" id="H" min="5" max="100"></div></div>
+      <div class="lbl">Добавить зону</div>
+      <div id="zbtns"></div>
+    </div>
+    <div class="card">
+      <h3>Условия</h3>
+      <div class="lbl" style="margin-top:0">Освещение</div><div class="chips" data-k="svet"></div>
+      <div class="lbl">Почва</div><div class="chips" data-k="pochva"></div>
+      <div class="lbl">Уход</div><div class="chips" data-k="uhod"></div>
+    </div>
+  </aside>
+
+  <section class="mid">
+    <div class="planwrap">
+      <svg id="plan"></svg>
+      <p class="hint">Зону двигают мышкой или пальцем, форму меняют за белые точки. Двойной клик по краю - новая точка, двойной клик по точке - убрать её. Delete - удалить выбранную зону.</p>
+      <div class="zlist" id="zlist"></div>
+    </div>
+  </section>
+
+  <aside>
+    <div class="card est">
+      <h3>Смета</h3>
+      <table id="est"></table>
+      <div class="tot"><span>Итого</span><b id="tot"></b></div>
+    </div>
+    <div class="card">
+      <h3>Работы</h3>
+      <div id="works"></div>
+    </div>
+  </aside>
+
+  <section class="cat">
+    <div class="cathead">
+      <div><h2>Растения <i class="a">для вашего сада</i></h2><p style="color:var(--muted)">Каталог подбирается под условия участка. Количество считаем по норме посадки.</p></div>
+      <div style="min-width:260px"><div id="fill" style="font-size:14px"></div><div class="bar"><i id="fillbar"></i></div>
+      <label class="ck" style="border:0;padding-bottom:0"><input type="checkbox" id="showAll"> Показать все растения</label></div>
+    </div>
+    <div class="plants" id="plants"></div>
+  </section>
+</main>
+
+<div class="sticky"><div class="in">
+  <div><div class="sum" id="tot2"></div><small id="per"></small></div><div class="sp"></div>
+  <button onclick="print()" style="background:transparent;color:#fff;border-color:#555">Смета в PDF</button>
+  <button class="pri" onclick="modal.classList.add('on')">Отправить заявку</button>
+</div></div>
+
+<div class="modal" id="modal" onclick="if(event.target==this)this.classList.remove('on')"><form class="card" onsubmit="send(event)">
+  <h3>Заявка <i class="a">на сад</i></h3>
+  <p style="color:var(--muted);font-size:14px">Проект и смета приложатся к заявке. Перезвоним, уточним детали и приедем на замер.</p>
+  <input type="text" placeholder="Как вас зовут" required>
+  <input type="tel" placeholder="Телефон" required>
+  <button class="pri" style="width:100%">Отправить</button>
+</form></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const TYPES={
+ dom:{n:'Дом, постройка',c:'#D9CFC3',st:'#A8998A',p:0},
+ gazon:{n:'Газон',c:'#B9CF8F',st:'#7E9A55',p:420,u:'Газон рулонный'},
+ posadki:{n:'Зона посадок',c:'#93AD6E',st:'#5F7A3E',p:850,u:'Подготовка грунта'},
+ terrasa:{n:'Терраса',c:'#D8B48E',st:'#A7794F',p:4800,u:'Терраса из лиственницы'},
+ gravij:{n:'Гравийная отсыпка',c:'#E3DDD3',st:'#B3AA9C',p:950,u:'Гравий с геотканью'},
+ vodoem:{n:'Водоём',c:'#A9CBD6',st:'#6A9AAB',p:9500,u:'Декоративный пруд'},
+ dorozhka:{n:'Дорожка',c:'#E6C9A8',st:'#C29466',p:2300,u:'Дорожка из плитки'},
+ klumba:{n:'Цветник',c:'#E7A98E',st:'#CF6640',p:1600,u:'Цветник с бордюром'},
+ besedka:{n:'Беседка',c:'#C9A98A',st:'#8E6C4E',p:12000,u:'Беседка под ключ'}
+};
+const OPT={svet:[['sun','Солнце'],['half','Полутень'],['shade','Тень']],
+ pochva:[['loam','Суглинок'],['sand','Песчаная'],['clay','Глина'],['wet','Сырая']],
+ uhod:[['min','Минимальный'],['any','Готовы ухаживать']]};
+const WORKS=[['proekt','Дизайн-проект с 3D',190,'м²','area'],['planirovka','Планировка грунта',240,'м²','area'],
+ ['drenazh','Дренаж по контуру посадок',1800,'п.м','perim'],['poliv','Автополив газона и посадок',520,'м²','green'],
+ ['svet','Садовое освещение',8900,'шт','lights'],['uhod','Сезон ухода за садом',38000,'сезон','one']];
+// растения: свет, почва, уход(min=неприхотливые), норма шт/м², цена
+const PL=[
+ ['Спирея японская','Spiraea japonica','кустарник','0,6-0,8 м',['sun','half'],['loam','sand','clay'],'min',1.5,790,'Цветёт розовым всё лето, легко стричь','#D98AA0','bush'],
+ ['Гортензия метельчатая','Hydrangea paniculata','кустарник','1,5-2 м',['sun','half'],['loam','clay','wet'],'min',0.7,1450,'Пышные белые шапки с июля до морозов','#F1E9DB','bush'],
+ ['Хоста','Hosta','многолетник','0,4-0,6 м',['half','shade'],['loam','clay','wet'],'min',3,560,'Крупная листва, спасает тенистые углы','#8FB37A','leaf'],
+ ['Лаванда','Lavandula angustifolia','многолетник','0,4-0,5 м',['sun'],['sand','loam'],'any',5,420,'Запах и сиреневые волны в июле','#9C8BC4','flower'],
+ ['Туя западная','Thuja occidentalis','хвойное','3-4 м',['sun','half'],['loam','clay','wet'],'min',1,2100,'Живая изгородь, зелёная круглый год','#5E7D4A','tree'],
+ ['Можжевельник казацкий','Juniperus sabina','хвойное','0,5-1 м',['sun','half'],['sand','loam'],'min',1,1250,'Стелется ковром, держит склоны','#6E8F5A','bush'],
+ ['Папоротник страусник','Matteuccia','многолетник','1-1,2 м',['shade','half'],['wet','loam','clay'],'min',2.5,490,'Для сырых тенистых мест','#79A35E','leaf'],
+ ['Роза флорибунда','Rosa floribunda','кустарник','0,7-1 м',['sun'],['loam','clay'],'any',3,980,'Цветёт волнами с июня по сентябрь','#E07A6A','flower'],
+ ['Пион травянистый','Paeonia lactiflora','многолетник','0,8-1 м',['sun','half'],['loam','clay'],'min',1,890,'Крупные ароматные цветы в июне','#F0A3B2','flower'],
+ ['Дёрен белый','Cornus alba','кустарник','2-2,5 м',['sun','half','shade'],['loam','clay','wet','sand'],'min',0.8,690,'Красные побеги зимой','#B5503C','bush'],
+ ['Астильба','Astilbe','многолетник','0,5-0,8 м',['half','shade'],['wet','loam'],'any',4,450,'Пушистые метёлки в тени','#E38FA6','flower'],
+ ['Яблоня декоративная','Malus Royalty','дерево','4-5 м',['sun'],['loam','clay'],'min',0.15,4900,'Весной в розовом цвету, осенью в ягодах','#C9576E','tree'],
+ ['Очиток видный','Sedum spectabile','многолетник','0,4 м',['sun'],['sand','loam'],'min',6,320,'Не боится засухи, цветёт до октября','#D88EA4','flower'],
+ ['Барбарис Тунберга','Berberis thunbergii','кустарник','0,8-1 м',['sun','half'],['loam','sand'],'min',1.5,720,'Пурпурная листва весь сезон','#8E3B4A','bush']
+];
+const SL={sun:'солнце',half:'полутень',shade:'тень'};
+const fmt=n=>Math.round(n).toLocaleString('ru-RU')+' ₽';
+function demo(){return{W:30,H:20,usl:{svet:'half',pochva:'loam',uhod:'min'},rab:{proekt:true,planirovka:true},lights:6,rast:{},
+ zony:[{t:'dom',p:[[2,2],[10,2],[10,8],[2,8]]},{t:'gazon',p:[[12,2],[28,2],[28,10],[12,10]]},
+ {t:'dorozhka',p:[[2,9],[11,9],[13.5,11.5],[12.5,12.5],[10.5,10.2],[2,10.2]]},{t:'terrasa',p:[[2,10.8],[8,10.8],[8,14],[2,14]]},
+ {t:'posadki',p:[[14,12],[28,12],[28,18],[14,18]]},{t:'klumba',p:[[2,15],[11,15],[11,18],[2,18]]}]}}
+let S=demo(),sel=-1;
+try{if(location.hash.length>2)S=JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(1)))))}catch(e){}
+const area=p=>Math.abs(p.reduce((s,a,i)=>{const b=p[(i+1)%p.length];return s+a[0]*b[1]-b[0]*a[1]},0)/2);
+const perim=p=>p.reduce((s,a,i)=>{const b=p[(i+1)%p.length];return s+Math.hypot(b[0]-a[0],b[1]-a[1])},0);
+const sumT=t=>S.zony.filter(z=>z.t==t).reduce((s,z)=>s+area(z.p),0);
+const r1=n=>Math.round(n*10)/10;
+const ok=p=>p[4].includes(S.usl.svet)&&p[5].includes(S.usl.pochva)&&(S.usl.uhod=='any'||p[6]=='min');
+
+// ---- UI
+zbtns.innerHTML=Object.entries(TYPES).map(([k,t])=>`<button class="zbtn" onclick="addZone('${k}')"><span class="sw" style="background:${t.c}"></span>${t.n}<span style="margin-left:auto;color:var(--acc)">+</span></button>`).join('');
+document.querySelectorAll('.chips').forEach(el=>{const k=el.dataset.k;el.innerHTML=OPT[k].map(([v,n])=>`<button class="chip" data-v="${v}">${n}</button>`).join('');
+ el.onclick=e=>{const v=e.target.dataset.v;if(v){S.usl[k]=v;render()}}});
+W.oninput=H.oninput=()=>{S.W=Math.max(5,Math.min(100,+W.value||5));S.H=Math.max(5,Math.min(100,+H.value||5));render(true)};
+showAll.onchange=()=>renderPlants();
+
+function addZone(t){const w=Math.min(6,S.W/3),h=t=='dorozhka'?1.2:Math.min(4,S.H/3),x=S.W/2-w/2,y=S.H/2-h/2;
+ S.zony.push({t,p:[[x,y],[x+w,y],[x+w,y+h],[x,y+h]]});sel=S.zony.length-1;render()}
+
+// ---- SVG plan
+const NS='http://www.w3.org/2000/svg',PAD=1.6;let drag=null;
+function el(n,a,par){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);par&&par.appendChild(e);return e}
+function drawPlan(){const sv=plan;sv.innerHTML='';sv.setAttribute('viewBox',`${-PAD} ${-PAD} ${S.W+PAD*2} ${S.H+PAD*2}`);
+ const defs=el('defs',{},sv);const pt=el('pattern',{id:'g',width:1,height:1,patternUnits:'userSpaceOnUse'},defs);
+ el('path',{d:'M1 0H0V1',fill:'none',stroke:'#E3D8CA','stroke-width':.03},pt);
+ el('rect',{x:0,y:0,width:S.W,height:S.H,fill:'#FBF8F3'},sv);el('rect',{x:0,y:0,width:S.W,height:S.H,fill:'url(#g)'},sv);
+ el('rect',{x:0,y:0,width:S.W,height:S.H,fill:'none',stroke:'#CF6640','stroke-width':.12,'stroke-dasharray':'.5 .3'},sv);
+ const fs=Math.max(S.W,S.H)/38;
+ el('text',{x:S.W/2,y:-.5,'text-anchor':'middle','font-size':fs,fill:'#6E655D','font-family':'Manrope'},sv).textContent=S.W+' м';
+ const ty=el('text',{x:-.5,y:S.H/2,'text-anchor':'middle','font-size':fs,fill:'#6E655D','font-family':'Manrope',transform:`rotate(-90 -0.5 ${S.H/2})`},sv);ty.textContent=S.H+' м';
+ S.zony.forEach((z,i)=>{const t=TYPES[z.t];const g=el('g',{},sv);
+  const poly=el('polygon',{points:z.p.map(a=>a.join(',')).join(' '),fill:t.c,stroke:i==sel?'#CF6640':t.st,'stroke-width':i==sel?.16:.07,style:'cursor:move'},g);
+  poly.onpointerdown=e=>{sel=i;startDrag(e,{i,all:true});drawPlan();renderList()};
+  poly.ondblclick=e=>{const m=toM(e);let best=0,bd=1e9;z.p.forEach((a,j)=>{const b=z.p[(j+1)%z.p.length];const d=segD(m,a,b);if(d<bd){bd=d;best=j}});z.p.splice(best+1,0,[r1(m[0]),r1(m[1])]);render()};
+  const c=z.p.reduce((s,a)=>[s[0]+a[0]/z.p.length,s[1]+a[1]/z.p.length],[0,0]);
+  const tx=el('text',{x:c[0],y:c[1],'text-anchor':'middle','font-size':fs*.8,fill:'#1E1D1B','font-family':'Manrope','font-weight':600,'pointer-events':'none'},g);
+  tx.textContent=r1(area(z.p))+' м²';
+  if(i==sel)z.p.forEach((a,j)=>{const h=el('circle',{cx:a[0],cy:a[1],r:fs*.32,fill:'#fff',stroke:'#CF6640','stroke-width':.1,style:'cursor:pointer'},g);
+   h.onpointerdown=e=>{e.stopPropagation();startDrag(e,{i,j})};
+   h.ondblclick=e=>{e.stopPropagation();if(z.p.length>3){z.p.splice(j,1);render()}}});
+ });
+ sv.onpointerdown=e=>{if(e.target==sv||e.target.tagName=='rect'){sel=-1;drawPlan();renderList()}};
+}
+function segD(m,a,b){const dx=b[0]-a[0],dy=b[1]-a[1],l=dx*dx+dy*dy||1;let t=((m[0]-a[0])*dx+(m[1]-a[1])*dy)/l;t=Math.max(0,Math.min(1,t));return Math.hypot(m[0]-a[0]-t*dx,m[1]-a[1]-t*dy)}
+function toM(e){const p=plan.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(plan.getScreenCTM().inverse());return[q.x,q.y]}
+function startDrag(e,d){e.preventDefault();d.m=toM(e);d.orig=S.zony[d.i].p.map(a=>a.slice());drag=d}
+addEventListener('pointermove',e=>{if(!drag)return;const m=toM(e),dx=m[0]-drag.m[0],dy=m[1]-drag.m[1],z=S.zony[drag.i];
+ const snap=v=>Math.round(v*10)/10,cl=(v,M)=>Math.max(0,Math.min(M,v));
+ if(drag.all){let ddx=dx,ddy=dy;drag.orig.forEach(a=>{ddx=Math.max(-a[0],Math.min(S.W-a[0],ddx));ddy=Math.max(-a[1],Math.min(S.H-a[1],ddy))});
+  z.p=drag.orig.map(a=>[snap(a[0]+ddx),snap(a[1]+ddy)])}
+ else z.p[drag.j]=[snap(cl(drag.orig[drag.j][0]+dx,S.W)),snap(cl(drag.orig[drag.j][1]+dy,S.H))];
+ drawPlan();renderList();renderEst()});
+addEventListener('pointerup',()=>{if(drag){drag=null;render()}});
+addEventListener('keydown',e=>{if((e.key=='Delete'||e.key=='Backspace')&&sel>-1&&!/INPUT/.test(document.activeElement.tagName)){S.zony.splice(sel,1);sel=-1;render()}});
+
+function renderList(){const used=S.zony.reduce((s,z)=>s+area(z.p),0),tot=S.W*S.H;
+ zlist.innerHTML=S.zony.map((z,i)=>`<div class="zi ${i==sel?'sel':''}" onclick="sel=${i};drawPlan();renderList()"><span class="sw" style="background:${TYPES[z.t].c}"></span>${TYPES[z.t].n}<b>${r1(area(z.p))} м²</b></div>`).join('')+
+ `<div class="zi" style="background:var(--soft)">Свободно<b>${r1(Math.max(0,tot-used))} м²</b></div><div class="zi" style="background:var(--soft)">Участок<b>${tot} м²</b></div>`}
+
+function calc(){const rows=[],tot=S.W*S.H;let sum=0;
+ const sec=n=>rows.push({sec:n});const add=(n,q,v)=>{rows.push({n,q,v});sum+=v};
+ sec('Покрытия и зоны');
+ Object.entries(TYPES).forEach(([k,t])=>{const a=sumT(k);if(t.p&&a>0)add(t.u,r1(a)+' м²',a*t.p)});
+ const plist=Object.entries(S.rast).filter(([,n])=>n>0);
+ if(plist.length){sec('Растения');plist.forEach(([i,n])=>add(PL[i][0],n+' шт',n*PL[i][8]))}
+ const green=sumT('gazon')+sumT('posadki')+sumT('klumba'),pp=S.zony.filter(z=>z.t=='posadki'||z.t=='klumba').reduce((s,z)=>s+perim(z.p),0);
+ const ws=WORKS.filter(w=>S.rab[w[0]]);if(ws.length)sec('Работы');
+ ws.forEach(w=>{const q={area:tot,perim:pp,green,lights:S.lights||6,one:1}[w[4]];add(w[1],(w[4]=='one'?'1':r1(q))+' '+w[3],q*w[2])});
+ return{rows,sum}}
+
+function renderEst(){const{rows,sum}=calc();
+ est.innerHTML=rows.map(r=>r.sec?`<tr class="sec"><td colspan=2>${r.sec}</td></tr>`:`<tr><td>${r.n}<div class="q">${r.q}</div></td><td>${fmt(r.v)}</td></tr>`).join('');
+ tot.textContent=tot2.textContent=fmt(sum);per.textContent=`${fmt(sum/(S.W*S.H))} за м² · участок ${S.W*S.H} м²`}
+
+function renderWorks(){works.innerHTML=WORKS.map(w=>`<label class="ck"><input type="checkbox" data-k="${w[0]}" ${S.rab[w[0]]?'checked':''}>${w[1]}<span class="p">${w[2].toLocaleString('ru-RU')} ₽/${w[3]}</span></label>`).join('')+
+ (S.rab.svet?`<div style="display:flex;align-items:center;gap:10px;margin-top:10px;font-size:14px">Светильников <input type="number" min="1" max="60" value="${S.lights||6}" style="width:80px" oninput="S.lights=+this.value||1;renderEst()"></div>`:'');
+ works.querySelectorAll('input[type=checkbox]').forEach(c=>c.onchange=()=>{S.rab[c.dataset.k]=c.checked;renderWorks();renderEst()})}
+
+const ICON={bush:c=>`<circle cx="40" cy="58" r="20" fill="#7E9A55"/><circle cx="62" cy="50" r="24" fill="#93AD6E"/><circle cx="84" cy="60" r="18" fill="#7E9A55"/>${[[38,48],[58,40],[70,56],[86,52],[50,62]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="${c}"/>`).join('')}`,
+ flower:c=>`${[0,72,144,216,288].map(a=>`<ellipse cx="60" cy="38" rx="10" ry="18" fill="${c}" transform="rotate(${a} 60 56)"/>`).join('')}<circle cx="60" cy="56" r="9" fill="#F2C94C"/>`,
+ leaf:c=>`${[-50,-20,10,40].map(a=>`<path d="M60 90 Q40 50 60 18 Q80 50 60 90Z" fill="${c}" transform="rotate(${a} 60 90)" opacity=".9"/>`).join('')}`,
+ tree:c=>`<rect x="56" y="62" width="8" height="26" fill="#8E6C4E"/><circle cx="60" cy="44" r="28" fill="${c}"/><circle cx="48" cy="38" r="6" fill="#fff" opacity=".18"/>`};
+function renderPlants(){const pa=sumT('posadki')+sumT('klumba');
+ const occ=Object.entries(S.rast).reduce((s,[i,n])=>s+n/PL[i][7],0);
+ fill.innerHTML=`Посадки ${r1(pa)} м² · занято ${r1(occ)} м² · свободно <b>${r1(Math.max(0,pa-occ))} м²</b>`;
+ fillbar.style.width=Math.min(100,pa?occ/pa*100:0)+'%';fillbar.style.background=occ>pa?'var(--acc)':'var(--green)';
+ const list=PL.map((p,i)=>[p,i]).filter(([p])=>showAll.checked||ok(p)||S.rast[PL.indexOf(p)]);
+ plants.innerHTML=list.map(([p,i])=>{const n=S.rast[i]||0,good=ok(p);
+  return`<div class="pl ${good?'':'off'}"><div class="pic" style="background:${p[10]}22"><svg viewBox="0 0 120 100" width="120">${ICON[p[11]](p[10])}</svg></div><div class="b">
+  <h4>${p[0]}</h4><div class="lat">${p[1]}</div><div class="tags"><span>${p[2]}</span><span>${p[3]}</span><span>${p[4].map(x=>SL[x]).join(' / ')}</span><span>${p[7]} шт/м²</span></div>
+  <div class="d">${p[9]}</div>${good?'':'<div class="warn">Не подходит под условия участка</div>'}
+  <div class="f"><b>${p[8].toLocaleString('ru-RU')} ₽</b>${n?`<div class="qty"><button onclick="q(${i},-1)">−</button><b>${n}</b><button onclick="q(${i},1)">+</button></div>`:
+  `<button class="pri" onclick="addP(${i})">В проект</button>`}</div></div></div>`}).join('')+
+  (list.length?'':'<p style="color:var(--muted)">Под такие условия в каталоге ничего нет - отметьте «Показать все растения».</p>')}
+function addP(i){const free=Math.max(1,sumT('posadki')+sumT('klumba')-Object.entries(S.rast).reduce((s,[j,n])=>s+n/PL[j][7],0));
+ const share=Math.max(1,Math.round(Math.min(free,12)*PL[i][7]));S.rast[i]=share;render();toast(`${PL[i][0]}: ${share} шт по норме посадки`)}
+function q(i,d){const st=Math.max(1,Math.round(PL[i][7]));S.rast[i]=Math.max(0,(S.rast[i]||0)+d*st);if(!S.rast[i])delete S.rast[i];render()}
+
+function render(keepInputs){if(!keepInputs){W.value=S.W;H.value=S.H}
+ document.querySelectorAll('.chips').forEach(el=>el.querySelectorAll('.chip').forEach(b=>b.classList.toggle('on',S.usl[el.dataset.k]==b.dataset.v)));
+ drawPlan();renderList();renderEst();renderWorks();renderPlants()}
+
+// ---- файлы и ссылки
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2200)}
+function saveFile(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:'application/json'}));a.download=`sad-${S.W*S.H}m2.json`;a.click()}
+fileIn.onchange=()=>{const f=fileIn.files[0];if(!f)return;f.text().then(t=>{try{const d=JSON.parse(t);if(!d.zony)throw 0;S=d;sel=-1;render();toast('Проект открыт')}catch(e){toast('Это не файл проекта')}});fileIn.value=''}
+function share(){const u=location.href.split('#')[0]+'#'+btoa(unescape(encodeURIComponent(JSON.stringify(S))));
+ navigator.clipboard.writeText(u).then(()=>toast('Ссылка скопирована'),()=>prompt('Скопируйте ссылку',u))}
+function send(e){e.preventDefault();modal.classList.remove('on');toast('Спасибо! Заявка отправлена, скоро перезвоним')}
+render();
+</script>
+</body>
+</html>

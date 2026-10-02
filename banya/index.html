@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Баня под ключ - конструктор</title>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAF6F1;--card:#FFFDFA;--ink:#1E1D1B;--muted:#6E655D;--line:#E8DFD4;--acc:#CF6640;--acc2:#B4532F;--soft:#F4E7DC}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 Manrope,system-ui,sans-serif}
+h1,h2,h3{font-family:'PT Serif',serif;font-weight:700}
+i.a{color:var(--acc);font-style:italic;font-weight:400}
+header{padding:36px 24px 22px;max-width:1360px;margin:auto;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between}
+header h1{font-size:clamp(30px,4vw,48px);line-height:1.05}
+header p{color:var(--muted);margin-top:8px;max-width:560px}
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+button{font:600 14px Manrope;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:40px;cursor:pointer;transition:.15s}
+button:hover{border-color:var(--acc);color:var(--acc)}
+.pri{background:var(--acc);color:#fff;border-color:var(--acc)}.pri:hover{background:var(--acc2);color:#fff}
+main{max-width:1360px;margin:auto;padding:0 24px 120px;display:grid;grid-template-columns:320px 1fr 330px;gap:20px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:20px}
+.card h3{font-size:19px;margin-bottom:12px}
+.lbl{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin:16px 0 8px}
+.lbl:first-of-type{margin-top:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+input[type=text],input[type=tel],select{width:100%;font:500 15px Manrope;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.rng{display:flex;justify-content:space-between;font-size:14px}.rng b{font-family:'PT Serif';font-size:18px}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;border-radius:14px;padding:10px 12px;width:100%}
+.opt.on{border-color:var(--acc);background:var(--soft);color:var(--ink)}
+.opt small{display:block;color:var(--muted);font-weight:500;font-size:12px}
+.opt .pr{margin-left:auto;font-size:13px;color:var(--acc);white-space:nowrap}
+.opt .sw{width:30px;height:30px;border-radius:8px;flex:none}
+.zbtn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border-radius:12px;margin-bottom:6px;padding:8px 12px}
+.sw{width:16px;height:16px;border-radius:5px;flex:none;border:1px solid rgba(0,0,0,.12)}
+.view{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px;margin-bottom:20px}
+.tabs{display:flex;gap:6px;margin-bottom:10px}.tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+svg{display:block;width:100%;height:auto;user-select:none;touch-action:none}
+#plan{background:#F3EDE4;border-radius:14px}
+.hint{font-size:13px;color:var(--muted);margin-top:10px}
+.rlist{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+.ri{display:flex;gap:8px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:12px;font-size:13px;background:#fff;cursor:pointer}
+.ri b{margin-left:auto}.ri.sel{border-color:var(--acc);box-shadow:0 0 0 2px var(--soft)}
+.ri.warn{background:#FBE9E1}
+label.ck{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px}
+label.ck input{accent-color:var(--acc);width:17px;height:17px;margin-top:2px}
+label.ck span.p{margin-left:auto;color:var(--muted);font-size:13px;white-space:nowrap}
+.est table{width:100%;border-collapse:collapse;font-size:14px}
+.est td{padding:6px 0;border-bottom:1px dashed var(--line);vertical-align:top}
+.est td:last-child{text-align:right;white-space:nowrap;font-weight:600}
+.est .sec td{border:0;padding-top:12px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.est .q{color:var(--muted);font-size:12px}
+.tot{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;font-family:'PT Serif';font-size:26px}.tot b{color:var(--acc)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.facts div{background:var(--soft);border-radius:12px;padding:10px;font-size:12px;color:var(--muted)}
+.facts b{display:block;font-family:'PT Serif';font-size:20px;color:var(--ink)}
+.note{font-size:13px;background:#FBE9E1;color:var(--acc2);padding:10px 12px;border-radius:12px;margin-top:10px}
+.sticky{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;z-index:5}
+.sticky .in{max-width:1360px;margin:auto;padding:14px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.sticky .sum{font-family:'PT Serif';font-size:28px}.sticky small{opacity:.7;display:block;font-size:13px;font-family:Manrope}
+.sticky .sp{flex:1}
+.modal{position:fixed;inset:0;background:rgba(30,29,27,.5);display:none;place-items:center;z-index:9;padding:16px}
+.modal.on{display:grid}.modal .card{max-width:420px;width:100%}.modal .card>*+*{margin-top:10px}
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:30px;opacity:0;transition:.3s;z-index:10;pointer-events:none}.toast.on{opacity:1}
+@media(max-width:1100px){main{grid-template-columns:1fr 1fr}.mid{grid-column:1/-1;order:-1}}
+@media(max-width:700px){main{grid-template-columns:1fr;padding:0 16px 140px}header{padding:24px 16px}}
+@media print{header .tools,.sticky,.side,.modal,.hint,.tabs{display:none!important}main{display:block}}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Баня <i class="a">под ключ</i></h1><p>Задайте размер, разложите комнаты, выберите материал и печь - стоимость строительства видна сразу.</p></div>
+  <div class="tools">
+    <button onclick="share()">Ссылка на проект</button>
+    <button onclick="saveFile()">Сохранить в файл</button>
+    <button onclick="fileIn.click()">Открыть файл</button>
+    <button onclick="if(confirm('Начать заново?')){S=demo();sel=-1;render()}">Начать заново</button>
+    <input type="file" id="fileIn" accept=".json" hidden>
+  </div>
+</header>
+
+<main>
+  <aside class="side">
+    <div class="card">
+      <h3>Размер</h3>
+      <div class="rng"><span>Длина</span><b id="Lv"></b></div><input type="range" id="L" min="3" max="12" step="0.5">
+      <div class="rng" style="margin-top:8px"><span>Ширина</span><b id="Wv"></b></div><input type="range" id="W" min="3" max="9" step="0.5">
+      <div class="lbl">Этажность</div>
+      <div class="opts" id="floors"></div>
+      <div class="lbl">Комнаты</div>
+      <div id="zbtns"></div>
+    </div>
+    <div class="card">
+      <h3>Материал стен</h3>
+      <div class="opts" id="mat"></div>
+    </div>
+  </aside>
+
+  <section class="mid">
+    <div class="view">
+      <div class="tabs"><button id="t1" class="on" onclick="mode('plan')">План</button><button id="t2" onclick="mode('vid')">Вид снаружи</button></div>
+      <svg id="plan"></svg>
+      <svg id="vid" style="display:none;background:linear-gradient(#F4E7DC,#FAF6F1);border-radius:14px"></svg>
+      <p class="hint" id="hint">Комнату двигают мышкой или пальцем, размер меняют за уголок справа внизу. Шаг - 0,5 м. Delete - удалить комнату.</p>
+      <div class="rlist" id="rlist"></div>
+      <div class="facts" id="facts"></div>
+      <div id="notes"></div>
+    </div>
+  </section>
+
+  <aside>
+    <div class="card"><h3>Печь</h3><div class="opts" id="pech"></div></div>
+    <div class="card"><h3>Фундамент и кровля</h3>
+      <div class="lbl">Фундамент</div><select id="fund"></select>
+      <div class="lbl">Кровля</div><select id="krov"></select>
+    </div>
+    <div class="card"><h3>Дополнительно</h3><div id="dop"></div></div>
+    <div class="card est"><h3>Смета</h3><table id="est"></table><div class="tot"><span>Итого</span><b id="tot"></b></div></div>
+  </aside>
+</main>
+
+<div class="sticky"><div class="in">
+  <div><div class="sum" id="tot2"></div><small id="per"></small></div><div class="sp"></div>
+  <button onclick="print()" style="background:transparent;color:#fff;border-color:#555">Смета в PDF</button>
+  <button class="pri" onclick="modal.classList.add('on')">Отправить заявку</button>
+</div></div>
+
+<div class="modal" id="modal" onclick="if(event.target==this)this.classList.remove('on')"><form class="card" onsubmit="send(event)">
+  <h3>Заявка <i class="a">на баню</i></h3>
+  <p style="color:var(--muted);font-size:14px">Проект и смета приложатся к заявке. Перезвоним, уточним участок и сроки.</p>
+  <input type="text" placeholder="Как вас зовут" required>
+  <input type="tel" placeholder="Телефон" required>
+  <button class="pri" style="width:100%">Отправить</button>
+</form></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const ROOMS={
+ parnaya:{n:'Парная',c:'#E4A07F',min:4},
+ moyka:{n:'Мойка',c:'#A9CBD6',min:3},
+ otdyh:{n:'Комната отдыха',c:'#E9D5B5',min:8},
+ tambur:{n:'Тамбур',c:'#D9CFC3',min:2},
+ sanuzel:{n:'Санузел',c:'#C3D7E0',min:1.5},
+ terrasa:{n:'Терраса',c:'#D8B48E',min:4,out:true},
+ kupel:{n:'Купель',c:'#8FB9C9',min:2,out:true,fix:280000}
+};
+const MAT=[['brus','Профилированный брус','150 × 150 мм, тёплый и ровный',21000,'#C99A64'],
+ ['brevno','Оцилиндрованное бревно','Ø 220 мм, классический вид',26500,'#B98552'],
+ ['karkas','Каркас с утеплением','быстро и бюджетно, обшивка вагонкой',15500,'#DDBC8E'],
+ ['kleen','Клеёный брус','не даёт усадки, можно жить сразу',34000,'#D4A673']];
+const PECH=[['drova','Дровяная, металл','классика, топится из моечной',58000],
+ ['kamen','Дровяная в камне','мягкий пар, долго держит тепло',145000],
+ ['elek','Электрокаменка','без дыма и дров, нужен 380 В',72000]];
+const FUND=[['vint','Винтовые сваи',2400],['lent','Мелкозаглублённая лента',5200],['plita','Монолитная плита',7400]];
+const KROV=[['metall','Металлочерепица',2100],['myagk','Гибкая черепица',2900],['falc','Фальцевая кровля',3600]];
+const DOP=[['vagonka','Отделка липой и осиной',3200,'м² пола','in'],['polki','Полки в парной',38000,'компл','one'],
+ ['elektr','Электрика и свет',2200,'м²','in'],['vodo','Водоснабжение и слив',85000,'компл','one'],
+ ['pokr','Покраска фасада',900,'м² стен','wall'],['dostavka','Доставка и сборка бригадой',60000,'объект','one']];
+const fmt=n=>Math.round(n).toLocaleString('ru-RU')+' ₽';
+const r1=n=>Math.round(n*10)/10;
+function demo(){return{L:6,W:4,fl:1,mat:'brus',pech:'drova',fund:'vint',krov:'metall',dop:{vagonka:true,polki:true,dostavka:true},
+ rooms:[{t:'tambur',x:0,y:0,w:1.5,h:2},{t:'otdyh',x:1.5,y:0,w:2.5,h:4},{t:'moyka',x:4,y:0,w:2,h:2},{t:'parnaya',x:4,y:2,w:2,h:2},{t:'sanuzel',x:0,y:2,w:1.5,h:2},{t:'terrasa',x:0,y:4,w:6,h:2}]}}
+let S=demo(),sel=-1,drag=null,view='plan';
+try{if(location.hash.length>2)S=JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(1)))))}catch(e){}
+
+// constructor controls
+const opts=(el,arr,key,priceFn)=>{el.innerHTML=arr.map(a=>`<button class="opt" data-v="${a[0]}">${a[4]?`<span class="sw" style="background:${a[4]}"></span>`:''}<span>${a[1]}<small>${a[2]}</small></span><span class="pr">${priceFn(a)}</span></button>`).join('');
+ el.onclick=e=>{const b=e.target.closest('.opt');if(b){S[key]=b.dataset.v;render()}}};
+opts(mat,MAT,'mat',a=>a[3].toLocaleString('ru-RU')+' ₽/м²');
+opts(pech,PECH,'pech',a=>fmt(a[3]));
+floors.innerHTML=[[1,'Один этаж','всё на одном уровне'],[1.5,'С мансардой','комната отдыха наверху, +70% площади отдыха']].map(a=>`<button class="opt" data-v="${a[0]}"><span>${a[1]}<small>${a[2]}</small></span></button>`).join('');
+floors.onclick=e=>{const b=e.target.closest('.opt');if(b){S.fl=+b.dataset.v;render()}};
+fund.innerHTML=FUND.map(a=>`<option value="${a[0]}">${a[1]} - ${a[2].toLocaleString('ru-RU')} ₽/м²</option>`).join('');
+krov.innerHTML=KROV.map(a=>`<option value="${a[0]}">${a[1]} - ${a[2].toLocaleString('ru-RU')} ₽/м²</option>`).join('');
+fund.onchange=()=>{S.fund=fund.value;render()};krov.onchange=()=>{S.krov=krov.value;render()};
+zbtns.innerHTML=Object.entries(ROOMS).map(([k,r])=>`<button class="zbtn" onclick="addRoom('${k}')"><span class="sw" style="background:${r.c}"></span>${r.n}<span style="margin-left:auto;color:var(--acc)">+</span></button>`).join('');
+L.oninput=W.oninput=()=>{S.L=+L.value;S.W=+W.value;S.rooms.forEach(clamp);render()};
+
+function bounds(r){return ROOMS[r.t].out?{W:S.L,H:S.W+3}:{W:S.L,H:S.W}}
+function clamp(r){const b=bounds(r);r.w=Math.min(r.w,b.W);r.h=Math.min(r.h,b.H);r.x=Math.max(0,Math.min(b.W-r.w,r.x));r.y=Math.max(0,Math.min(b.H-r.h,r.y))}
+function addRoom(t){const m=ROOMS[t],s=Math.max(1.5,Math.round(Math.sqrt(m.min)*2)/2);const r={t,x:0,y:m.out?S.W:0,w:s,h:s};clamp(r);S.rooms.push(r);sel=S.rooms.length-1;render()}
+
+// plan svg
+const NS='http://www.w3.org/2000/svg';
+function el(n,a,p){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e}
+function toM(e){const p=plan.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(plan.getScreenCTM().inverse());return[q.x,q.y]}
+function drawPlan(){const P=1.2,H=S.W+3;plan.innerHTML='';plan.setAttribute('viewBox',`${-P} ${-P} ${S.L+P*2} ${H+P*2}`);
+ const d=el('defs',{},plan),pt=el('pattern',{id:'g',width:.5,height:.5,patternUnits:'userSpaceOnUse'},d);el('path',{d:'M.5 0H0V.5',fill:'none',stroke:'#E3D8CA','stroke-width':.02},pt);
+ el('rect',{x:0,y:S.W,width:S.L,height:3,fill:'url(#g)',stroke:'#D9CFC3','stroke-width':.04,'stroke-dasharray':'.2 .15'},plan);
+ el('text',{x:S.L/2,y:S.W+2.8,'text-anchor':'middle','font-size':.35,fill:'#A89C8F','font-family':'Manrope'},plan).textContent='улица - терраса, купель';
+ el('rect',{x:0,y:0,width:S.L,height:S.W,fill:'#FBF8F3'},plan);el('rect',{x:0,y:0,width:S.L,height:S.W,fill:'url(#g)'},plan);
+ S.rooms.forEach((r,i)=>{const m=ROOMS[r.t],g=el('g',{},plan);
+  const re=el('rect',{x:r.x+.04,y:r.y+.04,width:r.w-.08,height:r.h-.08,rx:.08,fill:m.c,stroke:i==sel?'#CF6640':'rgba(0,0,0,.18)','stroke-width':i==sel?.1:.03,style:'cursor:move'},g);
+  re.onpointerdown=e=>{sel=i;start(e,i,false);drawPlan();renderList()};
+  const fs=Math.min(.42,r.w/6);
+  el('text',{x:r.x+r.w/2,y:r.y+r.h/2-fs*.2,'text-anchor':'middle','font-size':fs,'font-family':'Manrope','font-weight':700,fill:'#1E1D1B','pointer-events':'none'},g).textContent=m.n;
+  el('text',{x:r.x+r.w/2,y:r.y+r.h/2+fs*1.1,'text-anchor':'middle','font-size':fs*.85,'font-family':'Manrope',fill:'#6E655D','pointer-events':'none'},g).textContent=`${r.w}×${r.h} м · ${r1(r.w*r.h)} м²`;
+  if(i==sel){const h=el('rect',{x:r.x+r.w-.32,y:r.y+r.h-.32,width:.3,height:.3,rx:.06,fill:'#fff',stroke:'#CF6640','stroke-width':.06,style:'cursor:nwse-resize'},g);h.onpointerdown=e=>{e.stopPropagation();start(e,i,true)}}});
+ el('rect',{x:0,y:0,width:S.L,height:S.W,fill:'none',stroke:'#1E1D1B','stroke-width':.18,'pointer-events':'none'},plan);
+ el('text',{x:S.L/2,y:-.4,'text-anchor':'middle','font-size':.4,fill:'#6E655D','font-family':'Manrope'},plan).textContent=S.L+' м';
+ el('text',{x:-.4,y:S.W/2,'text-anchor':'middle','font-size':.4,fill:'#6E655D','font-family':'Manrope',transform:`rotate(-90 -0.4 ${S.W/2})`},plan).textContent=S.W+' м';
+ plan.onpointerdown=e=>{if(e.target==plan||(e.target.tagName=='rect'&&!e.target.style.cursor)){sel=-1;drawPlan();renderList()}}}
+function start(e,i,rs){e.preventDefault();const r=S.rooms[i];drag={i,rs,m:toM(e),o:{...r}}}
+addEventListener('pointermove',e=>{if(!drag)return;const m=toM(e),r=S.rooms[drag.i],b=bounds(r),sn=v=>Math.round(v*2)/2,dx=m[0]-drag.m[0],dy=m[1]-drag.m[1];
+ if(drag.rs){r.w=Math.max(1,Math.min(b.W-r.x,sn(drag.o.w+dx)));r.h=Math.max(1,Math.min(b.H-r.y,sn(drag.o.h+dy)))}
+ else{r.x=sn(drag.o.x+dx);r.y=sn(drag.o.y+dy);clamp(r)}drawPlan();renderList();renderEst()});
+addEventListener('pointerup',()=>{if(drag){drag=null;render()}});
+addEventListener('keydown',e=>{if((e.key=='Delete'||e.key=='Backspace')&&sel>-1&&!/INPUT|SELECT/.test(document.activeElement.tagName)){S.rooms.splice(sel,1);sel=-1;render()}});
+
+// outside view
+function drawVid(){const m=MAT.find(a=>a[0]==S.mat),wall=m[4],L=S.L,h=2.4,roofH=S.fl>1?2.6:1.5,dz=S.W*.45;
+ const roofC={metall:'#8E3B33',myagk:'#5B4A42',falc:'#5F6B66'}[S.krov];vid.innerHTML='';
+ vid.setAttribute('viewBox',`-2 ${-roofH-1.5} ${L+dz+4} ${h+roofH+3.6}`);
+ el('ellipse',{cx:(L+dz)/2,cy:h+.35,rx:(L+dz)/1.6,ry:.5,fill:'#C9D3A8',opacity:.6},vid);
+ // side wall
+ el('polygon',{points:`${L},0 ${L+dz},${-dz*.5} ${L+dz},${h-dz*.5} ${L},${h}`,fill:wall,style:'filter:brightness(.8)'},vid);
+ el('polygon',{points:`${L},0 ${L+dz/2},${-roofH-dz*.25} ${L+dz},${-dz*.5}`,fill:wall,style:'filter:brightness(.8)'},vid);
+ // front wall
+ el('rect',{x:0,y:0,width:L,height:h,fill:wall},vid);
+ const step=S.mat=='karkas'?.15:S.mat=='brevno'?.24:.18;
+ for(let y=step;y<h;y+=step)el('line',{x1:0,y1:y,x2:L,y2:y,stroke:'rgba(70,40,15,.22)','stroke-width':S.mat=='brevno'?.05:.02},vid);
+ // roof
+ el('polygon',{points:`-0.4,0.05 ${L/2},${-roofH} ${L+.4},.05`,fill:'none'},vid);
+ el('polygon',{points:`-.4,.1 ${dz/2-.4},${-roofH-dz*.25} ${L+dz/2+.4},${-roofH-dz*.25} ${L+.4},.1`,fill:roofC},vid);
+ el('polygon',{points:`${L+.4},.1 ${L+dz/2+.4},${-roofH-dz*.25} ${L+dz+.3},${-dz*.5+.05}`,fill:roofC,style:'filter:brightness(.75)'},vid);
+ // door & windows
+ el('rect',{x:.5,y:.4,width:.8,height:h-.4,fill:'#6B4A30',rx:.05},vid);
+ const win=(x,y,w,hh)=>{el('rect',{x,y,width:w,height:hh,fill:'#CFE2E8',stroke:'#FFFDFA','stroke-width':.08},vid)};
+ if(L>3)win(L*.45,.7,.9,.7);if(L>5)win(L*.72,.9,.5,.5);
+ if(S.fl>1)win(dz/2+L/2-.4,-roofH*.55,.8,.6);
+ // chimney
+ el('rect',{x:L*.78,y:-roofH*.85,width:.35,height:roofH*.8,fill:S.pech=='elek'?'none':'#7B7068'},vid);
+ // terrace
+ const t=S.rooms.filter(r=>r.t=='terrasa').reduce((s,r)=>s+r.w*r.h,0);
+ if(t){const tw=Math.min(L,Math.sqrt(t)*1.6);el('rect',{x:0,y:h-.05,width:tw,height:.25,fill:'#A7794F'},vid);[0,tw-.1].forEach(x=>el('rect',{x,y:.1,width:.1,height:h-.15,fill:'#8E6C4E'},vid))}
+ if(S.rooms.some(r=>r.t=='kupel'))el('ellipse',{cx:L+dz+1,cy:h,rx:.9,ry:.35,fill:'#8FB9C9',stroke:'#6B4A30','stroke-width':.08},vid);
+ el('text',{x:(L+dz)/2,y:h+1.4,'text-anchor':'middle','font-size':.38,fill:'#6E655D','font-family':'Manrope'},vid).textContent=`${m[1]} · ${KROV.find(a=>a[0]==S.krov)[1].toLowerCase()}`}
+function mode(v){view=v;plan.style.display=v=='plan'?'':'none';vid.style.display=v=='vid'?'':'none';t1.classList.toggle('on',v=='plan');t2.classList.toggle('on',v=='vid');hint.style.display=v=='plan'?'':'none'}
+
+function sums(){const inside=S.rooms.filter(r=>!ROOMS[r.t].out),out=S.rooms.filter(r=>r.t=='terrasa'),A=S.L*S.W;
+ const used=inside.reduce((s,r)=>s+r.w*r.h,0),ter=out.reduce((s,r)=>s+r.w*r.h,0);
+ const mans=S.fl>1?A*.7:0,wall=2*(S.L+S.W)*2.4+(S.fl>1?S.W*S.L*.4:0);return{A,used,ter,mans,wall,inA:A+mans}}
+function renderList(){const A=S.L*S.W;
+ rlist.innerHTML=S.rooms.map((r,i)=>{const m=ROOMS[r.t],a=r.w*r.h;return`<div class="ri ${i==sel?'sel':''} ${a<m.min?'warn':''}" onclick="sel=${i};drawPlan();renderList()"><span class="sw" style="background:${m.c}"></span>${m.n}<b>${r1(a)} м²</b></div>`}).join('');
+ const s=sums();facts.innerHTML=`<div><b>${A} м²</b>площадь бани</div><div><b>${r1(s.used)} м²</b>занято комнатами</div><div><b>${r1(s.ter)} м²</b>терраса</div>`;
+ const n=[];S.rooms.forEach(r=>{const m=ROOMS[r.t];if(r.w*r.h<m.min)n.push(`${m.n} меньше ${m.min} м² - будет тесно`)});
+ if(!S.rooms.some(r=>r.t=='parnaya'))n.push('В проекте нет парной');
+ if(s.used>A+.01)n.push('Комнаты не помещаются - увеличьте баню');
+ notes.innerHTML=n.map(t=>`<div class="note">${t}</div>`).join('')}
+
+function calc(){const s=sums(),rows=[];let sum=0;const sec=n=>rows.push({sec:n}),add=(n,q,v)=>{rows.push({n,q,v});sum+=v};
+ const m=MAT.find(a=>a[0]==S.mat),f=FUND.find(a=>a[0]==S.fund),k=KROV.find(a=>a[0]==S.krov),p=PECH.find(a=>a[0]==S.pech);
+ sec('Строительство');
+ add('Фундамент: '+f[1].toLowerCase(),r1(s.A+s.ter)+' м²',(s.A+s.ter)*f[2]);
+ add('Сруб/стены: '+m[1].toLowerCase(),r1(s.inA)+' м²',s.inA*m[3]);
+ const ka=(S.L+1)*(S.W+1)*1.25+(s.ter?s.ter*1.1:0);add('Кровля: '+k[1].toLowerCase(),r1(ka)+' м²',ka*k[2]);
+ if(s.ter)add('Терраса, настил и ограждение',r1(s.ter)+' м²',s.ter*6500);
+ S.rooms.filter(r=>r.t=='kupel').forEach(()=>add('Купель с подогревом','1 шт',280000));
+ sec('Печь');add('Печь: '+p[1].toLowerCase(),'с дымоходом и защитой',p[3]+(S.pech=='elek'?15000:42000));
+ const ds=DOP.filter(d=>S.dop[d[0]]);if(ds.length)sec('Дополнительно');
+ ds.forEach(d=>{const q={in:s.inA,wall:s.wall,one:1}[d[4]];add(d[1],d[4]=='one'?'1 '+d[3]:r1(q)+' '+d[3],q*d[2])});
+ return{rows,sum,s}}
+function renderEst(){const{rows,sum,s}=calc();
+ est.innerHTML=rows.map(r=>r.sec?`<tr class="sec"><td colspan=2>${r.sec}</td></tr>`:`<tr><td>${r.n}<div class="q">${r.q}</div></td><td>${fmt(r.v)}</td></tr>`).join('');
+ tot.textContent=tot2.textContent=fmt(sum);const days=Math.round(20+s.inA*.9+(S.mat=='karkas'?-8:0));
+ per.textContent=`${S.L}×${S.W} м · ${fmt(sum/s.inA)} за м² · срок около ${days} дней`}
+function renderDop(){dop.innerHTML=DOP.map(d=>`<label class="ck"><input type="checkbox" data-k="${d[0]}" ${S.dop[d[0]]?'checked':''}>${d[1]}<span class="p">${d[2].toLocaleString('ru-RU')} ₽/${d[3]}</span></label>`).join('');
+ dop.querySelectorAll('input').forEach(c=>c.onchange=()=>{S.dop[c.dataset.k]=c.checked;renderEst()})}
+
+function render(){L.value=S.L;W.value=S.W;Lv.textContent=S.L+' м';Wv.textContent=S.W+' м';fund.value=S.fund;krov.value=S.krov;
+ [[mat,'mat'],[pech,'pech']].forEach(([e,k])=>e.querySelectorAll('.opt').forEach(b=>b.classList.toggle('on',b.dataset.v==S[k])));
+ floors.querySelectorAll('.opt').forEach(b=>b.classList.toggle('on',+b.dataset.v==S.fl));
+ drawPlan();drawVid();renderList();renderDop();renderEst()}
+
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2200)}
+function saveFile(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:'application/json'}));a.download=`banya-${S.L}x${S.W}.json`;a.click()}
+fileIn.onchange=()=>{const f=fileIn.files[0];if(!f)return;f.text().then(t=>{try{const d=JSON.parse(t);if(!d.rooms)throw 0;S=d;sel=-1;render();toast('Проект открыт')}catch(e){toast('Это не файл проекта')}});fileIn.value=''}
+function share(){const u=location.href.split('#')[0]+'#'+btoa(unescape(encodeURIComponent(JSON.stringify(S))));navigator.clipboard.writeText(u).then(()=>toast('Ссылка скопирована'),()=>prompt('Скопируйте ссылку',u))}
+function send(e){e.preventDefault();modal.classList.remove('on');toast('Спасибо! Заявка отправлена, скоро перезвоним')}
+render();
+</script>
+</body>
+</html>
