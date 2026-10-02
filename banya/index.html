@@ -194,7 +194,7 @@ function drawPlan(){const P=1.2,H=S.W+3;plan.innerHTML='';plan.setAttribute('vie
  S.rooms.forEach((r,i)=>{const m=ROOMS[r.t],g=el('g',{},plan);
   const re=el('rect',{x:r.x+.04,y:r.y+.04,width:r.w-.08,height:r.h-.08,rx:.08,fill:m.c,stroke:i==sel?'#CF6640':'rgba(0,0,0,.18)','stroke-width':i==sel?.1:.03,style:'cursor:move'},g);
   re.onpointerdown=e=>{sel=i;start(e,i,false);drawPlan();renderList()};
-  const fs=Math.min(.42,r.w/6);
+  const fs=Math.min(.42,r.w/6,(r.w-.2)/(m.n.length*.6));
   el('text',{x:r.x+r.w/2,y:r.y+r.h/2-fs*.2,'text-anchor':'middle','font-size':fs,'font-family':'Manrope','font-weight':700,fill:'#1E1D1B','pointer-events':'none'},g).textContent=m.n;
   el('text',{x:r.x+r.w/2,y:r.y+r.h/2+fs*1.1,'text-anchor':'middle','font-size':fs*.85,'font-family':'Manrope',fill:'#6E655D','pointer-events':'none'},g).textContent=`${r.w}×${r.h} м · ${r1(r.w*r.h)} м²`;
   if(i==sel){const h=el('rect',{x:r.x+r.w-.32,y:r.y+r.h-.32,width:.3,height:.3,rx:.06,fill:'#fff',stroke:'#CF6640','stroke-width':.06,style:'cursor:nwse-resize'},g);h.onpointerdown=e=>{e.stopPropagation();start(e,i,true)}}});
