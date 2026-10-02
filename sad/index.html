@@ -97,6 +97,10 @@ label.ck span.p{margin-left:auto;color:var(--muted);font-size:13px;white-space:n
       <h3>Участок</h3>
       <div class="row2"><div><div class="lbl" style="margin-top:0">Длина, м</div><input type="number" id="W" min="5" max="100"></div>
       <div><div class="lbl" style="margin-top:0">Ширина, м</div><input type="number" id="H" min="5" max="100"></div></div>
+      <div class="lbl">Форма участка</div>
+      <button class="zbtn" id="bEdit" onclick="toggleEdit()">✎ Изменить форму участка</button>
+      <button class="zbtn" id="bDraw" onclick="startDraw()">⬠ Обвести участок по точкам</button>
+      <button class="zbtn" onclick="S.gran=rectG();mode=0;render()">▭ Вернуть прямоугольник</button>
       <div class="lbl">Добавить зону</div>
       <div id="zbtns"></div>
     </div>
@@ -111,7 +115,7 @@ label.ck span.p{margin-left:auto;color:var(--muted);font-size:13px;white-space:n
   <section class="mid">
     <div class="planwrap">
       <svg id="plan"></svg>
-      <p class="hint">Зону двигают мышкой или пальцем, форму меняют за белые точки. Двойной клик по краю - новая точка, двойной клик по точке - убрать её. Delete - удалить выбранную зону.</p>
+      <p class="hint">Зону двигают мышкой или пальцем, форму меняют за белые точки. Форму участка меняют кнопкой «Изменить форму участка» слева. Двойной клик по краю - новая точка, двойной клик по точке - убрать её. Delete - удалить выбранную зону.</p>
       <div class="zlist" id="zlist"></div>
     </div>
   </section>
@@ -190,11 +194,11 @@ const PL=[
 ];
 const SL={sun:'солнце',half:'полутень',shade:'тень'};
 const fmt=n=>Math.round(n).toLocaleString('ru-RU')+' ₽';
-function demo(){return{W:30,H:20,usl:{svet:'half',pochva:'loam',uhod:'min'},rab:{proekt:true,planirovka:true},lights:6,rast:{},
+function demo(){return{W:30,H:20,gran:[[0,0],[30,0],[30,20],[0,20]],usl:{svet:'half',pochva:'loam',uhod:'min'},rab:{proekt:true,planirovka:true},lights:6,rast:{},
  zony:[{t:'dom',p:[[2,2],[10,2],[10,8],[2,8]]},{t:'gazon',p:[[12,2],[28,2],[28,10],[12,10]]},
  {t:'dorozhka',p:[[2,9],[11,9],[13.5,11.5],[12.5,12.5],[10.5,10.2],[2,10.2]]},{t:'terrasa',p:[[2,10.8],[8,10.8],[8,14],[2,14]]},
  {t:'posadki',p:[[14,12],[28,12],[28,18],[14,18]]},{t:'klumba',p:[[2,15],[11,15],[11,18],[2,18]]}]}}
-let S=demo(),sel=-1;
+let S=demo(),sel=-1,mode=0,draft=[];const rectG=()=>[[0,0],[S.W,0],[S.W,S.H],[0,S.H]];
 try{if(location.hash.length>2)S=JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(1)))))}catch(e){}
 const area=p=>Math.abs(p.reduce((s,a,i)=>{const b=p[(i+1)%p.length];return s+a[0]*b[1]-b[0]*a[1]},0)/2);
 const perim=p=>p.reduce((s,a,i)=>{const b=p[(i+1)%p.length];return s+Math.hypot(b[0]-a[0],b[1]-a[1])},0);
@@ -206,7 +210,7 @@ const ok=p=>p[4].includes(S.usl.svet)&&p[5].includes(S.usl.pochva)&&(S.usl.uhod=
 zbtns.innerHTML=Object.entries(TYPES).map(([k,t])=>`<button class="zbtn" onclick="addZone('${k}')"><span class="sw" style="background:${t.c}"></span>${t.n}<span style="margin-left:auto;color:var(--acc)">+</span></button>`).join('');
 document.querySelectorAll('.chips').forEach(el=>{const k=el.dataset.k;el.innerHTML=OPT[k].map(([v,n])=>`<button class="chip" data-v="${v}">${n}</button>`).join('');
  el.onclick=e=>{const v=e.target.dataset.v;if(v){S.usl[k]=v;render()}}});
-W.oninput=H.oninput=()=>{S.W=Math.max(5,Math.min(100,+W.value||5));S.H=Math.max(5,Math.min(100,+H.value||5));render(true)};
+W.oninput=H.oninput=()=>{S.W=Math.max(5,Math.min(100,+W.value||5));S.H=Math.max(5,Math.min(100,+H.value||5));S.gran=rectG();render(true)};
 showAll.onchange=()=>renderPlants();
 
 function addZone(t){const w=Math.min(6,S.W/3),h=t=='dorozhka'?1.2:Math.min(4,S.H/3),x=S.W/2-w/2,y=S.H/2-h/2;
@@ -219,10 +223,10 @@ function drawPlan(){const sv=plan;sv.innerHTML='';sv.setAttribute('viewBox',`${-
  const defs=el('defs',{},sv);const pt=el('pattern',{id:'g',width:1,height:1,patternUnits:'userSpaceOnUse'},defs);
  el('path',{d:'M1 0H0V1',fill:'none',stroke:'#E3D8CA','stroke-width':.03},pt);
  el('rect',{x:0,y:0,width:S.W,height:S.H,fill:'#FBF8F3'},sv);el('rect',{x:0,y:0,width:S.W,height:S.H,fill:'url(#g)'},sv);
- el('rect',{x:0,y:0,width:S.W,height:S.H,fill:'none',stroke:'#CF6640','stroke-width':.12,'stroke-dasharray':'.5 .3'},sv);
+ el('polygon',{points:S.gran.map(a=>a.join(',')).join(' '),fill:'#FFFDF8',stroke:'#CF6640','stroke-width':.14,'stroke-dasharray':mode==1?'none':'.5 .3'},sv);
  const fs=Math.max(S.W,S.H)/38;
- el('text',{x:S.W/2,y:-.5,'text-anchor':'middle','font-size':fs,fill:'#6E655D','font-family':'Manrope'},sv).textContent=S.W+' м';
- const ty=el('text',{x:-.5,y:S.H/2,'text-anchor':'middle','font-size':fs,fill:'#6E655D','font-family':'Manrope',transform:`rotate(-90 -0.5 ${S.H/2})`},sv);ty.textContent=S.H+' м';
+ if(mode!=1){el('text',{x:S.W/2,y:-.5,'text-anchor':'middle','font-size':fs,fill:'#6E655D','font-family':'Manrope'},sv).textContent=S.W+' м';
+ const ty=el('text',{x:-.5,y:S.H/2,'text-anchor':'middle','font-size':fs,fill:'#6E655D','font-family':'Manrope',transform:`rotate(-90 -0.5 ${S.H/2})`},sv);ty.textContent=S.H+' м';}
  S.zony.forEach((z,i)=>{const t=TYPES[z.t];const g=el('g',{},sv);
   const poly=el('polygon',{points:z.p.map(a=>a.join(',')).join(' '),fill:t.c,stroke:i==sel?'#CF6640':t.st,'stroke-width':i==sel?.16:.07,style:'cursor:move'},g);
   poly.onpointerdown=e=>{sel=i;startDrag(e,{i,all:true});drawPlan();renderList()};
@@ -234,13 +238,25 @@ function drawPlan(){const sv=plan;sv.innerHTML='';sv.setAttribute('viewBox',`${-
    h.onpointerdown=e=>{e.stopPropagation();startDrag(e,{i,j})};
    h.ondblclick=e=>{e.stopPropagation();if(z.p.length>3){z.p.splice(j,1);render()}}});
  });
- sv.onpointerdown=e=>{if(e.target==sv||e.target.tagName=='rect'){sel=-1;drawPlan();renderList()}};
+ if(mode==1){S.gran.forEach((a,j)=>{const b=S.gran[(j+1)%S.gran.length];
+   const ln=el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],stroke:'transparent','stroke-width':.8,style:'cursor:copy'},sv);
+   ln.ondblclick=e=>{const m=toM(e);S.gran.splice(j+1,0,[r1(m[0]),r1(m[1])]);render()};
+   el('text',{x:(a[0]+b[0])/2,y:(a[1]+b[1])/2-.3,'text-anchor':'middle','font-size':fs*.75,fill:'#CF6640','font-family':'Manrope','font-weight':700,'pointer-events':'none'},sv).textContent=r1(Math.hypot(b[0]-a[0],b[1]-a[1]))+' м'});
+  S.gran.forEach((a,j)=>{const h=el('circle',{cx:a[0],cy:a[1],r:fs*.4,fill:'#CF6640',stroke:'#fff','stroke-width':.12,style:'cursor:grab'},sv);
+   h.onpointerdown=e=>{e.stopPropagation();e.preventDefault();drag={g:j,m:toM(e),o:a.slice()}};
+   h.ondblclick=e=>{e.stopPropagation();if(S.gran.length>3){S.gran.splice(j,1);render()}}})}
+ if(mode==2){if(draft.length)el('polyline',{points:draft.map(a=>a.join(',')).join(' '),fill:'rgba(207,102,64,.12)',stroke:'#CF6640','stroke-width':.14},sv);
+  draft.forEach((a,j)=>{const c=el('circle',{cx:a[0],cy:a[1],r:fs*(j?.3:.5),fill:j?'#CF6640':'#fff',stroke:'#CF6640','stroke-width':.12},sv);
+   if(!j&&draft.length>2){c.style.cursor='pointer';c.onpointerdown=e=>{e.stopPropagation();finishDraw()}}})}
+ sv.onpointerdown=e=>{if(mode==2){const m=toM(e);draft.push([r1(Math.max(0,Math.min(S.W,m[0]))),r1(Math.max(0,Math.min(S.H,m[1])))]);drawPlan();return}
+  if(e.target==sv||e.target.tagName=='rect'||e.target.tagName=='polygon'&&!e.target.style.cursor){sel=-1;drawPlan();renderList()}};
 }
 function segD(m,a,b){const dx=b[0]-a[0],dy=b[1]-a[1],l=dx*dx+dy*dy||1;let t=((m[0]-a[0])*dx+(m[1]-a[1])*dy)/l;t=Math.max(0,Math.min(1,t));return Math.hypot(m[0]-a[0]-t*dx,m[1]-a[1]-t*dy)}
 function toM(e){const p=plan.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(plan.getScreenCTM().inverse());return[q.x,q.y]}
 function startDrag(e,d){e.preventDefault();d.m=toM(e);d.orig=S.zony[d.i].p.map(a=>a.slice());drag=d}
 addEventListener('pointermove',e=>{if(!drag)return;const m=toM(e),dx=m[0]-drag.m[0],dy=m[1]-drag.m[1],z=S.zony[drag.i];
  const snap=v=>Math.round(v*10)/10,cl=(v,M)=>Math.max(0,Math.min(M,v));
+ if(drag.g!=null){S.gran[drag.g]=[snap(cl(drag.o[0]+dx,S.W)),snap(cl(drag.o[1]+dy,S.H))];drawPlan();renderList();renderEst();renderPlants();return}
  if(drag.all){let ddx=dx,ddy=dy;drag.orig.forEach(a=>{ddx=Math.max(-a[0],Math.min(S.W-a[0],ddx));ddy=Math.max(-a[1],Math.min(S.H-a[1],ddy))});
   z.p=drag.orig.map(a=>[snap(a[0]+ddx),snap(a[1]+ddy)])}
  else z.p[drag.j]=[snap(cl(drag.orig[drag.j][0]+dx,S.W)),snap(cl(drag.orig[drag.j][1]+dy,S.H))];
@@ -248,11 +264,11 @@ addEventListener('pointermove',e=>{if(!drag)return;const m=toM(e),dx=m[0]-drag.m
 addEventListener('pointerup',()=>{if(drag){drag=null;render()}});
 addEventListener('keydown',e=>{if((e.key=='Delete'||e.key=='Backspace')&&sel>-1&&!/INPUT/.test(document.activeElement.tagName)){S.zony.splice(sel,1);sel=-1;render()}});
 
-function renderList(){const used=S.zony.reduce((s,z)=>s+area(z.p),0),tot=S.W*S.H;
+function renderList(){const used=S.zony.reduce((s,z)=>s+area(z.p),0),tot=r1(area(S.gran));
  zlist.innerHTML=S.zony.map((z,i)=>`<div class="zi ${i==sel?'sel':''}" onclick="sel=${i};drawPlan();renderList()"><span class="sw" style="background:${TYPES[z.t].c}"></span>${TYPES[z.t].n}<b>${r1(area(z.p))} м²</b></div>`).join('')+
  `<div class="zi" style="background:var(--soft)">Свободно<b>${r1(Math.max(0,tot-used))} м²</b></div><div class="zi" style="background:var(--soft)">Участок<b>${tot} м²</b></div>`}
 
-function calc(){const rows=[],tot=S.W*S.H;let sum=0;
+function calc(){const rows=[],tot=area(S.gran);let sum=0;
  const sec=n=>rows.push({sec:n});const add=(n,q,v)=>{rows.push({n,q,v});sum+=v};
  sec('Покрытия и зоны');
  Object.entries(TYPES).forEach(([k,t])=>{const a=sumT(k);if(t.p&&a>0)add(t.u,r1(a)+' м²',a*t.p)});
@@ -265,7 +281,7 @@ function calc(){const rows=[],tot=S.W*S.H;let sum=0;
 
 function renderEst(){const{rows,sum}=calc();
  est.innerHTML=rows.map(r=>r.sec?`<tr class="sec"><td colspan=2>${r.sec}</td></tr>`:`<tr><td>${r.n}<div class="q">${r.q}</div></td><td>${fmt(r.v)}</td></tr>`).join('');
- tot.textContent=tot2.textContent=fmt(sum);per.textContent=`${fmt(sum/(S.W*S.H))} за м² · участок ${S.W*S.H} м²`}
+ tot.textContent=tot2.textContent=fmt(sum);const A=r1(area(S.gran));per.textContent=`${fmt(sum/A)} за м² · участок ${A} м² (${String(r1(A/100)).replace('.',',')} сот.)`}
 
 function renderWorks(){works.innerHTML=WORKS.map(w=>`<label class="ck"><input type="checkbox" data-k="${w[0]}" ${S.rab[w[0]]?'checked':''}>${w[1]}<span class="p">${w[2].toLocaleString('ru-RU')} ₽/${w[3]}</span></label>`).join('')+
  (S.rab.svet?`<div style="display:flex;align-items:center;gap:10px;margin-top:10px;font-size:14px">Светильников <input type="number" min="1" max="60" value="${S.lights||6}" style="width:80px" oninput="S.lights=+this.value||1;renderEst()"></div>`:'');
@@ -291,7 +307,10 @@ function addP(i){const free=Math.max(1,sumT('posadki')+sumT('klumba')-Object.ent
  const share=Math.max(1,Math.round(Math.min(free,12)*PL[i][7]));S.rast[i]=share;render();toast(`${PL[i][0]}: ${share} шт по норме посадки`)}
 function q(i,d){const st=Math.max(1,Math.round(PL[i][7]));S.rast[i]=Math.max(0,(S.rast[i]||0)+d*st);if(!S.rast[i])delete S.rast[i];render()}
 
-function render(keepInputs){if(!keepInputs){W.value=S.W;H.value=S.H}
+function toggleEdit(){mode=mode==1?0:1;sel=-1;render();if(mode==1)toast('Тяните оранжевые точки. Двойной клик по краю - новая точка')}
+function startDraw(){mode=2;draft=[];sel=-1;render();toast('Кликайте по углам участка, в конце - по первой точке')}
+function finishDraw(){S.gran=draft;draft=[];mode=1;render();toast('Готово! Форму можно подправить')}
+function render(keepInputs){if(!S.gran)S.gran=rectG();bEdit.classList.toggle('pri',mode==1);bDraw.classList.toggle('pri',mode==2);if(!keepInputs){W.value=S.W;H.value=S.H}
  document.querySelectorAll('.chips').forEach(el=>el.querySelectorAll('.chip').forEach(b=>b.classList.toggle('on',S.usl[el.dataset.k]==b.dataset.v)));
  drawPlan();renderList();renderEst();renderWorks();renderPlants()}
 
