@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ремонт коммерческих помещений - расчёт стоимости</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --concrete:#D8D6D1; --slab:#C6C3BC; --ink:#1D2125; --steel:#3E4A52;
+  --signal:#F3C21B; --white:#FFFFFF; --muted:#5D646A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--concrete);color:var(--ink);font:400 17px/1.55 "Golos Text",system-ui,sans-serif}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+h1,h2,h3{font-family:"Unbounded",sans-serif;line-height:1.08;letter-spacing:-.01em}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.tape{height:14px;background:repeating-linear-gradient(-45deg,var(--signal) 0 18px,var(--ink) 18px 36px)}
+
+/* header */
+header{background:var(--ink);color:var(--white)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{font:800 18px "Unbounded";text-decoration:none}
+.logo span{display:inline-block;background:var(--signal);color:var(--ink);padding:2px 7px;margin-right:6px}
+header nav{display:flex;gap:26px;font-size:15px}
+header nav a{text-decoration:none;opacity:.8}
+header nav a:hover{opacity:1}
+.phone{font-weight:600;text-decoration:none;white-space:nowrap}
+@media(max-width:520px){.phone{font-size:14px}.logo{font-size:15px}.inputs,.result{padding:22px}}
+@media(max-width:860px){header nav{display:none}}
+
+/* hero + calc */
+.hero{padding:56px 0 72px}
+.hero h1{font-size:clamp(34px,5.4vw,68px);font-weight:800;max-width:15ch}
+.hero .lead{max-width:56ch;margin-top:18px;color:var(--steel);font-size:19px}
+.calc{margin-top:44px;display:grid;grid-template-columns:1.15fr 1fr;background:var(--white);border:2px solid var(--ink)}
+@media(max-width:960px){.calc{grid-template-columns:1fr}}
+.inputs{padding:32px;display:grid;gap:28px;border-right:2px solid var(--ink)}
+@media(max-width:960px){.inputs{border-right:0;border-bottom:2px solid var(--ink)}}
+fieldset{border:0}
+legend{font-weight:600;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:block;padding:9px 14px;border:1.5px solid var(--steel);font-size:15px;transition:background .15s}
+.chips input:checked+span{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.chips input:focus-visible+span{outline:3px solid var(--signal);outline-offset:2px}
+.area-row{display:flex;align-items:baseline;justify-content:space-between}
+.area-row output{font:700 26px "Unbounded"}
+input[type=range]{width:100%;accent-color:var(--ink);height:28px}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px}
+@media(max-width:560px){.checks{grid-template-columns:1fr}}
+.checks label{display:flex;gap:10px;align-items:flex-start;font-size:15px;cursor:pointer}
+.checks input{width:18px;height:18px;accent-color:var(--ink);margin-top:3px;flex:none}
+.checks small{color:var(--muted);white-space:nowrap}
+.price strong{white-space:nowrap}
+
+.result{padding:32px;display:flex;flex-direction:column;gap:22px;background:#F4F3F0}
+.plan{background:var(--white);border:1.5px solid var(--slab);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center}
+.plan svg{width:100%;height:100%}
+.price small{display:block;color:var(--muted);font-size:14px}
+.price strong{display:block;font:800 clamp(28px,3.2vw,40px) "Unbounded";margin-top:4px}
+.meta{display:flex;gap:28px;font-size:15px;color:var(--steel)}
+.meta b{color:var(--ink)}
+.split{display:grid;gap:7px;font-size:14px}
+.split div{display:grid;grid-template-columns:1fr auto;gap:10px}
+.bar{grid-column:1/-1;height:6px;background:var(--slab)}
+.bar i{display:block;height:100%;background:var(--ink);transition:width .35s}
+.btn{display:inline-block;font:600 16px "Golos Text";padding:16px 22px;border:2px solid var(--ink);background:var(--signal);color:var(--ink);cursor:pointer;text-align:center;text-decoration:none}
+.btn:hover{background:var(--ink);color:var(--signal)}
+.btn.ghost{background:transparent}
+.btn.ghost:hover{background:var(--ink);color:var(--white)}
+.note{font-size:13px;color:var(--muted)}
+
+/* hero photo */
+.hero-top{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end}
+@media(max-width:960px){.hero-top{grid-template-columns:1fr}}
+.hero-photo{position:relative;border:2px solid var(--ink)}
+.hero-photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.hero-photo figcaption{position:absolute;left:0;bottom:0;background:var(--signal);font-size:14px;font-weight:600;padding:8px 12px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:44px;border-top:2px solid var(--ink)}
+@media(max-width:860px){.facts{grid-template-columns:1fr 1fr}}
+.facts div{padding:18px 18px 0 0}
+.facts b{display:block;font:800 30px "Unbounded"}
+.facts span{font-size:15px;color:var(--steel)}
+/* sections */
+section{padding:80px 0}
+section h2{font-size:clamp(26px,3.4vw,42px);font-weight:700;max-width:20ch;margin-bottom:36px}
+.dark{background:var(--ink);color:var(--white)}
+.dark .note{color:#9AA3A9}
+
+.objects{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--ink)}
+@media(max-width:860px){.objects{grid-template-columns:1fr}}
+.objects article{padding:26px 24px 30px 0;border-bottom:1.5px solid var(--slab)}
+.objects h3{font-size:19px;margin-bottom:10px;font-weight:700}
+.objects p{color:var(--steel);font-size:15px}
+
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:760px){.gallery{grid-template-columns:1fr}}
+.gallery figure{background:#262B30}
+.gallery img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover}
+.gallery figcaption{padding:16px 18px 20px;display:grid;gap:6px}
+.gallery figcaption b{font:700 17px "Unbounded"}
+.gallery figcaption span{color:#9AA3A9;font-size:15px}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media(max-width:860px){.reviews{grid-template-columns:1fr}}
+.reviews blockquote{border-left:6px solid var(--signal);padding:4px 0 4px 18px}
+.reviews p{margin-bottom:12px}
+.reviews cite{font-style:normal;font-size:14px;color:var(--steel)}
+.faq details{border-bottom:1.5px solid var(--slab);padding:18px 0}
+.faq summary{cursor:pointer;font-weight:600;font-size:18px}
+.faq details p{margin-top:10px;color:var(--steel);max-width:70ch}
+.via{display:flex;flex-wrap:wrap;gap:8px}
+.via label{cursor:pointer}
+.via input{position:absolute;opacity:0}
+.via span{display:block;padding:8px 14px;border:1.5px solid #6B747A;font-size:14px}
+.via input:checked+span{background:var(--signal);color:var(--ink);border-color:var(--signal)}
+.via input:focus-visible+span{outline:3px solid var(--white)}
+.contacts{display:grid;gap:10px;margin-top:28px;font-size:16px}
+.contacts a{text-decoration:none;border-bottom:1px solid #6B747A;justify-self:start}
+.contacts a:hover{color:var(--signal)}
+.cases{display:grid;gap:0}
+.case{display:grid;grid-template-columns:1.4fr .6fr .6fr .8fr;gap:16px;padding:20px 0;border-bottom:1px solid #3A4147;align-items:baseline}
+.case.head{color:#9AA3A9;font-size:14px;padding-top:0}
+.case b{font:700 17px "Unbounded"}
+@media(max-width:760px){.case{grid-template-columns:1fr 1fr}.case.head{display:none}.case b{grid-column:1/-1}}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;counter-reset:s}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+.steps li{list-style:none;counter-increment:s;border-top:6px solid var(--ink);padding-top:16px}
+.steps li::before{content:counter(s);font:800 34px "Unbounded";display:block;margin-bottom:8px}
+.steps h3{font:600 18px "Golos Text";margin-bottom:6px}
+.steps p{font-size:15px;color:var(--steel)}
+
+.lead-form{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+@media(max-width:860px){.lead-form{grid-template-columns:1fr}}
+form{display:grid;gap:14px}
+form label{display:grid;gap:6px;font-size:14px}
+form input:not([type=radio]),form textarea{font:inherit;padding:14px;border:2px solid var(--white);background:transparent;color:var(--white)}
+form textarea{min-height:90px;resize:vertical}
+.ok{display:none;border:2px solid var(--signal);padding:20px}
+footer{background:var(--ink);color:#9AA3A9;font-size:14px;padding:28px 0}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+@media print{
+  header,.hero h1,.hero .lead,section,footer,.tape,.inputs,.actions{display:none!important}
+  .calc{display:block;border:0}
+  .result{background:#fff}
+  #printHead{display:block!important}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="#"><span>ПК</span>ПрофКоммерц</a>
+  <nav><a href="#calc">Расчёт</a><a href="#lead">Контакты</a><a href="#objects">Объекты</a><a href="#cases">Работы</a><a href="#steps">Как работаем</a></nav>
+  <a class="phone" href="tel:+70000000000">+7 (900) 000-00-00</a>
+</div></header>
+<div class="tape"></div>
+
+<main>
+<div class="hero" id="calc"><div class="wrap">
+  <div class="hero-top">
+    <div>
+      <h1>Ремонт офиса, магазина или кафе без остановки работы</h1>
+      <p class="lead">Посчитайте примерную стоимость за минуту. Точную смету инженер составит после бесплатного замера.</p>
+    </div>
+    <figure class="hero-photo"><img src="img/work.jpg" alt="Бригада монтирует перегородки в торговом помещении"><figcaption>Сейчас в работе: магазин 160 м², ночные смены</figcaption></figure>
+  </div>
+
+  <div class="calc">
+    <div class="inputs">
+      <fieldset><legend>Тип помещения</legend><div class="chips" data-name="type">
+        <label><input type="radio" name="type" value="office" checked><span>Офис</span></label>
+        <label><input type="radio" name="type" value="shop"><span>Магазин</span></label>
+        <label><input type="radio" name="type" value="cafe"><span>Кафе, ресторан</span></label>
+        <label><input type="radio" name="type" value="auto"><span>Автосервис</span></label>
+        <label><input type="radio" name="type" value="plant"><span>Производство, склад</span></label>
+      </div></fieldset>
+
+      <div>
+        <div class="area-row"><label for="area" style="font-weight:600">Площадь</label><output id="areaOut">150 м²</output></div>
+        <input type="range" id="area" min="20" max="2000" step="10" value="150">
+      </div>
+
+      <fieldset><legend>Вид ремонта</legend><div class="chips">
+        <label><input type="radio" name="kind" value="1" checked><span>Косметический</span></label>
+        <label><input type="radio" name="kind" value="2.1"><span>Капитальный</span></label>
+        <label><input type="radio" name="kind" value="2.9"><span>Под ключ с дизайн-проектом</span></label>
+      </div></fieldset>
+
+      <fieldset><legend>Состояние помещения</legend><div class="chips">
+        <label><input type="radio" name="state" value="1" checked><span>Новое, без отделки</span></label>
+        <label><input type="radio" name="state" value="1.15"><span>После арендатора</span></label>
+        <label><input type="radio" name="state" value="1.35"><span>Нужен полный демонтаж</span></label>
+      </div></fieldset>
+
+      <fieldset><legend>Что ещё нужно</legend><div class="checks">
+        <label><input type="checkbox" data-sq="1200" data-g="eng"> Электрика и освещение</label>
+        <label><input type="checkbox" data-sq="1800" data-g="eng"> Вентиляция и кондиционеры</label>
+        <label><input type="checkbox" data-sq="900" data-g="eng"> Сантехника, санузлы</label>
+        <label><input type="checkbox" data-sq="600" data-g="eng"> Слаботочка и видеонаблюдение</label>
+        <label><input type="checkbox" data-fix="65000" data-g="ext"> Вывеска и входная группа</label>
+        <label><input type="checkbox" id="night"> Работы ночью и в выходные <small>+20%</small></label>
+        <label><input type="checkbox" id="urgent"> Срочно, в сжатые сроки <small>+15%</small></label>
+      </div></fieldset>
+    </div>
+
+    <div class="result" aria-live="polite">
+      <div id="printHead" style="display:none"><h2 style="font-size:24px">Предварительная смета</h2><p id="printParams" class="note"></p></div>
+      <div class="plan"><svg id="plan" viewBox="0 0 400 300" role="img" aria-label="План помещения"></svg></div>
+      <div class="price"><small>Примерная стоимость</small><strong id="price">-</strong></div>
+      <div class="meta"><span>Срок: <b id="term">-</b></span><span>За м²: <b id="perSq">-</b></span></div>
+      <div class="split" id="split"></div>
+      <div class="actions" style="display:grid;gap:10px">
+        <a class="btn" href="#lead" id="toLead">Получить точную смету</a>
+        <button class="btn ghost" type="button" onclick="print()">Сохранить расчёт в PDF</button>
+        <p class="note">Цены - средние по рынку, демо-расчёт. В реальном проекте их можно менять в Google-таблице.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="facts">
+    <div><b>12 лет</b><span>ремонтируем коммерческие помещения</span></div>
+    <div><b>380+</b><span>сданных объектов в Москве и области</span></div>
+    <div><b>3 года</b><span>гарантии на все работы по договору</span></div>
+    <div><b>0 ₽</b><span>замер, смета и выезд инженера</span></div>
+  </div>
+</div></div>
+
+<section id="objects"><div class="wrap">
+  <h2>Какие помещения ремонтируем</h2>
+  <div class="objects">
+    <article><h3>Офисы</h3><p>Опенспейс, переговорные, кабинеты. Перегородки, потолки Армстронг, кабельные каналы под рабочие места.</p></article>
+    <article><h3>Магазины и шоурумы</h3><p>Торговый зал, витрины, освещение товара. Работаем ночью, чтобы магазин не закрывался.</p></article>
+    <article><h3>Кафе и рестораны</h3><p>Зал, кухня по нормам СЭС, вытяжка, жироуловители. Сдаём под проверку Роспотребнадзора.</p></article>
+    <article><h3>Автосервисы</h3><p>Полимерные полы под нагрузку подъёмников, ямы, вентиляция боксов, мойка.</p></article>
+    <article><h3>Производства и склады</h3><p>Промышленные полы, бытовки, административный блок, освещение цехов.</p></article>
+    <article><h3>Медицина и салоны</h3><p>Кабинеты под лицензию, влагостойкая отделка, отдельные санузлы для персонала.</p></article>
+  </div>
+</div></section>
+
+<section class="dark" id="cases"><div class="wrap">
+  <h2>Последние объекты</h2>
+  <div class="gallery">
+    <figure><img src="img/office.jpg" alt="Офис после ремонта: рабочие места, переговорная, акустический потолок" loading="lazy"><figcaption><b>Офис IT-компании</b><span>420 м², под ключ за 6 недель. Акустический потолок, переговорная из стекла, электрика под 60 рабочих мест.</span></figcaption></figure>
+    <figure><img src="img/cafe.jpg" alt="Кофейня после ремонта" loading="lazy"><figcaption><b>Кофейня на первой линии</b><span>85 м² за 4 недели. Кухня по нормам СЭС, вытяжка, плитка, свет над стойкой.</span></figcaption></figure>
+    <figure><img src="img/shop.jpg" alt="Магазин одежды после ремонта" loading="lazy"><figcaption><b>Магазин одежды в ТЦ</b><span>160 м² за 3 недели, работали только ночью. Трековый свет, наливной пол.</span></figcaption></figure>
+    <figure><img src="img/auto.jpg" alt="Автосервис после ремонта: полимерный пол и подъёмники" loading="lazy"><figcaption><b>Автосервис на 6 постов</b><span>640 м² за 7 недель. Полимерный пол под подъёмники, вентиляция боксов.</span></figcaption></figure>
+  </div>
+  <h3 style="font-size:20px;margin:56px 0 16px">Ещё объекты</h3>
+  <div class="cases">
+    <div class="case head"><span>Объект</span><span>Площадь</span><span>Срок</span><span>Стоимость</span></div>
+    <div class="case"><b>Стоматология, 3 кабинета</b><span>140 м²</span><span>5 недель</span><span>2,9 млн ₽</span></div>
+    <div class="case"><b>Склад с административным блоком</b><span>1 200 м²</span><span>8 недель</span><span>6,4 млн ₽</span></div>
+    <div class="case"><b>Ресторан грузинской кухни</b><span>260 м²</span><span>9 недель</span><span>8,1 млн ₽</span></div>
+    <div class="case"><b>Салон красоты в жилом доме</b><span>95 м²</span><span>4 недели</span><span>1,6 млн ₽</span></div>
+  </div>
+</div></section>
+
+<section id="steps"><div class="wrap">
+  <h2>Как проходит ремонт</h2>
+  <ol class="steps">
+    <li><h3>Замер</h3><p>Инженер приезжает бесплатно в день заявки или на следующий.</p></li>
+    <li><h3>Смета и договор</h3><p>Фиксируем цену и сроки. Штраф за каждый день просрочки - в договоре.</p></li>
+    <li><h3>Работы</h3><p>Прораб на объекте каждый день, фотоотчёт в Telegram по вечерам.</p></li>
+    <li><h3>Сдача</h3><p>Акты, исполнительная документация, гарантия 3 года.</p></li>
+  </ol>
+</div></section>
+
+<section style="background:#F4F3F0"><div class="wrap">
+  <h2>Что говорят заказчики</h2>
+  <div class="reviews">
+    <blockquote><p>Сделали ремонт магазина за 3 недели ночами. Утром мы открывались, как обычно, ни одного дня простоя.</p><cite>Ольга, сеть магазинов одежды</cite></blockquote>
+    <blockquote><p>Смета не выросла ни на рубль. Прораб каждый вечер присылал фото, я ни разу не ездила на объект.</p><cite>Марина, кофейня «Зерно»</cite></blockquote>
+    <blockquote><p>Сдали кухню под проверку Роспотребнадзора с первого раза. Документы подготовили сами.</p><cite>Георгий, ресторан</cite></blockquote>
+  </div>
+</div></section>
+
+<section class="faq"><div class="wrap">
+  <h2>Частые вопросы</h2>
+  <details><summary>Цена в калькуляторе окончательная?</summary><p>Нет, это вилка по средним ценам. Точная цена будет в смете после замера, и в договоре она уже не меняется.</p></details>
+  <details><summary>Можно ремонтировать, не закрывая бизнес?</summary><p>Да. Работаем ночью и в выходные, делим помещение на зоны и ремонтируем по очереди.</p></details>
+  <details><summary>Вы работаете с юрлицами и НДС?</summary><p>Да, работаем с ООО и ИП, с НДС и без. Закрывающие документы даём по каждому этапу.</p></details>
+  <details><summary>Кто покупает материалы?</summary><p>Мы, по оптовым ценам, с чеками в отчёте. Если хотите, можете закупать сами.</p></details>
+</div></section>
+
+<section class="dark" id="lead"><div class="wrap lead-form">
+  <div>
+    <h2>Получите точную смету после замера</h2>
+    <p class="note" style="font-size:16px">Ваш расчёт из калькулятора придёт к нам вместе с заявкой. Ответим за 15 минут в рабочее время, там, где вам удобно.</p>
+    <div class="contacts">
+      <a href="tel:+79000000000">+7 (900) 000-00-00</a>
+      <a href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://vk.com/" target="_blank" rel="noopener">ВКонтакте</a>
+      <a href="mailto:info@profkommerc.ru">info@profkommerc.ru</a>
+      <span class="note">Москва, ул. Строителей, 12, офис 3. Пн-Сб 9:00-20:00</span>
+    </div>
+  </div>
+  <div>
+    <form id="form">
+      <label>Имя<input name="name" required autocomplete="name"></label>
+      <fieldset><legend style="font-size:14px;font-weight:400;margin-bottom:8px">Как с вами связаться</legend><div class="via">
+        <label><input type="radio" name="via" value="phone" checked><span>Позвонить</span></label>
+        <label><input type="radio" name="via" value="tg"><span>Telegram</span></label>
+        <label><input type="radio" name="via" value="vk"><span>ВКонтакте</span></label>
+        <label><input type="radio" name="via" value="mail"><span>Почта</span></label>
+      </div></fieldset>
+      <label><span id="contactLabel">Телефон</span><input name="contact" id="contact" type="tel" required autocomplete="tel" placeholder="+7"></label>
+      <label>Адрес объекта или комментарий<textarea name="msg" id="msg"></textarea></label>
+      <button class="btn" type="submit">Вызвать инженера на замер</button>
+      <p class="note">Демо: заявка вместе с расчётом приходит менеджеру в Telegram, ВК или на почту.</p>
+    </form>
+    <div class="ok" id="ok"><h3 style="font-size:20px;margin-bottom:8px">Заявка отправлена</h3><p>Инженер перезвонит, чтобы договориться о замере.</p></div>
+  </div>
+</div></section>
+</main>
+<div class="tape"></div>
+<footer><div class="wrap"><span>ПрофКоммерц - ремонт коммерческих помещений</span><span><a href="tel:+79000000000">+7 (900) 000-00-00</a>, <a href="mailto:info@profkommerc.ru">info@profkommerc.ru</a>, <a href="https://vk.com/">ВК</a>, <a href="https://t.me/">Telegram</a></span><span>Демо-проект для портфолио</span></div></footer>
+
+<script>
+const BASE={office:3600,shop:4100,cafe:6400,auto:4600,plant:3100};
+const NAMES={office:'Офис',shop:'Магазин',cafe:'Кафе, ресторан',auto:'Автосервис',plant:'Производство, склад'};
+const $=s=>document.querySelector(s);
+const val=n=>document.querySelector(`input[name=${n}]:checked`).value;
+const rub=v=>Math.round(v/1000)*1000;
+const fmt=v=>v.toLocaleString('ru-RU')+' ₽';
+const short=v=>v>=1e6?(v/1e6).toFixed(1).replace('.',',')+' млн ₽':fmt(rub(v));
+
+function drawPlan(area){
+  const ratio=1.5, wM=Math.sqrt(area*ratio), hM=area/wM;
+  const k=Math.sqrt(area/2000), pw=90+250*k, ph=pw/ratio;
+  const x=(400-pw)/2, y=(300-ph)/2+6;
+  const cell=Math.max(pw/wM,3), tiles=[];
+  if(cell>=6){for(let i=x+cell;i<x+pw;i+=cell)tiles.push(`<line x1="${i}" y1="${y}" x2="${i}" y2="${y+ph}"/>`);
+    for(let j=y+cell;j<y+ph;j+=cell)tiles.push(`<line x1="${x}" y1="${j}" x2="${x+pw}" y2="${j}"/>`);}
+  const door=Math.min(pw*.18,34);
+  $('#plan').innerHTML=`
+   <g stroke="#C6C3BC" stroke-width=".6">${tiles.join('')}</g>
+   <rect x="${x}" y="${y}" width="${pw}" height="${ph}" fill="none" stroke="#1D2125" stroke-width="5"/>
+   <line x1="${x+pw*.15}" y1="${y+ph}" x2="${x+pw*.15+door}" y2="${y+ph}" stroke="#fff" stroke-width="7"/>
+   <path d="M${x+pw*.15} ${y+ph} A${door} ${door} 0 0 1 ${x+pw*.15+door} ${y+ph-door}" fill="none" stroke="#3E4A52" stroke-dasharray="3 3"/>
+   <g stroke="#3E4A52" font-family="Golos Text" font-size="12" fill="#3E4A52">
+    <line x1="${x}" y1="${y-14}" x2="${x+pw}" y2="${y-14}"/><line x1="${x}" y1="${y-19}" x2="${x}" y2="${y-9}"/><line x1="${x+pw}" y1="${y-19}" x2="${x+pw}" y2="${y-9}"/>
+    <text x="${x+pw/2}" y="${y-20}" text-anchor="middle" stroke="none">${wM.toFixed(1).replace('.',',')} м</text>
+    <line x1="${x+pw+14}" y1="${y}" x2="${x+pw+14}" y2="${y+ph}"/>
+    <text x="${x+pw+20}" y="${y+ph/2+4}" stroke="none">${hM.toFixed(1).replace('.',',')} м</text>
+   </g>
+   <text x="${x+pw/2}" y="${y+ph/2+8}" text-anchor="middle" font-family="Unbounded" font-weight="700" font-size="${Math.max(14,Math.min(26,pw/8))}" fill="#1D2125">${area} м²</text>`;
+}
+
+function calc(){
+  const type=val('type'), area=+$('#area').value, kind=+val('kind'), state=+val('state');
+  $('#areaOut').textContent=area+' м²';
+  const finish=BASE[type]*area*kind;
+  const rough=finish*(state-1)+BASE[type]*area*.25;
+  let eng=0, ext=0;
+  document.querySelectorAll('.checks input[data-g]:checked').forEach(c=>{
+    if(c.dataset.sq) eng+= +c.dataset.sq*area*(type==='cafe'&&c.dataset.sq==1800?1.6:1);
+    if(c.dataset.fix) ext+= +c.dataset.fix*(area>500?2:1);
+  });
+  let total=finish+rough+eng+ext;
+  if($('#night').checked) total*=1.2;
+  if($('#urgent').checked) total*=1.15;
+  const lo=rub(total*.9), hi=rub(total*1.12);
+  const range=lo>=1e6?`${(lo/1e6).toFixed(1).replace('.',',')} - ${short(hi)}`:`${(lo).toLocaleString('ru-RU')} - ${fmt(hi)}`;
+  $('#price').textContent=range;
+  $('#perSq').textContent=fmt(Math.round(total/area/10)*10);
+  let days=8+area/({1:30,2.1:14,2.9:10})[kind]+(state>1.2?7:0)+(eng?6:0);
+  if($('#urgent').checked) days*=.72;
+  const w=Math.max(1,Math.round(days/7));
+  $('#term').textContent=w+' '+(w%10==1&&w%100!=11?'неделя':(w%10>=2&&w%10<=4&&(w%100<10||w%100>=20))?'недели':'недель');
+  const parts=[['Черновые работы и демонтаж',rough],['Чистовая отделка',finish],['Инженерные системы',eng],['Вывеска, входная группа',ext]].filter(p=>p[1]>0);
+  const sum=parts.reduce((a,p)=>a+p[1],0);
+  $('#split').innerHTML=parts.map(([n,v])=>`<div><span>${n}</span><span>${Math.round(v/sum*100)}%</span><span class="bar"><i style="width:${v/sum*100}%"></i></span></div>`).join('');
+  drawPlan(area);
+  const extras=[...document.querySelectorAll('.checks input:checked')].map(c=>c.parentElement.textContent.replace(/\+\d+%/,'').trim());
+  const summary=`${NAMES[type]}, ${area} м², ${document.querySelector('input[name=kind]:checked').nextElementSibling.textContent.toLowerCase()}, ${document.querySelector('input[name=state]:checked').nextElementSibling.textContent.toLowerCase()}${extras.length?'. Доп.: '+extras.join(', '):''}. Расчёт: ${range}.`;
+  $('#printParams').textContent=summary;
+  window._summary=summary;
+}
+document.querySelectorAll('.inputs input').forEach(i=>i.addEventListener('input',calc));
+$('#toLead').addEventListener('click',()=>{$('#msg').value='Мой расчёт: '+window._summary});
+$('#form').addEventListener('submit',e=>{e.preventDefault();e.target.style.display='none';$('#ok').style.display='block'});
+const VIA={phone:['Телефон','tel','+7'],tg:['Ник в Telegram','text','@username'],vk:['Ссылка на страницу ВК','text','vk.com/...'],mail:['Электронная почта','email','name@mail.ru']};
+document.querySelectorAll('[name=via]').forEach(r=>r.addEventListener('change',()=>{const [l,t,ph]=VIA[r.value];$('#contactLabel').textContent=l;$('#contact').type=t;$('#contact').placeholder=ph;$('#contact').value=''}));
+calc();
+</script>
+</body>
+</html>

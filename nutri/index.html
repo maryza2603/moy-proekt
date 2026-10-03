@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Анна Ветрова - нутрициолог</title>
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBFBF6; --oat:#EFEBDD; --ink:#22262B; --olive:#5E6B26; --beet:#9E2F57; --grain:#D9A441; --muted:#62666B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 "Nunito Sans",system-ui,sans-serif}
+:focus-visible{outline:3px solid var(--beet);outline-offset:3px}
+h1,h2,h3{font-family:"Yeseva One",serif;font-weight:400;line-height:1.12}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:72px}
+.name{font:22px "Yeseva One";text-decoration:none;color:inherit}
+header nav{display:flex;gap:24px;font-size:15px}
+header nav a{color:inherit;text-decoration:none}
+header nav a:hover{color:var(--beet)}
+@media(max-width:760px){header nav{display:none}}
+
+.hero{padding:40px 0 30px}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+@media(max-width:880px){.hero-grid{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(36px,5vw,62px)}
+.hero p{margin-top:18px;max-width:46ch;color:var(--muted);font-size:19px}
+.badges{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;font-size:15px}
+.badges b{display:block;font:26px "Yeseva One";color:var(--olive)}
+.btn{display:inline-block;margin-top:28px;font:700 16px "Nunito Sans";padding:15px 26px;border-radius:40px;border:0;background:var(--beet);color:#fff;text-decoration:none;cursor:pointer}
+.btn:hover{background:#7f2446}
+.btn.line{background:transparent;color:var(--beet);border:2px solid var(--beet)}
+.btn.line:hover{background:var(--beet);color:#fff}
+
+/* calculator */
+.calc{background:var(--oat);border-radius:28px;padding:32px;display:grid;gap:22px}
+.calc h2{font-size:28px}
+.row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.row label{display:grid;gap:4px;font-size:14px;color:var(--muted)}
+.row input{font:600 18px "Nunito Sans";padding:12px;border:1.5px solid #CFC8B4;border-radius:12px;background:var(--paper);width:100%}
+.seg{display:flex;background:var(--paper);border-radius:40px;padding:4px;gap:2px;flex-wrap:wrap}
+.seg label{flex:1;cursor:pointer;min-width:max-content}
+.seg input{position:absolute;opacity:0}
+.seg span{display:block;text-align:center;padding:9px 12px;border-radius:40px;font-size:15px}
+.seg input:checked+span{background:var(--ink);color:#fff}
+.seg input:focus-visible+span{outline:3px solid var(--beet)}
+.grp{display:grid;gap:8px}
+.grp>span{font-size:14px;color:var(--muted)}
+select{font:600 16px "Nunito Sans";padding:12px;border:1.5px solid #CFC8B4;border-radius:12px;background:var(--paper);width:100%}
+
+/* result */
+.result{padding:60px 0}
+.res-grid{display:grid;grid-template-columns:380px 1fr;gap:56px;align-items:center}
+@media(max-width:880px){.res-grid{grid-template-columns:1fr}}
+.plate{position:relative;max-width:380px;margin:0 auto}
+.plate svg{width:100%;display:block}
+.plate .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.plate .center b{font:52px "Yeseva One"}
+.plate .center span{font-size:15px;color:var(--muted)}
+.macros{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 30px}
+.macros div{border-top:4px solid;padding-top:10px}
+.macros b{font:30px "Yeseva One";display:block}
+.macros span{font-size:14px;color:var(--muted)}
+.meals{display:grid;gap:10px}
+.meal{display:grid;grid-template-columns:110px 1fr 90px;gap:14px;align-items:center;font-size:15px}
+.meal .track{height:10px;background:var(--oat);border-radius:10px;overflow:hidden}
+.meal i{display:block;height:100%;background:var(--olive);border-radius:10px;transition:width .4s}
+.meal em{font-style:normal;color:var(--muted);text-align:right}
+.hint{margin-top:22px;padding:18px 20px;border-left:4px solid var(--grain);background:var(--oat);font-size:15px}
+
+section{padding:76px 0}
+section h2{font-size:clamp(28px,3.6vw,44px);margin-bottom:30px;max-width:22ch}
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:center}
+@media(max-width:880px){.about{grid-template-columns:1fr}}
+.portrait{position:relative;border-radius:200px 200px 24px 24px;overflow:hidden;margin:0}
+.portrait img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+.portrait figcaption{position:absolute;left:16px;right:16px;bottom:16px;background:var(--olive);color:var(--paper);border-radius:16px;padding:16px 18px;font:19px/1.3 "Yeseva One"}
+.about p{margin-bottom:14px;max-width:60ch}
+.about ul{margin:18px 0 0 20px;color:var(--muted)}
+
+.services{background:var(--ink);color:var(--paper)}
+.svc-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px}
+@media(max-width:880px){.svc-grid{grid-template-columns:1fr}}
+.svc{display:grid;gap:12px}
+.svc label{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;padding:18px;border:1.5px solid #464B51;border-radius:18px;cursor:pointer}
+.svc label:has(input:checked){border-color:var(--grain);background:#2C3137}
+.svc input{accent-color:var(--grain);width:18px;height:18px;margin-top:4px}
+.svc b{display:block;font-size:17px}
+.svc small{color:#A9ADB1;font-size:14px}
+.svc .p{font:20px "Yeseva One";white-space:nowrap}
+.total{border:1.5px solid var(--grain);border-radius:24px;padding:28px;position:sticky;top:20px;align-self:start}
+.total b{display:block;font:44px "Yeseva One";color:var(--grain);margin:6px 0 14px}
+.total form{display:grid;gap:10px;margin-top:16px}
+.total input:not([type=radio]){font:inherit;padding:13px;border-radius:12px;border:1.5px solid #464B51;background:transparent;color:#fff}
+.total .btn{margin-top:6px}
+.ok{display:none;margin-top:16px;color:var(--grain)}
+.small{font-size:13px;color:#A9ADB1}
+
+.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 40px}
+@media(max-width:880px){.topics{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.topics{grid-template-columns:1fr}}
+.topics h3{font-size:21px;margin-bottom:6px}
+.topics p{color:var(--muted);font-size:16px}
+.topics div{border-top:2px solid var(--ink);padding-top:14px}
+.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:880px){.menu{grid-template-columns:1fr}}
+.menu figure{margin:0}
+.menu img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:24px}
+.menu figcaption{padding-top:12px}
+.menu b{font:20px "Yeseva One";display:block}
+.menu span{color:var(--muted);font-size:15px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;counter-reset:s;list-style:none}
+@media(max-width:880px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+.steps li{counter-increment:s}
+.steps li::before{content:counter(s);display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;background:var(--beet);color:#fff;font:22px "Yeseva One";margin-bottom:14px}
+.steps h3{font-size:20px;margin-bottom:6px}
+.steps p{color:var(--muted);font-size:16px}
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:880px){.revs{grid-template-columns:1fr}}
+.revs blockquote{background:var(--paper);border-radius:24px;padding:24px}
+.revs .res{font:28px "Yeseva One";color:var(--olive);display:block;margin-bottom:8px}
+.revs p{margin-bottom:12px}
+.revs cite{font-style:normal;font-size:14px;color:var(--muted)}
+.via{display:flex;flex-wrap:wrap;gap:6px}
+.via label{cursor:pointer}
+.via input{position:absolute;opacity:0}
+.via span{display:block;padding:7px 13px;border-radius:30px;border:1.5px solid #464B51;font-size:14px}
+.via input:checked+span{background:var(--grain);border-color:var(--grain);color:var(--ink)}
+.via input:focus-visible+span{outline:3px solid #fff}
+.contacts{display:flex;flex-wrap:wrap;gap:14px 28px;font-size:17px}
+.contacts a{color:var(--beet);font-weight:700}
+.faq details{border-bottom:1px solid #D8D2C1;padding:18px 0}
+.faq summary{cursor:pointer;font-weight:700;font-size:18px}
+.faq p{margin-top:10px;color:var(--muted);max-width:70ch}
+footer{padding:30px 0;font-size:14px;color:var(--muted);border-top:1px solid #E2DDCD}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="name" href="#">Анна Ветрова</a>
+  <nav><a href="#calc">Калькулятор</a><a href="#about">Обо мне</a><a href="#services">Услуги</a><a href="#faq">Вопросы</a><a href="#contacts">Контакты</a></nav>
+</div></header>
+
+<main>
+<div class="hero" id="calc"><div class="wrap hero-grid">
+  <div>
+    <h1>Питание, которое не нужно терпеть</h1>
+    <p>Я нутрициолог. Помогаю похудеть, вернуть энергию и наладить пищеварение без голодовок и запрещённых продуктов.</p>
+    <div class="badges"><span><b>7 лет</b>практики</span><span><b>600+</b>клиентов</span><span><b>−6 кг</b>в среднем за 3 месяца</span></div>
+    <a class="btn" href="#result">Посчитать мою норму</a>
+  </div>
+
+  <form class="calc" id="calcForm" onsubmit="return false">
+    <h2>Ваша норма калорий и КБЖУ</h2>
+    <div class="grp"><span>Пол</span><div class="seg">
+      <label><input type="radio" name="sex" value="f" checked><span>Женщина</span></label>
+      <label><input type="radio" name="sex" value="m"><span>Мужчина</span></label>
+    </div></div>
+    <div class="row">
+      <label>Возраст<input type="number" id="age" value="32" min="14" max="90" inputmode="numeric"></label>
+      <label>Рост, см<input type="number" id="height" value="166" min="120" max="220" inputmode="numeric"></label>
+      <label>Вес, кг<input type="number" id="weight" value="68" min="35" max="250" inputmode="numeric"></label>
+    </div>
+    <label class="grp"><span>Активность</span>
+      <select id="act">
+        <option value="1.2">Сидячая работа, почти не двигаюсь</option>
+        <option value="1.375" selected>Хожу пешком, 1-3 тренировки в неделю</option>
+        <option value="1.55">3-5 тренировок в неделю</option>
+        <option value="1.725">Спорт каждый день или физическая работа</option>
+      </select></label>
+    <div class="grp"><span>Цель</span><div class="seg">
+      <label><input type="radio" name="goal" value="lose" checked><span>Похудеть</span></label>
+      <label><input type="radio" name="goal" value="keep"><span>Держать вес</span></label>
+      <label><input type="radio" name="goal" value="gain"><span>Набрать мышцы</span></label>
+    </div></div>
+  </form>
+</div></div>
+
+<div class="result" id="result"><div class="wrap res-grid" aria-live="polite">
+  <div class="plate">
+    <svg viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="96" fill="#fff" stroke="#E2DDCD" stroke-width="2"/>
+      <circle cx="100" cy="100" r="80" fill="none" stroke="#EFEBDD" stroke-width="1"/>
+      <g id="arcs" transform="rotate(-90 100 100)"></g>
+      <circle cx="100" cy="100" r="54" fill="#FBFBF6"/>
+    </svg>
+    <div class="center"><b id="kcal">-</b><span>ккал в день</span></div>
+  </div>
+  <div>
+    <h2 style="font-size:clamp(26px,3vw,38px)" id="resTitle">Ваша тарелка на день</h2>
+    <div class="macros">
+      <div style="border-color:var(--beet)"><b id="pG">-</b><span>белки</span></div>
+      <div style="border-color:var(--grain)"><b id="fG">-</b><span>жиры</span></div>
+      <div style="border-color:var(--olive)"><b id="cG">-</b><span>углеводы</span></div>
+    </div>
+    <div class="meals" id="meals"></div>
+    <p class="hint" id="hint"></p>
+    <a class="btn" href="#services" id="getMenu">Получить меню на неделю под эту норму</a>
+  </div>
+</div></div>
+
+<section id="topics"><div class="wrap">
+  <h2>С чем ко мне приходят</h2>
+  <div class="topics">
+    <div><h3>Лишний вес</h3><p>Худеем на 2-4 кг в месяц без голода и срывов на выходных.</p></div>
+    <div><h3>Нет сил</h3><p>Ищем, где не хватает железа, витамина D и белка. Чаще всего дело в них.</p></div>
+    <div><h3>Пищеварение</h3><p>Вздутие, тяжесть после еды, нерегулярный стул. Подбираем продукты и режим.</p></div>
+    <div><h3>Тяга к сладкому</h3><p>Выравниваем сахар в крови, и вечером уже не тянет к печенью.</p></div>
+    <div><h3>После родов</h3><p>Питание при грудном вскармливании, возвращаем вес и силы.</p></div>
+    <div><h3>Спорт</h3><p>Набор мышц, сушка, питание до и после тренировки.</p></div>
+  </div>
+</div></section>
+
+<section id="about" style="background:var(--oat)"><div class="wrap about">
+  <figure class="portrait"><img src="img/anna.jpg" alt="Нутрициолог Анна Ветрова на кухне"><figcaption>«Худеть можно и с пастой на ужин. Вопрос в порции и в том, что лежит рядом»</figcaption></figure>
+  <div>
+    <h2>Я не дам вам список запретов</h2>
+    <p>Работаю с тем, как вы едите сейчас. Смотрим анализы, режим сна и стресс, а не только калории.</p>
+    <p>Меню собираю из продуктов, которые есть в обычном магазине у дома. Готовить по 2 часа в день не придётся.</p>
+    <ul>
+      <li>Диплом ПМГМУ им. Сеченова, нутрициология и диетология</li>
+      <li>Повышение квалификации по гастроэнтерологии и эндокринологии</li>
+      <li>Веду клиентов онлайн из любого города</li>
+    </ul>
+  </div>
+</div></section>
+
+<section id="menu"><div class="wrap">
+  <h2>Так выглядит меню, которое я составляю</h2>
+  <div class="menu">
+    <figure><img src="img/breakfast.jpg" alt="Овсянка с ягодами, яйца и тост" loading="lazy"><figcaption><b>Завтрак, 420 ккал</b><span>Овсянка с ягодами и йогуртом, 2 яйца, цельнозерновой тост</span></figcaption></figure>
+    <figure><img src="img/plate.jpg" alt="Курица, киноа, овощи и авокадо" loading="lazy"><figcaption><b>Обед, 560 ккал</b><span>Курица на гриле, киноа, запечённые овощи, авокадо</span></figcaption></figure>
+    <figure><img src="img/mealprep.jpg" alt="Контейнеры с едой на несколько дней" loading="lazy"><figcaption><b>Готовка на 3 дня за час</b><span>Учу готовить один раз и есть нормально всю неделю</span></figcaption></figure>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <h2>Как проходит работа</h2>
+  <ol class="steps">
+    <li><h3>Анкета</h3><p>Заполняете анкету о питании, сне и самочувствии. 15 минут.</p></li>
+    <li><h3>Консультация</h3><p>Созваниваемся на час, разбираем анкету и анализы.</p></li>
+    <li><h3>План и меню</h3><p>Через 3 дня присылаю меню, рецепты и список покупок.</p></li>
+    <li><h3>Сопровождение</h3><p>Каждый день смотрю дневник питания и отвечаю на вопросы в чате.</p></li>
+  </ol>
+</div></section>
+
+<section style="background:var(--oat)"><div class="wrap">
+  <h2>Результаты клиентов</h2>
+  <div class="revs">
+    <blockquote><span class="res">−9 кг за 3 месяца</span><p>Я ела больше, чем раньше, и всё равно худела. Ни разу не сорвалась.</p><cite>Екатерина, 38 лет</cite></blockquote>
+    <blockquote><span class="res">Ушло вздутие</span><p>Год мучилась после еды. Анна нашла причину за две недели.</p><cite>Ирина, 29 лет</cite></blockquote>
+    <blockquote><span class="res">+4 кг мышц</span><p>Наконец понял, сколько мне есть белка и когда. Результат в зале виден.</p><cite>Дмитрий, 31 год</cite></blockquote>
+  </div>
+</div></section>
+
+<section class="services" id="services"><div class="wrap">
+  <h2>Выберите формат работы</h2>
+  <div class="svc-grid">
+    <div class="svc" id="svc">
+      <label><input type="radio" name="plan" value="3500" data-n="Разовая консультация" checked><span><b>Разовая консультация</b><small>60 минут, разбор питания, рекомендации в PDF</small></span><span class="p">3 500 ₽</span></label>
+      <label><input type="radio" name="plan" value="12000" data-n="Сопровождение 1 месяц"><span><b>Сопровождение 1 месяц</b><small>Меню, проверка дневника питания каждый день, чат</small></span><span class="p">12 000 ₽</span></label>
+      <label><input type="radio" name="plan" value="30000" data-n="Программа 3 месяца"><span><b>Программа 3 месяца</b><small>Всё из месяца + анализы, коррекция плана каждые 2 недели</small></span><span class="p">30 000 ₽</span></label>
+      <label><input type="checkbox" value="2000" data-n="Разбор анализов"><span><b>Разбор анализов</b><small>Расшифрую кровь, гормоны, витамины</small></span><span class="p">+2 000 ₽</span></label>
+      <label><input type="checkbox" value="1500" data-n="Меню на неделю по вашей норме" id="menuOpt"><span><b>Меню на неделю по вашей норме</b><small>С рецептами и списком покупок</small></span><span class="p">+1 500 ₽</span></label>
+    </div>
+    <div class="total">
+      <span class="small">Итого</span>
+      <b id="sum">-</b>
+      <span class="small" id="sumList"></span>
+      <form id="lead">
+        <input name="name" placeholder="Имя" required autocomplete="name">
+        <div class="via" role="radiogroup" aria-label="Куда ответить">
+          <label><input type="radio" name="via" value="tg" checked><span>Telegram</span></label>
+          <label><input type="radio" name="via" value="vk"><span>ВКонтакте</span></label>
+          <label><input type="radio" name="via" value="mail"><span>Почта</span></label>
+          <label><input type="radio" name="via" value="phone"><span>Телефон</span></label>
+        </div>
+        <input name="contact" id="contact" placeholder="@username" required aria-label="Контакт">
+        <button class="btn" type="submit">Записаться</button>
+        <span class="small">Демо: заявка с вашей нормой КБЖУ и выбранной услугой приходит нутрициологу в Telegram, ВК или на почту.</span>
+      </form>
+      <p class="ok" id="ok">Заявка отправлена. Анна напишет вам в течение дня.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="faq" id="faq"><div class="wrap">
+  <h2>Частые вопросы</h2>
+  <details><summary>Насколько точен калькулятор?</summary><p>Он считает по формуле Миффлина - Сан Жеора, её используют диетологи. Это хорошая отправная точка. На консультации норму поправим с учётом анализов и образа жизни.</p></details>
+  <details><summary>Можно ли работать, если я на другом конце страны?</summary><p>Да, все консультации идут онлайн по видео, сопровождение - в Telegram.</p></details>
+  <details><summary>Будет ли тяжело?</summary><p>Нет. Меняем привычки постепенно, по 1-2 за неделю. Сладкое и хлеб не запрещаю.</p></details>
+</div></section>
+</main>
+<section id="contacts" style="padding:56px 0"><div class="wrap">
+  <h2 style="margin-bottom:18px">Напишите, где вам удобно</h2>
+  <div class="contacts">
+    <a href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://vk.com/" target="_blank" rel="noopener">ВКонтакте</a>
+    <a href="mailto:anna@vetrova-nutri.ru">anna@vetrova-nutri.ru</a>
+    <a href="tel:+79000000000">+7 (900) 000-00-00</a>
+  </div>
+</div></section>
+<footer><div class="wrap">Анна Ветрова, нутрициолог. Демо-проект для портфолио. Не является медицинской консультацией.</div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const num=v=>Math.round(v).toLocaleString('ru-RU');
+let norm={};
+function calc(){
+  const sex=document.querySelector('[name=sex]:checked').value;
+  const age=+$('#age').value||30, h=+$('#height').value||165, w=+$('#weight').value||65;
+  const act=+$('#act').value, goal=document.querySelector('[name=goal]:checked').value;
+  const bmr=10*w+6.25*h-5*age+(sex==='m'?5:-161);
+  const k={lose:.85,keep:1,gain:1.1}[goal];
+  const kcal=Math.round(bmr*act*k/10)*10;
+  const p=w*{lose:1.6,keep:1.3,gain:1.8}[goal], f=w*.9, c=Math.max(0,(kcal-p*4-f*9)/4);
+  norm={kcal,p:Math.round(p),f:Math.round(f),c:Math.round(c)};
+  $('#kcal').textContent=num(kcal);
+  $('#pG').textContent=norm.p+' г'; $('#fG').textContent=norm.f+' г'; $('#cG').textContent=norm.c+' г';
+  // plate arcs
+  const tot=p*4+f*9+c*4, r=67, L=2*Math.PI*r; let off=0;
+  $('#arcs').innerHTML=[[p*4,'#9E2F57'],[f*9,'#D9A441'],[c*4,'#5E6B26']].map(([v,col])=>{
+    const len=v/tot*L, s=`<circle cx="100" cy="100" r="${r}" fill="none" stroke="${col}" stroke-width="26" stroke-dasharray="${Math.max(len-2,0)} ${L}" stroke-dashoffset="${-off}" style="transition:all .5s"/>`;
+    off+=len; return s;}).join('');
+  const meals=[['Завтрак',.25],['Обед',.35],['Перекус',.1],['Ужин',.3]];
+  $('#meals').innerHTML=meals.map(([n,s])=>`<div class="meal"><span>${n}</span><span class="track"><i style="width:${s/.35*100}%"></i></span><em>${num(kcal*s)} ккал</em></div>`).join('');
+  const bmi=w/((h/100)**2);
+  $('#hint').textContent={
+    lose:`Дефицит 15% - около ${(w*0.005).toFixed(1).replace('.',',')} кг в неделю. Так вес уходит без срывов и не возвращается.`,
+    keep:`Индекс массы тела ${bmi.toFixed(1).replace('.',',')}. Держим калории и следим, чтобы белка хватало каждый день.`,
+    gain:`Профицит 10% и белок ${norm.p} г - мышцы растут, а не жир. Без тренировок с весом не сработает.`}[goal];
+  sum();
+}
+function sum(){
+  const picked=[...document.querySelectorAll('#svc input:checked')];
+  const total=picked.reduce((a,i)=>a+ +i.value,0);
+  $('#sum').textContent=num(total)+' ₽';
+  $('#sumList').textContent=picked.map(i=>i.dataset.n).join(' + ')+(norm.kcal?`. Ваша норма: ${num(norm.kcal)} ккал, Б ${norm.p} / Ж ${norm.f} / У ${norm.c}`:'');
+}
+document.querySelectorAll('#calcForm input,#calcForm select').forEach(i=>i.addEventListener('input',calc));
+document.querySelectorAll('#svc input').forEach(i=>i.addEventListener('change',sum));
+$('#getMenu').addEventListener('click',()=>{$('#menuOpt').checked=true;sum()});
+$('#lead').addEventListener('submit',e=>{e.preventDefault();e.target.style.display='none';$('#ok').style.display='block'});
+const VIA={tg:['@username','text'],vk:['vk.com/...','text'],mail:['name@mail.ru','email'],phone:['+7','tel']};
+document.querySelectorAll('[name=via]').forEach(r=>r.addEventListener('change',()=>{$('#contact').placeholder=VIA[r.value][0];$('#contact').type=VIA[r.value][1];$('#contact').value=''}));
+calc();
+</script>
+</body>
+</html>
