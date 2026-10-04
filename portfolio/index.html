@@ -152,6 +152,7 @@ header.scrolled{border-color:var(--line)}
 .badge.code{background:#F6DED3;color:var(--terra-d)}
 .badge.tilda{background:#E9E4F5;color:#5A4C8C}
 .badge.app{background:#DDEDE4;color:#2F6B4D}
+.badge.prem{background:#2B2420;color:#F1D9A8}
 .card h3{font-size:21px;margin-bottom:6px}
 .card p{color:var(--muted);font-size:15px;flex:1}
 .links{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
@@ -467,6 +468,8 @@ const W=[
  {cat:'konstr',t:'Баня под ключ',f:'Для строителей',img:'banya',d:'Планировка бани из комнат, печь, фундамент и кровля - смета в PDF и заявка в один клик.',url:GH+'banya/'},
  {cat:'konstr',t:'Планировщик сада',f:'Для ландшафта',img:'sad',d:'Участок любой формы, зоны и растения - площади и смета считаются автоматически.',url:GH+'sad/'},
  {cat:'konstr',t:'Входная дверь',f:'Для производства',img:'door',d:'Картинка двери собирается из слоёв: цвет, ручка, стекло - цена считается сразу.',url:'demo/door/'},
+ {cat:'code',t:'Стоматология «Фарфор»',f:'Для клиник',img:'stomat',d:'Сайт клиники с онлайн-записью: пациент выбирает врача, день и свободное время. Прайс с поиском, врачи, отзывы, карта.',url:GH+'demo-stomatologiya/',b:['Премиум','Онлайн-запись']},
+ {cat:'code',t:'Загородный комплекс «Тихая Сосна»',f:'Для баз отдыха',img:'baza',d:'Сайт базы отдыха с бронированием: календарь занятости домиков, расчёт стоимости с баней и завтраками, предоплата.',url:GH+'demo-baza-otdyha/',b:['Премиум','Бронирование']},
  {cat:'code',t:'Психологи: женская и мужская версия',f:'Для психологов',d:'Два сайта психологов в едином стиле - одна система дизайна под разных специалистов.',pair:['psy-w','psy-m'],labels:['Анна','Михаил'],links:[['Сайт 1',GH+'psy-konsultaciya/'],['Сайт 2',GH+'psy-mikhail/']],wide:1,b:['Серия']},
  {cat:'code',t:'Студия маникюра «Миндаль»',f:'Для салонов красоты',img:'mindal',d:'Сайт для мастера маникюра и педикюра: работы с просмотром фото, услуги с ценами, палитра и запись в один клик.',url:GH+'mindal/'},
  {cat:'code',t:'Преподаватель английского',f:'Для репетиторов',img:'english',d:'Сайт репетитора: программы, отзывы, запись на пробный урок.',url:GH+'english-tutor-v2/'},
@@ -517,7 +520,7 @@ function shot(w){
   return `<div class="shot"><div class="chrome"><i></i><i></i><i></i></div><img class="scroll" loading="lazy" src="img/sites/${w.img}.jpg" alt="${esc(w.t)}"></div>`;
 }
 function card(w,i){
-  const bd=[...(w.f?[['for',w.f]]:[]),BADGE[w.cat],...(w.b||[]).map(x=>['',x])].map(([c,x])=>`<span class="badge ${c}">${x}</span>`).join('');
+  const bd=[...(w.f?[['for',w.f]]:[]),BADGE[w.cat],...(w.b||[]).map(x=>[x==='Премиум'?'prem':'',x])].map(([c,x])=>`<span class="badge ${c}">${x}</span>`).join('');
   const links=w.links?w.links:(w.url?[['Открыть',w.url]]:[]);
   const foot=links.length?`<div class="links">${links.map(([l,u])=>`<a href="${u}" target="_blank" rel="noopener">${l}<svg><use href="#ext"/></svg></a>`).join('')}</div>`:`<div class="no-link"><svg width="15" height="15"><use href="#lock"/></svg>Личное приложение - покажу на созвоне</div>`;
   return `<article class="card${w.wide?' wide':''}" style="animation-delay:${Math.min(i,8)*50}ms">${shot(w)}<div class="body"><div class="badges">${bd}</div><h3>${esc(w.t)}</h3><p>${esc(w.d)}</p>${foot}</div></article>`;
