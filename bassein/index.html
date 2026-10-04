@@ -65,12 +65,86 @@ svg{display:block;width:100%;height:auto;border-radius:4px}
 @media(max-width:900px){main{grid-template-columns:minmax(0,1fr)}.left{position:static}}
 @media(max-width:600px){main{padding:0 16px 150px}header,.brand{padding-left:16px;padding-right:16px}.facts{grid-template-columns:1fr 1fr}.sticky .in{padding:12px 16px}.sticky .sum{font-size:22px}.sticky small{font-size:12px}.sticky .in{gap:8px}.sticky button{padding:8px 12px}.sticky .sp{display:none}.sticky .in>div:first-child{flex-basis:100%}.brand a{margin:0 12px 0 0}}
 @media print{.tools,.sticky,.right,.modal,.tabs,.brand a{display:none!important}main{display:block}.left{position:static}#vSec{display:block!important}}
+/* landing */
+.hero{position:relative;min-height:min(92vh,820px);color:#fff;display:flex;flex-direction:column;background:#0E2E3A url(img/hero.jpg) center/cover}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,28,36,.55) 0%,rgba(8,28,36,0) 30%,rgba(8,28,36,.15) 55%,rgba(8,28,36,.85) 100%)}
+.hero>*{position:relative}
+.hero .brand{color:#D6E4E6;width:100%}.hero .brand b{color:#fff}.hero .brand a{color:#D6E4E6}.hero .brand a:hover{color:#fff}
+.hero .in{margin:auto auto 0;max-width:1360px;width:100%;padding:0 24px 56px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end}
+.hero h1{font-size:clamp(40px,7vw,104px);line-height:.95;font-weight:300;letter-spacing:-.04em;max-width:11ch}
+.hero p{max-width:460px;margin-top:18px;font-size:17px;color:#E4EEEF}
+.hero .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.hero .ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}.hero .ghost:hover{border-color:#fff;color:#fff}
+.hero .meta{text-align:right;font-size:14px;color:#D6E4E6;line-height:1.5}.hero .meta b{display:block;font-family:Geologica;font-weight:300;font-size:44px;color:#fff;letter-spacing:-.02em}
+.wrap{max-width:1360px;margin:auto;padding:0 24px}
+.about,.faq{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px}
+.about{padding:96px 24px 80px}.faq{padding:0 24px 96px}
+.h2{font-size:clamp(28px,3.4vw,44px);font-weight:300;line-height:1.08;letter-spacing:-.02em}
+.about .txt p{color:var(--muted);font-size:17px;max-width:62ch}.about .txt p+p{margin-top:14px}
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:40px;border-top:1px solid var(--line)}
+.nums div{padding:18px 16px 0 0;font-size:14px;color:var(--muted)}
+.nums b{display:block;font-family:Geologica;font-weight:300;font-size:36px;color:var(--ink);letter-spacing:-.02em;line-height:1.15}
+.sec-h{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;padding-bottom:28px}
+.sec-h p{color:var(--muted);max-width:52ch}
+#konstruktor{background:#E6EDED;padding:72px 0 10px}
+#konstruktor header{padding-top:0}
+.steps-s{padding:96px 24px}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;counter-reset:st;padding:0}
+.steps li{list-style:none;padding-top:20px;border-top:2px solid var(--ink);counter-increment:st}
+.steps li:before{content:counter(st);font-family:Geologica;font-weight:300;font-size:44px;color:var(--acc);display:block;line-height:1}
+.steps h3{font-size:18px;margin:14px 0 6px}.steps p{font-size:14px;color:var(--muted)}
+.gal-s{padding:0 24px 96px}
+.gal{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px}
+.gal figure{margin:0;position:relative;overflow:hidden;border-radius:4px;background:var(--ink)}
+.gal figure:first-child{grid-row:1/3}
+.gal img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 18px 14px;color:#fff;background:linear-gradient(transparent,rgba(8,28,36,.85));font-size:14px}
+.gal figcaption b{display:block;font-family:Geologica;font-weight:500;font-size:18px}
+details{border-top:1px solid var(--line);padding:16px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-family:Geologica;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--acc);font-size:24px;line-height:1;transition:transform .2s}
+details[open] summary:after{transform:rotate(45deg)}
+details p{color:var(--muted);margin-top:10px;max-width:62ch}
+footer{background:var(--ink);color:#C9D7DA;padding:72px 0 150px}
+footer .wrap{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:32px}
+footer h2{color:#fff}
+footer h3{color:#fff;font-size:15px;margin-bottom:10px}
+footer a{color:#C9D7DA;text-decoration:none;display:block;line-height:1.9}footer a:hover{color:#fff}
+footer .pri{margin-top:22px}
+.sticky{transform:translateY(110%);transition:transform .3s}.sticky.show{transform:none}
+@media(prefers-reduced-motion:reduce){.sticky,summary:after{transition:none}}
+@media(max-width:900px){.about,.faq{grid-template-columns:minmax(0,1fr);gap:20px}.steps{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px 20px}.gal{grid-template-columns:minmax(0,1fr)}.gal figure:first-child{grid-row:auto}footer .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.hero .in{grid-template-columns:minmax(0,1fr)}.hero .meta{text-align:left}.nums{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media(max-width:600px){.wrap,.about,.steps-s,.gal-s,.faq{padding-left:16px;padding-right:16px}.hero .in{padding:0 16px 36px}.about,.steps-s{padding-top:64px;padding-bottom:64px}#konstruktor{padding-top:56px}.steps{grid-template-columns:minmax(0,1fr)}footer .wrap{grid-template-columns:minmax(0,1fr)}}
+@media print{.hero,.about,.steps-s,.gal-s,.faq,footer{display:none!important}#konstruktor{padding:0;background:none}}
 </style>
 </head>
 <body>
-<div class="brand"><b>ЛАГУНА</b><span><a href="#" onclick="return false">Telegram</a><a href="#" onclick="return false">ВКонтакте</a><a href="tel:+70000000000">+7 (900) 000-00-00</a></span></div>
+<section class="hero">
+  <div class="brand"><b>ЛАГУНА</b><span><a href="#konstruktor">Конструктор</a><a href="#raboty">Работы</a><a href="#" onclick="return false">Telegram</a><a href="tel:+70000000000">+7 (900) 000-00-00</a></span></div>
+  <div class="in">
+    <div>
+      <h1>Бассейны для загородного дома</h1>
+      <p>Проектируем и строим бетонные бассейны под ключ в Подмосковье. От котлована до первого заплыва - одна команда и один договор.</p>
+      <div class="cta"><button class="pri" onclick="go('konstruktor')">Собрать свой бассейн</button><button class="ghost" onclick="go('raboty')">Посмотреть работы</button></div>
+    </div>
+    <div class="meta"><b>140+</b>бассейнов построили<br>с 2012 года</div>
+  </div>
+</section>
+
+<section class="wrap about">
+  <h2 class="h2">Строим один раз и надолго</h2>
+  <div class="txt">
+    <p>Каждый бассейн - монолитная чаша из бетона с гидроизоляцией. Такая чаша не боится морозов и служит десятилетиями. Оборудование ставим европейское, а технический колодец прячем так, что его не видно с участка.</p>
+    <p>До начала работ вы видите проект и точную смету. Цена в договоре не меняется, а если стройка задерживается по нашей вине, мы платим неустойку.</p>
+    <div class="nums"><div><b>12 лет</b>строим бассейны</div><div><b>10 лет</b>гарантия на чашу</div><div><b>от 45 дней</b>до первого заплыва</div><div><b>1 договор</b>на все работы</div></div>
+  </div>
+</section>
+
+<section id="konstruktor">
 <header>
-  <div><h1>Бассейн на вашем участке</h1><p>Задайте форму и размер, выберите отделку чаши, бортик, подсветку и павильон. Бассейн собирается на глазах, смета считается сразу.</p></div>
+  <div><h1>Соберите бассейн для своего участка</h1><p>Задайте форму и размер, выберите отделку чаши, бортик, подсветку и павильон. Бассейн собирается на глазах, смета считается сразу.</p></div>
   <div class="tools">
     <button onclick="share()">Ссылка на проект</button>
     <button onclick="if(confirm('Начать заново?')){S=demo();render()}">Начать заново</button>
@@ -104,8 +178,46 @@ svg{display:block;width:100%;height:auto;border-radius:4px}
     <div class="card"><h3>Дополнительно</h3><div id="dop"></div></div>
   </aside>
 </main>
+</section>
 
-<div class="sticky"><div class="in">
+<section class="wrap steps-s">
+  <div class="sec-h"><h2 class="h2">Как мы работаем</h2><p>От заявки до первого заплыва - около двух месяцев. На каждом этапе вы знаете, что происходит и сколько это стоит.</p></div>
+  <ol class="steps">
+    <li><h3>Заявка</h3><p>Отправляете проект из конструктора, инженер перезванивает в течение часа.</p></li>
+    <li><h3>Замер</h3><p>Бесплатно приезжаем на участок, смотрим грунт и подъезд для техники.</p></li>
+    <li><h3>Проект и смета</h3><p>Чертежи чаши и инженерии, точная цена в договоре.</p></li>
+    <li><h3>Строительство</h3><p>Котлован, чаша, отделка и оборудование. Фотоотчёт каждую неделю.</p></li>
+    <li><h3>Запуск</h3><p>Наполняем, настраиваем автоматику и показываем, как ухаживать за водой.</p></li>
+  </ol>
+</section>
+
+<section class="wrap gal-s" id="raboty">
+  <div class="sec-h"><h2 class="h2">Наши бассейны</h2><p>Несколько проектов последних сезонов.</p></div>
+  <div class="gal">
+    <figure><img src="img/w-night.jpg" alt="Переливной бассейн с тёмной мозаикой и вечерней подсветкой"><figcaption><b>Переливной, Истра</b>Мозаика «Графит», гранит, тёплая подсветка</figcaption></figure>
+    <figure><img src="img/w-oval.jpg" alt="Овальный бассейн с террасой из ДПК в саду"><figcaption><b>Овальный, Звенигород</b>Плитка «Песок», терраса из ДПК</figcaption></figure>
+    <figure><img src="img/w-pav.jpg" alt="Бассейн под высоким раздвижным павильоном"><figcaption><b>С павильоном, Дмитров</b>Купаются с апреля по октябрь</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap faq">
+  <h2 class="h2">Частые вопросы</h2>
+  <div>
+    <details><summary>Можно ли купаться зимой?</summary><p>Да, если поставить высокий павильон и тепловой насос. Без павильона бассейн консервируем на зиму, а весной расконсервируем за один день.</p></details>
+    <details><summary>Сколько стоит содержание?</summary><p>Электричество на фильтрацию и подогрев - около 3-5 тысяч рублей в месяц летом. Химия с автодозированием - примерно 2 тысячи в месяц.</p></details>
+    <details><summary>Цена в конструкторе окончательная?</summary><p>Конструктор считает по нашему прайсу, точность около 10%. Окончательную цену фиксируем в договоре после замера участка.</p></details>
+    <details><summary>Нужны ли проект и разрешения?</summary><p>Для частного участка разрешение не нужно. Проект делаем сами, он входит в стоимость строительства.</p></details>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div><h2 class="h2">Обсудим ваш бассейн?</h2><button class="pri" onclick="go('konstruktor')">Собрать свой бассейн</button></div>
+  <div><h3>Связаться</h3><a href="tel:+70000000000">+7 (900) 000-00-00</a><a href="#" onclick="return false">Telegram</a><a href="#" onclick="return false">ВКонтакте</a></div>
+  <div><h3>Офис и шоурум</h3><p>Москва, Рублёво-Успенское шоссе, 12<br>ежедневно с 10 до 20</p></div>
+  <div><h3>Разделы</h3><a href="#konstruktor">Конструктор</a><a href="#raboty">Работы</a></div>
+</div></footer>
+
+<div class="sticky" id="bar"><div class="in">
   <div><div class="sum" id="tot2"></div><small id="per"></small></div><div class="sp"></div>
   <button onclick="print()" style="background:transparent;color:#fff;border-color:#4a5a60">Смета в PDF</button>
   <button class="pri" onclick="modal.classList.add('on')">Отправить заявку</button>
@@ -287,6 +399,9 @@ function toast(t){const e=document.getElementById('toast');e.textContent=t;e.cla
 function share(){const u=location.href.split('#')[0]+'#'+btoa(unescape(encodeURIComponent(JSON.stringify(S))));navigator.clipboard.writeText(u).then(()=>toast('Ссылка скопирована'),()=>prompt('Скопируйте ссылку',u))}
 function send(e){e.preventDefault();modal.classList.remove('on');toast('Спасибо! Заявка отправлена, скоро перезвоним')}
 buildOpts();renderDop();render();
+function go(id){document.getElementById(id).scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})}
+new IntersectionObserver(e=>bar.classList.toggle('show',e[0].isIntersecting),{rootMargin:'0px 0px -30% 0px'}).observe(document.getElementById('konstruktor'));
+if(location.hash.length>2)setTimeout(()=>go('konstruktor'),50);
 </script>
 </body>
 </html>
