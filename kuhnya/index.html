@@ -63,10 +63,85 @@ input[type=text],input[type=tel]{width:100%;font:15px Literata;padding:10px 12px
 @media(max-width:1000px){.spec{grid-template-columns:minmax(0,1fr)}.est{position:static}}
 @media(max-width:700px){.groups{grid-template-columns:minmax(0,1fr)}header{grid-template-columns:minmax(0,1fr)}.top,header,.stage,.spec{padding-left:16px;padding-right:16px}.view{padding:10px}.vbar .cap{flex-basis:100%;margin:0}.top nav a{margin:0 12px 0 0}.sticky .in{padding:12px 16px;gap:8px}.sticky .sp{display:none}.sticky .in>div:first-child{flex-basis:100%}.sticky .sum{font-size:22px}}
 @media print{.tools,.sticky,.groups,.modal,.vbar button,.top nav{display:none!important}.spec{display:block}.est{position:static}}
+/* landing */
+.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:min(88vh,780px);background:var(--paper);border-bottom:1px solid var(--line)}
+.hero .l{display:flex;flex-direction:column;padding:22px 48px 56px max(24px,calc((100vw - 1320px)/2 + 24px))}
+.hero .l .top{padding:0;margin:0;max-width:none}
+.hero .l .body{margin-top:auto}
+.hero h1{font-size:clamp(40px,5.4vw,84px);line-height:1;letter-spacing:-.015em}
+.hero .lead{color:var(--muted);font-size:18px;max-width:34ch;margin-top:20px}
+.hero .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.hero .spec-l{margin-top:44px;display:grid;grid-template-columns:auto 1fr;gap:6px 20px;font-size:14px;border-top:1px solid var(--ink);padding-top:14px;max-width:420px}
+.hero .spec-l dt{color:var(--muted)}.hero .spec-l dd{margin:0}
+.hero .r{background:#cfc9bf url(img/hero.jpg) center/cover;position:relative}
+.hero .r span{position:absolute;right:16px;bottom:14px;background:var(--paper);padding:6px 12px;font-size:13px;font-style:italic}
+.wrap{max-width:1320px;margin:auto;padding:0 24px}
+.h2{font-size:clamp(28px,3.4vw,46px);line-height:1.08}
+.about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;padding:96px 24px 88px}
+.about p{font-size:17px;max-width:62ch}.about p+p{margin-top:14px;color:var(--muted)}
+.mats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:36px}
+.mats div{font-size:14px;color:var(--muted)}.mats i{display:block;height:64px;margin-bottom:10px;border:1px solid var(--line)}
+.mats b{display:block;font-family:'Tenor Sans';font-weight:400;font-size:16px;color:var(--ink)}
+#konstruktor{background:var(--bg);border-top:1px solid var(--line);padding-top:56px}
+.sec-h{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;padding-bottom:28px;border-bottom:1px solid var(--ink);margin-bottom:28px}
+.sec-h p{color:var(--muted);max-width:50ch}
+.steps-s{padding:96px 24px 40px}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;padding:0;counter-reset:st}
+.steps li{list-style:none;counter-increment:st}
+.steps li:before{content:counter(st,decimal-leading-zero);font-family:'Tenor Sans';font-size:15px;color:var(--oak);display:block;margin-bottom:10px}
+.steps h3{font-size:20px;margin-bottom:6px}.steps p{font-size:14px;color:var(--muted)}
+.steps .d{font-size:13px;color:var(--ink);margin-top:8px;font-style:italic}
+.gal-s{padding:56px 24px 96px}
+.gal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.gal figure{margin:0}.gal img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+.gal figcaption{padding-top:12px;font-size:14px;color:var(--muted)}.gal figcaption b{display:block;font-family:'Tenor Sans';font-weight:400;font-size:18px;color:var(--ink)}
+.faq{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;padding:0 24px 96px}
+details{border-top:1px solid var(--ink);padding:16px 0}details:last-child{border-bottom:1px solid var(--ink)}
+summary{cursor:pointer;font-family:'Tenor Sans';font-size:19px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-size:22px;line-height:1;color:var(--oak)}details[open] summary:after{content:"−"}
+details p{color:var(--muted);margin-top:10px;max-width:62ch}
+footer{background:var(--ink);color:#BDB8B0;padding:72px 0 150px}
+footer .wrap{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px}
+footer h2{color:var(--paper)}footer h3{color:var(--paper);font-size:16px;margin-bottom:10px}
+footer a{color:#BDB8B0;text-decoration:none;display:block;line-height:1.9}footer a:hover{color:#fff}
+footer .pri{margin-top:22px;background:var(--paper);color:var(--ink)}
+.sticky{transform:translateY(110%);transition:transform .3s}.sticky.show{transform:none}
+@media(prefers-reduced-motion:reduce){.sticky{transition:none}}
+@media(max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}.hero .r{min-height:56vw;order:-1}.hero .l{padding:22px 24px 48px}.hero .l .body{margin-top:36px}.about,.faq{grid-template-columns:minmax(0,1fr);gap:20px}.steps{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.gal{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}footer .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.mats{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media(max-width:600px){.wrap,.about,.steps-s,.gal-s,.faq{padding-left:16px;padding-right:16px}.hero .l{padding:18px 16px 40px}.about{padding-top:64px;padding-bottom:56px}.steps,.gal{grid-template-columns:minmax(0,1fr)}footer .wrap{grid-template-columns:minmax(0,1fr)}}
+@media print{.hero,.about,.steps-s,.gal-s,.faq,footer{display:none!important}}
 </style>
 </head>
 <body>
-<div class="top"><span class="logo">ОЛИВА</span><nav><a href="#" onclick="return false">Telegram</a><a href="#" onclick="return false">ВКонтакте</a><a href="tel:+70000000000">+7 (900) 000-00-00</a></nav></div>
+<section class="hero">
+  <div class="l">
+    <div class="top"><span class="logo">ОЛИВА</span><nav><a href="#konstruktor">Конструктор</a><a href="#raboty">Кухни</a><a href="tel:+70000000000">+7 (900) 000-00-00</a></nav></div>
+    <div class="body">
+      <h1>Кухни по вашим размерам</h1>
+      <p class="lead">Делаем кухни на собственном производстве в Москве. Каждая собирается под вашу стену, вашу технику и ваш способ готовить.</p>
+      <div class="cta"><button class="pri" onclick="go('konstruktor')">Собрать свою кухню</button><button onclick="go('raboty')">Готовые кухни</button></div>
+      <dl class="spec-l"><dt>Срок</dt><dd>от 35 дней</dd><dt>Гарантия</dt><dd>5 лет на корпус и фурнитуру</dd><dt>Замер</dt><dd>бесплатно, с образцами фасадов</dd></dl>
+    </div>
+  </div>
+  <div class="r" role="img" aria-label="Кухня с фасадами цвета шалфей, мраморной столешницей и дубовым островом"><span>Проект «Шалфей и дуб», Хамовники</span></div>
+</section>
+
+<section class="wrap about">
+  <h2 class="h2">Своё производство, свои мастера</h2>
+  <div>
+    <p>Мы не перепродаём чужие модули. Корпуса режем и собираем у себя в цеху, фасады красим вручную в восемь слоёв, а столешницы из камня шлифуем по шаблону с вашего объекта.</p>
+    <p>Дизайнер ведёт проект от замера до установки. Вы общаетесь с одним человеком, а смета не меняется после подписания договора.</p>
+    <div class="mats">
+      <div><i style="background:#97A290"></i><b>Эмаль</b>матовая, 40 цветов</div>
+      <div><i style="background:linear-gradient(100deg,#B98B5D,#A57A4F 40%,#C29467)"></i><b>Шпон дуба</b>натуральный, под маслом</div>
+      <div><i style="background:linear-gradient(120deg,#F6F3EE 40%,#C9C4BC 50%,#F6F3EE 60%)"></i><b>Мрамор и кварц</b>Италия, Испания</div>
+      <div><i style="background:#B8924A"></i><b>Фурнитура</b>Blum и Hettich с доводчиками</div>
+    </div>
+  </div>
+</section>
+
+<section id="konstruktor">
 <header>
   <div><h1>Соберите свою кухню</h1><p>Планировка, фасады, столешница, ручки и техника. Кухня меняется после каждого выбора, а смета пересчитывается сразу.</p></div>
   <div class="tools"><button onclick="share()">Ссылка на проект</button><button onclick="if(confirm('Начать заново?')){S=demo();render()}">Начать заново</button></div>
@@ -92,8 +167,46 @@ input[type=text],input[type=tel]{width:100%;font:15px Literata;padding:10px 12px
   </div>
   <aside class="est"><h3>Смета</h3><table id="est"></table><div class="tot"><span>Итого</span><span id="tot"></span></div></aside>
 </section>
+</section>
 
-<div class="sticky"><div class="in">
+<section class="wrap steps-s">
+  <div class="sec-h"><h2 class="h2">От замера до первого ужина</h2><p>Пять шагов и около шести недель. Дизайнер на связи на каждом этапе.</p></div>
+  <ol class="steps">
+    <li><h3>Замер</h3><p>Дизайнер приезжает с образцами фасадов и столешниц.</p><div class="d">1 день</div></li>
+    <li><h3>Проект</h3><p>3D-визуализация, чертежи и точная смета.</p><div class="d">3-5 дней</div></li>
+    <li><h3>Договор</h3><p>Фиксируем цену и срок, предоплата 50%.</p><div class="d">1 день</div></li>
+    <li><h3>Производство</h3><p>Корпуса, покраска фасадов, камень по шаблону.</p><div class="d">30-40 дней</div></li>
+    <li><h3>Установка</h3><p>Собираем, подключаем технику, убираем за собой.</p><div class="d">1-2 дня</div></li>
+  </ol>
+</section>
+
+<section class="wrap gal-s" id="raboty">
+  <div class="sec-h"><h2 class="h2">Кухни, которые мы сделали</h2><p>Три проекта этого года. Каждую можно собрать в конструкторе выше.</p></div>
+  <div class="gal">
+    <figure><img src="img/w-graph.jpg" alt="Графитовая кухня с рифлёными фасадами и подсветкой"><figcaption><b>Графит, Пресня</b>Рифлёные фасады, гранит неро, скрытые ручки</figcaption></figure>
+    <figure><img src="img/w-white.jpg" alt="Белая угловая кухня в загородном доме"><figcaption><b>Белая угловая, Истра</b>Эмаль, белый кварц, чёрные скобы</figcaption></figure>
+    <figure><img src="img/w-navy.jpg" alt="Тёмно-синяя кухня с латунными ручками и винным шкафом"><figcaption><b>Глубокий синий, Патриаршие</b>Латунь, мрамор, винный шкаф</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap faq">
+  <h2 class="h2">Вопросы</h2>
+  <div>
+    <details><summary>Можно поставить мою технику?</summary><p>Да. Пришлите модели, и мы спроектируем шкафы под их размеры. Технику можем и подобрать сами, со скидкой партнёра.</p></details>
+    <details><summary>Насколько точна цена в конструкторе?</summary><p>Около 10%. Конструктор считает по нашему прайсу, а точную цену дизайнер даст после замера и фиксирует её в договоре.</p></details>
+    <details><summary>Что если стены кривые?</summary><p>Так почти всегда. Мы делаем замер лазером, а столешницу из камня изготавливаем по шаблону, снятому прямо на объекте.</p></details>
+    <details><summary>Есть рассрочка?</summary><p>Да, без переплаты на 6 месяцев через банк-партнёр.</p></details>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div><h2 class="h2">Пригласить дизайнера на замер</h2><button class="pri" onclick="go('konstruktor')">Собрать свою кухню</button></div>
+  <div><h3>Связаться</h3><a href="tel:+70000000000">+7 (900) 000-00-00</a><a href="#" onclick="return false">Telegram</a><a href="#" onclick="return false">ВКонтакте</a></div>
+  <div><h3>Шоурум</h3><p>Москва, Фрунзенская наб., 30<br>ежедневно с 10 до 21</p></div>
+  <div><h3>Разделы</h3><a href="#konstruktor">Конструктор</a><a href="#raboty">Кухни</a></div>
+</div></footer>
+
+<div class="sticky" id="bar"><div class="in">
   <div><div class="sum" id="tot2"></div><small id="per"></small></div><div class="sp"></div>
   <button class="gh" onclick="print()">Смета в PDF</button>
   <button class="pri" onclick="modal.classList.add('on')">Пригласить дизайнера на замер</button>
@@ -247,6 +360,9 @@ function toast(t){const e=document.getElementById('toast');e.textContent=t;e.cla
 function share(){const u=location.href.split('#')[0]+'#'+btoa(unescape(encodeURIComponent(JSON.stringify(S))));navigator.clipboard.writeText(u).then(()=>toast('Ссылка скопирована'),()=>prompt('Скопируйте ссылку',u))}
 function send(e){e.preventDefault();modal.classList.remove('on');toast('Готово, дизайнер перезвонит и согласует замер')}
 buildOpts();checks(tech,TECH,'tech');checks(dop,DOP,'dop');render();
+function go(id){document.getElementById(id).scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})}
+new IntersectionObserver(e=>bar.classList.toggle('show',e[0].isIntersecting),{rootMargin:'0px 0px -30% 0px'}).observe(document.getElementById('konstruktor'));
+if(location.hash.length>2)setTimeout(()=>go('konstruktor'),50);
 </script>
 </body>
 </html>
