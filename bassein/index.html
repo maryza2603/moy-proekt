@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Бассейн на участке - конструктор</title>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F5F4;--card:#FFFFFF;--ink:#0E2E3A;--muted:#5C7077;--line:#D5DEDF;--acc:#16728A;--acc2:#0E5468;--soft:#E2EEF0;--gold:#B58E4F;--trav:#E9DFCF}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 'Golos Text',system-ui,sans-serif}
+h1,h2,h3{font-family:Geologica,sans-serif;font-weight:500;letter-spacing:-.01em}
+i.a{font-style:normal}
+.brand{max-width:1360px;margin:auto;padding:18px 24px 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.brand b{font-family:Geologica;font-weight:300;font-size:22px;color:var(--ink);letter-spacing:.32em}
+.brand a{color:var(--muted);text-decoration:none;margin-left:14px}.brand a:hover{color:var(--acc)}
+header{padding:22px 24px 22px;max-width:1360px;margin:auto;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between}
+header h1{font-size:clamp(34px,5vw,64px);line-height:1;font-weight:300;letter-spacing:-.03em}
+header p{color:var(--muted);margin-top:8px;max-width:600px}
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+button{font:500 14px 'Golos Text';border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:40px;cursor:pointer;transition:.15s}
+button:hover{border-color:var(--acc);color:var(--acc)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.pri{background:var(--gold);color:#fff;border-color:var(--gold)}.pri:hover{background:#9C7840;color:#fff}
+main{max-width:1360px;margin:auto;padding:0 24px 130px;display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:20px;align-items:start}
+.left{position:sticky;top:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:20px;margin-bottom:20px}
+.right .card{background:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:18px 0 4px;margin:0}
+.right .card:first-child{border-top:0;padding-top:0}
+.card h3{font-size:20px;margin-bottom:12px}
+.lbl{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin:16px 0 8px}
+.rng{display:flex;justify-content:space-between;font-size:14px;margin-top:6px}.rng b{font-family:Geologica;font-weight:500;font-size:18px}
+input[type=range]{width:100%;accent-color:var(--acc)}
+input[type=text],input[type=tel]{width:100%;font:500 15px 'Golos Text';padding:10px 12px;border:1px solid var(--line);border-radius:4px;background:#fff}
+.opts{display:grid;gap:8px}.opts.g2{grid-template-columns:1fr}.opt>span:not(.sw):not(.pr){min-width:0}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;border-radius:4px;padding:10px 12px;width:100%;background:transparent}
+.opt.on{border-color:var(--ink);background:var(--ink);color:#fff}.opt.on small{color:#B9CBD0}.opt.on .pr{color:var(--trav)}
+.opt small{display:block;color:var(--muted);font-weight:500;font-size:12px}
+.opt .pr{margin-left:auto;font-size:13px;color:var(--acc);white-space:nowrap}
+.sw{width:28px;height:28px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.1)}
+label.ck{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px}
+label.ck input{accent-color:var(--acc);width:17px;height:17px;margin-top:2px}
+label.ck span.p{margin-left:auto;color:var(--muted);font-size:13px;white-space:nowrap}
+.view{background:var(--ink);border-radius:6px;padding:14px;margin-bottom:20px;color:#fff}
+.view .tabs button{background:transparent;color:#CFE0E4;border-color:#2C5462}.view .tabs button.on{background:var(--trav);color:var(--ink);border-color:var(--trav)}
+.tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.tabs .sp{flex:1}
+svg{display:block;width:100%;height:auto;border-radius:4px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.facts div{border-left:1px solid #2C5462;padding:4px 12px;font-size:12px;color:#9DB6BD}
+.facts b{display:block;font-family:Geologica;font-weight:300;font-size:24px;color:#fff}
+.est table{width:100%;border-collapse:collapse;font-size:14px}
+.est td{padding:6px 0;border-bottom:1px dashed var(--line);vertical-align:top}
+.est td:last-child{text-align:right;white-space:nowrap;font-weight:600;padding-left:10px}
+.est .sec td{border:0;padding-top:14px;font-family:Geologica;font-size:15px;color:var(--acc)}
+.est .q{color:var(--muted);font-size:12px}
+.tot{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;font-family:Geologica;font-weight:300;font-size:30px}.tot b{font-weight:500}
+.sticky{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;z-index:5}
+.sticky .in{max-width:1360px;margin:auto;padding:14px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.sticky .sum{font-family:Geologica;font-weight:300;font-size:30px}.sticky small{opacity:.7;display:block;font-size:13px}
+.sticky .sp{flex:1}
+.modal{position:fixed;inset:0;background:rgba(14,46,58,.55);display:none;place-items:center;z-index:9;padding:16px}
+.modal.on{display:grid}.modal .card{max-width:420px;width:100%}.modal .card>*+*{margin-top:10px}
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:30px;opacity:0;transition:.3s;z-index:10;pointer-events:none}.toast.on{opacity:1}
+@media(max-width:900px){main{grid-template-columns:minmax(0,1fr)}.left{position:static}}
+@media(max-width:600px){main{padding:0 16px 150px}header,.brand{padding-left:16px;padding-right:16px}.facts{grid-template-columns:1fr 1fr}.sticky .in{padding:12px 16px}.sticky .sum{font-size:22px}.sticky small{font-size:12px}.sticky .in{gap:8px}.sticky button{padding:8px 12px}.sticky .sp{display:none}.sticky .in>div:first-child{flex-basis:100%}.brand a{margin:0 12px 0 0}}
+@media print{.tools,.sticky,.right,.modal,.tabs,.brand a{display:none!important}main{display:block}.left{position:static}#vSec{display:block!important}}
+</style>
+</head>
+<body>
+<div class="brand"><b>ЛАГУНА</b><span><a href="#" onclick="return false">Telegram</a><a href="#" onclick="return false">ВКонтакте</a><a href="tel:+70000000000">+7 (900) 000-00-00</a></span></div>
+<header>
+  <div><h1>Бассейн на вашем участке</h1><p>Задайте форму и размер, выберите отделку чаши, бортик, подсветку и павильон. Бассейн собирается на глазах, смета считается сразу.</p></div>
+  <div class="tools">
+    <button onclick="share()">Ссылка на проект</button>
+    <button onclick="if(confirm('Начать заново?')){S=demo();render()}">Начать заново</button>
+  </div>
+</header>
+
+<main>
+  <section class="left">
+    <div class="view">
+      <div class="tabs"><button id="t1" class="on" onclick="mode(1)">Вид сверху</button><button id="t2" onclick="mode(2)">Разрез</button><span class="sp"></span><button id="tn" onclick="S.night=!S.night;render()">Вечер</button></div>
+      <svg id="vTop" viewBox="0 0 800 520"></svg>
+      <svg id="vSec" viewBox="0 0 800 420" style="display:none"></svg>
+      <div class="facts" id="facts"></div>
+    </div>
+    <div class="card est"><h3>Смета</h3><table id="est"></table><div class="tot"><span>Итого</span><b id="tot"></b></div></div>
+  </section>
+
+  <aside class="right">
+    <div class="card"><h3>Форма и размер</h3>
+      <div class="opts" id="g-shape"></div>
+      <div class="rng"><span>Длина</span><b id="Lv"></b></div><input type="range" id="L" min="4" max="12" step="0.5">
+      <div class="rng"><span>Ширина</span><b id="Wv"></b></div><input type="range" id="W" min="2.5" max="5" step="0.5">
+      <div class="rng"><span>Глубина</span><b id="Dv"></b></div><input type="range" id="D" min="1.2" max="2" step="0.1">
+    </div>
+    <div class="card"><h3>Тип перелива</h3><div class="opts" id="g-type"></div></div>
+    <div class="card"><h3>Отделка чаши</h3><div class="opts g2" id="g-fin"></div></div>
+    <div class="card"><h3>Бортик и терраса</h3><div class="opts" id="g-edge"></div></div>
+    <div class="card"><h3>Подсветка</h3><div class="opts" id="g-light"></div></div>
+    <div class="card"><h3>Павильон</h3><div class="opts" id="g-pav"></div></div>
+    <div class="card"><h3>Подогрев воды</h3><div class="opts" id="g-heat"></div></div>
+    <div class="card"><h3>Дополнительно</h3><div id="dop"></div></div>
+  </aside>
+</main>
+
+<div class="sticky"><div class="in">
+  <div><div class="sum" id="tot2"></div><small id="per"></small></div><div class="sp"></div>
+  <button onclick="print()" style="background:transparent;color:#fff;border-color:#4a5a60">Смета в PDF</button>
+  <button class="pri" onclick="modal.classList.add('on')">Отправить заявку</button>
+</div></div>
+
+<div class="modal" id="modal" onclick="if(event.target==this)this.classList.remove('on')"><form class="card" onsubmit="send(event)">
+  <h3>Заявка на бассейн</h3>
+  <p style="color:var(--muted);font-size:14px">Проект и смета приложатся к заявке. Инженер перезвонит, уточнит участок и приедет на замер.</p>
+  <input type="text" placeholder="Как вас зовут" required>
+  <input type="tel" placeholder="Телефон" required>
+  <button class="pri" style="width:100%">Отправить в Telegram</button>
+</form></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const G={
+ shape:[{id:'rect',n:'Прямоугольный',d:'строгая геометрия, удобно плавать',p:'база',k:1},
+  {id:'roman',n:'С римской лестницей',d:'полукруглые ступени на всю ширину',p:'+8%',k:1.08},
+  {id:'oval',n:'Овальный',d:'мягкая форма для сада',p:'+12%',k:1.12}],
+ type:[{id:'skim',n:'Скиммерный',d:'вода на 15 см ниже бортика',p:'база'},
+  {id:'over',n:'Переливной',d:'вода вровень с бортиком, «зеркало»',p:'+ ёмкость и решётка'}],
+ fin:[{id:'sand',n:'Плитка «Песок»',d:'тёплая, светлая вода',r:4200,c:'#E3D3B4',w:'#7FD0D2'},
+  {id:'azure',n:'Мозаика «Лазурь»',d:'классическая бирюза',r:6500,c:'#3BA7C2',w:'#3EB3CF'},
+  {id:'white',n:'Белый керамогранит',d:'светлая, почти прозрачная',r:5600,c:'#F1F1EE',w:'#9FDDE3'},
+  {id:'graph',n:'Мозаика «Графит»',d:'тёмная, как горное озеро',r:7400,c:'#3E4A4F',w:'#2F6C77'}],
+ edge:[{id:'conc',n:'Бетонный камень',d:'серый, нескользкий',r:4500,c:'#BDBAB2'},
+  {id:'trav',n:'Травертин',d:'тёплый натуральный камень',r:9800,c:'#E2D3BA'},
+  {id:'gran',n:'Гранит «Антрацит»',d:'строгий, вечный',r:12500,c:'#4F5458'},
+  {id:'wood',n:'Терраса из ДПК',d:'тёплая под ногами, + настил 2 м',r:7600,c:'#A4774F'}],
+ light:[{id:'none',n:'Без подсветки',d:'',r:0},
+  {id:'warm',n:'Тёплая белая LED',d:'спокойный вечерний свет',r:18000,c:'#FFE7A8'},
+  {id:'rgb',n:'Цветная RGB',d:'меняет цвет с пульта',r:26000,c:'#7FB6FF'}],
+ pav:[{id:'none',n:'Без павильона',d:'купальный сезон с мая по сентябрь',r:0},
+  {id:'half',n:'Низкий раздвижной',d:'поликарбонат, едет по рельсам',r:19000},
+  {id:'high',n:'Высокий в рост',d:'можно ходить внутри, сезон дольше',r:28000}],
+ heat:[{id:'none',n:'Без подогрева',d:'',p:0},
+  {id:'hex',n:'Теплообменник',d:'от котла дома',p:95000},
+  {id:'pump',n:'Тепловой насос',d:'дёшево греет, +6 °C к воде',p:380000}]};
+const DOP=[['jet','Противоток',165000],['massage','Гидромассажные форсунки',120000],['fall','Водопад на стене',85000],['auto','Автодозирование химии',140000],['cover','Защитное покрывало',58000]];
+const fmt=n=>Math.round(n).toLocaleString('ru-RU')+' ₽';
+const r1=n=>Math.round(n*10)/10;
+const pick=k=>G[k].find(o=>o.id==S[k]);
+function demo(){return{shape:'roman',L:8,W:3.5,D:1.5,type:'skim',fin:'azure',edge:'trav',light:'warm',pav:'none',heat:'pump',night:false,dop:{auto:true,cover:true}}}
+let S=demo(),view=1;
+try{if(location.hash.length>2)S=Object.assign(demo(),JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(1))))))}catch(e){}
+
+// options
+function geo(){const{L,W,D}=S;let A,P;
+ if(S.shape=='oval'){A=Math.PI*L*W/4;P=Math.PI*(1.5*(L+W)/2-Math.sqrt(L*W)/2)}
+ else if(S.shape=='roman'){A=L*W+Math.PI*W*W/8;P=2*L+W+Math.PI*W/2}
+ else{A=L*W;P=2*(L+W)}
+ return{A,P,V:A*(D-.15)}}
+function priceLabel(k,o){const g=geo();
+ if(o.p!==undefined)return typeof o.p=='number'?(o.p?fmt(o.p):'0 ₽'):o.p;
+ if(!o.r)return '0 ₽';
+ if(k=='fin')return o.r.toLocaleString('ru-RU')+' ₽/м²';
+ if(k=='edge')return o.r.toLocaleString('ru-RU')+' ₽/пм';
+ if(k=='light')return o.r.toLocaleString('ru-RU')+' ₽/шт';
+ if(k=='pav')return o.r.toLocaleString('ru-RU')+' ₽/м²'}
+function buildOpts(){for(const k in G){const el=document.getElementById('g-'+k);
+ el.innerHTML=G[k].map(o=>`<button class="opt" data-v="${o.id}">${o.c?`<span class="sw" style="background:${o.c}"></span>`:''}<span>${o.n}${o.d?`<small>${o.d}</small>`:''}</span><span class="pr">${priceLabel(k,o)}</span></button>`).join('');
+ el.onclick=e=>{const b=e.target.closest('.opt');if(b){S[k]=b.dataset.v;render()}}}}
+L.oninput=W.oninput=D.oninput=()=>{S.L=+L.value;S.W=+W.value;S.D=+D.value;render()};
+
+// svg helpers
+const shade=(hex,f)=>{const n=parseInt(hex.slice(1),16);let r=n>>16,g=n>>8&255,b=n&255;const m=f<0?0:255,t=Math.abs(f);r=Math.round(r+(m-r)*t);g=Math.round(g+(m-g)*t);b=Math.round(b+(m-b)*t);return'#'+((1<<24)|(r<<16)|(g<<8)|b).toString(16).slice(1)};
+function poolPath(x,y,l,w){
+ if(S.shape=='oval')return`M${x},${y+w/2}A${l/2},${w/2} 0 1 1 ${x+l},${y+w/2}A${l/2},${w/2} 0 1 1 ${x},${y+w/2}Z`;
+ if(S.shape=='roman'){const r=w/2;return`M${x+r},${y}H${x+l}V${y+w}H${x+r}A${r},${r} 0 0 1 ${x+r},${y}Z`}
+ return`M${x},${y}H${x+l}V${y+w}H${x}Z`}
+
+function drawTop(){const fin=pick('fin'),edge=pick('edge'),light=pick('light'),n=S.night;
+ const tl=S.shape=='roman'?S.L+S.W/2:S.L, bm=S.edge=='wood'?2:.6, sc=Math.min(600/(tl+2*bm),400/(S.W+2*bm)), l=tl*sc,w=S.W*sc, x=400-l/2,y=250-w/2;
+ const b=(S.edge=='wood'?2:.6)*sc, side=S.edge=='wood'?.6*sc:b;
+ const grass=n?'#1F3328':'#9DBB7E', sky=n?'#13202A':'#F6F4EF';
+ let s=`<defs>
+  <linearGradient id="wat" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${shade(fin.w,.25)}"/><stop offset="1" stop-color="${shade(fin.w,-.25)}"/></linearGradient>
+  <radialGradient id="glow"><stop offset="0" stop-color="${light.c||'#fff'}" stop-opacity=".85"/><stop offset="1" stop-color="${light.c||'#fff'}" stop-opacity="0"/></radialGradient>
+  <pattern id="tile" width="${sc*.25}" height="${sc*.25}" patternUnits="userSpaceOnUse"><path d="M${sc*.25} 0H0V${sc*.25}" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1"/></pattern>
+  <pattern id="deck" width="${sc*.15}" height="10" patternUnits="userSpaceOnUse"><rect width="${sc*.15}" height="10" fill="${edge.c}"/><line x1="0" y1="0" x2="0" y2="10" stroke="rgba(0,0,0,.18)"/></pattern>
+  <pattern id="stone" width="${sc*.6}" height="${sc*.3}" patternUnits="userSpaceOnUse"><rect width="${sc*.6}" height="${sc*.3}" fill="${edge.c}"/><path d="M0 0H${sc*.6}M0 0V${sc*.3}" stroke="rgba(0,0,0,.14)"/></pattern>
+  <clipPath id="pc"><path d="${poolPath(x,y,l,w)}"/></clipPath>
+ </defs>
+ <rect width="800" height="520" fill="${grass}"/>`;
+ // trees and grass texture
+ for(let i=0;i<26;i++){const tx=(i*97)%800,ty=(i*53)%520;if(Math.abs(tx-400)<l/2+b+40&&Math.abs(ty-250)<w/2+b+40)continue;s+=`<circle cx="${tx}" cy="${ty}" r="${10+(i%4)*5}" fill="${n?'#18291F':'#86A866'}" opacity=".7"/>`}
+ // house corner
+ s+=`<rect x="0" y="440" width="230" height="80" fill="${n?'#2B2F33':'#D9D2C5'}"/><text x="18" y="490" font-family="Golos Text" font-size="14" fill="${n?'#8C949A':'#8B8172'}">дом</text>`;
+ if(n)s+=`<rect x="40" y="440" width="50" height="6" fill="#FFD98A"/><rect x="140" y="440" width="50" height="6" fill="#FFD98A"/>`;
+ // deck/edge
+ s+=`<path d="${poolPath(x-side,y-b,l+side*2,w+b*2)}" fill="url(#${S.edge=='wood'?'deck':'stone'})" ${n?'style="filter:brightness(.55)"':''}/>`;
+ if(S.edge!='wood')s+=`<path d="${poolPath(x-side,y-b,l+side*2,w+b*2)}" fill="none" stroke="rgba(0,0,0,.15)"/>`;
+ // water
+ s+=`<path d="${poolPath(x,y,l,w)}" fill="${fin.c}"/>`;
+ s+=`<g clip-path="url(#pc)"><rect x="${x}" y="${y}" width="${l}" height="${w}" fill="url(#wat)" opacity="${n&&S.light=='none'?.5:.88}"/><rect x="${x}" y="${y}" width="${l}" height="${w}" fill="url(#tile)"/>`;
+ if(S.shape=='roman'){const r=w/2;for(let i=1;i<=3;i++)s+=`<path d="M${x+r},${y+i*r*.18} A${r-i*r*.18},${r-i*r*.18} 0 0 0 ${x+r},${y+w-i*r*.18}" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2"/>`}
+ else s+=`<rect x="${x+8}" y="${y+w*.15}" width="${sc*.9}" height="${w*.7}" fill="rgba(255,255,255,.12)"/>`;
+ for(let i=0;i<5;i++)s+=`<path d="M${x+l*(.15+i*.18)},${y+w*(.3+(i%2)*.35)} q12,-6 24,0 t24,0" stroke="rgba(255,255,255,.45)" stroke-width="2" fill="none"/>`;
+ // lights
+ if(S.light!='none'){const k=Math.max(4,Math.round(geo().P/3));for(let i=0;i<k;i++){const t=(i+.5)/k;let px,py;
+  if(i<k/2){px=x+l*(t*2);py=y+6}else{px=x+l*((t-.5)*2);py=y+w-6}
+  if(S.shape=='oval'){const a=i/k*Math.PI*2;px=400+Math.cos(a)*(l/2-8);py=250+Math.sin(a)*(w/2-8)}
+  s+=`<circle cx="${px}" cy="${py}" r="${n?38:5}" fill="url(#glow)" opacity="${n?.9:.6}"/>`}}
+ s+=`</g>`;
+ if(S.type=='over')s+=`<path d="${poolPath(x-6,y-6,l+12,w+12)}" fill="none" stroke="${n?'#5c6a70':'#E8EEF0'}" stroke-width="5" stroke-dasharray="3 3"/>`;
+ // jet/fall markers
+ if(S.dop.jet)s+=`<circle cx="${x+l-10}" cy="${y+w/2}" r="7" fill="#fff" opacity=".85"/>`;
+ if(S.dop.fall)s+=`<rect x="${x+l+side*.3}" y="${y+w*.3}" width="${Math.max(8,side*.5)}" height="${w*.4}" fill="${n?'#555':'#7B7F80'}"/>`;
+ // pavilion
+ if(S.pav!='none'){const px=x-side-6,pw=l+side*2+12;s+=`<rect x="${px}" y="${y-b-6}" width="${pw}" height="${w+b*2+12}" rx="${S.pav=='high'?30:18}" fill="rgba(220,235,240,.28)" stroke="${n?'#9fb3ba':'#fff'}" stroke-width="3"/>`;
+  const seg=Math.max(3,Math.round(tl/2));for(let i=1;i<seg;i++)s+=`<line x1="${px+pw*i/seg}" y1="${y-b-6}" x2="${px+pw*i/seg}" y2="${y+w+b+6}" stroke="${n?'#9fb3ba':'#fff'}" stroke-width="2" opacity=".8"/>`}
+ // dims
+ if(!n||true){const c=n?'#c9d3d6':'#3a4a50';s+=`<text x="400" y="${y-b-18}" text-anchor="middle" font-family="Golos Text" font-weight="700" font-size="15" fill="${c}">${r1(tl)} м</text><text x="${x-side-14}" y="250" text-anchor="middle" font-family="Golos Text" font-weight="700" font-size="15" fill="${c}" transform="rotate(-90 ${x-side-14} 250)">${S.W} м</text>`}
+ s+=`<text x="780" y="30" text-anchor="end" font-family="Geologica" font-size="16" fill="${n?'#c9d3d6':'#3a4a50'}">${fin.n}, ${n?'вечер':'день'}</text>`;
+ vTop.innerHTML=s}
+
+function drawSec(){const fin=pick('fin'),edge=pick('edge'),n=S.night,tl=S.shape=='roman'?S.L+S.W/2:S.L;
+ const sc=Math.min(480/tl,150/S.D),l=tl*sc,d=S.D*sc,x=360-l/2,g=150,wl=S.type=='over'?0:.15*sc;
+ let s=`<defs><linearGradient id="ws" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${shade(fin.w,.2)}"/><stop offset="1" stop-color="${shade(fin.w,-.35)}"/></linearGradient>
+ <pattern id="soil" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="${n?'#3A3129':'#CDB89A'}"/><circle cx="4" cy="5" r="1.4" fill="rgba(0,0,0,.12)"/><circle cx="11" cy="11" r="1" fill="rgba(0,0,0,.1)"/></pattern></defs>
+ <rect width="800" height="420" fill="${n?'#13202A':'#EEF4F4'}"/><rect y="${g}" width="800" height="270" fill="url(#soil)"/>`;
+ // concrete shell
+ const t=.3*sc;s+=`<rect x="${x-t}" y="${g}" width="${l+t*2}" height="${d+t}" fill="#9EA3A3"/>`;
+ s+=`<rect x="${x}" y="${g}" width="${l}" height="${d}" fill="${fin.c}"/>`;
+ s+=`<rect x="${x}" y="${g+wl}" width="${l}" height="${d-wl}" fill="url(#ws)" opacity=".85"/>`;
+ // steps
+ const st=S.shape=='roman'?4:3,sw=(S.shape=='roman'?S.W/2:.9)*sc/st,sh=Math.min(.3*sc,d/(st+1));
+ for(let i=0;i<st;i++)s+=`<rect x="${x}" y="${g+sh*(i+1)}" width="${sw*(st-i)}" height="${sh}" fill="${shade(fin.c,-.1)}" opacity=".9"/>`;
+ // lights
+ if(S.light!='none'){for(let i=1;i<4;i++)s+=`<circle cx="${x+l*i/4}" cy="${g+d*.55}" r="${n?30:6}" fill="${pick('light').c}" opacity="${n?.45:.9}"/>`}
+ if(S.dop.jet)s+=`<path d="M${x+l} ${g+d*.4} l-40 0" stroke="#fff" stroke-width="3" stroke-dasharray="6 5"/>`;
+ // overflow tank
+ if(S.type=='over')s+=`<rect x="${x+l+t+30}" y="${g+20}" width="80" height="${Math.min(d,90)}" fill="${n?'#4d5559':'#B8BDBD'}" stroke="#7d8384"/><text x="${x+l+t+70}" y="${g+20+Math.min(d,90)/2+4}" text-anchor="middle" font-family="Golos Text" font-size="11" fill="#2b3538">ёмкость</text>`;
+ // edges
+ const ew=(S.edge=='wood'?2:.6)*sc;s+=`<rect x="${x-ew}" y="${g-6}" width="${ew}" height="8" fill="${edge.c}"/><rect x="${x+l}" y="${g-6}" width="${ew}" height="8" fill="${edge.c}"/>`;
+ // pavilion
+ if(S.pav!='none'){const h=(S.pav=='high'?2.6:1.2)*sc*.8;s+=`<path d="M${x-ew} ${g-6} Q${x-ew} ${g-6-h*1.3} 400 ${g-6-h*1.3} T${x+l+ew} ${g-6}" fill="rgba(200,225,235,.3)" stroke="${n?'#9fb3ba':'#8BB3C0'}" stroke-width="3"/>`;
+  if(S.pav=='high')s+=`<g fill="${n?'#7f8b90':'#5E6B70'}"><circle cx="${x+l*.25}" cy="${g-6-58}" r="8"/><rect x="${x+l*.25-6}" y="${g-6-50}" width="12" height="44" rx="5"/></g>`}
+ // dims
+ const c=n?'#c9d3d6':'#2b3538';
+ s+=`<line x1="${x+l+12}" y1="${g}" x2="${x+l+12}" y2="${g+d}" stroke="${c}"/><text x="${x+l+18}" y="${g+d/2}" font-family="Golos Text" font-weight="700" font-size="14" fill="${c}">${S.D} м</text>`;
+ s+=`<text x="400" y="${g+d+t+34}" text-anchor="middle" font-family="Golos Text" font-size="13" fill="${c}">${S.type=='over'?'переливной: вода вровень с бортиком':'скиммерный: вода на 15 см ниже бортика'}, бетонная чаша 300 мм</text>`;
+ vSec.innerHTML=s}
+
+function mode(v){view=v;vTop.style.display=v==1?'':'none';vSec.style.display=v==2?'':'none';t1.classList.toggle('on',v==1);t2.classList.toggle('on',v==2)}
+
+function calc(){const g=geo(),rows=[];let sum=0;const sec=n=>rows.push({sec:n}),add=(n,q,v)=>{rows.push({n,q,v});sum+=v};
+ const sh=pick('shape'),fin=pick('fin'),edge=pick('edge'),light=pick('light'),pav=pick('pav'),heat=pick('heat');
+ const inner=g.A+g.P*S.D;
+ sec('Чаша');
+ add('Котлован и вывоз грунта',r1(g.V*1.4)+' м³',g.V*1.4*2200);
+ add('Бетонная чаша: '+sh.n.toLowerCase(),r1(g.A)+' м² зеркала',(g.A*22000+g.V*9000)*sh.k);
+ if(S.type=='over')add('Переливная решётка и ёмкость','по периметру '+r1(g.P)+' м',180000+g.A*9000);
+ add('Отделка: '+fin.n,r1(inner)+' м²',inner*fin.r);
+ add('Бортик: '+edge.n.toLowerCase(),r1(g.P)+' пм',g.P*edge.r);
+ if(S.edge=='wood')add('Настил ДПК вокруг бассейна',r1(g.P*2+16)+' м²',(g.P*2+16)*6800);
+ sec('Оборудование');
+ add('Фильтрация и насос','на '+r1(g.V)+' м³ воды',260000+g.V*1500);
+ if(S.light!='none'){const k=Math.max(4,Math.round(g.P/3));add('Подсветка: '+light.n.toLowerCase(),k+' шт',k*light.r)}
+ if(heat.p)add('Подогрев: '+heat.n.toLowerCase(),'1 компл',heat.p);
+ DOP.filter(d=>S.dop[d[0]]).forEach(d=>add(d[1],'1 компл',d[2]));
+ if(pav.r){const pa=(S.shape=='roman'?S.L+S.W/2+1.6:S.L+1.6)*(S.W+1.6);sec('Павильон');add('Павильон: '+pav.n.toLowerCase(),r1(pa)+' м²',pa*pav.r)}
+ return{rows,sum,g}}
+function renderEst(){const{rows,sum,g}=calc();
+ est.innerHTML=rows.map(r=>r.sec?`<tr class="sec"><td colspan=2>${r.sec}</td></tr>`:`<tr><td>${r.n}<div class="q">${r.q}</div></td><td>${fmt(r.v)}</td></tr>`).join('');
+ tot.textContent=tot2.textContent=fmt(sum);
+ const days=Math.round(30+g.A*.8+(S.type=='over'?10:0)+(S.pav!='none'?7:0));
+ per.textContent=`${r1(S.shape=='roman'?S.L+S.W/2:S.L)}×${S.W} м, срок около ${days} дней`;
+ facts.innerHTML=`<div><b>${r1(g.A)} м²</b>зеркало воды</div><div><b>${r1(g.V)} м³</b>объём воды</div><div><b>${S.D} м</b>глубина</div><div><b>${days} дн.</b>строительство</div>`}
+function renderDop(){dop.innerHTML=DOP.map(d=>`<label class="ck"><input type="checkbox" data-k="${d[0]}" ${S.dop[d[0]]?'checked':''}>${d[1]}<span class="p">${fmt(d[2])}</span></label>`).join('');
+ dop.querySelectorAll('input').forEach(c=>c.onchange=()=>{S.dop[c.dataset.k]=c.checked;render()})}
+
+function render(){L.value=S.L;W.value=S.W;D.value=S.D;Lv.textContent=S.L+' м';Wv.textContent=S.W+' м';Dv.textContent=S.D+' м';
+ for(const k in G)document.querySelectorAll('#g-'+k+' .opt').forEach(b=>b.classList.toggle('on',b.dataset.v==S[k]));
+ tn.classList.toggle('on',S.night);tn.textContent=S.night?'День':'Вечер';
+ drawTop();drawSec();renderEst()}
+
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2200)}
+function share(){const u=location.href.split('#')[0]+'#'+btoa(unescape(encodeURIComponent(JSON.stringify(S))));navigator.clipboard.writeText(u).then(()=>toast('Ссылка скопирована'),()=>prompt('Скопируйте ссылку',u))}
+function send(e){e.preventDefault();modal.classList.remove('on');toast('Спасибо! Заявка отправлена, скоро перезвоним')}
+buildOpts();renderDop();render();
+</script>
+</body>
+</html>

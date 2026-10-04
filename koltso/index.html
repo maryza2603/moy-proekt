@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Кольцо на заказ - конструктор</title>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1C1519;--deep:#140F12;--ink:#EFE4D2;--muted:#A8978E;--line:#3A2E33;--gold:#C9A56A;--rose:#7A4E58}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:300 16px/1.6 Jost,system-ui,sans-serif}
+h1,h2,h3{font-family:Prata,serif;font-weight:400}
+.top{max-width:1360px;margin:auto;padding:22px 24px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-family:Prata;font-size:22px;letter-spacing:.06em;color:var(--gold)}
+.top nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:14px}.top nav a:hover{color:var(--ink)}
+header{text-align:center;max-width:760px;margin:auto;padding:30px 24px 10px}
+header h1{font-size:clamp(34px,5vw,58px);line-height:1.08}
+header p{color:var(--muted);margin-top:10px}
+button{font:400 14px Jost;border:1px solid var(--line);background:transparent;color:var(--ink);padding:9px 16px;border-radius:30px;cursor:pointer;transition:.15s}
+button:hover{border-color:var(--gold);color:var(--gold)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.pri{background:var(--gold);color:var(--deep);border-color:var(--gold);font-weight:500}.pri:hover{background:#E0BE84;color:var(--deep)}
+main{max-width:1360px;margin:auto;padding:20px 24px 140px;display:grid;grid-template-columns:300px minmax(0,1fr) 300px;gap:32px;align-items:start}
+.grp{padding:16px 0 18px;border-bottom:1px solid var(--line)}
+.grp:first-child{padding-top:0}
+.grp h3{font-size:18px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.grp h3 span{font-family:Jost;font-size:13px;color:var(--muted)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{display:flex;align-items:center;gap:8px;padding:7px 13px 7px 8px}
+.opt.nosw{padding-left:13px}
+.opt.on{border-color:var(--gold);color:var(--gold);background:rgba(201,165,106,.08)}
+.sw{width:20px;height:20px;border-radius:50%;flex:none;border:1px solid rgba(255,255,255,.15)}
+select,input[type=text],input[type=tel]{width:100%;font:400 15px Jost;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--deep);color:var(--ink)}
+.hint{font-size:13px;color:var(--muted);margin-top:6px}
+.stage{position:sticky;top:12px}
+.view{background:radial-gradient(ellipse at 50% 38%,#3A2B31 0%,#1C1519 62%);border:1px solid var(--line);border-radius:24px;padding:16px;text-align:center}
+.tabs{display:inline-flex;gap:6px;margin-bottom:6px}.tabs button.on{background:var(--ink);color:var(--deep);border-color:var(--ink)}
+svg{display:block;width:100%;height:auto;max-height:62vh}
+.name{font-family:Prata;font-size:22px;margin-top:4px}
+.sub{color:var(--muted);font-size:14px}
+.est{margin-top:20px;border:1px solid var(--line);border-radius:24px;padding:20px 22px}
+.est table{width:100%;border-collapse:collapse;font-size:14px}
+.est td{padding:7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.est td:last-child{text-align:right;white-space:nowrap;padding-left:10px;color:var(--ink)}
+.est .q{color:var(--muted);font-size:12px}
+.tot{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;font-family:Prata;font-size:26px}.tot b{color:var(--gold);font-weight:400}
+.sticky{position:fixed;left:0;right:0;bottom:0;background:var(--deep);border-top:1px solid var(--line);z-index:5}
+.sticky .in{max-width:1360px;margin:auto;padding:14px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.sticky .sum{font-family:Prata;font-size:28px;color:var(--gold)}.sticky small{color:var(--muted);display:block;font-size:13px}
+.sticky .sp{flex:1}
+.modal{position:fixed;inset:0;background:rgba(10,7,9,.7);display:none;place-items:center;z-index:9;padding:16px}
+.modal.on{display:grid}.modal form{background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:24px;max-width:420px;width:100%}.modal form>*+*{margin-top:10px}
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%);background:var(--gold);color:var(--deep);padding:10px 18px;border-radius:30px;opacity:0;transition:.3s;z-index:10;pointer-events:none}.toast.on{opacity:1}
+@media(max-width:1100px){main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.stage{grid-column:1/-1;order:-1;position:static}}
+@media(max-width:680px){main{grid-template-columns:minmax(0,1fr);padding:10px 16px 150px}.top,header{padding-left:16px;padding-right:16px}.top nav a{margin:0 12px 0 0}.sticky .in{padding:12px 16px;gap:8px}.sticky .sp{display:none}.sticky .in>div:first-child{flex-basis:100%}.sticky .sum{font-size:22px}}
+@media print{body{background:#fff;color:#000}.sticky,.side,.modal,.tabs,.top nav,.tools{display:none!important}main{display:block}.view{background:#1C1519}.est td,.est td:last-child{color:#000}}
+</style>
+</head>
+<body>
+<div class="top"><span class="logo">Аурум</span><nav><a href="#" onclick="return false">Telegram</a><a href="#" onclick="return false">ВКонтакте</a><a href="tel:+70000000000">+7 (900) 000-00-00</a></nav></div>
+<header>
+  <h1>Кольцо, которое вы придумали сами</h1>
+  <p>Выберите металл, камень, оправу и гравировку. Мастер изготовит кольцо по вашему проекту за 3 недели.</p>
+</header>
+
+<main>
+  <aside class="side">
+    <div class="grp"><h3>Металл</h3><div class="opts" id="g-metal"></div></div>
+    <div class="grp"><h3>Камень</h3><div class="opts" id="g-gem"></div></div>
+    <div class="grp"><h3>Огранка</h3><div class="opts" id="g-cut"></div></div>
+    <div class="grp"><h3>Вес камня <span id="mm"></span></h3><div class="opts" id="g-ct"></div></div>
+  </aside>
+
+  <section class="stage">
+    <div class="view">
+      <div class="tabs"><button id="t1" class="on" onclick="mode(1)">Сбоку</button><button id="t2" onclick="mode(2)">На руке, сверху</button></div>
+      <svg id="vS" viewBox="0 0 500 440"></svg>
+      <svg id="vT" viewBox="0 0 500 440" style="display:none"></svg>
+      <div class="name" id="nm"></div><div class="sub" id="sb"></div>
+    </div>
+    <div class="est"><table id="est"></table><div class="tot"><span>Итого</span><b id="tot"></b></div></div>
+  </section>
+
+  <aside class="side">
+    <div class="grp"><h3>Оправа</h3><div class="opts" id="g-set"></div></div>
+    <div class="grp"><h3>Шинка</h3><div class="opts" id="g-band"></div></div>
+    <div class="grp"><h3>Размер</h3><select id="size"></select><p class="hint">Не знаете размер? Пришлём бесплатный кольцемер.</p></div>
+    <div class="grp"><h3>Гравировка <span>3 500 ₽</span></h3><input type="text" id="eng" maxlength="24" placeholder="Например: навсегда 14.02"><p class="hint">До 24 знаков, на внутренней стороне.</p></div>
+    <div class="grp" style="border:0;display:flex;gap:8px;flex-wrap:wrap" class="tools"><button onclick="share()">Ссылка на кольцо</button><button onclick="if(confirm('Начать заново?')){S=demo();render()}">Начать заново</button></div>
+  </aside>
+</main>
+
+<div class="sticky"><div class="in">
+  <div><div class="sum" id="tot2"></div><small id="per"></small></div><div class="sp"></div>
+  <button onclick="print()">Смета в PDF</button>
+  <button class="pri" onclick="modal.classList.add('on')">Заказать кольцо</button>
+</div></div>
+
+<div class="modal" id="modal" onclick="if(event.target==this)this.classList.remove('on')"><form onsubmit="send(event)">
+  <h3 style="font-size:24px">Заказ кольца</h3>
+  <p style="color:var(--muted);font-size:14px">Проект кольца придёт ювелиру. Он перезвонит, покажет камни на видео и пришлёт 3D-эскиз на согласование.</p>
+  <input type="text" placeholder="Как вас зовут" required>
+  <input type="tel" placeholder="Телефон" required>
+  <button class="pri" style="width:100%">Заказать кольцо</button>
+</form></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const G={
+ metal:[{id:'wg',n:'Белое золото',c:'#E4E4E2',p:38000,g:['#FAFAF8','#C9CBCC','#8E9296']},
+  {id:'yg',n:'Жёлтое золото',c:'#E1BE6E',p:34000,g:['#FBEAB0','#D6AE57','#9C7426']},
+  {id:'rg',n:'Розовое золото',c:'#E0A88F',p:36000,g:['#F8D3C2','#D5977E','#A0644E']},
+  {id:'pt',n:'Платина',c:'#D3D6D9',p:72000,g:['#F2F4F6','#BEC3C8','#7F868D']}],
+ gem:[{id:'dia',n:'Бриллиант',c:'#EAF3F8',r:520000,f:['#FFFFFF','#CFE6F2','#8FB4C9']},
+  {id:'lab',n:'Выращенный бриллиант',c:'#E2EEF5',r:115000,f:['#FFFFFF','#CFE6F2','#8FB4C9']},
+  {id:'sap',n:'Сапфир',c:'#2848A0',r:180000,f:['#6E8FE0','#2848A0','#14245A']},
+  {id:'emr',n:'Изумруд',c:'#1F8A5E',r:220000,f:['#6FD3A6','#1F8A5E','#0D4A31']},
+  {id:'rub',n:'Рубин',c:'#A8183A',r:260000,f:['#F06A88','#A8183A','#5A0A1E']}],
+ cut:[{id:'round',n:'Круг',k:1},{id:'oval',n:'Овал',k:.92},{id:'princess',n:'Принцесса',k:.85},{id:'emerald',n:'Изумрудная',k:.88},{id:'pear',n:'Груша',k:.9}],
+ ct:[{id:'0.3',n:'0,3 кт',mm:4.3},{id:'0.5',n:'0,5 кт',mm:5.2},{id:'0.7',n:'0,7 кт',mm:5.8},{id:'1',n:'1 кт',mm:6.5},{id:'1.5',n:'1,5 кт',mm:7.4},{id:'2',n:'2 кт',mm:8.2}],
+ set:[{id:'p4',n:'Солитер, 4 крапана',p:0},{id:'p6',n:'Солитер, 6 крапанов',p:6000},{id:'halo',n:'Halo, ореол из камней',p:48000},{id:'hidden',n:'Скрытый ореол',p:26000}],
+ band:[{id:'classic',n:'Классическая',p:0},{id:'thin',n:'Тонкая 1,6 мм',p:-6000},{id:'pave',n:'Дорожка камней',p:42000},{id:'twist',n:'Витая',p:14000}]};
+const fmt=n=>Math.round(n).toLocaleString('ru-RU')+' ₽';
+const pick=k=>G[k].find(o=>o.id==S[k]);
+function demo(){return{metal:'pt',gem:'dia',cut:'oval',ct:'1',set:'hidden',band:'pave',size:'17',eng:''}}
+let S=demo(),view=1;
+try{if(location.hash.length>2)S=Object.assign(demo(),JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(1))))))}catch(e){}
+
+function buildOpts(){for(const k in G){const el=document.getElementById('g-'+k),sw=k=='metal'||k=='gem';
+ el.innerHTML=G[k].map(o=>`<button class="opt ${sw?'':'nosw'}" data-v="${o.id}">${sw?`<span class="sw" style="background:${o.c}"></span>`:''}${o.n}</button>`).join('');
+ el.onclick=e=>{const b=e.target.closest('.opt');if(b){S[k]=b.dataset.v;render()}}}
+ size.innerHTML=['15','15.5','16','16.5','17','17.5','18','18.5','19','20'].map(v=>`<option value="${v}">${v.replace('.',',')}</option>`).join('');
+ size.onchange=()=>{S.size=size.value;renderEst()};eng.oninput=()=>{S.eng=eng.value;render()}}
+
+const defs=()=>{const m=pick('metal'),g=pick('gem');return`<defs>
+ <linearGradient id="mt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${m.g[0]}"/><stop offset=".45" stop-color="${m.g[1]}"/><stop offset=".7" stop-color="${m.g[2]}"/><stop offset="1" stop-color="${m.g[1]}"/></linearGradient>
+ <linearGradient id="mt2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${m.g[0]}"/><stop offset=".5" stop-color="${m.g[1]}"/><stop offset="1" stop-color="${m.g[2]}"/></linearGradient>
+ <linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${g.f[0]}"/><stop offset=".55" stop-color="${g.f[1]}"/><stop offset="1" stop-color="${g.f[2]}"/></linearGradient>
+ <radialGradient id="spark"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+ <radialGradient id="shadow"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>`};
+
+// side view
+function drawSide(){const ct=pick('ct'),u=ct.mm*9,cx=250,cy=280,R=118,band=S.band=='thin'?9:S.band=='pave'?15:14;
+ const shapeW={round:1,oval:.85,princess:.95,emerald:.82,pear:.82}[S.cut],w=u*shapeW,top=cy-R-band/2;
+ let s=defs()+`<ellipse cx="${cx}" cy="${cy+R+28}" rx="150" ry="16" fill="url(#shadow)"/>`;
+ // band ring (front view of hoop)
+ s+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="url(#mt)" stroke-width="${band*2}"/>`;
+ s+=`<circle cx="${cx}" cy="${cy}" r="${R-band}" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>`;
+ if(S.band=='twist')for(let a=-170;a<=-10;a+=12){const r=a*Math.PI/180;s+=`<line x1="${cx+Math.cos(r)*(R-band)}" y1="${cy+Math.sin(r)*(R-band)}" x2="${cx+Math.cos(r+.08)*(R+band)}" y2="${cy+Math.sin(r+.08)*(R+band)}" stroke="rgba(0,0,0,.25)" stroke-width="1.5"/>`}
+ if(S.band=='pave')for(let a=-160;a<=-20;a+=9){if(a>-112&&a<-68)continue;const r=a*Math.PI/180;s+=`<circle cx="${cx+Math.cos(r)*(R+band*.45)}" cy="${cy+Math.sin(r)*(R+band*.45)}" r="3.6" fill="url(#gm)" stroke="${pick('metal').g[2]}" stroke-width=".8"/>`}
+ // basket + prongs
+ const gird=top-26-u*.12,crownH=u*.32,pavH=u*.62;
+ s+=`<path d="M${cx-w*.32} ${top+4} L${cx-w*.18} ${gird+pavH*.7} L${cx+w*.18} ${gird+pavH*.7} L${cx+w*.32} ${top+4}Z" fill="url(#mt2)"/>`;
+ if(S.set=='hidden'||S.set=='halo'){const hw=S.set=='halo'?w*1.25:w*.8,hy=S.set=='halo'?gird+4:gird+pavH*.55;s+=`<rect x="${cx-hw/2}" y="${hy}" width="${hw}" height="9" rx="4" fill="url(#mt2)"/>`;for(let i=0;i<9;i++)s+=`<circle cx="${cx-hw/2+6+i*(hw-12)/8}" cy="${hy+3}" r="3.4" fill="url(#gm)"/>`}
+ // stone: pavilion + crown
+ s+=`<path d="M${cx-w/2} ${gird} L${cx} ${gird+pavH} L${cx+w/2} ${gird}Z" fill="url(#gm)" stroke="rgba(255,255,255,.4)" stroke-width=".8"/>`;
+ s+=`<path d="M${cx-w/2} ${gird} L${cx-w*.3} ${gird-crownH} L${cx+w*.3} ${gird-crownH} L${cx+w/2} ${gird}Z" fill="url(#gm)" stroke="rgba(255,255,255,.55)" stroke-width=".8"/>`;
+ for(let i=1;i<4;i++)s+=`<line x1="${cx-w/2+w*i/4}" y1="${gird}" x2="${cx}" y2="${gird+pavH}" stroke="rgba(255,255,255,.35)" stroke-width=".8"/><line x1="${cx-w*.3+w*.6*i/4}" y1="${gird-crownH}" x2="${cx-w/2+w*i/4}" y2="${gird}" stroke="rgba(255,255,255,.35)" stroke-width=".8"/>`;
+ // prongs
+ const np=S.set=='p6'?3:2;for(let i=0;i<np;i++){const f=np==2?[-.46,.46][i]:[-.46,0,.46][i];s+=`<path d="M${cx+f*w*.6} ${top+2} L${cx+f*w*1.04} ${gird-crownH*.35}" stroke="url(#mt2)" stroke-width="5" stroke-linecap="round"/>`;}
+ s+=`<circle cx="${cx-w*.12}" cy="${gird-crownH*.55}" r="${u*.18}" fill="url(#spark)"/><circle cx="${cx+w*.22}" cy="${gird+pavH*.3}" r="${u*.1}" fill="url(#spark)"/>`;
+ if(S.eng)s+=`<path id="ep" d="M${cx-R+band+12} ${cy+10} A${R-band-12} ${R-band-12} 0 0 0 ${cx+R-band-12} ${cy+10}" fill="none"/><text font-family="Prata" font-size="14" fill="${pick('metal').g[0]}" opacity=".85"><textPath href="#ep" startOffset="50%" text-anchor="middle">${esc(S.eng)}</textPath></text>`;
+ vS.innerHTML=s}
+
+// top view on finger
+function stonePath(cx,cy,r){const c=S.cut;
+ if(c=='round')return`<circle cx="${cx}" cy="${cy}" r="${r}"/>`;
+ if(c=='oval')return`<ellipse cx="${cx}" cy="${cy}" rx="${r*.82}" ry="${r*1.18}"/>`;
+ if(c=='princess')return`<rect x="${cx-r*.9}" y="${cy-r*.9}" width="${r*1.8}" height="${r*1.8}"/>`;
+ if(c=='emerald'){const a=r*.75,b=r*1.15,k=r*.25;return`<path d="M${cx-a+k} ${cy-b}H${cx+a-k}L${cx+a} ${cy-b+k}V${cy+b-k}L${cx+a-k} ${cy+b}H${cx-a+k}L${cx-a} ${cy+b-k}V${cy-b+k}Z"/>`}
+ return`<path d="M${cx} ${cy-r*1.3} C${cx+r*.5} ${cy-r*.6} ${cx+r*.95} ${cy} ${cx+r*.9} ${cy+r*.35} A${r*.9} ${r*.9} 0 0 1 ${cx-r*.9} ${cy+r*.35} C${cx-r*.95} ${cy} ${cx-r*.5} ${cy-r*.6} ${cx} ${cy-r*1.3}Z"/>`}
+function facets(cx,cy,r){const c=S.cut;let s='';
+ if(c=='princess'||c=='round'||c=='oval'||c=='pear'){const sx=c=='oval'?.82:c=='princess'?.9:.85,sy=c=='oval'?1.18:c=='princess'?.9:1;for(let i=0;i<8;i++){const a=i*Math.PI/4;s+=`<line x1="${cx}" y1="${cy}" x2="${cx+Math.cos(a)*r*sx}" y2="${cy+Math.sin(a)*r*sy}"/>`}
+  s+=c=='princess'?`<rect x="${cx-r*.45}" y="${cy-r*.45}" width="${r*.9}" height="${r*.9}"/>`:`<ellipse cx="${cx}" cy="${cy}" rx="${r*.45*sx}" ry="${r*.45*sy}"/>`}
+ else for(let i=1;i<3;i++)s+=`<rect x="${cx-r*.75*(1-i*.28)}" y="${cy-r*1.15*(1-i*.22)}" width="${r*1.5*(1-i*.28)}" height="${r*2.3*(1-i*.22)}"/>`;
+ return`<g fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1">${s}</g>`}
+function drawTop(){const ct=pick('ct'),r=ct.mm*6.2,cx=250,cy=210,m=pick('metal'),bw=S.band=='thin'?14:S.band=='pave'?24:20;
+ let s=defs()+`<defs><linearGradient id="skin" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B58673"/><stop offset=".5" stop-color="#E2B9A4"/><stop offset="1" stop-color="#B58673"/></linearGradient></defs>`;
+ s+=`<path d="M175 440 L180 60 Q250 -10 320 60 L325 440Z" fill="url(#skin)"/><path d="M215 40 Q250 20 285 40 L282 75 Q250 64 218 75Z" fill="#F0D8CC" opacity=".8"/>`;
+ s+=`<path d="M210 120 q40 8 80 0 M212 300 q38 8 76 0" stroke="rgba(120,70,55,.35)" stroke-width="2" fill="none"/>`;
+ // band across finger
+ s+=`<path d="M176 ${cy-bw/2} Q250 ${cy-bw/2-14} 324 ${cy-bw/2} L324 ${cy+bw/2} Q250 ${cy+bw/2-14} 176 ${cy+bw/2}Z" fill="url(#mt2)"/>`;
+ if(S.band=='twist')for(let x=182;x<322;x+=10)s+=`<line x1="${x}" y1="${cy+bw/2-4}" x2="${x+8}" y2="${cy-bw/2-2}" stroke="rgba(0,0,0,.22)" stroke-width="1.4"/>`;
+ if(S.band=='pave')for(let x=186;x<318;x+=11){if(Math.abs(x-250)<r*1.3)continue;s+=`<circle cx="${x}" cy="${cy-6+Math.pow((x-250)/74,2)*6}" r="4.2" fill="url(#gm)" stroke="${m.g[2]}" stroke-width=".8"/>`}
+ // halo
+ if(S.set=='halo'){const k=1.38;s+=`<g fill="url(#mt2)" transform="translate(${cx} ${cy}) scale(${k}) translate(${-cx} ${-cy})">${stonePath(cx,cy,r)}</g>`;
+  const n=22;for(let i=0;i<n;i++){const a=i/n*Math.PI*2,sx=S.cut=='oval'||S.cut=='emerald'||S.cut=='pear'?.85:1,sy=sx==1?1:1.25;s+=`<circle cx="${cx+Math.cos(a)*r*1.2*sx}" cy="${cy+Math.sin(a)*r*1.2*sy}" r="${r*.1}" fill="url(#gm)"/>`}}
+ // prongs
+ const pr=S.set=='p6'?6:4;for(let i=0;i<pr;i++){const a=(i/pr)*Math.PI*2+(pr==4?Math.PI/4:0),sx=S.cut=='oval'||S.cut=='emerald'||S.cut=='pear'?.82:.95,sy=sx==.95?.95:1.18;s+=`<circle cx="${cx+Math.cos(a)*r*sx}" cy="${cy+Math.sin(a)*r*sy}" r="${S.set=='halo'?3:4.5}" fill="url(#mt2)"/>`}
+ s+=`<g fill="url(#gm)" stroke="rgba(255,255,255,.7)" stroke-width="1.2">${stonePath(cx,cy,r)}</g>`+facets(cx,cy,r);
+ s+=`<circle cx="${cx-r*.3}" cy="${cy-r*.35}" r="${r*.35}" fill="url(#spark)"/>`;
+ // re-draw prongs on top
+ for(let i=0;i<pr;i++){const a=(i/pr)*Math.PI*2+(pr==4?Math.PI/4:0),sx=S.cut=='oval'||S.cut=='emerald'||S.cut=='pear'?.82:.95,sy=sx==.95?.95:1.18;s+=`<circle cx="${cx+Math.cos(a)*r*sx*.97}" cy="${cy+Math.sin(a)*r*sy*.97}" r="${S.set=='halo'?2.6:3.8}" fill="url(#mt2)"/>`}
+ s+=`<text x="250" y="24" text-anchor="middle" font-family="Jost" font-size="13" fill="#A8978E">камень ${String(ct.mm).replace('.',',')} мм, размер ${S.size.replace('.',',')}</text>`;
+ vT.innerHTML=s.replace(/id="(mt2?|gm|spark|shadow)"/g,'id="t$1"').replace(/url\(#(mt2?|gm|spark|shadow)\)/g,'url(#t$1)')}
+const esc=t=>t.replace(/[<&>"]/g,c=>({'<':'&lt;','&':'&amp;','>':'&gt;','"':'&quot;'}[c]));
+function mode(v){view=v;vS.style.display=v==1?'':'none';vT.style.display=v==2?'':'none';t1.classList.toggle('on',v==1);t2.classList.toggle('on',v==2)}
+
+function calc(){const rows=[];let sum=0;const add=(n,q,v)=>{rows.push({n,q,v});sum+=v};
+ const m=pick('metal'),g=pick('gem'),c=pick('cut'),ct=+S.ct,st=pick('set'),b=pick('band');
+ const sz=1+(parseFloat(S.size)-17)*.03;
+ add('Шинка: '+m.n.toLowerCase(),(m.id=='pt'?'платина 950':'золото 585')+', '+b.n.toLowerCase(),(m.p+b.p)*sz);
+ add(g.n+', огранка «'+c.n.toLowerCase()+'»',String(ct).replace('.',',')+' кт'+(g.id=='dia'?', сертификат GIA':g.id=='lab'?', сертификат IGI':''),g.r*Math.pow(ct,1.6)*c.k);
+ add('Оправа: '+st.n.toLowerCase(),st.id=='halo'?'22 бриллианта по 0,01 кт':st.id=='hidden'?'9 бриллиантов под камнем':'ручная закрепка',12000+st.p);
+ if(S.eng)add('Гравировка','«'+esc(S.eng)+'»',3500);
+ add('Работа ювелира и 3D-модель','изготовление 3 недели',28000);
+ return{rows,sum}}
+function renderEst(){const{rows,sum}=calc();
+ est.innerHTML=rows.map(r=>`<tr><td>${r.n}<div class="q">${r.q}</div></td><td>${fmt(r.v)}</td></tr>`).join('');
+ tot.textContent=tot2.textContent=fmt(sum);per.textContent=`размер ${S.size.replace('.',',')}, изготовление 3 недели`}
+
+function render(){for(const k in G)document.querySelectorAll('#g-'+k+' .opt').forEach(b=>b.classList.toggle('on',b.dataset.v==S[k]));
+ size.value=S.size;if(eng.value!=S.eng)eng.value=S.eng;mm.textContent=String(pick('ct').mm).replace('.',',')+' мм';
+ nm.textContent=`${pick('gem').n}, ${pick('ct').n}`;sb.textContent=`${pick('metal').n}, ${pick('set').n.toLowerCase()}`;
+ drawSide();drawTop();renderEst()}
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2200)}
+function share(){const u=location.href.split('#')[0]+'#'+btoa(unescape(encodeURIComponent(JSON.stringify(S))));navigator.clipboard.writeText(u).then(()=>toast('Ссылка скопирована'),()=>prompt('Скопируйте ссылку',u))}
+function send(e){e.preventDefault();modal.classList.remove('on');toast('Заказ принят, ювелир скоро позвонит')}
+buildOpts();render();
+</script>
+</body>
+</html>
