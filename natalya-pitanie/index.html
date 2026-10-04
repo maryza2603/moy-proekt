@@ -116,8 +116,9 @@ h2{font-size:clamp(30px,4vw,48px);font-weight:700;max-width:20ch;margin-bottom:2
 footer{padding:40px 0 56px;color:var(--muted);font-size:15px;text-align:center}
 
 /* тарелки */
-.pool-band{height:clamp(220px,32vw,380px);background:url(img/pool.jpg) center 40%/cover;position:relative;display:flex;align-items:flex-end}
-.pool-band p{font-family:"Unbounded";font-weight:700;color:#fff;font-size:clamp(22px,3.2vw,40px);line-height:1.15;max-width:18ch;padding:0 0 36px;text-shadow:0 2px 18px rgba(31,58,43,.55)}
+.pool-band{height:clamp(240px,32vw,400px);background:url(img/greens.jpg) right center/cover;position:relative;display:flex;align-items:center}
+.pool-band p{font-family:"Unbounded";font-weight:700;color:var(--deep);font-size:clamp(20px,3vw,38px);line-height:1.15;max-width:14ch}
+@media (max-width:560px){.pool-band{background-position:62% center}.pool-band p{background:rgba(245,246,238,.88);padding:14px 16px;border-radius:16px}}
 .plates{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .plates figure{background:var(--white);border-radius:28px;overflow:hidden;border:1px solid var(--line)}
 .plates img{width:100%;aspect-ratio:1;object-fit:cover}
@@ -237,7 +238,7 @@ footer{padding:40px 0 56px;color:var(--muted);font-size:15px;text-align:center}
     </div>
   </section>
 
-  <div class="pool-band"><div class="wrap" style="width:100%"><p>Дисциплина бассейна - в каждой тарелке</p></div></div>
+  <div class="pool-band"><div class="wrap" style="width:100%"><p>Еда - не враг, а топливо для жизни</p></div></div>
 
   <section id="plates">
     <div class="wrap">
