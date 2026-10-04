@@ -25,7 +25,7 @@ nav a{color:#cfe7df;text-decoration:none;margin-left:24px;font-size:15px}nav a:h
 .hero h1{font-size:52px;margin-bottom:20px}.hero h1 em{font-style:normal;color:var(--sun)}
 .hero p{color:#cfe7df;font-size:19px;margin-bottom:34px}
 .photo{color:#14463f !important;aspect-ratio:4/5;border-radius:200px 200px 32px 32px;background:linear-gradient(170deg,#f7ecd2,#d9e6dc 60%,#a9c7b8);display:flex;align-items:flex-end;justify-content:center;padding:28px;color:#fff;font-size:14px;position:relative;box-shadow:0 30px 60px rgba(0,0,0,.3)}
-.photo::before{content:"";position:absolute;inset:14px;border:2px dashed rgba(20,70,63,.25);border-radius:190px 190px 24px 24px}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}.photo .badge{z-index:1}
 .badge{position:absolute;left:-28px;top:40%;background:#fff;color:var(--ink);border-radius:18px;padding:14px 18px;font-size:14px;box-shadow:0 12px 30px rgba(0,0,0,.2)}.badge b{color:var(--deep);font-size:22px;display:block;font-family:Lora,serif}
 .facts{display:flex;gap:36px;margin-top:40px}
 .facts b{display:block;font-family:Lora,serif;font-size:34px;color:var(--sun)}.facts span{font-size:14px;color:#a9cfc3}
@@ -77,7 +77,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   <a href="#form" class="btn">Записаться на первую консультацию</a>
   <div class="facts"><div><b>8 лет</b><span>практики</span></div><div><b>600+</b><span>клиентов</span></div><div><b>МГУ</b><span>образование</span></div></div>
  </div>
- <div class="photo"><div class="badge"><b>4.9 ★</b>средняя оценка</div>Здесь будет фото специалиста</div>
+ <div class="photo"><div class="badge"><b>4.9 ★</b>средняя оценка</div><img src="photo.jpg" alt="Анна Смирнова, психолог"></div>
 </div></div>
 
 <section id="help"><div class="wrap">
@@ -128,14 +128,14 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
    <input name="phone" type="tel" placeholder="Телефон или @telegram" required>
    <select name="format"><option>Онлайн</option><option>Очно в Москве</option></select>
    <textarea name="msg" rows="3" placeholder="Коротко о запросе (необязательно)"></textarea>
-   <label class="ok"><input type="checkbox" required> Согласна(сен) на обработку персональных данных</label>
+   <label class="ok"><input type="checkbox" required> Согласна / согласен на обработку персональных данных</label>
    <button class="btn">Отправить заявку</button>
   </form>
   <div class="done" id="done"><h3>Спасибо!</h3><p>Заявка принята. Свяжусь с вами в ближайшее время.</p></div>
  </div>
 </div></div></section>
 
-<footer><div class="wrap"><span>© 2026 Анна Смирнова, психолог</span><span><a href="#">Telegram</a> · <a href="#">WhatsApp</a> · +7 900 000-00-00</span></div></footer>
+<footer><div class="wrap"><span>© 2026 Анна Смирнова, психолог</span><span><a href="#">Telegram</a> · <a href="#">WhatsApp</a></span></div></footer>
 
 <script>
 document.getElementById('f').addEventListener('submit',e=>{
