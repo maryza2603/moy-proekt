@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Бренд-гайд Марии, версия 2</title>
+<link rel="icon" href="logo/favicon-64.png">
+<style>
+@font-face{font-family:"PT Serif";src:url(fonts/PT_Serif-Web-Regular.ttf);font-weight:400}
+@font-face{font-family:"PT Serif";src:url(fonts/PT_Serif-Web-Bold.ttf);font-weight:700}
+@font-face{font-family:"PT Serif";src:url(fonts/PT_Serif-Web-Italic.ttf);font-style:italic}
+@font-face{font-family:"Manrope";src:url(fonts/Manrope-Variable.ttf);font-weight:200 800}
+:root{
+  --terra:#CF6640;--terra-d:#B4532F;--cream:#FAF6F1;--ink:#1E1D1B;
+  --beige:#EFE4D8;--line:#E7E1DA;--muted:#6E655D;--white:#FFFFFF;--soft:#F5F2EE;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--white);color:var(--ink);font:400 16px/1.55 Manrope,system-ui,sans-serif}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+
+/* Шапка */
+.nav{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;text-decoration:none}
+.brand img{width:36px;border-radius:50%}
+.nav ul{display:flex;gap:28px;list-style:none;padding:0;font-size:13px;font-weight:600}
+.nav ul a{text-decoration:none}
+.nav ul a:hover{color:var(--terra-d)}
+.pill-btn{display:inline-block;background:var(--terra);color:#fff;font-weight:700;font-size:14px;padding:11px 20px;border-radius:40px;text-decoration:none}
+.pill-btn:hover{background:var(--terra-d)}
+
+/* Огромные заголовки - главный приём */
+.big{font:800 clamp(52px,10vw,132px)/.9 Manrope,sans-serif;letter-spacing:-.045em;text-transform:uppercase}
+.h2{font:800 clamp(40px,6.4vw,82px)/.92 Manrope,sans-serif;letter-spacing:-.04em;text-transform:uppercase}
+.kicker{font-size:12px;color:var(--muted);margin-bottom:18px}
+.side{max-width:300px;color:var(--muted);font-size:14px;text-align:right;justify-self:end}
+
+.hero{padding:56px 0 32px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:32px}
+.photo{position:relative;border-radius:24px;overflow:hidden;height:min(560px,62vw)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+.card{position:absolute;right:20px;top:20px;background:rgba(30,29,27,.86);color:#fff;border-radius:14px;padding:16px 20px;min-width:240px}
+.card small{color:#F2B79F;font-size:11px}
+.card b{display:block;font-size:20px;margin:4px 0 10px}
+.card .row{display:flex;gap:18px;font-size:11px;color:#cfc8c0}
+.card .row strong{display:block;color:#fff;font-size:12px}
+
+/* Бегущая строка */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:20px;overflow:hidden}
+.track{display:flex;gap:28px;white-space:nowrap;padding:14px 0;font-size:14px;font-weight:600;width:max-content;animation:run 40s linear infinite}
+.track .tag{background:var(--terra);color:#fff;padding:3px 12px;border-radius:30px}
+@keyframes run{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.track{animation:none}}
+
+section{padding:110px 0 0}
+.head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:32px;margin-bottom:40px}
+
+/* Знак */
+.marks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.marks figure{background:var(--soft);border-radius:18px;padding:36px;display:grid;place-items:center;min-height:260px;position:relative}
+.marks figure.dark{background:var(--ink)}
+.marks figcaption{position:absolute;left:18px;bottom:14px;font-size:13px;font-weight:600}
+.marks .dark figcaption{color:#fff}
+
+/* Цвета - как таблица забегов */
+.rows{border-top:1px solid var(--line)}
+.crow{display:grid;grid-template-columns:72px 1.3fr 1fr 1fr auto;align-items:center;gap:20px;padding:16px 0;border-bottom:1px solid var(--line)}
+.chip{width:72px;height:48px;border-radius:12px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.crow b{font-size:18px}
+.crow .lbl{font-size:11px;color:var(--muted);display:block}
+.crow .val{font-weight:600}
+.badge{font-size:11px;font-weight:700;padding:5px 12px;border-radius:30px;border:1px solid var(--line);justify-self:start}
+.badge.main{background:var(--terra);color:#fff;border-color:var(--terra)}
+.copy{border:1px solid var(--ink);background:none;border-radius:30px;padding:9px 18px;font:600 13px Manrope,sans-serif;cursor:pointer}
+.copy:hover{background:var(--ink);color:#fff}
+
+/* Шрифты */
+.fonts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fbox{border-radius:18px;padding:32px;background:var(--soft)}
+.fbox.serif{background:var(--cream)}
+.fbox .name{font-size:13px;color:var(--muted);margin-bottom:10px}
+.fbox .sample{font-size:120px;line-height:1;margin:6px 0 18px}
+.serif .sample{font-family:"PT Serif",serif}
+.sans .sample{font-weight:800;letter-spacing:-.04em}
+.fbox p{max-width:40ch}
+
+/* Работы - мозаика */
+.mosaic{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tile{position:relative;border-radius:20px;overflow:hidden;background:var(--soft)}
+.tile img{width:100%;height:auto}
+.tile.big-t{grid-column:span 2}
+.tile .tl{position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.92);border-radius:30px;padding:6px 14px;font-size:13px;font-weight:700}
+
+.shop{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.item img{border-radius:16px;aspect-ratio:3/2;object-fit:cover;width:100%;background:var(--soft)}
+.item div{display:flex;justify-content:space-between;margin-top:10px;font-size:14px;font-weight:700}
+.item span{color:var(--muted);font-weight:500}
+
+/* Правила - как отзывы */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.q{border:1px solid var(--line);border-radius:18px;padding:28px;font-size:19px;font-weight:600;line-height:1.35;min-height:200px;display:flex;flex-direction:column;justify-content:space-between}
+.q small{font-size:12px;color:var(--muted);font-weight:500}
+.q.hl{background:var(--terra);color:#fff;border-color:var(--terra)}
+.q.hl small{color:#FBE0D4}
+
+/* Финал */
+.final{margin-top:110px;border-radius:28px;overflow:hidden;position:relative;background:var(--ink);color:#fff;min-height:440px;display:flex;align-items:flex-end}
+.final img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;opacity:.38}
+.final .in{position:relative;padding:56px}
+.final .h2 span{color:#F08A62}
+.final p{margin:18px 0 26px;max-width:46ch;color:#e6ded6}
+
+footer{padding:56px 0 40px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px;font-size:14px}
+footer h4{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:10px}
+footer a{display:block;text-decoration:none;margin-bottom:6px}
+footer a:hover{color:var(--terra-d)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:30px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+
+@media (max-width:860px){
+  .wrap{padding:0 16px}
+  .nav ul{display:none}
+  .hero,.head{grid-template-columns:1fr}
+  .side{text-align:left;justify-self:start}
+  .card{left:12px;right:12px;top:auto;bottom:12px;min-width:0}
+  .photo{height:440px}
+  section{padding-top:72px}
+  .marks,.fonts,.quotes,.shop{grid-template-columns:1fr}
+  .mosaic{grid-template-columns:1fr}
+  .tile.big-t{grid-column:auto}
+  .crow{grid-template-columns:56px 1fr auto;row-gap:6px}
+  .chip{width:56px}
+  .crow .hide-m{display:none}
+  .fbox .sample{font-size:84px}
+  .final .in{padding:28px}
+  footer{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Разделы">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="logo/logo-512.png" alt="">М | Д</a>
+    <ul>
+      <li><a href="#znak">Знак</a></li>
+      <li><a href="#cveta">Цвета</a></li>
+      <li><a href="#shrifty">Шрифты</a></li>
+      <li><a href="#raboty">Работы</a></li>
+    </ul>
+    <a class="pill-btn" href="https://t.me/luminoso89">Написать</a>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+  <header class="hero">
+    <h1 class="big">Дизайн<br>с характером.</h1>
+    <p class="side">Бренд-гайд Марии: знак, цвета, шрифты и примеры. Всё, чтобы любая работа узнавалась с первого взгляда.</p>
+  </header>
+
+  <div class="photo">
+    <img src="images/maria-za-rabotoi.jpg" alt="Мария за работой">
+    <div class="card">
+      <small>Кто за брендом</small>
+      <b>Мария, дизайнер</b>
+      <div class="row">
+        <div><strong>Сайты</strong>с нуля</div>
+        <div><strong>Соцсети</strong>оформление</div>
+        <div><strong>Бренд</strong>под ключ</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Сайты на коде.</span><span class="tag">Без шаблонов.</span><span>Калькуляторы и конструкторы.</span><span>Карточки WB и Ozon.</span><span>Логотипы.</span><span class="tag">С характером.</span><span>Презентации.</span>
+      <span>Сайты на коде.</span><span class="tag">Без шаблонов.</span><span>Калькуляторы и конструкторы.</span><span>Карточки WB и Ozon.</span><span>Логотипы.</span><span class="tag">С характером.</span><span>Презентации.</span>
+    </div>
+  </div>
+
+  <section id="znak">
+    <div class="head">
+      <h2 class="h2">Знак.</h2>
+      <p class="side">Рукописная «М», тонкая черта и печатная «Д». Подпись «Мария» - только картинкой, другими рукописными шрифтами не заменяю.</p>
+    </div>
+    <div class="marks">
+      <figure><img src="logo/logo-512.png" alt="" width="170"><figcaption>Круглый знак</figcaption></figure>
+      <figure><img src="logo/maria-rukopis.png" alt="" width="210"><figcaption>Подпись</figcaption></figure>
+      <figure class="dark"><img src="logo/favicon-180.png" alt="" width="90"><figcaption>Иконка сайта</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="cveta">
+    <div class="head">
+      <h2 class="h2">Цвета<br>бренда.</h2>
+      <p class="side">Тёплый крем и терракота - основа. Чернила только для текста и тонких линий.</p>
+    </div>
+    <div class="rows" id="rows"></div>
+  </section>
+
+  <section id="shrifty">
+    <div class="head">
+      <h2 class="h2">Два<br>шрифта.</h2>
+      <p class="side">Не больше двух в одной работе. Оба бесплатные, файлы лежат в папке fonts.</p>
+    </div>
+    <div class="fonts">
+      <div class="fbox serif">
+        <div class="name">PT Serif - заголовки, обычный, жирный, курсив</div>
+        <div class="sample">Аа</div>
+        <p style="font:700 28px/1.2 'PT Serif',serif">Сайт на коде <em style="font-weight:400;color:var(--terra)">с нуля</em></p>
+      </div>
+      <div class="fbox sans">
+        <div class="name">Manrope - основной текст, 400-800</div>
+        <div class="sample">Аа</div>
+        <p>Без конструкторов и шаблонов. Адаптирован для телефона и планшета. Делаю лендинги, калькуляторы и конструкторы для бизнеса.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="raboty">
+    <div class="head">
+      <h2 class="h2">Стиль<br>в работах.</h2>
+      <p class="side">Обложка группы и посты ВКонтакте - так бренд выглядит вживую.</p>
+    </div>
+    <div class="mosaic">
+      <div class="tile big-t"><img src="templates/vk-posty/01-do-posle-lending.jpg" alt="Пост до и после, лендинг"><span class="tl">До / После</span></div>
+      <div class="tile"><img src="templates/vk-posty/02-do-posle-logotipy.jpg" alt="Пост про логотипы"><span class="tl">Логотипы</span></div>
+      <div class="tile"><img src="templates/vk-posty/03-etapy-raboty-sait.jpg" alt="Пост про этапы работы"><span class="tl">Этапы работы</span></div>
+    </div>
+    <div class="tile" style="margin-top:16px"><img src="templates/vk-oblozhka/oblozhka-gruppy.jpg" alt="Обложка группы ВК"><span class="tl">Обложка группы</span></div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2 class="h2">Услуги.</h2>
+      <p class="side">Обложки услуг в одном стиле: крупный заголовок, акцент курсивом, цена внизу.</p>
+    </div>
+    <div class="shop">
+      <a class="item" href="templates/vk-uslugi/1-sait.png"><img src="templates/vk-uslugi/1-sait.png" alt=""><div>Сайт на коде <span>от 3 000 ₽</span></div></a>
+      <a class="item" href="templates/vk-uslugi/2-kalkulyator.png"><img src="templates/vk-uslugi/2-kalkulyator.png" alt=""><div>Калькулятор <span>от 2 000 ₽</span></div></a>
+      <a class="item" href="templates/vk-uslugi/3-konstruktor.png"><img src="templates/vk-uslugi/3-konstruktor.png" alt=""><div>Конструктор <span>от 20 000 ₽</span></div></a>
+      <a class="item" href="templates/vk-uslugi/4-kartochki-wb-ozon.png"><img src="templates/vk-uslugi/4-kartochki-wb-ozon.png" alt=""><div>Карточки WB и Ozon <span>от 500 ₽</span></div></a>
+      <a class="item" href="templates/vk-uslugi/5-logotip.png"><img src="templates/vk-uslugi/5-logotip.png" alt=""><div>Логотип <span>от 1 500 ₽</span></div></a>
+      <a class="item" href="templates/vk-uslugi/6-prezentaciya.png"><img src="templates/vk-uslugi/6-prezentaciya.png" alt=""><div>Презентация <span>от 1 500 ₽</span></div></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2 class="h2">Правила<br>стиля.</h2>
+      <p class="side">Чего держусь в каждой работе.</p>
+    </div>
+    <div class="quotes">
+      <div class="q">«Много воздуха и тёплый фон. Пусть работе будет чем дышать.»<small>Композиция</small></div>
+      <div class="q hl">«Одна терракота на экран. Акцент работает, когда он один.»<small>Цвет</small></div>
+      <div class="q">«Без кислотных цветов, стикеров и восклицаний. Показываю результат через До / После.»<small>Подача</small></div>
+    </div>
+  </section>
+
+  <div class="final">
+    <img src="images/foto-maria.png" alt="">
+    <div class="in">
+      <h2 class="h2">Ваш бренд<br><span>начинается здесь.</span></h2>
+      <p>Нужен сайт, оформление соцсетей или логотип в таком же внимании к деталям - напишите мне в Telegram.</p>
+      <a class="pill-btn" href="https://t.me/luminoso89">Написать в Telegram</a>
+    </div>
+  </div>
+
+  <footer>
+    <div><a class="brand" href="#top"><img src="logo/logo-512.png" alt="">Мария | Дизайн с характером</a></div>
+    <div><h4>Ссылки</h4><a href="https://maryza2603.github.io/moy-proekt/portfolio/">Портфолио</a><a href="https://vk.ru/dizainsharacterom">Группа ВК</a><a href="https://t.me/dizainsharacterom">Telegram-канал</a></div>
+    <div><h4>Бренд-гайд</h4><a href="./">Версия 1, спокойная</a><a href="https://t.me/luminoso89">@luminoso89</a></div>
+  </footer>
+</main>
+
+<div class="toast" role="status" aria-live="polite"></div>
+<script>
+const C=[
+ ["#CF6640","Терракота","акцент и кнопки","Основной",1],
+ ["#B4532F","Терракота тёмная","наведение","Акцент"],
+ ["#1E1D1B","Чернила","текст, линии","Текст"],
+ ["#FAF6F1","Крем","фон","Фон"],
+ ["#FFFDFA","Бумага","карточки","Фон"],
+ ["#EFE4D8","Беж","подложки","Доп."],
+ ["#E6D6C5","Беж плотный","плашки","Доп."],
+ ["#E4D9CD","Линии","рамки","Доп."],
+ ["#6E655D","Приглушённый","подписи","Текст"]];
+const r=document.getElementById('rows');
+C.forEach(([h,n,u,t,m])=>{r.insertAdjacentHTML('beforeend',`<div class="crow"><div class="chip" style="background:${h}"></div><div><b>${n}</b></div><div class="hide-m"><span class="lbl">Код</span><span class="val">${h}</span></div><div class="hide-m"><span class="lbl">Где</span><span class="badge ${m?'main':''}">${u}</span></div><button class="copy" data-hex="${h}">Скопировать</button></div>`)});
+const t=document.querySelector('.toast');let tm;
+r.addEventListener('click',async e=>{const b=e.target.closest('.copy');if(!b)return;
+ try{await navigator.clipboard.writeText(b.dataset.hex);t.textContent='Скопировано: '+b.dataset.hex}catch(_){t.textContent=b.dataset.hex}
+ t.classList.add('show');clearTimeout(tm);tm=setTimeout(()=>t.classList.remove('show'),1600)});
+</script>
+</body>
+</html>
