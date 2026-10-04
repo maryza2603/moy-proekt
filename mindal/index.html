@@ -140,6 +140,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 
+/* мастера */
+.team{display:grid;gap:14px;margin-top:28px}
+.mcard{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;background:var(--milk);border-radius:22px;padding:12px 16px 12px 12px}
+.mcard img{width:96px;height:96px;border-radius:50%;object-fit:cover}
+.mcard h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:26px;line-height:1}
+.mcard .exp{font-size:13px;color:var(--cherry);font-weight:600;margin:4px 0 4px}
+.mcard p{font-size:14px;color:var(--soft);line-height:1.45}
 /* онлайн-запись */
 .book{padding:96px 0;background:var(--cream)}
 .book .wrap{display:grid;grid-template-columns:.75fr 1.25fr;gap:56px;align-items:start}
@@ -286,6 +293,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
         <div class="kicker">Онлайн-запись</div>
         <h2 class="rv">Запишитесь за минуту</h2>
         <p class="sub">Выберите услугу, мастера и свободное время. Занятые часы видно сразу - не нужно ждать ответа в мессенджере.</p>
+        <div class="team">
+          <div class="mcard"><img src="img/m1.jpg" alt="Мастер Алина" loading="lazy"><div><h3>Алина</h3><div class="exp">Опыт 5 лет</div><p>Дизайн любой сложности: рисунки, френч, слайдеры. Повышение квалификации по аппаратному маникюру.</p></div></div>
+          <div class="mcard"><img src="img/m2.jpg" alt="Мастер Вера" loading="lazy"><div><h3>Вера</h3><div class="exp">Опыт 9 лет</div><p>Аппаратный педикюр и ровное покрытие, которое держится до 4 недель. Работает с проблемными ногтями.</p></div></div>
+        </div>
       </div>
       <form class="bk" id="bk" novalidate>
         <div id="bkForm">
@@ -351,7 +362,7 @@ addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key==
 <script>
 (()=>{
 const SRV=[['Маникюр без покрытия',900,60],['Маникюр с гель-лаком',1800,120],['Педикюр с покрытием',2200,120],['Маникюр + педикюр',3700,210]];
-const MST=['Любой мастер','Алина','Вера'];
+const MST=['Любой мастер<small>ближайшее свободное время</small>','Алина<small>дизайн, 5 лет</small>','Вера<small>педикюр, 9 лет</small>'];
 const HOURS=[10,11,12,13,14,15,16,17,18,19];
 const MON=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 const WD=['вс','пн','вт','ср','чт','пт','сб'];
@@ -387,7 +398,7 @@ f.addEventListener('change',e=>{const t=e.target;if(t.type==='radio'){st[t.name]
 f.addEventListener('input',sum);
 f.addEventListener('submit',e=>{e.preventDefault();if($('bGo').disabled)return;
   const s=SRV[st.s],d=days[st.d];
-  $('bDoneTxt').textContent=`${$('bName').value.trim()}, ждём вас ${d.getDate()} ${MON[d.getMonth()]} в ${st.h}:00. ${s[0]}${st.m?', мастер '+MST[st.m]:''}.`;
+  $('bDoneTxt').textContent=`${$('bName').value.trim()}, ждём вас ${d.getDate()} ${MON[d.getMonth()]} в ${st.h}:00. ${s[0]}${st.m?', мастер '+['','Алина','Вера'][st.m]:''}.`;
   $('bForm').hidden=true;$('bDone').hidden=false;});
 $('bAgain').addEventListener('click',()=>{st.h=null;$('bForm').hidden=false;$('bDone').hidden=true;draw()});
 draw();
