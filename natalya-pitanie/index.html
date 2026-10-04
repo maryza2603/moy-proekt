@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Наталья Пхенда - нутрициолог</title>
+<meta name="description" content="Наталья Пхенда - консультант по правильному питанию и нутрициолог. КМС по плаванию, экономическое образование. Консультации онлайн.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --tile:#F5F9FA;
+  --white:#FFFFFF;
+  --water:#0B5E8E;
+  --deep:#0D2B3E;
+  --red:#E1252B;
+  --line:#D5E4EA;
+  --muted:#4B6474;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--tile);color:var(--deep);font:400 18px/1.6 "Golos Text",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:"Unbounded",sans-serif;line-height:1.1;letter-spacing:-.01em}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* разделительный канат дорожки */
+.rope{height:14px;background:
+  repeating-linear-gradient(90deg,var(--red) 0 28px,var(--white) 28px 56px,var(--red) 56px 84px,var(--white) 84px 112px,var(--water) 112px 140px,var(--white) 140px 168px);
+  border-radius:7px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.12)}
+.rope-band{padding:0 24px;max-width:1208px;margin:0 auto}
+
+/* шапка */
+header{position:sticky;top:0;z-index:10;background:rgba(245,249,250,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{font-family:"Unbounded";font-weight:700;font-size:17px;text-decoration:none}
+.logo b{color:var(--red)}
+.nav ul{display:flex;gap:28px;list-style:none;font-size:16px}
+.nav ul a{text-decoration:none;color:var(--muted)}
+.nav ul a:hover{color:var(--deep)}
+.btn{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:600;padding:14px 26px;border-radius:999px;transition:transform .15s,background .15s}
+.btn:hover{background:#C41B21;transform:translateY(-1px)}
+.btn-max{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(120deg,#2F8CFF 0%,#5B5CF6 50%,#8B3FF5 100%)}
+.btn-max:hover{background:linear-gradient(120deg,#1F7BF0 0%,#4B4BE6 50%,#7A2FE6 100%)}
+.btn-max svg,.btn-mail svg{width:22px;height:22px;flex:none}
+.btn-mail,.btn-vk{display:inline-flex;align-items:center;gap:10px}
+.btn-mail{background:#005FF9}.btn-mail:hover{background:#004ED6}
+.btn-vk{background:#0077FF}.btn-vk:hover{background:#0062D6}
+.vk-mark{font-family:"Unbounded";font-weight:800;font-size:13px;background:#fff;color:#0077FF;border-radius:6px;padding:3px 5px;line-height:1}
+.ava{width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:50% 25%;margin-bottom:22px;box-shadow:0 0 0 4px #fff,0 0 0 6px var(--red)}
+.btn-ghost{background:transparent;color:var(--deep);box-shadow:inset 0 0 0 2px var(--deep)}
+.btn-ghost:hover{background:var(--deep);color:#fff}
+.nav .btn{padding:10px 20px;font-size:15px}
+
+/* первый экран */
+.hero{padding:64px 0 72px;display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(38px,5.4vw,68px);font-weight:800}
+.hero h1 span{display:block;color:var(--water)}
+.hero .lead{font-size:21px;max-width:30ch;margin:28px 0 36px;color:var(--muted)}
+.hero .actions{display:flex;flex-wrap:wrap;gap:14px}
+.photo{position:relative}
+.photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;border-radius:220px 220px 24px 24px}
+.medal{position:absolute;left:-28px;bottom:36px;background:var(--deep);color:#fff;border-radius:20px;padding:18px 22px;max-width:220px;box-shadow:0 18px 40px rgba(13,43,62,.25)}
+.medal strong{display:block;font-family:"Unbounded";font-size:30px;color:#fff}
+.medal small{font-size:14px;line-height:1.35;display:block;color:#C9DCE6}
+
+/* две опоры */
+section{padding:88px 0;scroll-margin-top:68px}
+h2{font-size:clamp(30px,4vw,48px);font-weight:700;max-width:20ch;margin-bottom:20px}
+.sub{color:var(--muted);max-width:56ch;margin-bottom:48px}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.pillar{background:var(--white);border-radius:28px;padding:40px;border:1px solid var(--line)}
+.pillar.swim{background:linear-gradient(160deg,rgba(11,94,142,.92),rgba(11,94,142,.55)),url(img/pool.jpg) center/cover;color:#fff;border:0;position:relative;overflow:hidden}
+.pillar.swim::after{content:"";position:absolute;inset:auto 0 0 0;height:90px;background:repeating-linear-gradient(170deg,rgba(255,255,255,.08) 0 10px,transparent 10px 26px)}
+.pillar .big{font-family:"Unbounded";font-weight:800;font-size:64px;line-height:1;margin-bottom:18px}
+.pillar.econ .big{color:var(--red)}
+.pillar h3{font-size:22px;font-weight:700;margin-bottom:14px}
+.pillar p{max-width:42ch}
+.pillar.swim p{color:#DCEBF3}
+
+/* услуги - дорожки */
+.services{background:linear-gradient(rgba(13,43,62,.93),rgba(13,43,62,.97)),url(img/pool.jpg) center/cover fixed;color:#fff}
+@media (max-width:900px){.services{background-attachment:scroll}}
+.services .sub{color:#A9C3D1}
+.lanes{border-top:1px solid rgba(255,255,255,.14)}
+.lane{display:grid;grid-template-columns:56px 1fr auto;gap:24px;padding:30px 0;border-bottom:1px solid rgba(255,255,255,.14);align-items:start}
+.lane .no{font-family:"Unbounded";font-weight:700;font-size:15px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);color:#fff}
+.lane h3{font-size:21px;font-weight:700;margin-bottom:10px}
+.lane ul{list-style:none;color:#C4D6E0;font-size:16px}
+.lane li{padding-left:18px;position:relative;margin-top:4px}
+.lane li::before{content:"";position:absolute;left:0;top:.65em;width:7px;height:7px;border-radius:50%;background:var(--red)}
+.price{font-family:"Unbounded";font-weight:700;font-size:24px;white-space:nowrap;text-align:right}
+.price small{display:block;font-family:"Golos Text";font-weight:400;font-size:14px;color:#A9C3D1;margin-top:6px}
+.price.ask{font-size:17px;color:#FFD3D4}
+.note{margin-top:36px;color:#A9C3D1;font-size:16px;max-width:60ch}
+
+/* как проходит работа - реальная последовательность */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:s}
+.step{border-top:4px solid var(--water);padding-top:22px}
+.step:nth-child(4){border-color:var(--red)}
+.step b{font-family:"Unbounded";font-size:15px;color:var(--water);display:block;margin-bottom:10px}
+.step h3{font-size:19px;margin-bottom:8px}
+.step p{font-size:16px;color:var(--muted)}
+
+/* контакты */
+.contact{background:var(--white);border-radius:36px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;border:1px solid var(--line)}
+.contact h2{margin-bottom:16px}
+.links{display:grid;gap:12px}
+.links a{display:flex;justify-content:space-between;align-items:center;gap:16px;text-decoration:none;padding:18px 22px;border-radius:18px;background:var(--tile);border:1px solid var(--line);transition:border-color .15s}
+.links a:hover{border-color:var(--water)}
+.links span{color:var(--muted);font-size:15px}
+.links strong{font-weight:600;word-break:break-all;text-align:right}
+footer{padding:40px 0 56px;color:var(--muted);font-size:15px;text-align:center}
+
+/* тарелки */
+.pool-band{height:clamp(220px,32vw,380px);background:url(img/pool.jpg) center 40%/cover;position:relative;display:flex;align-items:flex-end}
+.pool-band p{font-family:"Unbounded";font-weight:700;color:#fff;font-size:clamp(22px,3.2vw,40px);line-height:1.15;max-width:18ch;padding:0 0 36px;text-shadow:0 2px 18px rgba(13,43,62,.55)}
+.plates{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.plates figure{background:var(--white);border-radius:28px;overflow:hidden;border:1px solid var(--line)}
+.plates img{width:100%;aspect-ratio:1;object-fit:cover}
+.plates figcaption{padding:20px 22px 24px}
+.plates b{font-family:"Unbounded";font-size:17px;display:block;margin-bottom:6px}
+.plates span{color:var(--muted);font-size:16px}
+.plates .k{display:block;margin-top:12px;font-weight:600;color:var(--red);font-size:15px}
+@media (max-width:900px){.plates{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.plates{grid-template-columns:1fr}}
+
+/* конструктор питания */
+.calc{display:grid;grid-template-columns:1fr 1.05fr;gap:32px;align-items:start}
+.cform,.cres{background:var(--white);border:1px solid var(--line);border-radius:28px;padding:32px}
+.field{margin-bottom:22px}
+.field label.t,.field>span{display:block;font-weight:600;font-size:15px;margin-bottom:8px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--tile);cursor:pointer;font-size:15px}
+.seg input:checked+label{background:var(--water);border-color:var(--water);color:#fff}
+.seg input:focus-visible+label{outline:3px solid var(--red);outline-offset:2px}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.nums input,.cform select{width:100%;font:inherit;font-size:17px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--tile);color:var(--deep)}
+.cres{background:var(--deep);color:#fff;border:0}
+.plate{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.ring{position:relative;width:200px;height:200px;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring .c{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ring b{font-family:"Unbounded";font-size:34px;line-height:1}
+.ring small{color:#A9C3D1;font-size:14px}
+.macro{list-style:none;display:grid;gap:10px;font-size:16px;flex:1;min-width:180px}
+.macro li{display:flex;align-items:center;gap:10px}
+.macro i{width:14px;height:14px;border-radius:4px;display:inline-block}
+.macro strong{margin-left:auto;font-family:"Unbounded";font-size:16px;padding-left:16px}
+.meal{display:grid;grid-template-columns:90px 1fr 90px;gap:12px;align-items:center;font-size:15px;margin-top:10px}
+.meal .track{height:8px;border-radius:4px;background:rgba(255,255,255,.12)}
+.meal .track i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#5BB5E8,#fff);transition:width .4s}
+.meal em{font-style:normal;text-align:right;color:#C4D6E0}
+.hint{margin:24px 0;padding:16px 18px;border-left:4px solid var(--red);background:rgba(255,255,255,.06);border-radius:0 12px 12px 0;font-size:16px;color:#DCEBF3}
+@media (max-width:900px){.calc{grid-template-columns:1fr}}
+@media (max-width:560px){.cform,.cres{padding:24px 18px}.ring{margin:0 auto}.meal{grid-template-columns:72px 1fr 78px}}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:40px;padding-top:40px}
+  .photo{max-width:440px}
+  .medal{left:12px}
+  .pillars,.contact{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .nav ul{display:none}
+}
+@media (max-width:560px){
+  body{font-size:17px}
+  .wrap{padding:0 16px}.rope-band{padding:0 16px}
+  section{padding:64px 0}
+  .pillar,.contact{padding:28px 22px}
+  .pillar .big{font-size:48px}
+  .lane{grid-template-columns:1fr;gap:12px}
+  .lane .no{display:none}
+  .price{text-align:left}
+  .steps{grid-template-columns:1fr}
+  .nav .btn{display:none}
+  .links a{flex-direction:column;align-items:flex-start;gap:4px}
+  .links strong{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">Наталья <b>Пхенда</b></a>
+    <ul>
+      <li><a href="#about">Обо мне</a></li>
+      <li><a href="#services">Услуги и цены</a></li>
+      <li><a href="#calc">Конструктор</a></li>
+      <li><a href="#steps">Как проходит</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <a class="btn" href="#contact">Записаться</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <h1>Питание, которое работает <span>на ваш результат</span></h1>
+      <p class="lead">Нутрициолог и консультант по правильному питанию. Помогаю снизить или набрать вес без голодовок и срывов.</p>
+      <div class="actions">
+        <a class="btn" href="#contact">Записаться на консультацию</a>
+        <a class="btn btn-ghost" href="#services">Посмотреть цены</a>
+      </div>
+    </div>
+    <div class="photo">
+      <img src="img/natalya.jpg" alt="Наталья Пхенда, нутрициолог" width="480" height="450">
+      <div class="medal"><strong>КМС</strong><small>кандидат в мастера спорта по плаванию</small></div>
+    </div>
+  </div>
+
+  <div class="rope-band"><div class="rope" role="presentation"></div></div>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>Спорт и экономика - мои две опоры</h2>
+      <p class="sub">Я знаю питание не из учебника: годы тренировок научили меня, как еда влияет на силу, выносливость и восстановление. А экономическое образование - всё считать и планировать.</p>
+      <div class="pillars">
+        <div class="pillar swim">
+          <div class="big">КМС</div>
+          <h3>Кандидат в мастера спорта по плаванию</h3>
+          <p>Режим, дисциплина и питание под нагрузку - это моя жизнь с детства. Знаю, как держать форму и не выгорать, и передаю это вам простыми шагами.</p>
+        </div>
+        <div class="pillar econ">
+          <div class="big">₽ + ккал</div>
+          <h3>Экономическое образование</h3>
+          <p>Составляю рацион как грамотный бюджет: понятный план, измеримый результат и продукты, которые не бьют по кошельку.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="pool-band"><div class="wrap" style="width:100%"><p>Дисциплина бассейна - в каждой тарелке</p></div></div>
+
+  <section id="plates">
+    <div class="wrap">
+      <h2>Так выглядит правильная тарелка</h2>
+      <p class="sub">Никаких голодовок и скучной гречки без соли. Вкусная еда, в которой хватает белка, клетчатки и полезных жиров.</p>
+      <div class="plates">
+        <figure><img src="img/breakfast.jpg" alt="Йогурт с ягодами и гранолой" loading="lazy"><figcaption><b>Завтрак</b><span>Греческий йогурт, свежие ягоды, гранола и стакан воды с лимоном</span><em class="k" style="font-style:normal">около 400 ккал</em></figcaption></figure>
+        <figure><img src="img/chicken.jpg" alt="Курица с гречкой и овощами" loading="lazy"><figcaption><b>Обед</b><span>Курица на гриле, гречка, запечённые овощи и салат</span><em class="k" style="font-style:normal">около 550 ккал</em></figcaption></figure>
+        <figure><img src="img/salmon.jpg" alt="Лосось с киноа и салатом" loading="lazy"><figcaption><b>Ужин</b><span>Лосось, киноа, зелень, томаты и авокадо</span><em class="k" style="font-style:normal">около 500 ккал</em></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="wrap">
+      <h2>Услуги и цены</h2>
+      <p class="sub">Выберите формат, который подходит вам. Все консультации проходят онлайн.</p>
+      <div class="lanes">
+        <div class="lane">
+          <div class="no">1</div>
+          <div><h3>Разгрузочный день</h3>
+            <ul><li>Выбор рациона на день</li><li>Сопровождение онлайн в течение дня</li></ul></div>
+          <div class="price">1 000 ₽<small>в неделю</small></div>
+        </div>
+        <div class="lane">
+          <div class="no">2</div>
+          <div><h3>Разовая консультация</h3>
+            <ul><li>Разбор вашего текущего питания</li><li>Персональный рацион и коррекция режима питания</li></ul></div>
+          <div class="price">2 000 ₽</div>
+        </div>
+        <div class="lane">
+          <div class="no">3</div>
+          <div><h3>Сопровождение по питанию</h3>
+            <ul><li>Первичная консультация</li><li>План питания на неделю</li><li>Ежедневный контроль приёмов пищи и переписка по итогам дня</li><li>Ответы на все вопросы</li></ul></div>
+          <div class="price">17 000 ₽<small>первый месяц, далее 15 000 ₽</small></div>
+        </div>
+        <div class="lane">
+          <div class="no">4</div>
+          <div><h3>Диетическое питание по назначению врача</h3>
+            <ul><li>Подбор рациона на основе лечебной диеты</li><li>Сопровождение</li></ul></div>
+          <div class="price ask">по договорённости</div>
+        </div>
+        <div class="lane">
+          <div class="no">5</div>
+          <div><h3>Нарушения пищевого поведения</h3>
+            <ul><li>Переедание, потеря контроля аппетита, голодания «ради фигуры»</li><li>Оценка состояния и стратегия под вашу цель</li><li>Пошаговая реализация плана</li></ul></div>
+          <div class="price ask">по договорённости</div>
+        </div>
+      </div>
+      <p class="note">Консультация проходит онлайн или в переписке. Перед консультацией я пришлю короткую анкету, чтобы сразу работать с вашей ситуацией.</p>
+    </div>
+  </section>
+
+  <section id="calc">
+    <div class="wrap">
+      <h2>Конструктор правильного питания</h2>
+      <p class="sub">Укажите свои данные и цель - конструктор посчитает калории, белки, жиры и углеводы на день и разложит их по приёмам пищи.</p>
+      <div class="calc">
+        <form class="cform" id="calcForm" onsubmit="return false">
+          <div class="field"><span>Пол</span><div class="seg">
+            <input type="radio" name="sex" id="sf" value="f" checked><label for="sf">Женщина</label>
+            <input type="radio" name="sex" id="sm" value="m"><label for="sm">Мужчина</label></div></div>
+          <div class="field nums">
+            <div><label class="t" for="age">Возраст</label><input id="age" type="number" inputmode="numeric" value="35" min="14" max="90"></div>
+            <div><label class="t" for="height">Рост, см</label><input id="height" type="number" inputmode="numeric" value="165" min="120" max="220"></div>
+            <div><label class="t" for="weight">Вес, кг</label><input id="weight" type="number" inputmode="numeric" value="70" min="35" max="200"></div>
+          </div>
+          <div class="field"><label class="t" for="act">Активность</label>
+            <select id="act">
+              <option value="1.2">Сидячая работа, без спорта</option>
+              <option value="1.375" selected>Прогулки и 1-2 тренировки в неделю</option>
+              <option value="1.55">3-4 тренировки в неделю</option>
+              <option value="1.725">Тренировки почти каждый день</option>
+            </select></div>
+          <div class="field"><span>Цель</span><div class="seg">
+            <input type="radio" name="goal" id="gl" value="lose" checked><label for="gl">Снизить вес</label>
+            <input type="radio" name="goal" id="gk" value="keep"><label for="gk">Держать форму</label>
+            <input type="radio" name="goal" id="gg" value="gain"><label for="gg">Набрать массу</label></div></div>
+        </form>
+        <div class="cres" aria-live="polite">
+          <div class="plate">
+            <div class="ring"><svg viewBox="0 0 200 200" width="200" height="200"><circle cx="100" cy="100" r="67" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="26"/><g id="arcs"></g></svg>
+              <div class="c"><b id="kcal">0</b><small>ккал в день</small></div></div>
+            <ul class="macro">
+              <li><i style="background:#E1252B"></i>Белки<strong id="pG">0 г</strong></li>
+              <li><i style="background:#5BB5E8"></i>Жиры<strong id="fG">0 г</strong></li>
+              <li><i style="background:#F2F6F8"></i>Углеводы<strong id="cG">0 г</strong></li>
+            </ul>
+          </div>
+          <div id="meals" style="margin-top:22px"></div>
+          <p class="hint" id="hint"></p>
+          <a class="btn btn-max" href="https://max.ru/u/f9LHodD0cOKcQLD5IvwV6MmBE0FpVHgSipIQDiamH0slKDxpP-LSldkRE8s" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2.5c-5.3 0-9.5 3.9-9.5 8.9 0 2.6 1.2 5 3.1 6.6l-.6 3.5 3.5-1.8c1.1.4 2.3.6 3.5.6 5.3 0 9.5-3.9 9.5-8.9S17.3 2.5 12 2.5z"/></svg>Получить меню под мою норму</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="steps">
+    <div class="wrap">
+      <h2>Как проходит работа</h2>
+      <p class="sub">Четыре шага от первого сообщения до привычки, которая остаётся с вами.</p>
+      <div class="steps">
+        <div class="step"><b>Шаг 1</b><h3>Пишете мне</h3><p>В MAX, на почту или ВКонтакте - выбираем формат.</p></div>
+        <div class="step"><b>Шаг 2</b><h3>Заполняете анкету</h3><p>Привычки, режим, цели и самочувствие.</p></div>
+        <div class="step"><b>Шаг 3</b><h3>Получаете план</h3><p>Персональный рацион без запретов и сложных рецептов.</p></div>
+        <div class="step"><b>Шаг 4</b><h3>Идём к цели вместе</h3><p>Я рядом, отвечаю на вопросы и корректирую план.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rope-band"><div class="rope" role="presentation"></div></div>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <img class="ava" src="img/natalya.jpg" alt="Наталья Пхенда" width="96" height="96">
+          <h2>Запишитесь на консультацию</h2>
+          <p class="sub" style="margin-bottom:28px">Напишите, какая у вас цель, и я подскажу подходящий формат.</p>
+          <div class="actions" style="display:flex;flex-wrap:wrap;gap:12px">
+            <a class="btn btn-max" href="https://max.ru/u/f9LHodD0cOKcQLD5IvwV6MmBE0FpVHgSipIQDiamH0slKDxpP-LSldkRE8s" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2.5c-5.3 0-9.5 3.9-9.5 8.9 0 2.6 1.2 5 3.1 6.6l-.6 3.5 3.5-1.8c1.1.4 2.3.6 3.5.6 5.3 0 9.5-3.9 9.5-8.9S17.3 2.5 12 2.5z"/></svg>Написать в MAX</a>
+            <a class="btn btn-mail" href="mailto:yours_eda@mail.ru"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" d="M15.5 12a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zm0 0v1.5a2.5 2.5 0 0 0 5 0V12a8.5 8.5 0 1 0-3.3 6.7"/></svg>Написать на почту</a>
+            <a class="btn btn-vk" href="https://vk.ru/n.phenda"><span class="vk-mark" aria-hidden="true">VK</span>Написать ВКонтакте</a>
+          </div>
+        </div>
+        <div class="links">
+          <a href="https://max.ru/u/f9LHodD0cOKcQLD5IvwV6MmBE0FpVHgSipIQDiamH0slKDxpP-LSldkRE8s" target="_blank" rel="noopener"><span>MAX</span><strong>Открыть чат</strong></a>
+          <a href="tel:+79095400740"><span>Телефон</span><strong>+7 909 540-07-40</strong></a>
+          <a href="mailto:yours_eda@mail.ru"><span>Почта</span><strong>yours_eda@mail.ru</strong></a>
+          <a href="https://vk.ru/n.phenda"><span>ВКонтакте</span><strong>vk.ru/n.phenda</strong></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 Наталья Пхенда, нутрициолог. Консультации не заменяют приём врача.</footer>
+<script>
+const $=q=>document.querySelector(q);
+const num=v=>Math.round(v).toLocaleString('ru-RU');
+function calc(){
+  const sex=document.querySelector('[name=sex]:checked').value, goal=document.querySelector('[name=goal]:checked').value;
+  const age=+$('#age').value||35, h=+$('#height').value||165, w=+$('#weight').value||70, act=+$('#act').value;
+  const bmr=10*w+6.25*h-5*age+(sex==='m'?5:-161);
+  const kcal=Math.round(bmr*act*{lose:.85,keep:1,gain:1.1}[goal]/10)*10;
+  const p=w*{lose:1.6,keep:1.3,gain:1.8}[goal], f=w*.9, c=Math.max(0,(kcal-p*4-f*9)/4);
+  $('#kcal').textContent=num(kcal);
+  $('#pG').textContent=Math.round(p)+' г';$('#fG').textContent=Math.round(f)+' г';$('#cG').textContent=Math.round(c)+' г';
+  const tot=p*4+f*9+c*4,r=67,L=2*Math.PI*r;let off=0;
+  $('#arcs').innerHTML=[[p*4,'#E1252B'],[f*9,'#5BB5E8'],[c*4,'#F2F6F8']].map(([v,col])=>{const len=v/tot*L,o=off;off+=len;
+    return `<circle cx="100" cy="100" r="${r}" fill="none" stroke="${col}" stroke-width="26" stroke-dasharray="${Math.max(len-2,0)} ${L}" stroke-dashoffset="${-o}"/>`}).join('');
+  $('#meals').innerHTML=[['Завтрак',.25],['Обед',.35],['Перекус',.1],['Ужин',.3]].map(([n,k])=>`<div class="meal"><span>${n}</span><span class="track"><i style="width:${k/.35*100}%"></i></span><em>${num(kcal*k)} ккал</em></div>`).join('');
+  const bmi=(w/((h/100)**2)).toFixed(1).replace('.',',');
+  $('#hint').textContent={lose:`Мягкий дефицит 15% - около ${(w*.005).toFixed(1).replace('.',',')} кг в неделю. Так вес уходит без голода и не возвращается.`,
+    keep:`Индекс массы тела ${bmi}. Держим калории и следим, чтобы белка хватало каждый день.`,
+    gain:`Профицит 10% и белок ${Math.round(p)} г в день - так растут мышцы, а не жир. Без силовых тренировок не сработает.`}[goal];
+}
+document.querySelectorAll('#calcForm input,#calcForm select').forEach(i=>i.addEventListener('input',calc));
+calc();
+</script>
+</body>
+</html>
