@@ -118,7 +118,8 @@ footer{padding:40px 0 56px;color:var(--muted);font-size:15px;text-align:center}
 /* тарелки */
 .pool-band{height:clamp(240px,32vw,400px);background:url(img/greens.jpg) right center/cover;position:relative;display:flex;align-items:center}
 .pool-band p{font-family:"Unbounded";font-weight:700;color:var(--deep);font-size:clamp(20px,3vw,38px);line-height:1.15;max-width:14ch}
-@media (max-width:560px){.pool-band{background-position:62% center}.pool-band p{background:rgba(245,246,238,.88);padding:14px 16px;border-radius:16px}}
+.quote cite{display:block;font-style:normal;color:var(--muted);font-size:16px;max-width:32ch;margin-top:14px}
+@media (max-width:560px){.pool-band{background-position:62% center}.quote{background:rgba(245,246,238,.9);padding:14px 16px;border-radius:16px}.pool-band p{}}
 .plates{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .plates figure{background:var(--white);border-radius:28px;overflow:hidden;border:1px solid var(--line)}
 .plates img{width:100%;aspect-ratio:1;object-fit:cover}
@@ -246,7 +247,7 @@ footer{padding:40px 0 56px;color:var(--muted);font-size:15px;text-align:center}
     </div>
   </section>
 
-  <div class="pool-band"><div class="wrap" style="width:100%"><p>Еда - не враг, а топливо для жизни</p></div></div>
+  <div class="pool-band"><div class="wrap" style="width:100%"><blockquote class="quote"><p>Еда - не враг, а лекарство</p><cite>«Пусть пища будет твоим лекарством» - слова, которые приписывают Гиппократу</cite></blockquote></div></div>
 
   <section id="choice">
     <div class="wrap">
