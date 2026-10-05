@@ -77,7 +77,10 @@ nav a:hover{color:var(--ink)}
 .obj[hidden]{display:none}
 
 /* calculator */
-.calc-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;margin-top:44px;align-items:start}
+.calc-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;margin-top:36px;align-items:start}
+.mode{display:inline-flex;background:var(--white);border-radius:999px;padding:5px;margin-top:28px;box-shadow:inset 0 0 0 1.5px var(--line)}
+.mode button{font:600 16px "Golos Text";border:0;background:transparent;color:var(--ink);padding:12px 26px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+.mode button[aria-pressed="true"]{background:var(--brass);color:var(--ink)}
 .opts{display:grid;gap:26px}
 fieldset{border:0;display:flex;flex-wrap:wrap;gap:8px}
 legend{font-weight:600;margin-bottom:10px;font-size:15px}
@@ -182,8 +185,8 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:
         <h1>Ирина Ветрова<span>Квартиры в Екатеринбурге: купить, продать, обменять</span></h1>
         <p>Проверяю документы и историю квартиры, торгуюсь за вашу цену и веду сделку до момента, когда вы получаете ключи.</p>
         <div class="cta">
-          <a class="btn" href="#contact">Обсудить квартиру</a>
-          <a class="btn ghost" href="#objects">Смотреть объекты</a>
+          <a class="btn" href="#calc" data-go="sell">Продать квартиру</a>
+          <a class="btn ghost" href="#calc" data-go="buy">Купить квартиру</a>
         </div>
         <div class="facts">
           <div><b>11 лет</b><span>в недвижимости</span></div>
@@ -246,8 +249,12 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:
 
   <section class="calc" id="calc">
     <div class="wrap">
-      <h2>Сколько стоит квартира вашей мечты</h2>
-      <p class="lead">Выберите параметры - посчитаю примерную цену по реальным сделкам в Екатеринбурге за последние полгода.</p>
+      <h2 id="cTitle">Сколько стоит квартира вашей мечты</h2>
+      <p class="lead" id="cLead">Выберите параметры - посчитаю примерную цену по реальным сделкам в Екатеринбурге за последние полгода.</p>
+      <div class="mode" role="group" aria-label="Что вы хотите сделать">
+        <button type="button" aria-pressed="true" data-m="buy">Хочу купить</button>
+        <button type="button" aria-pressed="false" data-m="sell">Хочу продать</button>
+      </div>
       <div class="calc-grid">
         <form class="opts" id="calcForm">
           <fieldset><legend>Комнаты</legend>
@@ -278,7 +285,7 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:
           </fieldset>
         </form>
         <div class="result" aria-live="polite">
-          <p class="r-label">Примерная цена</p>
+          <p class="r-label" id="rLabel">Примерная цена</p>
           <p class="r-price" id="rPrice">7 600 000 ₽</p>
           <p class="r-range" id="rRange">от 7,1 до 8,1 млн</p>
           <dl class="r-meta">
@@ -287,7 +294,7 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:
           </dl>
           <p class="r-sum" id="rSum">2-комнатная, рядом с центром, новостройка, простой ремонт, без мебели</p>
           <a class="btn brass" href="#contact" id="rBtn">Подобрать такие варианты</a>
-          <p class="r-note">Расчёт примерный. Точную цену скажу после просмотра квартиры.</p>
+          <p class="r-note" id="rNote">Расчёт примерный. Точную цену скажу после просмотра квартиры.</p>
         </div>
       </div>
     </div>
@@ -393,7 +400,15 @@ const cf=document.getElementById('calcForm');
 const rub=n=>Math.round(n).toLocaleString('ru-RU')+' ₽';
 const mln=n=>(n/1e6).toLocaleString('ru-RU',{maximumFractionDigits:1});
 const txt=n=>cf.querySelector(`input[name=${n}]:checked`).parentNode.textContent.trim();
-let wish='';
+let wish='',mode='buy';
+const M={
+ buy:{t:'Сколько стоит квартира вашей мечты',l:'Выберите параметры - посчитаю примерную цену по реальным сделкам в Екатеринбурге за последние полгода.',r:'Примерная цена',b:'Подобрать такие варианты',n:'Расчёт примерный. Точную цену скажу после просмотра квартиры.',q:'Ваш запрос: ',e:'. Оставьте телефон - пришлю подходящие варианты.'},
+ sell:{t:'За сколько можно продать вашу квартиру',l:'Отметьте, какая у вас квартира, - посчитаю, за сколько похожие продавались в Екатеринбурге за последние полгода.',r:'Можно продать примерно за',b:'Узнать точную цену бесплатно',n:'Точную цену назову после бесплатного осмотра: учту этаж, вид из окна и состояние дома.',q:'Ваша квартира: ',e:'. Оставьте телефон - договоримся о бесплатной оценке.'}};
+document.querySelectorAll('.mode button').forEach(b=>b.addEventListener('click',()=>{
+  mode=b.dataset.m;const m=M[mode];
+  document.querySelectorAll('.mode button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  cTitle.textContent=m.t;cLead.textContent=m.l;rLabel.textContent=m.r;rBtn.textContent=m.b;rNote.textContent=m.n;
+}));
 function calc(){
   const v=n=>+cf.querySelector(`input[name=${n}]:checked`).value;
   const m2=v('rooms'), base=v('area')*v('house')*v('rep');
@@ -404,12 +419,13 @@ function calc(){
   document.getElementById('rArea').textContent=`около ${m2} м²`;
   document.getElementById('rM2').textContent=rub(Math.round(p/m2/100)*100);
   const r=txt('rooms'), rooms=r==='Студия'?'студия':r+'-комнатная';
-  wish=[rooms,txt('area').toLowerCase(),txt('house').toLowerCase(),txt('rep').toLowerCase(),txt('furn').toLowerCase()].join(', ');
+  wish=[rooms,txt('area').toLowerCase(),txt('house').toLowerCase(),({'Простой':'простой ремонт','Дизайнерский':'дизайнерский ремонт'}[txt('rep')]||txt('rep').toLowerCase()),txt('furn').toLowerCase()].join(', ');
   document.getElementById('rSum').textContent=wish[0].toUpperCase()+wish.slice(1);
 }
 cf.addEventListener('change',calc);calc();
+document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',()=>document.querySelector(`.mode button[data-m=${a.dataset.go}]`).click()));
 document.getElementById('rBtn').addEventListener('click',()=>{
-  document.querySelector('#contact .lead').textContent='Ваш запрос: '+wish+'. Оставьте телефон - пришлю подходящие варианты.';
+  document.querySelector('#contact .lead').textContent=M[mode].q+wish+M[mode].e;
 });
 document.getElementById('f').addEventListener('submit',e=>{
   e.preventDefault();

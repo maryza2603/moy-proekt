@@ -115,6 +115,9 @@ header.scrolled{border-color:var(--line)}
 .svc .ico svg{width:28px;height:28px}
 .svc h3{font-size:22px;margin-bottom:8px}
 .svc p{color:var(--muted);font-size:15px}
+.svc .price{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px;padding-top:14px;border-top:1px dashed var(--line);font-size:15px}.svc .price b{color:var(--terra);font-weight:700}.svc .price span{color:var(--muted)}
+.terms{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px}.term{padding:22px;border-radius:var(--radius);border:1px dashed var(--line);background:var(--paper)}.term h4{font-size:17px;margin-bottom:6px;color:var(--terra)}.term p{color:var(--muted);font-size:14.5px}@media(max-width:900px){.terms{grid-template-columns:1fr 1fr}}@media(max-width:560px){.terms{grid-template-columns:1fr}}
+.svc-wide{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr 1.25fr;gap:28px;align-items:center}.svc-wide .ico{margin:0}.svc-wide .vid{grid-column:1/-1;margin:4px auto 0;width:100%;max-width:720px}.svc-wide .vid video{display:block;width:100%;border-radius:14px;border:1px solid var(--line);background:#1b1e22;aspect-ratio:16/9}.svc-wide .vid figcaption{font-size:14px;color:var(--muted);margin-top:10px}.svc-wide .vid a{color:var(--terra);font-weight:600}.svc-wide .wide-txt p{max-width:46ch}.tiers{display:grid;gap:10px}.tiers div{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:baseline;padding:10px 0;border-top:1px dashed var(--line)}.tiers div:first-child{border-top:0}.tiers b{color:var(--terra);font-size:17px}.tiers span{color:var(--muted);font-size:14px}@media(max-width:900px){.svc-wide{grid-template-columns:1fr;gap:16px}}
 .svc .num{position:absolute;right:22px;top:16px;font-family:"PT Serif",serif;font-size:42px;color:var(--beige);font-weight:700}
 
 /* works */
@@ -144,9 +147,12 @@ header.scrolled{border-color:var(--line)}
 .card .body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
 .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
 .badge{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--beige);color:#7A5A44}
+.badge.for{background:var(--terra);color:#fff}
+.badge.konstr{background:#F3E3C9;color:#8A5A12}
 .badge.code{background:#F6DED3;color:var(--terra-d)}
 .badge.tilda{background:#E9E4F5;color:#5A4C8C}
 .badge.app{background:#DDEDE4;color:#2F6B4D}
+.badge.prem{background:#2B2420;color:#F1D9A8}
 .card h3{font-size:21px;margin-bottom:6px}
 .card p{color:var(--muted);font-size:15px;flex:1}
 .links{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
@@ -218,6 +224,7 @@ header.scrolled{border-color:var(--line)}
 .photo .sign img{height:58px;width:auto;aspect-ratio:auto;border-radius:0;object-fit:contain}
 .about p{color:var(--muted);margin-bottom:16px}
 .about p b{color:var(--ink)}
+.ways{list-style:none;margin:6px 0 18px;display:grid;gap:10px}.ways li{color:var(--muted);padding-left:22px;position:relative}.ways li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;border-radius:50%;background:var(--terra)}.ways b{color:var(--ink)}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:34px 0}
 .stat{padding:20px;border-radius:16px;background:var(--paper);border:1px solid var(--line)}
 .stat b{font-family:"PT Serif",serif;font-size:38px;color:var(--terra);display:block;line-height:1.1}
@@ -236,16 +243,17 @@ header.scrolled{border-color:var(--line)}
 .contact{text-align:center;overflow:hidden}
 .contact .blob.b1{left:auto;right:-200px;top:-200px;transform:rotate(160deg);opacity:.95}
 .contact .blob.b2{left:-160px;bottom:-200px}
-.contact-box{position:relative;z-index:2;max-width:760px;margin:0 auto}
+.contact-box{position:relative;z-index:2;max-width:900px;margin:0 auto}
 .contact h2{font-size:clamp(36px,5.5vw,64px)}
 .contact .lead{margin:0 auto 40px}
-.ch{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:640px;margin:0 auto}
-.ch a{display:flex;align-items:center;gap:16px;padding:22px 24px;border-radius:20px;background:var(--paper);border:1px solid var(--line);text-decoration:none;text-align:left;transition:.25s}
+.ch{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto}
+@media(max-width:860px){.ch{grid-template-columns:1fr;max-width:420px}}
+.ch a{display:flex;align-items:center;gap:16px;padding:20px 18px;min-width:0;border-radius:20px;background:var(--paper);border:1px solid var(--line);text-decoration:none;text-align:left;transition:.25s}
 .ch a:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--terra)}
 .ch .ci{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:#fff;flex:none}
 .ch .ci svg{width:26px;height:26px}
 .ch b{display:block;font-size:18px}
-.ch small{color:var(--muted)}
+.ch small{color:var(--muted);overflow-wrap:anywhere}
 footer{padding:30px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
 footer .foot-top{color:var(--terra);font-weight:700;text-decoration:none}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -338,7 +346,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <a class="btn ghost" href="#works">Смотреть работы</a>
       </div>
       <div class="hero-tags">
-        <span class="tag"><svg class="star"><use href="#star"/></svg>Из идеи в работу за день</span>
+        <span class="tag"><svg class="star"><use href="#star"/></svg>Первое демо - через 1-2 дня</span>
         <span class="tag"><svg class="star"><use href="#star"/></svg>Дизайн + код в одних руках</span>
       </div>
     </div>
@@ -366,15 +374,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="reveal">
       <span class="kicker"><svg class="star"><use href="#star"/></svg>Что я делаю</span>
       <h2>Дизайн и разработка <span class="script">под ключ</span></h2>
-      <p class="lead">Беру задачу целиком: от идеи и макета до работающего сайта или приложения. Не нужно искать отдельно дизайнера и программиста.</p>
+      <p class="lead">Беру задачу целиком: от идеи и макета до работающего сайта или приложения. Не нужно искать отдельно дизайнера и программиста. Точную цену и срок называю после знакомства с задачей - это бесплатно.</p>
     </div>
     <div class="svc-grid">
-      <div class="svc reveal"><span class="num">01</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14l-2 2 2 2M16 14l2 2-2 2"/></svg></div><h3>Сайты на коде</h3><p>Лендинги и сайты-визитки с анимациями и адаптивом. Быстрые, без конструкторов и абонентской платы.</p></div>
-      <div class="svc reveal"><span class="num">02</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M8 9.5c1.3-1 2.7-1 4 0s2.7 1 4 0M12 9.5V17"/></svg></div><h3>Сайты на Tilda</h3><p>Лендинги для курсов, услуг и экспертов. Удобно редактировать самостоятельно после сдачи.</p></div>
-      <div class="svc reveal"><span class="num">03</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg></div><h3>Приложения и калькуляторы</h3><p>Приложения для Android и Windows, конструкторы и калькуляторы со слоями, демо для заказчиков.</p></div>
-      <div class="svc reveal"><span class="num">04</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3c.5 4.8 4.2 8.5 9 9-4.8.5-8.5 4.2-9 9-.5-4.8-4.2-8.5-9-9 4.8-.5 8.5-4.2 9-9z"/></svg></div><h3>Логотипы и айдентика</h3><p>Логотип, цвета и шрифты, которые отражают характер бренда и узнаются с первого взгляда.</p></div>
-      <div class="svc reveal"><span class="num">05</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/></svg></div><h3>Маркетплейсы и соцсети</h3><p>Карточки товаров для WB и Ozon, оформление сообществ ВК и Телеграм, стикеры, карусели, ретушь фото.</p></div>
-      <div class="svc reveal"><span class="num">06</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8M7 12l3-3 2 2 4-4"/></svg></div><h3>Презентации</h3><p>Презентации для B2B, ритейла и онлайн-курсов. Понятная структура и аккуратная подача.</p></div>
+      <div class="svc svc-wide reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3 3 7.5l9 4.5 9-4.5z"/><path d="m3 12 9 4.5 9-4.5M3 16.5 12 21l9-4.5"/></svg></div><div class="wide-txt"><h3>Конструктор-визуализатор</h3><p>Клиент сам собирает товар на сайте - баню, кухню, бассейн, дверь или кольцо. Картинка меняется с каждым выбором, цена считается сразу, смета уходит в PDF, а заявка - вам в Telegram. Встраиваю на любой сайт, куда можно вставить HTML-код: Tilda, WordPress, Битрикс и другие. После запуска - 30 дней поддержки: если что-то работает не так, исправлю бесплатно и отвечу на вопросы.</p></div><div class="tiers"><div><b>20 000 ₽</b><span>1 товар, до 5 групп опций, смета PDF, 7 дней</span></div><div><b>30 000 ₽</b><span>до 10 групп, ракурсы, цены в Google-таблице, 10 дней</span></div><div><b>45 000 ₽</b><span>до 3 товаров и встраивание в ваш сайт, 14 дней</span></div></div><figure class="vid"><video src="video/konfig.mp4" poster="video/konfig.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Как работает конфигуратор дробильной установки"></video><figcaption>Как это работает: клиент выбирает опции - чертёж, цена и срок меняются сразу. <a href="https://maryza2603.github.io/moy-proekt/drobilki-konfig/" target="_blank" rel="noopener">Попробовать самим</a></figcaption></figure></div>
+      <div class="svc svc-wide reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 9l3-5h12l3 5-9 11z"/><path d="M3 9h18M9 9l3 11 3-11M8 4l1 5m7-5-1 5"/></svg></div><div class="wide-txt"><h3>Премиум-сайт для бизнеса</h3><p>Сайт, который сам принимает клиентов: онлайн-запись к мастеру или врачу, бронирование домиков и номеров по календарю, расчёт стоимости. Свой стиль под бренд, заявки приходят вам в Telegram. Примеры - стоматология «Фарфор» и база отдыха «Тихая Сосна» в портфолио.</p></div><div class="tiers"><div><b>25 000 ₽</b><span>сайт с онлайн-записью или бронированием, заявки в Telegram, 10 дней</span></div><div><b>35 000 ₽</b><span>+ прайс с поиском, календарь занятости, расчёт цены с допуслугами, 14 дней</span></div><div><b>50 000 ₽</b><span>+ до 5 страниц, цены и расписание в Google-таблице, домен и Метрика, 21 день</span></div></div></div>
+      <div class="svc reveal"><span class="num">01</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14l-2 2 2 2M16 14l2 2-2 2"/></svg></div><h3>Сайты на коде</h3><p>Лендинги и сайты-визитки с анимациями и адаптивом. Быстрые, без конструкторов и абонентской платы.</p><div class="price"><b>от 3 000 ₽</b><span>3-7 дней</span></div></div>
+      <div class="svc reveal"><span class="num">02</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M8 9.5c1.3-1 2.7-1 4 0s2.7 1 4 0M12 9.5V17"/></svg></div><h3>Сайты на Tilda</h3><p>Лендинги для курсов, услуг и экспертов. Удобно редактировать самостоятельно после сдачи.</p><div class="price"><b>от 5 000 ₽</b><span>3-7 дней</span></div></div>
+      <div class="svc reveal"><span class="num">03</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg></div><h3>Приложения и калькуляторы</h3><p>Приложения для Android и Windows, конструкторы и калькуляторы со слоями, демо для заказчиков.</p><div class="price"><b>калькулятор 2 / 5 / 9 тыс. ₽</b><span>2-5 дней</span></div></div>
+      <div class="svc reveal"><span class="num">04</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3c.5 4.8 4.2 8.5 9 9-4.8.5-8.5 4.2-9 9-.5-4.8-4.2-8.5-9-9 4.8-.5 8.5-4.2 9-9z"/></svg></div><h3>Логотипы и айдентика</h3><p>Логотип, цвета и шрифты, которые отражают характер бренда и узнаются с первого взгляда.</p><div class="price"><b>от 1 500 ₽</b><span>2-4 дня</span></div></div>
+      <div class="svc reveal"><span class="num">05</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/></svg></div><h3>Маркетплейсы и соцсети</h3><p>Карточки товаров для WB и Ozon, оформление сообществ ВК и Телеграм, стикеры, карусели, ретушь фото.</p><div class="price"><b>1 / 3 / 5 карточек - 500 / 1 500 / 2 500 ₽</b><span>1-2 дня</span></div></div>
+      <div class="svc reveal"><span class="num">06</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8M7 12l3-3 2 2 4-4"/></svg></div><h3>Презентации</h3><p>Презентации для B2B, ритейла и онлайн-курсов. Понятная структура и аккуратная подача.</p><div class="price"><b>от 1 500 ₽</b><span>1-3 дня</span></div></div>
     </div>
   </div>
 </section>
@@ -407,6 +417,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="step reveal"><h3>Правки</h3><p>Дорабатываем детали вместе, пока результат не станет таким, как вы хотите.</p></div>
       <div class="step reveal"><h3>Запуск</h3><p>Публикую сайт, передаю файлы и объясняю, как всем пользоваться.</p></div>
     </div>
+    <div class="terms"><div class="term reveal"><h4>Договор и чек</h4><p>Работаю официально как самозанятая. Заключаем договор, после оплаты присылаю чек.</p></div><div class="term reveal"><h4>Оплата частями</h4><p>50% предоплата, остальное - когда вы приняли работу. Большие проекты делим на этапы.</p></div><div class="term reveal"><h4>Правки включены</h4><p>Правки в рамках задания - без ограничений. Мелкие исправления после запуска - тоже.</p></div><div class="term reveal"><h4>Поддержка 30 дней</h4><p>Если после сдачи что-то сломалось по моей вине - исправляю бесплатно.</p></div></div>
   </div>
 </section>
 
@@ -419,6 +430,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <p>Я digital-дизайнер, а сейчас ещё и веб-разработчик. Начинала с дизайна: логотипы, карточки для маркетплейсов, оформление соцсетей, презентации и сайты на Tilda.</p>
       <p>Теперь делаю и то, что раньше было недоступно дизайнеру без программиста: <b>сайты на чистом коде, калькуляторы, приложения для Android и программы для компьютера.</b> Использую современные AI-инструменты, поэтому работаю быстро и могу показать демо уже на старте.</p>
       <p>Мой принцип - дизайн с характером. Не шаблон, а образ, который отражает именно ваш бизнес и помогает продавать.</p>
+      <ul class="ways"><li><b>Сначала разбираюсь в вашем деле.</b> Спрашиваю про ваших клиентов, а не только про цвета.</li><li><b>Делаю с нуля.</b> Без шаблонов - сайт должен быть похож на вас, а не на соседа.</li><li><b>На связи каждый день.</b> Вы всегда знаете, что с проектом. Сроки держу.</li></ul>
+      <p>Работаю со всей Россией онлайн.</p>
       <div class="stats">
         <div class="stat"><b id="cnt-sites">20+</b><span>сайтов</span></div>
         <div class="stat"><b>5</b><span>приложений</span></div>
@@ -440,6 +453,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="ch">
       <a href="https://t.me/luminoso89" target="_blank" rel="noopener"><span class="ci" style="background:#2AABEE"><svg><use href="#tg"/></svg></span><span><b>Телеграм</b><small>@luminoso89 - отвечаю быстро</small></span></a>
       <a href="https://vk.ru/dizainsharacterom" target="_blank" rel="noopener"><span class="ci" style="background:#0077FF"><svg><use href="#vk"/></svg></span><span><b>ВКонтакте</b><small>Группа «Дизайн с характером»</small></span></a>
+      <a href="mailto:maryza2603@gmail.com?subject=%D0%97%D0%B0%D0%BA%D0%B0%D0%B7%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0-%D0%BF%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE"><span class="ci" style="background:#CF6640"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span><b>Почта</b><small>maryza2603@gmail.com</small></span></a>
     </div>
   </div>
 </section>
@@ -452,32 +466,47 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <script>
 const GH='https://maryza2603.github.io/moy-proekt/';
 const W=[
- {cat:'code',t:'Психологи: женская и мужская версия',d:'Два сайта психологов в едином стиле - одна система дизайна под разных специалистов.',pair:['psy-w','psy-m'],labels:['Анна','Михаил'],links:[['Сайт 1',GH+'psy-konsultaciya/'],['Сайт 2',GH+'psy-mikhail/']],wide:1,b:['Серия']},
- {cat:'code',t:'Преподаватель английского',img:'english',d:'Сайт репетитора: программы, отзывы, запись на пробный урок.',url:GH+'english-tutor-v2/'},
- {cat:'code',t:'Контент-Лаборатория',img:'weapons',d:'Яркий лендинг для команды, которая создаёт контент.',url:GH+'weapons/'},
- {cat:'code',t:'Строительная компания',img:'stroyka',d:'Сайт подрядчика: услуги, объекты, расчёт стоимости.',url:GH+'stroyka/'},
- {cat:'code',t:'Двери и шкафы-купе',img:'dveri',d:'Каталог и заявка на замер для производителя мебели.',url:GH+'dveri-kupe/'},
- {cat:'code',t:'Дом под ключ в Анапе',img:'anapa',d:'Лендинг строительства домов у моря.',url:GH+'anapa-dom/'},
- {cat:'code',t:'Металлоконструкции',img:'metall',d:'Сайт для продажи металлоконструкций с каталогом.',url:GH+'metall/'},
- {cat:'code',t:'Студия дизайна интерьера',img:'interior',d:'Стильный сайт с портфолио интерьеров.',url:GH+'interior/'},
- {cat:'code',t:'Преподаватель математики',img:'math',d:'Сайт репетитора для школьников и подготовки к экзаменам.',url:GH+'math-tutor/'},
- {cat:'code',t:'ПК-мастер',img:'pc',d:'Сайт частного мастера по ремонту компьютеров.',url:GH+'pc-master/'},
- {cat:'code',t:'Загородные дома',img:'zagorod',d:'Строительство загородных домов: проекты, цены, этапы.',url:GH+'zagorodnye-doma/'},
- {cat:'tilda',t:'«Заговори на английском за 2 месяца»',img:'t-eng',d:'Продающий лендинг онлайн-курса английского.',url:'https://zagovorieng.tilda.ws/'},
- {cat:'tilda',t:'«Стоп, тревога!» - мини-курс',img:'t-kurpatov',d:'Лендинг мини-курса Андрея Курпатова.',url:'https://psiholog8.tilda.ws/'},
- {cat:'tilda',t:'Школа рисования «Акварель»',img:'t-akvarel',d:'Нежный лендинг художественной школы.',url:'https://tsvetishcool.tilda.ws/'},
- {cat:'tilda',t:'Детская стоматология',img:'t-zubki',d:'Дружелюбный сайт детской клиники.',url:'https://detkizubki.tilda.ws/'},
- {cat:'tilda',t:'Еда Азии',img:'t-asia',d:'Сайт ресторана азиатской кухни.',url:'https://project10946381.tilda.ws/'},
- {cat:'tilda',t:'«Научись спать правильно»',img:'t-son',d:'Лендинг онлайн-курса о здоровом сне.',url:'https://project10651681.tilda.ws/myproject1'},
- {cat:'tilda',t:'Мастер-класс «Бургер»',img:'t-burger',d:'Лендинг кулинарного мастер-класса.',url:'https://project10705053.tilda.ws/'},
- {cat:'app',t:'Клининговая компания',img:'cleaning',d:'«Чистый дом» - демо двух приложений: для клиента (заказ уборки с расчётом цены) и для клинера (заявки и выплаты).',url:GH+'cleaning/',b:['Веб-приложение']},
- {cat:'app',t:'Конструктор входной двери',img:'door',d:'Калькулятор со слоями: картинка двери меняется при выборе опций, цена считается сразу.',url:'demo/door/',b:['Калькулятор']},
+ {cat:'konstr',t:'Дробильная установка «ГорТехПоставка»',f:'Для производства',img:'drobilki-konfig',d:'B2B-конфигуратор: тип дробилки, производительность, шасси, привод и опции. Чертёж, цена, масса и срок поставки меняются сразу, смета в PDF и ссылка для коллег.',url:GH+'drobilki-konfig/',b:['B2B']},
+ {cat:'konstr',t:'Бассейн «Лагуна»',f:'Для строителей',img:'bassein',d:'Лендинг компании с конструктором: форма и размер чаши, отделка, подсветка - смета считается сразу.',url:GH+'bassein/'},
+ {cat:'konstr',t:'Кухня «Олива»',f:'Для производства',img:'kuhnya',d:'Кухня под размер стены: модули, фасады и столешница меняются на картинке, цена пересчитывается.',url:GH+'kuhnya/'},
+ {cat:'konstr',t:'Кольцо «Аурум»',f:'Для ювелиров',img:'koltso',d:'Ювелирная мастерская: металл, камень и огранка - кольцо собирается на глазах вместе с ценой.',url:GH+'koltso/'},
+ {cat:'konstr',t:'Баня под ключ',f:'Для строителей',img:'banya',d:'Планировка бани из комнат, печь, фундамент и кровля - смета в PDF и заявка в один клик.',url:GH+'banya/'},
+ {cat:'konstr',t:'Планировщик сада',f:'Для ландшафта',img:'sad',d:'Участок любой формы, зоны и растения - площади и смета считаются автоматически.',url:GH+'sad/'},
+ {cat:'konstr',t:'Входная дверь',f:'Для производства',img:'door',d:'Картинка двери собирается из слоёв: цвет, ручка, стекло - цена считается сразу.',url:'demo/door/'},
+ {cat:'code',t:'Стоматология «Фарфор»',f:'Для клиник',img:'stomat',d:'Сайт клиники с онлайн-записью: пациент выбирает врача, день и свободное время. Прайс с поиском, врачи, отзывы, карта.',url:GH+'demo-stomatologiya/',b:['Премиум','Онлайн-запись']},
+ {cat:'code',t:'Загородный комплекс «Тихая Сосна»',f:'Для баз отдыха',img:'baza',d:'Сайт базы отдыха с бронированием: календарь занятости домиков, расчёт стоимости с баней и завтраками, предоплата.',url:GH+'demo-baza-otdyha/',b:['Премиум','Бронирование']},
+ {cat:'code',t:'Психологи: женская и мужская версия',f:'Для психологов',d:'Два сайта психологов в едином стиле - одна система дизайна под разных специалистов.',pair:['psy-w','psy-m'],labels:['Анна','Михаил'],links:[['Сайт 1',GH+'psy-konsultaciya/'],['Сайт 2',GH+'psy-mikhail/']],wide:1,b:['Серия']},
+ {cat:'code',t:'Риэлтор Ирина Ветрова',f:'Для риэлторов',img:'rieltor',d:'Сайт-визитка риэлтора: объекты с фильтром, услуги с ценами, шаги сделки и калькулятор - покупатель узнаёт цену квартиры мечты, продавец - за сколько продать свою.',url:GH+'rieltor/'},
+ {cat:'code',t:'Студия маникюра «Миндаль»',f:'Для салонов красоты',img:'mindal',d:'Сайт для мастера маникюра и педикюра: работы с просмотром фото, услуги с ценами, палитра и онлайн-запись: клиент сам выбирает услугу, мастера и свободное время.',url:GH+'mindal/',b:['Онлайн-запись']},
+ {cat:'code',t:'Наталья Пхенда, консультант по питанию',f:'Для экспертов',img:'natalya',d:'Сайт для реального клиента: КМС по плаванию и экономист, питание без жёстких запретов. Услуги и цены, первые результаты клиентов, конструктор нормы калорий и БЖУ, запись в MAX.',url:GH+'natalya-pitanie/',b:['Реальный клиент','Конструктор КБЖУ']},
+ {cat:'code',t:'Преподаватель английского',f:'Для репетиторов',img:'english',d:'Сайт репетитора: направления, как проходит урок, отзывы, цены и запись на пробный урок с выбором дня и времени.',url:GH+'english-tutor-v2/'},
+ {cat:'code',t:'Контент-Лаборатория',f:'Для команд и агентств',img:'weapons',d:'Яркий лендинг для команды, которая создаёт контент.',url:GH+'weapons/'},
+ {cat:'code',t:'Дробильное оборудование «ГорТехПоставка»',f:'Для производства',img:'drobilki',d:'Сайт поставщика дробилок для карьеров: квиз-подбор модели за 3 вопроса, запрос КП и опросного листа.',url:GH+'drobilki/',b:['B2B','Квиз-подбор']},
+ {cat:'code',t:'Строительная компания',f:'Для строителей',img:'stroyka',d:'Сайт подрядчика: услуги, объекты, расчёт стоимости.',url:GH+'stroyka/'},
+ {cat:'code',t:'Двери и шкафы-купе',f:'Для производства',img:'dveri',d:'Каталог и заявка на замер для производителя мебели.',url:GH+'dveri-kupe/'},
+ {cat:'code',t:'Студия дизайна интерьера',f:'Для дизайнеров',img:'interior',d:'Стильный сайт с портфолио интерьеров.',url:GH+'interior/'},
+ {cat:'code',t:'Преподаватель математики',f:'Для репетиторов',img:'math',d:'Сайт репетитора для школьников и подготовки к экзаменам.',url:GH+'math-tutor/'},
+ {cat:'code',t:'ПК-мастер',f:'Для мастеров услуг',img:'pc',d:'Сайт частного мастера по ремонту компьютеров.',url:GH+'pc-master/'},
+ {cat:'code',t:'Загородные дома',f:'Для строителей',img:'zagorod',d:'Строительство загородных домов: проекты, цены, этапы.',url:GH+'zagorodnye-doma/'},
+ {cat:'tilda',t:'«Заговори на английском за 2 месяца»',f:'Для онлайн-школ',img:'t-eng',d:'Продающий лендинг онлайн-курса английского.',url:'https://zagovorieng.tilda.ws/'},
+ {cat:'tilda',t:'«Стоп, тревога!» - мини-курс',f:'Для психологов',img:'t-kurpatov',d:'Лендинг мини-курса Андрея Курпатова.',url:'https://psiholog8.tilda.ws/'},
+ {cat:'tilda',t:'Школа рисования «Акварель»',f:'Для онлайн-школ',img:'t-akvarel',d:'Нежный лендинг художественной школы.',url:'https://tsvetishcool.tilda.ws/'},
+ {cat:'tilda',t:'Детская стоматология',f:'Для клиник',img:'t-zubki',d:'Дружелюбный сайт детской клиники.',url:'https://detkizubki.tilda.ws/'},
+ {cat:'tilda',t:'Еда Азии',f:'Для кафе и доставки',img:'t-asia',d:'Сайт ресторана азиатской кухни.',url:'https://project10946381.tilda.ws/'},
+ {cat:'tilda',t:'«Научись спать правильно»',f:'Для экспертов',img:'t-son',d:'Лендинг онлайн-курса о здоровом сне.',url:'https://project10651681.tilda.ws/myproject1'},
+ {cat:'tilda',t:'Мастер-класс «Бургер»',f:'Для кафе и доставки',img:'t-burger',d:'Лендинг кулинарного мастер-класса.',url:'https://project10705053.tilda.ws/'},
+ {cat:'app',t:'Калькулятор строительства дома',f:'Для строителей',img:'anapa',d:'Сайт строительства домов у моря с расчётом стоимости дома по площади, этажам и материалам.',url:GH+'anapa-dom/',b:['Калькулятор']},
+ {cat:'app',t:'Калькулятор металлоконструкций',f:'Для производства',img:'metall',d:'Сайт производителя металлоконструкций с расчётом стоимости изделия.',url:GH+'metall/',b:['Калькулятор']},
+ {cat:'app',t:'Калькулятор лестниц',f:'Для производства',img:'lestnicy',d:'Сайт производителя лестниц с расчётом стоимости по форме, материалу и ограждению.',url:GH+'lestnicy/',b:['Калькулятор']},
+ {cat:'app',t:'Ремонт коммерческих помещений',f:'Для строителей',img:'remont',d:'Расчёт ремонта офиса, магазина или кафе за минуту - по площади и виду работ.',url:GH+'remont/',b:['Калькулятор']},
+ {cat:'app',t:'Калькулятор КБЖУ',f:'Для экспертов',img:'nutri',d:'Сайт нутрициолога: норма калорий и КБЖУ по параметрам клиента и запись на консультацию.',url:GH+'nutri/',b:['Калькулятор']},
+ {cat:'app',t:'Клининговая компания',f:'Для сервисов услуг',img:'cleaning',d:'«Чистый дом» - демо двух приложений: для клиента (заказ уборки с расчётом цены) и для клинера (заявки и выплаты).',url:GH+'cleaning/',b:['Веб-приложение']},
  {cat:'app',t:'Арена - приложение для Android',mock:'phone',d:'Личное Android-приложение для сервиса «Арена»: всё под рукой в телефоне, без браузера.',b:['Android']},
  {cat:'app',t:'Биржа фриланса - приложение',mock:'phone',d:'У биржи не было приложения - я сделала своё. Заказы и отклики прямо с телефона.',b:['Android']},
  {cat:'app',t:'Видеостудия для Windows',mock:'pc',d:'Программа на Python: озвучка видео русским голосом по субтитрам, транскрибация, скачивание видео, Reels.',b:['Windows','Python']},
 ];
-const CATS=[['all','Все'],['code','Сайты на коде'],['tilda','Tilda'],['app','Приложения'],['design','Дизайн']];
-const BADGE={code:['code','Код'],tilda:['tilda','Tilda'],app:['app','Приложение']};
+const CATS=[['all','Все'],['konstr','Конструкторы'],['code','Сайты на коде'],['tilda','Tilda'],['app','Приложения'],['design','Дизайн']];
+const BADGE={konstr:['konstr','Конструктор'],code:['code','Код'],tilda:['tilda','Tilda'],app:['app','Приложение']};
 
 /* дизайн: картинки лежат в img/design/<папка>/, презентации - в docs/ */
 const DESIGN=[
@@ -493,13 +522,13 @@ const DESIGN=[
 const $=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const designCount=DESIGN.reduce((n,g)=>n+(g.items||g.pres).length,0);
 function shot(w){
-  if(w.pair) return `<div class="shot pair"><div class="chrome"><i></i><i></i><i></i></div>${w.pair.map((p,i)=>`<div class="half"><img loading="lazy" src="img/sites/${p}.jpg" alt=""><span class="label">${w.labels[i]}</span></div>`).join('')}</div>`;
+  if(w.pair) return `<div class="shot pair"><div class="chrome"><i></i><i></i><i></i></div>${w.pair.map((p,i)=>`<div class="half"><img loading="lazy" src="img/sites/${p}.jpg" alt="${w.t} - ${w.labels[i]}"><span class="label">${w.labels[i]}</span></div>`).join('')}</div>`;
   if(w.mock==='phone') return `<div class="shot"><div class="appmock"><div class="device"><div class="top"></div><div class="it"></div><div class="it"></div><div class="it" style="width:70%"></div><div class="it"></div></div></div></div>`;
   if(w.mock==='pc') return `<div class="shot"><div class="appmock"><div class="pc"><div class="tb"><i></i><i></i><i></i></div><div class="tabs"><span>Озвучка</span><span>Транскрибация</span><span>Скачивание</span><span>Reels</span></div><div class="pane"><div class="ln"></div><div class="ln" style="width:70%"></div><div class="ln" style="width:85%"></div><div class="go"></div></div></div></div></div>`;
   return `<div class="shot"><div class="chrome"><i></i><i></i><i></i></div><img class="scroll" loading="lazy" src="img/sites/${w.img}.jpg" alt="${esc(w.t)}"></div>`;
 }
 function card(w,i){
-  const bd=[BADGE[w.cat],...(w.b||[]).map(x=>['',x])].map(([c,x])=>`<span class="badge ${c}">${x}</span>`).join('');
+  const bd=[...(w.f?[['for',w.f]]:[]),BADGE[w.cat],...(w.b||[]).map(x=>[x==='Премиум'?'prem':'',x])].map(([c,x])=>`<span class="badge ${c}">${x}</span>`).join('');
   const links=w.links?w.links:(w.url?[['Открыть',w.url]]:[]);
   const foot=links.length?`<div class="links">${links.map(([l,u])=>`<a href="${u}" target="_blank" rel="noopener">${l}<svg><use href="#ext"/></svg></a>`).join('')}</div>`:`<div class="no-link"><svg width="15" height="15"><use href="#lock"/></svg>Личное приложение - покажу на созвоне</div>`;
   return `<article class="card${w.wide?' wide':''}" style="animation-delay:${Math.min(i,8)*50}ms">${shot(w)}<div class="body"><div class="badges">${bd}</div><h3>${esc(w.t)}</h3><p>${esc(w.d)}</p>${foot}</div></article>`;
