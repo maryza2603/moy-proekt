@@ -110,6 +110,11 @@ h2{font-size:clamp(30px,4vw,48px);font-weight:700;max-width:20ch;margin-bottom:2
 .links strong{font-weight:600;word-break:break-all;text-align:right}
 footer{padding:40px 0 56px;color:var(--muted);font-size:15px;text-align:center}
 
+.choice-img img{width:100%;border-radius:28px;aspect-ratio:16/9;object-fit:cover}
+.choice-points{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:36px}
+.choice-points h3{font-size:19px;margin-bottom:10px;color:var(--water)}
+.choice-points p{color:var(--muted);font-size:17px}
+@media (max-width:900px){.choice-points{grid-template-columns:1fr;gap:20px}}
 /* тарелки */
 .pool-band{height:clamp(240px,32vw,400px);background:url(img/greens.jpg) right center/cover;position:relative;display:flex;align-items:center}
 .pool-band p{font-family:"Unbounded";font-weight:700;color:var(--deep);font-size:clamp(20px,3vw,38px);line-height:1.15;max-width:14ch}
@@ -243,14 +248,15 @@ footer{padding:40px 0 56px;color:var(--muted);font-size:15px;text-align:center}
 
   <div class="pool-band"><div class="wrap" style="width:100%"><p>Еда - не враг, а топливо для жизни</p></div></div>
 
-  <section id="plates">
+  <section id="choice">
     <div class="wrap">
-      <h2>Так выглядит правильная тарелка</h2>
-      <p class="sub">Никаких голодовок и скучной гречки без соли. Вкусная еда, в которой хватает белка, клетчатки и полезных жиров.</p>
-      <div class="plates">
-        <figure><img src="img/breakfast.jpg" alt="Йогурт с ягодами и гранолой" loading="lazy"><figcaption><b>Завтрак</b><span>Греческий йогурт, свежие ягоды, гранола и стакан воды с лимоном</span><em class="k" style="font-style:normal">около 400 ккал</em></figcaption></figure>
-        <figure><img src="img/chicken.jpg" alt="Курица с гречкой и овощами" loading="lazy"><figcaption><b>Обед</b><span>Курица на гриле, гречка, запечённые овощи и салат</span><em class="k" style="font-style:normal">около 550 ккал</em></figcaption></figure>
-        <figure><img src="img/salmon.jpg" alt="Лосось с киноа и салатом" loading="lazy"><figcaption><b>Ужин</b><span>Лосось, киноа, зелень, томаты и авокадо</span><em class="k" style="font-style:normal">около 500 ккал</em></figcaption></figure>
+      <h2>Без жёстких запретов и голодовок</h2>
+      <p class="sub">Вы приходите со своими привычками, и мы ничего не ломаем в первый же день. Меняем питание постепенно, шаг за шагом.</p>
+      <figure class="choice-img"><img src="img/choice.jpg" alt="Привычные магазинные продукты и полезные продукты, между ними пустая корзина" loading="lazy" width="1600" height="900"></figure>
+      <div class="choice-points">
+        <div><h3>Выбор за вами</h3><p>В магазине есть всё. Я помогаю разобраться, а продукты вы выбираете сами - то, что любите и что вам удобно.</p></div>
+        <div><h3>Постепенно</h3><p>Никаких резких ограничений с первого дня. Привычки меняются мягко, поэтому нет срывов и чувства голода.</p></div>
+        <div><h3>Сначала страшно, потом нравится</h3><p>Многие боятся, что придётся отказаться от всего. А потом сами замечают, что едят вкусно и чувствуют себя лучше.</p></div>
       </div>
     </div>
   </section>
@@ -260,7 +266,7 @@ footer{padding:40px 0 56px;color:var(--muted);font-size:15px;text-align:center}
       <h2>Первые результаты</h2>
       <p class="sub">Я только начинаю свою практику, и за каждым результатом - живой человек, с которым мы шли к цели вместе.</p>
       <div class="results">
-        <div class="res"><strong>−10 кг</strong><p>Клиентка постройнела, почувствовала себя увереннее - и вышла замуж.</p></div>
+        <div class="res"><strong>−10 кг</strong><p>Клиентка сама поняла, что ела немного, но не то. За месяц сопровождения - минус 10 кг, а потом она вышла замуж.</p></div>
         <div class="res"><strong>Новая работа</strong><p>Вместе с лёгкостью и энергией пришла смелость: клиентка сменила работу на лучшую.</p></div>
         <div class="res"><strong>−12 кг</strong><p>Моя дочь - с ней я прошла весь путь от первой консультации до результата.</p></div>
       </div>
