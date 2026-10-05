@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ирина Ветрова - риэлтор в Екатеринбурге</title>
+<meta name="description" content="Помогаю купить, продать и обменять квартиру в Екатеринбурге. Проверка документов, сопровождение до ключей.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#eef1f3; --white:#fbfcfc; --ink:#182433; --muted:#556272;
+  --brass:#b98a2e; --brass-l:#e7cf98; --sage:#5f8172; --line:#cdd5dc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:17px/1.6 "Golos Text",system-ui,sans-serif;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:Unbounded,sans-serif;font-weight:600;line-height:1.15;letter-spacing:-.01em}
+h2{font-size:clamp(28px,4vw,42px);margin-bottom:14px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+section{padding:96px 0;scroll-margin-top:20px}
+.lead{color:var(--muted);max-width:56ch}
+:focus-visible{outline:3px solid var(--brass);outline-offset:3px;border-radius:6px}
+
+/* header */
+header{position:sticky;top:0;z-index:10;background:rgba(238,241,243,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{font-family:Unbounded;font-weight:600;font-size:17px;text-decoration:none}
+.logo small{display:block;font:400 13px "Golos Text";color:var(--muted)}
+nav{display:flex;gap:26px}
+nav a{text-decoration:none;font-size:15px;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;text-decoration:none;border-radius:999px;padding:15px 28px;font-weight:600;font-size:16px;border:0;cursor:pointer;transition:background .2s}
+.btn:hover{background:#26384d}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.btn.sm{padding:10px 20px;font-size:15px}
+
+/* hero */
+.hero{padding:64px 0 88px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(40px,6.4vw,78px);margin:0 0 22px}
+.hero h1 span{display:block;font-size:.42em;font-weight:400;color:var(--muted);margin-top:14px;letter-spacing:0}
+.hero p{font-size:19px;max-width:30em;margin-bottom:32px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px}
+.facts{display:flex;gap:36px;margin-top:44px;padding-top:28px;border-top:1px solid var(--line)}
+.facts b{display:block;font:600 26px Unbounded}
+.facts span{font-size:14px;color:var(--muted)}
+.photo{position:relative;padding-top:56px}
+.photo img{border-radius:220px 220px 18px 18px;aspect-ratio:3/4;object-fit:cover;width:100%;box-shadow:0 30px 60px -30px rgba(24,36,51,.45)}
+/* the key tag - the one memorable thing */
+.tag{position:absolute;left:-46px;bottom:64px;width:190px;transform-origin:50% 0;animation:swing 3.2s ease-in-out 1}
+.tag svg{width:100%;height:auto;filter:drop-shadow(0 12px 18px rgba(24,36,51,.25))}
+@keyframes swing{0%{transform:rotate(-14deg)}30%{transform:rotate(8deg)}55%{transform:rotate(-4deg)}80%{transform:rotate(2deg)}100%{transform:rotate(0)}}
+@media (prefers-reduced-motion:reduce){.tag{animation:none}html{scroll-behavior:auto}}
+
+/* objects */
+.objects{background:var(--white)}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:44px;flex-wrap:wrap}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{font:500 15px "Golos Text";background:var(--paper);border:0;border-radius:999px;padding:9px 18px;cursor:pointer;color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.obj{display:flex;flex-direction:column}
+.obj figure{position:relative;overflow:hidden;border-radius:14px;margin-bottom:18px}
+.obj img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.obj .st{position:absolute;top:14px;left:14px;background:var(--white);font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px}
+.obj .st.sold{background:var(--sage);color:#fff}
+.obj h3{font-size:19px;margin-bottom:6px}
+.obj .addr{color:var(--muted);font-size:15px;margin-bottom:12px}
+.obj dl{display:flex;gap:22px;font-size:15px;margin-bottom:14px}
+.obj dt{color:var(--muted);font-size:13px}
+.obj dd{font-weight:600}
+.obj .price{font:600 22px Unbounded;margin-top:auto}
+.obj[hidden]{display:none}
+
+/* calculator */
+.calc-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;margin-top:44px;align-items:start}
+.opts{display:grid;gap:26px}
+fieldset{border:0;display:flex;flex-wrap:wrap;gap:8px}
+legend{font-weight:600;margin-bottom:10px;font-size:15px}
+.opts label{position:relative;cursor:pointer;padding:11px 20px;border-radius:12px;background:var(--white);box-shadow:inset 0 0 0 1.5px var(--line);font-size:15px;transition:background .15s,box-shadow .15s}
+.opts label:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts label:has(input:checked){background:var(--ink);color:#fff;box-shadow:none}
+.opts label:has(input:focus-visible){outline:3px solid var(--brass);outline-offset:2px}
+.result{position:sticky;top:96px;background:var(--ink);color:#e9edf1;border-radius:20px;padding:34px 30px}
+.r-label{color:#a9b5c2;font-size:14px}
+.r-price{font:600 clamp(30px,3.4vw,40px) Unbounded;color:#fff;margin:6px 0 4px;white-space:nowrap}
+.r-range{color:var(--brass-l);font-size:15px}
+.r-meta{display:flex;gap:28px;margin:24px 0 18px;padding-top:20px;border-top:1px solid #3a4b5f}
+.r-meta dt{font-size:13px;color:#a9b5c2}.r-meta dd{font-weight:600}
+.r-sum{font-size:15px;color:#c7d0da;margin-bottom:22px}
+.btn.brass{background:var(--brass);color:var(--ink);width:100%;justify-content:center}
+.btn.brass:hover{background:var(--brass-l)}
+.r-note{font-size:13px;color:#8796a6;margin-top:14px}
+
+/* services */
+.services .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px}
+.svc{border-top:1.5px solid var(--ink)}
+.svc details{border-bottom:1px solid var(--line)}
+.svc summary{list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:22px 0;cursor:pointer}
+.svc summary::-webkit-details-marker{display:none}
+.svc summary h3{font-size:20px}
+.svc summary span{color:var(--brass);font-weight:600;white-space:nowrap}
+.svc summary::after{content:"+";font:400 26px Unbounded;color:var(--muted);transition:transform .25s}
+.svc details[open] summary::after{transform:rotate(45deg)}
+.svc details p{padding:0 40px 24px 0;color:var(--muted);max-width:60ch}
+
+/* steps - a real sequence */
+.steps{background:var(--ink);color:#e9edf1}
+.steps .lead{color:#a9b5c2}
+.line{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:52px;counter-reset:s;position:relative}
+.line::before{content:"";position:absolute;top:21px;left:0;right:0;height:1px;background:#3a4b5f}
+.line li{position:relative;counter-increment:s}
+.line li::before{content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--ink);border:1.5px solid var(--brass);color:var(--brass-l);font:600 16px Unbounded;margin-bottom:20px;position:relative}
+.line li:last-child::before{background:var(--brass);color:var(--ink)}
+.line h3{font-size:16px;margin-bottom:8px;color:#fff}
+.line p{font-size:15px;color:#a9b5c2}
+
+/* reviews */
+.reviews .grid{grid-template-columns:repeat(3,1fr)}
+blockquote{background:var(--white);border-radius:14px;padding:30px;display:flex;flex-direction:column;gap:18px}
+blockquote p{font-size:16px}
+blockquote footer{margin-top:auto;font-size:14px;color:var(--muted)}
+blockquote footer b{display:block;color:var(--ink);font-size:15px}
+
+/* contacts */
+.contact{padding-top:0}
+.card{background:var(--white);border-radius:24px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.links{display:grid;gap:12px}
+.links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;padding:18px 22px;border-radius:14px;background:var(--paper);font-weight:600;transition:background .2s}
+.links a:hover{background:var(--brass-l)}
+.links a span{font-weight:400;color:var(--muted);font-size:15px}
+form{display:grid;gap:12px;margin-top:26px}
+input{font:16px "Golos Text";padding:15px 18px;border:1.5px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);width:100%}
+input:focus{outline:none;border-color:var(--brass)}
+.ok{display:none;color:var(--sage);font-weight:600}
+footer.site{padding:36px 0 48px;color:var(--muted);font-size:14px}
+footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  nav{display:none}
+  section{padding:68px 0}
+  .hero{padding-top:32px}
+  .hero .wrap,.services .wrap,.card{grid-template-columns:1fr}
+  .photo{max-width:420px;margin:0 auto;padding-top:0}
+  .tag{left:-14px;width:150px;bottom:40px}
+  .grid,.reviews .grid,.calc-grid{grid-template-columns:1fr}
+  .result{position:static}
+  .line{grid-template-columns:1fr;gap:28px}
+  .line::before{top:0;bottom:0;left:21px;right:auto;width:1px;height:auto}
+  .line li{padding-left:64px}
+  .line li::before{position:absolute;left:0;top:0;margin:0}
+  .card{padding:32px 22px}
+  .facts{gap:22px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">Ирина Ветрова<small>риэлтор, Екатеринбург</small></a>
+    <nav aria-label="Разделы">
+      <a href="#objects">Объекты</a>
+      <a href="#calc">Калькулятор</a>
+      <a href="#services">Услуги</a>
+      <a href="#steps">Как работаю</a>
+      <a href="#reviews">Отзывы</a>
+    </nav>
+    <a class="btn sm" href="#contact">Написать</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Ирина Ветрова<span>Квартиры в Екатеринбурге: купить, продать, обменять</span></h1>
+        <p>Проверяю документы и историю квартиры, торгуюсь за вашу цену и веду сделку до момента, когда вы получаете ключи.</p>
+        <div class="cta">
+          <a class="btn" href="#contact">Обсудить квартиру</a>
+          <a class="btn ghost" href="#objects">Смотреть объекты</a>
+        </div>
+        <div class="facts">
+          <div><b>11 лет</b><span>в недвижимости</span></div>
+          <div><b>240+</b><span>закрытых сделок</span></div>
+          <div><b>0</b><span>сорванных из-за документов</span></div>
+        </div>
+      </div>
+      <div class="photo">
+        <img src="img/irina.jpg" alt="Ирина Ветрова с ключами от квартиры" width="821" height="1100">
+        <div class="tag" aria-hidden="true">
+          <svg viewBox="0 0 190 120">
+            <path d="M40 8h138a8 8 0 0 1 8 8v88a8 8 0 0 1-8 8H40L6 60z" fill="#b98a2e"/>
+            <circle cx="34" cy="60" r="8" fill="#eef1f3"/>
+            <text x="62" y="54" font-family="Unbounded" font-weight="600" font-size="22" fill="#182433">Ключи</text>
+            <text x="62" y="80" font-family="Golos Text" font-size="14" fill="#182433">в день сделки</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="objects" id="objects">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <h2>Объекты</h2>
+          <p class="lead">Квартиры, которые я продаю сейчас, и те, что уже нашли хозяев.</p>
+        </div>
+        <div class="filters" role="group" aria-label="Фильтр объектов">
+          <button aria-pressed="true" data-f="all">Все</button>
+          <button aria-pressed="false" data-f="sale">В продаже</button>
+          <button aria-pressed="false" data-f="sold">Продано</button>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="obj" data-s="sale">
+          <figure><img src="img/obj1.jpg" alt="Гостиная двухкомнатной квартиры с панорамным окном" loading="lazy"><span class="st">В продаже</span></figure>
+          <h3>2-комнатная в новом доме</h3>
+          <p class="addr">Академический, ул. Вильгельма де Геннина</p>
+          <dl><div><dt>Площадь</dt><dd>54 м²</dd></div><div><dt>Этаж</dt><dd>12 из 18</dd></div><div><dt>Сдан</dt><dd>2022</dd></div></dl>
+          <p class="price">7 450 000 ₽</p>
+        </article>
+        <article class="obj" data-s="sale">
+          <figure><img src="img/obj2.jpg" alt="Светлая кухня с круглым столом и цветами на подоконнике" loading="lazy"><span class="st">В продаже</span></figure>
+          <h3>1-комнатная у парка</h3>
+          <p class="addr">Уралмаш, ул. Ильича</p>
+          <dl><div><dt>Площадь</dt><dd>33 м²</dd></div><div><dt>Этаж</dt><dd>3 из 5</dd></div><div><dt>Кухня</dt><dd>8 м²</dd></div></dl>
+          <p class="price">3 900 000 ₽</p>
+        </article>
+        <article class="obj" data-s="sold">
+          <figure><img src="img/obj3.jpg" alt="Большая гостиная с паркетом и книжным шкафом" loading="lazy"><span class="st sold">Продано за 19 дней</span></figure>
+          <h3>3-комнатная в центре</h3>
+          <p class="addr">Центр, ул. Пушкина</p>
+          <dl><div><dt>Площадь</dt><dd>88 м²</dd></div><div><dt>Потолки</dt><dd>3,2 м</dd></div><div><dt>Этаж</dt><dd>2 из 4</dd></div></dl>
+          <p class="price">14 200 000 ₽</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="calc" id="calc">
+    <div class="wrap">
+      <h2>Сколько стоит квартира вашей мечты</h2>
+      <p class="lead">Выберите параметры - посчитаю примерную цену по реальным сделкам в Екатеринбурге за последние полгода.</p>
+      <div class="calc-grid">
+        <form class="opts" id="calcForm">
+          <fieldset><legend>Комнаты</legend>
+            <label><input type="radio" name="rooms" value="26">Студия</label>
+            <label><input type="radio" name="rooms" value="38">1</label>
+            <label><input type="radio" name="rooms" value="56" checked>2</label>
+            <label><input type="radio" name="rooms" value="78">3</label>
+            <label><input type="radio" name="rooms" value="100">4+</label>
+          </fieldset>
+          <fieldset><legend>Район</legend>
+            <label><input type="radio" name="area" value="175000">Центр</label>
+            <label><input type="radio" name="area" value="140000" checked>Рядом с центром</label>
+            <label><input type="radio" name="area" value="118000">Спальный район</label>
+          </fieldset>
+          <fieldset><legend>Дом</legend>
+            <label><input type="radio" name="house" value="1.06" checked>Новостройка</label>
+            <label><input type="radio" name="house" value="1">Вторичка</label>
+          </fieldset>
+          <fieldset><legend>Ремонт</legend>
+            <label><input type="radio" name="rep" value="0.9">Без отделки</label>
+            <label><input type="radio" name="rep" value="1" checked>Простой</label>
+            <label><input type="radio" name="rep" value="1.08">Евроремонт</label>
+            <label><input type="radio" name="rep" value="1.17">Дизайнерский</label>
+          </fieldset>
+          <fieldset><legend>Мебель и техника</legend>
+            <label><input type="radio" name="furn" value="0" checked>Без мебели</label>
+            <label><input type="radio" name="furn" value="1">С мебелью</label>
+          </fieldset>
+        </form>
+        <div class="result" aria-live="polite">
+          <p class="r-label">Примерная цена</p>
+          <p class="r-price" id="rPrice">7 600 000 ₽</p>
+          <p class="r-range" id="rRange">от 7,1 до 8,1 млн</p>
+          <dl class="r-meta">
+            <div><dt>Площадь</dt><dd id="rArea">около 56 м²</dd></div>
+            <div><dt>Цена за м²</dt><dd id="rM2">148 400 ₽</dd></div>
+          </dl>
+          <p class="r-sum" id="rSum">2-комнатная, рядом с центром, новостройка, простой ремонт, без мебели</p>
+          <a class="btn brass" href="#contact" id="rBtn">Подобрать такие варианты</a>
+          <p class="r-note">Расчёт примерный. Точную цену скажу после просмотра квартиры.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="wrap">
+      <div>
+        <h2>Чем помогаю</h2>
+        <p class="lead">Первая консультация бесплатная: разберём вашу ситуацию и решим, нужна ли вам помощь риэлтора вообще.</p>
+      </div>
+      <div class="svc">
+        <details open>
+          <summary><h3>Продажа квартиры</h3><span>2% от цены</span></summary>
+          <p>Оценю по реальным сделкам в вашем доме, сделаю фото и объявление, проведу показы и переговоры. Вы приходите только на подписание.</p>
+        </details>
+        <details>
+          <summary><h3>Покупка</h3><span>от 60 000 ₽</span></summary>
+          <p>Подберу варианты под бюджет, съезжу на просмотры, проверю собственников и обременения. Торгуюсь за вас - обычно это окупает мою работу.</p>
+        </details>
+        <details>
+          <summary><h3>Обмен и встречная покупка</h3><span>по договорённости</span></summary>
+          <p>Продаём вашу квартиру и покупаем новую в один день, чтобы вы не остались без жилья и не платили за съём.</p>
+        </details>
+        <details>
+          <summary><h3>Проверка квартиры перед покупкой</h3><span>8 000 ₽</span></summary>
+          <p>Нашли квартиру сами? Проверю историю переходов права, долги, прописанных и наследников. Отчёт - за 2 рабочих дня.</p>
+        </details>
+        <details>
+          <summary><h3>Ипотека и сертификаты</h3><span>бесплатно</span></summary>
+          <p>Подам заявку сразу в несколько банков, помогу с материнским капиталом и жилищными сертификатами.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps" id="steps">
+    <div class="wrap">
+      <h2>Как проходит сделка</h2>
+      <p class="lead">На каждом шаге вы знаете, что происходит и сколько времени это займёт.</p>
+      <ol class="line">
+        <li><h3>Встреча</h3><p>Обсуждаем задачу, сроки и бюджет. Бесплатно.</p></li>
+        <li><h3>Договор</h3><p>Фиксируем условия и мою оплату - без скрытых платежей.</p></li>
+        <li><h3>Поиск и показы</h3><p>Отбираю варианты или покупателей, показываю, торгуюсь.</p></li>
+        <li><h3>Проверка и сделка</h3><p>Проверяю документы, готовлю договор, сопровождаю в банке.</p></li>
+        <li><h3>Ключи</h3><p>Акт передачи, переоформление счетов - и вы дома.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <h2>Отзывы</h2>
+      <p class="lead" style="margin-bottom:44px">Что говорят люди, с которыми мы уже прошли сделку.</p>
+      <div class="grid">
+        <blockquote><p>Продавали бабушкину квартиру с наследством от трёх человек. Ирина собрала всех, разобралась с документами и продала за месяц.</p><footer><b>Алексей К.</b>продажа, Центр</footer></blockquote>
+        <blockquote><p>Покупали первую квартиру в ипотеку и очень боялись. Ирина нашла в выбранной квартире незаконную перепланировку - вовремя отказались.</p><footer><b>Дарья и Максим</b>покупка, Академический</footer></blockquote>
+        <blockquote><p>Обменяли двушку на трёшку в один день. Не пришлось ни снимать жильё, ни перевозить вещи дважды.</p><footer><b>Светлана Петровна</b>обмен, ВИЗ</footer></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="card">
+        <div>
+          <h2>Расскажите про вашу квартиру</h2>
+          <p class="lead">Отвечаю в течение часа с 9 до 21. Можно просто написать адрес - начнём с него.</p>
+          <form id="f">
+            <label class="visually" for="name" hidden>Имя</label>
+            <input id="name" name="name" placeholder="Ваше имя" required autocomplete="name">
+            <label for="phone" hidden>Телефон</label>
+            <input id="phone" name="phone" type="tel" placeholder="Телефон" required autocomplete="tel">
+            <button class="btn" type="submit">Перезвоните мне</button>
+            <p class="ok" role="status">Заявка отправлена. Ирина перезвонит в течение часа.</p>
+          </form>
+        </div>
+        <div class="links">
+          <a href="https://t.me/" target="_blank" rel="noopener">Telegram <span>@irina_vetrova</span></a>
+          <a href="https://wa.me/" target="_blank" rel="noopener">WhatsApp <span>написать</span></a>
+          <a href="tel:+79000000000">Позвонить <span>+7 900 000-00-00</span></a>
+          <a href="#objects">Офис <span>ул. Малышева, 51</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© Ирина Ветрова, 2026</span>
+    <span>Демо-сайт. Сделано Марией - @luminoso89</span>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  const f=b.dataset.f;
+  document.querySelectorAll('.obj').forEach(o=>o.hidden=!(f==='all'||o.dataset.s===f));
+}));
+const cf=document.getElementById('calcForm');
+const rub=n=>Math.round(n).toLocaleString('ru-RU')+' ₽';
+const mln=n=>(n/1e6).toLocaleString('ru-RU',{maximumFractionDigits:1});
+const txt=n=>cf.querySelector(`input[name=${n}]:checked`).parentNode.textContent.trim();
+let wish='';
+function calc(){
+  const v=n=>+cf.querySelector(`input[name=${n}]:checked`).value;
+  const m2=v('rooms'), base=v('area')*v('house')*v('rep');
+  const furn=v('furn')?150000+m2*5000:0;
+  let p=Math.round((m2*base+furn)/50000)*50000;
+  document.getElementById('rPrice').textContent=rub(p);
+  document.getElementById('rRange').textContent=`от ${mln(p*.93)} до ${mln(p*1.07)} млн`;
+  document.getElementById('rArea').textContent=`около ${m2} м²`;
+  document.getElementById('rM2').textContent=rub(Math.round(p/m2/100)*100);
+  const r=txt('rooms'), rooms=r==='Студия'?'студия':r+'-комнатная';
+  wish=[rooms,txt('area').toLowerCase(),txt('house').toLowerCase(),txt('rep').toLowerCase(),txt('furn').toLowerCase()].join(', ');
+  document.getElementById('rSum').textContent=wish[0].toUpperCase()+wish.slice(1);
+}
+cf.addEventListener('change',calc);calc();
+document.getElementById('rBtn').addEventListener('click',()=>{
+  document.querySelector('#contact .lead').textContent='Ваш запрос: '+wish+'. Оставьте телефон - пришлю подходящие варианты.';
+});
+document.getElementById('f').addEventListener('submit',e=>{
+  e.preventDefault();
+  e.target.querySelector('.ok').style.display='block';
+  e.target.querySelector('button').disabled=true;
+  e.target.querySelector('button').textContent='Отправлено';
+});
+</script>
+</body>
+</html>
