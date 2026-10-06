@@ -34,12 +34,16 @@ h2{font-size:clamp(32px,4.5vw,52px);margin-bottom:14px}
 .lead{color:var(--muted);max-width:620px;font-size:18px}
 section{padding:100px 0;position:relative}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;background:var(--terra);color:#fff;text-decoration:none;font-weight:600;border:0;cursor:pointer;transition:.25s;font-size:16px}
-.btn{box-shadow:0 0 14px rgba(207,102,64,.45),0 0 2px rgba(207,102,64,.6);animation:glow 2.8s ease-in-out infinite}
-.btn:hover{background:var(--terra-d);transform:translateY(-2px);box-shadow:0 0 26px rgba(207,102,64,.75),0 0 8px rgba(207,102,64,.8)}
-@keyframes glow{0%,100%{box-shadow:0 0 12px rgba(207,102,64,.35),0 0 2px rgba(207,102,64,.5)}50%{box-shadow:0 0 24px rgba(207,102,64,.65),0 0 6px rgba(207,102,64,.7)}}
+.btn{position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(110deg,#CF6640 0%,#E8875A 25%,#B4532F 50%,#E8875A 75%,#CF6640 100%);background-size:250% 100%;animation:glow 2.4s ease-in-out infinite,flow 5s linear infinite}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.75),transparent);transform:skewX(-20deg);animation:shine 3s ease-in-out infinite;z-index:-1;pointer-events:none}
+.btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 0 40px 6px rgba(232,135,90,.85),0 0 12px rgba(207,102,64,1)}
+@keyframes glow{0%,100%{box-shadow:0 0 14px 2px rgba(207,102,64,.45)}50%{box-shadow:0 0 36px 8px rgba(232,135,90,.85)}}
+@keyframes flow{to{background-position:-250% 0}}
+@keyframes shine{0%{left:-60%}55%,100%{left:130%}}
 .btn svg{width:18px;height:18px}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
-.btn.ghost{box-shadow:none;animation:none}
+.btn.ghost{box-shadow:none;animation:none;background:transparent}
+.btn.ghost::after{background:linear-gradient(100deg,transparent,rgba(207,102,64,.35),transparent)}
 .btn.ghost:hover{background:var(--ink);color:#fff;box-shadow:0 0 20px rgba(207,102,64,.5)}
 .star{width:18px;height:18px;color:var(--terra);flex:none}
 
