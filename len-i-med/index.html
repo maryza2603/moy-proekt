@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Лён и Мёд - домашний текстиль</title>
+<meta name="description" content="Пледы, постельное бельё из льна и махровые полотенца. Покупайте на Wildberries и Ozon.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--linen:#EEE7DA;--paper:#F8F4EC;--honey:#B07A22;--honey-d:#8A5E15;--ink:#33261A;--muted:#6F6253;--sage:#7E8E70;--line:#D9CFBE}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 Onest,system-ui,sans-serif}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--honey);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:Prata,Georgia,serif;font-weight:400;line-height:1.12}
+
+/* шапка */
+header{position:sticky;top:0;z-index:5;background:rgba(248,244,236,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:Prata,serif;font-size:22px;text-decoration:none;letter-spacing:.04em}
+.logo i{font-style:normal;color:var(--honey)}
+nav a{margin-left:26px;text-decoration:none;font-size:15px;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+
+/* первый экран: три комнаты одного дома */
+.hero{padding:64px 0 40px}
+.hero h1{font-size:clamp(40px,6.4vw,84px);max-width:11ch}
+.hero p{max-width:46ch;margin-top:20px;color:var(--muted);font-size:19px}
+.rooms{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:14px;margin-top:44px;align-items:end}
+.room{position:relative;text-decoration:none;overflow:hidden;border-radius:200px 200px 6px 6px;background:var(--linen)}
+.room img{width:100%;aspect-ratio:3/3.6;object-fit:cover;transition:transform .6s}
+.room:first-child img{aspect-ratio:3/3.9}
+.room:hover img{transform:scale(1.04)}
+.room span{position:absolute;left:0;right:0;bottom:0;padding:40px 20px 16px;color:#fff;font-size:15px;background:linear-gradient(transparent,rgba(40,28,16,.6))}
+.room span b{display:block;font-family:Prata,serif;font-weight:400;font-size:24px}
+
+/* товары */
+section{padding:88px 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:40px}
+.head h2{font-size:clamp(32px,4vw,50px)}
+.head p{max-width:40ch;color:var(--muted)}
+.prod{display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:56px;align-items:center;padding:40px 0;border-top:1px solid var(--line)}
+.prod:nth-of-type(even){grid-template-columns:1fr minmax(0,420px)}
+.prod:nth-of-type(even) .pic{order:2}
+.pic img{border-radius:6px;box-shadow:0 30px 60px -36px rgba(51,38,26,.45)}
+.prod h3{font-size:clamp(28px,3vw,38px)}
+.where{color:var(--sage);font-weight:500;font-size:15px;margin-bottom:8px}
+.prod>div>p{color:var(--muted);margin:14px 0 20px;max-width:48ch}
+.facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:8px 28px;margin-bottom:24px;font-size:15px}
+.facts dt{color:var(--muted)}
+.facts dd{font-weight:600}
+.sizes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.sizes button{font:inherit;font-size:14px;padding:8px 14px;border:1px solid var(--line);background:none;border-radius:40px;cursor:pointer;color:var(--ink)}
+.sizes button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.price{font-family:Prata,serif;font-size:32px;margin-bottom:18px}
+.price small{font-family:Onest,sans-serif;font-size:15px;color:var(--muted);margin-left:8px}
+.buy{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:40px;text-decoration:none;font-weight:600;font-size:15px}
+.wb{background:#7A1F7A;color:#fff}
+.oz{background:#0050E0;color:#fff}
+.btn:hover{filter:brightness(1.1)}
+
+/* материал */
+.mat{background:var(--linen)}
+.mats{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.mats h3{font-size:26px;margin-bottom:10px}
+.mats p{color:var(--muted)}
+.mats .n{font-family:Prata,serif;font-size:56px;color:var(--honey);line-height:1;margin-bottom:12px}
+
+/* отзывы */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.rev{border-left:2px solid var(--honey);padding:4px 0 4px 20px}
+.rev p{font-family:Prata,serif;font-size:19px;line-height:1.5}
+.rev small{display:block;margin-top:12px;color:var(--muted);font-size:14px}
+.stars{color:var(--honey);letter-spacing:2px;font-size:14px;margin-bottom:8px}
+
+/* уход */
+.care{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.care ul{list-style:none}
+.care li{padding:14px 0;border-bottom:1px solid var(--line)}
+.care li b{display:block}
+.care li span{color:var(--muted);font-size:15px}
+.care h2{font-size:clamp(30px,3.6vw,46px)}
+.care .lead{color:var(--muted);margin-top:14px;max-width:40ch}
+
+footer{background:var(--ink);color:var(--linen);padding:56px 0 40px}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:end}
+footer .logo{font-size:30px}
+footer p{color:#B9AC98;font-size:14px;margin-top:8px}
+.demo{margin-top:36px;padding-top:20px;border-top:1px solid #4d3d2d;font-size:13px;color:#9c8e7a}
+.demo a{color:var(--linen)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--ink);color:var(--paper);padding:14px 22px;border-radius:40px;font-size:15px;transition:transform .35s;z-index:9}
+.toast.on{transform:translate(-50%,0)}
+
+@media (max-width:860px){
+  nav{display:none}
+  .rooms{grid-template-columns:1fr 1fr}
+  .rooms .room:first-child{grid-column:1/-1}
+  .room:first-child img{aspect-ratio:4/3.4}
+  .prod,.prod:nth-of-type(even){grid-template-columns:1fr;gap:28px}
+  .prod:nth-of-type(even) .pic{order:0}
+  .head{flex-direction:column;align-items:start}
+  .mats,.revs,.care{grid-template-columns:1fr;gap:32px}
+  section{padding:64px 0}
+  .wrap{padding:0 16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap bar">
+  <a class="logo" href="#">Лён <i>и</i> Мёд</a>
+  <nav><a href="#catalog">Каталог</a><a href="#material">Материалы</a><a href="#reviews">Отзывы</a><a href="#care">Уход</a></nav>
+</div></header>
+
+<main>
+<div class="wrap hero">
+  <h1>Тёплый текстиль для всего дома</h1>
+  <p>Пледы из мериноса, бельё из льна и махровые полотенца в одной медовой гамме. Шьём в Иваново, продаём на Wildberries и Ozon.</p>
+  <div class="rooms">
+    <a class="room" href="#pled"><img src="img/pled-s.webp" alt="Медовый вязаный плед на дубовом кресле"><span><b>Гостиная</b>Плед из мериноса</span></a>
+    <a class="room" href="#bele"><img src="img/bele-s.webp" alt="Льняное постельное бельё на кровати"><span><b>Спальня</b>Бельё из льна</span></a>
+    <a class="room" href="#polotenca"><img src="img/polotenca-s.webp" alt="Стопка махровых полотенец на табурете"><span><b>Ванная</b>Набор полотенец</span></a>
+  </div>
+</div>
+
+<section id="catalog"><div class="wrap">
+  <div class="head"><h2>Каталог</h2><p>Выберите размер - кнопка откроет этот товар на маркетплейсе, где вам удобнее покупать.</p></div>
+
+  <article class="prod" id="pled">
+    <div class="pic"><img src="img/pled.webp" alt="Карточка товара: плед из шерсти мериноса"></div>
+    <div>
+      <div class="where">Гостиная</div>
+      <h3>Плед из шерсти мериноса</h3>
+      <p>Крупная вязка, мягкий и не колется. Греет как одеяло, а весит меньше килограмма - удобно укрыться на диване или взять на дачу.</p>
+      <dl class="facts"><dt>Состав</dt><dt>Вес</dt><dt>Стирка</dt><dd>80% меринос</dd><dd>950 г</dd><dd>30°, деликатная</dd></dl>
+      <div class="sizes" data-p='{"130x170":"4 490","150x200":"5 290","180x220":"6 390"}'></div>
+      <div class="price"></div>
+      <div class="buy"><a class="btn wb" href="#">Купить на Wildberries</a><a class="btn oz" href="#">Купить на Ozon</a></div>
+    </div>
+  </article>
+
+  <article class="prod" id="bele">
+    <div class="pic"><img src="img/bele.webp" alt="Карточка товара: постельное бельё из льна"></div>
+    <div>
+      <div class="where">Спальня</div>
+      <h3>Постельное бельё из 100% льна</h3>
+      <p>Варёный лён: мягкий с первого дня и становится ещё мягче после каждой стирки. Летом прохладно, зимой не холодно.</p>
+      <dl class="facts"><dt>Состав</dt><dt>Плотность</dt><dt>В комплекте</dt><dd>100% лён</dd><dd>145 г/м²</dd><dd>4 предмета</dd></dl>
+      <div class="sizes" data-p='{"1,5-спальный":"7 900","2-спальный":"9 400","Евро":"10 200"}'></div>
+      <div class="price"></div>
+      <div class="buy"><a class="btn wb" href="#">Купить на Wildberries</a><a class="btn oz" href="#">Купить на Ozon</a></div>
+    </div>
+  </article>
+
+  <article class="prod" id="polotenca">
+    <div class="pic"><img src="img/polotenca.webp" alt="Карточка товара: набор махровых полотенец"></div>
+    <div>
+      <div class="where">Ванная</div>
+      <h3>Набор махровых полотенец</h3>
+      <p>Три полотенца в цветах крем, песок и мёд. Длинный хлопковый ворс впитывает воду сразу, без «первых стирок».</p>
+      <dl class="facts"><dt>Состав</dt><dt>Плотность</dt><dt>В наборе</dt><dd>100% хлопок</dd><dd>500 г/м²</dd><dd>3 штуки</dd></dl>
+      <div class="sizes" data-p='{"30x50 + 50x90 + 70x140":"3 290","3 шт. 50x90":"2 790","3 шт. 70x140":"4 590"}'></div>
+      <div class="price"></div>
+      <div class="buy"><a class="btn wb" href="#">Купить на Wildberries</a><a class="btn oz" href="#">Купить на Ozon</a></div>
+    </div>
+  </article>
+</div></section>
+
+<section class="mat" id="material"><div class="wrap">
+  <div class="head"><h2>Из чего мы шьём</h2><p>Только натуральные ткани. Синтетику не добавляем даже в нитки.</p></div>
+  <div class="mats">
+    <div><div class="n">Лён</div><h3>Дышит</h3><p>Из российского льна-долгунца. Отводит влагу, поэтому под льняным одеялом не жарко даже в июле.</p></div>
+    <div><div class="n">Меринос</div><h3>Греет</h3><p>Тонкая шерсть 19 микрон. Именно поэтому плед не колется, как обычная шерсть.</p></div>
+    <div><div class="n">Хлопок</div><h3>Впитывает</h3><p>Длинноволокнистый хлопок для махры. Ворс не скатывается и не выпадает после стирок.</p></div>
+  </div>
+</div></section>
+
+<section id="reviews"><div class="wrap">
+  <div class="head"><h2>Что пишут покупатели</h2><p>Отзывы с Wildberries, средняя оценка 4,9 из 5.</p></div>
+  <div class="revs">
+    <div class="rev"><div class="stars" aria-label="5 из 5">★★★★★</div><p>Плед правда не колется, проверено на муже, который не носит шерсть вообще.</p><small>Екатерина, плед 150x200</small></div>
+    <div class="rev"><div class="stars" aria-label="5 из 5">★★★★★</div><p>Лён мягкий сразу, не надо ждать десять стирок. Цвет как на фото.</p><small>Ольга, бельё «Евро»</small></div>
+    <div class="rev"><div class="stars" aria-label="5 из 5">★★★★★</div><p>Брала в подарок, упаковано красиво, с бечёвкой. Себе тоже закажу.</p><small>Марина, набор полотенец</small></div>
+  </div>
+</div></section>
+
+<section id="care"><div class="wrap care">
+  <div><h2>Как ухаживать, чтобы служило годами</h2><p class="lead">Короткая памятка. Такая же лежит в каждой упаковке.</p></div>
+  <ul>
+    <li><b>Стирка при 30-40°</b><span>Лён и хлопок - 40°, меринос - 30° в режиме «шерсть».</span></li>
+    <li><b>Без отбеливателя и кондиционера</b><span>Кондиционер забивает ворс полотенец, и они хуже впитывают.</span></li>
+    <li><b>Сушить расправленным</b><span>Плед - на горизонтальной поверхности, чтобы не вытянулся.</span></li>
+    <li><b>Лён можно не гладить</b><span>Мятая фактура - его естественный вид.</span></li>
+  </ul>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="foot">
+    <div><a class="logo" href="#">Лён <i>и</i> Мёд</a><p>Домашний текстиль. Иваново.</p></div>
+    <div class="buy"><a class="btn wb" href="#">Магазин на Wildberries</a><a class="btn oz" href="#">Магазин на Ozon</a></div>
+  </div>
+  <p class="demo">Демо-лендинг бренда для маркетплейса. Бренд, цены и отзывы придуманы для примера. Дизайн и разработка - <a href="https://maryza2603.github.io/moy-proekt/portfolio/">Мария</a>.</p>
+</div></footer>
+
+<div class="toast" role="status" aria-live="polite"></div>
+<script>
+document.querySelectorAll('.sizes').forEach(box=>{
+  const p=JSON.parse(box.dataset.p),price=box.nextElementSibling,keys=Object.keys(p);
+  const pick=k=>{box.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.textContent===k));price.innerHTML=p[k]+' ₽<small>размер '+k+'</small>'};
+  keys.forEach(k=>{const b=document.createElement('button');b.type='button';b.textContent=k;b.onclick=()=>pick(k);box.append(b)});
+  pick(keys[1]);
+});
+const toast=document.querySelector('.toast');let tt;
+document.querySelectorAll('.btn').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();
+  toast.textContent='В настоящем магазине кнопка откроет товар на '+(a.classList.contains('wb')?'Wildberries':'Ozon');
+  toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),2600);
+}));
+</script>
+</body>
+</html>
