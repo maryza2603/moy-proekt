@@ -177,6 +177,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .done h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:40px;color:var(--cherry)}
 .done p{color:var(--soft);margin:10px auto 0;max-width:420px}
 .hint{font-size:13px;color:var(--soft);margin-top:8px}
+.tgd{display:flex;gap:14px;align-items:center;background:var(--cream);border-radius:16px;padding:14px 16px;margin-bottom:18px;flex-wrap:wrap}
+.tgd p{flex:1 1 220px;font-size:14px;line-height:1.45;color:var(--soft)}
+.tgd b{color:var(--ink)}
+.tgd .btn{padding:10px 18px;font-size:14px;background:#2a8bd0}
+.tgd .btn:hover{background:#1f6fa8}
+.tgd.ok{background:#e4f1e6}
+.tgd.ok .btn{display:none}
 @media(max-width:900px){.book .wrap{grid-template-columns:1fr;gap:28px}.bk{padding:22px 18px}.bk .row{grid-template-columns:1fr}}
 </style>
 </head>
@@ -308,12 +315,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
             <label class="f">Имя<input id="bName" autocomplete="given-name" required></label>
             <label class="f">Телефон<input id="bPhone" type="tel" autocomplete="tel" placeholder="+7" required></label>
           </div></fieldset>
+          <div class="tgd" id="tgd"><p id="tgdTxt"><b>Посмотрите, как запись приходит мастеру.</b> Подключите демо-бота - и ваша запись придёт вам в Telegram.</p><a class="btn" id="tgdGo" target="_blank" rel="noopener">Подключить Telegram</a></div>
           <div class="sum"><p id="bSum">Выберите время</p><button class="btn" id="bGo" type="submit" disabled>Записаться</button></div>
         </div>
         <div class="done" id="bDone" hidden>
           <h3>Вы записаны</h3>
           <p id="bDoneTxt"></p>
-          <p>Это демо. На рабочем сайте запись сразу приходит мастеру в Telegram, а время пропадает из свободных.</p>
+          <p id="bDoneNote"></p>
           <p style="margin-top:20px"><button class="btn btn--ghost" type="button" id="bAgain">Записаться ещё раз</button></p>
         </div>
       </form>
@@ -399,7 +407,19 @@ f.addEventListener('input',sum);
 f.addEventListener('submit',e=>{e.preventDefault();if($('bGo').disabled)return;
   const s=SRV[st.s],d=days[st.d];
   $('bDoneTxt').textContent=`${$('bName').value.trim()}, ждём вас ${d.getDate()} ${MON[d.getMonth()]} в ${st.h}:00. ${s[0]}${st.m?', мастер '+['','Алина','Вера'][st.m]:''}.`;
-  $('bForm').hidden=true;$('bDone').hidden=false;});
+  $('bForm').hidden=true;$('bDone').hidden=false;
+  $('bDoneNote').textContent=tg.on?'Запись уже у вас в Telegram - именно так её получает мастер.':'Это демо. На рабочем сайте запись сразу приходит мастеру в Telegram, а время пропадает из свободных.';
+  if(tg.on)fetch(BOT_API+'/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sid:tg.sid,name:$('bName').value.trim(),phone:$('bPhone').value.trim(),service:s[0],master:['Любой','Алина','Вера'][st.m],date:`${d.getDate()} ${MON[d.getMonth()]}`,time:`${st.h}:00`,price:s[1].toLocaleString('ru-RU')+' ₽'})}).catch(()=>{});});
+// демо-бот Telegram
+const BOT_API='https://mindal-bot.tg-bot-mindal.workers.dev', BOT_NAME='mindal_demo_bot';
+const tg={sid:null,on:false,t:null};
+try{tg.sid=localStorage.getItem('mindalSid')}catch(e){}
+if(!tg.sid){tg.sid=[...crypto.getRandomValues(new Uint8Array(12))].map(b=>b.toString(36).padStart(2,'0')).join('');try{localStorage.setItem('mindalSid',tg.sid)}catch(e){}}
+$('tgdGo').href=`https://t.me/${BOT_NAME}?start=${tg.sid}`;
+const linked=()=>{tg.on=true;clearInterval(tg.t);$('tgd').classList.add('ok');$('tgdTxt').innerHTML='<b>✓ Telegram подключён.</b> Запишитесь - и запись придёт вам, как мастеру.'};
+const check=()=>fetch(BOT_API+'/status?sid='+tg.sid).then(r=>r.json()).then(j=>{if(j.linked)linked()}).catch(()=>{});
+check();addEventListener('focus',()=>{if(!tg.on)check()});
+$('tgdGo').addEventListener('click',()=>{clearInterval(tg.t);let n=0;tg.t=setInterval(()=>{if(++n>60)clearInterval(tg.t);check()},3000)});
 $('bAgain').addEventListener('click',()=>{st.h=null;$('bForm').hidden=false;$('bDone').hidden=true;draw()});
 draw();
 })();
