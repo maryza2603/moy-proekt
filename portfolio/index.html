@@ -143,6 +143,7 @@ header.scrolled{border-color:var(--line)}
 .shot .chrome i{width:8px;height:8px;border-radius:50%;background:#DCCFC2}
 .shot .chrome i:first-child{background:var(--terra)}
 .shot img{position:absolute;top:26px;left:0;width:100%;height:calc(100% - 26px);object-fit:cover;object-position:top;transition:transform 4s ease}
+.shot img.gif{top:0;height:100%;object-fit:contain;background:#f3ebe3}
 .card:hover .shot img.scroll{transform:translateY(-8%)}
 .shot.pair{display:grid;grid-template-columns:1fr 1fr}
 .shot.pair .half{position:relative;overflow:hidden}
@@ -533,6 +534,7 @@ const W=[
  {cat:'tilda',t:'Еда Азии',f:'Для кафе и доставки',img:'t-asia',d:'Сайт ресторана азиатской кухни.',url:'https://project10946381.tilda.ws/'},
  {cat:'tilda',land:1,t:'«Научись спать правильно»',f:'Для экспертов',img:'t-son',d:'Лендинг онлайн-курса о здоровом сне.',url:'https://project10651681.tilda.ws/myproject1'},
  {cat:'tilda',land:1,t:'Мастер-класс «Бургер»',f:'Для кафе и доставки',img:'t-burger',d:'Лендинг кулинарного мастер-класса.',url:'https://project10705053.tilda.ws/'},
+ {cat:'app',t:'Telegram-бот для заявок с сайта',f:'Для любого бизнеса',gif:'demo-bot-mindal.gif',d:'Клиент записывается на сайте - мастер через секунду получает запись в Telegram: имя, телефон, услуга, дата и цена. Подключается к любому сайту, в том числе к Тильде. Попробуйте сами: подключите демо-бота и запишитесь.',links:[['Попробовать на сайте',GH+'mindal/#book'],['Бот в Telegram','https://t.me/mindal_demo_bot']],b:['Telegram-бот']},
  {cat:'app',t:'Калькулятор строительства дома',f:'Для строителей',img:'anapa',d:'Сайт строительства домов у моря с расчётом стоимости дома по площади, этажам и материалам.',url:GH+'anapa-dom/',b:['Калькулятор']},
  {cat:'app',t:'Калькулятор металлоконструкций',f:'Для производства',img:'metall',d:'Сайт производителя металлоконструкций с расчётом стоимости изделия.',url:GH+'metall/',b:['Калькулятор']},
  {cat:'app',t:'Калькулятор лестниц',f:'Для производства',img:'lestnicy',d:'Сайт производителя лестниц с расчётом стоимости по форме, материалу и ограждению.',url:GH+'lestnicy/',b:['Калькулятор']},
@@ -562,6 +564,7 @@ const $=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"]/g,c=>({'&
 const designCount=DESIGN.reduce((n,g)=>n+(g.items||g.pres).length,0);
 function shot(w){
   if(w.pair) return `<div class="shot pair"><div class="chrome"><i></i><i></i><i></i></div>${w.pair.map((p,i)=>`<div class="half"><img decoding="async" src="img/sites/${p}.webp" alt="${w.t} - ${w.labels[i]}"><span class="label">${w.labels[i]}</span></div>`).join('')}</div>`;
+  if(w.gif) return `<div class="shot"><img class="gif" decoding="async" src="video/${w.gif}" alt="${esc(w.t)}"></div>`;
   if(w.mock==='phone') return `<div class="shot"><div class="appmock"><div class="device"><div class="top"></div><div class="it"></div><div class="it"></div><div class="it" style="width:70%"></div><div class="it"></div></div></div></div>`;
   if(w.mock==='pc') return `<div class="shot"><div class="appmock"><div class="pc"><div class="tb"><i></i><i></i><i></i></div><div class="tabs"><span>Озвучка</span><span>Транскрибация</span><span>Скачивание</span><span>Reels</span></div><div class="pane"><div class="ln"></div><div class="ln" style="width:70%"></div><div class="ln" style="width:85%"></div><div class="go"></div></div></div></div></div>`;
   return `<div class="shot"><div class="chrome"><i></i><i></i><i></i></div><img class="scroll" decoding="async" src="img/sites/${w.img}.webp" alt="${esc(w.t)}"></div>`;
