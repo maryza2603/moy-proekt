@@ -34,10 +34,13 @@ h2{font-size:clamp(32px,4.5vw,52px);margin-bottom:14px}
 .lead{color:var(--muted);max-width:620px;font-size:18px}
 section{padding:100px 0;position:relative}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;background:var(--terra);color:#fff;text-decoration:none;font-weight:600;border:0;cursor:pointer;transition:.25s;font-size:16px}
-.btn:hover{background:var(--terra-d);transform:translateY(-2px)}
+.btn{box-shadow:0 0 14px rgba(207,102,64,.45),0 0 2px rgba(207,102,64,.6);animation:glow 2.8s ease-in-out infinite}
+.btn:hover{background:var(--terra-d);transform:translateY(-2px);box-shadow:0 0 26px rgba(207,102,64,.75),0 0 8px rgba(207,102,64,.8)}
+@keyframes glow{0%,100%{box-shadow:0 0 12px rgba(207,102,64,.35),0 0 2px rgba(207,102,64,.5)}50%{box-shadow:0 0 24px rgba(207,102,64,.65),0 0 6px rgba(207,102,64,.7)}}
 .btn svg{width:18px;height:18px}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
-.btn.ghost:hover{background:var(--ink);color:#fff}
+.btn.ghost{box-shadow:none;animation:none}
+.btn.ghost:hover{background:var(--ink);color:#fff;box-shadow:0 0 20px rgba(207,102,64,.5)}
 .star{width:18px;height:18px;color:var(--terra);flex:none}
 
 /* header */
@@ -124,7 +127,7 @@ header.scrolled{border-color:var(--line)}
 .works-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:40px 0 36px}
 .filters button{border:1.5px solid var(--line);background:var(--paper);padding:10px 18px;border-radius:999px;font:600 14px Manrope,sans-serif;cursor:pointer;transition:.2s;color:var(--ink)}
-.filters button:hover{border-color:var(--terra)}
+.filters button:hover{border-color:var(--terra);box-shadow:0 0 14px rgba(207,102,64,.4)}
 .filters button.on{background:var(--ink);border-color:var(--ink);color:#fff}
 .filters button sup{font-size:11px;opacity:.6;margin-left:3px}
 .works{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
@@ -249,7 +252,7 @@ header.scrolled{border-color:var(--line)}
 .ch{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto}
 @media(max-width:860px){.ch{grid-template-columns:1fr;max-width:420px}}
 .ch a{display:flex;align-items:center;gap:16px;padding:20px 18px;min-width:0;border-radius:20px;background:var(--paper);border:1px solid var(--line);text-decoration:none;text-align:left;transition:.25s}
-.ch a:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--terra)}
+.ch a:hover{transform:translateY(-4px);box-shadow:var(--shadow),0 0 22px rgba(207,102,64,.45);border-color:var(--terra)}
 .ch .ci{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:#fff;flex:none}
 .ch .ci svg{width:26px;height:26px}
 .ch b{display:block;font-size:18px}
@@ -301,7 +304,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 .totop{position:fixed;right:24px;bottom:24px;z-index:60;width:54px;height:54px;border-radius:50%;border:0;background:var(--terra);color:#fff;cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 24px rgba(207,102,64,.35);opacity:0;visibility:hidden;transform:translateY(16px);transition:.3s}
 .totop.on{opacity:1;visibility:visible;transform:none}
-.totop:hover{background:var(--terra-d);transform:translateY(-3px)}
+.totop:hover{background:var(--terra-d);transform:translateY(-3px);box-shadow:0 0 22px rgba(207,102,64,.7)}
 .totop svg{width:22px;height:22px}
 @media (max-width:600px){.totop{right:16px;bottom:16px;width:48px;height:48px}}
 </style>
@@ -475,14 +478,10 @@ const W=[
  {cat:'konstr',t:'Входная дверь',f:'Для производства',img:'door',d:'Картинка двери собирается из слоёв: цвет, ручка, стекло - цена считается сразу.',url:'demo/door/'},
  {cat:'code',t:'Стоматология «Фарфор»',f:'Для клиник',img:'stomat',d:'Сайт клиники с онлайн-записью: пациент выбирает врача, день и свободное время. Прайс с поиском, врачи, отзывы, карта.',url:GH+'demo-stomatologiya/',b:['Премиум','Онлайн-запись']},
  {cat:'code',t:'Загородный комплекс «Тихая Сосна»',f:'Для баз отдыха',img:'baza',d:'Сайт базы отдыха с бронированием: календарь занятости домиков, расчёт стоимости с баней и завтраками, предоплата.',url:GH+'demo-baza-otdyha/',b:['Премиум','Бронирование']},
- {cat:'code',t:'Ресторан «Угли»',f:'Для ресторанов',img:'restoran',d:'Сайт ресторана с бронированием стола: схема зала, выбор даты, времени и гостей, меню с фото, заявка на банкет.',url:GH+'demo-restoran/',b:['Премиум','Бронь стола']},
- {cat:'code',t:'Детейлинг-центр «Глосс»',f:'Для автосервисов',img:'detailing',d:'Сайт детейлинга: калькулятор цены по классу авто, слайдер «до/после», запись на бокс и время.',url:GH+'demo-detailing/',b:['Премиум','Калькулятор']},
- {cat:'code',t:'Юристы «Корсаков и партнёры»',f:'Для юридических компаний',img:'yurist',d:'Сайт юридической фирмы: тест из 4 вопросов с оценкой стоимости, срока и плана работы, команда юристов.',url:GH+'demo-yurist/',b:['Премиум','Квиз']},
- {cat:'code',t:'Йога-студия «Дыши»',f:'Для фитнеса и йоги',img:'yoga',d:'Сайт студии: расписание недели с фильтрами и свободными местами, запись на занятие, подбор абонемента.',url:GH+'demo-yoga/',b:['Премиум','Расписание']},
  {cat:'code',t:'Психологи: женская и мужская версия',f:'Для психологов',d:'Два сайта психологов в едином стиле - одна система дизайна под разных специалистов.',pair:['psy-w','psy-m'],labels:['Анна','Михаил'],links:[['Сайт 1',GH+'psy-konsultaciya/'],['Сайт 2',GH+'psy-mikhail/']],wide:1,b:['Серия']},
  {cat:'code',t:'Риэлтор Ирина Ветрова',f:'Для риэлторов',img:'rieltor',d:'Сайт-визитка риэлтора: объекты с фильтром, услуги с ценами, шаги сделки и калькулятор - покупатель узнаёт цену квартиры мечты, продавец - за сколько продать свою.',url:GH+'rieltor/'},
  {cat:'code',t:'Студия маникюра «Миндаль»',f:'Для салонов красоты',img:'mindal',d:'Сайт для мастера маникюра и педикюра: работы с просмотром фото, услуги с ценами, палитра и онлайн-запись: клиент сам выбирает услугу, мастера и свободное время.',url:GH+'mindal/',b:['Онлайн-запись']},
- {cat:'code',t:'Наталья Пхенда, консультант по питанию',f:'Для экспертов',img:'natalya',d:'Сайт для реального клиента: КМС по плаванию и экономист, питание без жёстких запретов. Услуги и цены, первые результаты клиентов, запись в MAX, почту и ВК.',url:GH+'natalya-pitanie/',b:['Реальный клиент','Стиль по визиткам']},
+ {cat:'code',t:'Наталья Пхенда, консультант по питанию',f:'Для экспертов',img:'natalya',d:'Сайт для реального клиента: КМС по плаванию и экономист, питание без жёстких запретов. Услуги и цены, первые результаты клиентов, конструктор нормы калорий и БЖУ, запись в MAX.',url:GH+'natalya-pitanie/',b:['Реальный клиент','Конструктор КБЖУ']},
  {cat:'code',t:'Преподаватель английского',f:'Для репетиторов',img:'english',d:'Сайт репетитора: направления, как проходит урок, отзывы, цены и запись на пробный урок с выбором дня и времени.',url:GH+'english-tutor-v2/'},
  {cat:'code',t:'Контент-Лаборатория',f:'Для команд и агентств',img:'weapons',d:'Яркий лендинг для команды, которая создаёт контент.',url:GH+'weapons/'},
  {cat:'code',t:'Дробильное оборудование «ГорТехПоставка»',f:'Для производства',img:'drobilki',d:'Сайт поставщика дробилок для карьеров: квиз-подбор модели за 3 вопроса, запрос КП и опросного листа.',url:GH+'drobilki/',b:['B2B','Квиз-подбор']},
