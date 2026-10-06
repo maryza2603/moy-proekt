@@ -87,6 +87,17 @@ section{padding:88px 0}
 .care h2{font-size:clamp(30px,3.6vw,46px)}
 .care .lead{color:var(--muted);margin-top:14px;max-width:40ch}
 
+/* подписка */
+.sub{background:var(--honey);color:#fff}
+.sub .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.sub h2{font-size:clamp(30px,3.6vw,46px)}
+.sub p{margin-top:12px;color:#FBEFD9;max-width:40ch}
+.sub form{display:flex;flex-wrap:wrap;gap:10px}
+.sub input{flex:1 1 220px;font:inherit;padding:14px 20px;border-radius:40px;border:0;color:var(--ink)}
+.sub button{font:inherit;font-weight:600;padding:14px 24px;border-radius:40px;border:0;background:var(--ink);color:var(--paper);cursor:pointer}
+.sub .or{width:100%;font-size:14px;color:#FBEFD9}
+.sub .or a{color:#fff}
+@media (max-width:860px){.sub .wrap{grid-template-columns:1fr;gap:24px}}
 footer{background:var(--ink);color:var(--linen);padding:56px 0 40px}
 .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:end}
 footer .logo{font-size:30px}
@@ -114,7 +125,7 @@ footer p{color:#B9AC98;font-size:14px;margin-top:8px}
 <body>
 <header><div class="wrap bar">
   <a class="logo" href="#">Лён <i>и</i> Мёд</a>
-  <nav><a href="#catalog">Каталог</a><a href="#material">Материалы</a><a href="#reviews">Отзывы</a><a href="#care">Уход</a></nav>
+  <nav><a href="#catalog">Каталог</a><a href="#news">Скидка 10%</a><a href="#material">Материалы</a><a href="#reviews">Отзывы</a><a href="#care">Уход</a></nav>
 </div></header>
 
 <main>
@@ -198,6 +209,10 @@ footer p{color:#B9AC98;font-size:14px;margin-top:8px}
     <li><b>Лён можно не гладить</b><span>Мятая фактура - его естественный вид.</span></li>
   </ul>
 </div></section>
+<section class="sub" id="news"><div class="wrap">
+  <div><h2>Скидка 10% на первый заказ</h2><p>Оставьте почту - пришлём промокод для Wildberries и Ozon, а потом только новинки и распродажи, раз в месяц.</p></div>
+  <form id="subform"><label class="sr" for="em" style="position:absolute;left:-9999px">Почта</label><input id="em" type="email" required placeholder="Ваша почта"><button type="submit">Получить промокод</button><span class="or">Или подпишитесь на нас в <a href="#" class="tg">Telegram</a> - промокод придёт туда.</span></form>
+</div></section>
 </main>
 
 <footer><div class="wrap">
@@ -222,6 +237,8 @@ document.querySelectorAll('.btn').forEach(a=>a.addEventListener('click',e=>{
   toast.textContent='В настоящем магазине кнопка откроет товар на '+(a.classList.contains('wb')?'Wildberries':'Ozon');
   toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),2600);
 }));
+document.getElementById('subform').addEventListener('submit',e=>{e.preventDefault();toast.textContent='Готово! В настоящем магазине промокод придёт на почту';toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),2800);e.target.reset()});
+document.querySelector('.sub .tg').addEventListener('click',e=>{e.preventDefault();toast.textContent='В настоящем магазине откроется Telegram-канал бренда';toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),2800)});
 </script>
 </body>
 </html>
