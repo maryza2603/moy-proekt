@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Лестница в 3D - конструктор</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --steel:#23282d; --steel-2:#4a535b; --concrete:#d9dde0; --paper:#f3f4f5;
+  --oak:#b9824a; --blue:#2f6d8f; --line:#c3c9cd;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:Onest,system-ui,sans-serif;color:var(--steel);background:var(--paper);display:grid;grid-template-columns:1fr 380px;height:100vh;overflow:hidden}
+#stage{position:relative;background:linear-gradient(#e7eaec,#cfd4d7)}
+#stage canvas{display:block;width:100%;height:100%;touch-action:none}
+.views{position:absolute;top:16px;left:16px;display:flex;background:#fff;border-radius:10px;padding:4px;box-shadow:0 2px 10px rgba(35,40,45,.12)}
+.views button{border:0;background:none;font:500 14px Onest;padding:8px 14px;border-radius:7px;cursor:pointer;color:var(--steel-2)}
+.views button[aria-pressed=true]{background:var(--steel);color:#fff}
+.dims{position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.92);border-radius:10px;padding:12px 14px;font-size:13px;line-height:1.6;max-width:280px}
+.dims b{font-weight:700}
+.comfort{display:inline-block;margin-top:4px;padding:2px 8px;border-radius:20px;font-weight:500}
+.ok{background:#dcefe2;color:#1f6b3a}.warn{background:#f8e6cf;color:#8a5212}
+aside{background:#fff;border-left:1px solid var(--line);overflow-y:auto;padding:24px 22px 28px}
+h1{font-size:24px;line-height:1.15;margin:0 0 6px;font-weight:700;letter-spacing:-.01em}
+.lead{margin:0 0 22px;color:var(--steel-2);font-size:14px;line-height:1.5}
+fieldset{border:0;padding:0;margin:0 0 20px}
+legend{font-weight:700;font-size:15px;margin-bottom:10px;padding:0}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.seg input{position:absolute;opacity:0}
+.seg label{display:flex;flex-direction:column;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:10px;padding:10px 4px;font-size:13px;cursor:pointer;text-align:center}
+.seg input:checked+label{border-color:var(--steel);background:var(--steel);color:#fff}
+.seg input:focus-visible+label{outline:3px solid var(--blue);outline-offset:2px}
+.seg svg{width:34px;height:34px}
+.range{margin-bottom:14px}
+.range .top{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px}
+.range output{font-weight:700}
+input[type=range]{width:100%;accent-color:var(--steel)}
+.sw{display:flex;gap:8px;flex-wrap:wrap}
+.sw input{position:absolute;opacity:0}
+.sw label{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:30px;padding:6px 12px 6px 6px;font-size:13px;cursor:pointer}
+.sw label i{width:22px;height:22px;border-radius:50%;border:1px solid rgba(0,0,0,.15)}
+.sw input:checked+label{border-color:var(--steel);box-shadow:inset 0 0 0 1px var(--steel)}
+.sw input:focus-visible+label{outline:3px solid var(--blue);outline-offset:2px}
+.price{border-top:1px solid var(--line);padding-top:18px;margin-top:6px}
+.price .sum{font-size:32px;font-weight:700;letter-spacing:-.02em}
+.price small{display:block;color:var(--steel-2);font-size:13px;margin-top:4px;line-height:1.45}
+form{margin-top:16px;display:grid;gap:8px}
+form input{font:15px Onest;padding:12px;border:1.5px solid var(--line);border-radius:10px}
+form button{font:700 15px Onest;padding:14px;border:0;border-radius:10px;background:var(--blue);color:#fff;cursor:pointer}
+form button:focus-visible,.views button:focus-visible{outline:3px solid var(--steel);outline-offset:2px}
+.done{color:#1f6b3a;font-weight:500;font-size:14px}
+@media (max-width:820px){
+  body{grid-template-columns:1fr;grid-template-rows:52vh auto;height:auto;overflow:auto}
+  #stage{height:52vh;position:sticky;top:0;z-index:1}
+  aside{border-left:0;padding:20px 16px 32px;position:relative;z-index:2}
+  .dims{font-size:12px;padding:8px 10px;max-width:200px}
+}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="views" role="group" aria-label="Вид">
+    <button id="v3d" aria-pressed="true">3D</button>
+    <button id="vtop" aria-pressed="false">Вид сверху</button>
+  </div>
+  <div class="dims" id="dims"></div>
+</div>
+<aside>
+  <h1>Соберите лестницу на металлокаркасе</h1>
+  <p class="lead">Задайте размеры проёма - модель перестроится сразу. Покрутите её мышкой или пальцем.</p>
+
+  <fieldset>
+    <legend>Форма</legend>
+    <div class="seg">
+      <input type="radio" name="shape" id="s1" value="straight" checked><label for="s1"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="12" width="26" height="10"/><path d="M10 12v10M16 12v10M22 12v10"/></svg>Прямая</label>
+      <input type="radio" name="shape" id="s2" value="L"><label for="s2"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h18V4h8v24H4z"/><path d="M10 20v8M16 20v8M22 10h8"/></svg>Г-образная</label>
+      <input type="radio" name="shape" id="s3" value="U"><label for="s3"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h26v26H4zM4 16h18"/><path d="M10 4v10M16 4v10M10 18v12M16 18v12"/></svg>П-образная</label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Размеры</legend>
+    <div class="range"><div class="top"><label for="h">Высота от пола до пола</label><output id="ho"></output></div><input type="range" id="h" min="2400" max="3600" step="50" value="2900"></div>
+    <div class="range"><div class="top"><label for="n">Количество ступеней</label><output id="no"></output></div><input type="range" id="n" min="10" max="20" step="1" value="15"></div>
+    <div class="range"><div class="top"><label for="d">Глубина ступени</label><output id="do"></output></div><input type="range" id="d" min="220" max="320" step="10" value="280"></div>
+    <div class="range"><div class="top"><label for="w">Ширина лестницы</label><output id="wo"></output></div><input type="range" id="w" min="800" max="1300" step="50" value="1000"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Ограждение</legend>
+    <div class="seg">
+      <input type="radio" name="rail" id="r1" value="posts" checked><label for="r1">Стойки и поручень</label>
+      <input type="radio" name="rail" id="r2" value="glass"><label for="r2">Стекло</label>
+      <input type="radio" name="rail" id="r3" value="none"><label for="r3">Без ограждения</label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Ступени</legend>
+    <div class="sw">
+      <input type="radio" name="wood" id="w1" value="oak" checked><label for="w1"><i style="background:#b9824a"></i>Дуб</label>
+      <input type="radio" name="wood" id="w2" value="ash"><label for="w2"><i style="background:#e2cfae"></i>Ясень</label>
+      <input type="radio" name="wood" id="w3" value="walnut"><label for="w3"><i style="background:#5e3d27"></i>Орех</label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Каркас</legend>
+    <div class="sw">
+      <input type="radio" name="frame" id="f1" value="graphite" checked><label for="f1"><i style="background:#2b3035"></i>Графит</label>
+      <input type="radio" name="frame" id="f2" value="white"><label for="f2"><i style="background:#f1f1ef"></i>Белый</label>
+      <input type="radio" name="frame" id="f3" value="bronze"><label for="f3"><i style="background:#7a5a3a"></i>Бронза</label>
+    </div>
+  </fieldset>
+
+  <div class="price">
+    <div class="sum" id="sum"></div>
+    <small>Примерная стоимость с монтажом. Точную цену мастер назовёт после замера.</small>
+    <form id="form">
+      <input required name="name" placeholder="Ваше имя" autocomplete="name">
+      <input required name="phone" type="tel" placeholder="Телефон" autocomplete="tel">
+      <button type="submit">Отправить расчёт мастеру</button>
+    </form>
+  </div>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const stage=document.getElementById('stage');
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+stage.prepend(renderer.domElement);
+const scene=new THREE.Scene();
+const persp=new THREE.PerspectiveCamera(40,1,0.1,100);
+const ortho=new THREE.OrthographicCamera(-3,3,3,-3,0.1,100);
+let camera=persp;
+const controls=new THREE.OrbitControls(persp,renderer.domElement);
+controls.enableDamping=true;controls.maxPolarAngle=Math.PI/2.05;controls.minDistance=2;controls.maxDistance=16;
+
+scene.add(new THREE.HemisphereLight(0xffffff,0x9aa2a8,0.75));
+const sun=new THREE.DirectionalLight(0xffffff,0.85);
+sun.position.set(4,8,5);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+Object.assign(sun.shadow.camera,{left:-6,right:6,top:6,bottom:-6});
+scene.add(sun);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(40,40),new THREE.ShadowMaterial({opacity:.18}));
+floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
+
+const WOOD={oak:0xb9824a,ash:0xe2cfae,walnut:0x5e3d27};
+const FRAME={graphite:0x2b3035,white:0xf1f1ef,bronze:0x7a5a3a};
+const PRICE={wood:{oak:9500,ash:8200,walnut:14000},rail:{posts:9000,glass:21000,none:0},frame:{graphite:0,white:0.04,bronze:0.08}};
+
+let group=new THREE.Group();scene.add(group);
+const $=id=>document.getElementById(id);
+const val=name=>document.querySelector(`input[name=${name}]:checked`).value;
+
+function box(w,h,d,mat,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.castShadow=m.receiveShadow=true;return m}
+function beam(a,b,size,mat,parent){ // square bar between two points
+  const len=a.distanceTo(b);const m=new THREE.Mesh(new THREE.BoxGeometry(size,len,size),mat);
+  m.position.copy(a).add(b).multiplyScalar(.5);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),b.clone().sub(a).normalize());
+  m.castShadow=true;parent.add(m);return m}
+function glass(pts,mat,parent){ // quad from 4 points
+  const g=new THREE.BufferGeometry();const p=[];[0,1,2,0,2,3].forEach(i=>p.push(pts[i].x,pts[i].y,pts[i].z));
+  g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.computeVertexNormals();parent.add(new THREE.Mesh(g,mat))}
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+
+function build(){
+  const H=+$('h').value/1000,N=+$('n').value,D=+$('d').value/1000,W=+$('w').value/1000;
+  const shape=val('shape'),rail=val('rail');
+  const r=H/(N+1); // подъём; верхняя ступень - пол второго этажа
+  const wood=new THREE.MeshStandardMaterial({color:WOOD[val('wood')],roughness:.65});
+  const steel=new THREE.MeshStandardMaterial({color:FRAME[val('frame')],roughness:.45,metalness:.55});
+  const glassM=new THREE.MeshStandardMaterial({color:0xbfe0ea,transparent:true,opacity:.28,side:THREE.DoubleSide,roughness:.1});
+  scene.remove(group);group=new THREE.Group();scene.add(group);
+  const T=0.04,RH=0.9;let railLen=0;
+
+  // марш: n ступеней от уровня lvl, локально вдоль +x, ширина по z
+  function flight(n,lvl,origin,angle){
+    const g=new THREE.Group();g.position.copy(origin);g.rotation.y=angle;group.add(g);
+    for(let i=0;i<n;i++){const y=(lvl+i)*r;g.add(box(D+0.03,T,W,wood,(i+.5)*D,y-T/2,0))}
+    const a=V(0,(lvl-1)*r-0.14,0),b=V(n*D,(lvl+n-1)*r-0.14,0);
+    [-1,1].forEach(s=>{const z=s*(W/2-0.12);beam(V(a.x,Math.max(a.y,0.1),z),V(b.x,b.y,z),0.1,steel,g)});
+    if(rail!=='none'){
+      const z=W/2-0.03,p0=V(D*.5,lvl*r+RH,z),p1=V((n-.5)*D,(lvl+n-1)*r+RH,z);railLen+=p0.distanceTo(p1);
+      if(rail==='posts'){for(let i=0;i<n;i+=Math.max(1,Math.round(.8/D))){const x=(i+.5)*D,y=(lvl+i)*r;beam(V(x,y,z),V(x,y+RH,z),0.035,steel,g)}
+        const x=(n-.5)*D,y=(lvl+n-1)*r;beam(V(x,y,z),V(x,y+RH,z),0.035,steel,g)}
+      else glass([V(D*.5,lvl*r+.05,z),V((n-.5)*D,(lvl+n-1)*r+.05,z),V(p1.x,p1.y-.05,z),V(p0.x,p0.y-.05,z)],glassM,g);
+      beam(p0,p1,0.045,steel,g);
+    }
+    return g;
+  }
+  function landing(x0,x1,z0,z1,lvl,edges){
+    const y=lvl*r,cx=(x0+x1)/2,cz=(z0+z1)/2;
+    group.add(box(x1-x0,T,z1-z0,wood,cx,y-T/2,cz));
+    group.add(box(x1-x0-.1,0.1,z1-z0-.1,steel,cx,y-T-0.05,cz));
+    [[x0+.08,z0+.08],[x1-.08,z0+.08],[x0+.08,z1-.08],[x1-.08,z1-.08]].forEach(([x,z])=>beam(V(x,0,z),V(x,y-T-0.1,z),0.08,steel,group));
+    if(rail==='none')return;
+    edges.forEach(([a,b])=>{const A=V(a[0],y,a[1]),B=V(b[0],y,b[1]);railLen+=A.distanceTo(B);
+      if(rail==='posts'){beam(A,A.clone().setY(y+RH),0.035,steel,group);beam(B,B.clone().setY(y+RH),0.035,steel,group)}
+      else glass([A.clone().setY(y+.05),B.clone().setY(y+.05),B.clone().setY(y+RH-.05),A.clone().setY(y+RH-.05)],glassM,group);
+      beam(A.clone().setY(y+RH),B.clone().setY(y+RH),0.045,steel,group)});
+  }
+
+  let len,depth;
+  if(shape==='straight'){flight(N,1,V(0,0,0),0);len=N*D+0.03;depth=W}
+  else{
+    const n1=Math.floor((N-1)/2),n2=N-1-n1,L=n1+1,x0=n1*D;const hw=W/2-.03;
+    flight(n1,1,V(0,0,0),0);
+    if(shape==='L'){
+      landing(x0,x0+W,-W/2,W/2,L,[[[x0+W-.03,-hw],[x0+W-.03,hw]],[[x0,hw],[x0+W-.03,hw]]]);
+      flight(n2,L+1,V(x0+W/2,0,-W/2),Math.PI/2);len=x0+W;depth=W+n2*D;
+    }else{
+      const gap=0.1;
+      landing(x0,x0+W,-1.5*W-gap,W/2,L,[[[x0+W-.03,-1.5*W-gap+.03],[x0+W-.03,hw]]]);
+      flight(n2,L+1,V(x0,0,-(W+gap)),Math.PI);len=x0+W;depth=2*W+gap;
+    }
+  }
+  // центрирование
+  const bb=new THREE.Box3().setFromObject(group),c=bb.getCenter(new THREE.Vector3());
+  group.position.x-=c.x;group.position.z-=c.z;
+  const span=Math.max(bb.max.x-bb.min.x,bb.max.z-bb.min.z,H);
+  if(!build.framed){persp.position.set(span*1.1,span*.9,span*1.25);controls.target.set(0,H*.4,0);build.framed=true}
+  ortho.userData.span=span;resize();
+
+  // размеры и удобство
+  const rmm=Math.round(r*1000),step=2*rmm+D*1000;const good=step>=600&&step<=650&&rmm<=190;
+  $('ho').textContent=$('h').value+' мм';$('no').textContent=N;$('do').textContent=$('d').value+' мм';$('wo').textContent=$('w').value+' мм';
+  $('dims').innerHTML=`Подъём ступени <b>${rmm} мм</b><br>Габарит <b>${Math.round(len*1000)} × ${Math.round(depth*1000)} мм</b><br>
+    <span class="comfort ${good?'ok':'warn'}">${good?'Удобный шаг':(rmm>190?'Крутовато - добавьте ступеней':'Шаг неудобный - поменяйте глубину')}</span>`;
+
+  const pr=(N*PRICE.wood[val('wood')]+ (shape==='straight'?0:28000) + railLen*PRICE.rail[rail] + (N*D*2)*12000)*(1+PRICE.frame[val('frame')])+35000;
+  $('sum').textContent='от '+(Math.round(pr/1000)*1000).toLocaleString('ru-RU')+' ₽';
+}
+
+function resize(){
+  const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);
+  persp.aspect=w/h;persp.updateProjectionMatrix();
+  const s=(ortho.userData.span||4)*.65,a=w/h;
+  Object.assign(ortho,{left:-s*a,right:s*a,top:s,bottom:-s});ortho.updateProjectionMatrix();
+}
+ortho.position.set(0,20,0);ortho.lookAt(0,0,0);
+function setView(top){camera=top?ortho:persp;controls.enabled=!top;$('v3d').setAttribute('aria-pressed',!top);$('vtop').setAttribute('aria-pressed',top)}
+$('v3d').onclick=()=>setView(false);$('vtop').onclick=()=>setView(true);
+document.querySelectorAll('aside input').forEach(i=>i.addEventListener('input',build));
+$('form').onsubmit=e=>{e.preventDefault();e.target.innerHTML='<p class="done">Заявка отправлена. Мастер перезвонит и уточнит размеры.</p>'};
+addEventListener('resize',resize);
+build();
+(function loop(){requestAnimationFrame(loop);controls.update();renderer.render(scene,camera)})();
+</script>
+</body>
+</html>
