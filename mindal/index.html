@@ -407,7 +407,7 @@ f.addEventListener('input',sum);
 f.addEventListener('submit',e=>{e.preventDefault();if($('bGo').disabled)return;
   const s=SRV[st.s],d=days[st.d];
   $('bDoneTxt').textContent=`${$('bName').value.trim()}, ждём вас ${d.getDate()} ${MON[d.getMonth()]} в ${st.h}:00. ${s[0]}${st.m?', мастер '+['','Алина','Вера'][st.m]:''}.`;
-  $('bForm').hidden=true;$('bDone').hidden=false;
+  $('bkForm').hidden=true;$('bDone').hidden=false;
   $('bDoneNote').textContent=tg.on?'Запись уже у вас в Telegram - именно так её получает мастер.':'Это демо. На рабочем сайте запись сразу приходит мастеру в Telegram, а время пропадает из свободных.';
   if(tg.on)fetch(BOT_API+'/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sid:tg.sid,name:$('bName').value.trim(),phone:$('bPhone').value.trim(),service:s[0],master:['Любой','Алина','Вера'][st.m],date:`${d.getDate()} ${MON[d.getMonth()]}`,time:`${st.h}:00`,price:s[1].toLocaleString('ru-RU')+' ₽'})}).catch(()=>{});});
 // демо-бот Telegram
@@ -420,7 +420,7 @@ const linked=()=>{tg.on=true;clearInterval(tg.t);$('tgd').classList.add('ok');$(
 const check=()=>fetch(BOT_API+'/status?sid='+tg.sid).then(r=>r.json()).then(j=>{if(j.linked)linked()}).catch(()=>{});
 check();addEventListener('focus',()=>{if(!tg.on)check()});
 $('tgdGo').addEventListener('click',()=>{clearInterval(tg.t);let n=0;tg.t=setInterval(()=>{if(++n>60)clearInterval(tg.t);check()},3000)});
-$('bAgain').addEventListener('click',()=>{st.h=null;$('bForm').hidden=false;$('bDone').hidden=true;draw()});
+$('bAgain').addEventListener('click',()=>{st.h=null;$('bkForm').hidden=false;$('bDone').hidden=true;draw()});
 draw();
 })();
 </script>
