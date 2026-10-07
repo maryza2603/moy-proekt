@@ -19,10 +19,17 @@ h2{font-size:clamp(32px,4.5vw,52px);margin-bottom:14px}
 .lead{color:var(--muted);max-width:620px;font-size:18px}
 section{padding:100px 0;position:relative}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;background:var(--terra);color:#fff;text-decoration:none;font-weight:600;border:0;cursor:pointer;transition:.25s;font-size:16px}
-.btn:hover{background:var(--terra-d);transform:translateY(-2px)}
+.btn{position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(110deg,#CF6640 0%,#E8875A 25%,#B4532F 50%,#E8875A 75%,#CF6640 100%);background-size:250% 100%;animation:glow 2.4s ease-in-out infinite,flow 5s linear infinite}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.75),transparent);transform:skewX(-20deg);animation:shine 3s ease-in-out infinite;z-index:-1;pointer-events:none}
+.btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 0 40px 6px rgba(232,135,90,.85),0 0 12px rgba(207,102,64,1)}
+@keyframes glow{0%,100%{box-shadow:0 0 14px 2px rgba(207,102,64,.45)}50%{box-shadow:0 0 36px 8px rgba(232,135,90,.85)}}
+@keyframes flow{to{background-position:-250% 0}}
+@keyframes shine{0%{left:-60%}55%,100%{left:130%}}
 .btn svg{width:18px;height:18px}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
-.btn.ghost:hover{background:var(--ink);color:#fff}
+.btn.ghost{box-shadow:none;animation:none;background:transparent}
+.btn.ghost::after{background:linear-gradient(100deg,transparent,rgba(207,102,64,.35),transparent)}
+.btn.ghost:hover{background:var(--ink);color:#fff;box-shadow:0 0 20px rgba(207,102,64,.5)}
 .star{width:18px;height:18px;color:var(--terra);flex:none}
 
 /* header */
@@ -109,7 +116,7 @@ header.scrolled{border-color:var(--line)}
 .works-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:40px 0 36px}
 .filters button{border:1.5px solid var(--line);background:var(--paper);padding:10px 18px;border-radius:999px;font:600 14px Manrope,sans-serif;cursor:pointer;transition:.2s;color:var(--ink)}
-.filters button:hover{border-color:var(--terra)}
+.filters button:hover{border-color:var(--terra);box-shadow:0 0 14px rgba(207,102,64,.4)}
 .filters button.on{background:var(--ink);border-color:var(--ink);color:#fff}
 .filters button sup{font-size:11px;opacity:.6;margin-left:3px}
 .works{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
@@ -262,7 +269,7 @@ header.scrolled{border-color:var(--line)}
 .ch{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto}
 @media(max-width:860px){.ch{grid-template-columns:1fr;max-width:420px}}
 .ch a{display:flex;align-items:center;gap:16px;padding:20px 18px;min-width:0;border-radius:20px;background:var(--paper);border:1px solid var(--line);text-decoration:none;text-align:left;transition:.25s}
-.ch a:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--terra)}
+.ch a:hover{transform:translateY(-4px);box-shadow:var(--shadow),0 0 22px rgba(207,102,64,.45);border-color:var(--terra)}
 .ch .ci{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:#fff;flex:none}
 .ch .ci svg{width:26px;height:26px}
 .ch b{display:block;font-size:18px}
@@ -314,7 +321,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 .totop{position:fixed;right:24px;bottom:24px;z-index:60;width:54px;height:54px;border-radius:50%;border:0;background:var(--terra);color:#fff;cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 24px rgba(207,102,64,.35);opacity:0;visibility:hidden;transform:translateY(16px);transition:.3s}
 .totop.on{opacity:1;visibility:visible;transform:none}
-.totop:hover{background:var(--terra-d);transform:translateY(-3px)}
+.totop:hover{background:var(--terra-d);transform:translateY(-3px);box-shadow:0 0 22px rgba(207,102,64,.7)}
 .totop svg{width:22px;height:22px}
 @media (max-width:600px){.totop{right:16px;bottom:16px;width:48px;height:48px}}
 </style>
