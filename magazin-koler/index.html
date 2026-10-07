@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Колер - краски для стен</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Yeseva+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.hero{padding:56px 0 0}
+.hero .wrap{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:end}
+.hero .wrap>*{min-width:0}
+.hero h1{font:clamp(44px,5.4vw,80px)/1.02 var(--f-display);letter-spacing:-.01em}
+.hero p{color:var(--ink-2);font-size:18px;max-width:30em;margin:24px 0 32px}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap}
+.fan{display:flex;height:520px;gap:6px}
+.fan a{flex:1;border-radius:var(--r-m);background:var(--c);color:var(--t,#fff);display:flex;flex-direction:column;justify-content:flex-end;padding:18px 14px;transition:flex .45s cubic-bezier(.2,.7,.2,1);overflow:hidden;min-width:0}
+.fan a span{font:20px/1.1 var(--f-display);white-space:nowrap;opacity:0;transition:opacity .3s}
+.fan a small{font-size:12px;opacity:0;transition:opacity .3s;white-space:nowrap}
+.fan a:hover,.fan a.on{flex:4}
+.fan a:hover span,.fan a.on span,.fan a:hover small,.fan a.on small{opacity:1}
+.fan:hover a.on:not(:hover){flex:1}
+.fan:hover a.on:not(:hover) span,.fan:hover a.on:not(:hover) small{opacity:0}
+
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;border-top:1px solid var(--line);margin-top:56px;padding-top:28px}
+.facts b{display:block;font-weight:600}
+.facts span{color:var(--ink-2);font-size:14px}
+
+.sec{margin-top:110px}
+.sec-h{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:32px}
+.sec-h h2{font:clamp(32px,3.4vw,48px)/1.1 var(--f-display)}
+.sec-h a{border-bottom:1px solid;padding-bottom:2px;white-space:nowrap}
+
+.rooms{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.room{border-radius:var(--r-m);overflow:hidden;background:var(--white)}
+.room .sw{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;height:220px}
+.room .sw i:first-child{grid-row:span 2}
+.room div.t{padding:18px}
+.room h3{font-weight:500;font-size:18px}
+.room p{font-size:14px;color:var(--ink-2)}
+
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{padding:9px 18px;border-radius:999px;border:1px solid var(--line);font-size:14px}
+.tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.goods{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+.match{background:#2F5D50;color:#F0F3EE;border-radius:var(--r-l);display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.match .txt{padding:64px}
+.match h2{font:clamp(32px,3.4vw,48px)/1.1 var(--f-display);margin-bottom:18px}
+.match p{opacity:.85;max-width:28em;margin-bottom:32px}
+.match .btn{background:#F0F3EE;color:#2F5D50}
+.match ol{list-style:none;display:grid;gap:14px;margin-bottom:36px;counter-reset:s}
+.match li{display:flex;gap:14px;align-items:center;counter-increment:s}
+.match li::before{content:counter(s);width:30px;height:30px;border-radius:50%;border:1px solid rgba(240,243,238,.5);display:grid;place-items:center;font-size:13px;flex:none}
+.wall{background:#D8D2C4;position:relative;min-height:440px}
+.wall .paint{position:absolute;inset:0 0 34% 0;background:#2F5D50;opacity:.35}
+.wall .sofa{position:absolute;left:12%;right:12%;bottom:18%;height:26%;background:#E9E4DA;border-radius:30px 30px 10px 10px}
+.wall .sofa::after{content:"";position:absolute;left:6%;right:6%;top:-30%;height:45%;background:#DCD5C7;border-radius:20px}
+.wall .floor{position:absolute;left:0;right:0;bottom:0;height:22%;background:#A88D6C}
+.wall .chips{position:absolute;top:28px;right:28px;display:flex;gap:8px}
+.wall .chips button{width:34px;height:34px;border-radius:50%;background:var(--c);border:3px solid #fff}
+
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rev{background:var(--white);border-radius:var(--r-m);padding:28px}
+.rev .stars{color:#D9A441;letter-spacing:2px}
+.rev p{margin:14px 0 20px}
+.rev .who{display:flex;gap:12px;align-items:center;font-size:14px}
+.rev .who i{width:40px;height:40px;border-radius:50%;background:var(--c)}
+.rev .who span{color:var(--ink-2);display:block}
+
+.sub{display:flex;justify-content:space-between;align-items:center;gap:32px;border:1px solid var(--line);border-radius:var(--r-l);padding:48px 56px}
+.sub h2{font:32px/1.15 var(--f-display);max-width:16em}
+.sub form{display:flex;gap:8px;flex:none}
+.sub input{height:52px;border-radius:999px;border:1px solid var(--line);padding:0 22px;width:300px;font:inherit;background:var(--white)}
+
+@media (max-width:1000px){
+  .hero .wrap{grid-template-columns:1fr}
+  .fan{height:340px}
+  .rooms,.goods{grid-template-columns:repeat(2,1fr)}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .match{grid-template-columns:1fr}
+  .match .txt{padding:40px}
+  .revs{grid-template-columns:1fr}
+  .sub{flex-direction:column;align-items:flex-start}
+}
+@media (max-width:640px){
+  .hero{padding-top:32px}
+  .fan{height:260px;gap:4px}
+  .fan a{padding:12px 8px}
+  .sec{margin-top:72px}
+  .sec-h{flex-direction:column;align-items:flex-start}
+  .goods{gap:10px}
+  .card{padding:8px 8px 14px}
+  .add{width:36px;height:36px}
+  .price{font-size:17px}
+  .match .txt{padding:28px}
+  .wall{min-height:300px}
+  .sub{padding:28px}
+  .sub form{flex-direction:column;width:100%}
+  .sub input{width:100%}
+}
+@media (prefers-reduced-motion:reduce){.fan a,.fan a span,.fan a small{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap"><span>Колеровка в магазине и по коду за 10 минут</span><span>Доставка по Москве от 1 дня · 8 800 555-27-14</span></div></div>
+
+<header class="head"><div class="wrap">
+  <a href="index.html" class="logo"><i></i>Колер</a>
+  <nav class="nav"><a href="#">Краски</a><a href="#">Палитра</a><a href="#">Инструменты</a><a href="#">Подбор цвета</a><a href="#">Доставка</a></nav>
+  <div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>Цвет, код или название краски</div>
+  <div class="icons">
+    <a class="ic" href="#" aria-label="Избранное"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></a>
+    <a class="ic" href="#" aria-label="Корзина"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 7h14l-1.5 12h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><b>2</b></a>
+  </div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div>
+    <h1>Краска для стен в 312 оттенках</h1>
+    <p>Матовые и моющиеся краски без запаха. Выберите цвет на сайте, мы заколеруем банку и привезем ее вместе с валиком и лентой.</p>
+    <div class="acts"><a class="btn" href="product.html">Смотреть палитру</a><a class="btn ghost" href="#match">Подобрать цвет к комнате</a></div>
+  </div>
+  <div class="fan" aria-label="Популярные оттенки">
+    <a href="product.html" style="--c:#2F5D50"><span>Хвойный лес</span><small>KL-412 · матовая</small></a>
+    <a href="product.html" style="--c:#6E8FB5"><span>Северное небо</span><small>KL-208</small></a>
+    <a href="product.html" class="on" style="--c:#D9A441;--t:#1E2433"><span>Липовый мед</span><small>KL-117 · хит месяца</small></a>
+    <a href="product.html" style="--c:#C9B8A6;--t:#1E2433"><span>Льняной</span><small>KL-033</small></a>
+    <a href="product.html" style="--c:#B23A48"><span>Брусника</span><small>KL-501</small></a>
+    <a href="product.html" style="--c:#8A9A7B"><span>Шалфей</span><small>KL-415</small></a>
+    <a href="product.html" style="--c:#3A3F55"><span>Грозовой</span><small>KL-290</small></a>
+  </div>
+</div>
+<div class="wrap"><div class="facts">
+  <div><b>Без запаха</b><span>Можно красить детскую вечером и спать в ней ночью</span></div>
+  <div><b>Класс мойки 1</b><span>Выдерживает губку и бытовые средства</span></div>
+  <div><b>Пробники по 199 ₽</b><span>Банка 100 мл, хватит на лист А3</span></div>
+  <div><b>Возврат 30 дней</b><span>Если банка не вскрыта</span></div>
+</div></div>
+</section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-h"><h2>Готовые сочетания по комнатам</h2><a href="#">Все сочетания</a></div>
+  <div class="rooms">
+    <a class="room" href="#"><div class="sw"><i style="background:#8A9A7B"></i><i style="background:#E9E4DA"></i><i style="background:#A88D6C"></i></div><div class="t"><h3>Спальня</h3><p>Шалфей, сливки, орех</p></div></a>
+    <a class="room" href="#"><div class="sw"><i style="background:#6E8FB5"></i><i style="background:#F2F2EE"></i><i style="background:#3A3F55"></i></div><div class="t"><h3>Кухня</h3><p>Северное небо, мел, грозовой</p></div></a>
+    <a class="room" href="#"><div class="sw"><i style="background:#D9A441"></i><i style="background:#C9B8A6"></i><i style="background:#2F5D50"></i></div><div class="t"><h3>Детская</h3><p>Липовый мед, льняной, хвоя</p></div></a>
+    <a class="room" href="#"><div class="sw"><i style="background:#3A3F55"></i><i style="background:#B23A48"></i><i style="background:#D8D2C4"></i></div><div class="t"><h3>Кабинет</h3><p>Грозовой, брусника, камень</p></div></a>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-h"><h2>Покупают чаще всего</h2>
+    <div class="tabs"><button class="on">Все</button><button>Для стен</button><button>Для потолка</button><button>Для кухни и ванной</button><button>Грунт</button></div>
+  </div>
+  <div class="goods">
+    <a class="card" href="product.html"><div class="pic"><span class="tag">Хит</span><div class="can"><div class="body"><div class="label" style="--c:#2F5D50"><small>Матовая · 2,5 л</small><strong>Хвойный лес</strong></div></div></div></div><h3>Колер Мат, интерьерная</h3><div class="meta">KL-412 · 18 м² на слой</div><div class="row"><span class="price">2 490 ₽</span><button class="add" aria-label="В корзину">+</button></div></a>
+    <a class="card" href="product.html"><div class="pic"><span class="tag sale">−15%</span><div class="can"><div class="body"><div class="label" style="--c:#D9A441;--t:#1E2433"><small>Моющаяся · 2,5 л</small><strong>Липовый мед</strong></div></div></div></div><h3>Колер Кухня, моющаяся</h3><div class="meta">KL-117 · 20 м² на слой</div><div class="row"><span class="price">2 790 ₽<s>3 290 ₽</s></span><button class="add" aria-label="В корзину">+</button></div></a>
+    <a class="card" href="product.html"><div class="pic"><div class="can"><div class="body"><div class="label" style="--c:#F2F2EE;--t:#1E2433"><small>Для потолка · 5 л</small><strong>Мел</strong></div></div></div></div><h3>Колер Потолок, супербелая</h3><div class="meta">KL-001 · 40 м² на слой</div><div class="row"><span class="price">3 150 ₽</span><button class="add" aria-label="В корзину">+</button></div></a>
+    <a class="card" href="product.html"><div class="pic"><span class="tag">Новинка</span><div class="can"><div class="body"><div class="label" style="--c:#6E8FB5"><small>Полуматовая · 2,5 л</small><strong>Северное небо</strong></div></div></div></div><h3>Колер Ванная, влагостойкая</h3><div class="meta">KL-208 · 16 м² на слой</div><div class="row"><span class="price">2 990 ₽</span><button class="add" aria-label="В корзину">+</button></div></a>
+  </div>
+</div></section>
+
+<section class="sec" id="match"><div class="wrap">
+  <div class="match">
+    <div class="txt">
+      <h2>Не знаете, какой цвет выбрать?</h2>
+      <p>Пришлите фото комнаты, колорист предложит три оттенка и покажет их на ваших стенах. Это бесплатно.</p>
+      <ol><li>Загрузите фото комнаты</li><li>Получите три варианта за день</li><li>Закажите пробники или сразу банку</li></ol>
+      <a class="btn" href="#">Отправить фото</a>
+    </div>
+    <div class="wall" aria-hidden="true">
+      <div class="paint"></div><div class="floor"></div><div class="sofa"></div>
+      <div class="chips"><button style="--c:#2F5D50"></button><button style="--c:#D9A441"></button><button style="--c:#6E8FB5"></button></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-h"><h2>Что говорят покупатели</h2><a href="#">4,9 из 5 по 2 140 отзывам</a></div>
+  <div class="revs">
+    <div class="rev"><div class="stars">★★★★★</div><p>Красила спальню в Шалфей. Легла ровно в два слоя, запаха не было уже через час.</p><div class="who"><i style="--c:#8A9A7B"></i><div>Екатерина<span>Колер Мат, KL-415</span></div></div></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>Взяли пробники трех синих, повесили на стену на неделю. Очень удобно, не прогадали.</p><div class="who"><i style="--c:#6E8FB5"></i><div>Андрей<span>Пробники, 3 шт.</span></div></div></div>
+    <div class="rev"><div class="stars">★★★★☆</div><p>Кухню отмываю каждую неделю, краска держится. Доставка пришла на день позже обещанного.</p><div class="who"><i style="--c:#D9A441"></i><div>Ольга<span>Колер Кухня, KL-117</span></div></div></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sub">
+    <h2>Новые оттенки и скидки раз в месяц, без спама</h2>
+    <form onsubmit="return false"><input type="email" placeholder="Ваш e-mail" aria-label="E-mail"><button class="btn">Подписаться</button></form>
+  </div>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="grid">
+    <div><div class="logo"><i></i>Колер</div><p>Краски для стен и потолков.<br>Шоурум: Москва, ул. Малярная, 12.<br>Ежедневно с 10 до 21.</p></div>
+    <div><h4>Каталог</h4><ul><li>Краски для стен</li><li>Для потолка</li><li>Грунт</li><li>Инструменты</li></ul></div>
+    <div><h4>Покупателям</h4><ul><li>Доставка и оплата</li><li>Возврат</li><li>Расчет расхода</li><li>Колеровка</li></ul></div>
+    <div><h4>Связаться</h4><ul><li>8 800 555-27-14</li><li>hello@koler.shop</li><li>Telegram</li></ul></div>
+  </div>
+  <div class="copy"><span>© 2026 Колер</span><span>Концепт для портфолио</span></div>
+</div></footer>
+
+</body>
+</html>
