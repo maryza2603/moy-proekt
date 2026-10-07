@@ -47,7 +47,6 @@ h1{font-size:clamp(24px,3.4vw,36px);line-height:1.2;margin:28px 0 6px}
 .sum ul{list-style:none;font-size:14px;margin-bottom:10px}
 .sum li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line)}
 .sum li span:last-child{white-space:nowrap;font-weight:600}
-.sum li.disc span:last-child{color:var(--ok)}
 .total{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;margin:6px 0 14px}
 .total b{font-size:26px}
 form{display:grid;gap:8px}
@@ -92,7 +91,7 @@ footer a{color:var(--text);font-weight:700}
           <linearGradient id="gSil" x1="0" x2="1"><stop offset="0" stop-color="#9aa1aa"/><stop offset=".35" stop-color="#eef1f4"/><stop offset=".7" stop-color="#b3b9c1"/><stop offset="1" stop-color="#848b94"/></linearGradient>
           <linearGradient id="gCu" x1="0" x2="1"><stop offset="0" stop-color="#b8643a"/><stop offset=".5" stop-color="#e8946a"/><stop offset="1" stop-color="#a9542c"/></linearGradient>
         </defs>
-        <ellipse cx="320" cy="440" rx="290" ry="16" fill="#000" opacity=".08"/>
+        <ellipse id="floor" cx="320" cy="440" rx="290" ry="16" fill="#000" opacity=".08"/>
         <g id="L-base"></g>
         <g id="L-hoses"></g>
         <g id="L-nodes"></g>
@@ -122,6 +121,18 @@ footer a{color:var(--text);font-weight:700}
         <div class="opts" id="nodes"></div>
       </div>
 
+      <div class="box" id="placeBox">
+        <h3>Куда поставить остальные узлы</h3>
+        <p class="hint">Сверху на столе 3 места - остальные ставятся отдельно</p>
+        <div class="opts" id="place"></div>
+      </div>
+
+      <div class="box">
+        <h3>4. Установка</h3>
+        <p class="hint">Монтаж и запуск на вашем производстве</p>
+        <div class="opts" id="install"></div>
+      </div>
+
       <div class="box sum">
         <h3>Ваш комплект</h3>
         <ul id="lines"></ul>
@@ -145,8 +156,16 @@ footer a{color:var(--text);font-weight:700}
 <script>
 // ===== Данные: правятся здесь =====
 const TABLE_PRICE = 38000;        // стол-основа (только в сборе)
-const SET_DISCOUNT = 0.05;        // скидка при покупке станком в сборе
-const MAX_TOP = 3;                // мест под узлы сверху стола
+const MAX_TOP = 3;                // мест под узлы сверху основного стола
+
+const PLACE = [
+  {id:"frame", name:"На дополнительной раме", desc:"Отдельная рама на колёсах", price:24000},
+  {id:"near",  name:"Рядом со столом", desc:"Без рамы, на вашем основании", price:0}
+];
+const INSTALL = [
+  {id:"no",  name:"Без установки", desc:"Монтаж самостоятельно по инструкции", price:0},
+  {id:"yes", name:"Установка и пусконаладка", desc:"Монтаж, подключение, проверка на месте", price:18000}
+];
 
 const POWER = [
   {id:"p15", name:"1,5 кВт", kw:"1,5", desc:"Для небольшой мастерской", price:64000, size:0},
@@ -162,7 +181,7 @@ const NODES = [
   {id:"tube",  name:"Резка профильной трубы", desc:"Квадратная труба", price:47000, side:false}
 ];
 
-const state = {mode:"set", power:"p22", nodes:["bend","cut","punch"]};
+const state = {mode:"set", power:"p22", nodes:["bend","cut","punch"], place:"frame", install:"no"};
 let lastAdded = null;
 
 // ===== Рисунки узлов (одна точка привязки: низ-центр) =====
@@ -265,8 +284,25 @@ function render(){
 
   if(set){
     base = tableSVG(p);
-    const tops = sel.filter(n=>!n.side);
+    const tops = sel.filter(n=>!n.side), extras = tops.slice(MAX_TOP);
     const slotX = [228,340,452];
+    if(extras.length){
+      const x0 = 566, x1 = x0 + extras.length*110;
+      if(state.place==="frame"){
+        base += `<g class="${lastAdded==="place"?"flash":""}">
+          <rect x="${x0}" y="402" width="${x1-x0}" height="14" rx="3" fill="url(#gBlk)"/>
+          ${[x0+18,x1-18].map(x=>`<rect x="${x-3}" y="414" width="6" height="10" fill="#555"/><circle cx="${x}" cy="430" r="10" fill="#2b2d31"/><circle cx="${x}" cy="430" r="4" fill="#e7e9ec"/>`).join("")}
+          <rect x="${x0+6}" y="248" width="18" height="156" fill="url(#gBlk)"/><rect x="${x1-24}" y="248" width="18" height="156" fill="url(#gBlk)"/>
+          <rect x="${x0+24}" y="320" width="${x1-x0-48}" height="8" fill="#2b2d31"/>
+          <rect x="${x0}" y="226" width="${x1-x0}" height="24" rx="3" fill="url(#gBlk)"/><rect x="${x0}" y="226" width="${x1-x0}" height="4" fill="#4a4d54"/></g>`;
+      }
+      const by = state.place==="frame" ? 226 : 416;
+      extras.forEach((n,i)=>{
+        const x = x0+55+i*110, [w,h]=SIZE[n.id];
+        nodes += wrap(n.id, DRAW[n.id](), x-w/2, by-h);
+        hoses += `<path d="M${282} 340 C 420 ${state.place==="frame"?395:440}, ${x} ${by+10}, ${x+w/2-10} ${by-h+30}" fill="none" stroke="#111" stroke-width="3.5" opacity=".85"/>`;
+      });
+    }
     slotX.forEach((x,i)=>{
       const n = tops[i];
       if(!n){
@@ -304,6 +340,9 @@ function render(){
       k++;
     });
   }
+  const W = set ? Math.max(640, 600 + Math.max(0, sel.filter(n=>!n.side).length-MAX_TOP)*110 + 20) : 640;
+  $("scene").setAttribute("viewBox", `0 0 ${W} 470`);
+  $("floor").setAttribute("cx", W/2); $("floor").setAttribute("rx", W/2-30);
   L.base.innerHTML = base; L.hoses.innerHTML = hoses; L.nodes.innerHTML = nodes;
   lastAdded = null;
   renderPanel();
@@ -315,32 +354,37 @@ function calc(){
   if(set) lines.push(["Стол-основа с гидробаком", TABLE_PRICE]);
   if(p && p.price) lines.push([`Привод ${p.name}`, p.price]);
   NODES.filter(n=>state.nodes.includes(n.id)).forEach(n=>lines.push([n.name, n.price]));
-  const sub = lines.reduce((s,l)=>s+l[1],0);
-  const disc = set && state.nodes.length ? Math.round(sub*SET_DISCOUNT/100)*100 : 0;
-  return {lines, disc, total: sub-disc};
+  if(set && extraCount()){ const pl = PLACE.find(x=>x.id===state.place); if(pl.price) lines.push(["Дополнительная рама", pl.price]); }
+  const ins = INSTALL.find(x=>x.id===state.install);
+  if(ins.price) lines.push([ins.name, ins.price]);
+  return {lines, total: lines.reduce((s,l)=>s+l[1],0)};
 }
+
+const extraCount = () => Math.max(0, state.nodes.filter(id=>!NODES.find(n=>n.id===id).side).length - MAX_TOP);
+const optHTML = (list, cur, attr) => list.map(o=>
+  `<button class="opt ${o.id===cur?"on":""}" data-${attr}="${o.id}"><span class="mk"></span><span class="tx"><b>${o.name}</b><small>${o.desc}</small></span><span class="pr">${fmt(o.price)}</span></button>`).join("");
 
 function renderPanel(){
   const set = state.mode==="set";
   document.querySelectorAll("#mode button").forEach(b=>b.classList.toggle("on", b.dataset.m===state.mode));
   $("powHint").textContent = set ? "Гидростанция встроена в стол" : "Отдельная насосная станция или ваш насос";
-  $("nodeHint").textContent = set ? `На столе: гибка сбоку и до ${MAX_TOP} узлов сверху` : "Любое количество, каждый узел - отдельное изделие";
+  $("nodeHint").textContent = set ? `Можно выбрать все. На столе: гибка сбоку и ${MAX_TOP} места сверху` : "Любое количество, каждый узел - отдельное изделие";
   $("power").innerHTML = POWER.filter(p=>set ? !p.soloOnly : true).map(p=>
     `<button class="opt ${p.id===state.power?"on":""}" data-p="${p.id}"><span class="mk"></span><span class="tx"><b>${p.name}</b><small>${p.desc}</small></span><span class="pr">${p.price?fmt(p.price):"0 ₽"}</span></button>`).join("");
-  const topCount = state.nodes.filter(id=>!NODES.find(n=>n.id===id).side).length;
   $("nodes").innerHTML = NODES.map(n=>{
     const on = state.nodes.includes(n.id);
-    const full = set && !on && !n.side && topCount>=MAX_TOP;
-    return `<button class="opt chk ${on?"on":""} ${full?"off":""}" data-n="${n.id}"><span class="mk"></span><span class="tx"><b>${n.name}</b><small>${full?"Нет места на столе":n.desc}</small></span><span class="pr">${fmt(n.price)}</span></button>`;
+    return `<button class="opt chk ${on?"on":""}" data-n="${n.id}"><span class="mk"></span><span class="tx"><b>${n.name}</b><small>${n.desc}</small></span><span class="pr">${fmt(n.price)}</span></button>`;
   }).join("");
   const c = calc();
   $("lines").innerHTML = c.lines.map(l=>`<li><span>${l[0]}</span><span>${fmt(l[1])}</span></li>`).join("")
-    + (c.disc ? `<li class="disc"><span>Скидка за сборку ${SET_DISCOUNT*100}%</span><span>−${fmt(c.disc)}</span></li>` : "")
     + (c.lines.length ? "" : `<li><span>Пока ничего не выбрано</span><span></span></li>`);
+  $("placeBox").style.display = set && extraCount() ? "" : "none";
+  $("place").innerHTML = optHTML(PLACE, state.place, "pl");
+  $("install").innerHTML = optHTML(INSTALL, state.install, "in");
   $("total").textContent = fmt(c.total);
   $("capSum").textContent = fmt(c.total);
   const k = state.nodes.length;
-  $("capTxt").textContent = (set ? "Станок в сборе" : "Узлы отдельно") + (k ? ` · узлов: ${k}` : "");
+  $("capTxt").textContent = (set ? "Станок в сборе" : "Узлы отдельно") + (k ? ` · узлов: ${k}` : "") + (state.install==="yes" ? " · с установкой" : "");
 }
 
 function toast(t){ const el=$("toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("show"),2800); }
@@ -350,12 +394,6 @@ $("mode").addEventListener("click", e=>{
   state.mode = b.dataset.m;
   if(state.mode==="set"){
     if(state.power==="none") state.power="p22";
-    const tops = state.nodes.filter(id=>!NODES.find(n=>n.id===id).side);
-    if(tops.length>MAX_TOP){
-      const drop = tops.slice(MAX_TOP);
-      state.nodes = state.nodes.filter(id=>!drop.includes(id));
-      toast(`На стол помещается ${MAX_TOP} верхних узла - лишние убраны`);
-    }
   }
   render();
 });
@@ -368,11 +406,18 @@ $("nodes").addEventListener("click", e=>{
   const id = b.dataset.n, n = NODES.find(x=>x.id===id);
   if(state.nodes.includes(id)){ state.nodes = state.nodes.filter(x=>x!==id); }
   else{
-    const tops = state.nodes.filter(x=>!NODES.find(y=>y.id===x).side).length;
-    if(state.mode==="set" && !n.side && tops>=MAX_TOP){ toast(`На столе ${MAX_TOP} места сверху. Уберите узел или выберите «Узлы отдельно»`); return; }
     state.nodes.push(id); lastAdded = id;
+    if(state.mode==="set" && !n.side && extraCount()===1) toast("На столе 3 места сверху - выберите, куда поставить остальные узлы");
   }
   render();
+});
+$("place").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  state.place = b.dataset.pl; lastAdded = "place"; render();
+});
+$("install").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  state.install = b.dataset.in; render();
 });
 $("form").addEventListener("submit", e=>{
   e.preventDefault();
