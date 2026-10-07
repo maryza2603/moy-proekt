@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Конструктор шинообрабатывающего станка</title>
+<meta name="description" content="Соберите шинообрабатывающий станок: выберите мощность привода и узлы - пробивку, гибку, резку. Картинка и цена меняются сразу.">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f4f6;--card:#fff;--line:#e2e5ea;--text:#16181c;--muted:#6b7280;--acc:#f5b800;--acc2:#e0a800;--dark:#1d1f23;--ok:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.5;overflow-x:hidden}
+.top{background:var(--dark);color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
+.brand{font-weight:800;letter-spacing:.3px;display:flex;align-items:center;gap:10px}
+.brand i{width:28px;height:28px;border-radius:6px;background:var(--acc);display:inline-block;position:relative}
+.brand i:after{content:"";position:absolute;inset:8px 6px;border:3px solid var(--dark);border-left:0;border-radius:0 6px 6px 0}
+.badge{font-size:12px;background:rgba(255,255,255,.1);padding:4px 10px;border-radius:20px;color:#d1d5db;white-space:nowrap}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+h1{font-size:clamp(24px,3.4vw,36px);line-height:1.2;margin:28px 0 6px}
+.lead{color:var(--muted);margin-bottom:22px;max-width:720px}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:start;padding-bottom:40px}
+.stage{position:sticky;top:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.stage svg{display:block;width:100%;height:auto;background:linear-gradient(#fbfbfc,#eef0f3)}
+.stage .cap{display:flex;justify-content:space-between;gap:10px;padding:12px 16px;border-top:1px solid var(--line);font-size:14px}
+.stage .cap b{font-size:18px}
+.panel{display:flex;flex-direction:column;gap:14px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.box h3{font-size:16px;margin-bottom:4px}
+.box .hint{font-size:13px;color:var(--muted);margin-bottom:12px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--bg);padding:5px;border-radius:12px}
+.seg button{border:0;background:none;padding:10px 8px;border-radius:9px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;color:var(--muted)}
+.seg button.on{background:var(--card);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.opts{display:grid;gap:8px}
+.opt{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;cursor:pointer;background:var(--card);text-align:left;font:inherit;color:inherit;width:100%;transition:border-color .15s,background .15s}
+.opt:hover{border-color:#c9ccd2}
+.opt.on{border-color:var(--acc);background:#fffbeb}
+.opt .mk{width:20px;height:20px;border-radius:50%;border:2px solid #c3c7cf;flex:none;display:grid;place-items:center}
+.opt.chk .mk{border-radius:6px}
+.opt.on .mk{border-color:var(--acc2);background:var(--acc)}
+.opt.on .mk:after{content:"";width:6px;height:10px;border:solid var(--dark);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.opt .tx{flex:1;min-width:0}
+.opt .tx b{display:block;font-size:14px}
+.opt .tx small{color:var(--muted);font-size:12.5px}
+.opt .pr{font-weight:700;font-size:14px;white-space:nowrap}
+.opt.off{opacity:.45}
+.sum ul{list-style:none;font-size:14px;margin-bottom:10px}
+.sum li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.sum li span:last-child{white-space:nowrap;font-weight:600}
+.sum li.disc span:last-child{color:var(--ok)}
+.total{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;margin:6px 0 14px}
+.total b{font-size:26px}
+form{display:grid;gap:8px}
+input,textarea{font:inherit;font-size:15px;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;width:100%;background:#fff}
+textarea{resize:vertical;min-height:60px}
+.btn{border:0;background:var(--acc);color:var(--dark);font:inherit;font-weight:800;font-size:15px;padding:13px;border-radius:12px;cursor:pointer}
+.btn:hover{background:var(--acc2)}
+.ok{display:none;background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;border-radius:10px;padding:12px;font-size:14px}
+.note{font-size:12px;color:var(--muted);margin-top:10px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(120px);background:var(--dark);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;max-width:calc(100% - 32px);transition:transform .3s,opacity .3s;z-index:20;text-align:center;opacity:0;visibility:hidden}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 30px}
+footer a{color:var(--text);font-weight:700}
+.flash{animation:fl .7s ease}
+@keyframes fl{0%{opacity:.2;transform:translateY(-14px)}100%{opacity:1;transform:none}}
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr}
+  .stage{top:0;z-index:5;border-radius:0 0 16px 16px;margin:0 -16px;border-left:0;border-right:0}
+  .stage svg{max-height:38vh}
+  .stage .cap{padding:8px 16px}
+  h1{margin-top:20px}
+}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap">
+  <div class="brand"><i></i>ШинаПро</div>
+  <span class="badge">демо-конструктор</span>
+</div></div>
+
+<div class="wrap">
+  <h1>Соберите шинообрабатывающий станок</h1>
+  <p class="lead">Выберите мощность привода и нужные операции - пробивку, гибку, резку. Станок на картинке собирается сразу, цена пересчитывается автоматически.</p>
+
+  <div class="grid">
+    <div class="stage">
+      <svg id="scene" viewBox="0 0 640 470" role="img" aria-label="Превью станка">
+        <defs>
+          <linearGradient id="gYel" x1="0" x2="1"><stop offset="0" stop-color="#ffcf2e"/><stop offset=".55" stop-color="#f5b800"/><stop offset="1" stop-color="#d99f00"/></linearGradient>
+          <linearGradient id="gBlk" x1="0" x2="1"><stop offset="0" stop-color="#3a3d43"/><stop offset=".45" stop-color="#1f2125"/><stop offset="1" stop-color="#121316"/></linearGradient>
+          <linearGradient id="gCyl" x1="0" x2="1"><stop offset="0" stop-color="#2b2d31"/><stop offset=".3" stop-color="#5a5e66"/><stop offset=".6" stop-color="#1e2024"/><stop offset="1" stop-color="#0f1012"/></linearGradient>
+          <linearGradient id="gSil" x1="0" x2="1"><stop offset="0" stop-color="#9aa1aa"/><stop offset=".35" stop-color="#eef1f4"/><stop offset=".7" stop-color="#b3b9c1"/><stop offset="1" stop-color="#848b94"/></linearGradient>
+          <linearGradient id="gCu" x1="0" x2="1"><stop offset="0" stop-color="#b8643a"/><stop offset=".5" stop-color="#e8946a"/><stop offset="1" stop-color="#a9542c"/></linearGradient>
+        </defs>
+        <ellipse cx="320" cy="440" rx="290" ry="16" fill="#000" opacity=".08"/>
+        <g id="L-base"></g>
+        <g id="L-hoses"></g>
+        <g id="L-nodes"></g>
+      </svg>
+      <div class="cap"><span id="capTxt">Станок в сборе</span><b id="capSum">0 ₽</b></div>
+    </div>
+
+    <div class="panel">
+      <div class="box">
+        <h3>1. Как покупаете</h3>
+        <p class="hint">Готовый станок на столе или отдельные узлы</p>
+        <div class="seg" id="mode">
+          <button data-m="set" class="on">Станок в сборе</button>
+          <button data-m="solo">Узлы отдельно</button>
+        </div>
+      </div>
+
+      <div class="box">
+        <h3>2. Привод</h3>
+        <p class="hint" id="powHint">Гидростанция встроена в стол</p>
+        <div class="opts" id="power"></div>
+      </div>
+
+      <div class="box">
+        <h3>3. Узлы</h3>
+        <p class="hint" id="nodeHint">На столе: гибка сбоку и до 3 узлов сверху</p>
+        <div class="opts" id="nodes"></div>
+      </div>
+
+      <div class="box sum">
+        <h3>Ваш комплект</h3>
+        <ul id="lines"></ul>
+        <div class="total"><span>Итого</span><b id="total">0 ₽</b></div>
+        <form id="form">
+          <input name="name" placeholder="Ваше имя" required>
+          <input name="phone" type="tel" placeholder="Телефон" required>
+          <textarea name="msg" placeholder="Комментарий: толщина шины, сроки, доставка"></textarea>
+          <button class="btn" type="submit">Получить предложение</button>
+        </form>
+        <div class="ok" id="ok">Спасибо! Заявка с составом комплекта отправлена, менеджер свяжется с вами.<br><small>(В демо заявка никуда не уходит.)</small></div>
+        <p class="note">Цены и характеристики в демо условные - в рабочей версии подставляются из прайса.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>Демо сделала Мария - конструкторы и калькуляторы для сайтов. Telegram: <a href="https://t.me/luminoso89">@luminoso89</a></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== Данные: правятся здесь =====
+const TABLE_PRICE = 38000;        // стол-основа (только в сборе)
+const SET_DISCOUNT = 0.05;        // скидка при покупке станком в сборе
+const MAX_TOP = 3;                // мест под узлы сверху стола
+
+const POWER = [
+  {id:"p15", name:"1,5 кВт", kw:"1,5", desc:"Для небольшой мастерской", price:64000, size:0},
+  {id:"p22", name:"2,2 кВт", kw:"2,2", desc:"Оптимально для цеха", price:78000, size:1},
+  {id:"p30", name:"3 кВт",   kw:"3,0", desc:"Для интенсивной работы", price:95000, size:2},
+  {id:"none", name:"Без гидростанции", kw:"", desc:"Подключу свой насос", price:0, soloOnly:true}
+];
+const NODES = [
+  {id:"punch", name:"Пробивка отверстий", desc:"Отверстия в шине", price:52000, side:false},
+  {id:"bend",  name:"Гибка шины", desc:"Гиб по плоскости", price:61000, side:true},
+  {id:"cut",   name:"Резка шины", desc:"Ровный рез без заусенца", price:36000, side:false},
+  {id:"angle", name:"Резка уголка", desc:"Уголок под 90°", price:44000, side:false},
+  {id:"tube",  name:"Резка профильной трубы", desc:"Квадратная труба", price:47000, side:false}
+];
+
+const state = {mode:"set", power:"p22", nodes:["bend","cut","punch"]};
+let lastAdded = null;
+
+// ===== Рисунки узлов (одна точка привязки: низ-центр) =====
+const bolt = (x,y)=>`<circle cx="${x}" cy="${y}" r="3.2" fill="#2a2c30"/><circle cx="${x-.8}" cy="${y-.8}" r="1.1" fill="#777"/>`;
+const cyl = (x,y,w,h)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="4" fill="url(#gCyl)"/><ellipse cx="${x+w/2}" cy="${y+2}" rx="${w/2}" ry="4" fill="#3d4046"/><rect x="${x+w-10}" y="${y+10}" width="12" height="7" rx="2" fill="#111"/>`;
+
+const DRAW = {
+  punch:()=>`<g>${cyl(22,0,36,44)}
+    <rect x="17" y="42" width="46" height="12" rx="2" fill="#2b2d31"/>
+    <path d="M8 54 H72 V74 H44 Q32 74 32 86 V102 Q32 114 44 114 H72 V134 H8 Q2 134 2 128 V60 Q2 54 8 54Z" fill="url(#gYel)" stroke="#b58700" stroke-width="1"/>
+    <rect x="47" y="74" width="8" height="12" fill="url(#gSil)"/>
+    <rect x="42" y="104" width="22" height="10" fill="url(#gSil)"/>
+    <rect x="34" y="94" width="36" height="5" fill="url(#gCu)" opacity=".95"/>
+    ${bolt(14,64)}${bolt(14,124)}
+    <rect x="0" y="134" width="80" height="7" rx="2" fill="#2b2d31"/></g>`,
+  cut:()=>`<g>${cyl(26,0,30,48)}
+    <rect x="21" y="46" width="40" height="11" rx="2" fill="#2b2d31"/>
+    <rect x="9" y="57" width="64" height="76" rx="3" fill="url(#gBlk)"/>
+    <path d="M4 57 H78 L70 82 H12Z" fill="url(#gYel)"/>${bolt(20,66)}${bolt(62,66)}${bolt(41,73)}
+    <rect x="32" y="84" width="18" height="16" fill="#c9ced5"/>
+    <path d="M24 104 L41 118 L58 104 V112 L41 126 L24 112Z" fill="url(#gSil)"/>
+    <path d="M0 128 H20 V136 H0Z M62 128 H82 V136 H62Z" fill="url(#gYel)"/></g>`,
+  angle:()=>`<g>${cyl(28,0,30,40)}
+    <rect x="23" y="38" width="40" height="11" rx="2" fill="#2b2d31"/>
+    <rect x="5" y="49" width="76" height="86" rx="3" fill="url(#gBlk)"/>
+    <rect x="5" y="49" width="76" height="16" fill="url(#gYel)"/>${bolt(14,57)}${bolt(72,57)}
+    <path d="M43 76 L63 98 L43 120 L23 98Z" fill="url(#gSil)"/>
+    <path d="M43 84 L55 98 L43 112 L31 98Z" fill="#26282c"/>
+    <path d="M30 98 L43 85 L46 88 L36 98Z" fill="url(#gCu)"/>
+    <rect x="0" y="133" width="86" height="7" rx="2" fill="#2b2d31"/></g>`,
+  tube:()=>`<g>${cyl(28,0,30,42)}
+    <rect x="23" y="40" width="40" height="11" rx="2" fill="#2b2d31"/>
+    <rect x="4" y="51" width="12" height="84" fill="url(#gSil)"/><rect x="70" y="51" width="12" height="84" fill="url(#gSil)"/>
+    <rect x="12" y="51" width="62" height="20" fill="url(#gYel)"/>${bolt(22,61)}${bolt(64,61)}
+    <rect x="16" y="71" width="54" height="64" fill="url(#gBlk)"/>
+    <rect x="29" y="86" width="28" height="28" fill="#c9ced5"/><rect x="34" y="91" width="18" height="18" fill="#26282c"/>
+    <rect x="0" y="133" width="86" height="7" rx="2" fill="#2b2d31"/></g>`,
+  // гибка: горизонтальный узел, точка привязки - правый край по центру
+  bend:()=>`<g>
+    <rect x="0" y="26" width="44" height="30" rx="5" fill="url(#gCyl)"/><rect x="6" y="20" width="12" height="7" rx="2" fill="#111"/>
+    <rect x="42" y="20" width="12" height="42" fill="#2b2d31"/>
+    <path d="M54 8 H112 V74 H54Z" fill="url(#gYel)" stroke="#b58700"/>
+    <path d="M66 22 H100 V60 H66Z" fill="#2b2d31"/>
+    <path d="M70 41 L84 30 L98 41 L84 52Z" fill="url(#gSil)"/>
+    ${bolt(60,14)}${bolt(106,14)}${bolt(60,68)}${bolt(106,68)}
+    <path d="M58 40 H76 L92 26 L104 14" fill="none" stroke="url(#gCu)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>`
+};
+const SIZE = {punch:[80,141], cut:[82,136], angle:[86,140], tube:[86,140], bend:[112,82]};
+
+// ===== Основа: стол с гидростанцией или отдельная станция =====
+function motor(x,y,s){ // s: 0..2 - размер мотора по мощности
+  const w=40+s*9, h=34+s*7;
+  return `<rect x="${x}" y="${y-h}" width="${w}" height="${h}" rx="6" fill="url(#gSil)"/>
+    ${[...Array(5)].map((_,i)=>`<rect x="${x+4}" y="${y-h+6+i*(h-10)/5}" width="${w-8}" height="2" fill="#7b828b" opacity=".6"/>`).join("")}
+    <rect x="${x+w/2-8}" y="${y-h-7}" width="16" height="8" rx="2" fill="#555b63"/>`;
+}
+function tableSVG(p){
+  return `<g>
+    <rect x="150" y="402" width="380" height="14" rx="3" fill="url(#gBlk)"/>
+    ${[170,340,510].map(x=>`<rect x="${x-3}" y="414" width="6" height="10" fill="#555"/><circle cx="${x}" cy="430" r="10" fill="#2b2d31"/><circle cx="${x}" cy="430" r="4" fill="#e7e9ec"/>`).join("")}
+    <rect x="164" y="248" width="20" height="156" fill="url(#gBlk)"/>
+    <rect x="496" y="248" width="20" height="156" fill="url(#gBlk)"/>
+    <rect x="184" y="380" width="312" height="10" fill="#2b2d31"/>
+    <rect x="196" y="334" width="96" height="46" rx="4" fill="url(#gYel)"/>
+    <rect x="196" y="334" width="96" height="6" fill="#d99f00"/>
+    ${p?motor(205,334,p.size):""}
+    <circle cx="275" cy="320" r="9" fill="#fff" stroke="#2b2d31" stroke-width="3"/><path d="M275 320 L280 315" stroke="#c00" stroke-width="2"/>
+    <rect x="304" y="258" width="186" height="122" rx="3" fill="url(#gYel)" stroke="#b58700"/>
+    <rect x="314" y="268" width="166" height="102" rx="2" fill="none" stroke="#d99f00" stroke-width="2"/>
+    <rect x="466" y="304" width="7" height="28" rx="2" fill="#2b2d31"/>
+    ${p&&p.kw?`<rect x="340" y="296" width="110" height="34" rx="4" fill="#1d1f23"/><text x="395" y="319" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="17" fill="#f5b800">${p.kw} кВт</text>`:""}
+    <rect x="146" y="226" width="388" height="24" rx="3" fill="url(#gBlk)"/>
+    <rect x="146" y="226" width="388" height="4" fill="#4a4d54"/>
+    <rect x="120" y="262" width="44" height="12" fill="#2b2d31"/>
+  </g>`;
+}
+function stationSVG(p,cx){ // отдельная насосная станция
+  const x=cx-55;
+  return `<g transform="translate(${x},0)">
+    <rect x="0" y="352" width="110" height="62" rx="5" fill="url(#gYel)" stroke="#b58700"/>
+    ${motor(14,352,p.size)}
+    <rect x="22" y="372" width="66" height="26" rx="3" fill="#1d1f23"/>
+    <text x="55" y="390" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="13" fill="#f5b800">${p.kw} кВт</text>
+    <circle cx="16" cy="424" r="9" fill="#2b2d31"/><circle cx="94" cy="424" r="9" fill="#2b2d31"/>
+    <text x="55" y="452" text-anchor="middle" font-family="Manrope,sans-serif" font-size="12" fill="#6b7280">Гидростанция</text>
+  </g>`;
+}
+
+const fmt = n => n.toLocaleString("ru-RU").replace(/ /g," ") + " ₽";
+const $ = id => document.getElementById(id);
+const pow = () => POWER.find(p=>p.id===state.power);
+
+function render(){
+  const p = pow(), set = state.mode==="set";
+  const L = {base:$("L-base"), hoses:$("L-hoses"), nodes:$("L-nodes")};
+  let base="", hoses="", nodes="";
+  const sel = NODES.filter(n=>state.nodes.includes(n.id));
+  const wrap = (id,inner,tx,ty,sc=1,label) =>
+    `<g class="${id===lastAdded?"flash":""}" style="transform-origin:${tx}px ${ty}px"><g transform="translate(${tx},${ty}) scale(${sc})">${inner}</g>${label||""}</g>`;
+
+  if(set){
+    base = tableSVG(p);
+    const tops = sel.filter(n=>!n.side);
+    const slotX = [228,340,452];
+    slotX.forEach((x,i)=>{
+      const n = tops[i];
+      if(!n){
+        nodes += `<rect x="${x-40}" y="120" width="80" height="102" rx="8" fill="none" stroke="#c3c7cf" stroke-width="2" stroke-dasharray="6 6"/><text x="${x}" y="176" text-anchor="middle" font-family="Manrope,sans-serif" font-size="12" fill="#9aa0a8">свободно</text>`;
+        return;
+      }
+      const [w,h]=SIZE[n.id];
+      nodes += wrap(n.id, DRAW[n.id](), x-w/2, 226-h);
+      hoses += `<path d="M${270+i*6} 336 C ${270+i*6} 280, ${x+30} 300, ${x+w/2-10} ${226-h+30}" fill="none" stroke="#111" stroke-width="3.5" opacity=".85"/>`;
+    });
+    if(sel.some(n=>n.side)){
+      nodes += wrap("bend", DRAW.bend(), 16, 228);
+      hoses += `<path d="M232 336 C 200 300, 90 330, 40 282" fill="none" stroke="#111" stroke-width="3.5" opacity=".85"/>`;
+    }
+  } else {
+    const items = sel.map(n=>n.id);
+    const hasSt = p && p.kw;
+    const count = items.length + (hasSt?1:0);
+    if(!count){
+      nodes = `<text x="320" y="240" text-anchor="middle" font-family="Manrope,sans-serif" font-size="16" fill="#9aa0a8">Выберите узлы справа</text>`;
+    }
+    const step = 600/Math.max(count,1), sc = count>4 ? .82 : 1;
+    let k=0;
+    if(hasSt){ base = stationSVG(p, 20+step/2); k++; }
+    items.forEach(id=>{
+      const cx = 20+step*k+step/2, [w,h]=SIZE[id];
+      const name = NODES.find(n=>n.id===id).name;
+      if(id==="bend"){
+        const inner = DRAW.bend()+`<rect x="40" y="82" width="80" height="8" fill="#2b2d31"/><rect x="50" y="74" width="8" height="10" fill="#2b2d31"/><rect x="100" y="74" width="8" height="10" fill="#2b2d31"/>`;
+        nodes += wrap(id, inner, cx-(w*sc)/2-10, 416-90*sc, sc);
+      } else {
+        nodes += wrap(id, DRAW[id](), cx-(w*sc)/2, 416-h*sc, sc);
+      }
+      nodes += `<text x="${cx}" y="452" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11.5" fill="#6b7280">${name.replace("Резка профильной трубы","Резка трубы")}</text>`;
+      k++;
+    });
+  }
+  L.base.innerHTML = base; L.hoses.innerHTML = hoses; L.nodes.innerHTML = nodes;
+  lastAdded = null;
+  renderPanel();
+}
+
+function calc(){
+  const p = pow(), set = state.mode==="set";
+  const lines = [];
+  if(set) lines.push(["Стол-основа с гидробаком", TABLE_PRICE]);
+  if(p && p.price) lines.push([`Привод ${p.name}`, p.price]);
+  NODES.filter(n=>state.nodes.includes(n.id)).forEach(n=>lines.push([n.name, n.price]));
+  const sub = lines.reduce((s,l)=>s+l[1],0);
+  const disc = set && state.nodes.length ? Math.round(sub*SET_DISCOUNT/100)*100 : 0;
+  return {lines, disc, total: sub-disc};
+}
+
+function renderPanel(){
+  const set = state.mode==="set";
+  document.querySelectorAll("#mode button").forEach(b=>b.classList.toggle("on", b.dataset.m===state.mode));
+  $("powHint").textContent = set ? "Гидростанция встроена в стол" : "Отдельная насосная станция или ваш насос";
+  $("nodeHint").textContent = set ? `На столе: гибка сбоку и до ${MAX_TOP} узлов сверху` : "Любое количество, каждый узел - отдельное изделие";
+  $("power").innerHTML = POWER.filter(p=>set ? !p.soloOnly : true).map(p=>
+    `<button class="opt ${p.id===state.power?"on":""}" data-p="${p.id}"><span class="mk"></span><span class="tx"><b>${p.name}</b><small>${p.desc}</small></span><span class="pr">${p.price?fmt(p.price):"0 ₽"}</span></button>`).join("");
+  const topCount = state.nodes.filter(id=>!NODES.find(n=>n.id===id).side).length;
+  $("nodes").innerHTML = NODES.map(n=>{
+    const on = state.nodes.includes(n.id);
+    const full = set && !on && !n.side && topCount>=MAX_TOP;
+    return `<button class="opt chk ${on?"on":""} ${full?"off":""}" data-n="${n.id}"><span class="mk"></span><span class="tx"><b>${n.name}</b><small>${full?"Нет места на столе":n.desc}</small></span><span class="pr">${fmt(n.price)}</span></button>`;
+  }).join("");
+  const c = calc();
+  $("lines").innerHTML = c.lines.map(l=>`<li><span>${l[0]}</span><span>${fmt(l[1])}</span></li>`).join("")
+    + (c.disc ? `<li class="disc"><span>Скидка за сборку ${SET_DISCOUNT*100}%</span><span>−${fmt(c.disc)}</span></li>` : "")
+    + (c.lines.length ? "" : `<li><span>Пока ничего не выбрано</span><span></span></li>`);
+  $("total").textContent = fmt(c.total);
+  $("capSum").textContent = fmt(c.total);
+  const k = state.nodes.length;
+  $("capTxt").textContent = (set ? "Станок в сборе" : "Узлы отдельно") + (k ? ` · узлов: ${k}` : "");
+}
+
+function toast(t){ const el=$("toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("show"),2800); }
+
+$("mode").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  state.mode = b.dataset.m;
+  if(state.mode==="set"){
+    if(state.power==="none") state.power="p22";
+    const tops = state.nodes.filter(id=>!NODES.find(n=>n.id===id).side);
+    if(tops.length>MAX_TOP){
+      const drop = tops.slice(MAX_TOP);
+      state.nodes = state.nodes.filter(id=>!drop.includes(id));
+      toast(`На стол помещается ${MAX_TOP} верхних узла - лишние убраны`);
+    }
+  }
+  render();
+});
+$("power").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  state.power = b.dataset.p; render();
+});
+$("nodes").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  const id = b.dataset.n, n = NODES.find(x=>x.id===id);
+  if(state.nodes.includes(id)){ state.nodes = state.nodes.filter(x=>x!==id); }
+  else{
+    const tops = state.nodes.filter(x=>!NODES.find(y=>y.id===x).side).length;
+    if(state.mode==="set" && !n.side && tops>=MAX_TOP){ toast(`На столе ${MAX_TOP} места сверху. Уберите узел или выберите «Узлы отдельно»`); return; }
+    state.nodes.push(id); lastAdded = id;
+  }
+  render();
+});
+$("form").addEventListener("submit", e=>{
+  e.preventDefault();
+  $("form").style.display="none"; $("ok").style.display="block";
+});
+
+render();
+</script>
+</body>
+</html>
