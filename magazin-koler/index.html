@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="style.css">
 <style>
 .hero{padding:56px 0 0}
-.hero .wrap{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:end}
-.hero .wrap>*{min-width:0}
+.hero .wrap.top-row{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:end}
+.hero .wrap.top-row>*{min-width:0}
 .hero h1{font:clamp(44px,5.4vw,80px)/1.02 var(--f-display);letter-spacing:-.01em}
 .hero p{color:var(--ink-2);font-size:18px;max-width:30em;margin:24px 0 32px}
 .hero .acts{display:flex;gap:12px;flex-wrap:wrap}
@@ -75,7 +75,7 @@
 .sub input{height:52px;border-radius:999px;border:1px solid var(--line);padding:0 22px;width:300px;font:inherit;background:var(--white)}
 
 @media (max-width:1000px){
-  .hero .wrap{grid-template-columns:1fr}
+  .hero .wrap.top-row{grid-template-columns:1fr}
   .fan{height:340px}
   .rooms,.goods{grid-template-columns:repeat(2,1fr)}
   .facts{grid-template-columns:repeat(2,1fr)}
@@ -117,7 +117,7 @@
   </div>
 </div></header>
 
-<section class="hero"><div class="wrap">
+<section class="hero"><div class="wrap top-row">
   <div>
     <h1>Краска для стен в 312 оттенках</h1>
     <p>Матовые и моющиеся краски без запаха. Выберите цвет на сайте, мы заколеруем банку и привезем ее вместе с валиком и лентой.</p>
