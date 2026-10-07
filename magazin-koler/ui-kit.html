@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Колер - UI-кит</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Yeseva+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+body{padding:64px 0 96px}
+.kit-h{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding-bottom:32px;margin-bottom:24px}
+.kit-h h1{font:64px/1 var(--f-display)}
+.kit-h p{color:var(--ink-2);max-width:26em}
+.grp{display:grid;grid-template-columns:220px 1fr;gap:40px;padding:40px 0;border-bottom:1px solid var(--line)}
+.grp>h2{font:26px/1.2 var(--f-display)}
+.grp>h2 small{display:block;font:14px/1.5 var(--f-body);color:var(--ink-2);margin-top:8px}
+.sws{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.sw{background:var(--white);border-radius:var(--r-m);overflow:hidden;font-size:13px}
+.sw i{display:block;height:96px;background:var(--c);border-bottom:1px solid var(--line)}
+.sw div{padding:10px 12px}
+.sw b{display:block;font-weight:500;font-size:14px}
+.sw span{color:var(--ink-2)}
+.types{display:grid;gap:22px}
+.ty{display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:baseline}
+.ty span{color:var(--ink-2);font-size:13px}
+.row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.col{display:grid;gap:8px;justify-items:start;font-size:13px;color:var(--ink-2)}
+.btn.hover{background:#343C50}
+.btn.dis{background:var(--line);color:#8B919C;cursor:default}
+.btn.sm{height:40px;padding:0 20px;font-size:14px}
+.field{display:grid;gap:6px;font-size:14px;width:300px}
+.field input{height:52px;border:1px solid var(--line);border-radius:var(--r-s);padding:0 16px;font:inherit;background:var(--white)}
+.field.focus input{border:2px solid var(--ink);padding:0 15px}
+.field.err input{border:2px solid var(--sale);padding:0 15px}
+.field small{color:var(--sale)}
+.badge{font-size:12px;padding:4px 10px;border-radius:999px;background:var(--white);border:1px solid var(--line)}
+.badge.sale{background:var(--sale);color:#fff;border-color:var(--sale)}
+.badge.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip{padding:9px 18px;border-radius:999px;border:1px solid var(--line);font-size:14px}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.dot{width:44px;height:44px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.dot.on{outline:2px solid var(--ink);outline-offset:3px}
+.vol{border:1px solid var(--line);border-radius:var(--r-s);padding:12px 18px;background:var(--white);text-align:center}
+.vol b{display:block;font-weight:600}
+.vol span{font-size:12px;color:var(--ink-2)}
+.vol.on{border:2px solid var(--ink);padding:11px 17px}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:999px;height:52px}
+.qty button{width:44px;height:100%;font-size:20px}
+.cards{display:grid;grid-template-columns:repeat(3,260px);gap:16px}
+.icons-row .ic{background:var(--white)}
+.rad{display:flex;gap:24px;align-items:end}
+.rad div{background:var(--white);border:1px solid var(--line);width:96px;height:96px}
+.rad p{font-size:13px;color:var(--ink-2);margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kit-h"><h1>Колер, UI-кит</h1><p>Цвета, шрифты и компоненты интернет-магазина. Сетка 12 колонок, контейнер 1216 px, поля 32 px, на мобильном 16 px.</p></div>
+
+  <section class="grp"><h2>Цвета интерфейса<small>Основа, по которой собраны все страницы</small></h2>
+    <div class="sws">
+      <div class="sw"><i style="--c:#1E2433"></i><div><b>Ink</b><span>#1E2433, текст и кнопки</span></div></div>
+      <div class="sw"><i style="--c:#555C6B"></i><div><b>Ink 2</b><span>#555C6B, подписи</span></div></div>
+      <div class="sw"><i style="--c:#EDEFEA"></i><div><b>Paper</b><span>#EDEFEA, фон</span></div></div>
+      <div class="sw"><i style="--c:#E2E5DE"></i><div><b>Paper 2</b><span>#E2E5DE, подложки</span></div></div>
+      <div class="sw"><i style="--c:#C9CEC4"></i><div><b>Line</b><span>#C9CEC4, границы</span></div></div>
+      <div class="sw"><i style="--c:#B23A48"></i><div><b>Sale</b><span>#B23A48, скидки и ошибки</span></div></div>
+    </div>
+  </section>
+
+  <section class="grp"><h2>Цвета товара<small>Оттенки красок, используются только для товаров</small></h2>
+    <div class="sws">
+      <div class="sw"><i style="--c:#2F5D50"></i><div><b>Хвойный лес</b><span>KL-412</span></div></div>
+      <div class="sw"><i style="--c:#6E8FB5"></i><div><b>Северное небо</b><span>KL-208</span></div></div>
+      <div class="sw"><i style="--c:#D9A441"></i><div><b>Липовый мед</b><span>KL-117</span></div></div>
+      <div class="sw"><i style="--c:#C9B8A6"></i><div><b>Льняной</b><span>KL-033</span></div></div>
+      <div class="sw"><i style="--c:#8A9A7B"></i><div><b>Шалфей</b><span>KL-415</span></div></div>
+      <div class="sw"><i style="--c:#3A3F55"></i><div><b>Грозовой</b><span>KL-290</span></div></div>
+    </div>
+  </section>
+
+  <section class="grp"><h2>Типографика<small>Yeseva One для заголовков, Golos Text для текста</small></h2>
+    <div class="types">
+      <div class="ty"><span>H1, Yeseva 80/82</span><div style="font:80px/1.02 var(--f-display)">Краска для стен</div></div>
+      <div class="ty"><span>H2, Yeseva 48/53</span><div style="font:48px/1.1 var(--f-display)">Покупают чаще всего</div></div>
+      <div class="ty"><span>H3, Yeseva 26/31</span><div style="font:26px/1.2 var(--f-display)">Хвойный лес</div></div>
+      <div class="ty"><span>Lead, Golos 18/28</span><div style="font-size:18px;line-height:1.55">Выберите цвет на сайте, мы заколеруем банку и привезем ее.</div></div>
+      <div class="ty"><span>Body, Golos 16/25</span><div>Глубокоматовая краска на акриловой основе.</div></div>
+      <div class="ty"><span>Price, Golos 600 20</span><div class="price">2 490 ₽ <s>3 290 ₽</s></div></div>
+      <div class="ty"><span>Caption, Golos 13/20</span><div style="font-size:13px;color:var(--ink-2)">KL-412, 18 м² на слой</div></div>
+    </div>
+  </section>
+
+  <section class="grp"><h2>Кнопки<small>Высота 52 px, малая 40 px</small></h2>
+    <div class="row">
+      <div class="col"><button class="btn">В корзину</button>Default</div>
+      <div class="col"><button class="btn hover">В корзину</button>Hover</div>
+      <div class="col"><button class="btn dis">Нет в наличии</button>Disabled</div>
+      <div class="col"><button class="btn ghost">Подобрать цвет</button>Secondary</div>
+      <div class="col"><button class="btn sm">Подписаться</button>Small</div>
+      <div class="col"><button class="add">+</button>Icon</div>
+    </div>
+  </section>
+
+  <section class="grp"><h2>Поля ввода<small>Высота 52 px</small></h2>
+    <div class="row" style="align-items:start">
+      <label class="field">E-mail<input placeholder="Ваш e-mail"></label>
+      <label class="field focus">E-mail<input value="maria@mail"></label>
+      <label class="field err">E-mail<input value="maria@"><small>Проверьте адрес: не хватает домена</small></label>
+    </div>
+  </section>
+
+  <section class="grp"><h2>Бейджи и фильтры</h2>
+    <div class="row">
+      <span class="badge">Хит</span><span class="badge">Новинка</span><span class="badge sale">−15%</span><span class="badge dark">2</span>
+      <span style="width:24px"></span>
+      <span class="chip on">Все</span><span class="chip">Для стен</span><span class="chip">Для потолка</span>
+    </div>
+  </section>
+
+  <section class="grp"><h2>Выбор товара<small>Цвет, объем, количество</small></h2>
+    <div style="display:grid;gap:24px">
+      <div class="row"><span class="dot on" style="--c:#2F5D50"></span><span class="dot" style="--c:#8A9A7B"></span><span class="dot" style="--c:#6E8FB5"></span><span class="dot" style="--c:#D9A441"></span><span class="dot" style="--c:#B23A48"></span></div>
+      <div class="row"><span class="vol"><b>0,9 л</b><span>7 м²</span></span><span class="vol on"><b>2,5 л</b><span>18 м²</span></span><span class="vol"><b>9 л</b><span>65 м²</span></span>
+        <span style="width:24px"></span><div class="qty"><button>−</button><span>1</span><button>+</button></div></div>
+    </div>
+  </section>
+
+  <section class="grp"><h2>Карточка товара<small>Обычная, со скидкой, новинка</small></h2>
+    <div class="cards">
+      <div class="card"><div class="pic"><span class="tag">Хит</span><div class="can"><div class="body"><div class="label" style="--c:#2F5D50"><small>Матовая, 2,5 л</small><strong>Хвойный лес</strong></div></div></div></div><h3>Колер Мат, интерьерная</h3><div class="meta">KL-412, 18 м² на слой</div><div class="row" style="justify-content:space-between"><span class="price">2 490 ₽</span><button class="add">+</button></div></div>
+      <div class="card"><div class="pic"><span class="tag sale">−15%</span><div class="can"><div class="body"><div class="label" style="--c:#D9A441;--t:#1E2433"><small>Моющаяся, 2,5 л</small><strong>Липовый мед</strong></div></div></div></div><h3>Колер Кухня, моющаяся</h3><div class="meta">KL-117, 20 м² на слой</div><div class="row" style="justify-content:space-between"><span class="price">2 790 ₽<s>3 290 ₽</s></span><button class="add">+</button></div></div>
+      <div class="card"><div class="pic"><span class="tag">Новинка</span><div class="can"><div class="body"><div class="label" style="--c:#6E8FB5"><small>Полуматовая, 2,5 л</small><strong>Северное небо</strong></div></div></div></div><h3>Колер Ванная, влагостойкая</h3><div class="meta">KL-208, 16 м² на слой</div><div class="row" style="justify-content:space-between"><span class="price">2 990 ₽</span><button class="add">+</button></div></div>
+    </div>
+  </section>
+
+  <section class="grp icons-row"><h2>Иконки и скругления</h2>
+    <div class="row" style="gap:48px">
+      <div class="row">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></span>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 7h14l-1.5 12h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><b>2</b></span>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg></span>
+      </div>
+      <div class="rad">
+        <figure><div style="border-radius:6px"></div><p>S, 6 px</p></figure><figure><div style="border-radius:14px"></div><p>M, 14 px</p></figure><figure><div style="border-radius:28px"></div><p>L, 28 px</p></figure>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>
