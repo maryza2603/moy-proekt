@@ -42,6 +42,14 @@ h1{font-size:clamp(24px,2.6vw,34px);line-height:1.15;font-weight:800;letter-spac
 .specs div:first-child{border-left:0}
 .specs b{display:block;font-size:20px;font-weight:800}
 .specs span{font-size:13px;color:var(--muted)}
+.terms{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.terms div{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.terms svg{flex:none;width:22px;height:22px;color:var(--acc);margin-top:1px}
+.terms p{margin:0;line-height:1.3}
+.terms b{display:block;font-size:14px;font-weight:700}
+.terms span{font-size:12.5px;color:var(--muted)}
+@media (max-width:1100px){.terms{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.terms{grid-template-columns:1fr}}
 
 .panel{background:var(--paper);border:1px solid var(--line);border-radius:14px}
 .grp{padding:16px 18px;border-top:1px solid var(--line)}
@@ -241,6 +249,7 @@ dialog::backdrop{background:rgba(20,22,25,.6)}
    <div><b class="num" id="sMass">38 т</b><span>масса</span></div>
    <div><b class="num" id="sDays">60 дней</b><span>срок поставки</span></div>
   </div>
+  <div class="terms" aria-label="Условия поставки"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><p><b>Гарантия 12 месяцев</b><span>на оборудование, 24 - на раму</span></p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h3"/></svg><p><b>Оплата 30 / 70</b><span>предоплата, остаток перед отгрузкой. Лизинг</span></p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><p><b>Доставка по России</b><span>и странам СНГ, сопровождаем груз</span></p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg><p><b>Шеф-монтаж и пуск</b><span>обучаем персонал на объекте</span></p></div></div>
  </section>
 
  <section class="panel" aria-label="Комплектация">
