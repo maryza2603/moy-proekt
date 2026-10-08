@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BusinesStat - готовые обзоры рынков</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#141a14; --ink2:#2b332b; --muted:#667066;
+  --green:#5fa82a; --green-d:#2f6a17; --green-l:#e9f3df;
+  --line:#dfe5da; --paper:#fff; --bg:#f6f8f3;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Onest,system-ui,sans-serif;color:var(--ink);background:var(--bg);font-size:16px;line-height:1.5;font-variant-numeric:tabular-nums}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0}
+:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* шапка */
+.top{background:var(--ink);color:#cfd6cf;font-size:13px}
+.top .wrap{display:flex;gap:24px;align-items:center;height:36px}
+.top a:hover{color:#fff}
+.top .sp{margin-left:auto}
+header.main{background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+header.main .wrap{display:flex;align-items:center;gap:28px;height:76px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.02em}
+.logo svg{flex:none}
+.logo small{display:block;font-size:11px;font-weight:500;color:var(--muted);letter-spacing:0}
+.search{flex:1;display:flex;border:2px solid var(--ink);border-radius:10px;overflow:hidden;height:46px}
+.search input{flex:1;border:0;padding:0 16px;font:inherit;outline:none;min-width:0}
+.search button{background:var(--ink);color:#fff;padding:0 22px;font-weight:600}
+.search button:hover{background:var(--green-d)}
+.hicons{display:flex;gap:18px;align-items:center}
+.hicons a{display:flex;flex-direction:column;align-items:center;font-size:12px;color:var(--muted);position:relative}
+.hicons a:hover{color:var(--ink)}
+.badge{position:absolute;top:-6px;right:-2px;background:var(--green);color:#fff;font-size:11px;font-weight:700;border-radius:9px;padding:0 6px}
+.phone{font-weight:700;font-size:15px;white-space:nowrap}
+.phone small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+nav.menu{background:var(--paper);border-bottom:1px solid var(--line)}
+nav.menu .wrap{display:flex;gap:28px;height:46px;align-items:center;font-size:15px;font-weight:500;overflow-x:auto;white-space:nowrap}
+nav.menu a:hover{color:var(--green-d)}
+
+/* баннер */
+.hero{background:var(--ink);color:#fff;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding-top:56px;padding-bottom:56px}
+.hero h1{font-size:clamp(32px,4.2vw,52px);line-height:1.08;letter-spacing:-.03em;font-weight:800;max-width:14ch}
+.hero p.lead{margin-top:18px;color:#b9c4b9;font-size:18px;max-width:46ch}
+.hero .facts{display:flex;gap:36px;margin-top:32px}
+.hero .facts b{display:block;font-size:30px;font-weight:700;color:var(--green)}
+.hero .facts span{font-size:14px;color:#b9c4b9}
+.hero .cta{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:50px;padding:0 26px;border-radius:10px;font-weight:600;font-size:16px}
+.btn-g{background:var(--green);color:#fff}.btn-g:hover{background:#4f9220}
+.btn-o{border:1.5px solid #4a554a;color:#fff}.btn-o:hover{border-color:#fff}
+
+.chart{background:#1d251d;border:1px solid #2c362c;border-radius:16px;padding:26px 26px 20px}
+.chart h3{font-size:15px;font-weight:600;color:#dfe7df}
+.chart .sub{font-size:13px;color:#8d988d;margin-top:2px}
+.bars{display:flex;align-items:flex-end;gap:10px;height:210px;margin-top:22px;border-bottom:1px solid #3a453a}
+.bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+.bar i{display:block;width:100%;border-radius:6px 6px 0 0;background:#3c4a3c;transform-origin:bottom;animation:grow .9s cubic-bezier(.2,.7,.2,1) both}
+.bar.f i{background:repeating-linear-gradient(135deg,var(--green) 0 6px,#4f9220 6px 12px)}
+.bar em{font-style:normal;font-size:12px;color:#c9d3c9;margin-bottom:6px}
+.years{display:flex;gap:10px;margin-top:8px}
+.years span{flex:1;text-align:center;font-size:12px;color:#8d988d}
+.legend{display:flex;gap:18px;margin-top:14px;font-size:12px;color:#8d988d}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+@keyframes grow{from{transform:scaleY(0)}}
+@media (prefers-reduced-motion:reduce){.bar i{animation:none}}
+
+/* отрасли */
+section{padding:56px 0 0}
+.shead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:22px}
+.shead h2{font-size:28px;letter-spacing:-.02em;font-weight:700}
+.shead a{color:var(--green-d);font-weight:600;font-size:15px}
+.shead a:hover{text-decoration:underline}
+.inds{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ind{background:var(--paper);padding:18px 20px;display:flex;gap:14px;align-items:center}
+.ind:hover{background:var(--green-l)}
+.ind svg{flex:none;color:var(--green-d)}
+.ind b{display:block;font-weight:600;font-size:15px;line-height:1.3}
+.ind span{font-size:13px;color:var(--muted)}
+
+/* карточки отчетов */
+.reports{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.rep{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;grid-template-columns:96px 1fr;gap:20px}
+.cover{width:96px;height:132px;border-radius:6px;background:var(--ink);color:#fff;padding:10px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.cover::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--green)}
+.cover small{font-size:8px;font-weight:700;letter-spacing:.02em;color:var(--green)}
+.cover .mb{display:flex;align-items:flex-end;gap:3px;height:34px}
+.cover .mb i{flex:1;background:#4b5a4b;border-radius:1px}.cover .mb i:last-child{background:var(--green)}
+.cover strong{font-size:10px;line-height:1.2;font-weight:600}
+.rep h3{font-size:17px;line-height:1.3;font-weight:600}
+.rep h3 a:hover{color:var(--green-d)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13px;color:var(--muted)}
+.tag{display:inline-block;background:var(--green-l);color:var(--green-d);font-size:12px;font-weight:600;border-radius:6px;padding:2px 8px;margin-top:10px}
+.buy{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap}
+.price{font-size:22px;font-weight:700;margin-right:auto}
+.price s{font-size:14px;color:var(--muted);font-weight:400;margin-left:6px}
+.b-sm{height:40px;padding:0 16px;border-radius:8px;font-weight:600;font-size:14px}
+.b-buy{background:var(--ink);color:#fff}.b-buy:hover{background:var(--green-d)}
+.b-demo{background:transparent;border:1.5px solid var(--line);color:var(--ink)}.b-demo:hover{border-color:var(--ink)}
+
+.note{max-width:1200px;margin:56px auto 0;padding:24px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+
+@media (max-width:960px){
+  .hero .wrap{grid-template-columns:1fr}
+  .inds{grid-template-columns:repeat(2,1fr)}
+  .reports{grid-template-columns:1fr}
+  .phone,.top .hide{display:none}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  header.main .wrap{flex-wrap:wrap;height:auto;padding-top:12px;padding-bottom:12px;gap:12px}
+  .search{order:3;flex-basis:100%}
+  .hicons{margin-left:auto}
+  .inds{grid-template-columns:1fr}
+  .rep{grid-template-columns:72px 1fr;gap:14px;padding:16px}
+  .cover{width:72px;height:100px}
+  .hero .facts{gap:22px}
+  .shead h2{font-size:23px}
+}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <a href="#">О компании</a><a href="#" class="hide">Как купить</a><a href="#" class="hide">Оплата</a><a href="#">Контакты</a>
+  <span class="sp">RU / EN</span>
+</div></div>
+
+<header class="main"><div class="wrap">
+  <a class="logo" href="#" aria-label="BusinesStat - на главную">
+    <svg width="38" height="38" viewBox="0 0 38 38" aria-hidden="true"><rect width="38" height="38" rx="9" fill="#141a14"/><rect x="8" y="20" width="5" height="10" rx="1" fill="#5d6a5d"/><rect x="16.5" y="14" width="5" height="16" rx="1" fill="#5d6a5d"/><rect x="25" y="8" width="5" height="22" rx="1" fill="#5fa82a"/></svg>
+    <span>BusinesStat<small>обзоры рынков с 2005 года</small></span>
+  </a>
+  <form class="search" role="search" onsubmit="return false">
+    <input type="search" placeholder="Найти обзор: например, рынок молока" aria-label="Поиск обзора">
+    <button type="submit">Найти</button>
+  </form>
+  <div class="phone">8 800 000-00-00<small>звонок по России бесплатный</small></div>
+  <div class="hicons">
+    <a href="#"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>Избранное</a>
+    <a href="#"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 4h2l2.4 11h11L21 7H6.2"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>Корзина<span class="badge">2</span></a>
+  </div>
+</div></header>
+
+<nav class="menu" aria-label="Разделы"><div class="wrap">
+  <a href="#">Каталог обзоров</a><a href="#">Новинки</a><a href="#">Обзоры на заказ</a><a href="#">Инфографика</a><a href="#">Блог</a><a href="#">Клиенты</a>
+</div></nav>
+
+<div class="hero"><div class="wrap">
+  <div>
+    <h1>Готовые обзоры рынков России с прогнозом до 2030 года</h1>
+    <p class="lead">Объем рынка, цены, производство, импорт и крупнейшие игроки. Скачайте демо-версию и посмотрите, что внутри, до покупки.</p>
+    <div class="facts">
+      <div><b>9 000+</b><span>обзоров в каталоге</span></div>
+      <div><b>20 лет</b><span>на рынке аналитики</span></div>
+      <div><b>1 день</b><span>отправка после оплаты</span></div>
+    </div>
+    <div class="cta">
+      <a class="btn btn-g" href="#catalog">Выбрать обзор</a>
+      <a class="btn btn-o" href="#">Заказать исследование</a>
+    </div>
+  </div>
+  <figure class="chart" aria-label="Пример диаграммы из обзора">
+    <h3>Рынок косметики в России, млрд ₽</h3>
+    <p class="sub">Пример диаграммы из обзора, 2021-2030</p>
+    <div class="bars">
+      <div class="bar"><em>612</em><i style="height:52%"></i></div>
+      <div class="bar"><em>668</em><i style="height:57%;animation-delay:.05s"></i></div>
+      <div class="bar"><em>731</em><i style="height:62%;animation-delay:.1s"></i></div>
+      <div class="bar"><em>784</em><i style="height:67%;animation-delay:.15s"></i></div>
+      <div class="bar"><em>829</em><i style="height:71%;animation-delay:.2s"></i></div>
+      <div class="bar f"><em>902</em><i style="height:77%;animation-delay:.3s"></i></div>
+      <div class="bar f"><em>1 010</em><i style="height:86%;animation-delay:.35s"></i></div>
+      <div class="bar f"><em>1 128</em><i style="height:96%;animation-delay:.4s"></i></div>
+    </div>
+    <div class="years"><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span><span>2028</span><span>2030</span></div>
+    <div class="legend"><span><i style="background:#3c4a3c"></i>факт</span><span><i style="background:#5fa82a"></i>прогноз</span></div>
+  </figure>
+</div></div>
+
+<section id="catalog"><div class="wrap">
+  <div class="shead"><h2>Обзоры по отраслям</h2><a href="#">Весь каталог</a></div>
+  <div class="inds">
+    <a class="ind" href="#"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M12 21V9M12 9c0-3 2-5 6-5 0 3-2 5-6 5zM12 13c0-3-2-5-6-5 0 3 2 5 6 5z"/></svg><span><b>Сельское хозяйство</b><span>1 240 обзоров</span></span></a>
+    <a class="ind" href="#"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M4 20h16M6 20V10l4 3V10l4 3V6h4v14"/></svg><span><b>Промышленность</b><span>2 310 обзоров</span></span></a>
+    <a class="ind" href="#"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/></svg><span><b>Пищевые продукты</b><span>1 860 обзоров</span></span></a>
+    <a class="ind" href="#"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M9 3h6M10 3v5l-5 10a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-10V3"/></svg><span><b>Химия и косметика</b><span>940 обзоров</span></span></a>
+    <a class="ind" href="#"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M10 21v-6h4v6"/></svg><span><b>Строительство</b><span>780 обзоров</span></span></a>
+    <a class="ind" href="#"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 16V8h11v8M14 11h4l3 3v2h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Транспорт и логистика</b><span>520 обзоров</span></span></a>
+    <a class="ind" href="#"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5h8v2M3 12h18"/></svg><span><b>Услуги и торговля</b><span>1 100 обзоров</span></span></a>
+    <a class="ind" href="#"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg><span><b>Медицина и фармацевтика</b><span>660 обзоров</span></span></a>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="shead"><h2>Популярные обзоры</h2><a href="#">Все популярные</a></div>
+  <div class="reports">
+    <article class="rep">
+      <div class="cover"><small>BusinesStat</small><div class="mb"><i style="height:40%"></i><i style="height:55%"></i><i style="height:70%"></i><i style="height:100%"></i></div><strong>Рынок гречки</strong></div>
+      <div>
+        <h3><a href="#">Анализ рынка гречихи в России в 2021-2025 гг, прогноз на 2026-2030 гг</a></h3>
+        <div class="meta"><span>Обновлен: сентябрь 2026</span><span>98 страниц</span><span>62 таблицы</span></div>
+        <span class="tag">Сельское хозяйство</span>
+        <div class="buy"><span class="price">123 900 ₽</span><button class="b-sm b-demo">Демо-версия</button><button class="b-sm b-buy">В корзину</button></div>
+      </div>
+    </article>
+    <article class="rep">
+      <div class="cover"><small>BusinesStat</small><div class="mb"><i style="height:60%"></i><i style="height:52%"></i><i style="height:75%"></i><i style="height:100%"></i></div><strong>Рынок молока</strong></div>
+      <div>
+        <h3><a href="#">Анализ рынка молока в России в 2021-2025 гг, прогноз на 2026-2030 гг</a></h3>
+        <div class="meta"><span>Обновлен: август 2026</span><span>112 страниц</span><span>74 таблицы</span></div>
+        <span class="tag">Пищевые продукты</span>
+        <div class="buy"><span class="price">98 500 ₽<s>123 900 ₽</s></span><button class="b-sm b-demo">Демо-версия</button><button class="b-sm b-buy">В корзину</button></div>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+<p class="note">Демо-концепт первого экрана по прототипу в Figma. Цифры и названия - примерные. Автор: Мария, @luminoso89</p>
+
+</body>
+</html>
