@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Обслуживание кондиционеров - Термоконтур</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600&family=Tektur:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Термоконтур</a>
+    <nav class="nav">
+      <a href="index.html#services">Услуги</a>
+      <a href="index.html#plans">Договоры</a>
+      <a href="index.html#reviews">Отзывы</a>
+      <a href="index.html#faq">Вопросы</a>
+    </nav>
+    <a class="phone" href="tel:+78005550000">8 800 555-00-00</a>
+    <button class="burger" aria-label="Меню" onclick="document.getElementById('top').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<section class="hero page-hero">
+  <div class="wrap">
+    <div>
+      <p class="crumbs"><a href="index.html">Главная</a> / <a href="index.html#services">Услуги</a> / Кондиционеры</p>
+      <h1>Обслуживание кондиционеров</h1>
+      <p class="lead">Чистим, заправляем и ремонтируем сплит-системы любых брендов. Плановое ТО занимает около часа, после визита вы получаете акт с фото.</p>
+      <a class="btn" href="#form">Вызвать мастера</a>
+    </div>
+    <svg viewBox="0 0 420 260" fill="none" stroke="#FAFBFB" stroke-width="3" aria-hidden="true">
+      <rect x="20" y="30" width="380" height="110" rx="14"/>
+      <path d="M48 110h324" stroke="#F2C230" stroke-width="5"/>
+      <rect x="300" y="56" width="70" height="26" rx="4"/>
+      <path d="M80 170c0 20 -20 30 0 50M150 170c0 20-20 30 0 50M220 170c0 20-20 30 0 50M290 170c0 20-20 30 0 50M360 170c0 20-20 30 0 50" stroke="#AFC0D0"/>
+    </svg>
+  </div>
+</section>
+
+<section>
+  <div class="wrap check">
+    <div>
+      <h2>Что входит в плановое ТО</h2>
+      <ol>
+        <li>Диагностика<span>Проверяем давление фреона, токи, температуру на выходе</span></li>
+        <li>Чистка фильтров и теплообменника<span>Внутренний блок - антибактериальной пеной</span></li>
+        <li>Чистка дренажа<span>Убираем запах и протечки на стену</span></li>
+        <li>Мойка наружного блока<span>Если есть доступ без альпиниста</span></li>
+        <li>Проверка электрики<span>Подтягиваем клеммы, смотрим кабель</span></li>
+        <li>Тестовый запуск и акт<span>Замер температуры, фото до и после</span></li>
+      </ol>
+    </div>
+    <aside class="aside">
+      <h3>Цены</h3>
+      <table>
+        <tr><td>Плановое ТО</td><td>2 900 ₽</td></tr>
+        <tr><td>Дозаправка фреоном</td><td>от 1 900 ₽</td></tr>
+        <tr><td>Чистка наружного блока</td><td>1 500 ₽</td></tr>
+        <tr><td>Диагностика при поломке</td><td>1 500 ₽</td></tr>
+        <tr><td>Замена платы управления</td><td>от 4 500 ₽</td></tr>
+        <tr><td>Монтаж сплит-системы</td><td>от 9 900 ₽</td></tr>
+      </table>
+      <p style="font-size:14px;color:var(--steel);margin:16px 0 20px">По договору «Дом» ТО входит в абонемент, запчасти со скидкой 20%.</p>
+      <a class="btn" href="#form" style="width:100%">Записаться на ТО</a>
+    </aside>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Когда вызывать мастера не дожидаясь ТО</h2>
+    <div class="signs">
+      <div class="sign"><h3>Капает вода</h3><p>Обычно забит дренаж. Чем раньше почистить, тем меньше шанс испортить ремонт.</p></div>
+      <div class="sign"><h3>Плохо холодит</h3><p>Чаще всего утечка фреона или грязный теплообменник.</p></div>
+      <div class="sign"><h3>Неприятный запах</h3><p>В блоке размножились бактерии и грибок - нужна чистка с антисептиком.</p></div>
+      <div class="sign"><h3>Ошибка на дисплее</h3><p>Сфотографируйте код и пришлите нам - подскажем, что это, ещё до выезда.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="form">
+  <div class="wrap">
+    <div>
+      <h2>Вызвать мастера по кондиционерам</h2>
+      <p>Перезвоним за 15 минут и предложим ближайшее окно.</p>
+    </div>
+    <form class="form" onsubmit="event.preventDefault();this.hidden=true;document.getElementById('done').style.display='block'">
+      <input required placeholder="Имя" aria-label="Имя">
+      <input required type="tel" placeholder="Телефон" aria-label="Телефон">
+      <select aria-label="Что нужно"><option>Плановое ТО</option><option>Ремонт</option><option>Монтаж</option></select>
+      <button class="btn" type="submit">Вызвать мастера</button>
+      <small>Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</small>
+    </form>
+    <p class="done" id="done">Заявка отправлена. Перезвоним в течение 15 минут.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Термоконтур</a>
+    <span>Москва и область, ежедневно 8:00-22:00</span>
+    <a class="phone" href="tel:+78005550000" style="color:#fff">8 800 555-00-00</a>
+  </div>
+</footer>
+</body>
+</html>
