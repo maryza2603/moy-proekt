@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHOTO LAB - регламенты</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1E2640; --paper:#F5F6F8; --white:#fff; --line:#DDE1E8; --muted:#5D6578;
+  --flash:#FFC629; --focus:#3D6BFF;
+  --r-photo:#FF7A59; --r-print:#3BB3A6; --r-sale:#8C6CFF; --r-senior:#F2A900; --r-manager:#2F7DE1; --r-office:#6B7A8F;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 Onest,system-ui,sans-serif}
+h1,h2,h3{font-family:Unbounded,sans-serif;line-height:1.2;margin:0}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+a{color:inherit}
+
+/* gate */
+.gate{min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--ink);color:#fff}
+.gate form{width:100%;max-width:360px}
+.gate h1{font-size:28px;margin-bottom:8px}
+.gate p{color:#B9C0D4;margin:0 0 24px}
+.gate input{width:100%;padding:14px 16px;border-radius:12px;border:0;background:#fff;color:var(--ink);margin-bottom:12px}
+.gate button{width:100%;padding:14px;border:0;border-radius:12px;background:var(--flash);font-weight:600;cursor:pointer}
+.gate .err{color:#FF9C8A;min-height:24px;margin-top:8px;font-size:14px}
+.gate .hint{font-size:13px;color:#8E97AE;margin-top:16px}
+
+/* shell */
+header.top{position:sticky;top:0;z-index:5;background:var(--ink);color:#fff}
+.bar{max-width:960px;margin:0 auto;padding:12px 16px;display:flex;gap:12px;align-items:center}
+.logo{font-family:Unbounded;font-weight:700;font-size:15px;white-space:nowrap;cursor:pointer;background:none;border:0;color:#fff;padding:0}
+.logo span{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--flash);margin-right:8px}
+.search{flex:1;position:relative}
+.search input{width:100%;padding:10px 14px;border-radius:10px;border:0;background:#2E3858;color:#fff}
+.search input::placeholder{color:#9AA3BD}
+.admin{background:none;border:1px solid #47527A;color:#fff;border-radius:10px;padding:9px 12px;cursor:pointer;white-space:nowrap;font-size:14px}
+.admin[aria-pressed=true]{background:var(--flash);color:var(--ink);border-color:var(--flash)}
+main{max-width:960px;margin:0 auto;padding:24px 16px 64px}
+.crumbs{font-size:14px;color:var(--muted);margin-bottom:16px}
+.crumbs button{background:none;border:0;padding:0;color:var(--muted);text-decoration:underline;cursor:pointer}
+
+/* home: roles as photo prints */
+.hello h1{font-size:clamp(24px,5vw,40px);max-width:16ch}
+.hello p{color:var(--muted);max-width:52ch;margin:12px 0 28px}
+.roles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px}
+.print{background:var(--white);border:0;padding:10px 10px 16px;border-radius:4px;box-shadow:0 1px 2px rgba(30,38,64,.08),0 8px 20px rgba(30,38,64,.07);text-align:left;cursor:pointer;transition:transform .15s}
+.print:nth-child(odd){transform:rotate(-1.2deg)}
+.print:nth-child(even){transform:rotate(1deg)}
+.print:hover{transform:rotate(0) translateY(-3px)}
+.print .shot{aspect-ratio:4/3;border-radius:2px;display:grid;place-items:center;font-size:44px;margin-bottom:12px}
+.print b{display:block;font-family:Unbounded;font-weight:500;font-size:16px;padding:0 4px}
+.print small{display:block;color:var(--muted);padding:2px 4px 0}
+
+/* role page */
+.rolehead{display:flex;gap:16px;align-items:center;margin-bottom:24px}
+.rolehead .dot{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;font-size:28px;flex:none}
+.rolehead h1{font-size:clamp(22px,4vw,32px)}
+.rolehead p{margin:4px 0 0;color:var(--muted)}
+.block{margin-bottom:28px}
+.block h2{font-size:15px;font-weight:500;color:var(--muted);margin-bottom:8px;font-family:Onest}
+.list{background:var(--white);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.item{display:flex;justify-content:space-between;gap:12px;width:100%;padding:14px 16px;border:0;border-top:1px solid var(--line);background:none;text-align:left;cursor:pointer}
+.item:first-child{border-top:0}
+.item:hover{background:#FAFBFC}
+.item span:last-child{color:var(--muted);font-size:14px;white-space:nowrap}
+
+/* regulation */
+article{background:var(--white);border-radius:12px;border:1px solid var(--line);padding:24px clamp(16px,4vw,40px)}
+article h1{font-size:clamp(20px,4vw,28px);margin-bottom:8px}
+.meta{color:var(--muted);font-size:14px;margin-bottom:20px}
+.tag{display:inline-block;padding:2px 10px;border-radius:99px;font-size:13px;margin-right:6px;color:#fff}
+.body{max-width:68ch}
+.body h3{font-family:Onest;font-weight:600;font-size:18px;margin:22px 0 6px}
+.body ol,.body ul{padding-left:22px}
+.body li{margin-bottom:6px}
+.note{background:#FFF6D6;border-left:4px solid var(--flash);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.editing .body{outline:2px dashed var(--flash);outline-offset:8px;border-radius:4px}
+.editbar{display:none;gap:8px;margin-top:20px;flex-wrap:wrap}
+.editing .editbar{display:flex}
+.editbar button{padding:10px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+.save{background:var(--ink);color:#fff}
+.reset{background:var(--paper)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:10px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+mark{background:var(--flash);color:var(--ink);border-radius:3px;padding:0 2px}
+
+/* search results */
+.results h1{font-size:20px;margin-bottom:16px}
+.res{display:block;width:100%;text-align:left;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;cursor:pointer}
+.res b{display:block;margin-bottom:4px}
+.res p{margin:0;color:var(--muted);font-size:14px}
+.empty{color:var(--muted)}
+
+@media (max-width:560px){
+  .bar{flex-wrap:wrap}
+  .search{order:3;flex-basis:100%}
+  .logo{flex:1;text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const PASS = 'photolab';
+const ROLES = [
+  {id:'photo', name:'Фотограф', emoji:'📷', color:'var(--r-photo)', bg:'#FFE6DE', desc:'Съёмка детей в зале'},
+  {id:'print', name:'Печатник', emoji:'🖨️', color:'var(--r-print)', bg:'#DDF3F0', desc:'Печать, сувениры, брак'},
+  {id:'sale', name:'Продавец', emoji:'🛍️', color:'var(--r-sale)', bg:'#ECE6FF', desc:'Продажа фото и пакетов'},
+  {id:'senior', name:'Старший смены', emoji:'⭐', color:'var(--r-senior)', bg:'#FFF1CC', desc:'Открытие, касса, график'},
+  {id:'manager', name:'Управляющий', emoji:'📋', color:'var(--r-manager)', bg:'#DEEBFB', desc:'Точки, персонал, отчёты'},
+  {id:'office', name:'Офис', emoji:'🗂️', color:'var(--r-office)', bg:'#E6EAEF', desc:'Кадры, закупки, бухгалтерия'}
+];
+const ALL = ['photo','print','sale','senior','manager','office'];
+
+// Регламенты. Каждый: id, раздел, роли, заголовок, html
+const DOCS = [
+ {id:'open', block:'Начало и конец смены', roles:['senior','photo','print','sale'], title:'Открытие точки', time:'3 мин',
+  html:`<h3>За 20 минут до открытия</h3><ol><li>Снять точку с охраны, отметиться в чате смены.</li><li>Включить свет, фотоаппараты, принтеры и кассу.</li><li>Проверить заряд аккумуляторов - не меньше двух полных на фотографа.</li><li>Разложить образцы фото и сувениров на витрине.</li></ol><h3>Перед первым клиентом</h3><p>Сделать пробный отпечаток и проверить цвета. Если цвета ушли - сообщить печатнику и старшему смены.</p><div class="note">Если точка не открылась вовремя, старший смены сразу пишет управляющему.</div>`},
+ {id:'close', block:'Начало и конец смены', roles:['senior','photo','print','sale'], title:'Закрытие смены', time:'3 мин',
+  html:`<h3>Порядок</h3><ol><li>Скинуть все снимки за день на сервер, проверить, что папка дня не пустая.</li><li>Поставить аккумуляторы на зарядку.</li><li>Закрыть кассовую смену, сверить наличные с отчётом.</li><li>Отправить итог дня в чат: выручка, число клиентов, брак.</li></ol>`},
+ {id:'breaks', block:'Начало и конец смены', roles:ALL, title:'Перерывы', time:'1 мин',
+  html:`<p>При смене 12 часов положены два перерыва по 30 минут и один на 15 минут.</p><ul><li>Перерыв согласуется со старшим смены.</li><li>В пиковые часы (12:00-15:00 в выходные) перерывы не берём.</li><li>На точке всегда остаются минимум фотограф и продавец.</li></ul>`},
+ {id:'shoot', block:'Работа с клиентом', roles:['photo'], title:'Съёмка ребёнка', time:'4 мин',
+  html:`<h3>Знакомство</h3><p>Присесть на уровень ребёнка, назвать своё имя, спросить имя ребёнка. Родителю коротко объяснить: снимаем 5 минут, смотреть фото можно сразу.</p><h3>Съёмка</h3><ol><li>Не меньше 30 кадров, из них 10 крупным планом.</li><li>Минимум 3 разных фона или реквизита.</li><li>Если ребёнок плачет - пауза, игрушка, не настаивать.</li></ol><div class="note">Без согласия родителя не снимаем и не выкладываем фото в соцсети.</div>`},
+ {id:'efoto', block:'Работа с клиентом', roles:['photo','sale'], title:'Электронные фото', time:'2 мин',
+  html:`<p>Электронные фото продаём пакетом: 10 или все снимки съёмки.</p><ol><li>Отобрать кадры вместе с родителем на мониторе.</li><li>Отправить ссылку на скачивание в течение 15 минут после оплаты.</li><li>Ссылка действует 30 дней - сказать об этом клиенту.</li></ol>`},
+ {id:'sell', block:'Работа с клиентом', roles:['sale'], title:'Показ фото и продажа', time:'3 мин',
+  html:`<h3>Показ</h3><p>Показываем сначала 5 лучших кадров, потом остальные. Называем пакеты от большего к меньшему.</p><h3>Возражения</h3><ul><li>«Дорого» - предложить пакет поменьше или магнит.</li><li>«Подумаем» - отложить фото на 3 дня, выдать визитку с номером съёмки.</li></ul>`},
+ {id:'brak', block:'Печать и качество', roles:['print','senior','sale'], title:'Брак печати', time:'2 мин',
+  html:`<h3>Что считаем браком</h3><ul><li>Полосы, пятна, смещение цвета.</li><li>Обрезанное лицо или ошибка в кадрировании.</li><li>Мятая или поцарапанная бумага.</li></ul><h3>Что делать</h3><ol><li>Перепечатать за счёт точки, клиенту не доплачивать.</li><li>Записать брак в журнал: время, причина, сколько листов.</li><li>Если брака больше 5 листов за смену - сообщить управляющему.</li></ol>`},
+ {id:'souvenir', block:'Печать и качество', roles:['print'], title:'Сувениры: магниты и кружки', time:'2 мин',
+  html:`<p>Срок изготовления магнита - 10 минут, кружки - 25 минут. Перед печатью на кружке показать макет родителю и получить «да».</p>`},
+ {id:'cash', block:'Деньги и отчёты', roles:['senior','manager'], title:'Касса и инкассация', time:'2 мин',
+  html:`<ol><li>Наличные в кассе - не больше 30 000 ₽, остальное в сейф.</li><li>Инкассация по понедельникам и пятницам.</li><li>Расхождение больше 100 ₽ - объяснительная от старшего смены.</li></ol>`},
+ {id:'report', block:'Деньги и отчёты', roles:['manager','office'], title:'Еженедельный отчёт точки', time:'2 мин',
+  html:`<p>Каждый понедельник до 12:00 управляющий сдаёт в офис таблицу: выручка по дням, средний чек, конверсия съёмок в покупку, брак, расход бумаги.</p>`},
+ {id:'hire', block:'Персонал', roles:['manager','office'], title:'Новый сотрудник: первые 3 дня', time:'3 мин',
+  html:`<ol><li>День 1 - знакомство с точкой, этот справочник, наблюдение за работой.</li><li>День 2 - работа в паре с опытным сотрудником.</li><li>День 3 - самостоятельная смена под присмотром старшего.</li></ol><div class="note">Документы для оформления офис собирает до первой смены.</div>`},
+ {id:'look', block:'Персонал', roles:ALL, title:'Внешний вид и бейдж', time:'1 мин',
+  html:`<p>Фирменная футболка, бейдж с именем, чистая обувь. Без резких духов - работаем с маленькими детьми.</p>`}
+];
+
+const store = {
+  get(k){try{return localStorage.getItem(k)}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,v)}catch(e){}},
+  del(k){try{localStorage.removeItem(k)}catch(e){}}
+};
+let authed = false; try{ authed = sessionStorage.getItem('pl_ok')==='1' }catch(e){}
+let admin = false;
+const app = document.getElementById('app');
+const role = id => ROLES.find(r=>r.id===id);
+const docHtml = d => store.get('pl_doc_'+d.id) || d.html;
+const strip = h => h.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+const esc = s => s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1800)}
+
+function gate(){
+  app.innerHTML=`<div class="gate"><form id="f"><h1>PHOTO LAB</h1><p>Регламенты для сотрудников. Введите пароль, который выдал старший смены.</p>
+  <label for="pw" class="sr">Пароль</label><input id="pw" type="password" autocomplete="current-password" placeholder="Пароль">
+  <button>Войти</button><div class="err" id="err" role="alert"></div><div class="hint">Пароль демо-версии: photolab</div></form></div>`;
+  document.getElementById('pw').focus();
+  document.getElementById('f').onsubmit=e=>{e.preventDefault();
+    if(document.getElementById('pw').value.trim().toLowerCase()===PASS){authed=true;try{sessionStorage.setItem('pl_ok','1')}catch(e){};route()}
+    else document.getElementById('err').textContent='Пароль не подошёл. Проверьте раскладку и попробуйте ещё раз.'};
+}
+
+function shell(inner){
+  app.innerHTML=`<header class="top"><div class="bar">
+    <button class="logo" onclick="go('')"><span></span>PHOTO LAB</button>
+    <div class="search"><input id="q" type="search" placeholder="Поиск: брак, перерывы, электронные фото" aria-label="Поиск по регламентам"></div>
+    <button class="admin" id="adm" aria-pressed="${admin}">${admin?'Режим правки вкл.':'Править'}</button>
+  </div></header><main id="main">${inner}</main>`;
+  const q=document.getElementById('q');
+  const cur=decodeURIComponent(location.hash.slice(1));
+  if(cur.startsWith('search/')){q.value=cur.slice(7);q.focus();q.setSelectionRange(q.value.length,q.value.length)}
+  q.oninput=()=>{const v=q.value.trim(); history.replaceState(null,'',v?'#search/'+encodeURIComponent(v):'#'); route()};
+  document.getElementById('adm').onclick=()=>{admin=!admin;route();toast(admin?'Режим правки: откройте регламент и меняйте текст':'Режим правки выключен')};
+}
+
+function go(h){location.hash=h}
+
+function home(){
+  shell(`<section class="hello"><h1>Кто вы сегодня на смене?</h1>
+  <p>Выберите свою роль - покажем только те регламенты, которые нужны вам. Или найдите правило через поиск сверху.</p></section>
+  <div class="roles">${ROLES.map(r=>{const n=DOCS.filter(d=>d.roles.includes(r.id)).length;
+    return `<button class="print" onclick="go('role/${r.id}')"><div class="shot" style="background:${r.bg}">${r.emoji}</div><b>${r.name}</b><small>${r.desc} · ${n} регл.</small></button>`}).join('')}</div>`);
+}
+
+function rolePage(id){
+  const r=role(id); if(!r) return home();
+  const docs=DOCS.filter(d=>d.roles.includes(id));
+  const blocks=[...new Set(docs.map(d=>d.block))];
+  shell(`<div class="crumbs"><button onclick="go('')">Все роли</button> / ${r.name}</div>
+  <div class="rolehead"><div class="dot" style="background:${r.bg}">${r.emoji}</div><div><h1>${r.name}</h1><p>${r.desc}</p></div></div>
+  ${blocks.map(b=>`<section class="block"><h2>${b}</h2><div class="list">${docs.filter(d=>d.block===b).map(d=>
+    `<button class="item" onclick="go('doc/${id}/${d.id}')"><span>${d.title}</span><span>${d.time}</span></button>`).join('')}</div></section>`).join('')}`);
+}
+
+function docPage(rid,did,hl){
+  const d=DOCS.find(x=>x.id===did); if(!d) return home();
+  const r=role(rid)||role(d.roles[0]);
+  let html=docHtml(d);
+  if(hl && !admin){const re=new RegExp('('+hl.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+    html=html.replace(/>([^<]+)</g,(m,t)=>'>'+t.replace(re,'<mark>$1</mark>')+'<')}
+  shell(`<div class="crumbs"><button onclick="go('')">Все роли</button> / <button onclick="go('role/${r.id}')">${r.name}</button> / ${d.title}</div>
+  <article class="${admin?'editing':''}"><h1>${d.title}</h1>
+  <div class="meta">${d.roles.map(x=>`<span class="tag" style="background:${role(x).color}">${role(x).name}</span>`).join('')}</div>
+  <div class="body" id="body" ${admin?'contenteditable="true"':''}>${html}</div>
+  <div class="editbar"><button class="save" id="save">Сохранить</button><button class="reset" id="reset">Вернуть исходный текст</button></div></article>`);
+  if(admin){
+    document.getElementById('save').onclick=()=>{store.set('pl_doc_'+d.id,document.getElementById('body').innerHTML);toast('Сохранено')};
+    document.getElementById('reset').onclick=()=>{store.del('pl_doc_'+d.id);route();toast('Исходный текст возвращён')};
+  }
+}
+
+function search(q){
+  const ql=q.toLowerCase();
+  const hits=DOCS.filter(d=>(d.title+' '+strip(docHtml(d))).toLowerCase().includes(ql));
+  const snip=d=>{const t=strip(docHtml(d)),i=t.toLowerCase().indexOf(ql);
+    if(i<0) return esc(t.slice(0,110))+'…';
+    const s=Math.max(0,i-50),part=t.slice(s,i+ql.length+60);
+    return (s?'…':'')+esc(part).replace(new RegExp(esc(q).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),m=>'<mark>'+m+'</mark>')+'…'};
+  shell(`<section class="results"><h1>Найдено: ${hits.length}</h1>
+  ${hits.length?hits.map(d=>`<button class="res" onclick="go('doc/${d.roles[0]}/${d.id}/${encodeURIComponent(q)}')"><b>${d.title}</b><p>${snip(d)}</p></button>`).join('')
+  :`<p class="empty">По запросу «${esc(q)}» ничего нет. Попробуйте другое слово, например «касса» или «магнит».</p>`}</section>`);
+}
+
+function route(){
+  if(!authed) return gate();
+  const h=decodeURIComponent(location.hash.slice(1)); const p=h.split('/');
+  if(p[0]==='role') rolePage(p[1]);
+  else if(p[0]==='doc') docPage(p[1],p[2],p.slice(3).join('/'));
+  else if(p[0]==='search' && p[1]) search(p.slice(1).join('/'));
+  else home();
+  if(p[0]!=='search') window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);
+route();
+</script>
+<style>.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style>
+</body>
+</html>
