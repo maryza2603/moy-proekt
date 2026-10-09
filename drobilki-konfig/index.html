@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Конфигуратор дробильной установки - ГорТехПоставка</title>
+<meta name="description" content="Соберите дробильную установку под свой карьер: тип дробилки, производительность, шасси, привод и опции. Цена и срок поставки считаются сразу.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2316181b'/%3E%3Cpath d='M7 23 16 8l9 15z' fill='%23f2a900'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f2ef;--paper:#fff;--ink:#16181b;--muted:#5d6268;--line:#dcd9d2;--dark:#1b1e22;--dark2:#24282d;--acc:#f2a900;--acc2:#d98f00;--ok:#2f8f5b;--paint:#f2a900;--paint2:#c98a00}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;font-size:15px}
+button,input,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+
+header{background:var(--dark);color:#fff}
+header .in{max-width:1320px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:16px;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;text-decoration:none}
+.logo svg{width:28px;height:28px}
+header nav{display:flex;gap:18px;font-size:14px;color:#c9ccd0}
+header nav a{text-decoration:none}header nav a:hover{color:#fff}
+
+.app{max-width:1320px;margin:0 auto;padding:22px 20px 40px;display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:24px;align-items:start}
+.left{position:sticky;top:14px}
+h1{font-size:clamp(24px,2.6vw,34px);line-height:1.15;font-weight:800;letter-spacing:-.02em;max-width:22ch}
+.sub{color:var(--muted);margin-top:8px;max-width:60ch}
+
+.stage{margin-top:18px;background:var(--dark2);border-radius:14px;overflow:hidden;position:relative}
+.stage svg{display:block;width:100%;height:auto}
+.hazard{height:10px;background:repeating-linear-gradient(-45deg,var(--acc) 0 14px,var(--dark) 14px 28px)}
+.model{padding:14px 18px 0;color:#fff}
+.model b{display:block;font-size:20px;font-weight:800;letter-spacing:-.01em}
+.model span{font-size:13px;color:#aeb3b9}
+
+.specs{display:grid;grid-template-columns:repeat(4,1fr);background:var(--paper);border:1px solid var(--line);border-radius:12px;margin-top:14px}
+.specs div{padding:14px 16px;border-left:1px solid var(--line)}
+.specs div:first-child{border-left:0}
+.specs b{display:block;font-size:20px;font-weight:800}
+.specs span{font-size:13px;color:var(--muted)}
+.terms{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.terms div{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.terms svg{flex:none;width:22px;height:22px;color:var(--acc);margin-top:1px}
+.terms p{margin:0;line-height:1.3}
+.terms b{display:block;font-size:14px;font-weight:700}
+.terms span{font-size:12.5px;color:var(--muted)}
+@media (max-width:1100px){.terms{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.terms{grid-template-columns:1fr}}
+
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:14px}
+.grp{padding:16px 18px;border-top:1px solid var(--line)}
+.grp:first-child{border-top:0}
+.grp h2{font-size:15px;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between;gap:10px}
+.grp h2 small{font-weight:500;color:var(--muted);font-size:13px}
+.opts{display:grid;gap:8px}
+.opts.c3{grid-template-columns:repeat(3,1fr)}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt label{display:block;border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;cursor:pointer;height:100%;transition:border-color .15s,background .15s}
+.opt label b{display:block;font-weight:700;font-size:14px}
+.opt label span{display:block;font-size:12.5px;color:var(--muted);line-height:1.35}
+.opt label:hover{border-color:#b9b5ab}
+.opt input:checked+label{border-color:var(--ink);background:#fbf6e8;box-shadow:inset 0 0 0 1px var(--ink)}
+.opt input:focus-visible+label{outline:3px solid var(--acc);outline-offset:2px}
+.chk label{display:grid;grid-template-columns:20px 1fr auto;gap:10px;align-items:start}
+.chk label::before{content:"";width:18px;height:18px;border:1.5px solid #9a968c;border-radius:4px;margin-top:1px}
+.chk input:checked+label::before{background:var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3.5 8.5 3 3 6-7' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E") center/14px no-repeat;border-color:var(--ink)}
+.chk em{font-style:normal;font-size:13px;color:var(--muted);white-space:nowrap}
+.sw{display:flex;gap:10px}
+.sw .opt label{width:44px;height:44px;padding:0;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1.5px var(--line)}
+.sw .opt input:checked+label{box-shadow:0 0 0 2.5px var(--ink);background:none}
+.sw-note{font-size:13px;color:var(--muted);margin-top:8px}
+
+.total{padding:18px;border-top:1px solid var(--line);background:#fbfaf7;border-radius:0 0 14px 14px}
+.total .p{font-size:30px;font-weight:800;letter-spacing:-.02em}
+.total .n{font-size:13px;color:var(--muted)}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.btn{border:0;border-radius:10px;padding:13px 14px;font-weight:700;cursor:pointer;font-size:14.5px}
+.btn.main{background:var(--acc);color:var(--ink);grid-column:1/-1}
+.btn.main:hover{background:var(--acc2)}
+.btn.sec{background:var(--paper);border:1.5px solid var(--line)}
+.btn.sec:hover{border-color:var(--ink)}
+.copied{font-size:13px;color:var(--ok);margin-top:8px;min-height:1.3em}
+
+.mbar{display:none}
+footer{border-top:1px solid var(--line);padding:22px 20px;text-align:center;font-size:13px;color:var(--muted)}
+
+dialog{border:0;border-radius:16px;padding:0;max-width:440px;width:calc(100% - 32px);margin:auto}
+dialog::backdrop{background:rgba(20,22,25,.6)}
+.dlg{padding:24px}
+.dlg h3{font-size:21px;font-weight:800;margin-bottom:6px}
+.dlg p{color:var(--muted);font-size:14px}
+.dlg .cfg{background:var(--bg);border-radius:10px;padding:10px 12px;font-size:13px;margin:14px 0}
+.dlg label{display:block;font-size:13px;font-weight:600;margin:10px 0 4px}
+.dlg input,.dlg textarea{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:10px 12px;background:#fff}
+.dlg input:focus,.dlg textarea:focus{border-color:var(--ink);outline:0}
+.dlg .row{display:flex;gap:8px;margin-top:16px}
+.dlg .row .btn{flex:1}
+.x{position:absolute;right:12px;top:10px;background:none;border:0;font-size:24px;cursor:pointer;color:var(--muted);width:36px;height:36px}
+
+#print{display:none}
+
+@media(max-width:1000px){
+ .app{grid-template-columns:1fr}
+ .left{position:static}
+ .total{display:none}
+ .mbar{display:flex;position:sticky;bottom:0;z-index:5;background:var(--dark);color:#fff;padding:12px 16px;align-items:center;justify-content:space-between;gap:12px}
+ .mbar b{font-size:19px;display:block}.mbar span{font-size:12px;color:#aeb3b9}
+ .mbar .btn{padding:11px 14px}
+ .mtools{display:flex;gap:8px;padding:0 0 4px}
+}
+@media(min-width:1001px){.mtools{display:none}}
+@media(max-width:600px){
+ header nav{display:none}
+ .app{padding:16px 16px 28px}
+ .specs{grid-template-columns:1fr 1fr}
+ .specs div:nth-child(3){border-left:0}
+ .specs div:nth-child(n+3){border-top:1px solid var(--line)}
+ .opts.c3{grid-template-columns:1fr}
+ .model b{font-size:16px}
+}
+@media (prefers-reduced-motion:no-preference){
+ #mach>g{transition:opacity .25s}
+}
+@media print{
+ body{background:#fff}
+ header,.app,footer,.mbar,dialog{display:none!important}
+ #print{display:block;padding:10mm;font-size:12px}
+ #print h1{font-size:22px}
+ #print table{width:100%;border-collapse:collapse;margin-top:12px}
+ #print td{border-bottom:1px solid #ccc;padding:6px 4px;vertical-align:top}
+ #print td:last-child{text-align:right;white-space:nowrap}
+ #print .tot td{font-weight:800;font-size:15px;border-bottom:2px solid #000}
+ #print svg{width:100%;height:auto;margin-top:10px;background:#24282d}
+}
+</style>
+</head>
+<body>
+<header><div class="in">
+ <a class="logo" href="../drobilki/"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#2b3036"/><path d="M7 23 16 8l9 15z" fill="#f2a900"/></svg>ГорТехПоставка</a>
+ <nav><a href="../drobilki/">Каталог</a><a href="../drobilki/#contacts">Контакты</a></nav>
+</div></header>
+
+<main class="app">
+ <section class="left">
+  <h1>Соберите дробильную установку под свой карьер</h1>
+  <p class="sub">Выберите дробилку, производительность и комплектацию. Чертёж, цена и срок поставки меняются сразу.</p>
+  <div class="stage">
+   <div class="model"><b id="mName">ГТП-Щ 120</b><span id="mSub">Щековая, на колёсном шасси</span></div>
+   <svg viewBox="20 95 870 335" role="img" aria-labelledby="mName" id="draw">
+    <defs>
+     <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#2f343a" stroke-width="1"/></pattern>
+     <linearGradient id="pile" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a8378"/><stop offset="1" stop-color="#5f5a52"/></linearGradient>
+    </defs>
+    <rect y="90" width="900" height="340" fill="url(#grid)"/>
+    <rect y="372" width="900" height="58" fill="#1d2125"/>
+    <line x1="0" y1="372" x2="900" y2="372" stroke="#5d6268" stroke-width="2"/>
+    <g id="mach">
+     <!-- куча готового щебня -->
+     <path id="pileOut" d="M700 372 Q760 300 820 372Z" fill="url(#pile)"/>
+     <!-- шасси -->
+     <g id="chFrame">
+      <rect x="150" y="300" width="420" height="16" fill="#3a3f45"/>
+      <g fill="#3a3f45"><rect x="165" y="316" width="16" height="56"/><rect x="300" y="316" width="16" height="56"/><rect x="420" y="316" width="16" height="56"/><rect x="540" y="316" width="16" height="56"/></g>
+      <g fill="#555b62"><rect x="155" y="366" width="36" height="6"/><rect x="290" y="366" width="36" height="6"/><rect x="410" y="366" width="36" height="6"/><rect x="530" y="366" width="36" height="6"/></g>
+     </g>
+     <g id="chWheels">
+      <path d="M110 314 L150 306 L570 306 L570 322 L150 322 Z" fill="#3a3f45"/>
+      <rect x="150" y="300" width="420" height="22" fill="var(--paint2)"/>
+      <path d="M150 312 L95 330 L80 330" stroke="#3a3f45" stroke-width="8" fill="none"/>
+      <rect x="160" y="322" width="12" height="50" fill="#3a3f45"/>
+      <g><circle cx="430" cy="344" r="28" fill="#202326"/><circle cx="430" cy="344" r="12" fill="#6d737a"/><circle cx="500" cy="344" r="28" fill="#202326"/><circle cx="500" cy="344" r="12" fill="#6d737a"/></g>
+     </g>
+     <g id="chTracks">
+      <rect x="150" y="296" width="420" height="16" fill="var(--paint2)"/>
+      <rect x="200" y="318" width="320" height="54" rx="27" fill="#202326"/>
+      <rect x="208" y="326" width="304" height="38" rx="19" fill="#3a3f45"/>
+      <g fill="#6d737a"><circle cx="227" cy="345" r="15"/><circle cx="493" cy="345" r="15"/><circle cx="290" cy="352" r="8"/><circle cx="335" cy="352" r="8"/><circle cx="380" cy="352" r="8"/><circle cx="425" cy="352" r="8"/></g>
+      <rect x="250" y="312" width="220" height="10" fill="#3a3f45"/>
+     </g>
+     <!-- питатель -->
+     <g id="feeder">
+      <path d="M120 170 L300 170 L276 250 L150 250 Z" fill="var(--paint)" stroke="#16181b" stroke-width="2"/>
+      <path d="M150 250 L276 250 L292 290 L160 290 Z" fill="var(--paint2)" stroke="#16181b" stroke-width="2"/>
+      <g stroke="#16181b" stroke-width="2"><line x1="170" y1="270" x2="280" y2="270"/></g>
+      <g fill="#3a3f45"><rect x="160" y="290" width="14" height="10"/><rect x="270" y="290" width="14" height="10"/></g>
+      <path d="M140 170 L160 140 L190 155 L215 132 L250 150 L280 140 L300 170 Z" fill="#7d776c"/>
+     </g>
+     <!-- дробилки -->
+     <g id="crJaw">
+      <rect x="300" y="160" width="150" height="140" fill="var(--paint)" stroke="#16181b" stroke-width="2"/>
+      <path d="M318 172 L340 280 M432 172 L392 280" stroke="#16181b" stroke-width="5"/>
+      <circle cx="440" cy="190" r="44" fill="none" stroke="#16181b" stroke-width="6"/><circle cx="440" cy="190" r="8" fill="#16181b"/>
+      <g stroke="#16181b" stroke-width="3"><line x1="440" y1="146" x2="440" y2="234"/><line x1="396" y1="190" x2="484" y2="190"/></g>
+     </g>
+     <g id="crCone">
+      <rect x="310" y="230" width="140" height="70" fill="var(--paint2)" stroke="#16181b" stroke-width="2"/>
+      <path d="M320 230 L345 150 L415 150 L440 230 Z" fill="var(--paint)" stroke="#16181b" stroke-width="2"/>
+      <rect x="350" y="130" width="60" height="22" fill="#3a3f45"/>
+      <path d="M355 230 L380 175 L405 230" fill="none" stroke="#16181b" stroke-width="3"/>
+     </g>
+     <g id="crImpact">
+      <path d="M300 300 L300 200 Q300 150 375 150 Q450 150 450 200 L450 300 Z" fill="var(--paint)" stroke="#16181b" stroke-width="2"/>
+      <circle cx="375" cy="230" r="42" fill="#3a3f45" stroke="#16181b" stroke-width="2"/>
+      <g stroke="var(--paint)" stroke-width="7"><line x1="375" y1="194" x2="375" y2="266"/><line x1="339" y1="230" x2="411" y2="230"/></g>
+      <circle cx="375" cy="230" r="9" fill="#16181b"/>
+      <path d="M318 175 L345 210 M432 175 L405 210" stroke="#16181b" stroke-width="4"/>
+     </g>
+     <!-- привод -->
+     <g id="drElec">
+      <rect x="470" y="248" width="70" height="44" rx="6" fill="#4d6a86" stroke="#16181b" stroke-width="2"/>
+      <g stroke="#16181b" stroke-width="2"><line x1="482" y1="252" x2="482" y2="288"/><line x1="494" y1="252" x2="494" y2="288"/><line x1="506" y1="252" x2="506" y2="288"/></g>
+      <path d="M540 262 Q575 262 575 230" fill="none" stroke="#16181b" stroke-width="3"/>
+     </g>
+     <g id="drDiesel">
+      <rect x="462" y="206" width="104" height="90" fill="#3a3f45" stroke="#16181b" stroke-width="2"/>
+      <g fill="#262a2f"><rect x="474" y="218" width="80" height="6"/><rect x="474" y="230" width="80" height="6"/><rect x="474" y="242" width="80" height="6"/></g>
+      <rect x="532" y="178" width="12" height="28" fill="#202326"/>
+      <rect x="474" y="262" width="40" height="22" fill="var(--paint)"/>
+     </g>
+     <!-- конвейер -->
+     <g id="conv">
+      <line id="belt" x1="400" y1="320" x2="760" y2="200" stroke="#16181b" stroke-width="14" stroke-linecap="round"/>
+      <line id="belt2" x1="400" y1="320" x2="760" y2="200" stroke="#3a3f45" stroke-width="8" stroke-linecap="round"/>
+      <line id="leg" x1="640" y1="240" x2="640" y2="372" stroke="#3a3f45" stroke-width="6"/>
+     </g>
+     <g id="magnet"><rect id="magR" x="690" y="160" width="56" height="26" fill="#4d6a86" stroke="#16181b" stroke-width="2"/></g>
+     <g id="dust"><g fill="#9cc7e6"><circle cx="135" cy="176" r="3"/><circle cx="128" cy="186" r="2.5"/><circle cx="145" cy="190" r="2"/><circle cx="292" cy="176" r="3"/><circle cx="300" cy="188" r="2.5"/></g><path d="M118 168 L150 168 M286 168 L316 168" stroke="#9cc7e6" stroke-width="4"/></g>
+     <g id="screen">
+      <path id="scrP" d="M660 250 L780 290 L780 314 L660 274 Z" fill="var(--paint)" stroke="#16181b" stroke-width="2"/>
+      <line id="scrL1" x1="670" y1="272" x2="670" y2="372" stroke="#3a3f45" stroke-width="5"/>
+      <line id="scrL2" x1="770" y1="306" x2="770" y2="372" stroke="#3a3f45" stroke-width="5"/>
+     </g>
+     <g id="remote"><rect x="70" y="340" width="26" height="32" rx="4" fill="#3a3f45"/><rect x="75" y="346" width="16" height="8" fill="#f2a900"/><line x1="90" y1="340" x2="96" y2="326" stroke="#3a3f45" stroke-width="3"/></g>
+    </g>
+    <g fill="#8c9197" font-family="Manrope,sans-serif" font-size="13">
+     <text x="34" y="410" id="dimTxt">Длина в транспортном положении ~ 14,2 м</text>
+    </g>
+   </svg>
+   <div class="hazard"></div>
+  </div>
+  <div class="specs">
+   <div><b class="num" id="sCap">120 т/ч</b><span>производительность</span></div>
+   <div><b class="num" id="sKw">170 кВт</b><span>мощность</span></div>
+   <div><b class="num" id="sMass">38 т</b><span>масса</span></div>
+   <div><b class="num" id="sDays">60 дней</b><span>срок поставки</span></div>
+  </div>
+  <div class="terms" aria-label="Условия поставки"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><p><b>Гарантия 12 месяцев</b><span>на оборудование, 24 - на раму</span></p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h3"/></svg><p><b>Оплата 30 / 70</b><span>предоплата, остаток перед отгрузкой. Лизинг</span></p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><p><b>Доставка по России</b><span>и странам СНГ, сопровождаем груз</span></p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg><p><b>Шеф-монтаж и пуск</b><span>обучаем персонал на объекте</span></p></div></div>
+ </section>
+
+ <section class="panel" aria-label="Комплектация">
+  <div class="grp"><h2>Тип дробилки</h2><div class="opts" id="g-type"></div></div>
+  <div class="grp"><h2>Производительность <small>по граниту, фракция 0-40</small></h2><div class="opts c3" id="g-cap"></div></div>
+  <div class="grp"><h2>Шасси</h2><div class="opts" id="g-ch"></div></div>
+  <div class="grp"><h2>Привод</h2><div class="opts" id="g-dr"></div></div>
+  <div class="grp"><h2>Конвейер выгрузки</h2><div class="opts c3" id="g-cv"></div></div>
+  <div class="grp"><h2>Дополнительно</h2><div class="opts" id="g-add"></div></div>
+  <div class="grp"><h2>Окраска</h2><div class="sw" id="g-col"></div><p class="sw-note" id="colName"></p></div>
+  <div class="mtools"><button class="btn sec" onclick="print()">Смета в PDF</button><button class="btn sec" onclick="share()">Ссылка на конфигурацию</button></div>
+  <div class="total">
+   <div class="p num" id="price">0 ₽</div>
+   <div class="n">с НДС, ориентировочная цена. Точную пришлём в КП</div>
+   <div class="btns">
+    <button class="btn main" onclick="openLead()">Запросить КП на эту конфигурацию</button>
+    <button class="btn sec" onclick="print()">Смета в PDF</button>
+    <button class="btn sec" onclick="share()">Ссылка на конфигурацию</button>
+   </div>
+   <div class="copied" id="copied" aria-live="polite"></div>
+  </div>
+ </section>
+</main>
+<div class="mbar"><div><b class="num" id="mPrice">0 ₽</b><span>с НДС, ориентировочно</span></div><button class="btn main" onclick="openLead()">Запросить КП</button></div>
+
+<footer>© 2026 ГорТехПоставка. Демо-конфигуратор, цены условные. Разработка - Мария</footer>
+
+<dialog id="lead"><div class="dlg" style="position:relative">
+ <button class="x" onclick="lead.close()" aria-label="Закрыть">×</button>
+ <form id="leadForm">
+  <h3>Запрос КП</h3>
+  <p>Менеджер проверит конфигурацию под ваш материал и пришлёт КП с точной ценой.</p>
+  <div class="cfg" id="leadCfg"></div>
+  <label for="fCo">Компания</label><input id="fCo" autocomplete="organization">
+  <label for="fPh">Телефон *</label><input id="fPh" type="tel" required autocomplete="tel" placeholder="+7">
+  <label for="fMat">Что дробите и какая фракция нужна</label><textarea id="fMat" rows="2" placeholder="Например: гранит до 600 мм, нужен щебень 5-20"></textarea>
+  <div class="row"><button class="btn main" type="submit">Отправить запрос</button></div>
+ </form>
+ <div id="leadOk" hidden>
+  <h3>Запрос отправлен</h3>
+  <p>Это демо. На рабочем сайте конфигурация, смета и контакты сразу приходят менеджеру в Telegram.</p>
+  <div class="row"><button class="btn sec" onclick="lead.close()">Вернуться к конфигуратору</button></div>
+ </div>
+</div></dialog>
+
+<div id="print"></div>
+
+<script>
+const M=1e6;
+const D={
+ type:{t:'r',name:'Тип дробилки',o:[
+  {v:'jaw',b:'Щековая',s:'Первичное дробление, крепкие породы до 600 мм',code:'Щ'},
+  {v:'cone',b:'Конусная',s:'Вторичное дробление, кубовидный щебень',code:'К'},
+  {v:'imp',b:'Роторная',s:'Известняк и бетонный лом, высокая степень дробления',code:'Р'}]},
+ cap:{t:'r',name:'Производительность',o:[{v:50,b:'50 т/ч'},{v:120,b:'120 т/ч'},{v:250,b:'250 т/ч'}]},
+ ch:{t:'r',name:'Шасси',o:[
+  {v:'frame',b:'Стационарная рама',s:'Под постоянную площадку, монтаж на фундамент',p:0,m:0,d:0},
+  {v:'wheel',b:'Колёсное шасси',s:'Перевозка тягачом между участками',p:1.4*M,m:6,d:10},
+  {v:'track',b:'Гусеничное шасси',s:'Самоходная, переезд по карьеру своим ходом',p:4.9*M,m:14,d:20}]},
+ dr:{t:'r',name:'Привод',o:[
+  {v:'el',b:'Электрический',s:'Нужна сеть 380 В на площадке',p:0,d:0},
+  {v:'ds',b:'Дизель-генератор',s:'Автономная работа без подключения к сети',p:2.1*M,d:10,m:4}]},
+ cv:{t:'r',name:'Конвейер',o:[{v:6,b:'6 м',p:.6*M,kw:7.5},{v:8,b:'8 м',p:.8*M,kw:11},{v:10,b:'10 м',p:1.05*M,kw:15}]},
+ add:{t:'c',o:[
+  {v:'feeder',b:'Вибропитатель с колосниковым грохотом',s:'Подаёт материал равномерно и отсеивает мелочь',p:1.1*M,kw:11,m:4},
+  {v:'magnet',b:'Магнитный сепаратор',s:'Убирает арматуру и металл из потока',p:.42*M,kw:3,m:.6},
+  {v:'screen',b:'Грохот на выходе',s:'Сортирует щебень на 2 фракции',p:2.6*M,kw:15,m:5,d:10},
+  {v:'dust',b:'Пылеподавление',s:'Форсунки на загрузке, меньше пыли и претензий',p:.36*M,kw:2,m:.3},
+  {v:'remote',b:'Пульт дистанционного управления',s:'Оператор управляет с экскаватора',p:.18*M}]},
+ col:{t:'s',o:[{v:'y',b:'Жёлтая RAL 1003',c:'#f2a900',c2:'#c98a00',p:0},{v:'g',b:'Серая RAL 7040',c:'#9aa1a8',c2:'#737a81',p:0},{v:'b',b:'Ваш корпоративный цвет',c:'#2f6db3',c2:'#245489',p:.12*M}]}
+};
+const BASE={jaw:{50:4.2,120:6.8,250:11.5},cone:{50:5.6,120:8.9,250:14.2},imp:{50:4.8,120:7.6,250:12.4}};
+const KW={50:55,120:110,250:200}, MASS={50:18,120:32,250:55}, MF={jaw:1,cone:.9,imp:.85};
+let S={type:'jaw',cap:120,ch:'wheel',dr:'el',cv:8,add:['feeder','magnet'],col:'y'};
+try{const h=decodeURIComponent(location.hash.slice(1));if(h){const o=JSON.parse(h);S={...S,...o}}}catch(e){}
+
+const fmt=n=>Math.round(n).toLocaleString('ru-RU')+' ₽';
+const opt=(k,v)=>D[k].o.find(o=>String(o.v)===String(v));
+
+function build(){
+ for(const k of ['type','cap','ch','dr','cv']){
+  const g=document.getElementById('g-'+k);
+  g.innerHTML=D[k].o.map((o,i)=>`<div class="opt"><input type="radio" name="${k}" id="${k}${i}" value="${o.v}" ${String(S[k])===String(o.v)?'checked':''}><label for="${k}${i}"><b>${o.b}</b>${o.s?`<span>${o.s}</span>`:''}</label></div>`).join('');
+ }
+ document.getElementById('g-add').innerHTML=D.add.o.map((o,i)=>`<div class="opt chk"><input type="checkbox" id="a${i}" value="${o.v}" ${S.add.includes(o.v)?'checked':''}><label for="a${i}"><span style="color:var(--ink)"><b>${o.b}</b><span>${o.s}</span></span><em class="num">+${(o.p/M).toLocaleString('ru-RU')} млн</em></label></div>`).join('');
+ document.getElementById('g-col').innerHTML=D.col.o.map((o,i)=>`<div class="opt"><input type="radio" name="col" id="c${i}" value="${o.v}" ${S.col===o.v?'checked':''}><label for="c${i}" style="background:${o.c}" title="${o.b}"><span class="vh" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">${o.b}</span></label></div>`).join('');
+ document.querySelector('.panel').addEventListener('change',e=>{
+  const t=e.target;
+  if(t.type==='checkbox'){S.add=[...document.querySelectorAll('#g-add input:checked')].map(x=>x.value)}
+  else{S[t.name]=['cap','cv'].includes(t.name)?+t.value:t.value}
+  render();
+ });
+}
+
+function calc(){
+ const ch=opt('ch',S.ch),dr=opt('dr',S.dr),cv=opt('cv',S.cv),col=opt('col',S.col),ty=opt('type',S.type);
+ const rows=[[`Дробилка ${ty.b.toLowerCase()}, ${S.cap} т/ч`,BASE[S.type][S.cap]*M]];
+ if(ch.p)rows.push([ch.b,ch.p]);
+ if(dr.p)rows.push([dr.b,dr.p]);
+ rows.push([`Конвейер выгрузки ${cv.b}`,cv.p]);
+ let kw=KW[S.cap]+cv.kw, mass=MASS[S.cap]*MF[S.type]+ch.m+(dr.m||0), days=45+ch.d+dr.d;
+ for(const a of S.add){const o=opt('add',a);rows.push([o.b,o.p]);kw+=o.kw||0;mass+=o.m||0;days+=o.d||0}
+ if(col.p)rows.push([`Окраска: ${col.b.toLowerCase()}`,col.p]);
+ const sum=rows.reduce((s,r)=>s+r[1],0);
+ return {rows,sum,kw,mass,days,ty,ch,dr,cv,col};
+}
+
+const show=(id,on)=>{document.getElementById(id).style.display=on?'':'none'};
+function render(){
+ const c=calc();
+ const name=`ГТП-${c.ty.code}${S.ch==='track'?'Г':S.ch==='wheel'?'М':''} ${S.cap}`;
+ document.getElementById('mName').textContent=name;
+ document.getElementById('mSub').textContent=`${c.ty.b}, ${c.ch.b.toLowerCase()}, привод: ${c.dr.b.toLowerCase()}`;
+ sCap.textContent=S.cap+' т/ч';sKw.textContent=Math.round(c.kw)+' кВт';
+ sMass.textContent=c.mass.toFixed(0)+' т';sDays.textContent='от '+c.days+' дней';
+ price.textContent=fmt(c.sum);mPrice.textContent=fmt(c.sum);
+ // чертёж
+ show('chFrame',S.ch==='frame');show('chWheels',S.ch==='wheel');show('chTracks',S.ch==='track');
+ show('crJaw',S.type==='jaw');show('crCone',S.type==='cone');show('crImpact',S.type==='imp');
+ show('drElec',S.dr==='el');show('drDiesel',S.dr==='ds');
+ for(const a of ['feeder','magnet','screen','dust','remote'])show(a,S.add.includes(a));
+ document.documentElement.style.setProperty('--paint',c.col.c);
+ document.documentElement.style.setProperty('--paint2',c.col.c2);
+ // конвейер: длина
+ const len={6:250,8:320,10:390}[S.cv], ang=-0.32;
+ const x1=400,y1=320,x2=x1+len*Math.cos(ang),y2=y1+len*Math.sin(ang);
+ for(const id of ['belt','belt2']){const l=document.getElementById(id);l.setAttribute('x2',x2);l.setAttribute('y2',y2)}
+ const lx=x1+len*.7*Math.cos(ang),ly=y1+len*.7*Math.sin(ang);
+ leg.setAttribute('x1',lx);leg.setAttribute('x2',lx);leg.setAttribute('y1',ly);
+ magR.setAttribute('x',x2-60);magR.setAttribute('y',y2-48);
+ const sx=x2-30;
+ scrP.setAttribute('d',`M${sx-40} ${y2+40} L${sx+90} ${y2+80} L${sx+90} ${y2+104} L${sx-40} ${y2+64} Z`);
+ scrL1.setAttribute('x1',sx-30);scrL1.setAttribute('x2',sx-30);scrL1.setAttribute('y1',y2+62);
+ scrL2.setAttribute('x1',sx+80);scrL2.setAttribute('x2',sx+80);scrL2.setAttribute('y1',y2+98);
+ const px=S.add.includes('screen')?sx+40:x2+20, pr={50:45,120:60,250:75}[S.cap];
+ pileOut.setAttribute('d',`M${px-pr} 372 Q${px} ${372-pr*1.4} ${px+pr} 372Z`);
+ // масштаб по производительности
+ const sc={50:.86,120:.95,250:1.04}[S.cap];
+ document.getElementById('mach').setAttribute('transform',`translate(${450-450*sc} ${372-372*sc}) scale(${sc})`);
+ const L=(S.ch==='track'?12.5:S.ch==='wheel'?14.2:11)+(S.cap-120)/100*2+(S.cv-8)*.4;
+ dimTxt.textContent=`Длина в рабочем положении ~ ${L.toFixed(1).replace('.',',')} м`;
+ history.replaceState(null,'','#'+encodeURIComponent(JSON.stringify(S)));
+ window._c=c;window._name=name;
+}
+
+function cfgText(){const c=_c;return `<b>${_name}</b> - ${c.ty.b.toLowerCase()}, ${S.cap} т/ч, ${c.ch.b.toLowerCase()}, конвейер ${c.cv.b}${S.add.length?', опций: '+S.add.length:''}. <b class="num">${fmt(c.sum)}</b>`}
+function openLead(){leadCfg.innerHTML=cfgText();leadForm.hidden=false;leadOk.hidden=true;lead.showModal()}
+leadForm.addEventListener('submit',e=>{e.preventDefault();leadForm.hidden=true;leadOk.hidden=false});
+function share(){
+ const u=location.href, done=()=>{copied.textContent='Ссылка скопирована - отправьте её коллегам'};
+ if(navigator.clipboard)navigator.clipboard.writeText(u).then(done,()=>{copied.textContent=u});else copied.textContent=u;
+}
+window.addEventListener('beforeprint',()=>{
+ const c=_c,d=new Date().toLocaleDateString('ru-RU');
+ document.getElementById('print').innerHTML=`<h1>Смета: дробильная установка ${_name}</h1><p>ГорТехПоставка, ${d}. Цены с НДС, ориентировочные.</p>${document.getElementById('draw').outerHTML.replace('id="draw"','')}
+ <table>${c.rows.map(r=>`<tr><td>${r[0]}</td><td>${fmt(r[1])}</td></tr>`).join('')}<tr class="tot"><td>Итого</td><td>${fmt(c.sum)}</td></tr></table>
+ <p style="margin-top:10px">Производительность ${S.cap} т/ч, мощность ${Math.round(c.kw)} кВт, масса ~${c.mass.toFixed(0)} т, срок поставки от ${c.days} дней.</p>`;
+});
+build();render();
+</script>
+</body>
+</html>
