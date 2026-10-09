@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ВНЖ в Турции - расчёт стоимости</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== ЦВЕТА - меняются здесь ===== */
+:root{
+  --sea:#0D4F6B; --sea-deep:#08344A; --sand:#F3EEE6; --white:#fff;
+  --red:#C8102E; --text:#1B2730; --muted:#5E6B74; --line:#E2DBD0; --focus:#F5B700;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sand);color:var(--text);font:16px/1.55 "Golos Text",system-ui,sans-serif}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;line-height:1.15;margin:0}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+
+/* шапка */
+.top{background:var(--sea-deep);color:#fff;font-size:14px}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.brand{font-family:"Playfair Display";font-size:20px;font-weight:700;text-decoration:none}
+.brand i{font-style:normal;color:var(--red);background:#fff;border-radius:50%;display:inline-grid;place-items:center;width:26px;height:26px;font-size:14px;margin-right:8px;vertical-align:2px}
+nav.menu{display:flex;gap:20px;flex-wrap:wrap}
+nav.menu a{text-decoration:none;opacity:.85}
+nav.menu a:hover{opacity:1;text-decoration:underline}
+.phones{display:flex;gap:16px;flex-wrap:wrap}
+.phones a{text-decoration:none;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.ico{width:22px;height:22px;border-radius:6px;display:inline-grid;place-items:center;font-size:11px;font-weight:700;color:#fff}
+.ico.tg{background:#2AABEE}.ico.max{background:linear-gradient(135deg,#4E5BFF,#A23CFF)}
+
+/* первый экран */
+.hero{background:linear-gradient(180deg,var(--sea-deep) 0%,var(--sea) 100%);color:#fff;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-60px;height:140px;background:var(--sand);border-radius:50% 50% 0 0}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.1fr;gap:40px;padding-top:56px;padding-bottom:110px;align-items:start}
+.hero h1{font-size:clamp(28px,4.4vw,48px);max-width:14ch}
+.hero .lead{font-size:18px;color:#CFE2EA;margin:16px 0 24px;max-width:40ch}
+.facts{list-style:none;padding:0;margin:0;display:grid;gap:10px;color:#E6F0F4}
+.facts li{padding-left:28px;position:relative}
+.facts li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:14px;border-radius:50%;border:3px solid var(--red);background:#fff}
+
+/* квиз */
+.quiz{background:var(--white);color:var(--text);border-radius:18px;padding:28px;box-shadow:0 30px 60px rgba(4,30,44,.35)}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:14px;color:var(--muted)}
+.bar{height:6px;background:#EEE8DE;border-radius:99px;overflow:hidden;margin-bottom:22px}
+.bar span{display:block;height:100%;background:var(--red);transition:width .3s}
+.quiz h2{font-size:24px;margin-bottom:6px}
+.quiz .sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;text-align:left;transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--sea)}
+.opt .mk{width:20px;height:20px;flex:none;border:2px solid #B9B0A2;border-radius:50%;display:grid;place-items:center}
+.multi .opt .mk{border-radius:5px}
+.opt[aria-pressed=true]{border-color:var(--sea);background:#EAF3F6}
+.opt[aria-pressed=true] .mk{background:var(--sea);border-color:var(--sea)}
+.opt[aria-pressed=true] .mk::after{content:"";width:6px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+.btn{border:0;border-radius:12px;padding:14px 22px;font-weight:600;background:var(--red);color:#fff;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:none;color:var(--muted);padding-left:0}
+.btn.tg{background:#2AABEE}.btn.max{background:linear-gradient(135deg,#4E5BFF,#A23CFF)}
+
+/* итог */
+.price{font-family:"Playfair Display";font-size:44px;font-weight:700;color:var(--sea-deep);margin:4px 0}
+.price small{font-family:"Golos Text";font-size:16px;font-weight:500;color:var(--muted)}
+.res-list{list-style:none;padding:0;margin:16px 0;display:grid;gap:8px}
+.res-list li{display:flex;gap:10px}
+.res-list b{min-width:92px;color:var(--muted);font-weight:500}
+.docs{background:var(--sand);border-radius:12px;padding:14px 16px;margin:14px 0 18px;font-size:15px}
+.docs ul{margin:6px 0 0;padding-left:20px}
+.cta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fade{animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* как работаем */
+section.how{padding:24px 0 64px}
+.sec-title{font-size:clamp(24px,3.4vw,34px);margin-bottom:28px;max-width:20ch}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+.step{background:#fff;border-radius:16px;padding:22px;border-top:4px solid var(--sea)}
+.step::before{counter-increment:s;content:counter(s);font-family:"Playfair Display";font-size:34px;color:var(--red);display:block;margin-bottom:6px}
+.step p{margin:0}
+.note{margin-top:18px;color:var(--muted);font-size:15px}
+
+/* услуги */
+section.services{background:#fff;padding:56px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.svc{border:1.5px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:center}
+.svc span{font-size:26px}
+.cities{margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.city{background:var(--sea);color:#fff;border-radius:99px;padding:8px 16px;font-size:15px}
+
+/* контакты */
+section.contact{background:var(--sea-deep);color:#fff;padding:56px 0}
+.contact .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center}
+.contact p{color:#CFE2EA;max-width:46ch}
+.contact .btns{display:grid;gap:10px}
+.contact .phone{font-size:20px;text-decoration:none;display:flex;gap:10px;align-items:center}
+footer{background:#052333;color:#8FA9B5;font-size:13px;padding:18px 0}
+
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;padding-top:32px;gap:28px}
+  .steps{grid-template-columns:1fr 1fr}
+  .grid{grid-template-columns:1fr 1fr}
+  .contact .wrap{grid-template-columns:1fr}
+  nav.menu{display:none}
+}
+@media (max-width:520px){
+  .steps,.grid,.cta{grid-template-columns:1fr}
+  .quiz{padding:20px}
+  .price{font-size:36px}
+  .top .wrap{justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#"><i>☾</i>ВНЖ в Турции</a>
+  <nav class="menu" aria-label="Услуги">
+    <a href="#services">ВНЖ для россиян</a><a href="#services">Счета и карты</a><a href="#services">Гражданство Турции</a><a href="#services">Жильё</a><a href="#services">Медицина</a>
+  </nav>
+  <div class="phones">
+    <a href="https://t.me/+79958881851"><span class="ico tg">TG</span>+7 (995) 888-18-51</a>
+    <a href="tel:+905468389033"><span class="ico max">M</span>+90 (546) 838-90-33</a>
+  </div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div>
+    <h1>Вид на жительство в Турции для граждан России и Беларуси</h1>
+    <p class="lead">Узнайте точную стоимость ВНЖ под ваши задачи за 45 секунд - ответьте на 3 вопроса.</p>
+    <ul class="facts">
+      <li>Оформление за 11 дней</li>
+      <li>Мерсин, Анталия, Алания, Стамбул</li>
+      <li>Нужны только загранпаспорт и фотографии</li>
+      <li>Работаем официально, по договору</li>
+    </ul>
+  </div>
+  <div class="quiz" id="quiz" aria-live="polite"></div>
+</div></section>
+
+<section class="how"><div class="wrap">
+  <h2 class="sec-title">Вам нужен только один визит</h2>
+  <div class="steps">
+    <div class="step"><p>Вы проходите тест и получаете точную стоимость и список документов</p></div>
+    <div class="step"><p>Заключаем договор - всё официально и безопасно</p></div>
+    <div class="step"><p>Мы сами готовим все документы и назначаем дату оформления</p></div>
+    <div class="step"><p>Когда всё готово - один ваш личный визит</p></div>
+  </div>
+</div></section>
+
+<section class="services" id="services"><div class="wrap">
+  <h2 class="sec-title">Чем ещё поможем в Турции</h2>
+  <div class="grid">
+    <div class="svc"><span>📄</span>Оформление ВНЖ</div>
+    <div class="svc"><span>🔄</span>Продление ВНЖ</div>
+    <div class="svc"><span>🏠</span>Помощь с арендой и покупкой жилья</div>
+    <div class="svc"><span>🇹🇷</span>Покупка недвижимости для гражданства</div>
+    <div class="svc"><span>🏥</span>Организация медицинской помощи</div>
+    <div class="svc"><span>💳</span>Открытие счетов и карт</div>
+    <div class="svc"><span>🚗</span>Получение водительского удостоверения</div>
+    <div class="svc"><span>✈️</span>Встреча и размещение</div>
+    <div class="svc"><span>🤝</span>Сопровождение на всех этапах</div>
+  </div>
+  <div class="cities"><b>Оформляем в городах:</b><span class="city">Мерсин</span><span class="city">Анталия</span><span class="city">Алания</span><span class="city">Стамбул</span></div>
+</div></section>
+
+<section class="contact"><div class="wrap">
+  <div>
+    <h2 class="sec-title">Есть вопросы?</h2>
+    <p>Пишите в Telegram или MAX, звоните или приезжайте в Мерсин на личную встречу и консультацию.</p>
+  </div>
+  <div class="btns">
+    <a class="phone" href="tel:+79958881851"><span class="ico tg">TG</span>+7 (995) 888-18-51</a>
+    <a class="phone" href="tel:+905468389033"><span class="ico max">M</span>+90 (546) 838-90-33</a>
+    <a class="btn tg" href="https://t.me/+79958881851">Написать в Telegram</a>
+    <a class="btn max" href="tel:+905468389033">Написать в MAX</a>
+  </div>
+</div></section>
+<footer><div class="wrap">Оформление ВНЖ в Турции для граждан РФ и РБ</div></footer>
+
+<script>
+/* ===== ВОПРОСЫ И ЦЕНЫ - меняются здесь ===== */
+const QUESTIONS = [
+  {title:'Какие у вас планы на переезд?', sub:'Можно выбрать несколько', multi:true, options:[
+    'Хочу второе гражданство','Намерен открыть бизнес','Планирую переезд','Позже хочу получить гражданство','Нужны счета, карты, связь','Нужно перемещаться по миру и без проблем получать визы']},
+  {title:'ВНЖ нужно для вас или для всех членов семьи?', sub:'От этого зависит стоимость', price:true, options:[
+    {t:'Только для меня', p:2000},{t:'Для меня и супруги (а)', p:4000},{t:'Для меня, супруги (а) и ребёнка', p:6000},{t:'Для меня, супруги (а) и двоих детей', p:8000}]},
+  {title:'Ранее получали ВНЖ?', sub:'Выберите один вариант', options:['Да, в Турции','Да, в ЕС','Да, в других странах','Нет']}
+];
+const RESULT = {term:'11 дней', cities:'Мерсин, Анталия, Алания, Стамбул', docs:['Загранпаспорт','Фотографии'], currency:'€',
+  tg:'https://t.me/+79958881851', max:'tel:+905468389033'};
+
+let step=0; const ans=QUESTIONS.map(q=>q.multi?[]:null);
+const box=document.getElementById('quiz');
+const label=o=>typeof o==='string'?o:o.t;
+
+function render(){
+  if(step>=QUESTIONS.length) return result();
+  const q=QUESTIONS[step], pct=Math.round(step/QUESTIONS.length*100);
+  box.innerHTML=`<div class="fade"><div class="qhead"><span>Вопрос ${step+1} из ${QUESTIONS.length}</span><span>${pct}%</span></div>
+  <div class="bar"><span style="width:${pct}%"></span></div>
+  <h2>${q.title}</h2><p class="sub">${q.sub}</p>
+  <div class="opts ${q.multi?'multi':''}">${q.options.map((o,i)=>{
+    const on=q.multi?ans[step].includes(i):ans[step]===i;
+    return `<button class="opt" aria-pressed="${on}" data-i="${i}"><span class="mk"></span>${label(o)}</button>`}).join('')}</div>
+  <div class="nav">${step?'<button class="btn ghost" id="back">Назад</button>':'<span></span>'}
+  <button class="btn" id="next" ${ok()?'':'disabled'}>${step===QUESTIONS.length-1?'Узнать стоимость':'Дальше'}</button></div></div>`;
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;
+    if(q.multi){const a=ans[step];a.includes(i)?a.splice(a.indexOf(i),1):a.push(i);render()}
+    else{ans[step]=i;render();setTimeout(()=>{step++;render()},250)}});
+  const n=document.getElementById('next'); n.onclick=()=>{step++;render()};
+  const bk=document.getElementById('back'); if(bk) bk.onclick=()=>{step--;render()};
+}
+function ok(){const a=ans[step];return Array.isArray(a)?a.length>0:a!==null}
+
+function result(){
+  const qi=QUESTIONS.findIndex(q=>q.price), o=QUESTIONS[qi].options[ans[qi]];
+  const goals=ans[0].map(i=>QUESTIONS[0].options[i]);
+  const msg=encodeURIComponent(`Здравствуйте! Прошёл тест на сайте. ВНЖ: ${o.t}. Цели: ${goals.join(', ')}. Стоимость по расчёту: ${o.p} ${RESULT.currency}`);
+  box.innerHTML=`<div class="fade"><div class="bar"><span style="width:100%"></span></div>
+  <p class="sub">Стоимость ВНЖ под ключ</p>
+  <div class="price">${o.p.toLocaleString('ru-RU')} ${RESULT.currency} <small>${o.t.toLowerCase()}</small></div>
+  <ul class="res-list"><li><b>Срок</b>${RESULT.term}</li><li><b>Города</b>${RESULT.cities}</li></ul>
+  <div class="docs"><b>Что нужно от вас:</b><ul>${RESULT.docs.map(d=>`<li>${d}</li>`).join('')}</ul></div>
+  <div class="cta"><a class="btn tg" href="${RESULT.tg}?text=${msg}">Написать в Telegram</a><a class="btn max" href="${RESULT.max}">Написать в MAX</a></div>
+  <div class="nav"><button class="btn ghost" id="again">Пройти заново</button></div></div>`;
+  document.getElementById('again').onclick=()=>{step=0;ans.forEach((a,i)=>ans[i]=QUESTIONS[i].multi?[]:null);render()};
+}
+render();
+</script>
+</body>
+</html>
