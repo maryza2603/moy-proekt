@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Шторы с логотипом - рулонные шторы с печатью для бизнеса</title>
+<meta name="description" content="Рулонные шторы с логотипом и полноцветной печатью для офисов, магазинов и кафе. Мгновенный расчёт цены.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#F5008B; --pink-d:#C8006F; --ink:#141418; --coal:#1E1E24; --paper:#FFFFFF; --mist:#F3F2F5; --line:#E2E0E6; --muted:#5E5C66;
+  --yellow:#FFD400; --cyan:#00AEEF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55;font-size:16px}
+h1,h2,h3,.cond{font-family:"Roboto Condensed",sans-serif;line-height:1.02}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:38px;height:38px;position:relative}
+.logo-mark i{position:absolute;inset:0;border:4px solid}
+.logo-mark i:nth-child(1){border-color:var(--cyan);transform:translate(-3px,-3px)}
+.logo-mark i:nth-child(2){border-color:var(--pink)}
+.logo-mark i:nth-child(3){border-color:var(--yellow);transform:translate(3px,3px)}
+.logo b{font-family:"Roboto Condensed";font-weight:900;font-size:21px;letter-spacing:-.01em;line-height:1}
+.logo small{display:block;font-size:12px;color:var(--muted);font-weight:500}
+.hd nav{display:flex;gap:26px;font-weight:500;font-size:15px}
+.hd nav a{text-decoration:none}
+.hd nav a:hover{color:var(--pink)}
+.phone{font-family:"Roboto Condensed";font-weight:700;font-size:18px;text-decoration:none;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:"Roboto Condensed";font-weight:800;font-size:17px;padding:15px 26px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;transition:background .15s}
+.btn-pink{background:var(--pink);color:#fff}
+.btn-pink:hover{background:var(--pink-d)}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn-ghost:hover{background:rgba(255,255,255,.2)}
+
+/* hero */
+.hero{background:var(--ink);color:#fff;overflow:hidden;position:relative}
+.hero-in{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:72px 20px 80px}
+.tag{display:inline-block;background:var(--pink);color:#fff;font-family:"Roboto Condensed";font-weight:700;font-size:14px;padding:5px 12px;border-radius:999px;margin-bottom:22px}
+.hero h1{font-size:clamp(46px,7vw,86px);font-weight:900;letter-spacing:-.015em;margin-bottom:24px}
+.hero h1 .dots{color:var(--pink)}
+.hero p.lead{font-size:18px;color:#CFCDD6;max-width:52ch;margin-bottom:32px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+.stars{display:flex;align-items:center;gap:10px;font-size:14px;color:#CFCDD6}
+.stars span{color:var(--yellow);letter-spacing:2px;font-size:17px}
+
+/* window scene */
+.scene{position:relative;aspect-ratio:1/1.02;max-width:500px;justify-self:end;width:100%}
+.win{position:absolute;inset:0;background:linear-gradient(160deg,#8EC5E8,#CDE7F5 55%,#E9F3E4);border:14px solid #2B2B33;border-radius:6px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.win:after{content:"";position:absolute;left:50%;top:0;bottom:0;width:12px;margin-left:-6px;background:#2B2B33}
+.hero-blind{position:absolute;left:0;right:0;top:0;height:0;background:#F7F6F2;z-index:2;display:flex;align-items:center;justify-content:center;animation:drop 1.6s cubic-bezier(.6,.05,.3,1) .3s forwards;box-shadow:0 6px 12px rgba(0,0,0,.18)}
+.hero-blind:after{content:"";position:absolute;left:0;right:0;bottom:0;height:14px;background:#2B2B33}
+.hero-blind .brand{font-family:"Roboto Condensed";font-weight:900;color:var(--ink);font-size:clamp(30px,4.6vw,52px);line-height:.95;text-align:center;opacity:0;animation:fade .5s ease 1.7s forwards}
+.hero-blind .brand em{font-style:normal;color:var(--pink);display:block;font-size:.5em;margin-top:8px}
+.roller{position:absolute;left:-8px;right:-8px;top:-8px;height:26px;background:#3A3A44;border-radius:13px;z-index:3}
+@keyframes drop{to{height:78%}}
+@keyframes fade{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.hero-blind{animation:none;height:78%}.hero-blind .brand{animation:none;opacity:1}}
+
+/* trust */
+.trust{background:var(--mist);border-bottom:1px solid var(--line)}
+.trust ul{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:26px 20px}
+.trust li{display:flex;gap:14px;align-items:flex-start}
+.trust b{font-family:"Roboto Condensed";font-size:19px;font-weight:800;display:block}
+.trust small{color:var(--muted);font-size:14px}
+.ic{flex:none;width:40px;height:40px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center}
+
+section{padding:88px 0}
+.sec-h{font-size:clamp(34px,4.6vw,54px);font-weight:900;letter-spacing:-.01em;margin-bottom:14px}
+.sec-p{color:var(--muted);font-size:17px;max-width:62ch;margin-bottom:40px}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:1.25fr .75fr;gap:36px;align-items:start}
+.step{border:1px solid var(--line);border-radius:14px;padding:26px;margin-bottom:18px;background:#fff}
+.step h3{font-size:24px;font-weight:800;display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.step h3 .n{width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:17px;flex:none}
+.step .hint{color:var(--muted);font-size:14px;margin:0 0 18px 44px}
+.sizes{display:grid;grid-template-columns:1fr 1fr 110px;gap:12px}
+label.f{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:6px}
+input[type=number]{width:100%;font:600 18px Inter;padding:12px 14px;border:1.5px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+input[type=number]:focus{border-color:var(--pink);outline:none}
+.err{color:#C4002F;font-size:13px;margin-top:8px;min-height:18px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.opts.two{grid-template-columns:repeat(2,1fr)}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0}
+.opt label{display:block;height:100%;border:1.5px solid var(--line);border-radius:10px;padding:16px;cursor:pointer;transition:border-color .15s}
+.opt label:hover{border-color:#B9B6C1}
+.opt input:checked+label{border-color:var(--pink);box-shadow:inset 0 0 0 1.5px var(--pink)}
+.opt input:focus-visible+label{outline:3px solid var(--cyan);outline-offset:2px}
+.sw{height:46px;border-radius:6px;margin-bottom:12px;border:1px solid var(--line)}
+.sw.dim{background:repeating-linear-gradient(90deg,#EDEBE4 0 3px,#F7F6F1 3px 6px)}
+.sw.block{background:#E4E2DC}
+.sw.screen{background:radial-gradient(#9C9A94 1px,transparent 1.4px) 0 0/5px 5px,#D8D6D0}
+.sw.logo{background:#F7F6F2;display:grid;place-items:center;font:900 15px "Roboto Condensed"}
+.sw.full{background:linear-gradient(120deg,var(--pink),#7B2FF7 50%,var(--cyan));color:#fff;display:grid;place-items:center;font:900 15px "Roboto Condensed"}
+.opt b{font-family:"Roboto Condensed";font-size:18px;font-weight:800;display:block}
+.opt small{display:block;color:var(--muted);font-size:13px;line-height:1.4;margin-top:4px}
+.opt .pr{display:block;margin-top:8px;font-weight:600;font-size:13px;color:var(--ink)}
+
+/* sticky estimate */
+.est{position:sticky;top:88px;background:var(--ink);color:#fff;border-radius:16px;padding:26px;overflow:hidden}
+.est h3{font-size:26px;font-weight:900;margin-bottom:18px}
+.prev{background:linear-gradient(160deg,#8EC5E8,#D8ECF6);border:8px solid #2B2B33;border-radius:4px;height:210px;position:relative;display:flex;justify-content:center;align-items:flex-start;padding:10px;margin-bottom:20px}
+.pblind{position:relative;background:#F7F6F2;transition:width .35s,height .35s,background .25s;display:grid;place-items:center;box-shadow:0 4px 10px rgba(0,0,0,.2);max-width:100%}
+.pblind:before{content:"";position:absolute;left:-5px;right:-5px;top:-7px;height:9px;border-radius:5px;background:#3A3A44}
+.pblind:after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:#2B2B33}
+.pblind span{font:900 15px "Roboto Condensed";text-align:center;line-height:1;padding:4px;color:var(--ink)}
+.pblind.full{background:linear-gradient(120deg,var(--pink),#7B2FF7 50%,var(--cyan))}
+.pblind.full span{color:#fff}
+.pblind.screen{background:radial-gradient(rgba(0,0,0,.25) 1px,transparent 1.4px) 0 0/4px 4px,rgba(236,234,228,.82)}
+.pblind.block{background:#ECEAE4}
+.lines{font-size:14px;color:#CFCDD6;border-top:1px solid #33333C;padding-top:14px}
+.lines div{display:flex;justify-content:space-between;gap:12px;padding:5px 0}
+.lines div b{color:#fff;font-weight:600;white-space:nowrap}
+.total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #33333C;margin-top:10px;padding-top:16px}
+.total span{font-family:"Roboto Condensed";font-weight:700;font-size:18px}
+.total output{font-family:"Roboto Condensed";font-weight:900;font-size:40px;color:#fff}
+.note{font-size:12px;color:#9C9AA6;margin:6px 0 18px}
+.est .btn{width:100%}
+.sent{display:none;margin-top:14px;background:#1F3A2A;color:#B8F0C8;padding:12px 14px;border-radius:8px;font-size:14px}
+
+/* how */
+.how{background:var(--mist)}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;counter-reset:s}
+.steps li{counter-increment:s;border-top:4px solid var(--ink);padding-top:18px}
+.steps li:before{content:counter(s);font:900 54px "Roboto Condensed";color:var(--pink);display:block;line-height:1;margin-bottom:10px}
+.steps b{font-family:"Roboto Condensed";font-size:22px;font-weight:800;display:block;margin-bottom:6px}
+.steps p{color:var(--muted);font-size:15px}
+
+/* sectors */
+.sectors{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:2px solid var(--line);border-radius:14px;overflow:hidden}
+.sectors div{background:#fff;padding:28px}
+.sectors b{font-family:"Roboto Condensed";font-size:24px;font-weight:800;display:block;margin-bottom:6px}
+.sectors p{color:var(--muted);font-size:15px}
+
+/* reviews */
+.revs{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:20px}
+.rev{background:var(--mist);border-radius:14px;padding:28px}
+.rev:first-child{background:var(--pink);color:#fff}
+.rev:first-child p{font-size:22px;font-family:"Roboto Condensed";font-weight:700;line-height:1.25}
+.rev .st{color:var(--yellow);letter-spacing:2px;margin-bottom:12px}
+.rev:not(:first-child) .st{color:#E0A800}
+.rev p{margin-bottom:18px}
+.rev small{display:block;font-weight:600}
+.rev small span{display:block;font-weight:400;opacity:.75}
+
+/* trade + cta */
+.trade{background:var(--ink);color:#fff}
+.trade-in{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.trade .sec-p{color:#CFCDD6}
+.trade ul{list-style:none}
+.trade li{padding:14px 0;border-bottom:1px solid #33333C;display:flex;gap:12px}
+.trade li:before{content:"";flex:none;width:10px;height:10px;margin-top:8px;background:var(--pink);border-radius:2px}
+footer{background:#0E0E11;color:#9C9AA6;padding:36px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media (max-width:960px){
+  .hd nav{display:none}
+  .hero-in{grid-template-columns:1fr;padding:48px 20px 56px}
+  .scene{justify-self:center;max-width:380px}
+  .calc{grid-template-columns:1fr}
+  .est{position:static}
+  .steps{grid-template-columns:1fr 1fr}
+  .sectors,.revs,.trade-in{grid-template-columns:1fr}
+  .trust ul{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .phone{display:none}
+  section{padding:60px 0}
+  .opts,.opts.two{grid-template-columns:1fr}
+  .sizes{grid-template-columns:1fr 1fr}
+  .sizes>div:last-child{grid-column:1/-1}
+  .steps{grid-template-columns:1fr}
+  .step{padding:20px}
+  .step .hint{margin-left:0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <a class="logo" href="#top" aria-label="Шторы с логотипом - на главную">
+      <span class="logo-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span><b>ЛОГОШТОРЫ</b><small>шторы с печатью для бизнеса</small></span>
+    </a>
+    <nav aria-label="Разделы">
+      <a href="#calc">Расчёт цены</a>
+      <a href="#how">Как мы работаем</a>
+      <a href="#sectors">Для кого</a>
+      <a href="#trade">Партнёрам</a>
+    </nav>
+    <a class="phone" href="tel:+70000000000">+7 (000) 000-00-00</a>
+    <a class="btn btn-pink" href="#calc">Рассчитать цену</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" style="padding:0">
+  <div class="wrap hero-in">
+    <div>
+      <span class="tag">Рулонные шторы для бизнеса</span>
+      <h1>Шторы с логотипом. Просто<span class="dots">.....</span></h1>
+      <p class="lead">Шьём рулонные шторы точно по размеру окна и печатаем на них ваш логотип или полноцветную картинку. Три вида ткани: обычная, блэкаут и сетка-скрин. Не знаете, какая нужна? Подскажем.</p>
+      <div class="hero-btns">
+        <a class="btn btn-pink" href="#calc">Узнать цену за минуту</a>
+        <a class="btn btn-ghost" href="#how">Как это работает</a>
+      </div>
+      <div class="stars"><span aria-hidden="true">★★★★★</span> Здесь будет ваш рейтинг и отзывы с Яндекс Карт</div>
+    </div>
+    <div class="scene" aria-hidden="true">
+      <div class="win">
+        <div class="roller"></div>
+        <div class="hero-blind"><div class="brand">ВАШ<br>ЛОГОТИП<em>здесь</em></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <ul class="wrap">
+    <li><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span><div><b>Образцы ткани бесплатно</b><small>Посмотрите и потрогайте, прежде чем выбрать</small></div></li>
+    <li><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg></span><div><b>Макет и замеры проверим</b><small>До запуска в производство, без доплаты</small></div></li>
+    <li><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Быстро</b><small>Считаем в днях, а не в неделях</small></div></li>
+  </ul>
+</div>
+
+<section id="calc">
+  <div class="wrap">
+    <h2 class="sec-h">Рассчитайте цену за минуту</h2>
+    <p class="sec-p">Не переживайте, если не уверены в размерах. Мы перепроверим замеры и цену до запуска, а наш дизайнер бесплатно подготовит логотип к печати.</p>
+
+    <div class="calc">
+      <form id="f" novalidate>
+        <div class="step">
+          <h3><span class="n">1</span>Размеры окна</h3>
+          <p class="hint">Ширина до 3000 мм. Высота - от верха рамы до подоконника.</p>
+          <div class="sizes">
+            <div><label class="f" for="w">Ширина, мм</label><input id="w" type="number" inputmode="numeric" min="300" max="3000" value="1200"></div>
+            <div><label class="f" for="h">Высота, мм</label><input id="h" type="number" inputmode="numeric" min="300" max="3500" value="1500"></div>
+            <div><label class="f" for="q">Штук</label><input id="q" type="number" inputmode="numeric" min="1" max="99" value="2"></div>
+          </div>
+          <div class="err" id="err" role="alert"></div>
+        </div>
+
+        <div class="step">
+          <h3><span class="n">2</span>Ткань</h3>
+          <p class="hint">Все ткани коммерческого класса, с огнезащитной пропиткой.</p>
+          <div class="opts" role="radiogroup">
+            <div class="opt"><input type="radio" name="fab" id="fd" value="dim" checked><label for="fd"><div class="sw dim"></div><b>Светорассеивающая</b><small>Убирает блики и пропускает дневной свет. Для печати с одной стороны.</small><span class="pr">3 200 ₽/м²</span></label></div>
+            <div class="opt"><input type="radio" name="fab" id="fb" value="block"><label for="fb"><div class="sw block"></div><b>Блэкаут</b><small>Не пропускает свет. Подходит для печати с двух сторон.</small><span class="pr">3 800 ₽/м²</span></label></div>
+            <div class="opt"><input type="radio" name="fab" id="fs" value="screen"><label for="fs"><div class="sw screen"></div><b>Скрин</b><small>Видно улицу, меньше жары и бликов на мониторах.</small><span class="pr">4 300 ₽/м²</span></label></div>
+          </div>
+        </div>
+
+        <div class="step">
+          <h3><span class="n">3</span>Печать</h3>
+          <p class="hint">Как ваш макет ляжет на штору.</p>
+          <div class="opts two" role="radiogroup">
+            <div class="opt"><input type="radio" name="pr" id="pl" value="logo" checked><label for="pl"><div class="sw logo">ЛОГО</div><b>Логотип на светлом фоне</b><small>Белый, кремовый или серый фон.</small><span class="pr" id="pl-est"></span></label></div>
+            <div class="opt"><input type="radio" name="pr" id="pf" value="full"><label for="pf"><div class="sw full">ФОТО</div><b>Полноцветная печать</b><small>Фон любого цвета или фото на всю штору.</small><span class="pr" id="pf-est"></span></label></div>
+          </div>
+        </div>
+      </form>
+
+      <aside class="est" aria-live="polite">
+        <h3>Ваш расчёт</h3>
+        <div class="prev" aria-hidden="true"><div class="pblind" id="pb"><span>ВАШ<br>ЛОГОТИП</span></div></div>
+        <div class="lines">
+          <div><span id="l-size">2 шторы 1200×1500 мм</span><b id="l-sub"></b></div>
+          <div><span id="l-opt">Светорассеивающая · логотип</span><b></b></div>
+          <div><span>Подготовка макета</span><b>бесплатно</b></div>
+          <div><span>Доставка по России</span><b id="l-del"></b></div>
+        </div>
+        <div class="total"><span>Итого</span><output id="tot">0 ₽</output></div>
+        <p class="note">Предварительная цена, включая НДС. Точную сумму подтвердим после проверки замеров.</p>
+        <button class="btn btn-pink" type="button" id="send">Отправить расчёт менеджеру</button>
+        <div class="sent" id="sent">Это демо: в рабочей версии расчёт уйдёт в заявку на почту и в CRM.</div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <h2 class="sec-h">Как это работает</h2>
+    <p class="sec-p">От заявки до шторы на окне - четыре шага. На каждом мы рядом.</p>
+    <ol class="steps">
+      <li><b>Расчёт</b><p>Посчитайте цену в калькуляторе или пришлите размеры - ответим в тот же день.</p></li>
+      <li><b>Образцы и макет</b><p>Отправим образцы ткани, дизайнер подготовит макет с вашим логотипом.</p></li>
+      <li><b>Проверка</b><p>Сверяем размеры и макет с вами. В производство - только после «да».</p></li>
+      <li><b>Изготовление</b><p>Шьём и печатаем, отправляем готовые шторы с креплениями.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="sectors">
+  <div class="wrap">
+    <h2 class="sec-h">Для кого мы делаем шторы</h2>
+    <p class="sec-p">Окна работают по-разному: где-то нужна реклама с улицы, где-то тень на мониторах. Расскажите задачу - подберём решение.</p>
+    <div class="sectors">
+      <div><b>Офисы</b><p>Фирменный стиль в переговорных и меньше бликов на экранах.</p></div>
+      <div><b>Магазины</b><p>Витрина, которая работает как вывеска даже в нерабочее время.</p></div>
+      <div><b>Кафе и рестораны</b><p>Тень для гостей у окна и ваш логотип с улицы.</p></div>
+      <div><b>Клиники</b><p>Приватность в кабинетах без тяжёлых занавесок.</p></div>
+      <div><b>Школы и вузы</b><p>Блэкаут для аудиторий с проектором.</p></div>
+      <div><b>Салоны и студии</b><p>Атмосфера бренда прямо на окне.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2 class="sec-h">Что говорят клиенты</h2>
+    <p class="sec-p">Примеры отзывов - в рабочей версии здесь будут ваши настоящие.</p>
+    <div class="revs">
+      <div class="rev"><div class="st" aria-label="5 звёзд">★★★★★</div><p>«Заказали шторы для магазина - теперь витрина видна с другой стороны улицы. Помогли с макетом, сделали за 10 дней».</p><small>Руслан<span>пекарня</span></small></div>
+      <div class="rev"><div class="st" aria-label="5 звёзд">★★★★★</div><p>«Быстро и качественно. Ответили на все вопросы ещё до оплаты».</p><small>Ирина<span>IT-компания</span></small></div>
+      <div class="rev"><div class="st" aria-label="5 звёзд">★★★★★</div><p>«Офис стал выглядеть совсем по-другому. Все спрашивают, где заказывали».</p><small>Олег<span>зарядные станции</span></small></div>
+    </div>
+  </div>
+</section>
+
+<section class="trade" id="trade">
+  <div class="wrap trade-in">
+    <div>
+      <h2 class="sec-h">Работайте с нами как партнёр</h2>
+      <p class="sec-p">Делаем шторы для рекламных агентств, студий вывесок и оформителей. Вы общаетесь с клиентом - мы помогаем с замерами, макетом и производством без нашего логотипа.</p>
+      <a class="btn btn-pink" href="#calc">Стать партнёром</a>
+    </div>
+    <ul>
+      <li>Партнёрские цены от первого заказа</li>
+      <li>Бесплатные пробные макеты для ваших клиентов</li>
+      <li>Отправка напрямую клиенту, без нашего бренда</li>
+      <li>Персональный менеджер</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© ЛогоШторы. Демо-версия сайта на русском языке.</span><span>Цены в калькуляторе условные</span></div>
+</footer>
+
+<script>
+const RATE={dim:3200,block:3800,screen:4300}, NAME={dim:'Светорассеивающая',block:'Блэкаут',screen:'Скрин'};
+const FULL=1.35, MIN_AREA=1, DEL=990, FREE_DEL=30000;
+const $=id=>document.getElementById(id), fmt=n=>Math.round(n).toLocaleString('ru-RU')+' ₽';
+const plural=(n,a,b,c)=>{n=Math.abs(n)%100;const m=n%10;return n>10&&n<20?c:m>1&&m<5?b:m==1?a:c};
+function price(w,h,q,fab,pr){const area=Math.max(w*h/1e6,MIN_AREA);return area*RATE[fab]*(pr==='full'?FULL:1)*q}
+function calc(){
+  const w=+$('w').value,h=+$('h').value,q=+$('q').value;
+  const fab=document.querySelector('[name=fab]:checked').value, pr=document.querySelector('[name=pr]:checked').value;
+  let e='';
+  if(!w||w<300||w>3000) e='Ширина - от 300 до 3000 мм. Для окон шире разделим на две шторы.';
+  else if(!h||h<300||h>3500) e='Высота - от 300 до 3500 мм.';
+  else if(!q||q<1) e='Укажите количество, хотя бы 1 штуку.';
+  $('err').textContent=e;
+  if(e){$('tot').textContent='-';return}
+  const sub=price(w,h,q,fab,pr), del=sub>=FREE_DEL?0:DEL;
+  $('pl-est').textContent='≈ '+fmt(price(w,h,q,fab,'logo'));
+  $('pf-est').textContent='≈ '+fmt(price(w,h,q,fab,'full'));
+  $('l-size').textContent=q+' '+plural(q,'штора','шторы','штор')+' '+w+'×'+h+' мм';
+  $('l-sub').textContent=fmt(sub);
+  $('l-opt').textContent=NAME[fab]+' · '+(pr==='full'?'полноцветная печать':'логотип');
+  $('l-del').textContent=del?fmt(del):'бесплатно';
+  $('tot').textContent=fmt(sub+del);
+  // превью: масштаб под окно 3000×3500
+  const pb=$('pb'), box=pb.parentElement, bw=box.clientWidth-20, bh=box.clientHeight-20;
+  const s=Math.min(bw/3000,bh/3500);
+  pb.style.width=Math.max(w*s,40)+'px'; pb.style.height=Math.max(h*s,30)+'px';
+  pb.className='pblind '+(pr==='full'?'full':fab==='dim'?'':fab);
+}
+document.getElementById('f').addEventListener('input',calc);
+window.addEventListener('resize',calc);
+$('send').addEventListener('click',()=>{$('sent').style.display='block'});
+calc();
+</script>
+</body>
+</html>
