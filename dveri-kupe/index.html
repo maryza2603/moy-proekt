@@ -129,6 +129,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .float{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;flex-direction:column;gap:10px}
 .float a{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.5);font-size:22px;color:#fff}
 .float svg{width:26px;height:26px;fill:#fff}
+.msg .btn svg{width:20px;height:20px;fill:currentColor;flex:none}
+.av{background:#fff;color:#111}
+.ph2 svg{fill:#111}
 /* modal */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;place-items:center;z-index:90;padding:16px}
 .modal.on{display:grid}
@@ -255,11 +258,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <h2>Напишите нам - ответим за 15 минут</h2>
   <p class="sub">Пришлите размеры или фото ниши - сразу назовём ориентировочную цену.</p>
   <div class="msg">
-    <a class="btn wa" href="https://wa.me/79000000000" target="_blank">WhatsApp</a>
-    <a class="btn tg" href="https://t.me/username" target="_blank">Telegram</a>
-    <a class="btn mx" href="#" onclick="alert('Здесь будет ссылка на ваш MAX');return false">MAX</a>
-    <a class="btn ph2" href="tel:+79000000000">Позвонить</a>
-    <a class="btn btn-line" href="https://www.avito.ru/user/fa104da6f8535de171ea667e6d22974b/profile" target="_blank" rel="noopener">Мы на Авито</a>
+    <a class="btn wa" href="https://wa.me/79000000000" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg>WhatsApp</a>
+    <a class="btn tg" href="https://t.me/username" target="_blank"><svg viewBox="0 0 24 24"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.5 13.2l-4.7-1.5c-1-.3-1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3z"/></svg>Telegram</a>
+    <a class="btn mx" href="#" onclick="alert('Здесь будет ссылка на ваш MAX');return false"><svg viewBox="0 0 24 24"><path d="M12 2.5c-5.4 0-9.5 3.9-9.5 9 0 2.3.8 4.4 2.2 6l-.9 3.6c-.1.4.3.7.7.5l3.8-1.6c1.1.4 2.4.6 3.7.6 5.4 0 9.5-3.9 9.5-9s-4.1-9.1-9.5-9.1zm4.6 12.4h-1.8V10l-2.1 3.6h-1.3L9.3 10v4.9H7.5V7.6h1.7l2.8 4.7 2.8-4.7h1.8v7.3z"/></svg>MAX</a>
+    <a class="btn ph2" href="tel:+79000000000"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>Позвонить</a>
+    <a class="btn av" href="https://www.avito.ru/user/fa104da6f8535de171ea667e6d22974b/profile" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="15.5" cy="15.5" r="6.5" fill="#00aaff"/><circle cx="6.5" cy="16.5" r="4" fill="#97cf26"/><circle cx="16" cy="6" r="3.2" fill="#ff6163"/><circle cx="7" cy="8" r="2.3" fill="#a169f7"/></svg>Мы на Авито</a>
   </div>
 </div></section>
 
@@ -268,7 +271,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <div class="float">
   <a href="https://wa.me/79000000000" target="_blank" class="wa" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg></a>
   <a href="https://t.me/username" target="_blank" class="tg" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.5 13.2l-4.7-1.5c-1-.3-1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3z"/></svg></a>
-  <a href="tel:+79000000000" class="ph2" aria-label="Позвонить" style="color:#111">📞</a>
+  <a href="#" onclick="alert('Здесь будет ссылка на ваш MAX');return false" class="mx" aria-label="MAX"><svg viewBox="0 0 24 24"><path d="M12 2.5c-5.4 0-9.5 3.9-9.5 9 0 2.3.8 4.4 2.2 6l-.9 3.6c-.1.4.3.7.7.5l3.8-1.6c1.1.4 2.4.6 3.7.6 5.4 0 9.5-3.9 9.5-9s-4.1-9.1-9.5-9.1zm4.6 12.4h-1.8V10l-2.1 3.6h-1.3L9.3 10v4.9H7.5V7.6h1.7l2.8 4.7 2.8-4.7h1.8v7.3z"/></svg></a>
+  <a href="https://www.avito.ru/user/fa104da6f8535de171ea667e6d22974b/profile" target="_blank" rel="noopener" class="av" aria-label="Авито"><svg viewBox="0 0 24 24"><circle cx="15.5" cy="15.5" r="6.5" fill="#00aaff"/><circle cx="6.5" cy="16.5" r="4" fill="#97cf26"/><circle cx="16" cy="6" r="3.2" fill="#ff6163"/><circle cx="7" cy="8" r="2.3" fill="#a169f7"/></svg></a>
+  <a href="tel:+79000000000" class="ph2" aria-label="Позвонить"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></a>
 </div>
 
 <div class="modal" id="modal" onclick="this.classList.remove('on')"><div><div class="ph" id="mph"></div><p id="mcap"></p></div></div>
