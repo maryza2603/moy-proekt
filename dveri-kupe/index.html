@@ -150,7 +150,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .modal img{max-width:min(900px,100%);max-height:80vh;display:block;margin:0 auto;border-radius:10px}
 .modal p{text-align:center;margin-top:12px}
 .demo{background:var(--gold);color:#111;text-align:center;font-size:13px;padding:6px 16px;font-weight:500}
-span.nw{white-space:nowrap;font:inherit!important;color:inherit!important;letter-spacing:inherit!important;text-transform:inherit!important;display:inline!important;margin:0!important;padding:0!important;opacity:1!important}</style>
+span.nw{white-space:nowrap;font:inherit!important;color:inherit!important;letter-spacing:inherit!important;text-transform:inherit!important;display:inline!important;margin:0!important;padding:0!important;opacity:1!important}#toTop{position:fixed;left:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:rgba(15,13,10,.85);color:var(--gold);display:grid;place-items:center;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:.3s}#toTop.on{opacity:1;pointer-events:auto;transform:none}#toTop:hover{background:var(--gold);color:#111}#toTop svg{width:22px;height:22px}</style>
 </head>
 <body>
 <header><div class="wrap hd">
@@ -354,5 +354,5 @@ function renderGal(f){$('gal').innerHTML=works.map((x,i)=>[x,i]).filter(([x])=>f
 $('gf').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('gf').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderGal(b.dataset.v)});
 renderGal('all');
 </script>
-</body>
+<button id="toTop" aria-label="Наверх" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button><script>addEventListener("scroll",function(){document.getElementById("toTop").classList.toggle("on",scrollY>600)},{passive:true})</script></body>
 </html>
