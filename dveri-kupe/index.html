@@ -43,9 +43,10 @@ nav a:hover{color:var(--gold)}
 .facts{display:flex;gap:32px;margin-top:40px;flex-wrap:wrap}
 .facts b{display:block;font-family:"Cormorant Garamond",serif;font-size:34px;color:var(--gold)}
 .facts span{font-size:13px;color:var(--muted)}
-.door-vis{aspect-ratio:4/5;border-radius:6px;border:10px solid #3a3a3a;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:#3a3a3a;box-shadow:0 30px 60px rgba(0,0,0,.6)}
+.door-vis{aspect-ratio:4/5;overflow:hidden;border-radius:6px;border:10px solid #3a3a3a;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:#3a3a3a;box-shadow:0 30px 60px rgba(0,0,0,.6)}
 .door-vis div{border-radius:2px}
-@media(max-width:820px){.hero-g{grid-template-columns:1fr}.door-vis{width:100%;max-width:360px;margin:0 auto}}
+.hero-ph{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px;box-shadow:0 30px 60px rgba(0,0,0,.6);border:1px solid var(--line)}
+@media(max-width:820px){.hero-g{grid-template-columns:1fr}.hero-ph{max-width:420px;margin:0 auto;display:block}}
 /* fillings */
 .f-mirror{background:linear-gradient(115deg,#8d99a3,#dfe6ea 35%,#9aa6ae 50%,#e9eef1 70%,#8f9ba4)}
 .f-wood{background:repeating-linear-gradient(92deg,#7a5534 0 7px,#8a6240 7px 11px,#6d4a2c 11px 19px)}
@@ -64,8 +65,7 @@ nav a:hover{color:var(--gold)}
 /* services */
 .srv{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .srv article{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.srv .pic{height:220px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:18px;background:#262626}
-.srv .pic.w{grid-template-columns:1fr 1fr 1fr 1fr}
+.srv .pic{height:260px;width:100%;object-fit:cover;display:block;background:#262626}
 .srv .in{padding:24px}
 .srv h3{font-size:28px;margin-bottom:8px}
 .srv p{color:var(--muted);font-size:15px;margin-bottom:16px}
@@ -97,8 +97,8 @@ input[type=number]:focus{outline:1px solid var(--gold)}
 @media(max-width:860px){.cg{grid-template-columns:1fr}}
 /* gallery */
 .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.gal figure{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer}
-.gal .ph{height:240px;display:grid;gap:4px;padding:14px;background:#2a2a2a;transition:.3s}
+.gal figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer}
+.gal .ph{height:300px;width:100%;object-fit:cover;display:block;background:#2a2a2a;transition:.3s}
 .gal figure:hover .ph{transform:scale(1.03)}
 .gal figcaption{padding:14px 18px;font-size:14px}
 .gal figcaption span{display:block;color:var(--muted);font-size:13px}
@@ -136,13 +136,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 /* modal */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;place-items:center;z-index:90;padding:16px}
 .modal.on{display:grid}
-.modal .ph{width:min(520px,100%);height:min(620px,80vh);display:grid;gap:5px;padding:18px;background:#2a2a2a;border-radius:10px}
+.modal img{max-width:min(900px,100%);max-height:80vh;display:block;margin:0 auto;border-radius:10px}
 .modal p{text-align:center;margin-top:12px}
 .demo{background:var(--gold);color:#111;text-align:center;font-size:13px;padding:6px 16px;font-weight:500}
 </style>
 </head>
 <body>
-<div class="demo">Демо-версия сайта. Цены, фото и отзывы - примеры, заменим на ваши</div>
 <header><div class="wrap hd">
   <a href="#" class="logo"><i></i><div><b>МУР-Мебель</b><small>двери и шкафы-купе</small></div></a>
   <nav><a href="#services">Услуги</a><a href="#calc">Калькулятор</a><a href="#works">Работы</a><a href="#reviews">Отзывы</a><a href="#contacts">Контакты</a></nav>
@@ -157,7 +156,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="btns"><a href="#calc" class="btn btn-gold">Рассчитать стоимость</a><a href="#works" class="btn btn-line">Смотреть работы</a></div>
     <div class="facts"><div><b>от 3 дней</b><span>срок изготовления</span></div><div><b>Сочи-Адлер</b><span>замер и монтаж</span></div><div><b>2 года</b><span>гарантия</span></div></div>
   </div>
-  <div class="door-vis"><div class="f-mirror"></div><div class="f-wood"></div><div class="f-mirror"></div></div>
+  <img class="hero-ph" src="img/white2.jpg" alt="Зеркальный шкаф-купе в белом профиле - работа МУР-Мебель" width="1050" height="1400">
 </div></section>
 
 <section><div class="wrap">
@@ -175,9 +174,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <h2>Что мы делаем</h2>
   <p class="sub">Можно заказать только двери в готовую нишу - или шкаф целиком с наполнением.</p>
   <div class="srv">
-    <article><div class="pic"><div class="f-mirror"></div><div class="f-graphite"></div><div class="f-mirror"></div></div>
+    <article><img class="pic" src="img/stone.jpg" alt="Зеркальные двери-купе в прихожей" loading="lazy">
       <div class="in"><h3>Двери-купе</h3><p>В нишу, гардеробную, как межкомнатная перегородка. Подберём профиль и наполнение под интерьер.</p><div class="price">от 9 000 ₽ за м²</div></div></article>
-    <article><div class="pic w"><div class="f-wood"></div><div class="f-white"></div><div class="f-white"></div><div class="f-wood"></div></div>
+    <article><img class="pic" src="img/inside.jpg" alt="Внутреннее наполнение шкафа-купе" loading="lazy">
       <div class="in"><h3>Шкафы-купе на заказ</h3><p>Корпус, полки, штанги, ящики - спроектируем внутреннее наполнение под ваши вещи.</p><div class="price">от 18 000 ₽ за погонный метр</div></div></article>
   </div>
 </div></section>
@@ -229,7 +228,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <section id="works"><div class="wrap">
   <h2>Наши работы</h2>
-  <p class="sub">Здесь будут ваши фото. Галерею можно пополнять самостоятельно.</p>
+  <p class="sub">Фото наших установленных дверей и шкафов. Нажмите на фото, чтобы увеличить.</p>
   <div class="chips filt" id="gf"><button class="on" data-v="all">Все</button><button data-v="doors">Двери-купе</button><button data-v="wardrobe">Шкафы-купе</button></div>
   <div class="gal" id="gal"></div>
 </div></section>
@@ -277,7 +276,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <a href="tel:+79384622242" class="ph2" aria-label="Позвонить"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></a>
 </div>
 
-<div class="modal" id="modal" onclick="this.classList.remove('on')"><div><div class="ph" id="mph"></div><p id="mcap"></p></div></div>
+<div class="modal" id="modal" onclick="this.classList.remove('on')"><div><img id="mph" alt=""><p id="mcap"></p></div></div>
 
 <script>
 const $=id=>document.getElementById(id);
@@ -317,14 +316,14 @@ function calc(){
 }
 calc();
 const works=[
- ['doors','Двери-купе в спальню','Зеркало + серебро, Сочи',['mirror','mirror','mirror']],
- ['wardrobe','Шкаф в прихожую','ЛДСП дуб, Адлер',['wood','white','wood','white']],
- ['doors','Перегородка в гардеробную','Лакобель чёрный, Хоста',['lacobel','lacobel']],
- ['wardrobe','Шкаф под потолок','Графит + зеркало, Дагомыс',['graphite','mirror','graphite']],
- ['doors','Двери в нишу','Графит, Сочи',['graphite','graphite','graphite']],
- ['wardrobe','Шкаф в детскую','Белый ЛДСП, Мацеста',['white','white','white','white']]];
-function renderGal(f){$('gal').innerHTML=works.filter(x=>f=='all'||x[0]==f).map((x)=>`<figure data-i="${works.indexOf(x)}"><div class="ph" style="grid-template-columns:repeat(${x[3].length},1fr)">${x[3].map(c=>`<div class="f-${c}"></div>`).join('')}</div><figcaption>${x[1]}<span>${x[2]}</span></figcaption></figure>`).join('');
- $('gal').querySelectorAll('figure').forEach(fg=>fg.onclick=()=>{const x=works[fg.dataset.i];$('mph').style.gridTemplateColumns=`repeat(${x[3].length},1fr)`;$('mph').innerHTML=x[3].map(c=>`<div class="f-${c}"></div>`).join('');$('mcap').textContent=x[1]+' - '+x[2];$('modal').classList.add('on')})}
+ ['doors','white2','Зеркальный шкаф-купе','Белый профиль, двери до потолка'],
+ ['doors','stone','Двери-купе в прихожую','Зеркало, серебристый профиль'],
+ ['doors','black','Двери-купе в нишу','Зеркало, чёрный профиль'],
+ ['wardrobe','beige','Шкаф-купе в спальню','Три двери: комбинированные и зеркало'],
+ ['doors','white1','Зеркальные двери-купе','Белый профиль'],
+ ['wardrobe','inside','Наполнение шкафа-купе','Штанга, полки, выдвижные ящики']];
+function renderGal(f){$('gal').innerHTML=works.map((x,i)=>[x,i]).filter(([x])=>f=='all'||x[0]==f).map(([x,i])=>`<figure data-i="${i}"><img class="ph" src="img/${x[1]}.jpg" alt="${x[2]}" loading="lazy"><figcaption>${x[2]}<span>${x[3]}</span></figcaption></figure>`).join('');
+ $('gal').querySelectorAll('figure').forEach(fg=>fg.onclick=()=>{const x=works[fg.dataset.i];$('mph').src='img/'+x[1]+'.jpg';$('mph').alt=x[2];$('mcap').textContent=x[2]+' - '+x[3];$('modal').classList.add('on')})}
 $('gf').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('gf').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderGal(b.dataset.v)});
 renderGal('all');
 </script>
