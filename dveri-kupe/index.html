@@ -92,6 +92,7 @@ input[type=number]:focus{outline:1px solid var(--gold)}
 .lines{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-bottom:20px}
 .lines div{display:flex;justify-content:space-between;gap:10px;padding:3px 0}
 .send{display:grid;gap:10px}
+.send .btn{justify-content:center}
 .note{font-size:12px;color:var(--muted);margin-top:14px}
 @media(max-width:860px){.cg{grid-template-columns:1fr}}
 /* gallery */
@@ -129,7 +130,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .float{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;flex-direction:column;gap:10px}
 .float a{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.5);font-size:22px;color:#fff}
 .float svg{width:26px;height:26px;fill:#fff}
-.msg .btn svg{width:20px;height:20px;fill:currentColor;flex:none}
+.msg .btn svg,.send .btn svg{width:20px;height:20px;fill:currentColor;flex:none}
 .av{background:#fff;color:#111}
 .ph2 svg{fill:#111}
 /* modal */
@@ -218,8 +219,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <b id="sum">0 ₽</b>
       <div class="lines" id="lines"></div>
       <div class="send">
-        <a class="btn wa" id="sendWa" target="_blank">Отправить расчёт в WhatsApp</a>
-        <a class="btn tg" id="sendTg" target="_blank">Отправить в Telegram</a>
+        <a class="btn wa" id="sendWa" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg>Отправить расчёт в WhatsApp</a>
+        <a class="btn tg" id="sendTg" target="_blank"><svg viewBox="0 0 24 24"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.5 13.2l-4.7-1.5c-1-.3-1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3z"/></svg>Отправить в Telegram</a>
       </div>
       <p class="note">Замер: 1000 ₽ по Сочи, 1500 ₽ Адлер. Точную сумму назовём после замера.</p>
     </div>
