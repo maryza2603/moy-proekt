@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Граница - демо фирменного стиля</title>
+<meta name="description" content="Демо фирменного стиля для компании в сфере кадастрового учета и управления имуществом: графика, узоры, сайт, визитка, бейдж, буклет, вывеска.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--g9:#16181B;--g8:#23272C;--g7:#343A41;--g5:#6B727A;--g3:#B9BEC4;--g2:#DCDFE2;--g1:#F1F2F3;--red:#7A1424;--red-l:#9A1B30;--white:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--g1);color:var(--g9);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+section{padding:72px 0}
+.tag{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:12px}
+h2{font-size:clamp(28px,3.6vw,40px);font-weight:600;line-height:1.15;margin-bottom:12px;max-width:22ch}
+.lead{color:var(--g5);max-width:62ch;margin-bottom:36px}
+.grad{background:linear-gradient(135deg,var(--g9),var(--g7))}
+.sh{position:absolute;pointer-events:none}
+.red{background:linear-gradient(135deg,#9A1B30,#5A0E1A)}
+.ol{border:1.5px solid rgba(255,255,255,.16)}
+/* hero */
+.hero{position:relative;color:#fff;background:linear-gradient(135deg,var(--g9) 0%,var(--g7) 100%);overflow:hidden;padding:0}
+.hero svg.bgp{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
+.hero .in{position:relative;padding:28px 24px 96px}
+nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:96px;gap:16px;flex-wrap:wrap}
+nav ul{display:flex;gap:28px;list-style:none;font-size:14px;color:var(--g3)}
+.logo{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.14em;font-size:15px}
+.logo svg{width:34px;height:34px}
+.hero h1{font-size:clamp(34px,5.4vw,60px);line-height:1.08;font-weight:600;max-width:17ch;margin-bottom:20px}
+.hero p{color:var(--g3);max-width:52ch;font-size:18px;margin-bottom:32px}
+.btn{display:inline-block;background:var(--red);color:#fff;padding:15px 30px;font-weight:600;font-size:15px;text-decoration:none;border-radius:0}
+.btn.o{background:transparent;border:1px solid var(--g5);margin-left:12px}
+.stats{display:flex;gap:48px;margin-top:64px;flex-wrap:wrap}
+.stats b{display:block;font-size:34px;font-weight:600}
+.stats span{font-size:13px;color:var(--g3)}
+/* palette */
+.pal{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0}
+.pal div{height:150px;padding:14px;font-size:12px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff}
+.pal div.lt{color:var(--g9)}
+.pal b{font-size:14px}
+/* patterns */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.pgrid figure{position:relative;overflow:hidden}
+.pgrid figure svg{width:100%;height:220px;display:block}
+.pgrid figcaption{font-size:13px;color:var(--g5);margin-top:8px}
+/* items */
+.items{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start}
+.card-biz{grid-column:span 6}
+.badge{grid-column:span 3}
+.booklet{grid-column:span 3}
+.sign{grid-column:span 12}
+@media(max-width:860px){.card-biz,.badge,.booklet{grid-column:span 12}.hero nav ul{display:none}}
+.cap{font-size:13px;color:var(--g5);margin-top:10px}
+.bc{aspect-ratio:90/50;position:relative;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.18);color:#fff}
+.bc.front{background:linear-gradient(135deg,var(--g9),var(--g7));padding:7% 7%}
+.bc.back{background:#fff;color:var(--g9);margin-top:16px;padding:7%}
+.bc svg.p{position:absolute;right:0;top:0;height:100%;width:50%;opacity:.8}
+.bc .nm{font-weight:700;letter-spacing:.14em;font-size:clamp(13px,1.8vw,19px);position:relative}
+.bc .sl{position:absolute;left:7%;bottom:8%;font-size:clamp(9px,1vw,11px);color:var(--g3);letter-spacing:.06em}
+.bc.back b{display:block;font-size:clamp(13px,1.6vw,17px)}
+.bc.back span{font-size:clamp(10px,1.1vw,12px);color:var(--g5);display:block}
+.bc.back .ln{width:34px;height:3px;background:var(--red);margin:10px 0}
+.bc.back p{font-size:clamp(10px,1.1vw,12px);line-height:1.8;margin-top:12px}
+.bdg{aspect-ratio:3/4.2;background:#fff;box-shadow:0 12px 30px rgba(0,0,0,.18);position:relative;overflow:hidden;text-align:center}
+.bdg .top{height:34%;background:linear-gradient(135deg,var(--g9),var(--g7));position:relative}
+.bdg .top svg{position:absolute;inset:0;width:100%;height:100%;opacity:.7}
+.bdg .slot{width:30px;height:7px;border-radius:4px;background:var(--g1);position:absolute;left:50%;top:12px;transform:translateX(-50%);z-index:2}
+.bdg .ph{width:42%;aspect-ratio:1;background:var(--g2);margin:-22% auto 0;position:relative;border:4px solid #fff}
+.bdg h4{font-size:clamp(14px,1.8vw,19px);margin-top:14px}
+.bdg p{font-size:12px;color:var(--g5)}
+.bdg .st{position:absolute;left:0;right:0;bottom:0;background:var(--red);color:#fff;padding:9px;font-size:12px;letter-spacing:.2em;font-weight:600}
+.bk{aspect-ratio:210/297;box-shadow:0 12px 30px rgba(0,0,0,.18);position:relative;overflow:hidden;color:#fff;background:linear-gradient(160deg,var(--g9),var(--g7))}
+.bk svg{position:absolute;inset:0;width:100%;height:100%}
+.bk .t{position:absolute;left:9%;right:9%;bottom:9%}
+.bk small{font-size:10px;letter-spacing:.2em;color:var(--g3)}
+.bk h4{font-size:clamp(17px,2.2vw,24px);font-weight:600;line-height:1.15;margin:8px 0 12px}
+.bk i{display:block;width:34px;height:3px;background:var(--red-l)}
+.sg{background:var(--g9);padding:48px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;position:relative;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.sg svg.bgp{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.sg .l{display:flex;align-items:center;gap:20px;position:relative;color:#fff}
+.sg .l svg{width:72px;height:72px}
+.sg .l b{font-size:clamp(24px,4vw,44px);letter-spacing:.16em;display:block}
+.sg .l span{font-size:clamp(12px,1.5vw,16px);color:var(--g3);letter-spacing:.08em}
+.sg .r{position:relative;background:var(--red);color:#fff;padding:14px 26px;font-weight:600;letter-spacing:.06em;font-size:clamp(13px,1.6vw,17px)}
+/* services */
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--g2);border:1px solid var(--g2)}
+.svc div{background:#fff;padding:28px}
+.svc svg{width:44px;height:44px;margin-bottom:16px}
+.svc h3{font-size:18px;margin-bottom:6px}
+.svc p{font-size:14px;color:var(--g5)}
+footer{background:var(--g9);color:var(--g3);padding:32px 0;font-size:13px}
+</style>
+</head>
+<body>
+
+<!-- общие SVG-узоры -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <!-- сетка участков -->
+  <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#fff" stroke-opacity=".10" stroke-width="1"/></pattern>
+  <!-- диагональные границы -->
+  <pattern id="diag" width="32" height="32" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V32" stroke="#fff" stroke-opacity=".12" stroke-width="1"/></pattern>
+  <!-- точки межевых знаков -->
+  <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><rect x="19" y="19" width="3" height="3" fill="#fff" fill-opacity=".25"/><path d="M0 20H40M20 0V40" stroke="#fff" stroke-opacity=".06"/></pattern>
+  <linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16181B"/><stop offset="1" stop-color="#343A41"/></linearGradient>
+  <linearGradient id="gred" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9A1B30"/><stop offset="1" stop-color="#5A0E1A"/></linearGradient>
+  <!-- знак: участок с отсеченным углом -->
+  <symbol id="mark" viewBox="0 0 40 40"><path d="M4 4H28L36 12V36H4Z" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M4 22H22V36" fill="none" stroke="#9A1B30" stroke-width="2.5"/><rect x="26" y="26" width="6" height="6" fill="#9A1B30"/></symbol>
+</defs>
+</svg>
+
+<!-- HERO / сайт -->
+<header class="hero">
+  <svg class="bgp" aria-hidden="true"><rect width="100%" height="100%" fill="url(#grid)"/></svg>
+  <div class="sh red" style="right:0;bottom:0;width:32%;height:45%;clip-path:polygon(56% 0,100% 55%,100% 100%,0 100%);opacity:.55"></div>
+  <div class="sh ol" style="left:78%;top:48%;width:12%;height:26%"></div>
+  <div class="sh ol" style="left:60%;top:0;width:40%;height:55%;clip-path:polygon(0 0,100% 0,100% 100%,55% 100%)"></div>
+  <div class="wrap in">
+    <nav>
+      <div class="logo"><svg><use href="#mark"/></svg>ГРАНИЦА</div>
+      <ul><li>Услуги</li><li>О компании</li><li>Мероприятия</li><li>Контакты</li></ul>
+    </nav>
+    <h1>Кадастровый учет и управление имуществом</h1>
+    <p>Для бизнеса и государственных учреждений. Оформляем, ставим на учет и ведем имущество так, чтобы к вам не было вопросов.</p>
+    <a class="btn" href="#">Получить консультацию</a><a class="btn o" href="#">Ближайший семинар</a>
+    <div class="stats"><div><b>15 лет</b><span>на рынке</span></div><div><b>1 200+</b><span>объектов на учете</span></div><div><b>0</b><span>отказов в регистрации по нашей вине</span></div></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="tag">Услуги</div>
+    <h2>Что мы делаем для вашей недвижимости</h2>
+    <p class="lead">Блоки на сайте строятся на одной сетке и одних иконках. Это значит, что любую новую страницу можно добавить без нового дизайна.</p>
+    <div class="svc">
+      <div><svg viewBox="0 0 40 40" fill="none" stroke="#7A1424" stroke-width="2"><path d="M4 4H28L36 12V36H4Z"/><path d="M4 22H22V36"/></svg><h3>Кадастровый учет</h3><p>Постановка на учет, уточнение границ, технические планы.</p></div>
+      <div><svg viewBox="0 0 40 40" fill="none" stroke="#7A1424" stroke-width="2"><rect x="4" y="4" width="14" height="14"/><rect x="22" y="4" width="14" height="14"/><rect x="4" y="22" width="14" height="14"/><path d="M22 22H36V36H22Z" fill="#7A1424" stroke="none"/></svg><h3>Управление имуществом</h3><p>Реестр объектов, аренда, учет и сопровождение сделок.</p></div>
+      <div><svg viewBox="0 0 40 40" fill="none" stroke="#7A1424" stroke-width="2"><path d="M6 34V6H34"/><path d="M6 34L34 6"/><circle cx="20" cy="20" r="3" fill="#7A1424" stroke="none"/></svg><h3>Для госучреждений</h3><p>Работа по 44-ФЗ и 223-ФЗ, полный пакет документов.</p></div>
+      <div><svg viewBox="0 0 40 40" fill="none" stroke="#7A1424" stroke-width="2"><path d="M4 30L14 14L22 24L30 10L36 30Z"/><path d="M4 36H36"/></svg><h3>Семинары</h3><p>Разбираем изменения в законодательстве на практике.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff">
+  <div class="wrap">
+    <div class="tag">Фирменная графика</div>
+    <h2>Узоры, которые работают везде</h2>
+    <p class="lead">Три узора из одной логики: сетка участков, диагональ границы, точки межевых знаков. Растягиваются на сайт, визитку, буклет, вывеску и печать.</p>
+    <div class="pgrid">
+      <figure style="position:relative"><svg><rect width="100%" height="100%" fill="url(#gr)"/><rect width="100%" height="100%" fill="url(#grid)"/></svg><div class="sh" style="left:0;bottom:30px;width:55%;height:0;border-top:3px solid #9A1B30"></div><div class="sh" style="left:55%;bottom:0;width:0;height:30px;border-left:3px solid #9A1B30"></div><figcaption>Сетка участков - основа сайта и буклета</figcaption></figure>
+      <figure style="position:relative"><svg><rect width="100%" height="100%" fill="url(#gr)"/><rect width="100%" height="100%" fill="url(#diag)"/></svg><div class="sh red" style="right:0;top:0;width:40%;height:220px;max-height:100px;clip-path:polygon(0 0,100% 0,100% 100%)"></div><figcaption>Диагональ границы - для обложек и бейджей</figcaption></figure>
+      <figure style="position:relative"><svg><rect width="100%" height="100%" fill="url(#gr)"/><rect width="100%" height="100%" fill="url(#dots)"/><rect x="62%" y="58%" width="26%" height="30%" fill="none" stroke="#9A1B30" stroke-width="3"/></svg><figcaption>Межевые знаки - для фонов и презентаций</figcaption></figure>
+    </div>
+    <div style="margin-top:56px" class="pal">
+      <div style="background:#16181B"><b>Графит</b>#16181B</div>
+      <div style="background:#343A41"><b>Тёмно-серый</b>#343A41</div>
+      <div style="background:#6B727A"><b>Серый</b>#6B727A</div>
+      <div class="lt" style="background:#DCDFE2"><b>Светло-серый</b>#DCDFE2</div>
+      <div style="background:linear-gradient(135deg,#9A1B30,#5A0E1A)"><b>Бордо</b>#7A1424 - акцент</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="tag">Полиграфия и носители</div>
+    <h2>Визитка, бейдж, буклет, вывеска</h2>
+    <p class="lead">Всё собрано из тех же элементов. Бордо идёт только на акценты: линия, кнопка, одна деталь на макете.</p>
+    <div class="items">
+      <div class="card-biz">
+        <div class="bc front"><svg class="p"><rect width="100%" height="100%" fill="url(#diag)"/></svg><div class="sh red" style="right:0;bottom:0;width:30%;height:100%;clip-path:polygon(0 100%,100% 20%,100% 100%);opacity:.85"></div><div class="nm" style="display:flex;gap:8px;align-items:center"><svg style="width:22px;height:22px"><use href="#mark"/></svg>ГРАНИЦА</div><div class="sl">КАДАСТРОВЫЙ УЧЕТ · УПРАВЛЕНИЕ ИМУЩЕСТВОМ</div></div>
+        <div class="bc back"><b>Иван Петров</b><span>Ведущий кадастровый инженер</span><div class="ln"></div><p>+7 (000) 000-00-00<br>info@granitsa.example<br>granitsa.example</p></div>
+        <div class="cap">Визитка 90 x 50 мм, лицо и оборот</div>
+      </div>
+      <div class="badge">
+        <div class="bdg"><div class="top"><div class="slot"></div><svg><rect width="100%" height="100%" fill="url(#diag)"/></svg><div class="sh red" style="inset:0;clip-path:polygon(0 100%,100% 40%,100% 100%);opacity:.75"></div></div><div class="ph"></div><h4>Анна Сидорова</h4><p>Участник семинара</p><div class="st">УЧАСТНИК</div></div>
+        <div class="cap">Бейдж для семинаров, цвет полосы меняется по роли</div>
+      </div>
+      <div class="booklet">
+        <div class="bk"><svg><rect width="100%" height="100%" fill="url(#grid)"/></svg><div class="sh red" style="left:0;top:0;width:100%;height:30%;clip-path:polygon(0 0,100% 0,100% 100%,55% 0);opacity:.85"></div><div class="t"><small>БУКЛЕТ · 2026</small><h4>Кадастровый учет: что меняется для бизнеса</h4><i></i></div></div>
+        <div class="cap">Обложка буклета А4 / А5</div>
+      </div>
+      <div class="sign">
+        <div class="sg"><svg class="bgp"><rect width="100%" height="100%" fill="url(#diag)"/></svg><div class="l"><svg><use href="#mark"/></svg><div><b>ГРАНИЦА</b><span>КАДАСТРОВЫЙ УЧЕТ И УПРАВЛЕНИЕ ИМУЩЕСТВОМ</span></div></div><div class="r">ОФИС 214 · 2 ЭТАЖ</div></div>
+        <div class="cap">Вывеска у входа, пропорции 4:1, вектор под любой размер</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">Демо фирменного стиля. Название, контакты и цифры вымышленные, для показа визуального направления.</div></footer>
+</body>
+</html>
