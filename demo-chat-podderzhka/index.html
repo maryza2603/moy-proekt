@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Починим - ремонт техники на дому</title>
+<meta name="description" content="Напишите, что сломалось, - мастер ответит в чате за 5 минут и приедет сегодня.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@500;700;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDEFE9; --ink:#14201F; --teal:#1F6F68; --teal-d:#154f4a;
+  --signal:#FFD23F; --white:#fff; --muted:#5b6866; --line:#cfd5cf;
+  --r-lg:28px; --r-sm:10px;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 "Golos Text",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Geologica,sans-serif;line-height:1.08;letter-spacing:-.02em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+section{padding:84px 0}
+h2{font-size:clamp(30px,4.4vw,48px);font-weight:800;max-width:16ch}
+
+/* header */
+header{padding:18px 0}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.logo{font:800 22px Geologica;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:30px;height:30px;border-radius:9px;background:var(--ink);display:grid;place-items:center}
+.logo i::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--signal)}
+header a.tel{font-weight:600;text-decoration:none}
+
+/* chat buttons */
+.chats{display:flex;flex-wrap:wrap;gap:10px}
+.chat{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:999px;font:600 16px "Golos Text";text-decoration:none;border:2px solid var(--ink);background:var(--white);transition:transform .15s,background .15s}
+.chat:hover{transform:translateY(-2px)}
+.chat svg{width:20px;height:20px;flex:none}
+.chat.main{background:var(--ink);color:var(--white)}
+.chat.main:hover{background:var(--teal-d)}
+
+/* hero */
+.hero{padding:36px 0 84px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(40px,6.4vw,76px);font-weight:800}
+.hero p.lead{font-size:20px;margin:22px 0 30px;max-width:30em;color:var(--muted)}
+.hero small{display:block;margin-top:16px;color:var(--muted);font-size:15px}
+
+.phone{background:var(--white);border:2px solid var(--ink);border-radius:var(--r-lg);box-shadow:10px 10px 0 var(--ink);overflow:hidden;max-width:440px;justify-self:end;width:100%}
+.phone-top{background:var(--teal);color:#fff;padding:16px 20px;display:flex;align-items:center;gap:12px}
+.ava{width:40px;height:40px;border-radius:50%;background:var(--signal);display:grid;place-items:center;font:800 16px Geologica;color:var(--ink)}
+.phone-top b{display:block;font-weight:600;line-height:1.2}
+.phone-top span{font-size:13px;opacity:.85}
+.msgs{padding:20px;display:flex;flex-direction:column;gap:10px;min-height:330px;background:#F6F7F3}
+.m{max-width:82%;padding:11px 15px;border-radius:18px;font-size:16px;line-height:1.45;opacity:0;transform:translateY(8px);animation:pop .4s forwards}
+.m.in{background:var(--white);border:1px solid var(--line);border-bottom-left-radius:4px;align-self:flex-start}
+.m.out{background:var(--signal);border-bottom-right-radius:4px;align-self:flex-end}
+.m:nth-child(1){animation-delay:.4s}.m:nth-child(2){animation-delay:1.4s}.m:nth-child(3){animation-delay:2.6s}.m:nth-child(4){animation-delay:3.6s}
+@keyframes pop{to{opacity:1;transform:none}}
+.reply{display:flex;gap:8px;padding:14px;border-top:1px solid var(--line);background:var(--white)}
+.reply a{flex:1;text-align:center;padding:12px;border-radius:var(--r-sm);background:var(--ink);color:#fff;font-weight:600;text-decoration:none}
+.reply a+a{background:var(--paper);color:var(--ink)}
+
+/* how */
+.steps{list-style:none;padding:0;margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.steps li{counter-increment:s;background:var(--white);border:2px solid var(--ink);border-radius:var(--r-lg);padding:28px;position:relative}
+.steps li::before{content:counter(s);position:absolute;top:-18px;left:24px;width:36px;height:36px;border-radius:50%;background:var(--signal);border:2px solid var(--ink);display:grid;place-items:center;font:800 16px Geologica}
+.steps h3{font-size:22px;font-weight:700;margin-bottom:8px}
+.steps p{color:var(--muted)}
+
+/* prices */
+.prices{background:var(--ink);color:var(--paper);border-radius:var(--r-lg);margin:0 20px;max-width:1120px}
+@media(min-width:1160px){.prices{margin:0 auto}}
+.prices .wrap{padding:0 clamp(20px,5vw,56px)}
+.prices h2{color:#fff}
+.list{margin-top:36px;border-top:1px solid #ffffff33}
+.row{display:flex;justify-content:space-between;gap:20px;padding:20px 0;border-bottom:1px solid #ffffff33;align-items:baseline}
+.row span:first-child{font-size:19px}
+.row small{display:block;color:#aeb9b6;font-size:15px}
+.row b{font:700 22px Geologica;white-space:nowrap;color:var(--signal)}
+.note{margin-top:20px;color:#aeb9b6;font-size:15px}
+
+/* why */
+.why{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.facts{display:grid;gap:26px}
+.facts h3{font-size:21px;font-weight:700;margin-bottom:4px}
+.facts p{color:var(--muted)}
+
+/* faq */
+details{border-bottom:1px solid var(--line);padding:20px 0}
+summary{cursor:pointer;font:700 20px Geologica;list-style:none;display:flex;justify-content:space-between;gap:20px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:26px;line-height:1;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin-top:12px;color:var(--muted);max-width:60ch}
+.faq{margin-top:36px;max-width:780px}
+
+/* final */
+.final{background:var(--teal);color:#fff;border-radius:var(--r-lg);padding:56px clamp(24px,5vw,64px);margin:0 20px 60px;max-width:1120px}
+@media(min-width:1160px){.final{margin:0 auto 60px}}
+.final h2{color:#fff;max-width:18ch}
+.final p{margin:16px 0 28px;font-size:19px;opacity:.9}
+.final .chat{border-color:#fff}
+.final .chat.main{background:var(--signal);color:var(--ink);border-color:var(--signal)}
+
+footer{padding:0 0 110px;color:var(--muted);font-size:15px}
+
+/* floating chat */
+.fab{position:fixed;right:18px;bottom:18px;z-index:20;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.fab-list{display:none;flex-direction:column;gap:8px}
+.fab.open .fab-list{display:flex}
+.fab-list .chat{box-shadow:0 6px 20px #14201f33}
+.fab-btn{display:flex;align-items:center;gap:10px;padding:16px 22px;border-radius:999px;border:2px solid var(--ink);background:var(--signal);font:700 17px "Golos Text";cursor:pointer;box-shadow:5px 5px 0 var(--ink)}
+.fab-btn svg{width:22px;height:22px}
+
+@media(max-width:860px){
+  .hero .wrap,.why{grid-template-columns:1fr}
+  .phone{justify-self:stretch;max-width:none}
+  .steps{grid-template-columns:1fr;gap:34px}
+  section{padding:60px 0}
+  header a.tel{display:none}
+}
+@media(prefers-reduced-motion:reduce){.m{animation:none;opacity:1;transform:none}html{scroll-behavior:auto}.chat{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top"><i></i>Починим</a>
+    <a class="tel" href="tel:+70000000000">+7 (000) 000-00-00</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Опишите поломку в чате - мастер приедет сегодня</h1>
+      <p class="lead">Ремонт стиральных машин, холодильников и посудомоек на дому. Ответим за 5 минут и сразу назовём цену.</p>
+      <div class="chats" data-chats data-main></div>
+      <small>Фото или видео поломки ускорят диагностику.</small>
+    </div>
+
+    <div class="phone" aria-label="Пример переписки">
+      <div class="phone-top"><div class="ava">П</div><div><b>Поддержка «Починим»</b><span>онлайн, отвечаем за 5 минут</span></div></div>
+      <div class="msgs">
+        <div class="m out">Стиралка Bosch не отжимает, в барабане вода</div>
+        <div class="m in">Здравствуйте! Скорее всего, засорился насос. Подскажите, какой код ошибки на экране?</div>
+        <div class="m out">E18</div>
+        <div class="m in">Да, это насос. Мастер может приехать сегодня с 16:00. Диагностика бесплатна при ремонте.</div>
+      </div>
+      <div class="reply"><a href="#" data-chat="tg">Написать так же</a><a href="tel:+70000000000">Позвонить</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <h2>Как всё происходит</h2>
+    <ol class="steps">
+      <li><h3>Пишете в чат</h3><p>Опишите, что случилось, и пришлите фото. Мастер ответит и уточнит детали.</p></li>
+      <li><h3>Согласуем цену</h3><p>Называем стоимость до выезда. Если на месте выяснится другое, спросим вас.</p></li>
+      <li><h3>Мастер приезжает</h3><p>Чинит, как правило, за один визит. На работу и запчасти даём гарантию.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="prices" id="prices">
+  <div class="wrap" style="padding-top:64px;padding-bottom:64px">
+    <h2>Цены без сюрпризов</h2>
+    <div class="list">
+      <div class="row"><span>Диагностика<small>бесплатно, если вы оставляете ремонт</small></span><b>500 ₽</b></div>
+      <div class="row"><span>Замена насоса или тэна<small>стиральные машины, посудомойки</small></span><b>от 1 800 ₽</b></div>
+      <div class="row"><span>Ремонт холодильника<small>реле, датчики, не морозит</small></span><b>от 2 200 ₽</b></div>
+      <div class="row"><span>Выезд в пределах города</span><b>0 ₽</b></div>
+    </div>
+    <p class="note">Точную цену назовём в чате после вашего описания.</p>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap why">
+    <h2>Почему пишут нам</h2>
+    <div class="facts">
+      <div><h3>Гарантия 12 месяцев</h3><p>Если поломка вернётся, приедем и исправим бесплатно.</p></div>
+      <div><h3>Оригинальные запчасти</h3><p>Привозим с собой самые частые, остальные заказываем за 1-2 дня.</p></div>
+      <div><h3>Чат работает с 8 до 22</h3><p>Отвечает живой человек, а не бот. Заявки ночью обработаем утром.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>Вопросы</h2>
+    <div class="faq">
+      <details><summary>Сколько ждать мастера?</summary><p>Чаще всего в день обращения. Если пишете до 14:00, приедем вечером того же дня.</p></details>
+      <details><summary>Можно ли узнать цену, не вызывая мастера?</summary><p>Да. Напишите модель и что происходит - назовём вилку цен в чате.</p></details>
+      <details><summary>Как оплатить?</summary><p>После ремонта: картой, наличными или переводом. Чек выдаём.</p></details>
+      <details><summary>Что, если починить нельзя?</summary><p>Скажем честно и заплатите только за диагностику.</p></details>
+    </div>
+  </div>
+</section>
+
+<div class="final" id="contact">
+  <h2>Напишите, что сломалось</h2>
+  <p>Выберите, где вам удобнее. Ответим в том же мессенджере.</p>
+  <div class="chats" data-chats data-main></div>
+</div>
+</main>
+
+<footer><div class="wrap">© Починим, 2026. Ремонт техники на дому.</div></footer>
+
+<div class="fab" id="fab">
+  <div class="fab-list" data-chats></div>
+  <button class="fab-btn" id="fabBtn" aria-expanded="false" aria-controls="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>Написать в чат</button>
+</div>
+
+<script>
+/* Ссылки на чаты поддержки - заменить на реальные */
+const CHATS=[
+  {id:"tg",name:"Telegram",href:"https://t.me/your_support",icon:'<path d="M21 4 3 11l5 2 2 6 3-4 5 4z" fill="currentColor"/>'},
+  {id:"wa",name:"WhatsApp",href:"https://wa.me/70000000000",icon:'<path d="M4 20l1.4-4.2A8 8 0 1 1 8.2 18.6z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>'},
+  {id:"vk",name:"ВКонтакте",href:"https://vk.me/your_support",icon:'<rect x="3" y="4" width="18" height="13" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M9 17v3l3-3" fill="currentColor"/>'},
+  {id:"max",name:"MAX",href:"https://max.ru/your_support",icon:'<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 15V9l4 4 4-4v6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>'}
+];
+document.querySelectorAll("[data-chats]").forEach(box=>{
+  CHATS.forEach((c,i)=>{
+    const a=document.createElement("a");
+    a.className="chat"+(box.hasAttribute("data-main")&&i===0?" main":"");
+    a.href=c.href;a.target="_blank";a.rel="noopener";
+    a.innerHTML='<svg viewBox="0 0 24 24">'+c.icon+'</svg>'+c.name;
+    box.appendChild(a);
+  });
+});
+document.querySelectorAll("[data-chat]").forEach(a=>{a.href=CHATS.find(c=>c.id===a.dataset.chat).href;a.target="_blank";a.rel="noopener"});
+const fab=document.getElementById("fab"),btn=document.getElementById("fabBtn");
+btn.addEventListener("click",()=>{const o=fab.classList.toggle("open");btn.setAttribute("aria-expanded",o)});
+document.addEventListener("click",e=>{if(!fab.contains(e.target)){fab.classList.remove("open");btn.setAttribute("aria-expanded","false")}});
+</script>
+</body>
+</html>
