@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пример расшифровки аудио</title>
+<meta name="description" content="Учебная запись на две минуты: послушайте её и посмотрите, как выглядит расшифровка с таймингами и конспект.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ECEFF7;
+  --paper:#FFFFFF;
+  --ink:#101B3B;
+  --muted:#58628A;
+  --line:#D5DAEA;
+  --live:#C8F3E6;
+  --live-bar:#0C9C82;
+  --accent:#2B3FD6;
+  --radius:14px;
+  --head:"Unbounded","Golos Text",system-ui,sans-serif;
+  --body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* шапка */
+.top{padding:56px 0 32px}
+h1{font-family:var(--head);font-weight:600;font-size:clamp(28px,5vw,52px);line-height:1.12;letter-spacing:-.02em;margin:0 0 20px;max-width:16em}
+.lead{max-width:36em;font-size:19px;color:var(--ink);margin:0 0 12px}
+.note{max-width:36em;font-size:15px;color:var(--muted);margin:0}
+
+/* сетка */
+.grid{display:grid;grid-template-columns:340px minmax(0,1fr);gap:28px;align-items:start;padding-bottom:56px}
+
+/* плеер */
+.player{position:sticky;top:16px;background:var(--ink);color:#fff;border-radius:var(--radius);padding:22px;z-index:5}
+.player h2{font-family:var(--head);font-weight:500;font-size:15px;line-height:1.35;margin:0 0 4px}
+.player .meta{font-size:14px;color:#AEB7DB;margin:0 0 18px}
+.row{display:flex;align-items:center;gap:14px}
+.play{flex:none;width:58px;height:58px;border-radius:50%;border:0;background:#fff;color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.play:hover{background:var(--live)}
+.play svg{width:22px;height:22px;fill:currentColor}
+.play .i-pause{display:none}
+.player.playing .i-play{display:none}
+.player.playing .i-pause{display:block}
+.time{font-variant-numeric:tabular-nums;font-size:15px;color:#fff}
+.time span{color:#AEB7DB}
+.wave{display:flex;align-items:center;gap:2px;height:56px;margin:18px 0 12px;cursor:pointer;touch-action:none}
+.wave i{flex:1;min-width:2px;border-radius:2px;background:#4A5686;height:var(--h,30%)}
+.wave i.done{background:#5EE0C4}
+.speed{display:flex;gap:6px}
+.speed button{font:inherit;font-size:14px;color:#fff;background:transparent;border:1px solid #4A5686;border-radius:999px;padding:3px 12px;cursor:pointer}
+.speed button[aria-pressed="true"]{background:#fff;color:var(--ink);border-color:#fff}
+.hint{font-size:14px;color:#AEB7DB;margin:14px 0 0}
+
+/* вкладки */
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.tabs button{font:inherit;font-weight:500;font-size:16px;color:var(--muted);background:none;border:0;border-bottom:3px solid transparent;padding:10px 16px;margin-bottom:-1px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabs button:hover{color:var(--ink)}
+.panel[hidden]{display:none}
+.panel{background:var(--paper);border-radius:var(--radius);padding:12px 28px 28px}
+.panel-intro{font-size:15px;color:var(--muted);margin:16px 0 8px}
+
+/* расшифровка с таймингами */
+.turn{padding:16px 0;border-top:1px solid var(--line)}
+.turn:first-of-type{border-top:0}
+.who{font-weight:600;font-size:15px;margin:0 0 4px;color:var(--accent)}
+.turn.anna .who{color:var(--live-bar)}
+.ln{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:5px 10px;margin:0 -10px;border-radius:8px;border-left:4px solid transparent;cursor:pointer}
+.ln:hover{background:#F4F6FC}
+.ln .t{font-variant-numeric:tabular-nums;font-size:14px;color:var(--muted);padding-top:2px}
+.ln.on{background:var(--live);border-left-color:var(--live-bar)}
+.ln.on .t{color:var(--ink)}
+
+/* конспект */
+.sum h3{font-family:var(--head);font-weight:500;font-size:22px;line-height:1.3;margin:22px 0 10px}
+.sum p{margin:0 0 14px;max-width:38em}
+.sum h4{font-size:17px;font-weight:600;margin:26px 0 6px}
+.sum ul{margin:0 0 6px;padding-left:20px;max-width:38em}
+.sum li{margin:5px 0}
+.sum ol{margin:0 0 6px;padding-left:22px;max-width:38em}
+.sum ol li{margin:5px 0}
+.at{font:inherit;font-variant-numeric:tabular-nums;font-size:13px;color:var(--accent);background:#E8EBFC;border:0;border-radius:6px;padding:0 7px;margin-left:4px;cursor:pointer;white-space:nowrap}
+.at:hover{background:#D6DBFA}
+.quote{margin:20px 0 0;padding:14px 18px;background:#F4F6FC;border-left:4px solid var(--accent);border-radius:0 10px 10px 0;max-width:38em}
+
+/* что получите */
+.get{background:var(--ink);color:#fff;padding:52px 0 60px}
+.get h2{font-family:var(--head);font-weight:500;font-size:clamp(22px,3.4vw,32px);line-height:1.25;margin:0 0 26px;max-width:18em}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.cols h3{font-size:18px;font-weight:600;margin:0 0 6px}
+.cols p{margin:0;color:#C5CCE8;font-size:16px}
+
+@media (max-width:860px){
+  .grid{grid-template-columns:minmax(0,1fr);gap:18px}
+  .wave{gap:1px}
+  .wave i{min-width:0}
+  .player{top:8px;padding:14px 16px}
+  .player .meta,.hint{display:none}
+  .player h2{display:none}
+  .wave{height:36px;margin:12px 0 8px}
+  .play{width:46px;height:46px}
+  .panel{padding:8px 16px 22px}
+  .cols{grid-template-columns:1fr;gap:22px}
+  .top{padding:36px 0 22px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <h1>Так выглядит расшифровка вашей записи</h1>
+    <p class="lead">Ниже учебная запись на две минуты: интервью с мастером маникюра. Нажмите на воспроизведение, и текст побежит вместе со звуком. Нажмите на любую строку, чтобы перейти к этому месту.</p>
+    <p class="note">Запись создана для примера, голоса синтезированные. Ваш материал расшифрую так же.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid">
+
+    <aside class="player" id="player" aria-label="Плеер">
+      <h2>Как мастеру привлекать и удерживать клиентов</h2>
+      <p class="meta">Интервью, 2 минуты</p>
+      <div class="row">
+        <button class="play" id="play" type="button" aria-label="Воспроизвести">
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="4.5" height="16" rx="1"/><rect x="13.5" y="4" width="4.5" height="16" rx="1"/></svg>
+        </button>
+        <div class="time" id="time">0:00 <span>/ 2:09</span></div>
+      </div>
+      <div class="wave" id="wave" role="slider" tabindex="0" aria-label="Перемотка" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      <div class="speed" role="group" aria-label="Скорость">
+        <button type="button" data-r="1" aria-pressed="true">1x</button>
+        <button type="button" data-r="1.5" aria-pressed="false">1,5x</button>
+        <button type="button" data-r="2" aria-pressed="false">2x</button>
+      </div>
+      <p class="hint">Можно слушать и читать одновременно.</p>
+      <audio id="audio" src="zapis.mp3" preload="auto"></audio>
+    </aside>
+
+    <section aria-label="Результат">
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" id="tab-t" aria-controls="p-t" aria-selected="true">С таймингами</button>
+        <button type="button" role="tab" id="tab-s" aria-controls="p-s" aria-selected="false">Конспект</button>
+      </div>
+
+      <div class="panel" id="p-t" role="tabpanel" aria-labelledby="tab-t">
+        <p class="panel-intro">Полная расшифровка: кто говорит, что и в какую секунду. Ошибки распознавания исправлены вручную.</p>
+        <div id="transcript"></div>
+      </div>
+
+      <div class="panel sum" id="p-s" role="tabpanel" aria-labelledby="tab-s" hidden>
+        <h3>Как мастеру маникюра привлекать и удерживать клиентов</h3>
+        <p>Мастер Анна рассказывает, как новая клиентка выбирает студию, почему повторные визиты важнее скидок и какие ошибки чаще всего делают начинающие.</p>
+
+        <h4>Главное</h4>
+        <ul>
+          <li>Выбор начинается со страницы в соцсетях. Без свежих фотографий работ клиентка уходит дальше. <button class="at" data-s="14">0:14</button></li>
+          <li>Выкладывать три-четыре фотографии в неделю и подписывать, какой был дизайн и сколько времени заняла работа. Тогда клиентка понимает, чего ждать. <button class="at" data-s="26">0:26</button></li>
+          <li>Самое важное - повторные визиты. Записывать на следующий раз прямо в конце процедуры и предлагать конкретный день: «через три недели, среда вечером». Почти все соглашаются. <button class="at" data-s="47">0:47</button></li>
+          <li>Скидками лучше не злоупотреблять: они приучают ждать акций. Маленький бонус вроде ухода за кутикулой воспринимается как забота, а не как распродажа. <button class="at" data-s="63">1:03</button></li>
+        </ul>
+
+        <h4>Три ошибки начинающих мастеров <button class="at" data-s="77">1:17</button></h4>
+        <ol>
+          <li>Отвечают на сообщения по полдня. Клиентка не дожидается и записывается к другому.</li>
+          <li>Не указывают понятные цены.</li>
+          <li>Берут слишком много клиентов в день и не успевают держать качество.</li>
+        </ol>
+
+        <h4>Совет тем, кто только начинает <button class="at" data-s="99">1:39</button></h4>
+        <p>Не ждать идеального момента. Сделать первые десять работ недорого, собрать отзывы и фотографии, а дальше клиентки начнут приходить сами. Главное - работать аккуратно и честно называть сроки.</p>
+
+        <p class="quote">«Скидка приучает ждать акций. Лучше я подарю маленький бонус, и клиентка запомнит это как заботу, а не как распродажу.» <button class="at" data-s="66">1:06</button></p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<section class="get">
+  <div class="wrap">
+    <h2>Что вы получите по своей записи</h2>
+    <div class="cols">
+      <div><h3>Расшифровка с таймингами</h3><p>Весь текст с метками времени и подписями, кто говорит. Удобно искать нужное место.</p></div>
+      <div><h3>Конспект</h3><p>Главные мысли, выводы и советы своими словами. Читается за пару минут вместо прослушивания всей записи.</p></div>
+      <div><h3>Аудио или видео</h3><p>Расшифровываю записи любой длины, на русском и других языках. Файлы пришлю в текстовом формате.</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var TURNS=[
+    ["Интервьюер","q",[[0,"Анна, здравствуйте! Расскажите, с чего начинается запись нового клиента в вашу студию?"]]],
+    ["Анна","anna",[[8,"Здравствуйте! Ну, на самом деле всё начинается ещё до записи."],[14,"Человек сначала смотрит страницу в соцсетях. Если там нет свежих фотографий работ, он просто идёт дальше."]]],
+    ["Интервьюер","q",[[23,"То есть главное - показать работы?"]]],
+    ["Анна","anna",[[26,"Да, в первую очередь. Я выкладываю три-четыре фотографии в неделю и всегда подписываю, какой был дизайн и сколько по времени ушло."],[36,"Так клиент сразу понимает, чего ждать."]]],
+    ["Интервьюер","q",[[40,"А как вы работаете с теми, кто уже приходил?"]]],
+    ["Анна","anna",[[44,"Это вообще самое важное."],[47,"Я записываю клиентку на следующий визит прямо в конце процедуры."],[52,"Говорю: через три недели мы сделаем коррекцию, вам удобна среда вечером?"],[57,"Почти все соглашаются."]]],
+    ["Интервьюер","q",[[60,"Скидки используете?"]]],
+    ["Анна","anna",[[63,"Стараюсь не злоупотреблять."],[66,"Скидка приучает ждать акций."],[69,"Лучше я подарю маленький бонус, например уход за кутикулой, и клиентка запомнит это как заботу, а не как распродажу."]]],
+    ["Интервьюер","q",[[77,"Какие ошибки чаще всего делают начинающие мастера?"]]],
+    ["Анна","anna",[[82,"Первая - не отвечают на сообщения по полдня."],[86,"Человек написал, не дождался и записался к другому."],[90,"Вторая - нет понятных цен."],[93,"Третья - берут слишком много клиентов в день и не успевают держать качество."]]],
+    ["Интервьюер","q",[[99,"И последний вопрос. Что бы вы посоветовали тем, кто только начинает?"]]],
+    ["Анна","anna",[[106,"Не ждать идеального момента."],[109,"Сделайте первые десять работ недорого, соберите отзывы и фотографии, и дальше клиенты начнут приходить сами."],[117,"Главное - делать аккуратно и честно говорить о сроках."]]],
+    ["Интервьюер","q",[[121,"Анна, спасибо вам за разговор!"]]],
+    ["Анна","anna",[[125,"Спасибо вам! Было приятно."]]]
+  ];
+
+  function fmt(s){s=Math.floor(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+  var audio=document.getElementById("audio"),
+      player=document.getElementById("player"),
+      play=document.getElementById("play"),
+      timeEl=document.getElementById("time"),
+      wave=document.getElementById("wave"),
+      box=document.getElementById("transcript");
+
+  /* текст с таймингами */
+  var lines=[];
+  TURNS.forEach(function(t){
+    var d=document.createElement("div");d.className="turn "+t[1];
+    var w=document.createElement("p");w.className="who";w.textContent=t[0];d.appendChild(w);
+    t[2].forEach(function(l){
+      var r=document.createElement("div");r.className="ln";r.tabIndex=0;r.setAttribute("role","button");
+      r.innerHTML='<span class="t">'+fmt(l[0])+'</span><span></span>';
+      r.lastChild.textContent=l[1];
+      r.dataset.s=l[0];
+      d.appendChild(r);lines.push({el:r,s:l[0]});
+    });
+    box.appendChild(d);
+  });
+
+  function seek(s,go){audio.currentTime=s;if(go!==false)audio.play()}
+  box.addEventListener("click",function(e){var r=e.target.closest(".ln");if(r)seek(+r.dataset.s)});
+  box.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){var r=e.target.closest(".ln");if(r){e.preventDefault();seek(+r.dataset.s)}}
+  });
+  document.querySelectorAll(".at").forEach(function(b){
+    b.addEventListener("click",function(){seek(+b.dataset.s)});
+  });
+
+  /* вкладки */
+  var tabs=[["tab-t","p-t"],["tab-s","p-s"]];
+  function show(id){
+    tabs.forEach(function(p){
+      var on=p[0]===id;
+      document.getElementById(p[0]).setAttribute("aria-selected",on);
+      document.getElementById(p[1]).hidden=!on;
+    });
+  }
+  tabs.forEach(function(p){document.getElementById(p[0]).addEventListener("click",function(){show(p[0])})});
+
+  /* волна */
+  var N=72,bars=[];
+  for(var i=0;i<N;i++){var b=document.createElement("i");wave.appendChild(b);bars.push(b)}
+  function pseudo(){bars.forEach(function(b,i){b.style.setProperty("--h",(28+Math.abs(Math.sin(i*1.7)*Math.cos(i*.53))*60)+"%")})}
+  pseudo();
+  try{
+    fetch("zapis.mp3").then(function(r){return r.arrayBuffer()}).then(function(buf){
+      var AC=window.AudioContext||window.webkitAudioContext;var ctx=new AC();
+      return ctx.decodeAudioData(buf).then(function(a){
+        var d=a.getChannelData(0),step=Math.floor(d.length/N),peaks=[],mx=0;
+        for(var i=0;i<N;i++){var s=0;for(var j=0;j<step;j+=40){s=Math.max(s,Math.abs(d[i*step+j]||0))}peaks.push(s);mx=Math.max(mx,s)}
+        peaks.forEach(function(p,i){bars[i].style.setProperty("--h",Math.max(8,p/mx*100)+"%")});
+        ctx.close();
+      });
+    }).catch(function(){});
+  }catch(e){}
+
+  /* управление */
+  var cur=-1;
+  function dur(){return isFinite(audio.duration)&&audio.duration>0?audio.duration:130}
+  function update(){
+    var t=audio.currentTime,D=dur();
+    timeEl.innerHTML=fmt(t)+" <span>/ "+fmt(D)+"</span>";
+    var k=Math.floor(t/D*N);
+    bars.forEach(function(b,i){b.classList.toggle("done",i<k)});
+    wave.setAttribute("aria-valuenow",Math.round(t/D*100));
+    var idx=-1;
+    for(var i=0;i<lines.length;i++){if(lines[i].s<=t+0.15)idx=i;else break}
+    if(idx!==cur){
+      if(cur>=0)lines[cur].el.classList.remove("on");
+      cur=idx;
+      if(cur>=0){
+        var el=lines[cur].el;el.classList.add("on");
+        if(!audio.paused&&!document.getElementById("p-t").hidden){
+          var r=el.getBoundingClientRect(),vh=window.innerHeight;
+          if(r.top<120||r.bottom>vh-60){
+            var reduce=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+            el.scrollIntoView({block:"center",behavior:reduce?"auto":"smooth"});
+          }
+        }
+      }
+    }
+  }
+  audio.addEventListener("timeupdate",update);
+  audio.addEventListener("loadedmetadata",update);
+  audio.addEventListener("play",function(){player.classList.add("playing");play.setAttribute("aria-label","Пауза")});
+  audio.addEventListener("pause",function(){player.classList.remove("playing");play.setAttribute("aria-label","Воспроизвести")});
+  audio.addEventListener("ended",function(){audio.currentTime=0;update()});
+  play.addEventListener("click",function(){audio.paused?audio.play():audio.pause()});
+
+  function waveSeek(e){var r=wave.getBoundingClientRect();var x=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));audio.currentTime=x*dur()}
+  var drag=false;
+  wave.addEventListener("pointerdown",function(e){drag=true;wave.setPointerCapture(e.pointerId);waveSeek(e)});
+  wave.addEventListener("pointermove",function(e){if(drag)waveSeek(e)});
+  wave.addEventListener("pointerup",function(){drag=false});
+  wave.addEventListener("keydown",function(e){
+    if(e.key==="ArrowRight"){audio.currentTime=Math.min(dur(),audio.currentTime+5);e.preventDefault()}
+    if(e.key==="ArrowLeft"){audio.currentTime=Math.max(0,audio.currentTime-5);e.preventDefault()}
+  });
+
+  document.querySelectorAll(".speed button").forEach(function(b){
+    b.addEventListener("click",function(){
+      audio.playbackRate=+b.dataset.r;
+      document.querySelectorAll(".speed button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
+    });
+  });
+})();
+</script>
+</body>
+</html>
