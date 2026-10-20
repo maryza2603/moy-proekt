@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Психолог Елена Мирова - онлайн-консультации | Демо-сайт</title>
+<meta name="description" content="Демо-сайт психолога: выберите, с чем вы пришли, и узнайте, как проходит работа. Первая встреча 15 минут - бесплатно.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--fog:#E4EAEA;--deep:#1F3B44;--lamp:#D9A441;--mist:#F4F6F5;--sea:#6E9099;--line:rgba(31,59,68,.2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Golos Text",system-ui,sans-serif;background:var(--fog);color:var(--deep);font-size:18px;line-height:1.65}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--deep);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:22px;padding-bottom:22px}
+.who{font-family:Lora,serif;font-size:21px;text-decoration:none}
+.who small{display:block;font:400 14px "Golos Text",sans-serif;opacity:.7}
+.btn{display:inline-block;padding:15px 28px;border-radius:12px;background:var(--deep);color:#fff;font:600 16px "Golos Text",sans-serif;border:0;cursor:pointer;text-decoration:none;transition:background .2s}
+.btn:hover{background:#12272e}
+.btn.lamp{background:var(--lamp);color:var(--deep)}
+.btn.lamp:hover{background:#c8932f}
+.hero{padding:40px 0 90px}
+.hero .wrap{max-width:820px}
+h1{font-family:Lora,serif;font-weight:400;font-size:clamp(36px,5.2vw,62px);line-height:1.12;letter-spacing:-.01em}
+h1 em{font-style:italic;font-weight:400}
+.ask{margin-top:34px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.chips button{padding:11px 20px;border-radius:999px;border:1.5px solid var(--deep);background:transparent;color:var(--deep);font:500 16px "Golos Text",sans-serif;cursor:pointer;transition:.15s}
+.chips button:hover{background:rgba(31,59,68,.08)}
+.chips button[aria-pressed=true]{background:var(--deep);color:#fff}
+.reply{margin-top:26px;padding:26px 28px;border-radius:18px;background:var(--mist);border-left:5px solid var(--lamp);min-height:150px}
+.reply p{font-family:Lora,serif;font-size:21px;line-height:1.5}
+.reply small{display:block;margin-top:12px;font-size:15px;opacity:.75}
+.hero .cta{margin-top:26px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.hero .cta span{font-size:15px;opacity:.75}
+section{padding:64px 0}
+h2{font-family:Lora,serif;font-weight:400;font-size:clamp(28px,3.6vw,40px);line-height:1.15;margin-bottom:22px}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;counter-reset:s;list-style:none}
+.how li{border-top:2px solid var(--deep);padding-top:16px}
+.how b{display:block;font-family:Lora,serif;font-size:20px;font-weight:500;margin-bottom:6px}
+.cost{background:var(--mist)}
+.cost .rows{max-width:620px}
+.row{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.row b{font-family:Lora,serif;font-weight:500;font-size:22px;white-space:nowrap}
+.row small{display:block;opacity:.75;font-size:15px}
+.form{max-width:560px}
+label.l{display:block;font-weight:600;font-size:15px;margin:16px 0 6px}
+.f{width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid var(--deep);background:#fff;font:400 17px "Golos Text",sans-serif;color:var(--deep)}
+.hint{font-size:14px;opacity:.75;margin-top:6px}
+.form .btn{margin-top:20px}
+.ok{display:none;margin-top:16px;padding:14px 16px;border-radius:12px;background:#DCEBD8;font-size:16px}
+.ok.on{display:block}
+footer{padding:30px 0 40px;font-size:14px;opacity:.75}
+@media (max-width:760px){.how{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="who" href="#top">Елена Мирова<small>психолог, онлайн</small></a><a class="btn" href="#sign">Записаться</a></div></header>
+<main id="top">
+<div class="hero"><div class="wrap">
+  <h1>Иногда достаточно, чтобы вас просто выслушали</h1>
+  <p class="ask" id="askl">С чем вы пришли сегодня?</p>
+  <div class="chips" id="chips" role="group" aria-labelledby="askl">
+    <button type="button" data-k="a">Тревога</button>
+    <button type="button" data-k="b">Усталость, выгорание</button>
+    <button type="button" data-k="c">Отношения</button>
+    <button type="button" data-k="d">Не знаю, как назвать</button>
+  </div>
+  <div class="reply" id="reply" aria-live="polite">
+    <p>Можно начать с любого слова. Выберите то, что ближе, - я расскажу, как мы могли бы поработать.</p>
+  </div>
+  <div class="cta"><a class="btn lamp" href="#sign">Записаться на бесплатные 15 минут</a><span>Познакомимся, и вы решите, подходит ли вам такая работа.</span></div>
+</div></div>
+
+<section><div class="wrap"><h2>Как проходит работа</h2>
+<ol class="how">
+<li><b>Знакомство, 15 минут</b>Вы рассказываете, что беспокоит, я объясняю, как работаю. Никаких обязательств.</li>
+<li><b>Встречи по 50 минут</b>Онлайн по видеосвязи, раз в неделю. Всё, что вы говорите, остаётся между нами.</li>
+<li><b>Остановиться можно в любой момент</b>Если вам не подходит, скажите об этом. Перенос встречи - бесплатно, если предупредить за 24 часа.</li>
+</ol></div></section>
+
+<section class="cost"><div class="wrap"><h2>Стоимость</h2><div class="rows">
+<div class="row"><span>Знакомство<small>15 минут, видеосвязь</small></span><b>бесплатно</b></div>
+<div class="row"><span>Консультация<small>50 минут, видеосвязь</small></span><b>3 000 ₽</b></div>
+<div class="row"><span>Пакет из 4 встреч<small>раз в неделю, можно разбить на месяц</small></span><b>11 000 ₽</b></div>
+</div></div></section>
+
+<section id="sign"><div class="wrap form"><h2>Запись</h2>
+<p>Оставьте контакт - я напишу или позвоню в течение дня и предложу время.</p>
+<form id="f" onsubmit="return false">
+<label class="l" for="nm">Как к вам обращаться</label><input class="f" id="nm" autocomplete="given-name">
+<label class="l" for="ct">Телефон или Telegram</label><input class="f" id="ct" autocomplete="tel">
+<p class="hint">Контакт нужен только для связи по записи. Он не публикуется и не передаётся третьим лицам.</p>
+<button class="btn" id="go" type="button">Отправить</button>
+<p class="ok" id="ok" role="status"></p>
+</form></div></section>
+</main>
+<footer><div class="wrap">Демо-сайт психолога. Имя, цены и контакты условные. Для настоящего сайта сюда добавляются образование, сертификаты и подход - только подтверждённые.</div></footer>
+<script>
+(function(){
+  const t={
+    a:['Тревога часто звучит как «всё время жду плохого». На встречах мы разберём, что именно её запускает, и найдём то, что помогает вам успокоиться сейчас.','Работа начинается с вашего запроса, а не с диагноза.'],
+    b:['Когда нет сил даже на то, что раньше радовало, это не лень. Мы посмотрим, куда уходит энергия, и подумаем, что можно изменить без резких решений.','Начнём с того, что действительно возможно на этой неделе.'],
+    c:['Отношения - это про двоих, но разбираться можно и в одиночку: что вы чувствуете, чего хотите, как об этом говорить.','Можно прийти одному, даже если проблема «в паре».'],
+    d:['Это нормально. Часто всё начинается с ощущения «что-то не так». Мы будем искать слова вместе, спешить некуда.','На знакомстве достаточно сказать пару фраз.']
+  };
+  const $=s=>document.querySelector(s);
+  document.querySelectorAll('#chips button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('#chips button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    const r=t[b.dataset.k]; $('#reply').innerHTML='<p>'+r[0]+'</p><small>'+r[1]+'</small>';
+  }));
+  $('#go').addEventListener('click',()=>{
+    const ok=$('#ok'), c=$('#ct').value.trim();
+    if(c.length<5){ok.textContent='Укажите телефон или Telegram, чтобы я могла с вами связаться.';ok.classList.add('on');$('#ct').focus();return}
+    ok.textContent='Спасибо'+($('#nm').value.trim()?', '+$('#nm').value.trim():'')+'. Я свяжусь с вами в течение дня и предложу время.';
+    ok.classList.add('on');
+  });
+})();
+</script>
+</body>
+</html>

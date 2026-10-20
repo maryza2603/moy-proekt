@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пекарня «Зерно» - торты на заказ и хлеб каждый день | Демо-сайт</title>
+<meta name="description" content="Демо-сайт пекарни: соберите торт на заказ - выберите размер и начинку, цена посчитается сразу. Хлеб и выпечка каждый день с 7:00.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--butter:#F4C64E;--rye:#35200F;--flour:#FFF9EC;--poppy:#D63A28;--crust:#B8691F;--line:rgba(53,32,15,.18)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Onest,system-ui,sans-serif;color:var(--rye);background:var(--flour);font-size:17px;line-height:1.55}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--poppy);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+header{background:var(--butter)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:18px;padding-bottom:18px}
+.logo{font-family:Unbounded,sans-serif;font-weight:800;font-size:24px;text-decoration:none;letter-spacing:-.02em}
+.logo i{display:inline-block;width:.55em;height:.8em;border-radius:50% 50% 45% 45%;background:var(--rye);margin-right:8px;vertical-align:-.02em;transform:rotate(-12deg)}
+.hd-r{display:flex;align-items:center;gap:20px;font-weight:500}
+.hd-r a{text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;background:var(--rye);color:var(--flour);font:600 16px Onest,sans-serif;border:0;cursor:pointer;text-decoration:none;transition:transform .2s,background .2s}
+.btn:hover{background:var(--poppy);transform:translateY(-2px)}
+.hero{background:var(--butter);padding:36px 0 84px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:44px;background:var(--flour);clip-path:polygon(0 100%,0 60%,5% 40%,10% 60%,15% 35%,20% 60%,25% 40%,30% 62%,35% 38%,40% 60%,45% 42%,50% 60%,55% 36%,60% 60%,65% 40%,70% 62%,75% 38%,80% 60%,85% 42%,90% 62%,95% 40%,100% 60%,100% 100%)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+h1{font-family:Unbounded,sans-serif;font-weight:800;font-size:clamp(38px,5.6vw,72px);line-height:1;letter-spacing:-.035em}
+.sub{margin-top:22px;max-width:30em;font-size:19px}
+.hero-meta{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px 22px;font-weight:500}
+.hero-meta span:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--poppy);margin-right:9px}
+.builder{background:var(--flour);border-radius:28px;padding:26px;box-shadow:0 22px 50px -22px rgba(53,32,15,.55);position:relative}
+.cake-stage{height:210px;display:grid;place-items:end center;border-bottom:2px dashed var(--line);margin-bottom:18px}
+#cake{width:260px;height:200px;overflow:visible}
+#cake .tier{transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s;transform-origin:50% 100%}
+fieldset{border:0;margin-bottom:14px}
+legend{font-weight:600;font-size:14px;margin-bottom:8px;padding:0}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills input{position:absolute;opacity:0}
+.pills label{padding:9px 16px;border-radius:999px;border:1.5px solid var(--rye);cursor:pointer;font-size:15px;font-weight:500;transition:.15s}
+.pills input:checked+label{background:var(--rye);color:var(--flour)}
+.pills input:focus-visible+label{outline:3px solid var(--poppy);outline-offset:2px}
+.total{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:18px 0 14px}
+.total b{font-family:Unbounded,sans-serif;font-size:34px;letter-spacing:-.03em}
+.total span{font-size:14px;opacity:.75}
+.builder .btn{width:100%;background:var(--poppy)}
+.builder .btn:hover{background:var(--rye)}
+.ok{display:none;margin-top:14px;padding:14px 16px;border-radius:14px;background:#E8F2DC;font-size:15px}
+.ok.on{display:block}
+section{padding:72px 0}
+h2{font-family:Unbounded,sans-serif;font-weight:800;font-size:clamp(28px,3.6vw,44px);letter-spacing:-.03em;line-height:1.05;margin-bottom:12px}
+.lead{max-width:34em;opacity:.8}
+.shelf{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.item{padding:26px;border-radius:22px;background:#fff;border:1px solid var(--line)}
+.item h3{font-family:Unbounded,sans-serif;font-weight:500;font-size:19px;margin-bottom:6px}
+.item .pr{margin-top:14px;font-weight:600;color:var(--crust)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:36px;counter-reset:s}
+.steps li{list-style:none;position:relative;padding-top:58px}
+.steps li:before{counter-increment:s;content:counter(s);position:absolute;top:0;left:0;width:44px;height:44px;border-radius:50%;background:var(--butter);display:grid;place-items:center;font:800 20px Unbounded,sans-serif}
+.steps b{display:block;font-size:18px;margin-bottom:4px}
+.contacts{background:var(--rye);color:var(--flour)}
+.contacts h2{color:var(--butter)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:26px}
+.contacts a{color:var(--butter)}
+.contacts p+p{margin-top:8px}
+footer{background:var(--rye);color:rgba(255,249,236,.6);padding:18px 0 28px;font-size:14px}
+@media (max-width:860px){.hero .wrap,.cgrid{grid-template-columns:1fr}.shelf,.steps{grid-template-columns:1fr}.hd-r .tel{display:none}.hero{padding-bottom:70px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top"><i></i>Зерно</a>
+    <div class="hd-r"><a class="tel" href="tel:+70000000000">+7 (000) 000-00-00</a><a class="btn" href="#order">Заказать торт</a></div>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Торт на заказ - соберите свой за минуту</h1>
+      <p class="sub">Выберите размер и начинку, цена посчитается сразу. Кондитер позвонит, уточнит надпись и время, а в нужный день торт будет ждать у нас или приедет к вам.</p>
+      <div class="hero-meta"><span>Хлеб и выпечка каждый день с 7:00</span><span>Торт - от 2 дней до вашей даты</span></div>
+    </div>
+    <form class="builder" id="order" aria-label="Соберите торт" onsubmit="return false">
+      <div class="cake-stage">
+        <svg id="cake" viewBox="0 0 260 200" role="img" aria-label="Ваш торт">
+          <ellipse cx="130" cy="190" rx="118" ry="8" fill="#35200F" opacity=".12"/>
+          <g class="tier" id="t1"><rect x="40" y="130" width="180" height="56" rx="14" fill="#B8691F"/><rect x="40" y="130" width="180" height="18" rx="9" fill="#FFF9EC"/></g>
+          <g class="tier" id="t2"><rect x="62" y="84" width="136" height="50" rx="13" fill="#D63A28"/><rect x="62" y="84" width="136" height="16" rx="8" fill="#FFF9EC"/></g>
+          <g class="tier" id="t3"><rect x="86" y="42" width="88" height="46" rx="12" fill="#35200F"/><rect x="86" y="42" width="88" height="14" rx="7" fill="#FFF9EC"/></g>
+        <g id="topper" style="transition:transform .45s cubic-bezier(.3,1.4,.5,1)"><circle cx="130" cy="30" r="9" fill="#D63A28"/><path d="M130 21c2-9 9-11 12-9" stroke="#35200F" stroke-width="3" fill="none" stroke-linecap="round"/></g></svg>
+      </div>
+      <fieldset><legend>На сколько человек</legend>
+        <div class="pills" id="size">
+          <span><input type="radio" name="size" id="s6" value="6" checked><label for="s6">6 человек</label></span>
+          <span><input type="radio" name="size" id="s10" value="10"><label for="s10">10 человек</label></span>
+          <span><input type="radio" name="size" id="s16" value="16"><label for="s16">16 человек</label></span>
+        </div></fieldset>
+      <fieldset><legend>Начинка</legend>
+        <div class="pills" id="fill">
+          <span><input type="radio" name="fill" id="f1" value="0" checked><label for="f1">Медовик</label></span>
+          <span><input type="radio" name="fill" id="f2" value="0"><label for="f2">Ягодный</label></span>
+          <span><input type="radio" name="fill" id="f3" value="300"><label for="f3">Шоколад-вишня +300 ₽</label></span>
+          <span><input type="radio" name="fill" id="f4" value="400"><label for="f4">Карамель-орех +400 ₽</label></span>
+        </div></fieldset>
+      <div class="total"><b id="price">2 400 ₽</b><span id="note">1 ярус, около 1,4 кг</span></div>
+      <button class="btn" id="go" type="button">Оформить заказ</button>
+      <p class="ok" id="ok" role="status">Заявка принята. Кондитер позвонит в течение часа, уточнит дату, надпись и адрес. Платить сейчас не нужно.</p>
+    </form>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Каждый день с 7 утра</h2>
+    <p class="lead">Печём небольшими партиями, чтобы к вечеру ничего не лежало с утра.</p>
+    <div class="shelf">
+      <div class="item"><h3>Хлеб на закваске</h3><p>Ржаной, пшеничный, с семечками. Тесто отдыхает ночь.</p><p class="pr">от 140 ₽</p></div>
+      <div class="item"><h3>Булочки и круассаны</h3><p>С маслом, с корицей, с миндалём. Выходят из печи к 8:00 и к 16:00.</p><p class="pr">от 90 ₽</p></div>
+      <div class="item"><h3>Пирожные и десерты</h3><p>Набор на чаепитие из 6 штук, можно собрать самим.</p><p class="pr">от 1 100 ₽ за набор</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Как заказать торт</h2>
+    <ol class="steps">
+      <li><b>Соберите торт здесь</b>Размер и начинка, цена видна сразу.</li>
+      <li><b>Подтвердим по телефону</b>Кондитер уточнит дату, надпись и аллергены.</li>
+      <li><b>Заберите или закажите доставку</b>Торт будет готов к назначенному часу.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="contacts" id="contacts">
+  <div class="wrap">
+    <h2>Приходите и звоните</h2>
+    <div class="cgrid">
+      <div><p><b>Адрес</b><br>ул. Садовая, 14 (пример)</p><p><b>Часы работы</b><br>Каждый день с 7:00 до 21:00</p></div>
+      <div><p><b>Телефон</b><br><a href="tel:+70000000000">+7 (000) 000-00-00</a></p><p><b>Написать</b><br><a href="#">Telegram</a> · <a href="#">WhatsApp</a></p></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">Демо-сайт пекарни. Название, адрес, телефон и цены условные.</div></footer>
+
+<script>
+(function(){
+  const base={6:2400,10:3900,16:5900}, tiers={6:1,10:2,16:3}, kg={6:'около 1,4 кг',10:'около 2,3 кг',16:'около 3,6 кг'};
+  const $=s=>document.querySelector(s), fmt=n=>n.toLocaleString('ru-RU').replace(/ /g,' ')+' ₽';
+  function upd(){
+    const sz=document.querySelector('input[name=size]:checked').value;
+    const fl=+document.querySelector('input[name=fill]:checked').value;
+    const n=tiers[sz];
+    ['t1','t2','t3'].forEach((id,i)=>{const g=$('#'+id);const on=i<n;g.style.opacity=on?1:0;g.style.transform=on?'none':'translateY(-18px) scale(.96)'});
+    $("#topper").style.transform='translateY('+(n===1?88:n===2?42:0)+'px)';
+    $('#price').textContent=fmt(base[sz]+fl);
+    $('#note').textContent=n+' '+(n===1?'ярус':'яруса')+', '+kg[sz];
+    $('#ok').classList.remove('on');
+  }
+  document.querySelectorAll('#order input').forEach(i=>i.addEventListener('change',upd));
+  $('#go').addEventListener('click',()=>{$('#ok').classList.add('on')});
+  upd();
+})();
+</script>
+</body>
+</html>

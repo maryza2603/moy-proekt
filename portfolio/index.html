@@ -163,6 +163,25 @@ header.scrolled{border-color:var(--line)}
 .guarantee .terms{grid-template-columns:repeat(3,1fr)}
 @media(max-width:900px){.guarantee .terms{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.guarantee .terms{grid-template-columns:1fr}}
+.price-sec{background:var(--cream)}
+.pr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:44px}
+.pr{padding:30px 28px;border-radius:var(--radius);background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column}
+.pr h3{font-size:22px;margin-bottom:4px}
+.pr .what{color:var(--muted);font-size:15px;margin-bottom:14px}
+.pr .sum{font-family:'PT Serif',serif;font-size:30px;color:var(--terra);margin:2px 0 2px}
+.pr .sum small{font-family:Manrope,sans-serif;font-size:14px;color:var(--muted);margin-left:6px}
+.pr ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.pr li{position:relative;padding-left:26px;font-size:15px}
+.pr li:before{content:"";position:absolute;left:0;top:7px;width:14px;height:8px;border-left:2.5px solid var(--terra);border-bottom:2.5px solid var(--terra);transform:rotate(-45deg) scale(.8);transform-origin:left}
+.pr .tiers-l{margin-top:12px;display:grid;gap:8px}
+.pr .tiers-l div{display:flex;gap:12px;align-items:baseline;font-size:15px}
+.pr .tiers-l b{min-width:84px;color:var(--terra);font-family:'PT Serif',serif;font-size:18px}
+.pr-extra{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.pr-box{padding:24px 26px;border-radius:var(--radius);border:1px dashed var(--line);background:var(--paper)}
+.pr-box h4{font-size:17px;color:var(--terra);margin-bottom:8px}
+.pr-box p,.pr-box li{font-size:15px;color:var(--muted)}
+.pr-box ul{margin:0;padding-left:18px;display:grid;gap:6px}
+@media(max-width:900px){.pr-grid,.pr-extra{grid-template-columns:1fr}}
 .badge.real{background:#DDEDE4;color:#2F6B4D}
 .badge.demo{background:#ECE7E1;color:#7A6F66}
 .card h3{font-size:21px;margin-bottom:6px}
@@ -368,6 +387,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <a class="brand" href="#top"><img src="img/logo.png" alt="Логотип М|Д"><span><b>Дизайн с характером</b><small>Мария</small></span></a>
     <ul class="menu" id="menu">
       <li><a href="#services">Услуги</a></li>
+      <li><a href="#price">Цены</a></li>
       <li><a href="#works">Портфолио</a></li>
       <li><a href="#about">Обо мне</a></li>
       <li><a href="#contact">Контакты</a></li>
@@ -431,6 +451,81 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="svc reveal" data-go="dz:Карточки" role="link" tabindex="0" aria-label="Смотреть примеры: Маркетплейсы и соцсети"><span class="num">05</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/></svg></div><h3>Маркетплейсы и соцсети</h3><p>Карточки товаров для WB и Ozon - по одной или серией в едином стиле бренда, оформление сообществ ВК и Телеграм, стикеры, карусели, ретушь фото.</p><p class="spec">Размер 900x1200 (3:4) по требованиям WB и Ozon, отдаю в JPG и PNG. Правки в рамках задания - без ограничений.</p><p class="spec">Перед работой смотрю карточки конкурентов в вашей нише, чтобы ваша выделялась в выдаче и в неё хотелось кликнуть.</p><div class="ba"><figure><img src="img/design/mp/t1-before.webp" alt="Фото пледа от продавца"><figcaption>Ваше фото</figcaption></figure><span aria-hidden="true">→</span><figure><img src="img/design/mp/t1.webp" alt="Готовая карточка пледа"><figcaption>Карточка для WB</figcaption></figure></div><div class="how"><b>Как я работаю с карточками</b><ol><li><span>Вы присылаете</span> фото товара, ссылку на него или конкурентов, 3-5 главных выгод и логотип, если есть.</li><li><span>Первая карточка</span> - через день. Утверждаем стиль, по нему делаю остальные всей серией.</li><li><span>Файлы</span> отдаю в Telegram, ВК, на почту или ссылкой на Яндекс.Диск: JPG и PNG, готовые к загрузке на WB и Ozon.</li><li><span>На связи</span> каждый день в <a href="https://t.me/luminoso89" target="_blank" rel="noopener">Telegram</a>, отвечаю в течение дня.</li></ol></div><a class="mp-ex" href="#works" data-dz="mp"><span class="th"><img src="img/design/mp/t1.webp" alt="Карточка пледа"><img src="img/design/mp/t2.webp" alt="Карточка постельного белья"><img src="img/design/mp/t3.webp" alt="Карточка полотенец"></span>Смотреть все карточки</a><div class="price"><b>1 / 3 / 5 карточек - 500 / 1 500 / 2 500 ₽</b><span>1-2 дня</span></div><p class="spec">От 10 карточек - по 400 ₽ за штуку.</p><p class="spec">Лендинг бренда для маркетплейса - от 5 000 ₽, 5-7 дней (<a href="https://maryza2603.github.io/moy-proekt/len-i-med/" target="_blank" rel="noopener" style="color:var(--terra)">пример</a>). Пакет «лендинг + 3 карточки в одном стиле» - 6 000 ₽.</p></div>
       <div class="svc reveal" data-go="dz:Презентации" role="link" tabindex="0" aria-label="Смотреть примеры: Презентации"><span class="num">06</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8M7 12l3-3 2 2 4-4"/></svg></div><h3>Презентации</h3><p>Презентации для B2B, ритейла и онлайн-курсов. Понятная структура и аккуратная подача.</p><p class="spec">Отдаю в PDF и PowerPoint (PPTX), чтобы вы могли сами менять цифры и текст.</p><span class="mp-ex"><span class="th"><img src="img/design/pres/kofepro.webp" alt="Презентация"><img src="img/design/pres/utro-v-polyah.webp" alt="Презентация"><img src="img/design/pres/teplyi-dvor.webp" alt="Презентация"></span>Смотреть все презентации</span><div class="price"><b>от 1 500 ₽</b><span>1-3 дня</span></div></div>
     </div>
+  </div>
+</section>
+
+<section class="price-sec" id="price">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kicker"><svg class="star"><use href="#star"/></svg>Цены</span>
+      <h2>Сколько это стоит и что входит</h2>
+      <p class="lead">Простыми словами: за что вы платите и что получаете. Точную цену под вашу задачу называю после короткого разговора - это бесплатно.</p>
+    </div>
+    <div class="pr-grid">
+      <div class="pr reveal">
+        <h3>Сайт-визитка или лендинг</h3>
+        <p class="what">Сайт, который я делаю вручную, без конструктора. Быстро открывается, нет ежемесячной платы за конструктор.</p>
+        <div class="sum">от 3 000 ₽<small>3-7 дней</small></div>
+        <ul>
+          <li>Макет и вёрстка: дизайн под ваш бизнес</li>
+          <li>Удобно открывается и с телефона, и с компьютера</li>
+          <li>Кнопки связи и форма заявки</li>
+          <li>Размещаю сайт в интернете и подключаю ваш домен</li>
+          <li>Правки в рамках задания - без ограничений</li>
+          <li>30 дней поддержки после запуска</li>
+        </ul>
+      </div>
+      <div class="pr reveal">
+        <h3>Сайт на Tilda</h3>
+        <p class="what">Tilda - сервис, где вы сами сможете менять тексты и фото без программиста.</p>
+        <div class="sum">от 5 000 ₽<small>3-7 дней</small></div>
+        <ul>
+          <li>Всё то же, что в визитке</li>
+          <li>Передаю копию страницы в ваш аккаунт Tilda</li>
+          <li>Показываю, как самому менять тексты и фото</li>
+          <li>Правки без ограничений, 30 дней поддержки</li>
+        </ul>
+      </div>
+      <div class="pr reveal">
+        <h3>Сайт с онлайн-записью или бронированием</h3>
+        <p class="what">Клиент сам выбирает услугу, мастера, день и время - запись приходит вам в Telegram. Подходит салону, клинике, студии, базе отдыха.</p>
+        <div class="tiers-l">
+          <div><b>25 000 ₽</b><span>онлайн-запись или бронь, заявки в Telegram, свой стиль. 10 дней</span></div>
+          <div><b>35 000 ₽</b><span>+ прайс с поиском, календарь занятости, расчёт цены с доп. услугами. 14 дней</span></div>
+          <div><b>50 000 ₽</b><span>+ до 5 страниц, цены и расписание в таблице, домен и Метрика. 21 день</span></div>
+        </div>
+        <ul><li>30 дней поддержки после запуска, правки без ограничений</li></ul>
+      </div>
+      <div class="pr reveal">
+        <h3>Конструктор товара на сайте</h3>
+        <p class="what">Покупатель сам собирает баню, кухню, дверь или кольцо: картинка меняется, цена считается сразу, смета уходит в PDF.</p>
+        <div class="tiers-l">
+          <div><b>20 000 ₽</b><span>1 товар, до 5 групп опций, смета в PDF. 7 дней</span></div>
+          <div><b>30 000 ₽</b><span>до 10 групп, ракурсы, цены в Google-таблице. 10 дней</span></div>
+          <div><b>45 000 ₽</b><span>до 3 товаров и встраивание в ваш сайт. 14 дней</span></div>
+        </div>
+        <ul><li>Простой калькулятор без картинок - 2 000 / 5 000 / 9 000 ₽, 2-5 дней</li></ul>
+      </div>
+    </div>
+    <div class="pr-extra">
+      <div class="pr-box reveal">
+        <h4>Что оплачиваете отдельно, напрямую сервисам</h4>
+        <ul>
+          <li>Домен (адрес сайта) - покупаете на своё имя, я помогу выбрать и подключить</li>
+          <li>Хостинг (место, где живёт сайт) - тоже на ваше имя, чтобы сайт всегда был вашим</li>
+          <li>Подписка Tilda - только если нужен сайт на Tilda со своим адресом</li>
+        </ul>
+      </div>
+      <div class="pr-box reveal">
+        <h4>Что нужно от вас</h4>
+        <ul>
+          <li>Рассказать о бизнесе: что продаёте и кому</li>
+          <li>Фото и тексты, если есть. Нет текстов - напишу по короткому интервью, цену назову заранее</li>
+          <li>Предоплата 50%, остаток - когда вы приняли работу</li>
+        </ul>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:26px;font-size:16px">Логотипы - от 1 500 ₽, карточки для WB и Ozon - от 500 ₽, презентации - от 1 500 ₽: подробности в разделе «Что я делаю».</p>
   </div>
 </section>
 
