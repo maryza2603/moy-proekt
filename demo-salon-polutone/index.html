@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Студия красоты «Полутон» - маникюр, брови, ресницы, онлайн-запись | Демо-сайт</title>
+<meta name="description" content="Демо-сайт салона красоты: выберите услугу, мастера и время - запись за минуту. Маникюр, педикюр, брови, ресницы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bone:#ECE6DA;--ink:#1E1F1A;--lacquer:#7A1F2B;--sage:#B9C4AE;--paper:#F7F3EB;--line:rgba(30,31,26,.16)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Golos Text",system-ui,sans-serif;background:var(--bone);color:var(--ink);font-size:17px;line-height:1.55}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--lacquer);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:20px;padding-bottom:20px}
+.logo{font-family:Prata,serif;font-size:26px;text-decoration:none}
+.hd{display:flex;align-items:center;gap:22px;font-weight:500}
+.hd a{text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 26px;border-radius:999px;background:var(--lacquer);color:#fff;font:600 16px "Golos Text",sans-serif;border:0;cursor:pointer;text-decoration:none;transition:background .2s}
+.btn:hover{background:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.hero{padding:30px 0 80px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+h1{font-family:Prata,serif;font-weight:400;font-size:clamp(40px,5.4vw,74px);line-height:1.02;letter-spacing:-.015em;margin-top:20px}
+.sub{margin-top:24px;max-width:28em;font-size:19px}
+.drops{display:flex;gap:10px;margin-top:34px}
+.drops i{width:44px;height:58px;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;display:block;box-shadow:inset -6px -8px 0 rgba(0,0,0,.14),inset 6px 8px 0 rgba(255,255,255,.28)}
+.drops i:nth-child(1){background:var(--lacquer)}.drops i:nth-child(2){background:#C98A8D}.drops i:nth-child(3){background:var(--sage)}.drops i:nth-child(4){background:var(--ink)}.drops i:nth-child(5){background:#E7D3BF}
+.msg{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px}
+.book{background:var(--paper);border-radius:26px;padding:28px;box-shadow:0 24px 50px -28px rgba(30,31,26,.55)}
+.book h2{font-family:Prata,serif;font-weight:400;font-size:26px;margin-bottom:16px}
+fieldset{border:0;margin-bottom:16px}
+legend{font-weight:600;font-size:14px;margin-bottom:8px;padding:0}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills input{position:absolute;opacity:0}
+.pills label{display:inline-block;padding:9px 15px;border-radius:999px;border:1.5px solid var(--ink);cursor:pointer;font-size:15px;transition:.15s}
+.pills input:checked+label{background:var(--ink);color:#fff}
+.pills input:focus-visible+label{outline:3px solid var(--lacquer);outline-offset:2px}
+.pills input:disabled+label{opacity:.35;text-decoration:line-through;cursor:not-allowed;border-style:dashed}
+.slots label{min-width:70px;text-align:center}
+.fld{width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid var(--ink);background:#fff;font:500 16px "Golos Text",sans-serif;margin-bottom:12px}
+.sum{display:flex;justify-content:space-between;align-items:baseline;margin:6px 0 14px;font-size:15px}
+.sum b{font-family:Prata,serif;font-size:26px;font-weight:400}
+.book .btn{width:100%}
+.agree{font-size:13px;opacity:.7;margin-top:10px}
+.ok{display:none;margin-top:14px;padding:14px 16px;border-radius:14px;background:#DFE8D5;font-size:15px}
+.ok.on{display:block}
+section{padding:70px 0}
+h2.t{font-family:Prata,serif;font-weight:400;font-size:clamp(30px,3.8vw,46px);line-height:1.05;margin-bottom:26px}
+.price{max-width:760px}
+.price li{list-style:none;display:flex;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)}
+.price li span{flex:1}
+.price li small{display:block;opacity:.7;font-size:15px}
+.price li b{font-family:Prata,serif;font-weight:400;font-size:22px;white-space:nowrap}
+.masters{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.m{padding:26px;border-radius:22px;background:var(--paper)}
+.m .av{width:64px;height:64px;border-radius:50%;margin-bottom:14px;display:grid;place-items:center;font:400 28px Prata,serif;color:#fff}
+.m h3{font-family:Prata,serif;font-weight:400;font-size:22px}
+.m p{opacity:.8;font-size:15px}
+.contacts{background:var(--ink);color:var(--bone)}
+.contacts h2.t{color:#fff}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.cg p+p{margin-top:10px}
+.contacts a{color:var(--sage)}
+footer{background:var(--ink);color:rgba(236,230,218,.6);font-size:14px;padding:0 0 28px}
+@media (max-width:860px){.hero .wrap,.cg,.masters{grid-template-columns:1fr}.hd .tel{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="logo" href="#top">Полутон</a><div class="hd"><a href="#price">Цены</a><a href="#masters">Мастера</a><a class="tel" href="tel:+70000000000">+7 (000) 000-00-00</a></div></div></header>
+<main id="top">
+<div class="hero"><div class="wrap">
+  <div>
+    <h1>Маникюр, брови и ресницы - в удобное для вас время</h1>
+    <p class="sub">Выберите услугу, мастера и свободное время в форме записи. Запись займёт минуту, звонить не нужно. Если удобнее - напишите нам в мессенджер.</p>
+    <div class="drops" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="msg"><a class="btn ghost" href="#">Написать в WhatsApp</a><a class="btn ghost" href="#">Telegram</a><a class="btn ghost" href="tel:+70000000000">Позвонить</a></div>
+  </div>
+  <form class="book" id="book" onsubmit="return false" aria-label="Онлайн-запись">
+    <h2>Запишитесь онлайн</h2>
+    <fieldset><legend>Услуга</legend><div class="pills" id="svc">
+      <span><input type="radio" name="svc" id="v1" value="1800|Маникюр" checked><label for="v1">Маникюр</label></span>
+      <span><input type="radio" name="svc" id="v2" value="2400|Педикюр"><label for="v2">Педикюр</label></span>
+      <span><input type="radio" name="svc" id="v3" value="1200|Брови"><label for="v3">Брови</label></span>
+      <span><input type="radio" name="svc" id="v4" value="2500|Ресницы"><label for="v4">Ресницы</label></span></div></fieldset>
+    <fieldset><legend>Мастер</legend><div class="pills" id="mst">
+      <span><input type="radio" name="mst" id="m1" value="Алина" checked><label for="m1">Алина</label></span>
+      <span><input type="radio" name="mst" id="m2" value="Ксения"><label for="m2">Ксения</label></span>
+      <span><input type="radio" name="mst" id="m3" value="Дарья"><label for="m3">Дарья</label></span></div></fieldset>
+    <fieldset><legend>День</legend><div class="pills" id="day">
+      <span><input type="radio" name="day" id="d1" value="сегодня" checked><label for="d1">Сегодня</label></span>
+      <span><input type="radio" name="day" id="d2" value="завтра"><label for="d2">Завтра</label></span>
+      <span><input type="radio" name="day" id="d3" value="в субботу"><label for="d3">Суббота</label></span></div></fieldset>
+    <fieldset><legend>Свободное время</legend><div class="pills slots" id="slots"></div></fieldset>
+    <label class="sr" for="ph" style="position:absolute;left:-9999px">Телефон</label>
+    <input class="fld" id="ph" type="tel" placeholder="Ваш телефон" autocomplete="tel" inputmode="tel">
+    <div class="sum"><span id="what">Маникюр, Алина</span><b id="pr">1 800 ₽</b></div>
+    <button class="btn" id="go" type="button">Записаться</button>
+    <p class="agree">Нажимая «Записаться», вы соглашаетесь на обработку телефона только для связи по записи.</p>
+    <p class="ok" id="ok" role="status"></p>
+  </form>
+</div></div>
+
+<section id="price"><div class="wrap"><h2 class="t">Услуги и цены</h2>
+<ul class="price">
+<li><span>Маникюр<small>с покрытием гель-лаком, 2 часа</small></span><b>1 800 ₽</b></li>
+<li><span>Педикюр<small>комбинированный, с покрытием</small></span><b>2 400 ₽</b></li>
+<li><span>Брови<small>коррекция и окрашивание</small></span><b>1 200 ₽</b></li>
+<li><span>Ресницы<small>наращивание, классика или 2D</small></span><b>2 500 ₽</b></li>
+</ul></div></section>
+
+<section id="masters" style="padding-top:0"><div class="wrap"><h2 class="t">Мастера</h2>
+<div class="masters">
+<div class="m"><div class="av" style="background:var(--lacquer)">А</div><h3>Алина</h3><p>Маникюр и педикюр. Любит спокойные натуральные оттенки.</p></div>
+<div class="m"><div class="av" style="background:var(--ink)">К</div><h3>Ксения</h3><p>Брови и ресницы. Подбирает форму под черты лица.</p></div>
+<div class="m"><div class="av" style="background:#6E7F63">Д</div><h3>Дарья</h3><p>Маникюр с дизайном, от простого до сложного.</p></div>
+</div></div></section>
+
+<section class="contacts"><div class="wrap"><h2 class="t">Как нас найти</h2>
+<div class="cg"><div><p><b>Адрес</b><br>ул. Кирова, 12, 2 этаж (пример)</p><p><b>Часы работы</b><br>Ежедневно с 10:00 до 20:00</p></div>
+<div><p><b>Телефон</b><br><a href="tel:+70000000000">+7 (000) 000-00-00</a></p><p><b>Мессенджеры</b><br><a href="#">WhatsApp</a> и <a href="#">Telegram</a></p></div></div></div></section>
+</main>
+<footer><div class="wrap">Демо-сайт салона. Название, адрес, телефон и цены условные.</div></footer>
+
+<script>
+(function(){
+  const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+  const times=['10:00','11:30','13:00','14:30','16:00','17:30','19:00'];
+  // условно занятые слоты: зависят от мастера и дня, чтобы было видно, что расписание живое
+  const MS=['Алина','Ксения','Дарья'], DS=['сегодня','завтра','в субботу'];
+  function busy(m,d,t){return (MS.indexOf(m)*5+DS.indexOf(d)*3+times.indexOf(t)*7)%4===0}
+  function slots(){
+    const m=$('input[name=mst]:checked').value, d=$('input[name=day]:checked').value;
+    $('#slots').innerHTML=times.map((t,i)=>`<span><input type="radio" name="tm" id="t${i}" value="${t}" ${busy(m,d,t)?'disabled':''}><label for="t${i}">${t}</label></span>`).join('');
+    const f=$('#slots input:not(:disabled)'); if(f) f.checked=true;
+  }
+  function sum(){
+    const [p,n]=$('input[name=svc]:checked').value.split('|'), m=$('input[name=mst]:checked').value;
+    $('#what').textContent=n+', '+m; $('#pr').textContent=(+p).toLocaleString('ru-RU').replace(/ /g,' ')+' ₽';
+  }
+  $$('input[name=mst],input[name=day]').forEach(i=>i.addEventListener('change',()=>{slots();sum();$('#ok').classList.remove('on')}));
+  $$('input[name=svc]').forEach(i=>i.addEventListener('change',()=>{sum();$('#ok').classList.remove('on')}));
+  $('#go').addEventListener('click',()=>{
+    const ph=$('#ph').value.replace(/\D/g,''), ok=$('#ok');
+    if(ph.length<10){ok.textContent='Укажите телефон полностью, например +7 900 000-00-00, чтобы мы подтвердили запись.';ok.classList.add('on');$('#ph').focus();return}
+    const t=$('input[name=tm]:checked'); if(!t){ok.textContent='На этот день свободного времени нет. Выберите другой день или мастера.';ok.classList.add('on');return}
+    const [,n]=$('input[name=svc]:checked').value.split('|');
+    ok.textContent='Готово! '+n+', '+$('input[name=mst]:checked').value+', '+$('input[name=day]:checked').value+' в '+t.value+'. Мастер подтвердит запись по телефону.';
+    ok.classList.add('on');
+  });
+  slots();sum();
+})();
+</script>
+</body>
+</html>
