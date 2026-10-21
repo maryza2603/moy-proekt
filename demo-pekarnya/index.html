@@ -158,8 +158,8 @@ footer{background:var(--rye);color:rgba(255,249,236,.6);padding:18px 0 28px;font
     const sz=document.querySelector('input[name=size]:checked').value;
     const fl=+document.querySelector('input[name=fill]:checked').value;
     const n=tiers[sz];
-    ['t1','t2','t3'].forEach((id,i)=>{const g=$('#'+id);const on=i<n;g.style.opacity=on?1:0;g.style.transform=on?'none':'translateY(-18px) scale(.96)'});
-    $("#topper").style.transform='translateY('+(n===1?88:n===2?42:0)+'px)';
+    ['t1','t2','t3'].forEach((id,i)=>{const g=$('#'+id);const on=i<n;g.style.opacity=on?1:0;g.style.transform=on?(n===1&&i===0?'scaleY(1.9)':'none'):'translateY(-18px) scale(.96)'});
+    $("#topper").style.transform='translateY('+(n===1?38:n===2?42:0)+'px)';
     $('#price').textContent=fmt(base[sz]+fl);
     $('#note').textContent=n+' '+(n===1?'ярус':'яруса')+', '+kg[sz];
     $('#ok').classList.remove('on');
