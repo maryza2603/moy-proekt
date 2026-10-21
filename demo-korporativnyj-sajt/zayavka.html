@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Оставить заявку - Магистраль</title><meta name="description" content="Опишите груз и маршрут. Пришлём расчёт стоимости за 30 минут в рабочее время.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"></head>
+<body data-page="zayavka"><main id="main">
+
+<section class="page-h"><div class="wrap"><h1>Заявка на расчёт</h1><p>Опишите груз и маршрут. Менеджер пришлёт цену в рабочее время в течение 30 минут.</p></div></section>
+<div class="dash"></div>
+<section class="s"><div class="wrap form-grid">
+  <form class="f" id="lead" novalidate>
+    <div><label for="name">Имя</label><input id="name" name="name" autocomplete="name" required><p class="msg" aria-live="polite"></p></div>
+    <div><label for="company">Компания</label><input id="company" name="company" autocomplete="organization"><p class="msg"></p></div>
+    <div><label for="phone">Телефон</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__" required><p class="msg" aria-live="polite"></p></div>
+    <div><label for="email">Почта (по желанию)</label><input id="email" name="email" type="email" autocomplete="email"><p class="msg" aria-live="polite"></p></div>
+    <div class="full"><label for="service">Что нужно</label>
+      <select id="service" name="service"><option>Перевозка по России</option><option>Ответственное хранение</option><option>Доставка до двери</option><option>Таможня и сопровождение</option><option>Другое</option></select></div>
+    <div class="full"><label for="message">Груз и маршрут</label><textarea id="message" name="message" placeholder="Например: 12 паллет, 8 тонн, Москва - Казань, 28 октября" required></textarea><p class="msg" aria-live="polite"></p></div>
+    <input class="hp" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="full agree"><input type="checkbox" id="agree" name="agree"><label for="agree" style="font-weight:400;margin:0">Согласен на обработку персональных данных для связи по заявке</label></div>
+    <div class="full"><button class="btn" type="submit">Отправить заявку</button>
+      <div id="status" tabindex="-1" role="status"></div></div>
+  </form>
+  <aside class="aside"><h3>Быстрее по телефону</h3><p>Если груз срочный, позвоните: ответим сразу.</p><p><a href="tel:+74951234567" style="font-family:Unbounded,sans-serif;font-size:1.1rem">+7 (495) 123-45-67</a></p><p>Пн-Пт, 9:00-19:00</p></aside>
+</div></section>
+</main>
+<script src="js/config.js"></script><script src="js/posts.js"></script><script src="js/main.js"></script>
+</body></html>
