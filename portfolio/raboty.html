@@ -145,6 +145,8 @@ header.scrolled{border-color:var(--line)}
 .shot .chrome i:first-child{background:var(--terra)}
 .shot img{position:absolute;top:26px;left:0;width:100%;height:calc(100% - 26px);object-fit:cover;object-position:top;transition:transform 4s ease}
 .shot img.gif{top:0;height:100%;object-fit:contain;background:#f3ebe3}
+.shot.vid{aspect-ratio:4/5;background:#1b1e22}.shot.vid video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;background:#1b1e22}.shot.vid.sq{aspect-ratio:1/1}
+.badge.video{background:#E4EAF5;color:#2F4A7A}
 .card:hover .shot img.scroll{transform:translateY(-8%)}
 .shot.pair{display:grid;grid-template-columns:1fr 1fr}
 .shot.pair .half{position:relative;overflow:hidden}
@@ -513,6 +515,7 @@ const W=[
  {cat:'code',t:'Детейлинг-центр «Глосс»',f:'Для автосервисов',img:'detailing',d:'Сайт детейлинга: калькулятор цены по классу авто, слайдер «до/после», запись на бокс и время.',url:GH+'demo-detailing/',b:['Премиум','Калькулятор']},
  {cat:'code',t:'Юристы «Корсаков и партнёры»',f:'Для юридических компаний',img:'yurist',d:'Сайт юридической фирмы: тест из 4 вопросов с оценкой стоимости, срока и плана работы, команда юристов.',url:GH+'demo-yurist/',b:['Премиум','Квиз']},
  {cat:'code',t:'Йога-студия «Дыши»',f:'Для фитнеса и йоги',img:'yoga',d:'Сайт студии: расписание недели с фильтрами и свободными местами, запись на занятие, подбор абонемента.',url:GH+'demo-yoga/',b:['Премиум','Расписание']},
+ {cat:'code',t:'Мини-отель «Кипарис»',f:'Для отелей и гостевых домов',img:'otel-krym',d:'Сайт мини-отеля у моря: четыре типа номеров с ценами, дорога до пляжа, что входит в цену, выбор месяца и заявка на бронь.',url:GH+'otel-krym/',b:['Премиум','Цены по месяцам']},
  {cat:'code',t:'Психологи: женская и мужская версия',f:'Для психологов',d:'Два сайта психологов в едином стиле - одна система дизайна под разных специалистов.',pair:['psy-w','psy-m'],labels:['Анна','Михаил'],links:[['Сайт 1',GH+'psy-konsultaciya/'],['Сайт 2',GH+'psy-mikhail/']],wide:1,b:['Серия']},
  {cat:'code',t:'Риэлтор Ирина Ветрова',f:'Для риэлторов',img:'rieltor',d:'Сайт-визитка риэлтора: объекты с фильтром, услуги с ценами, шаги сделки и калькулятор - покупатель узнаёт цену квартиры мечты, продавец - за сколько продать свою.',url:GH+'rieltor/'},
  {cat:'code',t:'Студия маникюра «Миндаль»',f:'Для салонов красоты',img:'mindal',d:'Сайт для мастера маникюра и педикюра: работы с просмотром фото, услуги с ценами, палитра и онлайн-запись: клиент сам выбирает услугу, мастера и свободное время. На рабочем сайте запись приходит мастеру в Telegram, а занятое время сразу пропадает из расписания.',url:GH+'mindal/',b:['Онлайн-запись']},
@@ -543,10 +546,14 @@ const W=[
  {cat:'app',t:'Арена - приложение для Android',mock:'phone',d:'Личное Android-приложение для сервиса «Арена»: всё под рукой в телефоне, без браузера.',b:['Android']},
  {cat:'app',t:'Биржа фриланса - приложение',mock:'phone',d:'У биржи не было приложения - я сделала своё. Заказы и отклики прямо с телефона.',b:['Android']},
  {cat:'app',t:'Видеостудия для Windows',mock:'pc',d:'Программа на Python: озвучка видео русским голосом по субтитрам, транскрибация, скачивание видео, Reels.',b:['Windows','Python']},
+ {cat:'video',t:'Анимация логотипа',f:'Для любого бизнеса',vid:'logo-animaciya',sq:1,d:'Логотип на 5 секунд: знак появляется, надпись «пишется», внизу слоган. Для заставки видео, сторис и презентации.'},
+ {cat:'video',t:'Reels для мини-отеля',f:'Для отелей и гостевых домов',vid:'reels-otel',d:'Вертикальный ролик 18 секунд из фото: номера, завтрак, хозяйка, призыв написать даты. Музыка, подписи, плавные переходы.',links:[['Сайт отеля',GH+'otel-krym/']]},
+ {cat:'video',t:'Reels для студии йоги',f:'Для фитнеса и йоги',vid:'reels-yoga',d:'Ролик 18 секунд для соцсетей: зал, занятия, группы, приглашение на пробное. Спокойная музыка и крупные подписи.',links:[['Сайт студии',GH+'demo-yoga/']]},
+ {cat:'video',t:'Ролик-презентация сайта пекарни',f:'Для пекарен',vid:'reels-pekarnya',d:'Запись экрана конструктора торта: выбирают размер и начинку, цена пересчитывается, заявка уходит кондитеру. Подписи и музыка.',links:[['Сайт пекарни',GH+'demo-pekarnya/']]},
 ];
 const EXP=['Для психологов','Для экспертов','Для репетиторов','Для онлайн-школ'];
-const CATS=[['all','Все'],['konstr','Конструкторы'],['code','Сайты на коде'],['land','Лендинги'],['expert','Для экспертов'],['tilda','Tilda'],['app','Приложения'],['design','Дизайн']];
-const BADGE={konstr:['konstr','Конструктор'],code:['code','Код'],tilda:['tilda','Tilda'],app:['app','Приложение']};
+const CATS=[['all','Все'],['konstr','Конструкторы'],['code','Сайты на коде'],['land','Лендинги'],['expert','Для экспертов'],['tilda','Tilda'],['app','Приложения'],['video','Видео'],['design','Дизайн']];
+const BADGE={konstr:['konstr','Конструктор'],code:['code','Код'],tilda:['tilda','Tilda'],app:['app','Приложение'],video:['video','Видео']};
 
 /* дизайн: картинки лежат в img/design/<папка>/, презентации - в docs/ */
 const DESIGN=[
@@ -563,6 +570,7 @@ const $=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"]/g,c=>({'&
 const designCount=DESIGN.reduce((n,g)=>n+(g.items||g.pres).length,0);
 function shot(w){
   if(w.pair) return `<div class="shot pair"><div class="chrome"><i></i><i></i><i></i></div>${w.pair.map((p,i)=>`<div class="half"><img decoding="async" src="img/sites/${p}.webp" alt="${w.t} - ${w.labels[i]}"><span class="label">${w.labels[i]}</span></div>`).join('')}</div>`;
+  if(w.vid) return `<div class="shot vid${w.sq?' sq':''}"><video src="video/${w.vid}.mp4" poster="video/${w.vid}.jpg" controls preload="none" playsinline aria-label="${esc(w.t)}"></video></div>`;
   if(w.gif) return `<div class="shot"><img class="gif" decoding="async" src="video/${w.gif}" alt="${esc(w.t)}"></div>`;
   if(w.mock==='phone') return `<div class="shot"><div class="appmock"><div class="device"><div class="top"></div><div class="it"></div><div class="it"></div><div class="it" style="width:70%"></div><div class="it"></div></div></div></div>`;
   if(w.mock==='pc') return `<div class="shot"><div class="appmock"><div class="pc"><div class="tb"><i></i><i></i><i></i></div><div class="tabs"><span>Озвучка</span><span>Транскрибация</span><span>Скачивание</span><span>Reels</span></div><div class="pane"><div class="ln"></div><div class="ln" style="width:70%"></div><div class="ln" style="width:85%"></div><div class="go"></div></div></div></div></div>`;
@@ -571,7 +579,7 @@ function shot(w){
 function card(w,i){
   const bd=[...(w.f?[['for',w.f]]:[]),BADGE[w.cat],...(w.b||[]).map(x=>[x==='Премиум'?'prem':/^Реальный/.test(x)?'real':'',x]),...((w.b||[]).some(x=>/^Реальный/.test(x))||w.cat==='app'?[]:[['demo','Демо']])].map(([c,x])=>`<span class="badge ${c}">${x}</span>`).join('');
   const links=w.links?w.links:(w.url?[['Открыть',w.url]]:[]);
-  const foot=links.length?`<div class="links">${links.map(([l,u])=>`<a href="${u}" target="_blank" rel="noopener">${l}<svg><use href="#ext"/></svg></a>`).join('')}</div>`:`<div class="no-link"><svg width="15" height="15"><use href="#lock"/></svg>Личное приложение - покажу на созвоне</div>`;
+  const foot=(!links.length&&w.vid)?'':links.length?`<div class="links">${links.map(([l,u])=>`<a href="${u}" target="_blank" rel="noopener">${l}<svg><use href="#ext"/></svg></a>`).join('')}</div>`:`<div class="no-link"><svg width="15" height="15"><use href="#lock"/></svg>Личное приложение - покажу на созвоне</div>`;
   return `<article class="card${w.wide?' wide':''}" style="animation-delay:${Math.min(i,8)*50}ms">${shot(w)}<div class="body"><div class="badges">${bd}</div><h3>${esc(w.t)}</h3><p>${esc(w.d)}</p>${foot}</div></article>`;
 }
 const ARR='<svg viewBox="0 0 24 24"><use href="#arrow"/></svg>';
