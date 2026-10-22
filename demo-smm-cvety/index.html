@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SMM для цветочной лавки «Полевая» | Демо-кейс</title>
+<meta name="description" content="Демо-кейс: оформление, 9 постов с текстами, Reels, сторис, контент-план на месяц и образец отчёта для вымышленной цветочной лавки.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@700;800&family=Caveat:wght@600;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--poppy:#D8321C;--blue:#3552D6;--wheat:#EFC24A;--green:#1F3B2D;--mist:#E6E1F2;--ink:#151A16;--white:#FBFAF7;--kraft:#C79A6B;--pad:clamp(20px,5vw,72px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Golos Text',system-ui,sans-serif;color:var(--ink);background:var(--white);font-size:18px;line-height:1.55}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.d{font-family:'Fira Sans Extra Condensed',sans-serif;font-weight:800;letter-spacing:-.01em;line-height:.9}
+.hand{font-family:Caveat,cursive;font-weight:700}
+.wrap{padding:0 var(--pad);max-width:1320px;margin:0 auto}
+section{padding:clamp(56px,9vw,120px) 0}
+h2{font-size:clamp(46px,8vw,104px);margin-bottom:28px}
+.lead{font-size:clamp(18px,2vw,22px);max-width:34em}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px var(--pad);background:var(--mist)}
+.top b{font:800 26px 'Fira Sans Extra Condensed'}
+.top a{font-size:15px;text-decoration:none;border-bottom:2px solid currentColor}
+.hero{background:var(--mist);padding:0 0 clamp(40px,6vw,80px)}
+.hero img{width:100%;height:auto}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(24px,5vw,72px);padding-top:clamp(32px,5vw,64px);align-items:end}
+.hero h1{font-size:clamp(46px,6.4vw,92px)}
+.hero p{font-size:19px}
+.note{display:inline-block;margin-top:18px;padding:8px 16px;background:var(--wheat);font-weight:600;font-size:15px;border-radius:4px}
+.inc{background:var(--wheat)}
+.inc ul{list-style:none;border-top:5px solid var(--ink)}
+.inc li{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:24px;padding:20px 0;border-bottom:2px solid var(--ink);align-items:baseline}
+.inc li b{font:800 clamp(30px,4vw,48px)/1 'Fira Sans Extra Condensed'}
+.brand{background:var(--poppy);color:var(--white)}
+.brand .grid{display:grid;grid-template-columns:260px 1fr;gap:clamp(24px,4vw,56px);align-items:start;margin-top:36px}
+.brand .ava{border-radius:50%;width:260px;height:260px;object-fit:cover;box-shadow:8px 10px 0 rgba(0,0,0,.2)}
+.sw{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px;margin:0 0 28px}
+.sw div{padding:46px 12px 12px;font-size:14px;font-weight:600;color:var(--white);box-shadow:5px 6px 0 rgba(0,0,0,.2)}
+.sw .l{color:var(--ink)}
+.type{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.type p{font-size:16px;max-width:30em}
+.type .d{font-size:56px;margin-bottom:8px}
+.feed{background:var(--white)}
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,44px);margin-top:44px}
+.post img{width:100%;height:auto;box-shadow:8px 10px 0 rgba(21,26,22,.14)}
+.post .rb{display:inline-block;margin:22px 0 8px;font:800 24px 'Fira Sans Extra Condensed';letter-spacing:.01em}
+.post details summary{cursor:pointer;font-weight:600;font-size:16px;padding:6px 0;color:var(--blue)}
+.post details p{font-size:16px;margin-top:8px;white-space:pre-line}
+.reels{background:var(--green);color:var(--white)}
+.reels h2{color:var(--wheat)}
+.vids{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,320px));gap:40px;margin-top:40px;align-items:start}
+.vids video{width:100%;aspect-ratio:9/16;background:#000;box-shadow:8px 10px 0 rgba(0,0,0,.3)}
+.vids figcaption{margin-top:14px;font-size:16px;max-width:22em}
+.vids figcaption b{display:block;font:800 30px/1 'Fira Sans Extra Condensed';margin-bottom:6px;color:var(--wheat)}
+.sl{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:56px}
+.sl img{width:100%;height:auto}
+.plan{background:var(--mist)}
+.tw{overflow-x:auto;margin-top:36px;border-top:5px solid var(--ink)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:16px}
+th{font:800 24px 'Fira Sans Extra Condensed';text-align:left;padding:14px 12px;border-bottom:2px solid var(--ink);position:sticky;top:0;background:var(--mist)}
+td{padding:11px 12px;border-bottom:1px solid rgba(21,26,22,.25);vertical-align:top}
+tr.w td:first-child{font:800 26px 'Fira Sans Extra Condensed'}
+.fm{display:inline-block;padding:2px 10px;border-radius:99px;font-size:14px;font-weight:600;color:var(--white)}
+.fm.p{background:var(--poppy)}.fm.r{background:var(--blue)}.fm.s{background:var(--green)}
+.rep{background:var(--blue);color:var(--white)}
+.rep h2{color:var(--wheat)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;margin-top:36px;border-top:4px solid var(--white)}
+.stats div{padding:20px 20px 20px 0;border-bottom:2px solid rgba(255,255,255,.5)}
+.stats b{display:block;font:800 clamp(52px,6vw,84px)/1 'Fira Sans Extra Condensed'}
+.stats span{font-size:15px;opacity:.9}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);margin-top:44px}
+.two h3{font:800 34px 'Fira Sans Extra Condensed';margin-bottom:10px;color:var(--wheat)}
+.two li{margin:0 0 10px 20px}
+.cap{font-size:14px;margin-top:28px;opacity:.9}
+.tone{background:var(--white)}
+.tone .rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-top:36px}
+.tone .c{border-top:5px solid var(--poppy);padding-top:14px}
+.tone .c h3{font:800 32px 'Fira Sans Extra Condensed';margin-bottom:8px}
+.tone .q{font-size:16px;background:var(--mist);padding:14px 16px;margin-top:10px;border-left:6px solid var(--blue)}
+.tone .q b{display:block;font-size:13px;font-weight:600;opacity:.7;margin-bottom:2px}
+.end{background:var(--wheat)}
+.end .d{font-size:clamp(46px,8vw,96px)}
+.btn{display:inline-block;margin-top:26px;background:var(--ink);color:var(--white);padding:18px 34px;border-radius:999px;text-decoration:none;font-weight:600}
+footer{padding:26px var(--pad);font-size:14px;background:var(--ink);color:rgba(251,250,247,.75)}
+@media(max-width:900px){.hero .wrap,.two{grid-template-columns:1fr}.posts{grid-template-columns:repeat(2,1fr)}.brand .grid{grid-template-columns:1fr}.sl{grid-template-columns:repeat(3,1fr)}.inc li{grid-template-columns:1fr;gap:6px}}
+@media(max-width:560px){.posts{grid-template-columns:1fr}.sl{grid-template-columns:repeat(2,1fr)}body{font-size:17px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="top"><b>Полевая</b><a href="../portfolio/">Все мои работы</a></div>
+
+<header class="hero">
+  <img src="img/cover.webp" alt="Обложка сообщества цветочной лавки «Полевая»: яркие цветы в технике вырезанной бумаги" width="1920" height="768">
+  <div class="wrap">
+    <div>
+      <h1 class="d">Соцсети для цветочной лавки под ключ</h1>
+      <span class="note">Демо-кейс: лавка вымышленная, цены и отзыв условные</span>
+    </div>
+    <p>Показываю, как выглядит SMM, когда им занимаются системно: общий стиль, регулярные посты с текстами, Reels и сторис, план на месяц и отчёт. Всё нарисовано и собрано с нуля, без стоковых фото.</p>
+  </div>
+</header>
+
+<section class="inc">
+  <div class="wrap">
+    <h2 class="d">Что вошло в работу</h2>
+    <ul>
+      <li><b>Оформление</b><span>аватар и обложка сообщества, палитра, шрифты, рубрики</span></li>
+      <li><b>9 постов с текстами</b><span>знакомство, что цветёт сегодня, цены, польза, закулисье, отзыв, подписка, вопрос подписчикам, сезонный пост</span></li>
+      <li><b>2 Reels и 10 слайдов</b><span>вертикальные ролики с музыкой, те же слайды работают как сторис</span></li>
+      <li><b>Контент-план на месяц</b><span>что, когда и зачем публикуем: 12 постов, 4 Reels, сторис</span></li>
+      <li><b>Образец отчёта</b><span>как я показываю итоги месяца и что предлагаю дальше</span></li>
+      <li><b>Тон общения</b><span>как бренд говорит с подписчиками и отвечает на вопросы</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="brand" id="brand">
+  <div class="wrap">
+    <h2 class="d">Стиль: цветы из бумаги</h2>
+    <p class="lead">Лавка продаёт полевые цветы в крафте, поэтому весь стиль собран из плоских вырезанных форм, жёсткой тени и крафтовой бумаги. Заголовки крупные и узкие, чтобы читались в ленте за секунду.</p>
+    <div class="grid">
+      <img class="ava" src="img/avatar.webp" alt="Аватар лавки: белый мак на красном фоне" width="260" height="260">
+      <div>
+        <div class="sw">
+          <div style="background:#D8321C">Мак<br>#D8321C</div>
+          <div style="background:#3552D6">Василёк<br>#3552D6</div>
+          <div class="l" style="background:#EFC24A">Колос<br>#EFC24A</div>
+          <div style="background:#1F3B2D">Лист<br>#1F3B2D</div>
+          <div class="l" style="background:#E6E1F2">Дымка<br>#E6E1F2</div>
+          <div class="l" style="background:#C79A6B">Крафт<br>#C79A6B</div>
+        </div>
+        <div class="type">
+          <div><p class="d" style="font-size:56px">Полевая</p><p>Fira Sans Extra Condensed: заголовки и цены. Плотный и узкий, помещается крупно.</p></div>
+          <div><p class="hand" style="font-size:44px;line-height:1">заказ в сообщениях</p><p>Caveat: подписи на крафтовых бирках, живой акцент.</p></div>
+          <div><p style="font-weight:600;font-size:20px">Golos Text</p><p>Основной текст: ровный и спокойный, хорошо читается с телефона.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="feed" id="posts">
+  <div class="wrap">
+    <h2 class="d">Лента: 9 постов</h2>
+    <p class="lead">У каждого поста своя рубрика и своя задача. Под картинкой готовый текст подписи: его можно публиковать как есть.</p>
+    <div class="posts">
+      <article class="post"><img src="img/post-01.webp" alt="Пост «Привет. Мы - Полевая»" loading="lazy"><span class="rb">Знакомство</span><details><summary>Текст подписи</summary><p>Привет! Мы - «Полевая». Собираем букеты из полевых и сезонных цветов и заворачиваем в крафт.
+
+Здесь будем показывать, что цветёт сегодня, рассказывать, как ухаживать за букетами, и иногда пускать вас за кулисы.
+
+Заказать букет можно в сообщения: напишите повод, бюджет и день.</p></details></article>
+      <article class="post"><img src="img/post-02.webp" alt="Пост «Что цветёт сегодня»" loading="lazy"><span class="rb">Рубрика по вторникам</span><details><summary>Текст подписи</summary><p>Что цветёт сегодня. Каждый вторник показываем, что приехало этим утром, и называем цену за стебель.
+
+Ромашка - 90 ₽, василёк - 70 ₽, мак - 140 ₽. Из них можно собрать букет на любой бюджет.
+
+Что добавить в рубрику на следующей неделе? Напишите в комментариях.</p></details></article>
+      <article class="post"><img src="img/post-03.webp" alt="Пост «Три букета на эту неделю»" loading="lazy"><span class="rb">Продажа</span><details><summary>Текст подписи</summary><p>Три букета на эту неделю: Полевой - 1 900 ₽, Нежный - 2 600 ₽, Большой - 3 900 ₽.
+
+Состав зависит от того, что цветёт сегодня, поэтому два букета никогда не бывают одинаковыми. Чтобы заказать, напишите в сообщения.</p></details></article>
+      <article class="post"><img src="img/post-04.webp" alt="Пост «Как продлить жизнь букета: 3 правила»" loading="lazy"><span class="rb">Польза</span><details><summary>Текст подписи</summary><p>Как продлить жизнь букета: 3 правила.
+
+1. Подрежьте стебли под углом на 2-3 см острым ножом.
+2. Налейте воду комнатной температуры и меняйте раз в два дня.
+3. Поставьте подальше от батареи и вазы с фруктами.
+
+Сохраните пост, чтобы он был под рукой.</p></details></article>
+      <article class="post"><img src="img/post-05.webp" alt="Пост «6:30 утра. Приехали цветы»" loading="lazy"><span class="rb">Закулисье</span><details><summary>Текст подписи</summary><p>6:30 утра. Приехали цветы. Разбираем, подрезаем, ставим в воду. К открытию лавка пахнет лугом.
+
+Какой цветок вы бы взяли первым?</p></details></article>
+      <article class="post"><img src="img/post-06.webp" alt="Пост с отзывом покупательницы" loading="lazy"><span class="rb">Отзыв</span><details><summary>Текст подписи</summary><p>Заказала букет маме за день до дня рождения. Привезли через два часа. Мама плакала. Букет стоял две недели.
+
+Спасибо, Анна, что поделились. (Пример отзыва для демо-кейса.)</p></details></article>
+      <article class="post"><img src="img/post-07.webp" alt="Пост «Букет по пятницам»" loading="lazy"><span class="rb">Подписка</span><details><summary>Текст подписи</summary><p>Букет по пятницам. Свежий букет каждую пятницу к 18:00, от 1 500 ₽ за раз. Поставить на паузу или отменить можно в любой момент: просто напишите нам.
+
+Первый букет по подписке - со скидкой 10%.</p></details></article>
+      <article class="post"><img src="img/post-08.webp" alt="Пост «Какой вы цветок сегодня?»" loading="lazy"><span class="rb">Вопрос подписчикам</span><details><summary>Текст подписи</summary><p>Какой вы цветок сегодня?
+
+Ромашка - спокойный день. Василёк - много дел. Мак - хочу праздника.
+
+Ответьте в комментариях, а мы подберём к вашему настроению букет.</p></details></article>
+      <article class="post"><img src="img/post-09.webp" alt="Пост «Сухоцветы: букет до весны»" loading="lazy"><span class="rb">Сезон</span><details><summary>Текст подписи</summary><p>Сухоцветы: букет до весны. Пшеница, статица и лаванда не вянут и не просят воды.
+
+Подарок, который простоит всю зиму. Собираем под ваш бюджет, пишите в сообщения.</p></details></article>
+    </div>
+  </div>
+</section>
+
+<section class="reels" id="reels">
+  <div class="wrap">
+    <h2 class="d">Reels и сторис</h2>
+    <p class="lead">Два вертикальных ролика собраны из тех же слайдов, что и сторис. Один формат работает сразу в трёх местах.</p>
+    <div class="vids">
+      <figure><video src="video/reel1-chto-cvetet.mp4" poster="video/reel1-chto-cvetet.jpg" controls preload="none" playsinline></video><figcaption><b>Что цветёт сегодня</b>15 секунд: три цветка с ценами и призыв заказать букет.</figcaption></figure>
+      <figure><video src="video/reel2-3-pravila.mp4" poster="video/reel2-3-pravila.jpg" controls preload="none" playsinline></video><figcaption><b>3 правила для букета</b>16 секунд: польза, которую сохраняют и пересылают.</figcaption></figure>
+    </div>
+    <div class="sl" aria-label="Слайды для сторис">
+      <img src="img/story-02.webp" alt="Сторис: Ромашка" loading="lazy"><img src="img/story-03.webp" alt="Сторис: Василёк" loading="lazy"><img src="img/story-04.webp" alt="Сторис: Мак" loading="lazy"><img src="img/story-07.webp" alt="Сторис: срез под углом" loading="lazy"><img src="img/story-08.webp" alt="Сторис: чистая вода" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="plan" id="plan">
+  <div class="wrap">
+    <h2 class="d">План на месяц</h2>
+    <p class="lead">12 постов, 4 Reels и сторис по будням. Рубрики повторяются, чтобы подписчики знали, чего ждать и в какой день.</p>
+    <div class="tw">
+    <table>
+      <thead><tr><th>Неделя</th><th>День</th><th>Формат</th><th>Рубрика и тема</th><th>Зачем</th></tr></thead>
+      <tbody>
+        <tr class="w"><td>1</td><td>Пн</td><td><span class="fm p">Пост</span></td><td>Знакомство: кто мы и что делаем</td><td>Познакомить с лавкой</td></tr>
+        <tr><td></td><td>Вт</td><td><span class="fm r">Reels</span></td><td>Что цветёт сегодня</td><td>Охват и подписки</td></tr>
+        <tr><td></td><td>Ср</td><td><span class="fm s">Сторис</span></td><td>Закулисье: утренняя приёмка цветов</td><td>Доверие</td></tr>
+        <tr><td></td><td>Пт</td><td><span class="fm p">Пост</span></td><td>Три букета на неделю</td><td>Заказы к выходным</td></tr>
+        <tr class="w"><td>2</td><td>Пн</td><td><span class="fm p">Пост</span></td><td>Польза: как продлить жизнь букета</td><td>Сохранения и репосты</td></tr>
+        <tr><td></td><td>Вт</td><td><span class="fm r">Reels</span></td><td>Что цветёт сегодня</td><td>Охват</td></tr>
+        <tr><td></td><td>Ср</td><td><span class="fm s">Сторис</span></td><td>Опрос: какой повод чаще всего?</td><td>Узнать аудиторию</td></tr>
+        <tr><td></td><td>Пт</td><td><span class="fm p">Пост</span></td><td>Букет по пятницам: подписка</td><td>Регулярные заказы</td></tr>
+        <tr class="w"><td>3</td><td>Пн</td><td><span class="fm p">Пост</span></td><td>Отзыв покупателя</td><td>Доверие</td></tr>
+        <tr><td></td><td>Вт</td><td><span class="fm r">Reels</span></td><td>3 правила для букета</td><td>Охват, сохранения</td></tr>
+        <tr><td></td><td>Ср</td><td><span class="fm s">Сторис</span></td><td>Букет дня с ценой</td><td>Быстрый заказ</td></tr>
+        <tr><td></td><td>Пт</td><td><span class="fm p">Пост</span></td><td>Вопрос: какой вы цветок сегодня?</td><td>Комментарии</td></tr>
+        <tr class="w"><td>4</td><td>Пн</td><td><span class="fm p">Пост</span></td><td>Закулисье: 6:30, приехали цветы</td><td>Тёплое отношение</td></tr>
+        <tr><td></td><td>Вт</td><td><span class="fm r">Reels</span></td><td>Что цветёт сегодня (новые цветы)</td><td>Охват</td></tr>
+        <tr><td></td><td>Ср</td><td><span class="fm s">Сторис</span></td><td>Ответы на частые вопросы: доставка, сроки</td><td>Снять сомнения</td></tr>
+        <tr><td></td><td>Пт</td><td><span class="fm p">Пост</span></td><td>Сезон: сухоцветы</td><td>Продажа подарков</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section class="rep" id="report">
+  <div class="wrap">
+    <h2 class="d">Образец отчёта за месяц</h2>
+    <p class="lead">В конце месяца я присылаю одну страницу: что сделано, что сработало и что менять. Цифры ниже условные: показываю формат, а не результат реальной лавки.</p>
+    <div class="stats">
+      <div><b>12 400</b><span>охват за месяц</span></div>
+      <div><b>+186</b><span>новых подписчиков</span></div>
+      <div><b>47</b><span>сообщений с вопросом о заказе</span></div>
+      <div><b>21</b><span>заказ из этих сообщений</span></div>
+    </div>
+    <div class="two">
+      <div><h3>Что сработало</h3><ul><li>Пост «3 правила для букета»: больше всего сохранений.</li><li>Reels «Что цветёт сегодня»: приводит больше всего новых подписчиков.</li><li>Опрос в сторис помог понять, что чаще всего покупают на день рождения.</li></ul></div>
+      <div><h3>Что делаем дальше</h3><ul><li>Повторять Reels каждый вторник, меняя цветы.</li><li>Добавить пост про букеты ко Дню учителя и Дню матери заранее.</li><li>Попросить трёх покупателей оставить отзыв для следующего месяца.</li></ul></div>
+    </div>
+    <p class="cap">Образец для демо-кейса. Реальные цифры в отчёте берутся из статистики сообщества.</p>
+  </div>
+</section>
+
+<section class="tone" id="tone">
+  <div class="wrap">
+    <h2 class="d">Как лавка говорит с подписчиками</h2>
+    <p class="lead">Тон один на все посты и ответы: тёплый, на «вы», без капса и лишних восклицаний. Вот как он звучит в переписке.</p>
+    <div class="rows">
+      <div class="c"><h3>Вопрос о цене</h3><div class="q"><b>Покупатель</b>Сколько стоит букет на день рождения?</div><div class="q"><b>Лавка</b>Здравствуйте! Букеты у нас от 1 900 ₽. Подскажите, пожалуйста, на какой день и какой бюджет, и мы предложим два варианта.</div></div>
+      <div class="c"><h3>Букет быстро завял</h3><div class="q"><b>Покупатель</b>Букет простоял всего три дня.</div><div class="q"><b>Лавка</b>Жаль, что так вышло. Расскажите, пожалуйста, где он стоял и когда вы его подрезали. Если дело в нас, заменим букет.</div></div>
+      <div class="c"><h3>Нужна доставка</h3><div class="q"><b>Покупатель</b>А вы привозите?</div><div class="q"><b>Лавка</b>Да, привозим по городу в день заказа. Напишите адрес и время, мы сразу назовём стоимость доставки.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="end">
+  <div class="wrap">
+    <h2 class="d">Хотите так же для своего бизнеса?</h2>
+    <p class="lead">Беру оформление, посты с текстами, Reels и сторис, план и отчёт. Цены и пакеты - в разделе «Цены» портфолио.</p>
+    <a class="btn" href="../portfolio/#price">Смотреть цены</a>
+  </div>
+</section>
+<footer>Демо-кейс. Лавка «Полевая» вымышленная, цены, отзыв и цифры отчёта условные. Все рисунки выполнены с нуля.</footer>
+</body>
+</html>
