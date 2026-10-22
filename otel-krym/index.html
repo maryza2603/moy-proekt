@@ -146,6 +146,14 @@
   .incl__fig img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
   .incl__fig figcaption { padding: var(--v-3) var(--v-4) var(--v-4); font-size: var(--v-t-sm); color: var(--v-ink-soft); }
   .incl__fig figcaption b { color: var(--v-ink); font-weight: 600; }
+  .love { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); gap: var(--v-8) var(--v-9); align-items: center; }
+  .love__fig { margin: 0; border-radius: var(--v-radius); overflow: hidden; box-shadow: var(--v-e2); background: var(--v-surface); }
+  .love__fig img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 30%; display: block; }
+  .love__fig figcaption { padding: var(--v-3) var(--v-4) var(--v-4); font-size: var(--v-t-sm); color: var(--v-ink-soft); }
+  .love__fig figcaption b { color: var(--v-ink); font-weight: 600; }
+  .love__copy .v-label { display: block; margin-bottom: var(--v-5); }
+  .love__copy > p { margin-top: var(--v-5); color: var(--v-ink-soft); max-width: 44ch; }
+  @media (max-width: 860px) { .love { grid-template-columns: 1fr; gap: var(--v-6); } .love__fig { max-width: 26rem; } }
   @media (max-width: 860px) { .incl { grid-template-columns: 1fr; gap: var(--v-6); } .yes li { grid-template-columns: 1fr; } .incl__fig { position: static; max-width: 22rem; } }
 
   /* ---- акт 5 · фирменный ход: сезонная шкала цен ----------------------------- */
@@ -331,6 +339,22 @@
           <img src="assets/breakfast.webp" alt="Домашний завтрак на террасе с видом на море" width="900" height="1200" loading="lazy">
           <figcaption><b>Завтрак готовим сами.</b> Каждое утро, без шведской линии.</figcaption>
         </figure>
+      </div>
+    </section>
+
+    <!-- 4б · ГОТОВИМ С ЛЮБОВЬЮ -->
+    <section class="v-section" data-v-act="flow" data-v-drift="#eef0ec" id="lyubov" aria-label="Готовим с любовью">
+      <div class="v-wrap love">
+        <figure class="love__fig" data-v-reveal="left" data-v-reveal-at="0.1 0.45">
+          <img src="assets/hostess.webp" alt="Мария, хозяйка отеля, готовит завтрак на кухне: нарезает овощи и зелень" width="1254" height="1254" loading="lazy">
+          <figcaption><b>Мария,</b> хозяйка «Кипариса»</figcaption>
+        </figure>
+        <div class="love__copy" data-v-in data-v-stagger="70">
+          <span class="v-label">Кухня «Кипариса»</span>
+          <h2 class="v-display v-display--lg">Готовим <em>с любовью</em></h2>
+          <p>Каждое утро завтрак готовит хозяйка: свежие овощи, зелень, яйца, домашний хлеб. Всё простое и по-настоящему вкусное, как дома.</p>
+          <p>Если у вас есть особые пожелания к еде, напишите заранее, и мы учтём их при заказе продуктов.</p>
+        </div>
       </div>
     </section>
 
