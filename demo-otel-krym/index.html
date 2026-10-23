@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Кипарис · мини-отель у моря в Алуште</title>
+<meta name="description" content="Мини-отель «Кипарис» в Алуште: 8 номеров, 7 минут пешком до пляжа, завтрак на террасе. Цены по сезонам видны на сайте, бронь в пару сообщений.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Кипарис · мини-отель у моря в Алуште">
+<meta property="og:description" content="8 номеров, 7 минут до пляжа, завтрак на террасе. Цены по сезонам – на сайте.">
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M16 3c-4 7-6 13-6 18a6 6 0 0 0 12 0c0-5-2-11-6-18z%27 fill=%27%231f5a4c%27/%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/piazzolla-cyr.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/manrope-cyr.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="vibe.css">
+<style>
+  @font-face { font-family: "Piazzolla"; font-style: normal; font-weight: 500 600; font-display: swap;
+    src: url(assets/fonts/piazzolla-cyr.woff2) format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+  @font-face { font-family: "Piazzolla"; font-style: normal; font-weight: 500 600; font-display: swap;
+    src: url(assets/fonts/piazzolla-lat.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+  @font-face { font-family: "Piazzolla"; font-style: italic; font-weight: 500; font-display: swap;
+    src: url(assets/fonts/piazzolla-italic-cyr.woff2) format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+  @font-face { font-family: "Piazzolla"; font-style: italic; font-weight: 500; font-display: swap;
+    src: url(assets/fonts/piazzolla-italic-lat.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+  @font-face { font-family: "Manrope"; font-style: normal; font-weight: 400 600; font-display: swap;
+    src: url(assets/fonts/manrope-cyr.woff2) format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+  @font-face { font-family: "Manrope"; font-style: normal; font-weight: 400 600; font-display: swap;
+    src: url(assets/fonts/manrope-lat.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+
+  html, body { margin: 0; background: #eef0ec; }
+
+  /* ---- тема: известняк, кипарис, морская глубина ---------------------------- */
+  .v-page {
+    --v-canvas: #eef0ec; --v-surface: #fbfbf8;
+    --v-ink: #17221f; --v-ink-soft: #55615c;
+    --v-accent: #1f5a4c; --v-accent-ink: #f3f6f2;
+    --v-accent-deep: #1a4b40;
+    --v-font-display: "Piazzolla", "Georgia", serif;
+    --v-font-text: "Manrope", "Segoe UI", system-ui, sans-serif;
+    --v-shadow-color: 23 40 36;
+    --v-e1: 0 1px 2px rgb(var(--v-shadow-color) / .08), 0 8px 22px rgb(var(--v-shadow-color) / .10);
+    --v-e2: 0 2px 6px rgb(var(--v-shadow-color) / .10), 0 22px 54px rgb(var(--v-shadow-color) / .16);
+    --v-radius: 12px;
+    --v-track-tight: -0.015em;
+    --v-t-xs: clamp(0.8125rem, 0.79rem + 0.15vw, 0.85rem);
+    --v-t-sm: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem);
+  }
+  .v-display { font-weight: 500; }
+  .v-display em { font-style: italic; color: var(--v-accent-deep); }
+  .nowrap { white-space: nowrap; }
+
+  /* ---- шапка ------------------------------------------------------------- */
+  .bar { position: fixed; inset: 0 0 auto 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: var(--v-4);
+    padding: var(--v-3) var(--v-gutter); background: rgb(238 240 236 / .86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--v-hair); }
+  .bar__mark { font-family: var(--v-font-display); font-size: var(--v-t-lg); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: .45em; white-space: nowrap; }
+  .bar__mark svg { width: .8em; height: 1em; fill: var(--v-accent); flex: none; }
+  .index { display: flex; gap: var(--v-6); font-size: var(--v-t-sm); }
+  .index a { text-decoration: none; color: var(--v-ink-soft); padding-block: .3em; transition: color .16s var(--v-ease-out); }
+  @media (hover: hover) and (pointer: fine) { .index a:hover { color: var(--v-ink); } }
+  .bar .v-btn { padding: .75em 1.3em; }
+  @media (max-width: 860px) { .index { gap: var(--v-4); font-size: var(--v-t-xs); } .bar .v-btn { padding: .65em 1em; } }
+  @media (max-width: 600px) { .index { display: none; } }
+
+  /* ---- акт 1 · терраса над морем --------------------------------------- */
+  .hero__back img { position: absolute; max-width: none; width: 112%; height: 112%; left: -6%; top: -6%; object-fit: cover; object-position: 60% 50%; }
+  .hero__col { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(90deg, rgb(238 240 236 / .82) 0%, rgb(238 240 236 / .55) 34%, transparent 62%); }
+  .hero__copy { bottom: clamp(3.5rem, 10vh, 7rem); max-width: min(44rem, 88vw); }
+  .hero__label { display: block; margin-bottom: var(--v-4); }
+  .hero__copy .v-display { font-size: clamp(2.3rem, 1.3rem + 3.2vw, 4.2rem); line-height: 1.02; max-width: 17ch; }
+  .hero__copy .v-lede { margin-top: var(--v-5); max-width: 38ch; color: var(--v-ink); }
+  .hero__cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--v-4) var(--v-6); margin-top: var(--v-6); }
+  .hero__from { font-size: var(--v-t-sm); color: var(--v-ink); }
+  .hero__from b { font-family: var(--v-font-display); font-size: var(--v-t-lg); font-weight: 600; }
+  .hero__note { position: absolute; z-index: 3; right: var(--v-gutter); top: clamp(5.5rem, 15vh, 9rem); display: grid; gap: .2em; text-align: right;
+    padding: var(--v-4) var(--v-5); border-radius: var(--v-radius); background: rgb(251 251 248 / .84); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: var(--v-e1); }
+  .hero__note b { font-family: var(--v-font-display); font-size: var(--v-t-xl); font-weight: 600; line-height: 1; }
+  .hero__note span { font-size: var(--v-t-sm); color: var(--v-ink-soft); }
+  .hero__two { bottom: auto; top: clamp(7rem, 22vh, 13rem); max-width: min(40rem, 88vw); }
+  .hero__two .v-display { font-size: var(--v-t-2xl); line-height: 1.06; max-width: 15ch; }
+  .hero__two ul { margin-top: var(--v-5); display: grid; gap: var(--v-2); font-size: var(--v-t-base); }
+  .hero__two li { display: flex; gap: .6em; align-items: baseline; }
+  .hero__two li::before { content: ""; flex: none; width: 1.2rem; height: 1px; background: var(--v-accent); transform: translateY(-.3em); }
+  @media (max-width: 860px) {
+    .hero__back img { object-position: 50% 80%; }
+    .hero__col { background: linear-gradient(to bottom, rgb(238 240 236 / .8) 0%, rgb(238 240 236 / .45) 45%, transparent 68%); }
+    .hero__copy, .hero__two { bottom: auto; top: clamp(5rem, 10vh, 6.5rem); }
+    .hero__copy .v-display { font-size: clamp(2rem, 1.2rem + 3.6vw, 2.7rem); }
+    .hero__copy .v-lede { font-size: var(--v-t-base); margin-top: var(--v-3); }
+    .hero__cta { margin-top: var(--v-4); }
+    .hero__note { top: auto; bottom: var(--v-6); right: var(--v-gutter); }
+  }
+
+  /* ---- акт 2 · номера лентой ------------------------------------------------ */
+  .rooms { display: flex; flex-direction: column; justify-content: center; height: 100%; padding-top: 4.5rem; }
+  .rooms__rail { padding-inline: var(--v-gutter); align-items: flex-start; gap: clamp(1rem, 2.5vw, 2.5rem); }
+  .rooms__intro { flex: none; width: clamp(18rem, 28vw, 26rem); padding-top: clamp(.5rem, 4vh, 3rem); padding-right: var(--v-6); }
+  .rooms__intro .v-label { display: block; margin-bottom: var(--v-5); }
+  .rooms__intro h2 { font-size: clamp(1.9rem, 1.1rem + 1.9vw, 2.8rem); line-height: 1.06; }
+  .rooms__intro p { margin-top: var(--v-5); color: var(--v-ink-soft); max-width: 30ch; text-wrap: pretty; }
+  .room { flex: none; width: min(clamp(240px, 27vw, 370px), calc((100svh - 16rem) * .75)); }
+  .room__img { display: block; border-radius: var(--v-radius); overflow: hidden; box-shadow: var(--v-e1); background: var(--v-surface); }
+  .room__img img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  .room__cap { padding-top: var(--v-4); display: grid; gap: var(--v-1); }
+  .room__cap h3 { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-lg); }
+  .room__cap p { font-size: var(--v-t-sm); color: var(--v-ink-soft); }
+  .room__price { font-size: var(--v-t-sm); }
+  .room__price b { font-family: var(--v-font-display); font-weight: 600; font-size: var(--v-t-lg); color: var(--v-accent-deep); }
+  @media (max-width: 860px) { .rooms__intro { width: 60vw; padding-top: 0; } .rooms__intro h2 { font-size: var(--v-t-xl); } .room { width: min(76vw, calc((100svh - 15rem) * .75)); } }
+  @media (pointer: coarse) {
+    .rooms--touch { padding-top: 5rem; }
+    .rooms--touch .rooms__intro { width: auto; max-width: 36rem; padding: 0 var(--v-gutter); margin-bottom: var(--v-5); }
+    .rooms--touch .rooms { height: auto; padding-top: 0; display: block; }
+    .rooms--touch [data-v-stage] { scroll-padding-inline: var(--v-gutter); }
+    .rooms--touch .room { width: min(68vw, 20rem); }
+  }
+
+  /* ---- акт 3 · дорога к морю ------------------------------------------------ */
+  .road { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: var(--v-8) var(--v-9); align-items: center; }
+  .road__fig { border-radius: var(--v-radius); overflow: hidden; box-shadow: var(--v-e2); aspect-ratio: 16 / 10; background: var(--v-surface); }
+  .road__fig img { width: 100%; height: 100%; object-fit: cover; }
+  .road__copy .v-label { display: block; margin-bottom: var(--v-5); }
+  .v-page .steps { margin-top: var(--v-6); position: relative; display: grid; gap: var(--v-5); padding-left: 1.75rem; }
+  .steps::before { content: ""; position: absolute; left: .35rem; top: .5rem; bottom: .5rem; width: 1px; background: var(--v-hair-strong); }
+  .steps li { position: relative; display: grid; gap: .15em; }
+  .steps li::before { content: ""; position: absolute; left: -1.75rem; top: .45em; width: .75rem; height: .75rem; border-radius: 50%; background: var(--v-canvas); border: 1px solid var(--v-accent); }
+  .steps li:last-child::before { background: var(--v-accent); }
+  .steps b { font-weight: 600; }
+  .steps span { color: var(--v-ink-soft); font-size: var(--v-t-sm); }
+  .steps i { font-style: normal; font-variant-numeric: tabular-nums; color: var(--v-accent-deep); font-weight: 600; }
+  @media (max-width: 860px) { .road { grid-template-columns: 1fr; gap: var(--v-6); } }
+
+  /* ---- акт 4 · что входит в цену ------------------------------------------- */
+  .incl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .75fr); gap: var(--v-8) var(--v-9); align-items: start; }
+  .incl__copy .v-label { display: block; margin-bottom: var(--v-5); }
+  .incl__copy > p { margin-top: var(--v-5); color: var(--v-ink-soft); max-width: 40ch; }
+  .v-page .yes { margin-top: var(--v-6); }
+  .yes li { display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: var(--v-1) var(--v-6); padding: var(--v-4) 0; border-top: 1px solid var(--v-hair); }
+  .yes li:last-child { border-bottom: 1px solid var(--v-hair); }
+  .yes b { font-weight: 600; }
+  .yes span { color: var(--v-ink-soft); font-size: var(--v-t-sm); }
+  .incl__fig { border-radius: var(--v-radius); overflow: hidden; box-shadow: var(--v-e2); background: var(--v-surface); position: sticky; top: 6rem; }
+  .incl__fig img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  .incl__fig figcaption { padding: var(--v-3) var(--v-4) var(--v-4); font-size: var(--v-t-sm); color: var(--v-ink-soft); }
+  .incl__fig figcaption b { color: var(--v-ink); font-weight: 600; }
+  .love { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); gap: var(--v-8) var(--v-9); align-items: center; }
+  .love__fig { margin: 0; border-radius: var(--v-radius); overflow: hidden; box-shadow: var(--v-e2); background: var(--v-surface); }
+  .love__fig img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 30%; display: block; }
+  .love__fig figcaption { padding: var(--v-3) var(--v-4) var(--v-4); font-size: var(--v-t-sm); color: var(--v-ink-soft); }
+  .love__fig figcaption b { color: var(--v-ink); font-weight: 600; }
+  .love__copy .v-label { display: block; margin-bottom: var(--v-5); }
+  .love__copy > p { margin-top: var(--v-5); color: var(--v-ink-soft); max-width: 44ch; }
+  @media (max-width: 860px) { .love { grid-template-columns: 1fr; gap: var(--v-6); } .love__fig { max-width: 26rem; } }
+  @media (max-width: 860px) { .incl { grid-template-columns: 1fr; gap: var(--v-6); } .yes li { grid-template-columns: 1fr; } .incl__fig { position: static; max-width: 22rem; } }
+
+  /* ---- акт 5 · фирменный ход: сезонная шкала цен ----------------------------- */
+  .season__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--v-6) var(--v-9); align-items: end; margin-bottom: var(--v-7); }
+  .season__head .v-label { display: block; margin-bottom: var(--v-5); }
+  .season__head p { color: var(--v-ink-soft); max-width: 40ch; }
+  .months { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-radius: var(--v-radius); overflow: hidden; border: 1px solid var(--v-hair-strong); }
+  .months button { font: inherit; font-size: var(--v-t-sm); padding: var(--v-4) var(--v-2) var(--v-3); background: var(--v-surface); color: var(--v-ink); border: 0; border-left: 1px solid var(--v-hair); cursor: pointer; display: grid; gap: .5em; justify-items: center; transition: background-color .16s var(--v-ease-out), color .16s var(--v-ease-out); }
+  .months button:first-child { border-left: 0; }
+  /* «температура» сезона: полоска высотой от загрузки */
+  .months button i { display: block; width: 60%; height: .3rem; border-radius: 99px; background: var(--v-hair-strong); position: relative; overflow: hidden; }
+  .months button i::after { content: ""; position: absolute; inset: 0 auto 0 0; width: calc(var(--heat) * 100%); background: var(--v-accent); opacity: .75; }
+  .months button[aria-pressed="true"] { background: var(--v-accent); color: var(--v-accent-ink); }
+  .months button[aria-pressed="true"] i { background: rgb(255 255 255 / .25); }
+  .months button[aria-pressed="true"] i::after { background: var(--v-accent-ink); }
+  @media (hover: hover) and (pointer: fine) { .months button:not([aria-pressed="true"]):hover { background: var(--v-canvas); } }
+  .season__note { margin-top: var(--v-4); font-size: var(--v-t-sm); color: var(--v-ink-soft); min-height: 1.6em; }
+  .v-page .prices { margin-top: var(--v-6); }
+  .prices li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--v-1) var(--v-6); align-items: baseline; padding: var(--v-5) 0; border-top: 1px solid var(--v-hair); }
+  .prices li:last-child { border-bottom: 1px solid var(--v-hair); }
+  .prices h3 { font-family: var(--v-font-display); font-weight: 500; font-size: var(--v-t-lg); }
+  .prices p { grid-column: 1; color: var(--v-ink-soft); font-size: var(--v-t-sm); }
+  .prices .p { grid-row: 1; grid-column: 2; font-family: var(--v-font-display); font-weight: 600; font-size: var(--v-t-lg); color: var(--v-accent-deep); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .prices .p small { font-family: var(--v-font-text); font-weight: 400; font-size: var(--v-t-xs); color: var(--v-ink-soft); }
+  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--v-4) var(--v-5); margin-top: var(--v-7); }
+  .cta span { color: var(--v-ink-soft); font-size: var(--v-t-sm); max-width: 38ch; }
+  @media (max-width: 860px) {
+    .season__head { grid-template-columns: 1fr; }
+    .months { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .months button:nth-child(5) { border-left: 0; }
+    .months button:nth-child(n+5) { border-top: 1px solid var(--v-hair); }
+  }
+
+  /* ---- акт 6 · бронь (финал) --------------------------------------------- */
+  .close { height: 100%; display: grid; grid-template-rows: 1fr auto; padding: 0 var(--v-gutter); color: var(--v-ink); }
+  .close__inner { align-self: center; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: var(--v-8); align-items: end; padding-top: var(--v-9); }
+  .close__inner p { margin-top: var(--v-5); color: var(--v-ink-soft); max-width: 40ch; }
+  .close__btns { margin-top: var(--v-6); display: flex; flex-wrap: wrap; gap: var(--v-3); }
+  .close__meta { display: grid; gap: var(--v-3); color: var(--v-ink-soft); font-size: var(--v-t-sm); }
+  .close__tel { font-family: var(--v-font-display); font-size: var(--v-t-xl); font-weight: 600; text-decoration: none; color: var(--v-ink); padding-block: .3em; }
+  .close__meta b { color: var(--v-ink); font-weight: 600; }
+  .foot { display: flex; justify-content: space-between; gap: var(--v-4); flex-wrap: wrap; padding: var(--v-6) 0; border-top: 1px solid var(--v-hair); font-size: var(--v-t-xs); color: var(--v-ink-soft); }
+  @media (max-width: 860px) { .close__inner { grid-template-columns: 1fr; gap: var(--v-6); padding-top: var(--v-8); } .close__tel { font-size: var(--v-t-lg); } }
+</style>
+</head>
+<body>
+<div class="v-page">
+  <span data-v-progress></span>
+
+  <header class="bar">
+    <a class="bar__mark" href="#top"><svg viewBox="0 0 20 32" aria-hidden="true"><path d="M10 1c-4 8-6 15-6 20a6 6 0 0 0 12 0c0-5-2-12-6-20z"/></svg>Кипарис</a>
+    <nav class="index" aria-label="Разделы">
+      <a href="#nomera">Номера</a>
+      <a href="#more">До моря</a>
+      <a href="#vhodit">Что входит</a>
+      <a href="#ceny">Цены</a>
+    </nav>
+    <a class="v-btn" href="#bron">Забронировать</a>
+  </header>
+
+  <main>
+
+    <!-- 1 · УЗНАВАНИЕ: терраса над морем, слои, оффер встречает -->
+    <section id="top" data-v-act="pin" data-v-span="2.2" data-v-drift="#eef0ec" aria-label="Мини-отель «Кипарис»">
+      <div data-v-stage>
+        <div class="v-layer hero__back" data-v-parallax="-0.45">
+          <picture>
+            <source media="(max-width: 860px)" srcset="assets/hero-m.webp">
+            <img src="assets/hero.webp" alt="" width="1920" height="1080" fetchpriority="high">
+          </picture>
+        </div>
+        <div class="hero__col" aria-hidden="true"></div>
+
+        <div class="hero__note" data-v-cue="0 0.6 0" data-v-rise="0">
+          <b>7 минут</b>
+          <span>пешком до пляжа</span>
+        </div>
+
+        <div class="v-copy v-copy--lead hero__copy" data-v-cue="0 0.6 0 0.1">
+          <span class="v-label hero__label">Мини-отель «Кипарис» · Алушта</span>
+          <h1 class="v-display v-display--xl" data-v-kinetic="lines">Мини-отель у моря в Алуште</h1>
+          <p class="v-lede">8 номеров, завтрак на террасе и тропинка к пляжу. Цена по месяцам видна до брони.</p>
+          <div class="hero__cta">
+            <a class="v-btn" href="#bron" data-v-magnet="0.25" data-v-rise="0">Забронировать</a>
+            <span class="hero__from">номер от <b>3&nbsp;200&nbsp;₽</b> за ночь</span>
+          </div>
+        </div>
+
+        <div class="v-copy v-copy--lead hero__two" data-v-cue="0.62 0.96 0.06 0.04">
+          <h2 class="v-display">Три вопроса, которые задают до брони</h2>
+          <ul>
+            <li>Далеко ли море – 7 минут вниз по ступеням</li>
+            <li>Что входит в цену – завтрак, парковка, кондиционер</li>
+            <li>Сколько стоит в мой месяц – цены по сезонам ниже</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · ВЫБОР: номера боковой лентой -->
+    <section data-v-act="pan" data-v-span="4" id="nomera" aria-label="Номера">
+      <div data-v-stage>
+        <div class="rooms">
+          <div class="rooms__rail" data-v-pan="0.02">
+            <div class="rooms__intro" data-v-cue="0 1 0 0">
+              <span class="v-label">Номера</span>
+              <h2 class="v-display">Четыре типа номеров, восемь дверей</h2>
+              <p>В каждом свой санузел, кондиционер и холодильник. Цена ниже – за ночь в июле, в другие месяцы дешевле.</p>
+            </div>
+
+            <figure class="room">
+              <div class="room__img"><img src="assets/room-sea.webp" alt="Двухместный номер с балконом и видом на море" width="900" height="1200"></div>
+              <figcaption class="room__cap">
+                <h3>С видом на море</h3>
+                <p>2 гостя · 18 м² · свой балкон</p>
+                <span class="room__price"><b>6&nbsp;400&nbsp;₽</b> за ночь</span>
+              </figcaption>
+            </figure>
+            <figure class="room">
+              <div class="room__img"><img src="assets/room-garden.webp" alt="Двухместный номер с окном в сад" width="900" height="1200"></div>
+              <figcaption class="room__cap">
+                <h3>В сад</h3>
+                <p>2 гостя · 14 м² · первый этаж, тихо</p>
+                <span class="room__price"><b>4&nbsp;900&nbsp;₽</b> за ночь</span>
+              </figcaption>
+            </figure>
+            <figure class="room">
+              <div class="room__img"><img src="assets/room-family.webp" alt="Семейный номер с двуспальной и односпальной кроватью" width="900" height="1200"></div>
+              <figcaption class="room__cap">
+                <h3>Семейный</h3>
+                <p>до 4 гостей · 24 м² · вид на море</p>
+                <span class="room__price"><b>8&nbsp;200&nbsp;₽</b> за ночь</span>
+              </figcaption>
+            </figure>
+            <figure class="room">
+              <div class="room__img"><img src="assets/room-studio.webp" alt="Студия с мини-кухней у окна" width="900" height="1200"></div>
+              <figcaption class="room__cap">
+                <h3>Студия с кухней</h3>
+                <p>до 3 гостей · 28 м² · плита и посуда</p>
+                <span class="room__price"><b>9&nbsp;100&nbsp;₽</b> за ночь</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · ДОКАЗАТЕЛЬСТВО: дорога к морю, шторка -->
+    <section class="v-section v-section--tight" data-v-act="flow" data-v-drift="#e9eee9" id="more" aria-label="Дорога к морю">
+      <div class="v-wrap road">
+        <figure class="road__fig" data-v-reveal="left" data-v-reveal-at="0.12 0.5">
+          <img src="assets/path.webp" alt="Каменные ступени между кипарисами ведут к галечному пляжу" width="1600" height="900" loading="lazy">
+        </figure>
+        <div class="road__copy" data-v-in data-v-stagger="70">
+          <span class="v-label">Дорога к морю</span>
+          <h2 class="v-display v-display--lg">Семь минут вниз – и вы на пляже</h2>
+          <ul class="steps">
+            <li><b>Калитка отеля</b><span>выходите через сад, без лифтов и трасс</span></li>
+            <li><b><i>3 мин</i> · ступени между кипарисами</b><span>в тени даже в полдень, есть перила</span></li>
+            <li><b><i>7 мин</i> · галечный пляж</b><span>городской, бесплатный; лежаки берём у нас</span></li>
+          </ul>
+          <p class="cta"><span>Обратно в гору – минут десять. Если тяжело подниматься, попросите номер на первом этаже.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · ЧТО ВХОДИТ: строки с линиями, фото завтрака -->
+    <section class="v-section" data-v-act="flow" data-v-drift="#eef0ec" id="vhodit" aria-label="Что входит в цену">
+      <div class="v-wrap incl">
+        <div class="incl__copy" data-v-in data-v-stagger="60">
+          <span class="v-label">Что входит в цену</span>
+          <h2 class="v-display v-display--lg">Цена за ночь – <em>без доплат на месте</em></h2>
+          <p>Всё, что ниже, уже в цене номера. Доплачиваете только то, что выбрали сами: трансфер или поздний выезд.</p>
+          <ul class="yes">
+            <li><b>Завтрак на террасе</b><span>домашний: сырники, каша, овощи, фрукты, кофе. С 8:00 до 10:30</span></li>
+            <li><b>Парковка во дворе</b><span>закрытая, на 6 машин, место держим под вашу бронь</span></li>
+            <li><b>Кондиционер и холодильник</b><span>в каждом номере, плюс чайник и посуда</span></li>
+            <li><b>Лежаки и зонт</b><span>берёте у администратора и несёте на пляж</span></li>
+            <li><b>Уборка и смена белья</b><span>уборка каждые 3 дня, полотенца по просьбе</span></li>
+          </ul>
+        </div>
+        <figure class="incl__fig" data-v-reveal="up" data-v-reveal-at="0.1 0.45">
+          <img src="assets/breakfast.webp" alt="Домашний завтрак на террасе с видом на море" width="900" height="1200" loading="lazy">
+          <figcaption><b>Завтрак готовим сами.</b> Каждое утро, без шведской линии.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 4б · ГОТОВИМ С ЛЮБОВЬЮ -->
+    <section class="v-section" data-v-act="flow" data-v-drift="#eef0ec" id="lyubov" aria-label="Готовим с любовью">
+      <div class="v-wrap love">
+        <figure class="love__fig" data-v-reveal="left" data-v-reveal-at="0.1 0.45">
+          <img src="assets/hostess.webp" alt="Мария, хозяйка отеля, готовит завтрак на кухне: нарезает овощи и зелень" width="1254" height="1254" loading="lazy">
+          <figcaption><b>Мария,</b> хозяйка «Кипариса»</figcaption>
+        </figure>
+        <div class="love__copy" data-v-in data-v-stagger="70">
+          <span class="v-label">Кухня «Кипариса»</span>
+          <h2 class="v-display v-display--lg">Готовим <em>с любовью</em></h2>
+          <p>Каждое утро завтрак готовит хозяйка: свежие овощи, зелень, яйца, домашний хлеб. Всё простое и по-настоящему вкусное, как дома.</p>
+          <p>Если у вас есть особые пожелания к еде, напишите заранее, и мы учтём их при заказе продуктов.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · ФИРМЕННЫЙ ХОД: сезонная шкала – выбираешь месяц, цены пересчитываются -->
+    <section class="v-section" data-v-act="flow" data-v-drift="#f4f5f1" id="ceny" aria-label="Цены по месяцам">
+      <div class="v-wrap season">
+        <div class="season__head" data-v-in data-v-stagger="60">
+          <div>
+            <span class="v-label">Цены по месяцам</span>
+            <h2 class="v-display v-display--lg">Выберите месяц – увидите цену</h2>
+          </div>
+          <p>Море тёплое с июня по сентябрь. В мае и октябре тихо и вдвое дешевле: идеально, если едете гулять, а не купаться.</p>
+        </div>
+        <div data-v-in>
+          <div class="months" role="group" aria-label="Месяц поездки">
+            <button type="button" data-m="0" style="--heat:.25">Май<i></i></button>
+            <button type="button" data-m="1" style="--heat:.55">Июнь<i></i></button>
+            <button type="button" data-m="2" style="--heat:1" aria-pressed="true">Июль<i></i></button>
+            <button type="button" data-m="3" style="--heat:1">Август<i></i></button>
+            <button type="button" data-m="4" style="--heat:.6">Сентябрь<i></i></button>
+            <button type="button" data-m="5" style="--heat:.25">Октябрь<i></i></button>
+            <button type="button" data-m="6" style="--heat:.1">Зима<i></i></button>
+          </div>
+          <p class="season__note" id="season-note" aria-live="polite"></p>
+          <ul class="prices" id="prices">
+            <li data-r="sea"><h3>С видом на море</h3><span class="p"></span><p>2 гостя, балкон</p></li>
+            <li data-r="garden"><h3>В сад</h3><span class="p"></span><p>2 гостя, первый этаж</p></li>
+            <li data-r="family"><h3>Семейный</h3><span class="p"></span><p>до 4 гостей, дети до 5 лет бесплатно</p></li>
+            <li data-r="studio"><h3>Студия с кухней</h3><span class="p"></span><p>до 3 гостей, удобно на неделю и дольше</p></li>
+          </ul>
+          <div class="cta">
+            <a class="v-btn" href="#bron">Забронировать</a>
+            <span>От 7 ночей – минус 10% в любой месяц. Скидку посчитаем сами, когда напишете даты.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · ДЕЙСТВИЕ: бронь, финал держит реплику -->
+    <section data-v-act="pin" data-v-span="1.4" data-v-drift="#dfe7e2" id="bron" aria-label="Забронировать">
+      <div data-v-stage>
+        <div class="close">
+          <div class="close__inner">
+            <div data-v-cue="0.04">
+              <h2 class="v-display v-display--lg">Напишите даты – ответим за 15 минут</h2>
+              <p>Скажите, когда приезжаете и сколько вас. Пришлём свободные номера с ценой за весь срок. Предоплата – одна ночь, остальное на месте.</p>
+              <div class="close__btns">
+                <a class="v-btn" href="https://t.me/" target="_blank" rel="noopener">Забронировать</a>
+                <a class="v-btn v-btn--ghost" href="tel:+79780000000">Позвонить</a>
+              </div>
+            </div>
+            <div class="close__meta" data-v-cue="0.1">
+              <a class="close__tel" href="tel:+79780000000">+7 978 000-00-00</a>
+              <span><b>ул. Партизанская</b>, Алушта</span>
+              <span>Заезд с 14:00, выезд до 12:00</span>
+              <span>Отвечаем с 8:00 до 22:00</span>
+            </div>
+          </div>
+          <footer class="foot">
+            <span>Мини-отель «Кипарис» · Алушта · демо-сайт</span>
+            <span>Номера, завтрак на террасе, 7 минут до моря</span>
+          </footer>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="vibe.js"></script>
+<script>
+  (function () {
+    var act = document.getElementById('nomera');
+    var stage = act.querySelector('[data-v-stage]');
+    var intro = act.querySelector('.rooms__intro');
+    if (window.matchMedia('(pointer: coarse)').matches) { act.insertBefore(intro, stage); act.classList.add('rooms--touch'); }
+
+    Vibe.mount(document.querySelector('.v-page'));
+
+    // Фирменный ход: сезонная шкала. Цена за ночь по месяцам, пересчёт по клику.
+    var P = {
+      sea:    [3600, 5200, 6400, 6400, 4800, 3400, 2900],
+      garden: [2800, 3900, 4900, 4900, 3600, 2600, 2200],
+      family: [4600, 6600, 8200, 8200, 6100, 4300, 3600],
+      studio: [5100, 7300, 9100, 9100, 6800, 4800, 3900]
+    };
+    var notes = [
+      'Май: море ещё прохладное, +16. Тихо, цветут сады, лучшее время для прогулок.',
+      'Июнь: море +20–22, народу меньше, чем в июле.',
+      'Июль: пик сезона, море +25. Бронируйте за месяц-два.',
+      'Август: самое тёплое море, +26. Свободные номера разбирают к маю.',
+      'Сентябрь: бархатный сезон, море +22, жара спадает.',
+      'Октябрь: море +17, солнечно и пусто. Цены почти зимние.',
+      'Ноябрь–апрель: открыты, но завтрак по запросу. Дешевле всего.'
+    ];
+    var btns = document.querySelectorAll('.months button');
+    var fmt = function (n) { return n.toLocaleString('ru-RU').replace(/ |\s/g, ' '); };
+    function pick(m) {
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.m === m)); });
+      document.querySelectorAll('#prices li').forEach(function (li) {
+        li.querySelector('.p').innerHTML = fmt(P[li.dataset.r][m]) + '&nbsp;₽ <small>за ночь</small>';
+      });
+      document.getElementById('season-note').textContent = notes[m];
+    }
+    btns.forEach(function (b) { b.addEventListener('click', function () { pick(+b.dataset.m); }); });
+    pick(2);
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Термоконтур - сервисное обслуживание климатической техники</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600&family=Tektur:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Термоконтур</a>
+    <nav class="nav">
+      <a href="#services">Услуги</a>
+      <a href="#plans">Договоры</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="phone" href="tel:+78005550000">8 800 555-00-00</a>
+    <button class="burger" aria-label="Меню" onclick="document.getElementById('top').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<!-- 1. Первый экран с заявкой-нарядом -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Обслуживаем кондиционеры, котлы и вентиляцию по графику</h1>
+      <p class="lead">Плановое ТО и срочный ремонт для квартир, офисов и магазинов. Мастер приезжает в выбранное окно, после визита вы получаете акт с фото.</p>
+      <a class="btn ghost" href="#plans">Сравнить договоры</a>
+      <div class="hero-facts">
+        <div><b>2 часа</b>выезд на аварию</div>
+        <div><b>1 год</b>гарантия на работы</div>
+        <div><b>40+</b>брендов техники</div>
+      </div>
+    </div>
+    <form class="ticket" id="ticket" onsubmit="event.preventDefault();this.querySelector('.btn').textContent='Мастер записан - ждите звонка'">
+      <div class="ticket-head"><h3>Вызов мастера</h3><span>2 шага</span></div>
+      <label class="t">Что нужно обслужить</label>
+      <div class="chips">
+        <input type="radio" name="eq" id="e1" value="Кондиционер" checked><label for="e1">Кондиционер</label>
+        <input type="radio" name="eq" id="e2" value="Котёл"><label for="e2">Газовый котёл</label>
+        <input type="radio" name="eq" id="e3" value="Вентиляция"><label for="e3">Вентиляция</label>
+        <input type="radio" name="eq" id="e4" value="Водонагреватель"><label for="e4">Водонагреватель</label>
+      </div>
+      <label class="t">Что случилось</label>
+      <div class="chips">
+        <input type="radio" name="tp" id="t1" value="plan" checked><label for="t1">Плановое ТО</label>
+        <input type="radio" name="tp" id="t2" value="fix"><label for="t2">Сломалось</label>
+        <input type="radio" name="tp" id="t3" value="install"><label for="t3">Установка</label>
+      </div>
+      <div class="slot" aria-live="polite"><span id="slotLabel">Ближайшее окно</span><b id="slotTime">завтра, 10:00-12:00</b><span id="slotPrice">ТО кондиционера - от 2 900 ₽</span></div>
+      <button class="btn" type="submit">Записаться на это время</button>
+    </form>
+  </div>
+</section>
+
+<!-- 2. Услуги -->
+<section id="services">
+  <div class="wrap">
+    <h2>Что обслуживаем</h2>
+    <p class="lead">Работаем с бытовой и полупромышленной техникой. Если бренда нет в списке, уточним по телефону.</p>
+    <div class="svc-grid">
+      <a class="svc" href="uslugi-kondicionery.html">
+        <svg viewBox="0 0 56 56" fill="none" stroke="#14233A" stroke-width="2.5"><rect x="4" y="12" width="48" height="20" rx="3"/><path d="M10 26h36M16 38v8M28 38v12M40 38v8"/></svg>
+        <h3>Кондиционеры и сплит-системы</h3><p>Чистка, заправка фреоном, диагностика, ремонт плат и компрессоров.</p><span class="price">от 2 900 ₽</span></a>
+      <a class="svc" href="uslugi-kondicionery.html">
+        <svg viewBox="0 0 56 56" fill="none" stroke="#14233A" stroke-width="2.5"><rect x="12" y="4" width="32" height="44" rx="3"/><circle cx="28" cy="20" r="7"/><path d="M20 38h16M22 48v4M34 48v4"/></svg>
+        <h3>Газовые котлы</h3><p>Ежегодное ТО по требованиям газовой службы, настройка горелки, промывка теплообменника.</p><span class="price">от 3 500 ₽</span></a>
+      <a class="svc" href="uslugi-kondicionery.html">
+        <svg viewBox="0 0 56 56" fill="none" stroke="#14233A" stroke-width="2.5"><circle cx="28" cy="28" r="22"/><path d="M28 28c0-10 8-14 12-10M28 28c-10 0-14 8-10 12M28 28c10 0 14-8 10-12M28 28c0 10-8 14-12 10"/></svg>
+        <h3>Вентиляция</h3><p>Замена фильтров, чистка воздуховодов, проверка производительности с замером.</p><span class="price">от 4 800 ₽</span></a>
+      <a class="svc" href="uslugi-kondicionery.html">
+        <svg viewBox="0 0 56 56" fill="none" stroke="#14233A" stroke-width="2.5"><rect x="14" y="4" width="28" height="40" rx="12"/><path d="M22 50h12M28 44v6M24 18c4-4 4 4 8 0"/></svg>
+        <h3>Водонагреватели</h3><p>Чистка от накипи, замена анода и ТЭНа, проверка клапана безопасности.</p><span class="price">от 2 400 ₽</span></a>
+      <a class="svc" href="uslugi-kondicionery.html">
+        <svg viewBox="0 0 56 56" fill="none" stroke="#14233A" stroke-width="2.5"><path d="M8 46V18l20-12 20 12v28z"/><path d="M20 46V30h16v16"/></svg>
+        <h3>Тепловые насосы</h3><p>Сезонная проверка, контроль давления и электрики, обновление прошивки.</p><span class="price">от 6 500 ₽</span></a>
+      <a class="svc" href="uslugi-kondicionery.html">
+        <svg viewBox="0 0 56 56" fill="none" stroke="#14233A" stroke-width="2.5"><rect x="6" y="10" width="44" height="34" rx="3"/><path d="M6 20h44M16 30h10M16 36h18"/></svg>
+        <h3>Обслуживание объектов</h3><p>Офисы, магазины, кафе: график визитов, журнал работ, закрывающие документы.</p><span class="price">по договору</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Как проходит визит -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Как проходит визит</h2>
+    <div class="steps">
+      <div class="step"><h3>Заявка</h3><p>Выбираете технику и окно на сайте или по телефону. Подтверждаем за 15 минут.</p></div>
+      <div class="step"><h3>Напоминание</h3><p>За час до визита приходит СМС с именем мастера и номером его телефона.</p></div>
+      <div class="step"><h3>Работа</h3><p>Мастер называет цену до начала работ. Если найдёт что-то ещё, сначала согласует с вами.</p></div>
+      <div class="step"><h3>Акт с фото</h3><p>На почту приходит акт: что сделано, фото до и после, дата следующего ТО.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Договоры -->
+<section class="plans-sec" id="plans">
+  <div class="wrap">
+    <h2>Договоры на обслуживание</h2>
+    <p class="lead">По договору мы сами помним о сроках ТО и приезжаем на аварию вне очереди.</p>
+    <div class="plans">
+      <div class="plan">
+        <h3>Разовый визит</h3><p class="who">Для одной единицы техники</p>
+        <div class="sum">2 900 ₽ <small>за визит</small></div>
+        <ul><li>Чистка и диагностика</li><li>Акт с фото</li><li>Гарантия 6 месяцев</li></ul>
+        <a class="btn" href="#ticket">Вызвать мастера</a>
+      </div>
+      <div class="plan main">
+        <h3>Дом</h3><p class="who">Квартира или частный дом</p>
+        <div class="sum">1 450 ₽ <small>в месяц</small></div>
+        <ul><li>2 плановых ТО в год на всю технику</li><li>Выезд на аварию за 2 часа</li><li>Скидка 20% на запчасти</li><li>Гарантия 12 месяцев</li></ul>
+        <a class="btn" href="#form">Оформить договор</a>
+      </div>
+      <div class="plan">
+        <h3>Бизнес</h3><p class="who">Офисы, магазины, кафе</p>
+        <div class="sum">от 6 900 ₽ <small>в месяц</small></div>
+        <ul><li>График визитов под ваш режим</li><li>Персональный инженер</li><li>Документы для проверок</li><li>Работа по безналу с НДС</li></ul>
+        <a class="btn" href="#form">Запросить расчёт</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Цифры и отзывы -->
+<section class="proof" id="reviews">
+  <div class="wrap">
+    <div>
+      <h2>Отвечаем сроками, а не обещаниями</h2>
+      <p class="lead" style="margin-bottom:32px">Сроки прописаны в договоре. Если опоздаем, следующий визит бесплатный.</p>
+      <div class="sla">
+        <div><b>15 мин</b><span>подтверждение заявки</span></div>
+        <div><b>2 ч</b><span>выезд на аварию по договору</span></div>
+        <div><b>94%</b><span>ремонтов за один визит</span></div>
+        <div><b>3 200</b><span>единиц техники на обслуживании</span></div>
+      </div>
+    </div>
+    <div class="reviews">
+      <article class="rev"><p>В июле встал кондиционер в серверной. Мастер приехал через полтора часа, заменил конденсатор и прислал акт с фото. Теперь у нас договор на весь офис.</p><footer><b>Андрей К.</b>, офис-менеджер, бизнес-центр на Лесной</footer></article>
+      <article class="rev"><p>Удобно, что напоминают про ТО котла: я про него вечно забываю. Всё сделали за час, полы после себя закрыли плёнкой.</p><footer><b>Елена С.</b>, частный дом, Истра</footer></article>
+      <article class="rev"><p>Обслуживают вентиляцию в трёх наших кофейнях. Приходят до открытия, документы для Роспотребнадзора всегда в порядке.</p><footer><b>Илья М.</b>, сеть кофеен</footer></article>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Вопросы -->
+<section class="faq" id="faq" style="padding-top:0">
+  <div class="wrap" style="max-width:860px">
+    <h2>Частые вопросы</h2>
+    <details open><summary>Как часто нужно обслуживать кондиционер?</summary><p>Дома - дважды в год, весной и осенью. В офисах и кафе, где воздух грязнее, - раз в квартал.</p></details>
+    <details><summary>Сколько стоит, если нужен ремонт?</summary><p>Диагностика входит в выезд. Цену ремонта мастер называет до начала работ, и вы решаете, делать ли его.</p></details>
+    <details><summary>Есть ли гарантия?</summary><p>На работы - от 6 до 12 месяцев в зависимости от договора. На запчасти - гарантия производителя.</p></details>
+    <details><summary>Работаете в выходные?</summary><p>Да, с 8:00 до 22:00 без выходных. Аварийные выезды по договору - круглосуточно.</p></details>
+  </div>
+</section>
+
+<!-- 7. Заявка -->
+<section class="cta" id="form">
+  <div class="wrap">
+    <div>
+      <h2>Рассчитаем договор под вашу технику</h2>
+      <p>Перечислите, что у вас стоит, - перезвоним с ценой и ближайшей датой первого визита.</p>
+    </div>
+    <form class="form" onsubmit="event.preventDefault();this.hidden=true;document.getElementById('done').style.display='block'">
+      <input required placeholder="Имя" aria-label="Имя">
+      <input required type="tel" placeholder="Телефон" aria-label="Телефон">
+      <textarea rows="3" placeholder="Например: 3 кондиционера и газовый котёл" aria-label="Техника"></textarea>
+      <button class="btn" type="submit">Получить расчёт</button>
+      <small>Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</small>
+    </form>
+    <p class="done" id="done">Заявка отправлена. Перезвоним в течение 15 минут.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <a class="logo" href="index.html"><i></i>Термоконтур</a>
+    <span>Москва и область, ежедневно 8:00-22:00</span>
+    <a class="phone" href="tel:+78005550000" style="color:#fff">8 800 555-00-00</a>
+  </div>
+</footer>
+
+<script>
+const data={
+  'Кондиционер':{plan:['завтра, 10:00-12:00','ТО кондиционера - от 2 900 ₽'],fix:['сегодня, 16:00-18:00','Диагностика и выезд - 1 500 ₽'],install:['в четверг, 9:00-13:00','Монтаж сплит-системы - от 9 900 ₽']},
+  'Котёл':{plan:['завтра, 12:00-14:00','ТО котла - от 3 500 ₽'],fix:['сегодня, 18:00-20:00','Диагностика и выезд - 1 800 ₽'],install:['в пятницу, 9:00-15:00','Замена котла - от 14 000 ₽']},
+  'Вентиляция':{plan:['в среду, 9:00-12:00','ТО вентиляции - от 4 800 ₽'],fix:['завтра, 9:00-11:00','Диагностика и выезд - 2 000 ₽'],install:['через неделю','Проект и монтаж - по замеру']},
+  'Водонагреватель':{plan:['завтра, 14:00-16:00','Чистка бойлера - от 2 400 ₽'],fix:['сегодня, 17:00-19:00','Диагностика и выезд - 1 200 ₽'],install:['завтра, 16:00-19:00','Установка - от 3 900 ₽']}
+};
+const f=document.getElementById('ticket');
+f.addEventListener('change',()=>{
+  const d=data[f.eq.value][f.tp.value];
+  document.getElementById('slotLabel').textContent=f.tp.value==='fix'?'Срочный выезд':'Ближайшее окно';
+  document.getElementById('slotTime').textContent=d[0];
+  document.getElementById('slotPrice').textContent=d[1];
+});
+</script>
+</body>
+</html>
