@@ -47,6 +47,11 @@ legend{font-weight:600;font-size:14px;margin-bottom:8px;padding:0}
 .total span{font-size:14px;opacity:.75}
 .builder .btn{width:100%;background:var(--poppy)}
 .builder .btn:hover{background:var(--rye)}
+.fld{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--rye);background:#fff;font:500 16px Onest,sans-serif;color:var(--rye);margin-bottom:10px}
+.fld::placeholder{color:rgba(53,32,15,.55)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hint{font-size:13px;opacity:.7;margin:-4px 0 10px}
+.sr{position:absolute;left:-9999px}
 .ok{display:none;margin-top:14px;padding:14px 16px;border-radius:14px;background:#E8F2DC;font-size:15px}
 .ok.on{display:block}
 section{padding:72px 0}
@@ -108,9 +113,24 @@ footer{background:var(--rye);color:rgba(255,249,236,.6);padding:18px 0 28px;font
           <span><input type="radio" name="fill" id="f3" value="300"><label for="f3">Шоколад-вишня +300 ₽</label></span>
           <span><input type="radio" name="fill" id="f4" value="400"><label for="f4">Карамель-орех +400 ₽</label></span>
         </div></fieldset>
+      <fieldset><legend>Как получить</legend>
+        <div class="pills" id="get">
+          <span><input type="radio" name="get" id="g1" value="самовывоз" checked><label for="g1">Заберу сам</label></span>
+          <span><input type="radio" name="get" id="g2" value="доставка"><label for="g2">Нужна доставка</label></span>
+        </div></fieldset>
+      <div class="row2">
+        <div><label class="sr" for="nm">Ваше имя</label><input class="fld" id="nm" placeholder="Ваше имя" autocomplete="given-name"></div>
+        <div><label class="sr" for="ph">Телефон</label><input class="fld" id="ph" type="tel" inputmode="tel" placeholder="Телефон" autocomplete="tel"></div>
+      </div>
+      <div class="row2">
+        <div><label class="sr" for="dt">Дата получения</label><input class="fld" id="dt" type="date"></div>
+        <div><label class="sr" for="ad">Адрес доставки</label><input class="fld" id="ad" placeholder="Адрес (если доставка)" autocomplete="street-address"></div>
+      </div>
+      <label class="sr" for="tx">Надпись на торте</label><input class="fld" id="tx" placeholder="Надпись на торте, например «С днём рождения, Аня!»" maxlength="40">
+      <p class="hint">Платить сейчас не нужно. Кондитер перезвонит и всё уточнит.</p>
       <div class="total"><b id="price">2 400 ₽</b><span id="note">1 ярус, около 1,4 кг</span></div>
       <button class="btn" id="go" type="button">Оформить заказ</button>
-      <p class="ok" id="ok" role="status">Заявка принята. Кондитер позвонит в течение часа, уточнит дату, надпись и адрес. Платить сейчас не нужно.</p>
+      <p class="ok" id="ok" role="status"></p>
     </form>
   </div>
 </div>
@@ -143,7 +163,7 @@ footer{background:var(--rye);color:rgba(255,249,236,.6);padding:18px 0 28px;font
     <h2>Приходите и звоните</h2>
     <div class="cgrid">
       <div><p><b>Адрес</b><br>ул. Садовая, 14 (пример)</p><p><b>Часы работы</b><br>Каждый день с 7:00 до 21:00</p></div>
-      <div><p><b>Телефон</b><br><a href="tel:+70000000000">+7 (000) 000-00-00</a></p><p><b>Написать</b><br><a href="#">Telegram</a> · <a href="#">WhatsApp</a></p></div>
+      <div><p><b>Телефон</b><br><a href="tel:+70000000000">+7 (000) 000-00-00</a></p><p><b>Написать</b><br>Telegram и WhatsApp (на рабочем сайте здесь ваши ссылки)</p></div>
     </div>
   </div>
 </section>
@@ -165,7 +185,17 @@ footer{background:var(--rye);color:rgba(255,249,236,.6);padding:18px 0 28px;font
     $('#ok').classList.remove('on');
   }
   document.querySelectorAll('#order input').forEach(i=>i.addEventListener('change',upd));
-  $('#go').addEventListener('click',()=>{$('#ok').classList.add('on')});
+  const dt=$('#dt'), d0=new Date(); d0.setDate(d0.getDate()+2); dt.min=d0.toISOString().slice(0,10); dt.value=dt.min;
+  $('#go').addEventListener('click',()=>{
+    const ok=$('#ok'), ph=$('#ph').value.replace(/\D/g,''), get=document.querySelector('input[name=get]:checked').value;
+    const say=m=>{ok.textContent=m;ok.classList.add('on')};
+    if(!$('#nm').value.trim()){say('Напишите, как к вам обращаться.');$('#nm').focus();return}
+    if(ph.length<10){say('Укажите телефон полностью, например +7 900 000-00-00, чтобы кондитер мог перезвонить.');$('#ph').focus();return}
+    if(!dt.value||dt.value<dt.min){say('Торт готовим от 2 дней. Выберите дату позже.');dt.focus();return}
+    if(get==='доставка'&&!$('#ad').value.trim()){say('Для доставки нужен адрес.');$('#ad').focus();return}
+    const day=new Date(dt.value).toLocaleDateString('ru-RU',{day:'numeric',month:'long'});
+    say('Заявка принята, '+$('#nm').value.trim()+'. '+$('#price').textContent+', '+$('#note').textContent+', на '+day+' ('+get+'). '+($('#tx').value.trim()?'Надпись: «'+$('#tx').value.trim()+'». ':'')+'Кондитер позвонит в течение часа. Платить сейчас не нужно. Это демо: заявка никуда не отправляется.');
+  });
   upd();
 })();
 </script>
