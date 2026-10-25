@@ -62,7 +62,7 @@ a{color:inherit}
 
 
 /* hero с картинками */
-.hero .girl-hero{position:absolute;left:36%;bottom:5%;width:clamp(95px,11vw,190px);animation:foxIn 1.8s 1.9s cubic-bezier(.2,.8,.2,1) both;filter:drop-shadow(0 10px 8px rgba(40,90,50,.25))}
+.hero .girl-hero{position:absolute;left:42%;bottom:5%;width:clamp(95px,11vw,190px);animation:foxIn 1.8s 1.9s cubic-bezier(.2,.8,.2,1) both;filter:drop-shadow(0 10px 8px rgba(40,90,50,.25))}
 .hero .bar-hero-img{position:absolute;right:5%;bottom:9%;width:clamp(210px,31vw,520px);animation:barUp 1.4s 2.4s cubic-bezier(.2,1.2,.3,1) both;filter:drop-shadow(0 18px 18px rgba(60,30,60,.3));transform-origin:center bottom}
 .fox-hero,.buddy .fox-b{--flip:-1}
 @keyframes foxIn{from{transform:translateX(-420px) scaleX(var(--flip,1));opacity:0}to{transform:scaleX(var(--flip,1));opacity:1}}
@@ -70,8 +70,8 @@ a{color:inherit}
 .hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% bottom}
 .hero .cl{position:absolute;width:95vw;max-width:1500px;height:auto;pointer-events:none;filter:drop-shadow(0 8px 20px rgba(120,150,200,.25))}
 .cl1{left:-25%;top:12%}.cl2{right:-25%;top:18%}.cl3{left:-15%;top:46%;width:80vw}.cl4{right:-15%;top:52%;width:80vw}
-.hero .fox-hero{position:absolute;left:21%;bottom:7%;width:clamp(150px,19vw,330px);animation:foxIn 1.8s 1.6s cubic-bezier(.2,.8,.2,1) both;filter:drop-shadow(0 10px 8px rgba(40,90,50,.25))}
-@media(max-width:700px){.hero .bar-hero-img{width:58vw;right:2%;bottom:3%}.hero .fox-hero{left:6%!important;bottom:15%!important;width:30vw!important}.hero .girl-hero{left:30%!important;bottom:14%!important;width:20vw!important}.hero-cta{top:auto!important;bottom:36%!important}.hero-title{top:11%!important}.hero-title p{margin-top:6px}.hero .bg{object-position:12% bottom}.hero .fox-hero{left:30%;bottom:12%}.hero-title{top:16%}}
+.hero .fox-hero{z-index:2;position:absolute;left:21%;bottom:7%;width:clamp(150px,19vw,330px);animation:foxIn 1.8s 1.6s cubic-bezier(.2,.8,.2,1) both;filter:drop-shadow(0 10px 8px rgba(40,90,50,.25))}
+@media(max-width:700px){.hero .bar-hero-img{width:58vw;right:2%;bottom:3%}.hero .fox-hero{left:6%!important;bottom:15%!important;width:30vw!important}.hero .girl-hero{left:40%!important;bottom:14%!important;width:20vw!important}.hero-cta{top:auto!important;bottom:36%!important}.hero-title{top:11%!important}.hero-title p{margin-top:6px}.hero .bg{object-position:12% bottom}.hero .fox-hero{left:30%;bottom:12%}.hero-title{top:16%}}
 .hero-title{left:auto;right:0;width:min(60%,820px);text-align:center}
 @media(max-width:900px){.hero-title{width:100%;right:auto;left:0}}
 .buddy{width:150px}
