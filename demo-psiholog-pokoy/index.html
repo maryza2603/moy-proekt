@@ -54,6 +54,19 @@ label.l{display:block;font-weight:600;font-size:15px;margin:16px 0 6px}
 .form .btn{margin-top:20px}
 .ok{display:none;margin-top:16px;padding:14px 16px;border-radius:12px;background:#DCEBD8;font-size:16px}
 .ok.on{display:block}
+.about{padding-top:0}
+.sample{max-width:720px;padding:24px 26px;border:2px dashed var(--sea);border-radius:16px;background:var(--mist)}
+.sample .tag{display:inline-block;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--lamp);color:var(--deep);margin-bottom:12px}
+.sample dl{display:grid;gap:12px}
+.sample dt{font-weight:600}
+.sample dd{opacity:.85}
+details.q{max-width:720px;border-top:1px solid var(--line);padding:14px 0}
+details.q:last-of-type{border-bottom:1px solid var(--line)}
+details.q summary{cursor:pointer;font-family:Lora,serif;font-size:20px;list-style:none}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary:before{content:"+";display:inline-block;width:22px;color:var(--sea)}
+details.q[open] summary:before{content:"-"}
+details.q p{margin-top:10px;padding-left:22px}
 footer{padding:30px 0 40px;font-size:14px;opacity:.75}
 @media (max-width:760px){.how{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
@@ -80,15 +93,31 @@ footer{padding:30px 0 40px;font-size:14px;opacity:.75}
 <section><div class="wrap"><h2>Как проходит работа</h2>
 <ol class="how">
 <li><b>Знакомство, 15 минут</b>Вы рассказываете, что беспокоит, я объясняю, как работаю. Никаких обязательств.</li>
-<li><b>Встречи по 50 минут</b>Онлайн по видеосвязи, раз в неделю. Всё, что вы говорите, остаётся между нами.</li>
+<li><b>Встречи по 50 минут</b>Онлайн по видеосвязи, раз в неделю. Всё, что вы говорите, остаётся между нами. Единственное исключение - угроза жизни: тогда я сначала скажу вам об этом.</li>
 <li><b>Остановиться можно в любой момент</b>Если вам не подходит, скажите об этом. Перенос встречи - бесплатно, если предупредить за 24 часа.</li>
 </ol></div></section>
 
 <section class="cost"><div class="wrap"><h2>Стоимость</h2><div class="rows">
 <div class="row"><span>Знакомство<small>15 минут, видеосвязь</small></span><b>бесплатно</b></div>
 <div class="row"><span>Консультация<small>50 минут, видеосвязь</small></span><b>3 000 ₽</b></div>
-<div class="row"><span>Пакет из 4 встреч<small>раз в неделю, можно разбить на месяц</small></span><b>11 000 ₽</b></div>
+<div class="row"><span>Пакет из 4 встреч<small>4 встречи в течение месяца, вместо 12 000 ₽ при оплате по одной</small></span><b>11 000 ₽</b></div>
 </div></div></section>
+
+<section class="first"><div class="wrap"><h2>Как проходит первая встреча</h2>
+<details class="q"><summary>Что нужно, чтобы начать?</summary><p>Ничего. Нужны только тихое место, наушники и 15 минут. Ссылку на видеосвязь я пришлю после записи.</p></details>
+<details class="q"><summary>Нужно ли готовиться?</summary><p>Нет. Можно прийти просто с ощущением, что что-то не так. Если хочется, запишите пару слов о том, что беспокоит, но это необязательно.</p></details>
+<details class="q"><summary>Что если мне не подойдёт?</summary><p>Тогда вы так и скажете, и мы не будем продолжать. Знакомство бесплатное, и ничего не обязывает.</p></details>
+<details class="q"><summary>Кто узнает, что я приходила?</summary><p>Никто. Всё, что вы рассказываете, остаётся между нами. Единственное исключение - угроза жизни: тогда я сначала скажу вам об этом.</p></details>
+</div></section>
+
+<section class="about"><div class="wrap"><h2>Обо мне</h2>
+<div class="sample"><span class="tag">Пример блока: психолог заполняет сама</span>
+<dl>
+<dt>Образование</dt><dd>Вуз, программа, год. Дополнительное обучение и сертификаты - только подтверждённые.</dd>
+<dt>Мой подход</dt><dd>Как проходит работа: на что опираюсь, как строю встречи, чего не делаю.</dd>
+<dt>С чем работаю</dt><dd>Например: тревога, выгорание, отношения. И с чем не работаю, и куда направляю.</dd>
+<dt>Фото и несколько слов о себе</dt><dd>Живое фото и пара тёплых строк, чтобы вас узнали при встрече.</dd>
+</dl></div></div></section>
 
 <section id="sign"><div class="wrap form"><h2>Запись</h2>
 <p>Оставьте контакт - я напишу или позвоню в течение дня и предложу время.</p>

@@ -31,6 +31,9 @@ h1{font-family:Prata,serif;font-weight:400;font-size:clamp(40px,5.4vw,74px);line
 .drops{display:flex;gap:10px;margin-top:34px}
 .drops i{width:44px;height:58px;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;display:block;box-shadow:inset -6px -8px 0 rgba(0,0,0,.14),inset 6px 8px 0 rgba(255,255,255,.28)}
 .drops i:nth-child(1){background:var(--lacquer)}.drops i:nth-child(2){background:#C98A8D}.drops i:nth-child(3){background:var(--sage)}.drops i:nth-child(4){background:var(--ink)}.drops i:nth-child(5){background:#E7D3BF}
+.demo-note{margin-top:12px;font-size:13px;opacity:.65}
+.btn[aria-disabled]{cursor:default}
+.btn.ghost[aria-disabled]:hover{background:transparent;color:var(--ink)}
 .msg{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px}
 .book{background:var(--paper);border-radius:26px;padding:28px;box-shadow:0 24px 50px -28px rgba(30,31,26,.55)}
 .book h2{font-family:Prata,serif;font-weight:400;font-size:26px;margin-bottom:16px}
@@ -80,7 +83,8 @@ footer{background:var(--ink);color:rgba(236,230,218,.6);font-size:14px;padding:0
     <h1>Маникюр, брови и ресницы - в удобное для вас время</h1>
     <p class="sub">Выберите услугу, мастера и свободное время в форме записи. Запись займёт минуту, звонить не нужно. Если удобнее - напишите нам в мессенджер.</p>
     <div class="drops" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="msg"><a class="btn ghost" href="#">Написать в WhatsApp</a><a class="btn ghost" href="#">Telegram</a><a class="btn ghost" href="tel:+70000000000">Позвонить</a></div>
+    <div class="msg"><span class="btn ghost" aria-disabled="true" title="На рабочем сайте здесь будет ваша ссылка">Написать в WhatsApp</span><span class="btn ghost" aria-disabled="true" title="На рабочем сайте здесь будет ваша ссылка">Telegram</span><a class="btn ghost" href="tel:+70000000000">Позвонить</a></div>
+    <p class="demo-note">Это демо: кнопки WhatsApp и Telegram на рабочем сайте ведут в ваши чаты.</p>
   </div>
   <form class="book" id="book" onsubmit="return false" aria-label="Онлайн-запись">
     <h2>Запишитесь онлайн</h2>
@@ -93,10 +97,7 @@ footer{background:var(--ink);color:rgba(236,230,218,.6);font-size:14px;padding:0
       <span><input type="radio" name="mst" id="m1" value="Алина" checked><label for="m1">Алина</label></span>
       <span><input type="radio" name="mst" id="m2" value="Ксения"><label for="m2">Ксения</label></span>
       <span><input type="radio" name="mst" id="m3" value="Дарья"><label for="m3">Дарья</label></span></div></fieldset>
-    <fieldset><legend>День</legend><div class="pills" id="day">
-      <span><input type="radio" name="day" id="d1" value="сегодня" checked><label for="d1">Сегодня</label></span>
-      <span><input type="radio" name="day" id="d2" value="завтра"><label for="d2">Завтра</label></span>
-      <span><input type="radio" name="day" id="d3" value="в субботу"><label for="d3">Суббота</label></span></div></fieldset>
+    <fieldset><legend>День</legend><div class="pills" id="day"></div></fieldset>
     <fieldset><legend>Свободное время</legend><div class="pills slots" id="slots"></div></fieldset>
     <label class="sr" for="ph" style="position:absolute;left:-9999px">Телефон</label>
     <input class="fld" id="ph" type="tel" placeholder="Ваш телефон" autocomplete="tel" inputmode="tel">
@@ -124,7 +125,7 @@ footer{background:var(--ink);color:rgba(236,230,218,.6);font-size:14px;padding:0
 
 <section class="contacts"><div class="wrap"><h2 class="t">Как нас найти</h2>
 <div class="cg"><div><p><b>Адрес</b><br>ул. Кирова, 12, 2 этаж (пример)</p><p><b>Часы работы</b><br>Ежедневно с 10:00 до 20:00</p></div>
-<div><p><b>Телефон</b><br><a href="tel:+70000000000">+7 (000) 000-00-00</a></p><p><b>Мессенджеры</b><br><a href="#">WhatsApp</a> и <a href="#">Telegram</a></p></div></div></div></section>
+<div><p><b>Телефон</b><br><a href="tel:+70000000000">+7 (000) 000-00-00</a></p><p><b>Мессенджеры</b><br>WhatsApp и Telegram (на рабочем сайте здесь ваши ссылки)</p></div></div></div></section>
 </main>
 <footer><div class="wrap">Демо-сайт салона. Название, адрес, телефон и цены условные.</div></footer>
 
@@ -133,8 +134,10 @@ footer{background:var(--ink);color:rgba(236,230,218,.6);font-size:14px;padding:0
   const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
   const times=['10:00','11:30','13:00','14:30','16:00','17:30','19:00'];
   // условно занятые слоты: зависят от мастера и дня, чтобы было видно, что расписание живое
-  const MS=['Алина','Ксения','Дарья'], DS=['сегодня','завтра','в субботу'];
-  function busy(m,d,t){return (MS.indexOf(m)*5+DS.indexOf(d)*3+times.indexOf(t)*7)%4===0}
+  const MS=['Алина','Ксения','Дарья'], WD=['вс','пн','вт','ср','чт','пт','сб'], MON=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  const DAYS=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()+i);return {k:String(i),label:i===0?'Сегодня':i===1?'Завтра':WD[d.getDay()]+', '+d.getDate(),full:d.getDate()+' '+MON[d.getMonth()]+' ('+WD[d.getDay()]+')'}});
+  $('#day').innerHTML=DAYS.map((d,i)=>`<span><input type="radio" name="day" id="d${i}" value="${d.k}" ${i===0?'checked':''}><label for="d${i}">${d.label}</label></span>`).join('');
+  function busy(m,d,t){return (MS.indexOf(m)*5+(+d)*3+times.indexOf(t)*7)%4===0}
   function slots(){
     const m=$('input[name=mst]:checked').value, d=$('input[name=day]:checked').value;
     $('#slots').innerHTML=times.map((t,i)=>`<span><input type="radio" name="tm" id="t${i}" value="${t}" ${busy(m,d,t)?'disabled':''}><label for="t${i}">${t}</label></span>`).join('');
@@ -151,7 +154,7 @@ footer{background:var(--ink);color:rgba(236,230,218,.6);font-size:14px;padding:0
     if(ph.length<10){ok.textContent='Укажите телефон полностью, например +7 900 000-00-00, чтобы мы подтвердили запись.';ok.classList.add('on');$('#ph').focus();return}
     const t=$('input[name=tm]:checked'); if(!t){ok.textContent='На этот день свободного времени нет. Выберите другой день или мастера.';ok.classList.add('on');return}
     const [,n]=$('input[name=svc]:checked').value.split('|');
-    ok.textContent='Готово! '+n+', '+$('input[name=mst]:checked').value+', '+$('input[name=day]:checked').value+' в '+t.value+'. Мастер подтвердит запись по телефону.';
+    ok.textContent='Готово! '+n+', '+$('input[name=mst]:checked').value+', '+DAYS[+$('input[name=day]:checked').value].full+' в '+t.value+'. Мастер подтвердит запись по телефону.';
     ok.classList.add('on');
   });
   slots();sum();
