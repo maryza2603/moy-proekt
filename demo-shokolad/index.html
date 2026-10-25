@@ -143,6 +143,19 @@ footer{margin-top:60px;font-size:14px;opacity:.7}
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition:none!important;scroll-behavior:auto!important}
   .cloud-l{transform:translateX(-135%)}.cloud-r{transform:translateX(135%)}
 }
+
+.ico{width:34px;height:34px;flex:none;display:block}
+.shop .l{display:flex;align-items:center;gap:14px}
+.contacts a{display:inline-flex;align-items:center;gap:10px;padding:8px 20px 8px 10px!important}
+.contacts .ico{width:30px;height:30px}
+
+.float-contacts{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:18;display:flex;flex-direction:column;gap:8px}
+.float-contacts a{display:block;width:42px;height:42px;border-radius:13px;box-shadow:0 6px 16px rgba(46,22,89,.28);transition:transform .15s;position:relative}
+.float-contacts a:hover{transform:translateX(-4px) scale(1.06)}
+.float-contacts .ico{width:100%;height:100%}
+.float-contacts a::after{content:attr(data-t);position:absolute;right:56px;top:50%;transform:translateY(-50%);background:#fff;color:var(--plum);font-weight:800;font-size:13px;padding:5px 10px;border-radius:10px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+.float-contacts a:hover::after,.float-contacts a:focus-visible::after{opacity:1}
+@media(max-width:600px){.float-contacts{right:6px;gap:6px}.float-contacts a{width:34px;height:34px;border-radius:10px}.float-contacts a::after{display:none}}
 </style>
 </head>
 <body>
@@ -164,6 +177,17 @@ footer{margin-top:60px;font-size:14px;opacity:.7}
   </defs>
 </svg>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="gWb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cb11ab"/><stop offset="1" stop-color="#481173"/></linearGradient>
+<radialGradient id="gIg" cx=".3" cy="1" r="1.2"><stop offset="0" stop-color="#fdd35c"/><stop offset=".35" stop-color="#ff543e"/><stop offset=".7" stop-color="#c837ab"/><stop offset="1" stop-color="#4f5bd5"/></radialGradient>
+<symbol id="i-wb" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="url(#gWb)"/><text x="24" y="31" text-anchor="middle" font-family="Nunito,Arial,sans-serif" font-weight="800" font-size="19" fill="#fff">WB</text></symbol>
+<symbol id="i-ozon" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#005bff"/><text x="24" y="30" text-anchor="middle" font-family="Nunito,Arial,sans-serif" font-weight="800" font-size="14.5" fill="#fff">ozon</text></symbol>
+<symbol id="i-ym" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#ffdb4d"/><path d="M12 33V15h4.2l7.8 11 7.8-11H36v18h-4V22.6L24 33.5l-8-10.9V33z" fill="#1c1c1c"/></symbol>
+<symbol id="i-tg" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#29a9eb"/><path d="M10.5 23.6 35.6 13.9c1.2-.5 2.2.3 1.8 2l-4.3 20c-.3 1.4-1.2 1.8-2.4 1.1l-6.6-4.9-3.2 3.1c-.4.4-.6.6-1.3.6l.5-6.7 12.2-11c.5-.5-.1-.7-.8-.3L14 28.5l-6.5-2c-1.4-.4-1.4-1.400 .1-2z" fill="#fff"/></symbol>
+<symbol id="i-vk" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#0077ff"/><path d="M25.6 34c-9.6 0-15.100-6.600-15.300-17.600h4.800c.2 8.100 3.700 11.500 6.600 12.200V16.400h4.500v7c2.800-.3 5.700-3.500 6.700-7h4.500c-.7 4.300-3.900 7.500-6.100 8.800 2.200 1.100 5.800 3.900 7.100 8.800h-5c-1.100-3.400-3.800-6-7.200-6.400V34z" fill="#fff"/></symbol>
+<symbol id="i-ig" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="url(#gIg)"/><rect x="11" y="11" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="6.200" fill="none" stroke="#fff" stroke-width="3"/><circle cx="32" cy="16" r="2" fill="#fff"/></symbol>
+<symbol id="i-mail" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#ff6f9f"/><rect x="10" y="14" width="28" height="20" rx="3.500" fill="none" stroke="#fff" stroke-width="3"/><path d="m11 17 13 10 13-10" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></symbol>
+</defs></svg>
 <header class="nav">
   <a class="logo" href="#top">Ни в сказке сказать</a>
   <nav aria-label="Разделы"><ul>
@@ -304,9 +328,9 @@ footer{margin-top:60px;font-size:14px;opacity:.7}
     <h2>Где купить</h2>
     <p class="lead">Заказать можно на маркетплейсах, а попробовать в магазинах-партнёрах.</p>
     <div class="shops">
-      <a class="shop" href="#gde"><span>Wildberries<small>доставка по России</small></span><i>›</i></a>
-      <a class="shop" href="#gde"><span>Ozon<small>доставка по России</small></span><i>›</i></a>
-      <a class="shop" href="#gde"><span>Яндекс Маркет<small>доставка по России</small></span><i>›</i></a>
+      <a class="shop" href="#gde"><span class="l"><svg class="ico" aria-hidden="true"><use href="#i-wb"/></svg><span>Wildberries<small>доставка по России</small></span></span><i>›</i></a>
+      <a class="shop" href="#gde"><span class="l"><svg class="ico" aria-hidden="true"><use href="#i-ozon"/></svg><span>Ozon<small>доставка по России</small></span></span><i>›</i></a>
+      <a class="shop" href="#gde"><span class="l"><svg class="ico" aria-hidden="true"><use href="#i-ym"/></svg><span>Яндекс Маркет<small>доставка по России</small></span></span><i>›</i></a>
     </div>
     <p class="partners-shops"><strong>Магазины-партнёры:</strong> кофейни, кондитерские и подарочные лавки. Список обновляем, ищите нашу обёртку с лисой.</p>
   </div>
@@ -342,13 +366,22 @@ footer{margin-top:60px;font-size:14px;opacity:.7}
     <h2>Напишите нам</h2>
     <p class="lead">Ответим на вопросы про вкусы, заказ и сотрудничество.</p>
     <div class="contacts">
-      <a href="#kontakty">Telegram</a><a href="#kontakty">ВКонтакте</a><a href="#kontakty">Instagram*</a><a href="mailto:hello@example.com">hello@example.com</a>
+      <a href="#kontakty"><svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg>Telegram</a><a href="#kontakty"><svg class="ico" aria-hidden="true"><use href="#i-vk"/></svg>ВКонтакте</a><a href="#kontakty"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>Instagram*</a><a href="mailto:hello@example.com"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg>hello@example.com</a>
     </div>
     <footer>© Ни в сказке сказать, ни пером описать. Демонстрационный вариант сайта.<br>*Организация запрещена в РФ.</footer>
   </div>
 </section>
 </main>
 
+<nav class="float-contacts" aria-label="Купить или связаться с нами">
+  <a href="#gde" data-t="Wildberries" aria-label="Wildberries"><svg class="ico" aria-hidden="true"><use href="#i-wb"/></svg></a>
+  <a href="#gde" data-t="Ozon" aria-label="Ozon"><svg class="ico" aria-hidden="true"><use href="#i-ozon"/></svg></a>
+  <a href="#gde" data-t="Яндекс Маркет" aria-label="Яндекс Маркет"><svg class="ico" aria-hidden="true"><use href="#i-ym"/></svg></a>
+  <a href="#kontakty" data-t="Telegram" aria-label="Telegram"><svg class="ico" aria-hidden="true"><use href="#i-tg"/></svg></a>
+  <a href="#kontakty" data-t="ВКонтакте" aria-label="ВКонтакте"><svg class="ico" aria-hidden="true"><use href="#i-vk"/></svg></a>
+  <a href="#kontakty" data-t="Instagram*" aria-label="Instagram"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg></a>
+  <a href="mailto:hello@example.com" data-t="Написать на почту" aria-label="Почта"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></a>
+</nav>
 <!-- лиса-спутница -->
 <div class="buddy" id="buddy" aria-hidden="true">
   <div class="say" id="say"></div>
@@ -365,6 +398,7 @@ footer{margin-top:60px;font-size:14px;opacity:.7}
     var p=max>0?scrollY/max:0;
     var w=innerWidth-buddy.offsetWidth-16;
     buddy.style.setProperty('--x',(8+p*w)+'px');
+    if(p>0.6){say.style.left='auto';say.style.right='10px'}else{say.style.left='10px';say.style.right='auto'}
     var mid=innerHeight*0.5, id=null;
     for(var k in phrases){var el=document.getElementById(k);var r=el.getBoundingClientRect();if(r.top<mid&&r.bottom>mid){id=k}}
     if(id&&id!==current){current=id;say.textContent=phrases[id];say.classList.add('on');clearTimeout(timer);timer=setTimeout(function(){say.classList.remove('on')},2600)}
