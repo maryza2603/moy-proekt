@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сергей К - новостройки Новосибирска с рассрочкой</title>
+<meta name="description" content="Квартиры в новостройках Новосибирска: рассрочка, первый взнос от 700 000 ₽, подбор под бюджет. Агентство недвижимости Кварцс.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --suit:#F5F6F7;
+  --ink:#101C2A;
+  --ink-2:#1B2B3D;
+  --steel:#5B6B7B;
+  --quartz:#D9DEE6;
+  --lit:#F2B24A;
+  --lit-soft:#F7D9A0;
+  --line:rgba(16,28,42,.14);
+  --font-d:'Geologica',system-ui,sans-serif;
+  --font-b:'Onest',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--suit);color:var(--ink);font-family:var(--font-b);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--lit);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* demo strip */
+.demo-strip{background:var(--ink);color:var(--quartz);font-size:14px;text-align:center;padding:8px 16px}
+
+/* header */
+.top{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.brand{font-family:var(--font-d);font-weight:600;font-size:19px;letter-spacing:-.01em;text-decoration:none}
+.brand small{display:block;font-family:var(--font-b);font-weight:400;font-size:13px;color:var(--steel);letter-spacing:0}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--suit);border:0;border-radius:999px;padding:14px 26px;font-weight:500;text-decoration:none;transition:background .2s}
+.btn:hover{background:var(--ink-2)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);padding:10px 20px;font-size:15px}
+.btn.ghost:hover{background:var(--ink);color:var(--suit)}
+.btn.lit{background:var(--lit);color:var(--ink)}
+.btn.lit:hover{background:var(--lit-soft)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:36px 0 72px}
+h1{font-family:var(--font-d);font-weight:300;font-size:clamp(38px,5.4vw,68px);line-height:1.04;letter-spacing:-.03em}
+.hero p.lead{margin:28px 0 36px;max-width:30em;color:var(--steel);font-size:19px}
+.facts{display:flex;gap:36px;margin-top:44px;flex-wrap:wrap}
+.facts div{max-width:11em}
+.facts b{display:block;font-family:var(--font-d);font-weight:600;font-size:26px;letter-spacing:-.02em}
+.facts span{font-size:14px;color:var(--steel)}
+
+/* facade */
+.facade{background:var(--ink);border-radius:20px 20px 4px 4px;padding:28px 24px 0;position:relative;box-shadow:0 30px 60px -30px rgba(16,28,42,.55)}
+.facade svg{display:block;width:100%;height:auto}
+.facade .win{fill:#223448;transition:fill .35s}
+.facade .win.fixed{fill:#2c4157}
+.facade .win.obj{cursor:pointer}
+.facade .win.obj.on{fill:var(--lit)}
+.facade .win.obj.off{fill:#2a3d52}
+.facade .win.obj:hover,.facade .win.obj:focus-visible{stroke:var(--suit);stroke-width:2}
+.facade .win.boot{animation:boot .5s both}
+@keyframes boot{from{fill:#223448}}
+.facade-cap{color:var(--quartz);font-size:14px;padding:16px 4px 20px;display:flex;justify-content:space-between;gap:12px}
+.facade-cap b{color:var(--lit);font-weight:600}
+#tip{position:absolute;pointer-events:none;background:var(--suit);color:var(--ink);border-radius:8px;padding:7px 12px;font-size:14px;font-weight:500;opacity:0;transform:translate(-50%,-120%);transition:opacity .15s;white-space:nowrap;z-index:3}
+
+/* catalog */
+section{padding:72px 0}
+h2{font-family:var(--font-d);font-weight:300;font-size:clamp(30px,3.8vw,46px);letter-spacing:-.025em;line-height:1.1}
+.sub{color:var(--steel);margin-top:12px;max-width:34em}
+.filters{display:flex;flex-wrap:wrap;gap:28px 40px;margin:36px 0 12px;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);align-items:flex-end}
+.fgroup{display:flex;flex-direction:column;gap:10px}
+.fgroup > span{font-size:14px;color:var(--steel)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:transparent;border:1.5px solid var(--quartz);color:var(--ink);border-radius:999px;padding:8px 18px;font-size:15px;transition:all .15s}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--suit)}
+.count{margin-left:auto;font-family:var(--font-d);font-size:15px;color:var(--steel)}
+.count b{color:var(--ink);font-weight:600}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px;margin-top:28px}
+.card{background:#fff;border:1px solid var(--line);border-radius:6px 28px 6px 6px;overflow:hidden;display:flex;flex-direction:column;transition:opacity .25s,transform .25s}
+.card.hide{display:none}
+.card.flash{outline:3px solid var(--lit);outline-offset:4px}
+.plan{background:var(--quartz);padding:18px 18px 10px;position:relative;aspect-ratio:3/2}
+.plan svg{width:100%;height:100%}
+.plan .tag{position:absolute;left:14px;top:14px;background:var(--ink);color:var(--suit);font-size:13px;border-radius:999px;padding:3px 12px}
+.plan .tag.lit{background:var(--lit);color:var(--ink);left:auto;right:14px;font-weight:500}
+.cbody{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.price{font-family:var(--font-d);font-weight:600;font-size:27px;letter-spacing:-.02em}
+.cbody .t{font-weight:500}
+.cbody .m{color:var(--steel);font-size:15px}
+.cbody .vznos{margin-top:8px;padding-top:12px;border-top:1px dashed var(--line);font-size:15px}
+.cbody .vznos b{font-weight:600}
+.ask{margin-top:auto;padding-top:16px}
+.ask button{width:100%;justify-content:center}
+.empty{grid-column:1/-1;padding:48px 0;color:var(--steel)}
+
+/* how */
+.how{background:var(--ink);color:var(--suit)}
+.how h2{color:var(--suit)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:44px;position:relative}
+.step{padding:0 32px 0 0;border-top:2px solid var(--steel);padding-top:24px;position:relative}
+.step::before{content:"";position:absolute;top:-8px;left:0;width:14px;height:14px;border-radius:50%;background:var(--lit)}
+.step h3{font-family:var(--font-d);font-weight:600;font-size:21px;letter-spacing:-.015em;margin-bottom:8px}
+.step p{color:var(--quartz);font-size:16px}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.portrait{aspect-ratio:4/5;background:linear-gradient(160deg,var(--quartz),#c3cad5);border-radius:6px 90px 6px 6px;display:flex;align-items:flex-end;justify-content:center;color:var(--steel);font-size:15px;padding:22px;text-align:center;max-width:380px}
+.contact .btn{margin-top:28px}
+.links{margin-top:22px;color:var(--steel);font-size:15px}
+footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--steel);font-size:14px}
+
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(30px);background:var(--ink);color:var(--suit);padding:14px 22px;border-radius:12px;font-size:15px;opacity:0;pointer-events:none;transition:all .25s;z-index:50;max-width:92vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%)}
+
+@media (max-width:860px){
+  body{font-size:16px}
+  .hero{grid-template-columns:1fr;gap:36px;padding-bottom:48px}
+  .steps{grid-template-columns:1fr;gap:28px}
+  .contact{grid-template-columns:1fr;gap:32px}
+  .count{margin-left:0;width:100%}
+  section{padding:52px 0}
+  .btn.ghost.hdr{display:none}
+}
+@media (max-width:520px){.wrap{padding:0 16px}.facts{gap:20px 28px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-strip">Демо-страница. Объекты, цены и контакты показаны для примера.</div>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#">Сергей К<small>Агентство недвижимости Кварцс</small></a>
+    <button class="btn ghost hdr" data-ask="Здравствуйте! Хочу подобрать квартиру в новостройке.">Написать в Telegram</button>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>Новостройки Новосибирска с рассрочкой и взносом от&nbsp;700&nbsp;000&nbsp;₽</h1>
+      <p class="lead">Подберу квартиру под ваш бюджет и посчитаю, сколько платить в месяц. Все объекты в одном месте, не в историях, которые пропадают через сутки.</p>
+      <button class="btn lit" data-ask="Здравствуйте! Смотрю квартиры в новостройках Новосибирска. Подберите варианты под мой бюджет.">Написать в Telegram</button>
+      <div class="facts">
+        <div><b>каждый день</b><span>новые квартиры в подборке</span></div>
+        <div><b>рассрочка</b><span>и небольшой первый взнос</span></div>
+        <div><b>все районы</b><span>левый и правый берег</span></div>
+      </div>
+    </div>
+
+    <div class="facade" id="facade">
+      <div id="tip"></div>
+      <svg id="tower" viewBox="0 0 390 520" role="img" aria-label="Фасад дома: светящиеся окна показывают квартиры, подходящие под выбранные условия"></svg>
+      <div class="facade-cap"><span>Каждое светящееся окно - квартира из каталога ниже.</span><span><b id="litCount">8</b> подходят</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="katalog">
+  <div class="wrap">
+    <h2>Квартиры в продаже</h2>
+    <p class="sub">Выберите условия, и окна в доме выше покажут, что подходит. Нажмите на окно или карточку, чтобы спросить про квартиру.</p>
+
+    <div class="filters">
+      <div class="fgroup"><span>Комнат</span>
+        <div class="chips" id="fRooms">
+          <button class="chip" data-v="all" aria-pressed="true">Любое</button>
+          <button class="chip" data-v="0" aria-pressed="false">Студия</button>
+          <button class="chip" data-v="1" aria-pressed="false">1</button>
+          <button class="chip" data-v="2" aria-pressed="false">2</button>
+          <button class="chip" data-v="3" aria-pressed="false">3</button>
+        </div>
+      </div>
+      <div class="fgroup"><span>Бюджет</span>
+        <div class="chips" id="fBudget">
+          <button class="chip" data-v="all" aria-pressed="true">Любой</button>
+          <button class="chip" data-v="7000000" aria-pressed="false">до 7 млн</button>
+          <button class="chip" data-v="9000000" aria-pressed="false">до 9 млн</button>
+          <button class="chip" data-v="12000000" aria-pressed="false">до 12 млн</button>
+        </div>
+      </div>
+      <div class="fgroup"><span>Оплата</span>
+        <div class="chips"><button class="chip" id="fInst" aria-pressed="false">Только с рассрочкой</button></div>
+      </div>
+      <div class="count">Подходит <b id="cnt">8</b> из 8</div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <h2>Как проходит покупка</h2>
+    <div class="steps">
+      <div class="step"><h3>Вы пишете бюджет</h3><p>Сколько есть на первый взнос, на какой район смотрите и когда нужны ключи. Хватит пары сообщений в Telegram.</p></div>
+      <div class="step"><h3>Я присылаю варианты</h3><p>Квартиры с планировками, ценой и сроком сдачи. Помогаю сравнить рассрочку и ипотеку, чтобы выбрать выгодный вариант.</p></div>
+      <div class="step"><h3>Смотрим и оформляем</h3><p>Договариваюсь о просмотре, прохожу с вами оформление и не бросаю после подписания договора.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap contact">
+    <div class="portrait">Здесь будет ваше фото</div>
+    <div>
+      <h2>Сергей К, агентство недвижимости Кварцс</h2>
+      <p class="sub">Продаю квартиры в новостройках Новосибирска. Напишите, какой бюджет и какие комнаты нужны, отвечу вариантами.</p>
+      <button class="btn" data-ask="Здравствуйте! Хочу подобрать квартиру в новостройке.">Написать в Telegram</button>
+      <p class="links">Контакты подставятся после согласования.</p>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">Демо-страница, сделана для примера. Данные объектов условные.</div></footer>
+<div id="toast" role="status"></div>
+
+<script>
+const TG_USER = ""; // после согласования сюда ставится ник Telegram, без @
+
+const OBJ = [
+  {id:1, rooms:0, area:27.4, price:4950000, dist:"Октябрьский район", due:"4 кв. 2027", fl:"7 из 19", dp:495000, inst:true,  win:[1,2]},
+  {id:2, rooms:1, area:38.6, price:6500000, dist:"Ленинский район",   due:"2 кв. 2028", fl:"12 из 24", dp:700000, inst:true,  win:[2,4]},
+  {id:3, rooms:1, area:41.2, price:6900000, dist:"Кировский район",   due:"1 кв. 2028", fl:"5 из 17", dp:750000, inst:true,  win:[3,1]},
+  {id:4, rooms:2, area:52.3, price:7200000, dist:"Дзержинский район", due:"сдан",       fl:"9 из 16", dp:720000, inst:false, win:[4,3]},
+  {id:5, rooms:2, area:55.0, price:7892000, dist:"Октябрьский район", due:"2 кв. 2027", fl:"14 из 22", dp:750000, inst:true,  win:[5,5]},
+  {id:6, rooms:2, area:59.2, price:9800000, dist:"Заельцовский район",due:"3 кв. 2027", fl:"10 из 25", dp:980000, inst:false, win:[6,0]},
+  {id:7, rooms:3, area:74.5, price:9200000, dist:"Ленинский район",   due:"4 кв. 2028", fl:"6 из 18", dp:900000, inst:true,  win:[7,2]},
+  {id:8, rooms:3, area:87.6, price:12400000,dist:"Советский район",   due:"4 кв. 2027", fl:"11 из 20", dp:1240000,inst:false, win:[2,0]}
+];
+const NAMES = ["Студия","1-комнатная","2-комнатная","3-комнатная"];
+const fmt = n => n.toLocaleString("ru-RU").replace(/ /g," ") + " ₽";
+
+/* планировки: условные схемы */
+function plan(r){
+  const walls = {
+    0:'<rect x="10" y="10" width="140" height="80"/><path d="M10 62h54M64 62v28M100 10v34h50"/>',
+    1:'<rect x="10" y="10" width="140" height="80"/><path d="M80 10v50M10 60h70M80 36h70M110 36v54"/>',
+    2:'<rect x="10" y="10" width="140" height="80"/><path d="M60 10v44M10 54h50M60 54h45M105 10v80M105 50h45"/>',
+    3:'<rect x="10" y="10" width="140" height="80"/><path d="M52 10v40M10 50h42M52 50h50M102 10v80M102 38h48M52 50v40M127 38v52"/>'
+  }[r];
+  return `<svg viewBox="0 0 160 100" fill="none" stroke="#101C2A" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true">${walls}</svg>`;
+}
+
+/* каталог */
+const grid = document.getElementById("grid");
+grid.innerHTML = OBJ.map(o => `
+  <article class="card" id="o${o.id}" data-id="${o.id}">
+    <div class="plan">${plan(o.rooms)}<span class="tag">${o.area} м²</span>${o.inst?'<span class="tag lit">рассрочка</span>':''}</div>
+    <div class="cbody">
+      <div class="price">${fmt(o.price)}</div>
+      <div class="t">${NAMES[o.rooms]}, этаж ${o.fl}</div>
+      <div class="m">${o.dist}, сдача: ${o.due}</div>
+      <div class="vznos">Первый взнос от <b>${fmt(o.dp)}</b></div>
+      <div class="ask"><button class="btn ghost" data-ask="Здравствуйте! Интересует ${NAMES[o.rooms].toLowerCase()} ${o.area} м² за ${fmt(o.price)} (${o.dist}). Расскажите подробнее.">Спросить про эту</button></div>
+    </div>
+  </article>`).join("") + '<p class="empty" id="empty" hidden>Под такие условия сейчас ничего нет. Напишите мне, подберу похожие варианты.</p>';
+
+/* фасад */
+const COLS = 6, ROWS = 9, W = 390, H = 520;
+const tower = document.getElementById("tower");
+const gx = 30, gy = 30, cw = 50, ch = 40, pad = 10;
+let svg = `<rect x="0" y="0" width="${W}" height="${H}" fill="none"/>`;
+const winMap = {};
+OBJ.forEach(o => winMap[o.win.join(",")] = o.id);
+let k = 0;
+for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++){
+  const x = gx + c*(cw+pad), y = gy + r*(ch+pad);
+  const id = winMap[r+","+c];
+  if (id){
+    const o = OBJ.find(z => z.id === id);
+    svg += `<rect class="win obj on boot" data-id="${id}" x="${x}" y="${y}" width="${cw}" height="${ch}" rx="2" tabindex="0" role="button" aria-label="${NAMES[o.rooms]}, ${fmt(o.price)}" style="animation-delay:${(k++)*0.18+0.2}s"/>`;
+  } else {
+    const fixed = ((r*7+c*3)%5===0);
+    svg += `<rect class="win${fixed?' fixed':''}" x="${x}" y="${y}" width="${cw}" height="${ch}" rx="2"/>`;
+  }
+}
+svg += `<rect x="${gx+2*(cw+pad)}" y="${gy+ROWS*(ch+pad)-4}" width="${2*cw+pad}" height="14" fill="#223448"/>`;
+tower.innerHTML = svg;
+
+/* фильтры */
+const st = {rooms:"all", budget:"all", inst:false};
+const tip = document.getElementById("tip");
+function match(o){
+  return (st.rooms==="all" || o.rooms===+st.rooms)
+      && (st.budget==="all" || o.price<=+st.budget)
+      && (!st.inst || o.inst);
+}
+function apply(){
+  let n = 0;
+  OBJ.forEach(o => {
+    const m = match(o); if (m) n++;
+    document.getElementById("o"+o.id).classList.toggle("hide", !m);
+    const w = tower.querySelector('.win.obj[data-id="'+o.id+'"]');
+    w.classList.remove("boot");
+    w.classList.toggle("on", m); w.classList.toggle("off", !m);
+  });
+  document.getElementById("cnt").textContent = n;
+  document.getElementById("litCount").textContent = n;
+  document.getElementById("empty").hidden = n !== 0;
+}
+function group(id, key){
+  document.getElementById(id).addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    st[key] = b.dataset.v;
+    document.querySelectorAll("#"+id+" .chip").forEach(x => x.setAttribute("aria-pressed", x===b));
+    apply();
+  });
+}
+group("fRooms","rooms"); group("fBudget","budget");
+const inst = document.getElementById("fInst");
+inst.addEventListener("click", () => { st.inst = !st.inst; inst.setAttribute("aria-pressed", st.inst); apply(); });
+
+/* окно -> карточка */
+function goto(id){
+  const card = document.getElementById("o"+id);
+  if (card.classList.contains("hide")) return;
+  card.scrollIntoView({behavior:"smooth", block:"center"});
+  card.classList.add("flash"); setTimeout(() => card.classList.remove("flash"), 1800);
+}
+tower.addEventListener("click", e => { const w = e.target.closest(".win.obj"); if (w) goto(w.dataset.id); });
+tower.addEventListener("keydown", e => { if (e.key==="Enter"||e.key===" "){ const w = e.target.closest(".win.obj"); if (w){ e.preventDefault(); goto(w.dataset.id);} }});
+tower.addEventListener("mousemove", e => {
+  const w = e.target.closest(".win.obj");
+  if (!w){ tip.style.opacity = 0; return; }
+  const o = OBJ.find(z => z.id === +w.dataset.id);
+  const box = document.getElementById("facade").getBoundingClientRect();
+  tip.textContent = NAMES[o.rooms] + ", " + fmt(o.price);
+  tip.style.left = (e.clientX - box.left) + "px"; tip.style.top = (e.clientY - box.top) + "px"; tip.style.opacity = 1;
+});
+tower.addEventListener("mouseleave", () => tip.style.opacity = 0);
+
+/* кнопка связи */
+const toast = document.getElementById("toast");
+let tt;
+function say(msg){ toast.textContent = msg; toast.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("show"), 3800); }
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-ask]"); if (!b) return;
+  const text = b.dataset.ask;
+  if (TG_USER) window.open("https://t.me/" + TG_USER + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+  else say("В демо здесь откроется чат в Telegram с готовым сообщением: «" + text + "»");
+});
+</script>
+</body>
+</html>
