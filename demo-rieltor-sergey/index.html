@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>Сергей К - новостройки Новосибирска с рассрочкой</title>
 <meta name="description" content="Квартиры в новостройках Новосибирска: рассрочка, первый взнос от 700 000 ₽, подбор под бюджет. Агентство недвижимости Кварцс.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -110,7 +111,8 @@ h2{font-family:var(--font-d);font-weight:300;font-size:clamp(30px,3.8vw,46px);le
 
 /* contact */
 .contact{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.portrait{aspect-ratio:4/5;background:linear-gradient(160deg,var(--quartz),#c3cad5);border-radius:6px 90px 6px 6px;display:flex;align-items:flex-end;justify-content:center;color:var(--steel);font-size:15px;padding:22px;text-align:center;max-width:380px}
+.portrait{aspect-ratio:4/5;background:var(--quartz);border-radius:6px 90px 6px 6px;overflow:hidden;max-width:380px}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block}
 .contact .btn{margin-top:28px}
 .links{margin-top:22px;color:var(--steel);font-size:15px}
 footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--steel);font-size:14px}
@@ -133,7 +135,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--steel);f
 </head>
 <body>
 
-<div class="demo-strip">Демо-страница. Объекты, цены и контакты показаны для примера.</div>
+<div class="demo-strip">Демо-страница, сделана для вас. Объекты и цены условные. Ссылка закрыта от поиска, её знаете только вы.</div>
 
 <div class="wrap">
   <header class="top">
@@ -207,7 +209,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--steel);f
 
 <section>
   <div class="wrap contact">
-    <div class="portrait">Здесь будет ваше фото</div>
+    <div class="portrait"><img src="sergey.jpg" alt="Сергей К, агент по недвижимости в Новосибирске" width="640" height="640"></div>
     <div>
       <h2>Сергей К, агентство недвижимости Кварцс</h2>
       <p class="sub">Продаю квартиры в новостройках Новосибирска. Напишите, какой бюджет и какие комнаты нужны, отвечу вариантами.</p>
