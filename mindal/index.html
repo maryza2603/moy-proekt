@@ -7,184 +7,216 @@
 <meta name="description" content="Студия маникюра и педикюра «Миндаль»: маникюр, покрытие гель-лаком, педикюр, дизайн. Демо-сайт для портфолио.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+/* Hallmark · custom theme: «Шалфей и миндаль» · tone: soft · macrostructure: floating-pill nav + bento hero
+ * paper oklch(97.5% 0.012 88) · accent oklch(44% 0.075 145) · Onest (заголовки) + Golos Text (текст)
+ * pre-emit critique: P4 H4 E4 S4 R4 V5 */
 :root{
-  --milk:#f7f1ec; --cream:#efe4da; --ink:#2b1d1f; --soft:#6f5b5d;
-  --cherry:#8e1f2c; --cherry-d:#6d1520; --rose:#e9b9b4; --line:#e2d3c8;
+  --color-paper:oklch(97.5% .012 88);
+  --color-paper-2:oklch(94.5% .022 92);
+  --color-card:oklch(99% .006 90);
+  --color-ink:oklch(24% .025 150);
+  --color-soft:oklch(44% .02 140);
+  --color-accent:oklch(44% .075 145);
+  --color-accent-d:oklch(36% .07 145);
+  --color-sage:oklch(86% .055 140);
+  --color-sage-2:oklch(92% .035 135);
+  --color-almond:oklch(84% .06 75);
+  --color-line:oklch(88% .022 95);
+  --color-deep:oklch(30% .05 150);
+  --color-on-deep:oklch(95% .018 92);
+  --color-on-deep-soft:oklch(82% .03 110);
+  --color-tg:oklch(52% .14 240);
+  --color-tg-d:oklch(44% .13 240);
+  --color-disabled:oklch(80% .02 100);
+  --color-ok:oklch(92% .05 150);
+  --color-focus:oklch(55% .12 145);
+  --color-shadow:oklch(24% .025 150 / .35);
+  --color-scrim:oklch(18% .02 150 / .92);
+  --font-display:Onest,system-ui,sans-serif;
+  --font-body:"Golos Text",system-ui,sans-serif;
+  --r-sm:16px; --r-md:24px; --r-lg:36px; --r-pill:999px;
+  --ease-out:cubic-bezier(.22,1,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--milk);color:var(--ink);font:400 17px/1.6 Manrope,system-ui,sans-serif}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--color-paper);color:var(--color-ink);font:400 17px/1.6 var(--font-body);overflow-x:clip}
 img{display:block;max-width:100%}
 a{color:inherit}
+h1,h2,h3{font-family:var(--font-display);font-style:normal;overflow-wrap:anywhere;min-width:0}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-.serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500}
 
-/* шапка */
-header{position:sticky;top:0;z-index:20;background:rgba(247,241,236,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:500;text-decoration:none;letter-spacing:.02em;position:relative}
-.logo::after{content:"";position:absolute;top:8px;right:-9px;width:6px;height:6px;border-radius:50%;background:var(--cherry);box-shadow:0 0 0 3px rgba(142,31,44,.15)}
-nav{display:flex;gap:28px;font-size:15px}
-nav a{text-decoration:none;color:var(--soft)}
-nav a:hover{color:var(--cherry)}
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--cherry);color:#fff;text-decoration:none;padding:15px 28px;border-radius:999px;font-weight:600;font-size:16px;transition:background .2s,transform .2s}
-.btn:hover{background:var(--cherry-d);transform:translateY(-2px)}
-.btn--vk{background:#2aabee;color:#fff}.btn--vk:hover{background:#1c8fcc}
+/* шапка-«таблетка» */
+header{position:sticky;top:12px;z-index:20;padding:0 16px}
+header .wrap{max-width:1080px;display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 10px 0 26px;
+  background:color-mix(in oklch,var(--color-card) 88%,transparent);backdrop-filter:blur(12px);border:1px solid var(--color-line);border-radius:var(--r-pill)}
+.logo{font-family:var(--font-display);font-size:24px;font-weight:700;text-decoration:none;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.logo::before{content:"";width:12px;height:16px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--color-accent)}
+nav{display:flex;gap:26px;font-size:15px}
+nav a{text-decoration:none;color:var(--color-soft);white-space:nowrap}
+nav a:hover{color:var(--color-accent)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--color-accent);color:var(--color-card);text-decoration:none;padding:15px 28px;border-radius:var(--r-pill);font-weight:600;font-size:16px;white-space:nowrap;transition:background .2s,transform .2s var(--ease-out)}
+.btn:hover{background:var(--color-accent-d);transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--color-focus);outline-offset:3px}
+.btn--vk{background:var(--color-tg);color:var(--color-card)}.btn--vk:hover{background:var(--color-tg-d)}
+.btn--ghost{background:transparent;color:var(--color-ink);border:1.5px solid var(--color-ink)}
+.btn--ghost:hover{background:var(--color-ink);color:var(--color-card)}
+header .btn{padding:11px 22px;font-size:14px}
 .actions{display:flex;flex-wrap:wrap;gap:12px}
-.master .wrap{display:grid;grid-template-columns:.8fr 1fr;gap:64px;align-items:center}
-.master figure{border-radius:220px 220px 28px 28px;overflow:hidden;aspect-ratio:3/4;box-shadow:0 30px 60px -30px rgba(43,29,31,.45)}
-.master figure img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
-.master blockquote{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:30px;color:var(--cherry);margin:24px 0}
-.btn--ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
-.btn--ghost:hover{background:var(--ink);color:#fff}
-header .btn{padding:10px 20px;font-size:14px}
+.kicker{display:inline-block;font-size:13px;font-weight:600;color:var(--color-accent-d);background:var(--color-sage-2);padding:6px 14px;border-radius:var(--r-pill)}
 
-/* первый экран */
-.hero{padding:64px 0 88px}
-.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
-.kicker{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--cherry);font-weight:600}
-.hero h1{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(68px,11vw,150px);line-height:.9;margin:18px 0 10px;
-  background:linear-gradient(110deg,var(--ink) 40%,#c9858b 50%,var(--ink) 60%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:glint 5s ease-in-out infinite}
-@keyframes glint{0%,100%{background-position:100% 0}50%{background-position:0 0}}
-.slogan{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(26px,3.2vw,36px);color:var(--cherry);line-height:1.2}
-.hero p.lead{margin:22px 0 34px;color:var(--soft);max-width:440px}
-.hero .actions{display:flex;flex-wrap:wrap;gap:12px}
-.collage{position:relative;height:560px}
-.collage figure{position:absolute;overflow:hidden;border-radius:200px 200px 24px 24px;box-shadow:0 30px 60px -30px rgba(43,29,31,.45)}
-.collage figure img{width:100%;height:100%;object-fit:cover}
-.collage .c1{inset:0 22% 8% 0}
-.collage .c2{width:44%;height:52%;right:0;bottom:0;border-radius:24px;border:8px solid var(--milk)}
-.badge{position:absolute;left:-18px;bottom:40px;background:#fff;border-radius:18px;padding:14px 18px;font-size:14px;box-shadow:0 16px 40px -20px rgba(0,0,0,.35)}
-.badge b{display:block;font-size:15px}
+/* первый экран: три плитки */
+.hero{padding:56px 0 40px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:center}
+.hero h1{font-weight:700;font-size:clamp(58px,10vw,128px);line-height:.95;letter-spacing:-.035em;margin:20px 0 12px}
+.slogan{font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.6vw,30px);color:var(--color-accent);line-height:1.25}
+.hero p.lead{margin:22px 0 32px;color:var(--color-soft);max-width:460px}
+.bento{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:14px;height:540px;position:relative}
+.bento figure{overflow:hidden;border-radius:var(--r-lg)}
+.bento img{width:100%;height:100%;object-fit:cover}
+.bento .t1{grid-row:1/3}
+.bento .t3{border-radius:var(--r-pill) var(--r-pill) var(--r-lg) var(--r-lg)}
+.badge{position:absolute;left:-14px;bottom:26px;background:var(--color-card);border-radius:var(--r-pill);padding:12px 22px;font-size:14px;line-height:1.3;box-shadow:0 18px 36px -18px var(--color-shadow)}
+.badge b{display:block;font-size:15px;font-family:var(--font-display)}
 
-/* бегущая строка */
-.ticker{background:var(--ink);color:var(--cream);overflow:hidden;padding:16px 0;white-space:nowrap}
-.ticker div{display:inline-block;animation:run 30s linear infinite;font-family:"Cormorant Garamond",serif;font-size:24px;font-style:italic}
-.ticker span{margin:0 28px;color:var(--rose)}
-@keyframes run{to{transform:translateX(-50%)}}
+/* факты */
+.facts{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:8px auto 0;padding:0 24px;max-width:1180px}
+.facts li{background:var(--color-sage-2);color:var(--color-accent-d);font-weight:500;font-size:15px;padding:10px 20px;border-radius:var(--r-pill)}
 
-section{padding:96px 0}
-h2{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(40px,5vw,60px);line-height:1.05;margin:12px 0 18px}
-.sub{color:var(--soft);max-width:560px}
+section{padding:88px 0}
+h2{font-weight:600;font-size:clamp(34px,4.6vw,56px);line-height:1.08;letter-spacing:-.025em;margin:14px 0 16px}
+h2 i{font-style:normal;color:var(--color-accent);text-decoration:underline;text-decoration-color:var(--color-almond);text-decoration-thickness:.12em;text-underline-offset:.14em}
+.sub{color:var(--color-soft);max-width:560px}
 
 /* работы */
-.grid{margin-top:48px;columns:3 300px;column-gap:18px}
-.grid button{all:unset;cursor:zoom-in;display:block;margin-bottom:18px;border-radius:18px;overflow:hidden;break-inside:avoid;position:relative}
-.grid img{width:100%;transition:transform .6s}
+.grid{margin-top:44px;columns:3 300px;column-gap:16px}
+.grid button{all:unset;cursor:zoom-in;display:block;margin-bottom:16px;border-radius:var(--r-md);overflow:hidden;break-inside:avoid;position:relative}
+.grid img{width:100%;transition:transform .6s var(--ease-out)}
 .grid button:hover img{transform:scale(1.04)}
-.grid button::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35) 45%,transparent 60%);transform:translateX(-120%);transition:transform .9s}
-.grid button:hover::after{transform:translateX(120%)}
-.grid button:focus-visible{outline:3px solid var(--cherry);outline-offset:3px}
+.grid button:focus-visible{outline:3px solid var(--color-focus);outline-offset:3px}
 
-/* услуги */
-.services{background:var(--cream)}
-.services .wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:64px;align-items:start}
-.list{border-top:1px solid var(--ink)}
-.item{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:26px 0;border-bottom:1px solid var(--line)}
-.item .n{font-family:"Cormorant Garamond",serif;font-size:28px;color:var(--cherry);line-height:1}
-.item h3{font-size:20px;font-weight:600;margin-bottom:4px}
-.item p{color:var(--soft);font-size:15px}
-.note{margin-top:26px;font-size:15px;color:var(--soft)}
+/* о студии */
+.master .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:64px;align-items:center}
+.master figure{border-radius:48% 52% 44% 56%/38% 42% 58% 62%;overflow:hidden;aspect-ratio:1/1.08;background:var(--color-sage-2)}
+.master figure img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.master blockquote{font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.4vw,28px);line-height:1.3;color:var(--color-accent-d);margin:26px 0;padding-left:20px;border-left:4px solid var(--color-almond)}
+
+/* услуги: карточки */
+.services{background:var(--color-paper-2)}
+.services .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:56px;align-items:start}
+.list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.item{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:24px;background:var(--color-card);border-radius:var(--r-md);border:1px solid var(--color-line)}
+.item .n{width:40px;height:40px;border-radius:50%;background:var(--color-sage);color:var(--color-accent-d);font-family:var(--font-display);font-weight:600;font-size:15px;display:grid;place-items:center}
+.item h3{font-size:19px;font-weight:600;line-height:1.25}
+.item p{color:var(--color-soft);font-size:15px;line-height:1.5}
+.note{margin-top:26px}
 
 /* палитра */
-.palette .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.pics{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.pics img{border-radius:18px;aspect-ratio:3/4;object-fit:cover}
-.pics img:last-child{margin-top:48px}
-.dots{display:flex;gap:10px;margin-top:26px}
-.dots i{width:34px;height:34px;border-radius:50%;box-shadow:inset 0 -6px 10px rgba(0,0,0,.12),inset 0 6px 8px rgba(255,255,255,.5)}
+.palette .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.pics{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.pics img{border-radius:var(--r-md);aspect-ratio:3/4;object-fit:cover}
+.pics img:last-child{margin-top:44px;border-radius:var(--r-pill) var(--r-pill) var(--r-md) var(--r-md)}
+.dots{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.dots i{width:36px;height:36px;border-radius:50%;box-shadow:inset 0 -6px 10px oklch(20% .02 150 / .12),inset 0 6px 8px oklch(100% 0 0 / .5)}
 
 /* запись */
-.contact{background:var(--ink);color:var(--cream);border-radius:36px;margin:0 24px 24px;padding:88px 0}
-.contact .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
-.contact h2{color:#fff}
-.contact .sub{color:#c8b8b2}
-.phone{display:block;font-family:"Cormorant Garamond",serif;font-size:clamp(38px,5vw,56px);color:#fff;text-decoration:none;margin:26px 0 22px}
-.phone:hover{color:var(--rose)}
-.info{display:grid;gap:22px}
-.info div{border-top:1px solid rgba(255,255,255,.15);padding-top:16px}
-.info small{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--rose);margin-bottom:4px}
-.info a{text-decoration:underline;text-underline-offset:4px}
-.contact .btn{background:var(--rose);color:var(--ink)}
-.contact .btn:hover{background:#fff}
+.book{padding:88px 0;background:var(--color-sage-2)}
+.book .wrap{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:48px;align-items:start}
+.team{display:grid;gap:12px;margin-top:28px}
+.mcard{display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;align-items:center;background:var(--color-card);border-radius:var(--r-md);padding:12px 18px 12px 12px}
+.mcard img{width:88px;height:88px;border-radius:50%;object-fit:cover}
+.mcard h3{font-weight:600;font-size:21px;line-height:1.1}
+.mcard .exp{font-size:13px;color:var(--color-accent);font-weight:600;margin:4px 0}
+.mcard p{font-size:14px;color:var(--color-soft);line-height:1.45}
+.bk{background:var(--color-card);border-radius:var(--r-lg);padding:30px;box-shadow:0 30px 60px -44px var(--color-shadow)}
+.bk fieldset{border:0;margin:0 0 24px}
+.bk legend{font-family:var(--font-display);font-weight:600;font-size:15px;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:block;border:1.5px solid var(--color-line);border-radius:var(--r-md);padding:9px 16px;cursor:pointer;font-size:15px;line-height:1.3;transition:border-color .15s,background .15s}
+.chip span small{display:block;color:var(--color-soft);font-size:12.5px}
+.chip span:hover{border-color:var(--color-accent)}
+.chip input:checked+span{background:var(--color-accent);border-color:var(--color-accent);color:var(--color-card)}
+.chip input:checked+span small{color:var(--color-sage-2)}
+.chip input:focus-visible+span{outline:3px solid var(--color-focus);outline-offset:2px}
+.chip input:disabled+span{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.days .chip span{text-align:center;min-width:64px}
+.slots .chip span{min-width:70px;text-align:center}
+.bk .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.bk label.f{display:block;font-size:13px;color:var(--color-soft)}
+.bk label.f input{display:block;width:100%;margin-top:4px;border:1.5px solid var(--color-line);border-radius:var(--r-sm);padding:12px 16px;font:inherit;color:var(--color-ink);background:var(--color-paper)}
+.bk label.f input:focus{outline:0;border-color:var(--color-accent);background:var(--color-card)}
+.sum{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--color-line);padding-top:20px;margin-top:4px;flex-wrap:wrap}
+.sum p{font-size:15px;color:var(--color-soft)}.sum b{color:var(--color-ink)}
+.sum .btn{border:0;cursor:pointer;font-family:inherit}
+.sum .btn:disabled{background:var(--color-disabled);cursor:not-allowed;transform:none}
+.done{text-align:center;padding:30px 10px}
+.done h3{font-weight:600;font-size:36px;color:var(--color-accent)}
+.done p{color:var(--color-soft);margin:10px auto 0;max-width:420px}
+.hint{font-size:13px;color:var(--color-soft);margin-top:8px}
+.tgd{display:flex;gap:14px;align-items:center;background:var(--color-sage-2);border-radius:var(--r-sm);padding:14px 18px;margin-bottom:18px;flex-wrap:wrap}
+.tgd p{flex:1 1 220px;font-size:14px;line-height:1.45;color:var(--color-soft)}
+.tgd b{color:var(--color-ink)}
+.tgd .btn{padding:10px 18px;font-size:14px;background:var(--color-tg)}
+.tgd .btn:hover{background:var(--color-tg-d)}
+.tgd.ok{background:var(--color-ok)}
+.tgd.ok .btn{display:none}
 
-footer{padding:28px 0 40px;font-size:14px;color:var(--soft)}
+/* контакты */
+.contact{background:var(--color-deep);color:var(--color-on-deep);border-radius:var(--r-lg);margin:0 20px 20px;padding:80px 0}
+.contact .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:56px;align-items:center}
+.contact h2{color:var(--color-card)}
+.contact .kicker{background:var(--color-accent-d);color:var(--color-on-deep)}
+.contact .sub{color:var(--color-on-deep-soft)}
+.phone{display:block;font-family:var(--font-display);font-weight:600;font-size:clamp(34px,4.6vw,52px);letter-spacing:-.02em;color:var(--color-card);text-decoration:none;margin:24px 0 22px;white-space:nowrap}
+.phone:hover{color:var(--color-sage)}
+.info{display:grid;gap:18px}
+.info div{background:var(--color-accent-d);border-radius:var(--r-md);padding:16px 22px}
+.info small{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-sage);margin-bottom:2px}
+.info a{text-decoration:underline;text-underline-offset:4px}
+.contact .btn{background:var(--color-sage);color:var(--color-ink)}
+.contact .btn:hover{background:var(--color-card)}
+.contact .btn--vk{background:var(--color-tg);color:var(--color-card)}.contact .btn--vk:hover{background:var(--color-tg-d)}
+
+footer{padding:24px 0 40px;font-size:14px;color:var(--color-soft)}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 /* просмотр фото */
-.lb{position:fixed;inset:0;background:rgba(20,12,14,.92);display:none;align-items:center;justify-content:center;z-index:50;padding:24px}
+.lb{position:fixed;inset:0;background:var(--color-scrim);display:none;align-items:center;justify-content:center;z-index:50;padding:24px}
 .lb.on{display:flex}
-.lb img{max-height:88vh;border-radius:14px}
-.lb button{position:absolute;background:none;border:0;color:#fff;font-size:40px;cursor:pointer;padding:12px}
+.lb img{max-height:88vh;border-radius:var(--r-md)}
+.lb button{position:absolute;background:none;border:0;color:var(--color-card);font-size:40px;cursor:pointer;padding:12px}
 .lb .x{top:10px;right:16px}.lb .p{left:8px}.lb .nx{right:8px}
 
 /* появление */
-.rv{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
 .rv.in{opacity:1;transform:none}
 
 @media (max-width:900px){
   nav{display:none}
-  .hero{padding:32px 0 64px}
-  .hero .wrap,.master .wrap,.services .wrap,.palette .wrap,.contact .wrap{grid-template-columns:1fr;gap:40px}
-  .collage{height:440px}
+  .hero{padding:28px 0 28px}
+  .hero .wrap,.master .wrap,.services .wrap,.palette .wrap,.contact .wrap,.book .wrap{grid-template-columns:minmax(0,1fr);gap:36px}
+  .bento{height:420px}
   .badge{left:8px}
-  section{padding:72px 0}
-  .contact{margin:0 12px 12px;border-radius:26px;padding:64px 0}
+  section{padding:64px 0}
+  .book{padding:64px 0}
+  .contact{margin:0 12px 12px;border-radius:var(--r-md);padding:56px 0}
+  .bk{padding:22px 18px}.bk .row{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .list{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:480px){
   .wrap{padding:0 16px}
-  header .btn{display:none}
-  .collage{height:380px}
+  header{padding:0 10px}
+  header .wrap{padding:0 8px 0 18px}
+  header .btn{padding:10px 16px}
+  .bento{height:360px}
+  .phone{font-size:clamp(26px,9vw,34px)}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
-
-/* мастера */
-.team{display:grid;gap:14px;margin-top:28px}
-.mcard{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;background:var(--milk);border-radius:22px;padding:12px 16px 12px 12px}
-.mcard img{width:96px;height:96px;border-radius:50%;object-fit:cover}
-.mcard h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:26px;line-height:1}
-.mcard .exp{font-size:13px;color:var(--cherry);font-weight:600;margin:4px 0 4px}
-.mcard p{font-size:14px;color:var(--soft);line-height:1.45}
-/* онлайн-запись */
-.book{padding:96px 0;background:var(--cream)}
-.book .wrap{display:grid;grid-template-columns:.75fr 1.25fr;gap:56px;align-items:start}
-.book h2{font-family:"Cormorant Garamond",serif;font-weight:400;font-size:clamp(40px,5vw,60px);line-height:1;margin:14px 0 16px}
-.bk{background:#fff;border-radius:28px;padding:30px;box-shadow:0 30px 60px -40px rgba(43,29,31,.5)}
-.bk fieldset{border:0;margin:0 0 24px}
-.bk legend{font-weight:600;font-size:15px;margin-bottom:10px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip input{position:absolute;opacity:0;pointer-events:none}
-.chip span{display:block;border:1.5px solid var(--line);border-radius:16px;padding:9px 14px;cursor:pointer;font-size:15px;line-height:1.3;transition:border-color .15s,background .15s}
-.chip span small{display:block;color:var(--soft);font-size:12.5px}
-.chip span:hover{border-color:var(--rose)}
-.chip input:checked+span{background:var(--cherry);border-color:var(--cherry);color:#fff}
-.chip input:checked+span small{color:#f3d9d6}
-.chip input:focus-visible+span{outline:3px solid var(--rose);outline-offset:2px}
-.chip input:disabled+span{opacity:.38;cursor:not-allowed;text-decoration:line-through}
-.days .chip span{text-align:center;min-width:64px}
-.slots .chip span{min-width:70px;text-align:center}
-.bk .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.bk label.f{display:block;font-size:13px;color:var(--soft)}
-.bk label.f input{display:block;width:100%;margin-top:4px;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;font:inherit;background:var(--milk)}
-.bk label.f input:focus{outline:0;border-color:var(--cherry)}
-.sum{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--line);padding-top:20px;margin-top:4px;flex-wrap:wrap}
-.sum p{font-size:15px;color:var(--soft)}.sum b{color:var(--ink)}
-.sum .btn{border:0;cursor:pointer}
-.sum .btn:disabled{background:#c9b8b2;cursor:not-allowed;transform:none}
-.done{text-align:center;padding:30px 10px}
-.done h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:40px;color:var(--cherry)}
-.done p{color:var(--soft);margin:10px auto 0;max-width:420px}
-.hint{font-size:13px;color:var(--soft);margin-top:8px}
-.tgd{display:flex;gap:14px;align-items:center;background:var(--cream);border-radius:16px;padding:14px 16px;margin-bottom:18px;flex-wrap:wrap}
-.tgd p{flex:1 1 220px;font-size:14px;line-height:1.45;color:var(--soft)}
-.tgd b{color:var(--ink)}
-.tgd .btn{padding:10px 18px;font-size:14px;background:#2a8bd0}
-.tgd .btn:hover{background:#1f6fa8}
-.tgd.ok{background:#e4f1e6}
-.tgd.ok .btn{display:none}
-@media(max-width:900px){.book .wrap{grid-template-columns:1fr;gap:28px}.bk{padding:22px 18px}.bk .row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -207,7 +239,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   <section class="hero">
     <div class="wrap">
       <div>
-        <div class="kicker">Маникюр и педикюр · у дома</div>
+        <span class="kicker">Маникюр и педикюр · у дома</span>
         <h1>Миндаль</h1>
         <div class="slogan">Руки, которые хочется показывать</div>
         <p class="lead">Уютная студия на два кресла. Стерильные инструменты, ровное покрытие, которое держится 3-4 недели, и дизайн - от нежного нюда до яркого лета.</p>
@@ -216,22 +248,22 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
           <a class="btn btn--vk" href="#contact"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.3 2.9 11.5c-1.3.5-1.3 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.4l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.1zM8.9 14.1l9.2-5.8c.4-.3.8-.1.5.2l-7.6 6.9-.3 3.2-1.8-4.5z"/></svg>Написать в Telegram</a>
         </div>
       </div>
-      <div class="collage">
-        <figure class="c1"><img src="img/n1.jpg" alt="Маникюр с цветочным дизайном"></figure>
-        <figure class="c2"><img src="img/n3.jpg" alt="Красный маникюр с блёстками"></figure>
+      <div class="bento">
+        <figure class="t1"><img src="img/n1.jpg" alt="Маникюр с цветочным дизайном"></figure>
+        <figure class="t2"><img src="img/n3.jpg" alt="Красный маникюр с блёстками"></figure>
+        <figure class="t3"><img src="img/n4.jpg" alt="Нежно-розовый маникюр с крапинками"></figure>
         <div class="badge"><b>Покрытие 3-4 недели</b>без сколов</div>
       </div>
     </div>
   </section>
 
-  <div class="ticker" aria-hidden="true"><div>
-    Маникюр<span>✦</span>Педикюр<span>✦</span>Покрытие гель-лаком<span>✦</span>Дизайн<span>✦</span>Нюд и яркие цвета<span>✦</span>Руки, которые хочется показывать<span>✦</span>
-    Маникюр<span>✦</span>Педикюр<span>✦</span>Покрытие гель-лаком<span>✦</span>Дизайн<span>✦</span>Нюд и яркие цвета<span>✦</span>Руки, которые хочется показывать<span>✦</span>
-  </div></div>
+  <ul class="facts" aria-label="Коротко о студии">
+    <li>Стерильные инструменты</li><li>Два мастера, без очередей</li><li>Чай или кофе, пока сохнет покрытие</li><li>Нюд и яркие цвета</li>
+  </ul>
 
   <section id="works">
     <div class="wrap">
-      <div class="kicker">Работы</div>
+      <span class="kicker">Работы</span>
       <h2 class="rv">Каждый ноготь - <i>ручная работа</i></h2>
       <p class="sub rv">Работы наших мастеров. Нажмите на фото, чтобы рассмотреть поближе.</p>
       <div class="grid" id="grid">
@@ -250,7 +282,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <div class="wrap">
       <figure class="rv"><img src="img/n10.jpg" alt="Мастер покрывает ногти гель-лаком" loading="lazy"></figure>
       <div>
-        <div class="kicker">О студии</div>
+        <span class="kicker">О студии</span>
         <h2 class="rv">Спокойно, чисто, красиво</h2>
         <p class="sub rv">Два мастера, свой кабинет без очередей и шума. Инструменты проходят стерилизацию в сухожаре, пилки и бафы - одноразовые. Пока сохнет покрытие - чай или кофе.</p>
         <blockquote class="rv">«Уходите с маникюром, который не стыдно показать»</blockquote>
@@ -262,7 +294,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   <section class="services" id="services">
     <div class="wrap">
       <div>
-        <div class="kicker">Услуги</div>
+        <span class="kicker">Услуги</span>
         <h2 class="rv">Что я делаю</h2>
         <p class="sub rv">Цены указаны без дизайна. Снятие старого покрытия входит в стоимость.</p>
         <p class="note rv"><a class="btn" href="#book">Записаться</a></p>
@@ -283,7 +315,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
         <img class="rv" src="img/n9.jpg" alt="Палитра нежных оттенков с перламутром" loading="lazy">
       </div>
       <div>
-        <div class="kicker">Палитра</div>
+        <span class="kicker">Палитра</span>
         <h2 class="rv">Подберём ваш оттенок</h2>
         <p class="sub rv">Пастель, перламутр, нюд, сочные летние цвета и глубокий красный. Если не можете выбрать - покажу образцы на типсах и помогу подобрать цвет под настроение и сезон.</p>
         <div class="dots rv">
@@ -297,7 +329,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   <section class="book" id="book">
     <div class="wrap">
       <div>
-        <div class="kicker">Онлайн-запись</div>
+        <span class="kicker">Онлайн-запись</span>
         <h2 class="rv">Запишитесь за минуту</h2>
         <p class="sub">Выберите услугу, мастера и свободное время. Занятые часы видно сразу - не нужно ждать ответа в мессенджере.</p>
         <div class="team">
@@ -331,7 +363,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   <section class="contact" id="contact">
     <div class="wrap">
       <div>
-        <div class="kicker" style="color:var(--rose)">Запись</div>
+        <span class="kicker">Запись</span>
         <h2 class="rv">Приходите за новым маникюром</h2>
         <p class="sub">Напишите или позвоните - подберём удобное время. Работаем каждый день с 10 до 21.</p>
         <a class="phone" href="#contact">8 900 000-00-00</a>
