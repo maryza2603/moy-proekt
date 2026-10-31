@@ -136,6 +136,14 @@ header.scrolled{border-color:var(--line)}
 .filters button:hover{border-color:var(--terra)}
 .filters button.on{background:var(--ink);border-color:var(--ink);color:#fff}
 .filters button sup{font-size:11px;opacity:.6;margin-left:3px}
+.aud{padding:34px 0 8px}.aud-h{font-size:clamp(26px,3.2vw,38px);margin-bottom:6px}.aud-sub{color:var(--muted);margin-bottom:18px}
+.aud-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.aud-btn{display:flex;flex-direction:column;gap:4px;text-align:left;padding:16px 16px;border:1.5px solid var(--line);border-radius:16px;background:var(--paper);cursor:pointer;font-family:inherit;color:var(--ink);transition:.2s}
+.aud-btn b{font-size:16px;line-height:1.25}.aud-btn span{font-size:13px;color:var(--muted);line-height:1.35}
+.aud-btn:hover{border-color:var(--terra);transform:translateY(-2px)}
+.aud-note{margin:-14px 0 22px;font-size:15px}.aud-note button{border:0;background:none;color:var(--terra);font:700 15px Manrope,sans-serif;cursor:pointer;text-decoration:underline;margin-left:8px;padding:0}.aud-note a{color:var(--terra);font-weight:700;margin-left:12px}
+@media (max-width:900px){.aud-row{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.aud-row{grid-template-columns:1fr}}
 .works{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 .card{background:var(--paper);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;transition:.3s;animation:fade .45s both}
 .card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
@@ -425,6 +433,20 @@ ym(113961526, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true}
   </div>
 </section>
 
+<section class="aud" id="aud">
+  <div class="wrap">
+    <h2 class="aud-h">Для кого я делаю</h2>
+    <p class="aud-sub">Нажмите на своё дело - покажу работы для таких клиентов.</p>
+    <div class="aud-row">
+      <button type="button" class="aud-btn" data-aud="salon"><b>Салон, студия, мастер</b><span>маникюр, брови, йога, запись онлайн</span></button>
+      <button type="button" class="aud-btn" data-aud="shop"><b>Магазин и продавец на WB и Ozon</b><span>карточки товаров, сайт бренда</span></button>
+      <button type="button" class="aud-btn" data-aud="prod"><b>Производство и стройка</b><span>калькулятор и конструктор с ценой</span></button>
+      <button type="button" class="aud-btn" data-aud="cafe"><b>Кафе, пекарня, отель</b><span>меню, заказ, бронирование</span></button>
+      <button type="button" class="aud-btn" data-aud="expert"><b>Эксперт, психолог, школа</b><span>запись на консультацию, курсы</span></button>
+    </div>
+  </div>
+</section>
+
 <section class="services" id="services">
   <div class="wrap">
     <div class="reveal">
@@ -619,11 +641,21 @@ function renderDesign(){
     return `<div class="dz-group" id="dz-${gi}"><div class="dz-head"><div><h3><svg class="star"><use href="#star"/></svg>${g.g}</h3><p>${g.p}</p></div>${nav}</div>${inner}</div>`;
   }).join('');
 }
+const AUD={
+ salon:{l:'Салон, студия, мастер',f:['Для салонов красоты','Для мастеров услуг','Для фитнеса и йоги']},
+ shop:{l:'Магазин и продавец на WB и Ozon',f:['Для маркетплейсов','Для цветочных магазинов','Для ювелиров']},
+ prod:{l:'Производство и стройка',f:['Для производства','Для строителей','Для ландшафта','Для автосервисов']},
+ cafe:{l:'Кафе, пекарня, отель',f:['Для пекарен','Для кафе и доставки','Для ресторанов','Для отелей и гостевых домов','Для баз отдыха']},
+ expert:{l:'Эксперт, психолог, школа',f:['Для психологов','Для экспертов','Для репетиторов','Для онлайн-школ','Для клиник','Для юридических компаний','Для риэлторов']}
+};
 function show(cat){
   document.querySelectorAll('#filters button').forEach(b=>b.classList.toggle('on',b.dataset.c===cat));
-  const list=W.filter(w=>cat==='all'||w.cat===cat||(cat==='land'&&w.land)||(cat==='expert'&&EXP.includes(w.f)));
+  const isA=cat.indexOf('aud-')===0;
+  const list=W.filter(w=>cat==='all'||w.cat===cat||(cat==='land'&&w.land)||(cat==='expert'&&EXP.includes(w.f))||(isA&&AUD[cat.slice(4)].f.includes(w.f)));
   $('#grid').style.display=list.length?'':'none';
   $('#grid').innerHTML=list.map(card).join('');
+  let an=$('#audNote');if(!an){an=document.createElement('div');an.id='audNote';$('#grid').before(an)}
+  an.className=isA?'aud-note':'';an.innerHTML=isA?`Работы для: <b>${AUD[cat.slice(4)].l}</b><button type="button" data-c="all">Показать все</button>${cat==='aud-shop'?'<a href="#" data-dz>Карточки для WB и Ozon</a>':''}`:'';
   const d=$('#design'); d.style.display=(cat==='design'||cat==='all')?'':'none';
   d.style.marginTop=cat==='all'?'70px':'0';
   d.innerHTML=(cat==='all'&&designCount?`<h2 style="font-size:36px;margin-bottom:30px">Дизайн</h2>`:'')+(cat==='all'&&!designCount?'':renderDesign());
@@ -633,6 +665,7 @@ $('#filters').onclick=e=>{const b=e.target.closest('button');if(b)show(b.dataset
 show('all');
 $('#cnt-sites').textContent=W.filter(w=>w.cat!=='app').reduce((n,w)=>n+(w.pair&&w.labels[0]!=='Было'?2:1),0)+'';
 
+document.addEventListener('click',e=>{const b=e.target.closest('[data-aud]');if(b){show('aud-'+b.dataset.aud);$('#filters').scrollIntoView({behavior:'smooth'});return}const r=e.target.closest('#audNote button');if(r)show('all')});
 document.addEventListener('click',e=>{const a=e.target.closest('[data-dz]');if(!a)return;e.preventDefault();show('design');const g=DESIGN.findIndex(x=>x.g.startsWith('Карточки'));const el=document.getElementById('dz-'+g);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})});
 // карточки услуг: клик - фильтр и прокрутка к примерам
 function goSvc(el){const g=el.dataset.go;
