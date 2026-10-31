@@ -78,6 +78,7 @@ h1{font-size:clamp(24px,2.6vw,34px);line-height:1.15;font-weight:800;letter-spac
 .total{padding:18px;border-top:1px solid var(--line);background:#fbfaf7;border-radius:0 0 14px 14px}
 .total .p{font-size:30px;font-weight:800;letter-spacing:-.02em}
 .total .n{font-size:13px;color:var(--muted)}
+.bk{margin-bottom:12px;font-size:14px}.bk h3{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}.bk .r{display:flex;justify-content:space-between;gap:14px;padding:6px 0;border-bottom:1px dashed var(--line)}.bk .r span:last-child{white-space:nowrap;font-variant-numeric:tabular-nums}.bk .r.base{font-weight:700}
 .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
 .btn{border:0;border-radius:10px;padding:13px 14px;font-weight:700;cursor:pointer;font-size:14.5px}
 .btn.main{background:var(--acc);color:var(--ink);grid-column:1/-1}
@@ -107,7 +108,7 @@ dialog::backdrop{background:rgba(20,22,25,.6)}
 @media(max-width:1000px){
  .app{grid-template-columns:1fr}
  .left{position:static}
- .total{display:none}
+ .total{display:block;border-radius:14px;margin:0 16px 12px}.total .p,.total .n,.total .btns,.total .copied{display:none}
  .mbar{display:flex;position:sticky;bottom:0;z-index:5;background:var(--dark);color:#fff;padding:12px 16px;align-items:center;justify-content:space-between;gap:12px}
  .mbar b{font-size:19px;display:block}.mbar span{font-size:12px;color:#aeb3b9}
  .mbar .btn{padding:11px 14px}
@@ -262,7 +263,8 @@ dialog::backdrop{background:rgba(20,22,25,.6)}
   <div class="grp"><h2>Окраска</h2><div class="sw" id="g-col"></div><p class="sw-note" id="colName"></p></div>
   <div class="mtools"><button class="btn sec" onclick="print()">Смета в PDF</button><button class="btn sec" onclick="share()">Ссылка на конфигурацию</button></div>
   <div class="total">
-   <div class="p num" id="price">0 ₽</div>
+   <div class="bk" id="bk" aria-label="Из чего складывается цена"></div>
+   <div class="p num" id="price">10 520 000 ₽</div>
    <div class="n">с НДС, ориентировочная цена. Точную пришлём в КП</div>
    <div class="btns">
     <button class="btn main" onclick="openLead()">Запросить КП на эту конфигурацию</button>
@@ -273,7 +275,7 @@ dialog::backdrop{background:rgba(20,22,25,.6)}
   </div>
  </section>
 </main>
-<div class="mbar"><div><b class="num" id="mPrice">0 ₽</b><span>с НДС, ориентировочно</span></div><button class="btn main" onclick="openLead()">Запросить КП</button></div>
+<div class="mbar"><div><b class="num" id="mPrice">10 520 000 ₽</b><span>с НДС, ориентировочно</span></div><button class="btn main" onclick="openLead()">Запросить КП</button></div>
 
 <footer>© 2026 ГорТехПоставка. Демо-конфигуратор, цены условные. Разработка - Мария</footer>
 
@@ -366,6 +368,7 @@ function render(){
  sCap.textContent=S.cap+' т/ч';sKw.textContent=Math.round(c.kw)+' кВт';
  sMass.textContent=c.mass.toFixed(0)+' т';sDays.textContent='от '+c.days+' дней';
  price.textContent=fmt(c.sum);mPrice.textContent=fmt(c.sum);
+ document.getElementById('bk').innerHTML='<h3>Из чего складывается цена</h3>'+c.rows.map((r,i)=>`<div class="r${i?'':' base'}"><span>${i?'+ ':''}${r[0]}</span><span>${fmt(r[1])}</span></div>`).join('');
  // чертёж
  show('chFrame',S.ch==='frame');show('chWheels',S.ch==='wheel');show('chTracks',S.ch==='track');
  show('crJaw',S.type==='jaw');show('crCone',S.type==='cone');show('crImpact',S.type==='imp');
