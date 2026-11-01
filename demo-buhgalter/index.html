@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Бухгалтерия для ИП и ООО - цена за каждую операцию</title>
+<meta name="description" content="Бухгалтерское обслуживание ИП и небольших ООО дистанционно. В прайсе у каждой операции есть время и цена: выберите систему налогообложения и сразу увидите сумму.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#17202B;--pen:#1F3FD1;--pen-d:#1731A8;--mark:#FFE066;--paper:#FCFCFB;--grid:#DCE4EE;--line:#CBD5E2;--muted:#56626F;--white:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:'Golos Text',system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--pen);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:800;letter-spacing:-.03em;line-height:1.08}
+h2{font-size:clamp(30px,4vw,46px);margin-bottom:14px;max-width:22ch}
+.lead{color:var(--muted);max-width:56ch}
+.num{font-variant-numeric:tabular-nums}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--pen);background:var(--pen);color:#fff;font-weight:600;font-size:17px;padding:14px 26px;border-radius:6px;text-decoration:none;cursor:pointer;transition:background .15s,color .15s}
+.btn:hover{background:var(--pen-d);border-color:var(--pen-d)}
+.btn.ghost{background:transparent;color:var(--pen)}
+.btn.ghost:hover{background:var(--pen);color:#fff}
+
+/* шапка */
+.top{position:sticky;top:0;z-index:20;background:rgba(252,252,251,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;text-decoration:none;letter-spacing:-.01em}
+.brand svg{flex:none}
+.nav{display:flex;gap:26px;font-size:16px}
+.nav a{text-decoration:none;color:var(--muted)}
+.nav a:hover{color:var(--ink)}
+.top .btn{padding:9px 18px;font-size:15px}
+
+/* первый экран */
+.hero{position:relative;padding:72px 0 96px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(36px,5.2vw,64px);margin-bottom:22px;max-width:15ch}
+.hero .lead{font-size:20px;margin-bottom:34px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+
+/* чек */
+.receipt{position:relative;background:#fff;padding:26px 26px 22px;max-width:380px;justify-self:end;width:100%;box-shadow:0 18px 40px -22px rgba(23,32,43,.45);transform:rotate(1.2deg)}
+.receipt::after{content:"";position:absolute;left:0;right:0;bottom:-10px;height:10px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='10'%3E%3Cpath d='M0 0h20l-10 10z' fill='%23fff'/%3E%3C/svg%3E") repeat-x}
+.receipt h3{font-size:15px;font-weight:600;letter-spacing:0;color:var(--muted);line-height:1.3}
+.receipt .who{font-size:21px;font-weight:800;letter-spacing:-.02em;margin:2px 0 14px}
+.receipt ul{list-style:none;border-top:2px dashed var(--line);padding-top:10px}
+.receipt li{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:6px 0;font-size:16px;line-height:1.3;animation:slip .45s both;animation-delay:calc(var(--i)*.17s + .35s)}
+.receipt li small{grid-column:1;color:var(--muted);font-size:13px}
+.receipt li b{grid-row:1 / span 2;grid-column:2;align-self:center;font-weight:600}
+.receipt .total{display:flex;justify-content:space-between;align-items:baseline;border-top:2px dashed var(--line);margin-top:8px;padding-top:12px;font-weight:800;font-size:22px;letter-spacing:-.02em}
+.receipt .total span:last-child{background:linear-gradient(var(--mark),var(--mark)) 0 88%/0 62% no-repeat;padding:0 4px;animation:mark .7s 1.8s forwards}
+.receipt .eq{margin-top:8px;font-size:14px;color:var(--muted)}
+@keyframes slip{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes mark{to{background-size:100% 62%}}
+
+.sec{padding:96px 0}
+.sec.alt{background:#fff;border-block:1px solid var(--line)}
+
+/* как считается цена */
+.formula{font-size:clamp(26px,4.2vw,54px);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin:8px 0 34px}
+.formula em{font-style:normal;background:linear-gradient(var(--mark),var(--mark)) 0 90%/100% 55% no-repeat;padding:0 4px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--ink)}
+.facts div{padding:20px 24px 4px 0}
+.facts div+div{padding-left:24px;border-left:1px solid var(--line)}
+.facts strong{display:block;font-size:20px;letter-spacing:-.01em;margin-bottom:4px}
+.facts p{color:var(--muted);font-size:16px}
+
+/* прайс */
+.tool{background:#fff;border:2px solid var(--ink);border-radius:10px;margin-top:34px;overflow:hidden}
+.ctrl{display:grid;gap:18px;padding:22px;border-bottom:2px solid var(--ink);background:var(--paper)}
+.ctrl fieldset{border:0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.ctrl legend{float:left;width:190px;font-weight:600;font-size:16px;padding-top:2px}
+.seg{display:inline-flex;border:2px solid var(--ink);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:#fff;padding:9px 22px;cursor:pointer;font-weight:600;font-size:16px}
+.seg button+button{border-left:2px solid var(--ink)}
+.seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{border:2px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;cursor:pointer;font-weight:500;font-size:16px}
+.chips button:hover{border-color:var(--ink)}
+.chips button[aria-pressed=true]{background:var(--pen);border-color:var(--pen);color:#fff}
+.sw{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:16px}
+.sw input{position:absolute;opacity:0}
+.sw i{width:44px;height:26px;border-radius:99px;background:var(--line);position:relative;transition:background .15s;flex:none}
+.sw i::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .15s}
+.sw input:checked+i{background:var(--pen)}
+.sw input:checked+i::after{transform:translateX(18px)}
+.sw input:focus-visible+i{outline:3px solid var(--pen);outline-offset:3px}
+.sw input:disabled+i{opacity:.45}
+.sw input:disabled~span{color:var(--muted)}
+.ttl{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;padding:18px 22px 10px}
+.ttl h3{font-size:24px}
+.ttl .acts button{border:0;background:none;color:var(--pen);font-weight:600;font-size:15px;cursor:pointer;padding:4px 6px;text-decoration:underline;text-underline-offset:3px}
+.hd,.row{display:grid;grid-template-columns:34px 1fr 92px 108px;gap:12px;align-items:center;padding:12px 22px}
+.hd{font-size:14px;color:var(--muted);border-bottom:1px solid var(--line);padding-top:4px}
+.hd span:nth-child(n+3),.row .min,.row .cost{text-align:right}
+.row{border-bottom:1px solid var(--line);cursor:pointer;line-height:1.35}
+.row:hover{background:#F4F7FD}
+.row.on{background:#F1F4FE}
+.row input{appearance:none;width:22px;height:22px;border:2px solid var(--ink);border-radius:5px;background:#fff;cursor:pointer;display:grid;place-content:center}
+.row input:checked{background:var(--pen);border-color:var(--pen)}
+.row input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.row .min{color:var(--muted);font-size:16px}
+.row .cost{font-weight:700}
+.row small{display:block;color:var(--muted);font-size:14px;margin-top:3px;font-weight:400}
+.row.base .nm{font-weight:700}
+.sum{display:flex;flex-wrap:wrap;gap:14px 36px;align-items:center;justify-content:space-between;padding:20px 22px;background:var(--ink);color:#fff}
+.sum dl{display:flex;flex-wrap:wrap;gap:6px 34px}
+.sum dt{font-size:13px;color:#AEB9C7}
+.sum dd{font-size:20px;font-weight:700}
+.sum dd.big{font-size:30px;letter-spacing:-.02em;color:var(--ink);background:var(--mark);padding:0 8px;border-radius:3px}
+.sum .btn{background:#fff;color:var(--ink);border-color:#fff}
+.sum .btn:hover{background:var(--mark);border-color:var(--mark)}
+.note{margin-top:14px;color:var(--muted);font-size:15px;max-width:80ch}
+
+/* для кого: строки без карточек */
+.who{margin-top:30px;border-top:2px solid var(--ink)}
+.who div{display:grid;grid-template-columns:260px 1fr;gap:12px 40px;padding:22px 0;border-bottom:1px solid var(--line)}
+.who dt{font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.who dd{color:var(--muted);max-width:60ch}
+
+/* шаги */
+.steps{counter-reset:s;list-style:none;margin-top:34px;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.steps li{counter-increment:s;padding:0 24px 0 0;position:relative}
+.steps li::before{content:counter(s);display:grid;place-content:center;width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;font-weight:700;margin-bottom:14px}
+.steps li::after{content:"";position:absolute;top:19px;left:46px;right:8px;border-top:2px dashed var(--line)}
+.steps li:last-child::after{display:none}
+.steps h3{font-size:20px;margin-bottom:6px;letter-spacing:-.01em}
+.steps p{color:var(--muted);font-size:16px}
+
+/* вопросы */
+.faq{margin-top:28px;max-width:820px;border-top:2px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 40px 20px 0;font-weight:600;font-size:20px;position:relative;letter-spacing:-.01em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:6px;top:14px;font-size:30px;font-weight:400;color:var(--pen);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{padding:0 0 22px;color:var(--muted);max-width:64ch}
+
+/* заявка */
+.order{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
+form{display:grid;gap:16px;background:#fff;border:2px solid var(--ink);border-radius:10px;padding:26px}
+label.f{display:grid;gap:6px;font-weight:600;font-size:16px}
+.f input,.f textarea{border:2px solid var(--line);border-radius:6px;padding:12px 14px;background:var(--paper);font-weight:400;width:100%}
+.f textarea{min-height:130px;resize:vertical}
+.f input:focus,.f textarea:focus{border-color:var(--pen);outline:none}
+.ok{display:none;padding:14px 16px;background:#E9F7EE;border:2px solid #2E8B57;border-radius:6px;font-size:16px}
+.ok.show{display:block}
+.fine{font-size:14px;color:var(--muted)}
+footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+
+@media(max-width:920px){
+ .nav{display:none}
+ .hero .wrap,.order{grid-template-columns:1fr;gap:40px}
+ .receipt{justify-self:start;transform:none}
+ .facts{grid-template-columns:1fr}
+ .facts div+div{padding-left:0;border-left:0;border-top:1px solid var(--line);margin-top:18px;padding-top:18px}
+ .steps{grid-template-columns:1fr 1fr;gap:30px 0}
+ .steps li::after{display:none}
+ .who div{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+ body{font-size:17px}
+ .sec{padding:64px 0}
+ .hero{padding:44px 0 64px}
+ .top .btn{display:none}
+ .ctrl legend{float:none;width:100%;margin-bottom:6px}
+ .ctrl{padding:18px 16px}
+ .hd{display:none}
+ .row{grid-template-columns:34px 1fr auto;padding:12px 16px}
+ .row .min{grid-column:2;grid-row:2;text-align:left;font-size:14px}
+ .row .cost{grid-column:3;grid-row:1 / span 2;align-self:center}
+ .ttl{padding:16px 16px 8px}
+ .sum{padding:18px 16px}
+ .steps{grid-template-columns:1fr}
+ form{padding:18px}
+}
+@media(prefers-reduced-motion:reduce){
+ *{animation:none!important;transition:none!important}
+ .receipt .total span:last-child{background-size:100% 62%}
+ html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+ <div class="wrap">
+  <a class="brand" href="#top" aria-label="Бухгалтерия для ИП и ООО, на главную">
+   <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="1.5" y="1.5" width="27" height="27" rx="5" fill="none" stroke="#17202B" stroke-width="2"/><path d="M1.5 10.5h27M1.5 19.5h27M10.5 1.5v27M19.5 1.5v27" stroke="#DCE4EE" stroke-width="1.5"/><path d="M7 16l5 5 11-12" fill="none" stroke="#1F3FD1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+   Бухгалтерия для ИП и ООО
+  </a>
+  <nav class="nav" aria-label="Разделы">
+   <a href="#price">Услуги и цены</a>
+   <a href="#who">Для кого</a>
+   <a href="#steps">Как работаем</a>
+   <a href="#faq">Вопросы</a>
+  </nav>
+  <a class="btn" href="#order">Оставить заявку</a>
+ </div>
+</header>
+
+<main id="top">
+<section class="hero">
+ <div class="wrap">
+  <div>
+   <h1>Бухгалтерия для ИП и небольших ООО: платите за нужные операции, а не за пакет</h1>
+   <p class="lead">В прайсе у каждой операции есть время и цена: 80 ₽ за минуту работы. Выберите свою систему налогообложения и сразу увидите, сколько это стоит.</p>
+   <div class="cta">
+    <a class="btn" href="#price">Посмотреть цены</a>
+    <a class="btn ghost" href="#order">Оставить заявку</a>
+   </div>
+  </div>
+  <aside class="receipt" aria-label="Пример набора услуг с ценами">
+   <h3>Пример набора</h3>
+   <p class="who">ИП на УСН 6%</p>
+   <ul>
+    <li style="--i:0">Помню о вас<small>60 мин</small><b class="num">4 800 ₽</b></li>
+    <li style="--i:1">Банковская выписка<small>2 мин</small><b class="num">160 ₽</b></li>
+    <li style="--i:2">Проверка счёта 51<small>10 мин</small><b class="num">800 ₽</b></li>
+    <li style="--i:3">Расчёт налога по УСН 6%<small>10 мин</small><b class="num">800 ₽</b></li>
+    <li style="--i:4">Платёжное поручение<small>2 мин</small><b class="num">160 ₽</b></li>
+    <li style="--i:5">Закрытие месяца<small>15 мин</small><b class="num">1 200 ₽</b></li>
+    <li style="--i:6">Проверка требований ФНС<small>5 мин</small><b class="num">400 ₽</b></li>
+   </ul>
+   <p class="total"><span>Итого</span><span class="num">8 320 ₽</span></p>
+   <p class="eq num">104 мин × 80 ₽ = 8 320 ₽</p>
+  </aside>
+ </div>
+</section>
+
+<section class="sec" id="how">
+ <div class="wrap">
+  <h2>Как считается цена</h2>
+  <p class="formula">Минуты работы × <em>80 ₽</em> = цена операции</p>
+  <div class="facts">
+   <div><strong>Расчёт налога по УСН 6%</strong><p class="num">10 минут × 80 ₽ = 800 ₽. Так считается каждая строка прайса.</p></div>
+   <div><strong>Помню о вас: 4 800 ₽ в месяц</strong><p>Фиксированный платёж на 1 час работы: ответы на требования, переписка, напоминания о сроках, консультации.</p></div>
+   <div><strong>Чего нет в прайсе: 4 800 ₽ в час</strong><p>Любая другая задача считается по времени, которое на неё нужно.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="sec alt" id="price">
+ <div class="wrap">
+  <h2>Услуги и цены</h2>
+  <p class="lead">Выберите, кто вы и на какой системе налогообложения. Отметьте нужные операции, и внизу появится сумма.</p>
+
+  <div class="tool">
+   <div class="ctrl">
+    <fieldset><legend>Кто вы</legend>
+     <div class="seg" id="seg-type" role="group" aria-label="Кто вы">
+      <button type="button" data-v="ip" aria-pressed="true">ИП</button>
+      <button type="button" data-v="ooo" aria-pressed="false">ООО</button>
+     </div>
+    </fieldset>
+    <fieldset><legend>Система налогообложения</legend>
+     <div class="chips" id="chips-mode" role="group" aria-label="Система налогообложения"></div>
+    </fieldset>
+    <fieldset><legend>Сотрудники</legend>
+     <label class="sw"><input type="checkbox" id="staff"><i></i><span id="staff-lbl">Есть сотрудники</span></label>
+    </fieldset>
+   </div>
+
+   <div class="ttl">
+    <h3 id="ttl"></h3>
+    <div class="acts"><button type="button" id="all">Выбрать всё</button><button type="button" id="none">Сбросить</button></div>
+   </div>
+   <div class="hd" aria-hidden="true"><span></span><span>Операция</span><span>Время</span><span>Цена</span></div>
+   <div id="rows"></div>
+
+   <div class="sum" aria-live="polite">
+    <dl>
+     <div><dt>Выбрано операций</dt><dd class="num" id="s-n">0</dd></div>
+     <div><dt>Время работы</dt><dd class="num" id="s-t">0 мин</dd></div>
+     <div><dt>Итого</dt><dd class="big num" id="s-sum">0 ₽</dd></div>
+    </dl>
+    <a class="btn" href="#order" id="to-order">Отправить набор в заявку</a>
+   </div>
+  </div>
+  <p class="note">Периодичность операции указана в её названии: ежемесячно, ежеквартально или раз в год. Итог - это сумма за один раз выполнения выбранных операций. Всё, чего нет в списке, стоит 4 800 ₽ за час.</p>
+ </div>
+</section>
+
+<section class="sec" id="who">
+ <div class="wrap">
+  <h2>С кем работаем</h2>
+  <dl class="who">
+   <div><dt>ИП</dt><dd>УСН 6%, УСН 6% с НДС, УСН 15% и ОСНО. С сотрудниками и без.</dd></div>
+   <div><dt>Небольшие ООО</dt><dd>УСН 6%, УСН 15% и ОСНО: кадровый учёт, зарплата, отчётность, баланс малого предприятия.</dd></div>
+   <div><dt>Транспорт и торговля</dt><dd>Ведём транспортные компании и торговый бизнес.</dd></div>
+   <div><dt>Любой город</dt><dd>Работаем дистанционно. Клиенты в Подмосковье, Туле, Ростове-на-Дону и Владикавказе - все в московском часовом поясе.</dd></div>
+  </dl>
+ </div>
+</section>
+
+<section class="sec alt" id="steps">
+ <div class="wrap">
+  <h2>Как начать работу</h2>
+  <ol class="steps">
+   <li><h3>Выбираете набор</h3><p>Отмечаете нужные операции в прайсе или просто оставляете заявку, и мы подберём вместе.</p></li>
+   <li><h3>Присылаете документы</h3><p>Банковские выписки файлом, счета, акты и накладные. Приезжать никуда не нужно.</p></li>
+   <li><h3>Бухгалтер считает</h3><p>Закрывает месяц, считает налоги и взносы, готовит платёжки и декларации.</p></li>
+   <li><h3>Отчёты уходят в налоговую</h3><p>Отправка через личный кабинет, вы получаете суммы к уплате и напоминания о сроках.</p></li>
+  </ol>
+ </div>
+</section>
+
+<section class="sec" id="faq">
+ <div class="wrap">
+  <h2>Частые вопросы</h2>
+  <div class="faq">
+   <details><summary>С какими формами и системами налогообложения вы работаете?</summary><p>С ИП и ООО на УСН 6%, УСН 15% и ОСНО, а также с ИП на УСН 6% с НДС. В прайсе есть отдельные наборы с сотрудниками и без них.</p></details>
+   <details><summary>Нужно ли приезжать или передавать бумажные документы?</summary><p>Нет. Работаем дистанционно: выписки из банка присылаются файлом, отчётность уходит через личный кабинет.</p></details>
+   <details><summary>Что входит в «Помню о вас»?</summary><p>Фиксированный платёж 4 800 ₽ в месяц. В него входит 1 час работы: ответы на требования налоговой, деловая переписка, напоминания о сроках и консультации.</p></details>
+   <details><summary>Сколько стоит то, чего нет в прайсе?</summary><p>4 800 ₽ за час работы. Перед началом назовём, сколько времени займёт задача.</p></details>
+   <details><summary>Можно заказать только часть услуг?</summary><p>Да. В прайсе можно отметить только нужные операции, например одну декларацию или расчёт налога.</p></details>
+  </div>
+ </div>
+</section>
+
+<section class="sec alt" id="order">
+ <div class="wrap order">
+  <div>
+   <h2>Расскажите, что нужно</h2>
+   <p class="lead">Напишите форму бизнеса и систему налогообложения. Если вы уже отметили набор в прайсе, он добавится в заявку сам.</p>
+  </div>
+  <form id="form" novalidate>
+   <label class="f">Как к вам обращаться<input name="name" autocomplete="name" required></label>
+   <label class="f">Телефон или Telegram<input name="contact" autocomplete="tel" required></label>
+   <label class="f">Что нужно<textarea name="msg" id="msg" placeholder="Например: ИП на УСН 6%, без сотрудников, нужна отчётность и расчёт налогов"></textarea></label>
+   <button class="btn" type="submit">Отправить заявку</button>
+   <p class="ok" id="ok" role="status">Спасибо! Это демонстрационная версия: заявка никуда не отправляется.</p>
+   <p class="fine">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+  </form>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="wrap">Бухгалтерское обслуживание ИП и небольших ООО. Дистанционно, по всей России.</div>
+</footer>
+
+<script>
+const SHEETS=[[{"n": "Помню о вас", "m": 60, "b": 1}, {"n": "Банковская выписка (загрузка из файла)", "m": 2}, {"n": "Проверка счёта 51", "m": 10}, {"n": "Уведомление по УСН ежеквартально", "m": 10}, {"n": "Формирование декларации по налогу на УСН доходы 6% (годовая)", "m": 30}, {"n": "Книга доходов УСН 6% (годовая)", "m": 30}, {"n": "Регламентные операции по закрытию месяца", "m": 15}, {"n": "Расчёт налога по УСН 6%", "m": 10}, {"n": "Расчёт и начисление 1% взноса свыше 300 тыс. ₽", "m": 20}, {"n": "Создание платёжного поручения", "m": 2}, {"n": "Подготовка счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Занесение в базу счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Проверка поступлений требований ФНС (4 раза в месяц по 5 минут)", "m": 5}, {"n": "Отправка отчётов через личный кабинет ИП", "m": 10}], [{"n": "Помню о вас", "m": 60, "b": 1}, {"n": "Банковская выписка (загрузка из файла)", "m": 2}, {"n": "Проверка счёта 51", "m": 10}, {"n": "Уведомление по УСН ежеквартально", "m": 10}, {"n": "Формирование декларации по налогу на УСН доходы 6% (годовая)", "m": 30}, {"n": "Книга доходов УСН 6% (годовая)", "m": 30}, {"n": "Регламентные операции по закрытию месяца", "m": 15}, {"n": "Расчёт налога по УСН 6%", "m": 10}, {"n": "Расчёт и начисление 1% взноса свыше 300 тыс. ₽", "m": 20}, {"n": "Создание платёжного поручения", "m": 2}, {"n": "Подготовка счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Занесение в базу счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Проверка поступлений требований ФНС (4 раза в месяц по 5 минут)", "m": 5}, {"n": "Расчёт налоговой нагрузки при разных ставках НДС", "m": 30}, {"n": "Декларация по НДС квартальная", "m": 30}, {"n": "Перечисление платежей в бюджет", "m": 2}, {"n": "Отправка отчётов через личный кабинет ИП", "m": 10}], [{"n": "Помню о вас", "m": 60, "b": 1}, {"n": "Банковская выписка (загрузка из файла)", "m": 2}, {"n": "Проверка счёта 51", "m": 10}, {"n": "Ведение кадрового учёта на 1 сотрудника", "m": 10}, {"n": "Расчёт заработной платы (оклад) на 1 сотрудника", "m": 10}, {"n": "РСВ квартальная", "m": 15}, {"n": "6 НДФЛ квартальная", "m": 15}, {"n": "ЕФС 1 квартальная", "m": 15}, {"n": "Уведомления по взносам и НДФЛ 2 раза в месяц", "m": 10}, {"n": "Персонифицированные сведения 1 раз в месяц", "m": 10}, {"n": "Уведомление по УСН квартальная", "m": 10}, {"n": "Декларация по УСН 6% годовая", "m": 30}, {"n": "Книга доходов УСН 6%, годовая", "m": 15}, {"n": "Регламентные операции по закрытию месяца", "m": 15}, {"n": "Расчёт налога по УСН 6%", "m": 10}, {"n": "Расчёт фиксированных страховых взносов, предоставление суммы клиенту", "m": 15}, {"n": "Расчёт и начисление 1% взноса свыше 300 тыс. ₽", "m": 20}, {"n": "Создание платёжного поручения", "m": 2}, {"n": "Подготовка и отправка документа контрагенту Заказчика по электронной почте", "m": 5}, {"n": "Подготовка счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Занесение в базу счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Отправка отчётов через личный кабинет ИП", "m": 10}, {"n": "Проверка поступлений требований ФНС (4 раза в месяц по 5 минут)", "m": 5}], [{"n": "Помню о вас", "m": 60, "b": 1}, {"n": "Банковская выписка (загрузка из файла)", "m": 2}, {"n": "Проверка счёта 51", "m": 10}, {"n": "Уведомление по УСН квартальная", "m": 10}, {"n": "Декларация по УСН 15% годовая", "m": 30}, {"n": "Книга доходов УСН 15% годовая", "m": 15}, {"n": "Регламентные операции по закрытию месяца", "m": 15}, {"n": "Расчёт налога по УСН 15%", "m": 10}, {"n": "Расчёт фиксированных страховых взносов, предоставление суммы клиенту", "m": 16}, {"n": "Расчёт и начисление 1% взноса", "m": 20}, {"n": "Создание платёжного поручения", "m": 2}, {"n": "Подготовка и отправка документа контрагенту Заказчика по электронной почте", "m": 5}, {"n": "Подготовка счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Занесение в базу счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Отправка отчётов через личный кабинет ИП", "m": 10}, {"n": "Проверка поступлений требований ФНС (4 раза в месяц по 5 минут)", "m": 5}], [{"n": "Помню о вас", "m": 60, "b": 1}, {"n": "Банковская выписка (загрузка из файла)", "m": 2}, {"n": "Проверка счёта 51", "m": 10}, {"n": "Ведение кадрового учёта на 1 сотрудника", "m": 10}, {"n": "Расчёт заработной платы (оклад) на 1 сотрудника", "m": 10}, {"n": "РСВ квартальная", "m": 15}, {"n": "6 НДФЛ квартальная", "m": 15}, {"n": "ЕФС 1 квартальная", "m": 15}, {"n": "Уведомления по взносам и НДФЛ 2 раза в месяц", "m": 10}, {"n": "Персонифицированные сведения 1 раз в месяц", "m": 10}, {"n": "Уведомление по УСН квартальная", "m": 10}, {"n": "Декларация по УСН 15% годовая", "m": 30}, {"n": "Книга доходов УСН 15% годовая", "m": 15}, {"n": "Регламентные операции по закрытию месяца", "m": 15}, {"n": "Расчёт налога по УСН 15%", "m": 10}, {"n": "Расчёт фиксированных страховых взносов, предоставление суммы клиенту", "m": 15}, {"n": "Расчёт и начисление 1% взноса свыше 300 тыс. ₽", "m": 20}, {"n": "Создание платёжного поручения", "m": 2}, {"n": "Подготовка и отправка документа контрагенту Заказчика по электронной почте", "m": 5}, {"n": "Подготовка счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Занесение в базу счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Отправка отчётов через личный кабинет ИП", "m": 10}, {"n": "Проверка поступлений требований ФНС (4 раза в месяц по 5 минут)", "m": 5}], [{"n": "Помню о вас", "m": 60, "b": 1}, {"n": "Банковская выписка (загрузка из файла)", "m": 2}, {"n": "Проверка счёта 51", "m": 10}, {"n": "Расчёт НДС", "m": 10}, {"n": "Расчёт Налога на имущество", "m": 10}, {"n": "Расчёт НДФЛ", "m": 15}, {"n": "Расчёт Земельного и транспортного налога (для сверки с ИФНС)", "m": 15}, {"n": "Уведомления по НДФЛ 1 раза в квартал", "m": 10}, {"n": "Декларация по НДС ежеквартально", "m": 30}, {"n": "Декларация по налогу на имущество 1 раз в год", "m": 15}, {"n": "Регламентные операции по закрытию месяца", "m": 15}, {"n": "Расчёт фиксированных страховых взносов, предоставление суммы клиенту", "m": 15}, {"n": "Расчёт и начисление 1% взноса свыше 300 тыс. ₽", "m": 20}, {"n": "Создание платёжного поручения", "m": 2}, {"n": "Подготовка и отправка документа контрагенту Заказчика по электронной почте", "m": 5}, {"n": "Подготовка счетов, актов, накладных, счетов фактур(до 5 строк)", "m": 5}, {"n": "Занесение в базу счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Отправка отчётов через личный кабинет ИП", "m": 10}, {"n": "Проверка поступлений требований ФНС (4 раза в месяц по 5 минут)", "m": 5}], [{"n": "Помню о вас", "m": 60, "b": 1}, {"n": "Банковская выписка (загрузка из файла)", "m": 2}, {"n": "Проверка счёта 51", "m": 10}, {"n": "Расчёт НДС", "m": 10}, {"n": "Расчёт Налога на имущество", "m": 10}, {"n": "Расчёт НДФЛ", "m": 15}, {"n": "Расчёт Земельного и транспортного налога (для сверки с ИФНС)", "m": 15}, {"n": "Уведомления по НДФЛ 1 раза в квартал", "m": 10}, {"n": "Декларация по НДС ежеквартально", "m": 30}, {"n": "Декларация по налогу на имущество 1 раз в год", "m": 15}, {"n": "Ведение кадрового учёта на 1 сотрудника", "m": 10}, {"n": "Расчёт заработной платы (оклад) на 1 сотрудника", "m": 10}, {"n": "РСВ квартальная", "m": 15}, {"n": "6 НДФЛ квартальная", "m": 15}, {"n": "ЕФС 1 квартальная", "m": 15}, {"n": "Уведомления по взносам и НДФЛ 2 раза в месяц", "m": 10}, {"n": "Персонифицированные сведения 1 раз в месяц", "m": 10}, {"n": "Регламентные операции по закрытию месяца", "m": 15}, {"n": "Расчёт фиксированных страховых взносов, предоставление суммы клиенту", "m": 15}, {"n": "Расчёт и начисление 1% взноса свыше 300 тыс. ₽", "m": 20}, {"n": "Создание платёжного поручения", "m": 2}, {"n": "Подготовка и отправка документа контрагенту Заказчика по электронной почте", "m": 5}, {"n": "Подготовка счетов, актов, накладных, счетов фактур(до 5 строк)", "m": 5}, {"n": "Занесение в базу счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Отправка отчётов через личный кабинет ИП", "m": 10}, {"n": "Проверка поступлений требований ФНС (4 раза в месяц по 5 минут)", "m": 5}], [{"n": "Помню о вас", "m": 60, "b": 1}, {"n": "Банковская выписка (загрузка из файла)", "m": 2}, {"n": "Проверка счёта 51", "m": 10}, {"n": "Уведомление по УСН ежеквартально", "m": 10}, {"n": "Формирование декларации по налогу на УСН доходы 6% (годовая)", "m": 30}, {"n": "Книга доходов УСН 6% (годовая)", "m": 30}, {"n": "Регламентные операции по закрытию месяца", "m": 15}, {"n": "Расчёт налога по УСН 6%", "m": 10}, {"n": "Расчёт и начисление 1% взноса свыше 300 тыс. ₽", "m": 20}, {"n": "Создание платёжного поручения", "m": 2}, {"n": "Подготовка счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Занесение в базу счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Проверка поступлений требований ФНС (4 раза в месяц по 5 минут)", "m": 5}, {"n": "Ведение кадрового учёта на 1 сотрудника", "m": 10}, {"n": "Расчёт заработной платы (оклад) на 1 сотрудника", "m": 10}, {"n": "РСВ квартальная", "m": 15}, {"n": "6 НДФЛ квартальная", "m": 15}, {"n": "ЕФС 1 квартальная", "m": 15}, {"n": "Уведомления по взносам и НДФЛ 2 раза в месяц", "m": 10}, {"n": "Персонифицированные сведения 1 раз в месяц", "m": 10}, {"n": "Расчёт дивидендов", "m": 30}, {"n": "Баланс действующей компании (малое предприятие)", "m": 60}], [{"n": "Помню о вас", "m": 60, "b": 1}, {"n": "Банковская выписка (загрузка из файла)", "m": 2}, {"n": "Проверка счёта 51", "m": 10}, {"n": "Ведение кадрового учёта на 1 сотрудника", "m": 10}, {"n": "Расчёт заработной платы (оклад) на 1 сотрудника", "m": 10}, {"n": "РСВ квартальная", "m": 15}, {"n": "6 НДФЛ квартальная", "m": 15}, {"n": "ЕФС 1 квартальная", "m": 15}, {"n": "Уведомления по взносам и НДФЛ 2 раза в месяц", "m": 10}, {"n": "Персонифицированные сведения 1 раз в месяц", "m": 10}, {"n": "Уведомление по УСН квартальная", "m": 10}, {"n": "Декларация по УСН 15% годовая", "m": 30}, {"n": "Книга доходов УСН 15% годовая", "m": 15}, {"n": "Регламентные операции по закрытию месяца", "m": 15}, {"n": "Контроль всех бухгалтерских счетов при закрытии месяца", "m": 15}, {"n": "Расчёт налога по УСН 15%", "m": 10}, {"n": "Баланс действующей компании (малое предприятие)", "m": 60}, {"n": "Создание платёжного поручения", "m": 2}, {"n": "Подготовка и отправка документа контрагенту Заказчика по электронной почте", "m": 5}, {"n": "Подготовка счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Занесение в базу счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Отправка отчётов через личный кабинет", "m": 10}, {"n": "Проверка поступлений требований ФНС (4 раза в месяц по 5 минут)", "m": 5}], [{"n": "Помню о вас", "m": 60, "b": 1}, {"n": "Банковская выписка (загрузка из файла)", "m": 2}, {"n": "Проверка счёта 51", "m": 10}, {"n": "Ведение кадрового учёта на 1 сотрудника", "m": 10}, {"n": "Расчёт заработной платы (оклад) на 1 сотрудника", "m": 10}, {"n": "РСВ квартальная", "m": 15}, {"n": "6 НДФЛ квартальная", "m": 15}, {"n": "ЕФС 1 квартальная", "m": 15}, {"n": "Декларация по прибыли квартальная", "m": 30}, {"n": "Декларация по НДС квартальная", "m": 30}, {"n": "Уведомления по взносам и НДФЛ 2 раза в месяц", "m": 10}, {"n": "Персонифицированные сведения 1 раз в месяц", "m": 10}, {"n": "Регламентные операции по закрытию месяца", "m": 15}, {"n": "Контроль всех бухгалтерских счетов при закрытии месяца", "m": 15}, {"n": "Баланс действующей компании (малое предприятие)", "m": 60}, {"n": "Форма ЕФС 1 по травматизму", "m": 10}, {"n": "Подтверждение ОКВЭД", "m": 10}, {"n": "Создание платёжного поручения", "m": 2}, {"n": "Подготовка и отправка документа контрагенту Заказчика по электронной почте", "m": 5}, {"n": "Подготовка счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Занесение в базу счетов, актов, накладных (до 5 строк)", "m": 5}, {"n": "Отправка отчётов через личный кабинет", "m": 10}, {"n": "Проверка поступлений требований ФНС (4 раза в месяц по 5 минут)", "m": 5}]];
+const CFG={
+ ip:{modes:[
+  {id:'usn6',label:'УСН 6%',s:0,st:2,t:'ИП на УСН 6%'},
+  {id:'usn6nds',label:'УСН 6% с НДС',s:1,st:null,t:'ИП на УСН 6% с НДС'},
+  {id:'usn15',label:'УСН 15%',s:3,st:4,t:'ИП на УСН 15%'},
+  {id:'osno',label:'ОСНО',s:5,st:6,t:'ИП на ОСНО'}]},
+ ooo:{modes:[
+  {id:'usn6',label:'УСН 6%',s:7,st:null,t:'ООО на УСН 6%'},
+  {id:'usn15',label:'УСН 15%',s:8,st:null,t:'ООО на УСН 15%'},
+  {id:'osno',label:'ОСНО',s:9,st:null,t:'ООО на ОСНО'}]}
+};
+const BASE_TXT='Фиксированный платёж в месяц. Входит 1 час работы: ответы на требования, деловая переписка, напоминания о сроках, консультации.';
+const RATE=80;
+const $=s=>document.querySelector(s);
+const st={type:'ip',mode:0,staff:false,sel:new Set()};
+const money=n=>n.toLocaleString('ru-RU')+' ₽';
+const dur=m=>m>=60?(Math.floor(m/60)+' ч'+(m%60?' '+m%60+' мин':'')):m+' мин';
+
+function cur(){
+ const c=CFG[st.type].modes[st.mode];
+ const staffOn=st.staff&&c.st!==null;
+ const rows=SHEETS[staffOn?c.st:c.s];
+ return {c,staffOn,rows,title:c.t+(staffOn?' с сотрудниками':'')};
+}
+function reset(){const {rows}=cur();st.sel=new Set(rows.map((r,i)=>r.b?i:-1).filter(i=>i>=0));}
+
+function renderControls(){
+ document.querySelectorAll('#seg-type button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===st.type));
+ const box=$('#chips-mode');box.innerHTML='';
+ CFG[st.type].modes.forEach((m,i)=>{
+  const b=document.createElement('button');b.type='button';b.textContent=m.label;
+  b.setAttribute('aria-pressed',i===st.mode);
+  b.onclick=()=>{st.mode=i;if(CFG[st.type].modes[i].st===null&&st.type==='ip')st.staff=false;reset();render();};
+  box.appendChild(b);
+ });
+ const c=CFG[st.type].modes[st.mode];
+ const sw=$('#staff');
+ if(st.type==='ooo'){sw.disabled=true;sw.checked=true;$('#staff-lbl').textContent='Кадровый учёт и зарплата уже в наборе';}
+ else{sw.disabled=c.st===null;sw.checked=st.staff&&c.st!==null;$('#staff-lbl').textContent=c.st===null?'Для этого режима набор с сотрудниками не предусмотрен':'Есть сотрудники';}
+}
+function renderRows(){
+ const {rows,title}=cur();
+ $('#ttl').textContent=title;
+ const box=$('#rows');box.innerHTML='';
+ rows.forEach((r,i)=>{
+  const l=document.createElement('label');l.className='row'+(r.b?' base':'')+(st.sel.has(i)?' on':'');
+  const cost=r.m*RATE;
+  l.innerHTML='<input type="checkbox"'+(st.sel.has(i)?' checked':'')+' aria-label="'+r.n.replace(/"/g,'')+'">'+
+   '<span class="nm">'+r.n+(r.b?'<small>'+BASE_TXT+'</small>':'')+'</span>'+
+   '<span class="min num">'+dur(r.m)+'</span><span class="cost num">'+money(cost)+'</span>';
+  l.querySelector('input').onchange=e=>{e.target.checked?st.sel.add(i):st.sel.delete(i);l.classList.toggle('on',e.target.checked);sum();};
+  box.appendChild(l);
+ });
+ sum();
+}
+function sum(){
+ const {rows}=cur();let m=0;st.sel.forEach(i=>m+=rows[i].m);
+ $('#s-n').textContent=st.sel.size;$('#s-t').textContent=dur(m);$('#s-sum').textContent=money(m*RATE);
+}
+function render(){renderControls();renderRows();}
+
+document.querySelectorAll('#seg-type button').forEach(b=>b.onclick=()=>{st.type=b.dataset.v;st.mode=0;st.staff=false;reset();render();});
+$('#staff').onchange=e=>{st.staff=e.target.checked;reset();render();};
+$('#all').onclick=()=>{const {rows}=cur();st.sel=new Set(rows.map((_,i)=>i));renderRows();};
+$('#none').onclick=()=>{st.sel=new Set();renderRows();};
+$('#to-order').onclick=()=>{
+ const {rows,title}=cur();let m=0;const names=[];
+ [...st.sel].sort((a,b)=>a-b).forEach(i=>{m+=rows[i].m;names.push(rows[i].n);});
+ $('#msg').value=title+'. Выбрано: '+names.join('; ')+'. Время '+dur(m)+', сумма '+money(m*RATE)+'.';
+};
+$('#form').onsubmit=e=>{e.preventDefault();$('#ok').classList.add('show');};
+reset();render();
+</script>
+</body>
+</html>
