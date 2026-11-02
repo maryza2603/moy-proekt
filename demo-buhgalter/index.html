@@ -462,7 +462,7 @@ $('#form').onsubmit=e=>{e.preventDefault();$('#ok').classList.add('show');};
 reset();render();
 
 /* Цены из Google Таблицы (опубликована как CSV). Если не загрузилась или данные странные - остаются встроенные цены. */
-const PRICES_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vTYUjaF_8Ryy2XrSrhqu51Te8YSQu38tg3gYsXA7LHMnHHUCFR66LhKjXwCKz81zN5jb2TZH_x6SnxI/pub?output=csv';
+const PRICES_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vQZS66HrLQ6l-O_OAH6lSPMuEx0e4X7GW3qgR4uY5jiprl9PNwgkSkUbQMHc8cCy6cfvaDsYPS-hnUs/pub?output=csv';
 function parseCSV(t){
  const out=[];let row=[],f='',q=false;
  for(let i=0;i<t.length;i++){
