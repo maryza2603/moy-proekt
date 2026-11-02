@@ -400,7 +400,7 @@ const CFG={
   {id:'osno',label:'ОСНО',s:9,st:null,t:'ООО на ОСНО'}]}
 };
 const BASE_TXT='Фиксированный платёж в месяц. Входит 1 час работы: ответы на требования, деловая переписка, напоминания о сроках, консультации.';
-const RATE=50;
+let RATE=50;
 const $=s=>document.querySelector(s);
 const st={type:'ip',mode:0,staff:false,sel:new Set()};
 const money=n=>n.toLocaleString('ru-RU')+' ₽';
@@ -460,6 +460,40 @@ $('#to-order').onclick=()=>{
 };
 $('#form').onsubmit=e=>{e.preventDefault();$('#ok').classList.add('show');};
 reset();render();
+
+/* Цены из Google Таблицы (опубликована как CSV). Если не загрузилась или данные странные - остаются встроенные цены. */
+const PRICES_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vTYUjaF_8Ryy2XrSrhqu51Te8YSQu38tg3gYsXA7LHMnHHUCFR66LhKjXwCKz81zN5jb2TZH_x6SnxI/pub?output=csv';
+function parseCSV(t){
+ const out=[];let row=[],f='',q=false;
+ for(let i=0;i<t.length;i++){
+  const ch=t[i];
+  if(q){if(ch==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=ch;}
+  else if(ch==='"')q=true;
+  else if(ch===','){row.push(f);f='';}
+  else if(ch==='\n'||ch==='\r'){if(ch==='\r'&&t[i+1]==='\n')i++;row.push(f);out.push(row);row=[];f='';}
+  else f+=ch;
+ }
+ if(f!==''||row.length){row.push(f);out.push(row);}
+ return out;
+}
+function loadPrices(txt){
+ const rows=parseCSV(txt);
+ const rate=parseFloat(String(rows[0]&&rows[0][1]).replace(',','.').replace(/\s/g,''));
+ if(!(rate>0&&rate<100000))return false;
+ const groups=[],idx={};
+ for(let i=3;i<rows.length;i++){
+  const r=rows[i];if(!r||!r[0]||!r[2])continue;
+  const m=parseFloat(String(r[3]).replace(',','.'));
+  if(!(m>0))return false;
+  if(!(r[0] in idx)){idx[r[0]]=groups.length;groups.push([]);}
+  groups[idx[r[0]]].push({n:r[2].replace(/</g,'&lt;'),m:m,b:r[5]==='1'?1:0});
+ }
+ if(groups.length!==SHEETS.length||groups.some(g=>!g.length))return false;
+ SHEETS.splice(0,SHEETS.length,...groups);
+ RATE=rate;
+ return true;
+}
+fetch(PRICES_URL,{cache:'no-store'}).then(r=>r.ok?r.text():Promise.reject()).then(t=>{if(loadPrices(t)){reset();render();}}).catch(()=>{});
 </script>
 </body>
 </html>
