@@ -156,6 +156,11 @@ label.f{display:grid;gap:6px;font-weight:600;font-size:16px}
 .ok{display:none;padding:14px 16px;background:#E9F7EE;border:2px solid #2E8B57;border-radius:6px;font-size:16px}
 .ok.show{display:block}
 .fine{font-size:14px;color:var(--muted)}
+.contacts{list-style:none;margin-top:26px;border-top:2px solid var(--ink)}
+.contacts li{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:18px}
+.contacts li span{color:var(--muted);font-size:16px}
+.contacts a{font-weight:600;text-decoration:none;color:var(--pen)}
+.contacts a:hover{text-decoration:underline}
 footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
 
 @media(max-width:920px){
@@ -357,6 +362,12 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
   <div>
    <h2>Расскажите, что нужно</h2>
    <p class="lead">Напишите форму бизнеса и систему налогообложения. Если вы уже отметили набор в прайсе, он добавится в заявку сам.</p>
+   <ul class="contacts">
+    <li><span>Телефон</span><a href="tel:+79035465714">+7 903 546-57-14</a></li>
+    <li><span>WhatsApp и МАХ</span><a href="https://wa.me/79035465714" rel="noopener">+7 903 546-57-14</a></li>
+    <li><span>Почта</span><a href="mailto:nad6290@yandex.ru">nad6290@yandex.ru</a></li>
+    <li><span>Время</span>с 9:00 до 18:00, на связи всегда</li>
+   </ul>
   </div>
   <form id="form" novalidate>
    <label class="f">Как к вам обращаться<input name="name" autocomplete="name" required></label>
@@ -371,7 +382,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 </main>
 
 <footer>
- <div class="wrap">Бухгалтерское обслуживание ИП и небольших ООО. Дистанционно, по всей России.</div>
+ <div class="wrap">ИП Белова Надежда Михайловна. Бухгалтерское обслуживание ИП и небольших ООО дистанционно, работаю по договору.</div>
 </footer>
 
 <script>
