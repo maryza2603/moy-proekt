@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#111815;--pen:#1F5A44;--pen-d:#16463A;--sage:#C9DCCB;--mark:#C9DCCB;--paper:#F6F8F5;--tint:#EAF1EB;--line:#CCD7CE;--muted:#566159;--white:#fff}
+:root{--ink:#111815;--pen:#1F5A44;--pen-d:#16463A;--sage:#C9DCCB;--mark:#C9DCCB;--paper:#EAF1EA;--card:#F4F8F3;--tint:#EAF1EB;--line:#CCD7CE;--muted:#566159;--white:#fff}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
 body{font-family:'Golos Text',system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -54,7 +54,7 @@ h2{font-size:clamp(30px,4vw,46px);margin-bottom:14px;max-width:22ch}
 .hero .btn.ghost:hover{background:#fff;color:var(--ink);border-color:#fff}
 
 .sec{padding:96px 0}
-.sec.alt{background:#DDE9DF}
+.sec.alt{background:#D8E6DB}
 .sec.dk,.sec.bk{--ink:#fff;--muted:#B7C9BC;--line:#2F5646;--pen:#C9DCCB;color:#fff}
 .sec.dk{background:#173A2E}
 .sec.bk{background:#0E1411;--line:#2A3A32}
@@ -86,16 +86,16 @@ footer{background:#080C0A;color:#9FB1A5;border-top:0}
 .facts p{color:var(--muted);font-size:16px}
 
 /* прайс */
-.tool{background:#fff;border:2px solid var(--ink);border-radius:10px;margin-top:34px;overflow:hidden}
-.ctrl{display:grid;gap:18px;padding:22px;border-bottom:2px solid var(--ink);background:var(--paper)}
+.tool{background:var(--card);border:2px solid var(--ink);border-radius:10px;margin-top:34px;overflow:hidden}
+.ctrl{display:grid;gap:18px;padding:22px;border-bottom:2px solid var(--ink);background:#DFEAE1}
 .ctrl fieldset{border:0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
 .ctrl legend{float:left;width:190px;font-weight:600;font-size:16px;padding-top:2px}
 .seg{display:inline-flex;border:2px solid var(--ink);border-radius:8px;overflow:hidden}
-.seg button{border:0;background:#fff;padding:9px 22px;cursor:pointer;font-weight:600;font-size:16px}
+.seg button{border:0;background:var(--card);padding:9px 22px;cursor:pointer;font-weight:600;font-size:16px}
 .seg button+button{border-left:2px solid var(--ink)}
 .seg button[aria-pressed=true]{background:var(--ink);color:#fff}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips button{border:2px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;cursor:pointer;font-weight:500;font-size:16px}
+.chips button{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:7px 16px;cursor:pointer;font-weight:500;font-size:16px}
 .chips button:hover{border-color:var(--ink)}
 .chips button[aria-pressed=true]{background:var(--pen);border-color:var(--pen);color:#fff}
 .sw{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:16px}
@@ -114,9 +114,9 @@ footer{background:#080C0A;color:#9FB1A5;border-top:0}
 .hd{font-size:14px;color:var(--muted);border-bottom:1px solid var(--line);padding-top:4px}
 .hd span:nth-child(n+3),.row .min,.row .cost{text-align:right}
 .row{border-bottom:1px solid var(--line);cursor:pointer;line-height:1.35}
-.row:hover{background:#EFF5F0}
-.row.on{background:#E6EFE7}
-.row input{appearance:none;width:22px;height:22px;border:2px solid var(--ink);border-radius:5px;background:#fff;cursor:pointer;display:grid;place-content:center}
+.row:hover{background:#E8F1EA}
+.row.on{background:#DAE8DD}
+.row input{appearance:none;width:22px;height:22px;border:2px solid var(--ink);border-radius:5px;background:var(--card);cursor:pointer;display:grid;place-content:center}
 .row input:checked{background:var(--pen);border-color:var(--pen)}
 .row input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
 .row .min{color:var(--muted);font-size:16px}
@@ -128,7 +128,7 @@ footer{background:#080C0A;color:#9FB1A5;border-top:0}
 .sum dt{font-size:13px;color:#A9BCAC}
 .sum dd{font-size:20px;font-weight:700}
 .sum dd.big{font-size:30px;letter-spacing:-.02em;color:var(--ink);background:var(--mark);padding:0 8px;border-radius:3px}
-.sum .btn{background:#fff;color:var(--ink);border-color:#fff}
+.sum .btn{background:var(--sage);color:var(--ink);border-color:var(--sage)}
 .sum .btn:hover{background:var(--mark);border-color:var(--mark)}
 .note{margin-top:14px;color:var(--muted);font-size:15px;max-width:80ch}
 
@@ -163,7 +163,7 @@ footer{background:#080C0A;color:#9FB1A5;border-top:0}
 
 /* заявка */
 .order{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
-form{display:grid;gap:16px;background:#fff;border:2px solid var(--ink);border-radius:10px;padding:26px}
+form{display:grid;gap:16px;background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:26px}
 label.f{display:grid;gap:6px;font-weight:600;font-size:16px}
 .f input,.f textarea{border:2px solid var(--line);border-radius:6px;padding:12px 14px;background:var(--paper);font-weight:400;width:100%}
 .f textarea{min-height:130px;resize:vertical}
