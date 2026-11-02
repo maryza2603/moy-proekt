@@ -177,8 +177,10 @@ label.f{display:grid;gap:6px;font-weight:600;font-size:16px}
 .cb svg{width:24px;height:24px;flex:none}
 .cb-wa{background:#25D366;border-color:#25D366;color:#0B3B1E}
 .cb:hover{filter:brightness(1.06)}
-.cb-tel,.cb-mail{background:transparent}
-.cb-tel:hover,.cb-mail:hover{background:rgba(255,255,255,.1)}
+.cb-tel,.cb-mail,.cb-max{background:transparent}
+button.cb{font-family:inherit;cursor:pointer;text-align:left;width:100%}
+.cb-tel:hover,.cb-mail:hover,.cb-max:hover{background:rgba(255,255,255,.1)}
+.cb-time{background:transparent;cursor:default;font-weight:500}
 .ctime{margin-top:10px;color:#D3DBC0;font-size:16px}
 .contacts{list-style:none;margin-top:26px;border-top:2px solid var(--ink)}
 .contacts li{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:18px}
@@ -384,10 +386,10 @@ footer{padding:34px 0;font-size:15px}
    <div class="cbtns">
     <a class="cb cb-wa" href="https://wa.me/79035465714" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.1c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.1 8.1 0 1 1 12 20.100Zm4.500-6c-.2-.1-1.500-.7-1.700-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-1.500-.7-2.500-1.300-3.400-2.800-.3-.4.2-.4.700-1.300.1-.2 0-.3 0-.5l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.300-.8.800-1 1.700-.9 2.700.4 1.600 1.200 2.800 2.600 4 1.800 1.500 3.200 2 4.300 2.300.8.2 1.800.1 2.400-.5.200-.2.500-.8.500-1.300 0-.2 0-.3-.2-.4Z"/></svg>Написать в WhatsApp</a>
     <a class="cb cb-tel" href="tel:+79035465714"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.600 10.800c1.400 2.800 3.800 5.100 6.600 6.600l2.200-2.200c.3-.3.700-.4 1-.2 1.100.4 2.300.6 3.600.6.600 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.500c.6 0 1 .4 1 1 0 1.300.2 2.500.6 3.600.1.300 0 .7-.2 1l-2.300 2.200Z"/></svg>Позвонить +7 903 546-57-14</a>
+    <button type="button" class="cb cb-max" id="max-copy" data-n="+79035465714"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.500 2 2 6.200 2 11.500c0 2.800 1.300 5.300 3.400 7L5 22l3.600-1.900c1 .3 2.200.4 3.400.4 5.500 0 10-4.200 10-9.500S17.500 2 12 2Zm-3.200 12.300-1.300-.3 1.500-4.700h1.200l1.500 3.200 1.500-3.200h1.200l1.500 4.700-1.300.3-.9-3-1.500 3h-.6l-1.500-3-.9 3Z"/></svg><span id="max-t">МАХ: +7 903 546-57-14</span></button>
     <a class="cb cb-mail" href="mailto:nad6290@yandex.ru"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm8 7.500L20 8V7l-8 4.500L4 7v1l8 4.500Z"/></svg>nad6290@yandex.ru</a>
+   <div class="cb cb-time"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm.5-13H11v6l5 3 .8-1.200-4.300-2.600V7Z"/></svg>С 9:00 до 18:00, на связи всегда</div>
    </div>
-   <p class="ctime">МАХ: +7 903 546-57-14</p>
-   <p class="ctime">С 9:00 до 18:00, на связи всегда</p>
   </div>
   <form id="form" novalidate>
    <label class="f">Как к вам обращаться<input name="name" autocomplete="name" required></label>
@@ -513,6 +515,9 @@ function loadPrices(txt){
  return true;
 }
 fetch(PRICES_URL,{cache:'no-store'}).then(r=>r.ok?r.text():Promise.reject()).then(t=>{if(loadPrices(t)){reset();render();}}).catch(()=>{});
+</script>
+<script>
+(function(){var b=document.getElementById('max-copy');if(!b)return;b.addEventListener('click',function(){var t=document.getElementById('max-t'),o='МАХ: +7 903 546-57-14';function ok(){t.textContent='Номер скопирован - вставьте его в поиск МАХ';setTimeout(function(){t.textContent=o},4000)}try{navigator.clipboard.writeText(b.dataset.n).then(ok,ok)}catch(e){ok()}})})();
 </script>
 </body>
 </html>
