@@ -172,6 +172,11 @@ label.f{display:grid;gap:6px;font-weight:600;font-size:16px}
 .ok{display:none;padding:14px 16px;background:#E3E7CF;border:2px solid #2E8B57;border-radius:6px;font-size:16px}
 .ok.show{display:block}
 .fine{font-size:14px;color:var(--muted)}
+.totop{position:fixed;right:18px;bottom:18px;z-index:60;width:52px;height:52px;border-radius:50%;border:2px solid #D3DBC0;background:#2E6A52;color:#EBEED8;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.28);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,transform .25s,visibility .25s}
+.totop.on{opacity:1;visibility:visible;transform:none}
+.totop:hover{background:#1F5A44}
+.totop svg{width:24px;height:24px}
+@media(max-width:600px){.totop{right:14px;bottom:14px}}
 .cbtns{display:flex;flex-direction:column;gap:12px;margin-top:26px;max-width:420px}
 .cb{display:flex;align-items:center;gap:12px;padding:15px 20px;border-radius:12px;font-weight:600;font-size:17px;text-decoration:none;border:2px solid #D3DBC0;color:#EBEED8;transition:background .15s}
 .cb svg{width:24px;height:24px;flex:none}
@@ -518,6 +523,10 @@ fetch(PRICES_URL,{cache:'no-store'}).then(r=>r.ok?r.text():Promise.reject()).the
 </script>
 <script>
 (function(){var b=document.getElementById('max-copy');if(!b)return;b.addEventListener('click',function(){var t=document.getElementById('max-t'),o='МАХ: +7 903 546-57-14';function ok(){t.textContent='Номер скопирован - вставьте его в поиск МАХ';setTimeout(function(){t.textContent=o},4000)}try{navigator.clipboard.writeText(b.dataset.n).then(ok,ok)}catch(e){ok()}})})();
+</script>
+<button type="button" class="totop" id="totop" aria-label="Наверх"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<script>
+(function(){var b=document.getElementById("totop");if(!b)return;function f(){b.classList.toggle("on",(window.pageYOffset||document.documentElement.scrollTop)>300)}window.addEventListener("scroll",f,{passive:true});f();b.addEventListener("click",function(){var r=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;window.scrollTo({top:0,behavior:r?"auto":"smooth"})})})();
 </script>
 </body>
 </html>
