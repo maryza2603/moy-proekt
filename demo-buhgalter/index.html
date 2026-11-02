@@ -54,7 +54,24 @@ h2{font-size:clamp(30px,4vw,46px);margin-bottom:14px;max-width:22ch}
 .hero .btn.ghost:hover{background:#fff;color:var(--ink);border-color:#fff}
 
 .sec{padding:96px 0}
-.sec.alt{background:#fff;border-block:1px solid var(--line)}
+.sec.alt{background:#DDE9DF}
+.sec.dk,.sec.bk{--ink:#fff;--muted:#B7C9BC;--line:#2F5646;--pen:#C9DCCB;color:#fff}
+.sec.dk{background:#173A2E}
+.sec.bk{background:#0E1411;--line:#2A3A32}
+.dk .btn,.bk .btn{background:var(--sage);border-color:var(--sage);color:#111815}
+.dk .btn:hover,.bk .btn:hover{background:#fff;border-color:#fff}
+.dk :focus-visible,.bk :focus-visible{outline-color:var(--sage)}
+.dk .tool,.dk form,.dk .photo,.bk .tool,.bk form,.bk .photo{--ink:#111815;--muted:#566159;--line:#CCD7CE;--pen:#1F5A44;color:#111815}
+.dk .btn.ghost{color:#fff}
+.dk .steps li::before{background:var(--sage);color:#111815}
+.formula em{color:#111815}
+.dk .facts{border-top-color:#C9DCCB}
+.bk .who{border-top-color:#C9DCCB}
+.bk .contacts{border-top-color:#C9DCCB}
+.bk .contacts a{color:var(--sage)}
+.bk form .btn{background:var(--pen);border-color:var(--pen);color:#fff}
+.bk form .btn:hover{background:var(--pen-d);border-color:var(--pen-d)}
+footer{background:#080C0A;color:#9FB1A5;border-top:0}
 
 /* как считается цена */
 .formula{font-size:clamp(26px,4.2vw,54px);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin:8px 0 34px}
@@ -155,7 +172,7 @@ label.f{display:grid;gap:6px;font-weight:600;font-size:16px}
 .contacts li span{color:var(--muted);font-size:16px}
 .contacts a{font-weight:600;text-decoration:none;color:var(--pen)}
 .contacts a:hover{text-decoration:underline}
-footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+footer{padding:34px 0;font-size:15px}
 
 @media(max-width:920px){
  .nav{display:none}
@@ -228,7 +245,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
  </div>
 </section>
 
-<section class="sec" id="how">
+<section class="sec dk" id="how">
  <div class="wrap">
   <h2>Почему выбирают такой формат</h2>
   <div class="facts">
@@ -239,7 +256,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
  </div>
 </section>
 
-<section class="sec alt" id="services">
+<section class="sec" id="services">
  <div class="wrap">
   <h2>Чем занимаюсь</h2>
   <dl class="who">
@@ -253,7 +270,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
  </div>
 </section>
 
-<section class="sec alt" id="price">
+<section class="sec" id="price">
  <div class="wrap">
   <h2>Услуги и цены</h2>
   <p class="lead">Выберите, кто вы и на какой системе налогообложения. Отметьте нужные операции, и внизу появится сумма.</p>
@@ -294,7 +311,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
  </div>
 </section>
 
-<section class="sec" id="who">
+<section class="sec bk" id="who">
  <div class="wrap">
   <h2>С кем работаем</h2>
   <dl class="who">
@@ -306,7 +323,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
  </div>
 </section>
 
-<section class="sec" id="about">
+<section class="sec alt" id="about">
  <div class="wrap about">
   <div class="photo" role="img" aria-label="Надежда, бухгалтер"><b>Н</b><span>Надежда<br>бухгалтер для ИП и ООО<br><strong>Стаж более 20 лет</strong></span></div>
   <div>
@@ -317,7 +334,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
  </div>
 </section>
 
-<section class="sec alt" id="steps">
+<section class="sec dk" id="steps">
  <div class="wrap">
   <h2>Как начать работу</h2>
   <ol class="steps">
@@ -342,7 +359,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
  </div>
 </section>
 
-<section class="sec alt" id="order">
+<section class="sec bk" id="order">
  <div class="wrap order">
   <div>
    <h2>Расскажите, что нужно</h2>
