@@ -64,7 +64,7 @@ h2{font-size:clamp(30px,4vw,46px);margin-bottom:14px;max-width:22ch}
 .dk .btn,.bk .btn{background:var(--sage);border-color:var(--sage);color:#111815}
 .dk .btn:hover,.bk .btn:hover{background:#fff;border-color:#fff}
 .dk :focus-visible,.bk :focus-visible{outline-color:var(--sage)}
-.dk .tool,.dk form,.dk .photo,.bk .tool,.bk form,.bk .photo{--ink:#111815;--muted:#566159;--line:#CCD7CE;--pen:#1F5A44;color:#111815}
+.dk .tool,.dk form,.bk .tool,.bk form{--ink:#111815;--muted:#566159;--line:#CCD7CE;--pen:#1F5A44;color:#111815}
 .dk .btn.ghost{color:#fff}
 .dk .steps li::before{background:var(--sage);color:#111815}
 .formula em{color:#111815}
@@ -133,10 +133,11 @@ footer{background:#080C0A;color:#9FB1A5;border-top:0}
 .note{margin-top:14px;color:var(--muted);font-size:15px;max-width:80ch}
 
 /* для кого: строки без карточек */
-.about{display:grid;grid-template-columns:320px 1fr;gap:56px;align-items:center}
-.photo strong{display:block;margin-top:8px;color:var(--ink)}
-.photo b{display:block;font-size:120px;line-height:1;font-weight:800;letter-spacing:-.04em;color:var(--pen);margin-bottom:12px}
-.photo{aspect-ratio:4/5;background:#fff;border:2px solid var(--ink);border-radius:10px;display:grid;place-content:center;text-align:center;color:var(--muted);font-size:16px}
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:start}
+.facts2{border-top:2px solid var(--ink);margin-top:8px}
+.facts2 div{display:grid;grid-template-columns:110px 1fr;gap:12px 24px;padding:18px 0;border-bottom:1px solid #B9CDBD}
+.facts2 dt{color:var(--muted);font-size:16px;padding-top:3px}
+.facts2 dd{font-size:20px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
 .who{margin-top:30px;border-top:2px solid var(--ink)}
 .who div{display:grid;grid-template-columns:260px 1fr;gap:12px 40px;padding:22px 0;border-bottom:1px solid var(--line)}
 .who dt{font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
@@ -191,7 +192,6 @@ footer{padding:34px 0;font-size:15px}
  .steps li::after{display:none}
  .who div{grid-template-columns:1fr}
  .about{grid-template-columns:1fr;gap:28px}
- .photo{max-width:260px}
 }
 @media(max-width:640px){
  body{font-size:17px}
@@ -328,12 +328,17 @@ footer{padding:34px 0;font-size:15px}
 
 <section class="sec alt" id="about">
  <div class="wrap about">
-  <div class="photo" role="img" aria-label="Надежда, бухгалтер"><b>Н</b><span>Надежда<br>бухгалтер для ИП и ООО<br><strong>Стаж более 20 лет</strong></span></div>
   <div>
    <h2>Обо мне</h2>
    <p class="lead">Работаю в профессии больше 20 лет и веду клиентов полностью дистанционно. Работаю в вашей учётной базе, а если её нет, подключаю СБИС Бухгалтерию: она онлайн, привязки к компьютеру нет.</p>
-   <p class="lead" style="margin-top:14px">Регистрирую ИП и ООО, открываю счета в Сбере, Т-Банке и Альфа-банке. Беру клиентов с нуля, а также предпринимателей, у которых бизнес уже идёт. Рабочий день с 9:00 до 18:00, на связи всегда.</p>
+   <p class="lead" style="margin-top:14px">Регистрирую ИП и ООО, открываю счета в Сбере, Т-Банке и Альфа-банке. Беру клиентов с нуля, а также предпринимателей, у которых бизнес уже идёт.</p>
   </div>
+  <dl class="facts2">
+   <div><dt>Стаж</dt><dd>больше 20 лет в бухгалтерии</dd></div>
+   <div><dt>Формат</dt><dd>полностью дистанционно, в вашей базе или в СБИС</dd></div>
+   <div><dt>Клиенты</dt><dd>ИП и небольшие ООО, с нуля и уже работающие</dd></div>
+   <div><dt>Время</dt><dd>с 9:00 до 18:00, на связи всегда</dd></div>
+  </dl>
  </div>
 </section>
 
