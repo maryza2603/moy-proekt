@@ -181,13 +181,9 @@ label.f{display:grid;gap:6px;font-weight:600;font-size:16px}
 .cb{display:flex;align-items:center;gap:12px;padding:15px 20px;border-radius:12px;font-weight:600;font-size:17px;text-decoration:none;border:2px solid #D3DBC0;color:#EBEED8;transition:background .15s}
 .cb svg{width:24px;height:24px;flex:none}
 .cb .maxlogo{width:26px;height:26px;margin:-3px 0 -3px -4px}
-.cb-wa{background:#25D366;border-color:#25D366;color:#0B3B1E}
-.cb:hover{filter:brightness(1.06)}
-.cb-tel,.cb-mail{background:transparent}
-.cb-max{background:linear-gradient(90deg,#44ccff 0%,#5533ee 62%,#9933dd 100%);border-color:transparent;background-origin:border-box;color:#fff}
-.cb-max .maxlogo{background:#fff;border-radius:9px;padding:2px;box-sizing:content-box}
+.cb-tel,.cb-wa,.cb-max,.cb-mail{background:transparent}
 button.cb{font-family:inherit;cursor:pointer;text-align:left;width:100%}
-.cb-tel:hover,.cb-mail:hover{background:rgba(255,255,255,.1)}
+.cb-tel:hover,.cb-wa:hover,.cb-max:hover,.cb-mail:hover{background:rgba(255,255,255,.1)}
 .cb-time{background:transparent;cursor:default;font-weight:500}
 .ctime{margin-top:10px;color:#D3DBC0;font-size:16px}
 .contacts{list-style:none;margin-top:26px;border-top:2px solid var(--ink)}
@@ -283,7 +279,7 @@ footer{padding:34px 0;font-size:15px}
   <h2>Чем занимаюсь</h2>
   <dl class="who">
    <div><dt>Регистрация и счета</dt><dd>Регистрирую ИП и ООО, открываю расчётные счета в Сбере, Т-Банке и Альфа-банке.</dd></div>
-   <div><dt>Ведение учёта</dt><dd>Банк, первичные документы, закрытие месяца, проверка счёта 51 и сверок. Работаю в вашей базе или в Saby.</dd></div>
+   <div><dt>Ведение учёта</dt><dd>Банк, первичные документы, закрытие месяца, сверка с контрагентами. Работаю в вашей базе или в Saby.</dd></div>
    <div><dt>Налоги и взносы</dt><dd>Расчёт по вашей системе налогообложения, платёжные поручения, напоминания о сроках оплаты.</dd></div>
    <div><dt>Отчётность</dt><dd>Декларации, отчёты в ФНС и СФР, баланс малого предприятия для ООО. Отправка через личный кабинет.</dd></div>
    <div><dt>Зарплата и кадры</dt><dd>Расчёт зарплаты, отчётность по сотрудникам, кадровый учёт для ООО.</dd></div>
@@ -311,6 +307,9 @@ footer{padding:34px 0;font-size:15px}
     </fieldset>
     <fieldset><legend>Сотрудники</legend>
      <label class="sw"><input type="checkbox" id="staff"><i></i><span id="staff-lbl">Есть сотрудники</span></label>
+    </fieldset>
+    <fieldset><legend>Подключение к ЭТрН</legend>
+     <div class="chips" id="chips-etrn" role="group" aria-label="Подключение к ЭТрН"></div>
     </fieldset>
    </div>
 
@@ -379,7 +378,7 @@ footer{padding:34px 0;font-size:15px}
   <h2>Частые вопросы</h2>
   <div class="faq">
    <details><summary>С какими формами и системами налогообложения вы работаете?</summary><p>С ИП и ООО на УСН 6%, УСН 15% и ОСНО, а также с ИП на УСН 6% с НДС. В прайсе есть отдельные наборы с сотрудниками и без них.</p></details>
-   <details><summary>Нужно ли приезжать или передавать бумажные документы?</summary><p>Нет. Работаем дистанционно: выписки из банка присылаются файлом, отчётность уходит через личный кабинет.</p></details>
+   <details><summary>Нужно ли приезжать или передавать бумажные документы?</summary><p>Нет. Работаем дистанционно: выписки из банка присылаются файлом, первичные документы сканом или фото. Отчётность уходит через личный кабинет.</p></details>
    <details><summary>Что входит в «Помню о вас»?</summary><p>Это фиксированный ежемесячный платёж, в него входит 1 час работы: ответы на требования налоговой, деловая переписка, напоминания о сроках и консультации. Сумма - в первой строке калькулятора.</p></details>
    <details><summary>Сколько стоит то, чего нет в прайсе?</summary><p>Считаю по времени. Стоимость часа указана под калькулятором, а перед началом работы назову, сколько времени займёт задача.</p></details>
    <details><summary>Можно заказать только часть услуг?</summary><p>Да. В прайсе можно отметить только нужные операции, например одну декларацию или расчёт налога.</p></details>
@@ -401,7 +400,7 @@ footer{padding:34px 0;font-size:15px}
   </div>
   <form id="form" novalidate>
    <label class="f">Как к вам обращаться<input name="name" autocomplete="name" required></label>
-   <label class="f">Телефон или Telegram<input name="contact" autocomplete="tel" required></label>
+   <label class="f">Телефон<input name="contact" autocomplete="tel" required></label>
    <label class="f">Что нужно<textarea name="msg" id="msg" placeholder="Например: ИП на УСН 6%, без сотрудников, нужна отчётность и расчёт налогов"></textarea></label>
    <button class="btn" type="submit">Отправить заявку</button>
    <p class="ok" id="ok" role="status"></p>
@@ -431,7 +430,8 @@ const CFG={
 const BASE_TXT='Фиксированный платёж в месяц. Входит 1 час работы: ответы на требования, деловая переписка, напоминания о сроках, консультации.';
 let RATE=50;
 const $=s=>document.querySelector(s);
-const st={type:'ip',mode:0,staff:false,sel:new Set()};
+const ETRN=[{n:200,p:1500},{n:1000,p:5000},{n:3000,p:13500},{n:5000,p:20000},{n:10000,p:35000},{n:50000,p:150000}];
+const st={type:'ip',mode:0,staff:false,sel:new Set(),etrn:-1};
 const money=n=>n.toLocaleString('ru-RU')+' ₽';
 const dur=m=>m>=60?(Math.floor(m/60)+' ч'+(m%60?' '+m%60+' мин':'')):m+' мин';
 
@@ -457,6 +457,15 @@ function renderControls(){
  if(st.type==='ooo'){sw.disabled=true;sw.checked=true;$('#staff-lbl').textContent='Кадровый учёт и зарплата уже в наборе';}
  else{sw.disabled=c.st===null;sw.checked=st.staff&&c.st!==null;$('#staff-lbl').textContent=c.st===null?'Для этого режима набор с сотрудниками не предусмотрен':'Есть сотрудники';}
 }
+function renderEtrn(){
+ const box=$('#chips-etrn');box.innerHTML='';
+ [{l:'Не нужно',i:-1}].concat(ETRN.map((e,i)=>({l:e.n.toLocaleString('ru-RU')+' док. - '+money(e.p),i}))).forEach(o=>{
+  const b=document.createElement('button');b.type='button';b.textContent=o.l;
+  b.setAttribute('aria-pressed',o.i===st.etrn);
+  b.onclick=()=>{st.etrn=o.i;renderEtrn();sum();};
+  box.appendChild(b);
+ });
+}
 function renderRows(){
  const {rows,title}=cur();
  $('#ttl').textContent=title;
@@ -474,9 +483,9 @@ function renderRows(){
 }
 function sum(){
  const {rows}=cur();let m=0;st.sel.forEach(i=>m+=rows[i].m);
- $('#s-n').textContent=st.sel.size;$('#s-t').textContent=dur(m);$('#s-sum').textContent=money(m*RATE);
+ $('#s-n').textContent=st.sel.size;$('#s-t').textContent=dur(m);$('#s-sum').textContent=money(m*RATE+(st.etrn>=0?ETRN[st.etrn].p:0));
 }
-function render(){renderControls();renderRows();const h=$('#hour');if(h)h.textContent=money(RATE*60);}
+function render(){renderControls();renderEtrn();renderRows();const h=$('#hour');if(h)h.textContent=money(RATE*60);}
 
 document.querySelectorAll('#seg-type button').forEach(b=>b.onclick=()=>{st.type=b.dataset.v;st.mode=0;st.staff=false;reset();render();});
 $('#staff').onchange=e=>{st.staff=e.target.checked;reset();render();};
@@ -485,13 +494,13 @@ $('#none').onclick=()=>{st.sel=new Set();renderRows();};
 $('#to-order').onclick=()=>{
  const {rows,title}=cur();let m=0;const names=[];
  [...st.sel].sort((a,b)=>a-b).forEach(i=>{m+=rows[i].m;names.push(rows[i].n);});
- $('#msg').value=title+'. Выбрано: '+names.join('; ')+'. Время '+dur(m)+', сумма '+money(m*RATE)+'.';
+ $('#msg').value=title+'. Выбрано: '+names.join('; ')+'. Время '+dur(m)+', сумма '+money(m*RATE)+'.'+(st.etrn>=0?' Подключение к ЭТрН: '+ETRN[st.etrn].n.toLocaleString('ru-RU')+' документов, '+money(ETRN[st.etrn].p)+'. Всего: '+money(m*RATE+ETRN[st.etrn].p)+'.':'');
 };
 $('#form').onsubmit=e=>{e.preventDefault();
  const f=e.target,ok=$('#ok'),btn=f.querySelector('button[type=submit]');
- if(!f.elements.name.value.trim()||!f.elements.contact.value.trim()){ok.textContent='Укажите, как к вам обращаться, и телефон или Telegram.';ok.classList.add('show');return;}
+ if(!f.elements.name.value.trim()||!f.elements.contact.value.trim()){ok.textContent='Укажите, как к вам обращаться, и телефон.';ok.classList.add('show');return;}
  btn.disabled=true;
- fetch('https://formsubmit.co/ajax/nad6290@yandex.ru',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({_subject:'Заявка с сайта: бухгалтерские услуги',_template:'table',_captcha:'false',Имя:f.elements.name.value,'Телефон или Telegram':f.elements.contact.value,'Что нужно':f.elements.msg.value})})
+ fetch('https://formsubmit.co/ajax/nad6290@yandex.ru',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({_subject:'Заявка с сайта: бухгалтерские услуги',_template:'table',_captcha:'false',Имя:f.elements.name.value,'Телефон':f.elements.contact.value,'Что нужно':f.elements.msg.value})})
  .then(r=>r.ok?r.json():Promise.reject()).then(()=>{ok.textContent='Спасибо! Заявка отправлена, я свяжусь с вами в рабочее время.';f.reset();})
  .catch(()=>{ok.textContent='Не получилось отправить заявку. Напишите в WhatsApp или позвоните: +7 903 546-57-14.';})
  .finally(()=>{ok.classList.add('show');btn.disabled=false;});
