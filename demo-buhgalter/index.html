@@ -401,7 +401,7 @@ footer{padding:34px 0;font-size:15px}
    <label class="f">Телефон или Telegram<input name="contact" autocomplete="tel" required></label>
    <label class="f">Что нужно<textarea name="msg" id="msg" placeholder="Например: ИП на УСН 6%, без сотрудников, нужна отчётность и расчёт налогов"></textarea></label>
    <button class="btn" type="submit">Отправить заявку</button>
-   <p class="ok" id="ok" role="status">Спасибо! Это демонстрационная версия: заявка никуда не отправляется.</p>
+   <p class="ok" id="ok" role="status"></p>
    <p class="fine">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
   </form>
  </div>
@@ -484,7 +484,15 @@ $('#to-order').onclick=()=>{
  [...st.sel].sort((a,b)=>a-b).forEach(i=>{m+=rows[i].m;names.push(rows[i].n);});
  $('#msg').value=title+'. Выбрано: '+names.join('; ')+'. Время '+dur(m)+', сумма '+money(m*RATE)+'.';
 };
-$('#form').onsubmit=e=>{e.preventDefault();$('#ok').classList.add('show');};
+$('#form').onsubmit=e=>{e.preventDefault();
+ const f=e.target,ok=$('#ok'),btn=f.querySelector('button[type=submit]');
+ if(!f.elements.name.value.trim()||!f.elements.contact.value.trim()){ok.textContent='Укажите, как к вам обращаться, и телефон или Telegram.';ok.classList.add('show');return;}
+ btn.disabled=true;
+ fetch('https://formsubmit.co/ajax/nad6290@yandex.ru',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({_subject:'Заявка с сайта: бухгалтерские услуги',_template:'table',_captcha:'false',Имя:f.elements.name.value,'Телефон или Telegram':f.elements.contact.value,'Что нужно':f.elements.msg.value})})
+ .then(r=>r.ok?r.json():Promise.reject()).then(()=>{ok.textContent='Спасибо! Заявка отправлена, я свяжусь с вами в рабочее время.';f.reset();})
+ .catch(()=>{ok.textContent='Не получилось отправить заявку. Напишите в WhatsApp или позвоните: +7 903 546-57-14.';})
+ .finally(()=>{ok.classList.add('show');btn.disabled=false;});
+};
 reset();render();
 
 /* Цены из Google Таблицы (опубликована как CSV). Если не загрузилась или данные странные - остаются встроенные цены. */
