@@ -232,8 +232,19 @@ header.scrolled{border-color:var(--line)}
 .svc[data-go]:hover .ico{background:var(--terra);color:#fff}
 .svc[data-go] .ico{transition:background .2s,color .2s}
 .svc[data-go] .go{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:14px;font-weight:600;color:var(--terra)}
-.works,.dz-group{scroll-margin-top:90px}
-#filters{scroll-margin-top:100px}
+.works,.dz-group{scroll-margin-top:140px}
+#filters{scroll-margin-top:150px}
+/* быстрые кнопки в шапке */
+.qnav{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.qnav::-webkit-scrollbar{display:none}
+.qnav a{flex:0 0 auto;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper);font-size:13.5px;font-weight:600;color:var(--ink);text-decoration:none;white-space:nowrap;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+.qnav a:hover{border-color:var(--terra);color:var(--terra)}
+/* кнопка «смотреть работы» под ценами */
+.pr-go{align-self:flex-start;margin-top:18px;padding:10px 18px;border-radius:999px;border:1.5px solid var(--terra);background:transparent;color:var(--terra);font:600 14px Manrope,sans-serif;cursor:pointer;transition:background .2s,color .2s}
+.pr-go:hover{background:var(--terra);color:#fff}
+.pr-go+.pr-go{margin-left:8px}
+.pk-go{margin:22px 0 0;text-align:center}
+.pk-go .pr-go{align-self:auto;margin:0}
 /* примеры карточек в услуге */
 .svc .ba{display:flex;align-items:center;gap:10px;margin-top:14px}
 .svc .ba figure{flex:1;margin:0}
@@ -252,7 +263,7 @@ header.scrolled{border-color:var(--line)}
 .mp-ex img{width:48px;height:48px;object-fit:cover;border-radius:6px;border:2px solid var(--paper);box-shadow:0 2px 6px rgba(0,0,0,.12)}
 .mp-ex img+img{margin-left:-14px}
 .mp-ex:hover{text-decoration:underline}
-.dz-group{scroll-margin-top:90px}
+.dz-group{scroll-margin-top:140px}
 /* design gallery */
 .dz-group{margin-bottom:54px}
 .dz-vids{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;align-items:flex-start}
@@ -517,6 +528,16 @@ ym(113961526, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true}
     <a class="btn" href="https://t.me/luminoso89" target="_blank" rel="noopener"><svg><use href="#tg"/></svg>Написать</a>
     <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
   </div>
+  <div class="wrap qnav" aria-label="Быстрый переход к услугам">
+    <a data-go="code" role="link" tabindex="0">Сайты</a>
+    <a data-go="konstr" role="link" tabindex="0">Конструкторы</a>
+    <a data-go="dz:Логотипы" role="link" tabindex="0">Логотипы</a>
+    <a data-go="dz:Фирменный" role="link" tabindex="0">Фирменный стиль</a>
+    <a data-go="dz:Карточки" role="link" tabindex="0">Карточки WB и Ozon</a>
+    <a data-go="video" role="link" tabindex="0">Видео</a>
+    <a data-go="smm" role="link" tabindex="0">SMM</a>
+    <a href="#price">Цены</a>
+  </div>
 </header>
 
 <section class="hero">
@@ -615,6 +636,9 @@ ym(113961526, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true}
           <li>Правки в рамках задания</li>
           <li>Инструкция: как выложить сайт и подключить домен самим</li>
         </ul>
+        <button type="button" class="pr-go" data-go="konstr">Смотреть работы →</button>
+        <button type="button" class="pr-go" data-go="video">Смотреть работы →</button>
+        <button type="button" class="pr-go" data-go="smm">Смотреть работы →</button>
       </div>
       <div class="pk main reveal">
         <span class="pk-tag">Чаще всего берут</span>
@@ -642,6 +666,7 @@ ym(113961526, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true}
         </ul>
       </div>
     </div>
+    <p class="pk-go reveal"><button type="button" class="pr-go" data-go="code">Смотреть сайты на коде →</button></p>
     <p class="pk-note reveal"><b>Не входит в пакеты:</b> покупка домена (адреса сайта) и хостинга (места, где он хранится). Покупаете сами на своё имя, чтобы сайт всегда был вашим. В «Старт» и «Стандарт» моя установка на хостинг и подключение домена - плюс 1 500 ₽.</p>
     <h3 class="pk-sub reveal">Другие сайты и услуги</h3>
     <div class="pr-grid">
@@ -657,6 +682,7 @@ ym(113961526, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true}
           <li>Правки без ограничений, 30 дней поддержки</li>
         </ul>
         <p class="not"><b>Не входит:</b> подписка Tilda (нужна для своего адреса) и покупка домена. Моя помощь с подключением домена - плюс 1 500 ₽.</p>
+        <button type="button" class="pr-go" data-go="tilda">Смотреть работы →</button>
       </div>
       <div class="pr reveal">
         <h3>Сайт с онлайн-записью или бронированием</h3>
@@ -669,6 +695,7 @@ ym(113961526, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true}
         <ul><li>Установка сайта на хостинг и подключение домена входят в цену</li>
         <li>30 дней поддержки после запуска, правки без ограничений</li></ul>
         <p class="not"><b>Не входит:</b> покупка домена и хостинга. Покупаете сами на своё имя, а устанавливаю я.</p>
+        <button type="button" class="pr-go" data-go="code">Смотреть работы →</button>
       </div>
       <div class="pr reveal">
         <h3>Конструктор товара на сайте</h3>
@@ -713,6 +740,7 @@ ym(113961526, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true}
         <li>Файлы отдаю в PNG и PDF, цвета и шрифты - в бренд-гайде</li>
         <li>Логотип с нуля - от 1 500 ₽, отдельной услугой</li></ul>
         <p class="not"><b>Не входит:</b> тексты, фото и иллюстрации, их присылаете вы. Нужен сайт - цены выше.</p>
+        <button type="button" class="pr-go" data-go="dz:Фирменный">Смотреть работы →</button><button type="button" class="pr-go" data-go="dz:Логотипы">Логотипы →</button>
       </div>
       <div class="pr reveal">
         <h3>Карточки для WB и Ozon</h3>
@@ -728,6 +756,7 @@ ym(113961526, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true}
         <li>Правки в рамках задания - без ограничений</li>
         <li>Лендинг бренда - от 5 000 ₽, пакет «лендинг + 3 карточки» - 6 000 ₽</li></ul>
         <p class="not"><b>Не входит:</b> съёмка товара. Фото присылаете вы.</p>
+        <button type="button" class="pr-go" data-go="dz:Карточки">Смотреть работы →</button>
       </div>
       <div class="pr reveal">
         <h3>Подключение Telegram-бота к сайту</h3>
@@ -740,6 +769,7 @@ ym(113961526, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true}
           <li>Проверяю на тестовой заявке перед сдачей</li>
           <li>30 дней поддержки после подключения</li>
         </ul>
+        <button type="button" class="pr-go" data-go="app">Смотреть работы →</button>
       </div>
       <div class="pr reveal">
         <h3>Видеомонтаж и вертикальные видео</h3>
@@ -1120,6 +1150,13 @@ function goSvc(el){const g=el.dataset.go;
   else{show(g);$('#filters').scrollIntoView({behavior:'smooth'})}}
 document.addEventListener('click',e=>{const L=e.target.closest('.svc[data-link]');if(L&&!e.target.closest('a')){const t=document.querySelector(L.dataset.link);if(t)t.scrollIntoView({behavior:'smooth'});return}const s=e.target.closest('.svc[data-go]');if(!s||e.target.closest('a,video,button'))return;goSvc(s)});
 document.addEventListener('keydown',e=>{const s=e.target.closest&&e.target.closest('.svc[data-go]');if(s&&(e.key==='Enter'||e.key===' ')&&e.target===s){e.preventDefault();goSvc(s)}});
+// кнопки «смотреть работы» под ценами и быстрые кнопки в шапке
+document.addEventListener('click',e=>{const b=e.target.closest('.pr-go[data-go],.qnav a[data-go]');if(b){e.preventDefault();goSvc(b)}});
+document.addEventListener('keydown',e=>{const b=e.target.closest&&e.target.closest('.qnav a[data-go]');if(b&&(e.key==='Enter'||e.key===' ')){e.preventDefault();goSvc(b)}});
+// ссылки на разделы для откликов: /portfolio/#cards, #brand и т.д.
+const HASHGO={sites:'code',konstr:'konstr',logo:'dz:Логотипы',brand:'dz:Фирменный',cards:'dz:Карточки',video:'video',smm:'smm',app:'app',tilda:'tilda'};
+function hashGo(){const g=HASHGO[location.hash.slice(1)];if(g)setTimeout(()=>goSvc({dataset:{go:g}}),350)}
+hashGo();addEventListener('hashchange',hashGo);
 // ленты и лайтбокс
 document.addEventListener('click',e=>{const b=e.target.closest('.moreBtn');if(!b)return;if(b.dataset.more){MORE[b.dataset.more]=1;show(b.dataset.more)}else{const y=scrollY;DESIGN[+b.dataset.dmore].open=true;$('#design').innerHTML=(CUR==='all'?`<h2 style="font-size:36px;margin-bottom:30px">Дизайн</h2>`:'')+renderDesign();scrollTo(0,y)}});
 document.addEventListener('click',e=>{
