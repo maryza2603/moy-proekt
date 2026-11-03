@@ -172,6 +172,8 @@ label.f{display:grid;gap:6px;font-weight:600;font-size:16px}
 .ok{display:none;padding:14px 16px;background:#E3E7CF;border:2px solid #2E8B57;border-radius:6px;font-size:16px}
 .ok.show{display:block}
 .fine{font-size:14px;color:var(--muted)}
+.chk{display:flex;align-items:flex-start;gap:10px;font-size:15px;line-height:1.4;margin:2px 0 14px;cursor:pointer}
+.chk input{width:20px;height:20px;margin-top:1px;flex:none;accent-color:#1F5A44}
 .totop{position:fixed;right:18px;bottom:18px;z-index:60;width:52px;height:52px;border-radius:50%;border:2px solid #D3DBC0;background:#2E6A52;color:#EBEED8;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.28);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,transform .25s,visibility .25s}
 .totop.on{opacity:1;visibility:visible;transform:none}
 .totop:hover{background:#1F5A44}
@@ -402,9 +404,9 @@ footer{padding:34px 0;font-size:15px}
    <label class="f">Как к вам обращаться<input name="name" autocomplete="name" required></label>
    <label class="f">Телефон<input name="contact" autocomplete="tel" required></label>
    <label class="f">Что нужно<textarea name="msg" id="msg" placeholder="Например: ИП на УСН 6%, без сотрудников, нужна отчётность и расчёт налогов"></textarea></label>
+   <label class="chk"><input type="checkbox" name="agree" id="agree"><span>Я даю <a href="soglasie.html" target="_blank" rel="noopener">согласие на обработку персональных данных</a> и ознакомлен(а) с <a href="politika.html" target="_blank" rel="noopener">политикой обработки</a></span></label>
    <button class="btn" type="submit">Отправить заявку</button>
    <p class="ok" id="ok" role="status"></p>
-   <p class="fine">Нажимая кнопку, вы соглашаетесь на <a href="politika.html">обработку персональных данных</a>.</p>
   </form>
  </div>
 </section>
@@ -499,6 +501,7 @@ $('#to-order').onclick=()=>{
 $('#form').onsubmit=e=>{e.preventDefault();
  const f=e.target,ok=$('#ok'),btn=f.querySelector('button[type=submit]');
  if(!f.elements.name.value.trim()||!f.elements.contact.value.trim()){ok.textContent='Укажите, как к вам обращаться, и телефон.';ok.classList.add('show');return;}
+ if(!f.elements.agree.checked){ok.textContent='Поставьте галочку согласия на обработку персональных данных.';ok.classList.add('show');return;}
  btn.disabled=true;
  fetch('https://formsubmit.co/ajax/nad6290@yandex.ru',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({_subject:'Заявка с сайта: бухгалтерские услуги',_template:'table',_captcha:'false',Имя:f.elements.name.value,'Телефон':f.elements.contact.value,'Что нужно':f.elements.msg.value})})
  .then(r=>r.ok?r.json():Promise.reject()).then(()=>{ok.textContent='Спасибо! Заявка отправлена, я свяжусь с вами в рабочее время.';f.reset();})
