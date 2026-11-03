@@ -180,12 +180,14 @@ label.f{display:grid;gap:6px;font-weight:600;font-size:16px}
 .cbtns{display:flex;flex-direction:column;gap:12px;margin-top:26px;max-width:420px}
 .cb{display:flex;align-items:center;gap:12px;padding:15px 20px;border-radius:12px;font-weight:600;font-size:17px;text-decoration:none;border:2px solid #D3DBC0;color:#EBEED8;transition:background .15s}
 .cb svg{width:24px;height:24px;flex:none}
-.cb .maxlogo{width:28px;height:28px;margin:-2px -2px -2px -2px}
+.cb .maxlogo{width:26px;height:26px;margin:-3px 0 -3px -4px}
 .cb-wa{background:#25D366;border-color:#25D366;color:#0B3B1E}
 .cb:hover{filter:brightness(1.06)}
-.cb-tel,.cb-mail,.cb-max{background:transparent}
+.cb-tel,.cb-mail{background:transparent}
+.cb-max{background:linear-gradient(90deg,#44ccff 0%,#5533ee 62%,#9933dd 100%);border-color:transparent;background-origin:border-box;color:#fff}
+.cb-max .maxlogo{background:#fff;border-radius:9px;padding:2px;box-sizing:content-box}
 button.cb{font-family:inherit;cursor:pointer;text-align:left;width:100%}
-.cb-tel:hover,.cb-mail:hover,.cb-max:hover{background:rgba(255,255,255,.1)}
+.cb-tel:hover,.cb-mail:hover{background:rgba(255,255,255,.1)}
 .cb-time{background:transparent;cursor:default;font-weight:500}
 .ctime{margin-top:10px;color:#D3DBC0;font-size:16px}
 .contacts{list-style:none;margin-top:26px;border-top:2px solid var(--ink)}
