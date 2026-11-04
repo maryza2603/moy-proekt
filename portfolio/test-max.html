@@ -28,7 +28,7 @@
 <body>
 <main>
   <h1>Тест: заявка с сайта</h1>
-  <p class="lead">Заполните поля и отправьте. Заявка должна прийти в МАХ и на почту.</p>
+  <p class="lead">Заполните поля и отправьте. Заявка должна прийти в МАХ.</p>
 
   <form id="f" novalidate>
     <label>Имя
@@ -49,7 +49,6 @@
 
 <script>
 const MAX_URL = 'https://max-test-form.tg-bot-mindal.workers.dev/';
-const MAIL_URL = 'https://formsubmit.co/ajax/maryza2603@gmail.com';
 
 const f = document.getElementById('f');
 const res = document.getElementById('res');
@@ -79,13 +78,7 @@ f.addEventListener('submit', async e => {
     body: JSON.stringify(data),
   }).then(r => r.json()).then(j => show('МАХ', j.ok, j.error)).catch(() => show('МАХ', false, 'нет связи'));
 
-  const toMail = fetch(MAIL_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({ name: data.name, phone: data.phone, message: data.message, _subject: 'Заявка с тестовой страницы', _captcha: 'false' }),
-  }).then(r => r.json()).then(j => show('Почта', String(j.success) === 'true', j.message)).catch(() => show('Почта', false, 'нет связи'));
-
-  await Promise.all([toMax, toMail]);
+  await toMax;
   btn.disabled = false;
   btn.textContent = 'Отправить заявку';
 });
