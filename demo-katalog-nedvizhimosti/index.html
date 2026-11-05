@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Каталог недвижимости - демо</title>
+<meta name="description" content="Демо каталога недвижимости: поиск с фильтрами, карточки объектов, вход через Telegram и личный кабинет.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ffffff; --ink:#15171c; --mute:#6b7280; --line:#e4e6eb; --soft:#f4f5f7;
+  --cobalt:#2340e8; --cobalt-d:#1a31b8; --ok:#17803d; --warn:#b4231b;
+  --r:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Onest',system-ui,sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+
+/* шапка */
+header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font-weight:700;font-size:20px;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:22px;height:22px;border:2.5px solid var(--ink);border-radius:5px;position:relative;display:inline-block}
+.logo i::after{content:"";position:absolute;left:3px;right:3px;bottom:-2.5px;height:8px;background:var(--cobalt);border-radius:2px 2px 0 0}
+nav.top{display:flex;gap:26px;font-size:15px}
+nav.top a{text-decoration:none;color:var(--mute);font-weight:500}
+nav.top a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 20px;border-radius:var(--r);font-weight:600;font-size:15px;transition:background .15s,border-color .15s}
+.btn.pri{background:var(--cobalt);color:#fff}
+.btn.pri:hover{background:var(--cobalt-d)}
+.btn.sec{border:1px solid var(--line);background:#fff}
+.btn.sec:hover{border-color:var(--ink)}
+.btn.tg{background:#229ed9;color:#fff}
+.btn.tg:hover{background:#1b86b9}
+.btn.sm{height:36px;padding:0 14px;font-size:14px}
+.user{display:flex;align-items:center;gap:10px}
+.ava{width:34px;height:34px;border-radius:50%;background:var(--cobalt);color:#fff;display:grid;place-items:center;font-weight:600;font-size:14px}
+
+/* первый экран: поиск */
+.hero{padding:56px 0 36px;border-bottom:1px solid var(--line)}
+h1{font-size:clamp(32px,5vw,56px);line-height:1.05;letter-spacing:-.035em;font-weight:700;max-width:14ch}
+.hero p.sub{color:var(--mute);margin-top:14px;max-width:46ch}
+.search{margin-top:30px;border:1px solid var(--ink);border-radius:14px;padding:6px;display:grid;grid-template-columns:auto 1fr auto;gap:6px;background:#fff}
+.seg{display:flex;background:var(--soft);border-radius:9px;padding:3px}
+.seg button{padding:0 18px;height:40px;border-radius:7px;font-weight:600;font-size:15px;color:var(--mute)}
+.seg button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.q{display:flex;align-items:center;padding:0 14px;gap:10px}
+.q input{border:0;outline:0;width:100%;height:46px;font-size:16px;background:none}
+.q svg{flex:none;color:var(--mute)}
+.search .btn{height:46px;padding:0 28px}
+
+.filters{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;align-items:center}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{height:38px;padding:0 15px;border:1px solid var(--line);border-radius:999px;font-size:14.5px;font-weight:500;background:#fff}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.field{display:flex;align-items:center;gap:0;border:1px solid var(--line);border-radius:var(--r);height:38px;overflow:hidden;background:#fff}
+.field label{padding:0 0 0 12px;color:var(--mute);font-size:14px;white-space:nowrap}
+.field input,.field select{border:0;outline:0;height:36px;width:104px;padding:0 10px;font-size:14.5px;background:none}
+.field select{width:auto;padding-right:6px}
+.field:focus-within{border-color:var(--cobalt)}
+.field .dash{color:var(--mute)}
+.reset{font-size:14px;color:var(--mute);text-decoration:underline;text-underline-offset:3px;margin-left:auto}
+.reset:hover{color:var(--ink)}
+
+/* результаты */
+.res-head{display:flex;align-items:end;justify-content:space-between;gap:16px;padding:30px 0 18px;flex-wrap:wrap}
+.res-head h2{font-size:26px;letter-spacing:-.02em;line-height:1.2}
+.res-head .count{color:var(--mute);font-weight:400}
+.sort{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sort .field select{width:auto;padding-right:12px}
+.view{display:flex;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.view button{height:36px;padding:0 14px;font-size:14px;font-weight:600;color:var(--mute)}
+.view button[aria-pressed=true]{background:var(--ink);color:#fff}
+
+.layout{display:grid;grid-template-columns:1fr;gap:24px;padding-bottom:70px}
+.layout.map{grid-template-columns:minmax(0,1fr) 420px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:28px 22px;align-content:start}
+.layout.map .grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.card{position:relative;cursor:pointer}
+.card .pic{display:block;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--soft);position:relative}
+.card .pic svg,.card .pic img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.card:hover .pic svg,.card:hover .pic img{transform:scale(1.03)}
+.badge{position:absolute;left:10px;top:10px;background:#fff;border-radius:7px;font-size:13px;font-weight:600;padding:3px 9px}
+.fav{position:absolute;right:10px;top:10px;width:38px;height:38px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.fav svg{width:19px;height:19px;fill:none;stroke:var(--ink);stroke-width:1.8}
+.fav[aria-pressed=true] svg{fill:var(--warn);stroke:var(--warn)}
+.price{font-size:22px;font-weight:700;letter-spacing:-.02em;margin-top:12px}
+.price small{font-size:14px;font-weight:500;color:var(--mute);letter-spacing:0}
+.title{margin-top:2px;font-weight:500}
+.meta,.addr{color:var(--mute);font-size:14.5px}
+.card h3{font-size:16px;font-weight:500;line-height:1.4}
+.card:focus-within .pic{outline:2px solid var(--cobalt);outline-offset:2px}
+.card .open{position:absolute;inset:0;z-index:1;border-radius:12px}
+.fav{z-index:2}
+.empty{grid-column:1/-1;border:1px dashed var(--line);border-radius:14px;padding:48px 24px;text-align:center}
+.empty b{display:block;font-size:20px;margin-bottom:6px}
+.empty p{color:var(--mute);margin-bottom:18px}
+
+.mapbox{position:sticky;top:84px;height:calc(100vh - 110px);min-height:420px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#eef0f3;display:none}
+.layout.map .mapbox{display:block}
+.mapbox svg{width:100%;height:100%;display:block}
+.pin{cursor:pointer}
+.pin rect{fill:#fff;stroke:var(--ink);stroke-width:1.4;transition:fill .15s}
+.pin text{font:600 12px 'Onest',sans-serif;fill:var(--ink);text-anchor:middle}
+.pin:hover rect,.pin.on rect{fill:var(--ink)}
+.pin:hover text,.pin.on text{fill:#fff}
+
+/* окна */
+.scrim{position:fixed;inset:0;background:rgba(15,18,28,.5);z-index:50;display:none;align-items:center;justify-content:center;padding:16px}
+.scrim.on{display:flex}
+.modal{background:#fff;border-radius:16px;width:min(560px,100%);max-height:94vh;overflow:auto;position:relative}
+.modal.wide{width:min(940px,100%)}
+.x{position:absolute;right:12px;top:12px;width:38px;height:38px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:22px;z-index:3;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.pad{padding:30px}
+.pad h2{font-size:26px;letter-spacing:-.02em;line-height:1.2}
+.pad p.lead{color:var(--mute);margin:8px 0 22px}
+.detail{display:grid;grid-template-columns:1.15fr 1fr}
+.detail .pic{background:var(--soft);min-height:340px}
+.detail .pic svg,.detail .pic img{width:100%;height:100%;object-fit:cover;display:block}
+.detail .info{padding:30px}
+.detail .price{margin-top:0;font-size:30px}
+.params{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin:20px 0;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.params div span{display:block;color:var(--mute);font-size:13.5px}
+.params div b{font-weight:600}
+.desc{color:#3a3f4a;font-size:15px}
+.acts{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+form .row{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+form label.l{font-size:14px;font-weight:500}
+form input.t{height:46px;border:1px solid var(--line);border-radius:var(--r);padding:0 14px;font-size:16px;width:100%}
+form input.t:focus{outline:0;border-color:var(--cobalt)}
+.hint{font-size:13.5px;color:var(--mute)}
+.err{font-size:13.5px;color:var(--warn);min-height:18px}
+.steps{list-style:none;margin:6px 0 22px;display:grid;gap:12px}
+.steps li{display:flex;gap:12px;align-items:flex-start;font-size:15px}
+.steps li i{flex:none;width:26px;height:26px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-style:normal;font-weight:600;font-size:13px}
+.tgphone{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--soft);margin-bottom:18px;display:flex;gap:12px;align-items:center}
+.tgphone .ic{width:44px;height:44px;border-radius:50%;background:#229ed9;display:grid;place-items:center;flex:none}
+.tgphone b{display:block}
+.tgphone span{font-size:14px;color:var(--mute)}
+
+/* кабинет */
+#cabinet{display:none;padding:34px 0 80px}
+#cabinet.on{display:block}
+.tabs{display:flex;gap:6px;margin:20px 0 26px;border-bottom:1px solid var(--line)}
+.tabs button{padding:12px 16px;font-weight:600;color:var(--mute);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected=true]{color:var(--ink);border-color:var(--ink)}
+.list{display:grid;gap:12px}
+.row-i{display:flex;justify-content:space-between;gap:16px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:16px 18px;flex-wrap:wrap}
+.row-i b{font-weight:600}
+.row-i span{color:var(--mute);font-size:14.5px;display:block}
+.st{font-size:13.5px;font-weight:600;border-radius:7px;padding:4px 10px;background:#e8f5ec;color:var(--ok)}
+.profile{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:22px}
+.profile .ava{width:64px;height:64px;font-size:24px}
+
+footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--mute);font-size:14.5px}
+footer .wrap{display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:10px;font-size:15px;opacity:0;pointer-events:none;transition:.25s;z-index:80}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:980px){
+  .layout.map{grid-template-columns:1fr}
+  .mapbox{position:relative;top:0;height:420px;order:-1}
+  .detail{grid-template-columns:1fr}
+  .detail .pic{min-height:230px}
+  nav.top{display:none}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .search{grid-template-columns:1fr}
+  .seg button{flex:1}
+  .hero{padding-top:34px}
+  .field input{width:88px}
+  .reset{margin-left:0}
+}
+
+/* оценка, шаги, отзывы */
+section.calc,section.steps,section.reviews{padding:80px 0}
+section.calc{border-top:1px solid var(--line)}
+section h2{font-size:clamp(26px,3.6vw,38px);letter-spacing:-.025em;line-height:1.15;margin-bottom:10px}
+.lead{color:var(--mute);max-width:56ch}
+.calc-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;margin-top:34px;align-items:start}
+.opts{display:grid;gap:24px}
+fieldset{border:0;display:flex;flex-wrap:wrap;gap:8px}
+legend{font-weight:600;margin-bottom:10px;font-size:15px}
+.opts label{position:relative;cursor:pointer;padding:10px 18px;border-radius:10px;border:1px solid var(--line);font-size:15px;transition:border-color .15s}
+.opts label:hover{border-color:var(--ink)}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts label:has(input:checked){background:var(--ink);color:#fff;border-color:var(--ink)}
+.opts label:has(input:focus-visible){outline:2px solid var(--cobalt);outline-offset:2px}
+.result{position:sticky;top:90px;background:var(--soft);border-radius:16px;padding:30px}
+.r-label{color:var(--mute);font-size:14px}
+.r-price{font-size:clamp(30px,3.4vw,40px);font-weight:700;letter-spacing:-.03em;margin:4px 0 2px;white-space:nowrap}
+.r-range{color:var(--cobalt);font-size:15px;font-weight:500}
+.r-meta{display:flex;gap:28px;margin:22px 0 16px;padding-top:18px;border-top:1px solid var(--line)}
+.r-meta dt{font-size:13px;color:var(--mute)}.r-meta dd{font-weight:600}
+.r-sum{font-size:15px;margin-bottom:20px}
+.r-note{font-size:13px;color:var(--mute);margin-top:12px}
+section.steps{background:#eaefff;color:var(--ink)}
+section.steps .lead{color:#4b5568}
+.line{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:46px;counter-reset:s;position:relative}
+.line::before{content:"";position:absolute;top:21px;left:0;right:0;height:1px;background:#b9c5f5}
+.line li{position:relative;counter-increment:s}
+.line li::before{content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#fff;border:1.5px solid var(--cobalt);color:var(--cobalt);font-weight:600;margin-bottom:18px;position:relative}
+.line li:last-child::before{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
+.line h3{font-size:17px;margin-bottom:6px;color:var(--ink)}
+.line p{font-size:15px;color:#4b5568}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+blockquote{border:1px solid var(--line);border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:16px}
+blockquote footer{border:0;padding:0;margin-top:auto;font-size:14px;color:var(--mute)}
+blockquote footer b{display:block;color:var(--ink);font-size:15px}
+@media (max-width:980px){
+  .calc-grid,.rgrid{grid-template-columns:1fr}
+  .result{position:static}
+  .line{grid-template-columns:1fr;gap:26px}
+  .line::before{top:0;bottom:0;left:21px;right:auto;width:1px;height:auto}
+  .line li{padding-left:64px}
+  .line li::before{position:absolute;left:0;top:0;margin:0}
+}
+@media (max-width:640px){section.calc,section.steps,section.reviews{padding:56px 0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#" id="home"><i></i>Домовой каталог</a>
+    <nav class="top" aria-label="Разделы">
+      <a href="#catalog">Каталог</a>
+      <a href="#" data-need-auth="fav">Избранное</a>
+      <a href="#calc">Оценка</a>
+      <a href="#steps">Как это работает</a>
+      <a href="#" id="navReq">Оставить заявку</a>
+    </nav>
+    <div id="authSlot"></div>
+  </div>
+</header>
+
+<main id="main">
+<section id="catalogView">
+  <div class="hero">
+    <div class="wrap">
+      <h1>Найдите дом, в котором хочется остаться</h1>
+      <p class="sub">Квартиры, дома, участки и помещения. Фильтры считают объекты сразу, без перезагрузки страницы.</p>
+
+      <div class="search" role="search">
+        <div class="seg" role="group" aria-label="Тип сделки">
+          <button data-deal="buy" aria-pressed="true">Купить</button>
+          <button data-deal="rent" aria-pressed="false">Снять</button>
+        </div>
+        <div class="q">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="qInput" type="search" placeholder="Город, район или улица" aria-label="Поиск по адресу" autocomplete="off">
+        </div>
+        <button class="btn pri" id="goBtn">Показать объекты</button>
+      </div>
+
+      <div class="filters">
+        <div class="chips" role="group" aria-label="Тип недвижимости" id="typeChips"></div>
+        <div class="chips" role="group" aria-label="Комнаты" id="roomChips"></div>
+        <div class="field"><label for="pMin">Цена от</label><input id="pMin" inputmode="numeric" placeholder="0"><span class="dash">-</span><label for="pMax" style="padding-left:6px">до</label><input id="pMax" inputmode="numeric" placeholder="любая"></div>
+        <div class="field"><label for="aMin">Площадь от</label><input id="aMin" inputmode="numeric" placeholder="0" style="width:70px"><span style="padding-right:12px;color:var(--mute);font-size:14px">м²</span></div>
+        <button class="reset" id="resetBtn">Сбросить фильтры</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" id="catalog">
+    <div class="res-head">
+      <h2 id="resTitle" aria-live="polite">Объекты</h2>
+      <div class="sort">
+        <div class="field"><label for="sortSel">Сортировка</label>
+          <select id="sortSel">
+            <option value="new">Сначала новые</option>
+            <option value="pa">Сначала дешевле</option>
+            <option value="pd">Сначала дороже</option>
+            <option value="area">По площади</option>
+          </select>
+        </div>
+        <div class="view" role="group" aria-label="Вид">
+          <button data-view="list" aria-pressed="true">Список</button>
+          <button data-view="map" aria-pressed="false">На карте</button>
+        </div>
+      </div>
+    </div>
+    <div class="layout" id="layout">
+      <div class="grid" id="grid"></div>
+      <div class="mapbox" id="mapbox" aria-label="Карта объектов"></div>
+    </div>
+  </div>
+
+  <section class="calc" id="calc">
+    <div class="wrap">
+      <h2 id="cTitle">Сколько стоит квартира</h2>
+      <p class="lead" id="cLead">Выберите параметры - посчитаем примерную цену по сделкам за последние полгода.</p>
+      <div class="seg" role="group" aria-label="Что вы хотите сделать" style="display:inline-flex;margin-top:18px">
+        <button type="button" data-m="buy" aria-pressed="true">Хочу купить</button>
+        <button type="button" data-m="sell" aria-pressed="false">Хочу продать</button>
+      </div>
+      <div class="calc-grid">
+        <form class="opts" id="calcForm">
+          <fieldset><legend>Город</legend>
+            <label><input type="radio" name="city" value="380000" data-n="Москва" checked>Москва</label>
+            <label><input type="radio" name="city" value="270000" data-n="Санкт-Петербург">Санкт-Петербург</label>
+            <label><input type="radio" name="city" value="200000" data-n="Казань">Казань</label>
+            <label><input type="radio" name="city" value="340000" data-n="Сочи">Сочи</label>
+          </fieldset>
+          <fieldset><legend>Комнаты</legend>
+            <label><input type="radio" name="rooms" value="26">Студия</label>
+            <label><input type="radio" name="rooms" value="38">1</label>
+            <label><input type="radio" name="rooms" value="56" checked>2</label>
+            <label><input type="radio" name="rooms" value="78">3</label>
+            <label><input type="radio" name="rooms" value="100">4+</label>
+          </fieldset>
+          <fieldset><legend>Район</legend>
+            <label><input type="radio" name="zone" value="1.25">Центр</label>
+            <label><input type="radio" name="zone" value="1" checked>Рядом с центром</label>
+            <label><input type="radio" name="zone" value="0.85">Спальный район</label>
+          </fieldset>
+          <fieldset><legend>Дом</legend>
+            <label><input type="radio" name="house" value="1.06" checked>Новостройка</label>
+            <label><input type="radio" name="house" value="1">Вторичка</label>
+          </fieldset>
+          <fieldset><legend>Ремонт</legend>
+            <label><input type="radio" name="rep" value="0.9">Без отделки</label>
+            <label><input type="radio" name="rep" value="1" checked>Простой</label>
+            <label><input type="radio" name="rep" value="1.08">Евроремонт</label>
+            <label><input type="radio" name="rep" value="1.17">Дизайнерский</label>
+          </fieldset>
+        </form>
+        <div class="result" aria-live="polite">
+          <p class="r-label" id="rLabel">Примерная цена</p>
+          <p class="r-price" id="rPrice"></p>
+          <p class="r-range" id="rRange"></p>
+          <dl class="r-meta"><div><dt>Площадь</dt><dd id="rArea"></dd></div><div><dt>Цена за м²</dt><dd id="rM2"></dd></div></dl>
+          <p class="r-sum" id="rSum"></p>
+          <button class="btn pri" id="rBtn" style="width:100%">Подобрать такие варианты</button>
+          <p class="r-note">Расчёт примерный. Точную цену назовёт специалист после просмотра.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps" id="steps">
+    <div class="wrap">
+      <h2>Как проходит сделка</h2>
+      <p class="lead">На каждом шаге вы знаете, что происходит и сколько это займёт.</p>
+      <ol class="line">
+        <li><h3>Выбор</h3><p>Подбираете объекты в каталоге и сохраняете понравившиеся.</p></li>
+        <li><h3>Заявка</h3><p>Оставляете заявку - менеджер напишет в Telegram в течение часа.</p></li>
+        <li><h3>Просмотр</h3><p>Показываем объект и отвечаем на вопросы, цена обсуждается.</p></li>
+        <li><h3>Проверка</h3><p>Проверяем документы, обременения и историю объекта.</p></li>
+        <li><h3>Ключи</h3><p>Договор, расчёт и акт передачи - вы дома.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <h2>Отзывы</h2>
+      <div class="rgrid">
+        <blockquote><p>Искали двушку три месяца. Здесь отфильтровала по цене и району, сохранила пять вариантов, и через неделю уже была на просмотрах.</p><footer><b>Екатерина</b>покупка, Москва</footer></blockquote>
+        <blockquote><p>Менеджер нашёл в выбранной квартире незаконную перепланировку, мы вовремя отказались. Спасибо за честность.</p><footer><b>Андрей</b>покупка, Санкт-Петербург</footer></blockquote>
+        <blockquote><p>Продали квартиру за 19 дней, цена совпала с расчётом в калькуляторе почти до рубля.</p><footer><b>Светлана Петровна</b>продажа, Казань</footer></blockquote>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section id="cabinet">
+  <div class="wrap">
+    <a href="#" id="backCat" class="hint" style="text-decoration:underline">К каталогу</a>
+    <h1 style="font-size:36px;max-width:none;margin-top:10px">Личный кабинет</h1>
+    <div class="tabs" role="tablist">
+      <button role="tab" data-tab="fav" aria-selected="true">Избранное</button>
+      <button role="tab" data-tab="searches" aria-selected="false">Сохранённые поиски</button>
+      <button role="tab" data-tab="reqs" aria-selected="false">Мои заявки</button>
+      <button role="tab" data-tab="me" aria-selected="false">Профиль</button>
+    </div>
+    <div id="tabBody"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Домовой каталог - демонстрационная версия. Объекты, цены и адреса вымышленные.</div>
+    <div>Вход через Telegram в демо имитирован. В рабочей версии подключается ваш бот.</div>
+  </div>
+</footer>
+
+<!-- карточка объекта -->
+<div class="scrim" id="objScrim" role="dialog" aria-modal="true" aria-label="Объект">
+  <div class="modal wide" id="objModal"></div>
+</div>
+
+<!-- вход -->
+<div class="scrim" id="loginScrim" role="dialog" aria-modal="true" aria-labelledby="loginH">
+  <div class="modal">
+    <button class="x" data-close aria-label="Закрыть">×</button>
+    <div class="pad" id="loginBody"></div>
+  </div>
+</div>
+
+<!-- заявка -->
+<div class="scrim" id="reqScrim" role="dialog" aria-modal="true" aria-labelledby="reqH">
+  <div class="modal">
+    <button class="x" data-close aria-label="Закрыть">×</button>
+    <div class="pad" id="reqBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ---------- данные ---------- */
+const fmt = n => new Intl.NumberFormat('ru-RU').format(n);
+const OBJ = [
+ {id:1,deal:'buy',type:'flat',city:'Москва',dist:'Хамовники',addr:'ул. Усачёва, 14',rooms:2,area:58,floor:'7 из 12',price:21500000,year:2019,img:'img/obj1.jpg',pos:[34,46],desc:'Светлая двухкомнатная квартира в монолитном доме. Окна во двор, раздельный санузел, консьерж и подземный паркинг.',age:1},
+ {id:2,deal:'buy',type:'flat',city:'Москва',dist:'Тимирязевский',addr:'Дмитровское ш., 71',rooms:1,area:39,floor:'11 из 25',price:11900000,year:2022,img:'img/obj2.jpg',pos:[52,18],desc:'Однокомнатная квартира с чистовой отделкой. Рядом метро, школа и парк.',age:3},
+ {id:3,deal:'buy',type:'flat',city:'Санкт-Петербург',dist:'Петроградский',addr:'Большой пр. П.С., 55',rooms:3,area:96,floor:'4 из 6',price:34800000,year:1912,img:'img/obj3.jpg',pos:[40,40],desc:'Трёхкомнатная квартира в доме с лепниной, потолки 3,5 м, вид на Неву с кухни.',age:5},
+ {id:4,deal:'buy',type:'house',city:'Казань',dist:'Лаишевский район',addr:'пос. Вознесенье, уч. 18',rooms:5,area:240,floor:'2 этажа',price:27500000,year:2021,pos:[68,64],desc:'Дом из газобетона с гаражом на два места. Участок 10 соток, ландшафт и скважина.',age:2},
+ {id:5,deal:'buy',type:'house',city:'Сочи',dist:'Хоста',addr:'ул. Приморская, 9',rooms:4,area:180,floor:'3 этажа',price:42000000,year:2020,pos:[24,72],desc:'Дом в 300 метрах от моря, терраса, панорамное остекление, бассейн.',age:7},
+ {id:6,deal:'buy',type:'land',city:'Москва',dist:'Новая Москва',addr:'д. Яковлево',rooms:0,area:1200,floor:'ИЖС',price:8900000,year:0,pos:[74,34],desc:'Ровный участок 12 соток, электричество и газ по границе, асфальт до участка.',age:4},
+ {id:7,deal:'buy',type:'land',city:'Казань',dist:'Высокогорский район',addr:'с. Макуловка',rooms:0,area:2000,floor:'ИЖС',price:5200000,year:0,pos:[60,52],desc:'Участок 20 соток у леса, проект планировки согласован.',age:9},
+ {id:8,deal:'buy',type:'office',city:'Санкт-Петербург',dist:'Центральный',addr:'Литейный пр., 30',rooms:0,area:124,floor:'2 из 5',price:38600000,year:2008,pos:[58,56],desc:'Помещение свободного назначения, отдельный вход, витринные окна, действующий арендатор.',age:6},
+ {id:9,deal:'rent',type:'flat',city:'Москва',dist:'Арбат',addr:'Староконюшенный пер., 21',rooms:2,area:64,floor:'5 из 9',price:145000,year:2016,pos:[44,50],desc:'Квартира с дизайнерским ремонтом, вся техника, можно с питомцами.',age:1},
+ {id:10,deal:'rent',type:'flat',city:'Санкт-Петербург',dist:'Московский',addr:'Ленинский пр., 82',rooms:1,area:36,floor:'9 из 16',price:48000,year:2018,pos:[48,28],desc:'Студия-однушка, тихий двор, интернет и мебель включены.',age:2},
+ {id:11,deal:'rent',type:'house',city:'Сочи',dist:'Адлер',addr:'ул. Лесная, 4',rooms:3,area:120,floor:'2 этажа',price:210000,year:2019,pos:[30,60],desc:'Дом с садом на длительный срок, парковка, кондиционеры в каждой комнате.',age:8},
+ {id:12,deal:'rent',type:'office',city:'Москва',dist:'Сити',addr:'Пресненская наб., 12',rooms:0,area:210,floor:'31 из 60',price:560000,year:2014,pos:[26,34],desc:'Открытый офис на 30 рабочих мест, переговорные, панорамные окна.',age:3},
+ {id:13,deal:'buy',type:'flat',city:'Казань',dist:'Вахитовский',addr:'ул. Баумана, 40',rooms:2,area:52,floor:'3 из 5',price:9700000,year:2017,pos:[44,26],desc:'Квартира на пешеходной улице, с отделкой, подходит для аренды посуточно.',age:10},
+ {id:14,deal:'buy',type:'flat',city:'Москва',dist:'Раменки',addr:'Мичуринский пр., 5',rooms:4,area:128,floor:'14 из 22',price:46500000,year:2023,pos:[62,70],desc:'Четырёхкомнатная квартира с двумя санузлами, гардеробной и террасой.',age:11},
+ {id:15,deal:'rent',type:'flat',city:'Казань',dist:'Приволжский',addr:'ул. Чистопольская, 18',rooms:2,area:55,floor:'6 из 10',price:42000,year:2015,pos:[70,44],desc:'Просторная двушка с мебелью, рядом школа, магазины и остановка.',age:4},
+ {id:16,deal:'buy',type:'house',city:'Санкт-Петербург',dist:'Курортный',addr:'г. Сестрорецк, ул. Дубковская, 2',rooms:6,area:310,floor:'3 этажа',price:58000000,year:2022,pos:[20,20],desc:'Дом у залива с сауной, камином и видом на сосны. Участок 15 соток.',age:12}
+];
+const TYPES = {flat:'Квартира',house:'Дом',land:'Участок',office:'Коммерческая'};
+const TYPE_PL = {flat:'квартиры',house:'дома',land:'участки',office:'помещения'};
+
+/* ---------- состояние ---------- */
+const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k)||d)}catch(e){return JSON.parse(d)}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const S = {
+  deal:'buy', types:new Set(), rooms:new Set(), pMin:'', pMax:'', aMin:'', q:'', sort:'new', view:'list',
+  user:ls.get('dk_user','null'),
+  fav:new Set(ls.get('dk_fav','[]')),
+  searches:ls.get('dk_searches','[]'),
+  reqs:ls.get('dk_reqs','[]'),
+  tab:'fav', after:null
+};
+const save = () => {
+  ls.set('dk_user',S.user);
+  ls.set('dk_fav',[...S.fav]);
+  ls.set('dk_searches',S.searches);
+  ls.set('dk_reqs',S.reqs);
+};
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2600)}
+
+/* ---------- иллюстрации ---------- */
+const PAL=[['#dfe6f5','#2340e8','#aebcf0'],['#efe7dc','#15171c','#cdbba2'],['#e1ece6','#2d5a45','#a9c8b8'],['#ece3ee','#5b3a66','#c9b4d1'],['#e6e9ed','#3b4452','#b4bcc7'],['#f1e4df','#8a3b2a','#dcb8ad']];
+function art(o,big){
+  if(o.img)return `<img src="${o.img}" alt="${TYPES[o.type]}, ${o.addr}" ${big?'':'loading="lazy"'}>`;
+  const p=PAL[o.id%PAL.length], [sky,main,soft]=p, w=400, h=300;
+  let g='';
+  if(o.type==='flat'||o.type==='office'){
+    const bw=o.type==='flat'?150:230, bh=o.type==='flat'?(170+(o.id%4)*14):120, x=(w-bw)/2, y=250-bh;
+    const cols=o.type==='flat'?5:8, rows=o.type==='flat'?Math.floor(bh/30):3;
+    g+=`<rect x="${x}" y="${y}" width="${bw}" height="${bh}" fill="${main}"/>`;
+    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+      const ww=(bw-16)/cols;
+      g+=`<rect x="${x+8+c*ww+3}" y="${y+12+r*(o.type==='flat'?30:34)}" width="${ww-6}" height="${o.type==='flat'?18:24}" fill="${((r*3+c*5+o.id)%7===0)?'#ffe9a8':soft}" opacity=".92"/>`;
+    }
+    g+=`<rect x="${x-24}" y="${250-60}" width="34" height="60" fill="${soft}"/><rect x="${x+bw-8}" y="${250-84}" width="36" height="84" fill="${soft}" opacity=".7"/>`;
+  } else if(o.type==='house'){
+    const hw=210,hh=90,x=95,y=250-hh;
+    g+=`<rect x="${x}" y="${y}" width="${hw}" height="${hh}" fill="${soft}"/>`;
+    g+=`<polygon points="${x-14},${y} ${x+hw/2},${y-62} ${x+hw+14},${y}" fill="${main}"/>`;
+    g+=`<rect x="${x+hw-52}" y="${y-60}" width="16" height="34" fill="${main}"/>`;
+    g+=`<rect x="${x+22}" y="${y+22}" width="46" height="34" fill="${sky}"/><rect x="${x+hw-68}" y="${y+22}" width="46" height="34" fill="${sky}"/>`;
+    g+=`<rect x="${x+hw/2-17}" y="${y+30}" width="34" height="60" fill="${main}"/>`;
+    g+=`<circle cx="56" cy="212" r="26" fill="${main}" opacity=".85"/><rect x="53" y="230" width="6" height="22" fill="${main}"/>`;
+  } else {
+    g+=`<path d="M0 250 Q110 205 220 232 T400 218 V300 H0Z" fill="${soft}"/>`;
+    g+=`<path d="M0 270 Q140 240 260 262 T400 252 V300 H0Z" fill="${main}" opacity=".85"/>`;
+    for(let i=0;i<9;i++)g+=`<rect x="${40+i*38}" y="${236-(i%2)*6}" width="3" height="24" fill="${main}" opacity=".6"/>`;
+    g+=`<rect x="36" y="244" width="330" height="3" fill="${main}" opacity=".6"/>`;
+  }
+  const sun=`<circle cx="${70+(o.id*37)%260}" cy="${50+(o.id%3)*14}" r="16" fill="#fff" opacity=".8"/>`;
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${TYPES[o.type]}, ${o.addr}"><rect width="${w}" height="${h}" fill="${sky}"/>${sun}${g}<rect y="250" width="${w}" height="50" fill="${main}" opacity=".08"/></svg>`;
+}
+
+/* ---------- фильтр ---------- */
+function filtered(){
+  const q=S.q.trim().toLowerCase(), pmin=+S.pMin||0, pmax=+S.pMax||Infinity, amin=+S.aMin||0;
+  let r=OBJ.filter(o=>o.deal===S.deal
+    &&(!S.types.size||S.types.has(o.type))
+    &&(!S.rooms.size||(o.rooms>0&&S.rooms.has(o.rooms>=4?4:o.rooms))||false)
+    &&o.price>=pmin&&o.price<=pmax&&o.area>=amin
+    &&(!q||(o.city+' '+o.dist+' '+o.addr).toLowerCase().includes(q)));
+  if(S.sort==='pa')r.sort((a,b)=>a.price-b.price);
+  else if(S.sort==='pd')r.sort((a,b)=>b.price-a.price);
+  else if(S.sort==='area')r.sort((a,b)=>b.area-a.area);
+  else r.sort((a,b)=>a.age-b.age);
+  return r;
+}
+function areaTxt(o){return o.type==='land'?`${o.area/100} сот.`:`${o.area} м²`}
+function head(o){
+  if(o.type==='flat')return `${o.rooms}-комн. квартира, ${o.area} м²`;
+  if(o.type==='house')return `Дом ${o.area} м², ${o.rooms} комн.`;
+  if(o.type==='land')return `Участок ${o.area/100} сот.`;
+  return `Помещение ${o.area} м²`;
+}
+function priceTxt(o){return o.deal==='rent'?`${fmt(o.price)} ₽ <small>в месяц</small>`:`${fmt(o.price)} ₽`}
+
+function renderTop(){
+  $('#typeChips').innerHTML=Object.entries(TYPES).map(([k,v])=>`<button class="chip" data-type="${k}" aria-pressed="${S.types.has(k)}">${v}</button>`).join('');
+  $('#roomChips').innerHTML=[1,2,3,4].map(n=>`<button class="chip" data-room="${n}" aria-pressed="${S.rooms.has(n)}">${n===4?'4+':n} комн.</button>`).join('');
+}
+function render(){
+  const r=filtered();
+  const dealW=S.deal==='buy'?'на продажу':'в аренду';
+  $('#resTitle').innerHTML=`${r.length? 'Найдено':'Ничего не найдено'} <span class="count">${r.length?r.length+' '+plural(r.length,['объект','объекта','объектов'])+' '+dealW:''}</span>`;
+  $('#grid').innerHTML=r.length?r.map(card).join(''):`<div class="empty"><b>Под эти условия объектов нет</b><p>Расширьте диапазон цены или уберите часть фильтров.</p><button class="btn sec" id="emptyReset">Сбросить фильтры</button></div>`;
+  $('#layout').classList.toggle('map',S.view==='map');
+  if(S.view==='map')drawMap(r);
+  $$('[data-deal]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.deal===S.deal));
+  $$('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===S.view));
+}
+function plural(n,f){n=Math.abs(n)%100;const m=n%10;return n>10&&n<20?f[2]:m>1&&m<5?f[1]:m===1?f[0]:f[2]}
+function card(o){
+  const fav=S.fav.has(o.id);
+  return `<article class="card" data-id="${o.id}">
+    <div class="pic">${art(o)}<span class="badge">${TYPES[o.type]}</span></div>
+    <button class="fav" data-fav="${o.id}" aria-pressed="${fav}" aria-label="${fav?'Убрать из избранного':'Добавить в избранное'}"><svg viewBox="0 0 24 24" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-9.2-9.5C1.7 7.700 3.900 4.500 7.200 4.500c2 0 3.600 1.100 4.800 2.900 1.200-1.800 2.800-2.900 4.800-2.900 3.300 0 5.500 3.200 4.400 6.500-1.700 4.900-9.200 9.500-9.200 9.500Z"/></svg></button>
+    <div class="price">${priceTxt(o)}</div>
+    <h3>${head(o)}</h3>
+    <div class="addr">${o.city}, ${o.dist}</div>
+    <div class="meta">${o.addr}</div>
+    <button class="open" data-open="${o.id}" aria-label="Открыть: ${head(o)}"></button>
+  </article>`;
+}
+function drawMap(r){
+  const roads=`<path d="M0 120 C120 100 200 160 420 130" stroke="#fff" stroke-width="10" fill="none"/><path d="M90 0 C110 120 60 240 120 420" stroke="#fff" stroke-width="8" fill="none"/><path d="M0 300 L420 250" stroke="#fff" stroke-width="6" fill="none"/><path d="M250 0 C230 100 330 200 300 420" stroke="#fff" stroke-width="7" fill="none"/>`;
+  const water=`<path d="M0 360 C80 330 140 380 220 350 S360 360 420 330 V420 H0Z" fill="#cfdcf0"/>`;
+  const park=`<rect x="150" y="190" width="90" height="60" rx="12" fill="#dbe8dc"/><rect x="20" y="20" width="60" height="50" rx="10" fill="#dbe8dc"/>`;
+  const pins=r.map(o=>{const x=o.pos[0]*4.2,y=o.pos[1]*4.2;const t=o.deal==='rent'?fmt(Math.round(o.price/1000))+' тыс.':(o.price/1e6).toFixed(1).replace('.0','').replace('.',',')+' млн';const wd=t.length*7.2+16;
+    return `<g class="pin" data-open="${o.id}" tabindex="0" role="button" aria-label="${head(o)}, ${t}"><rect x="${x-wd/2}" y="${y-13}" width="${wd}" height="26" rx="13"/><text x="${x}" y="${y+4.500}">${t}</text></g>`}).join('');
+  $('#mapbox').innerHTML=`<svg viewBox="0 0 420 420" preserveAspectRatio="xMidYMid slice"><rect width="420" height="420" fill="#eef0f3"/>${park}${water}${roads}${pins}</svg>`;
+}
+
+/* ---------- авторизация ---------- */
+function renderAuth(){
+  const s=$('#authSlot');
+  if(S.user){
+    s.innerHTML=`<div class="user"><button class="btn sec sm" id="toCab">Кабинет</button><div class="ava" title="${S.user.name}">${S.user.name[0]}</div></div>`;
+  } else {
+    s.innerHTML=`<button class="btn pri sm" id="loginOpen">Войти</button>`;
+  }
+}
+function openLogin(after){
+  S.after=after||null;
+  $('#loginBody').innerHTML=`
+    <h2 id="loginH">Вход через Telegram</h2>
+    <p class="lead">Пароль не нужен. Подтвердите вход в Telegram - и кабинет откроется.</p>
+    <ol class="steps">
+      <li><i>1</i><span>Нажмите кнопку ниже, откроется Telegram</span></li>
+      <li><i>2</i><span>Нажмите «Войти» в сообщении от бота</span></li>
+      <li><i>3</i><span>Вернитесь на сайт - вы уже внутри</span></li>
+    </ol>
+    <button class="btn tg" id="tgStart" style="width:100%"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M21.200 3.400 2.900 10.500c-1.200.5-1.200 1.200-.2 1.500l4.700 1.500 1.800 5.600c.2.600.1.800.7.800.5 0 .7-.2 1-.5l2.300-2.300 4.800 3.600c.9.500 1.500.2 1.700-.8l3.100-14.700c.3-1.300-.5-1.800-1.600-1.400ZM8.500 13.200l9.800-6.200c.5-.3.900-.1.500.2l-8.200 7.400-.3 3.400-1.800-4.800Z"/></svg>Войти через Telegram</button>
+    <p class="hint" style="margin-top:12px">В демо вход имитируется. В рабочей версии подключается официальный виджет Telegram и ваш бот, а данные входа проверяются на сервере.</p>`;
+  open('#loginScrim');
+}
+function loginStep2(){
+  $('#loginBody').innerHTML=`
+    <h2 id="loginH">Подтвердите вход в Telegram</h2>
+    <p class="lead">Бот «Домовой каталог» прислал вам сообщение.</p>
+    <div class="tgphone"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M21.200 3.400 2.900 10.500c-1.200.5-1.200 1.200-.2 1.500l4.700 1.500 1.800 5.600c.2.600.1.800.7.800.5 0 .7-.2 1-.5l2.300-2.300 4.800 3.600c.9.500 1.500.2 1.700-.8l3.100-14.700c.3-1.300-.5-1.800-1.600-1.400Z"/></svg></div><div><b>Войти на сайт «Домовой каталог»?</b><span>Мы получим только имя и фото профиля</span></div></div>
+    <div style="display:flex;gap:10px"><button class="btn pri" id="tgOk" style="flex:1">Войти</button><button class="btn sec" data-close>Отмена</button></div>
+    <p class="hint" style="margin-top:12px">Это экран демо: так выглядит подтверждение в Telegram.</p>`;
+}
+function doLogin(){
+  S.user={name:'Алексей',id:'tg_demo'};
+  save();renderAuth();closeAll();toast('Вы вошли через Telegram');
+  if(S.after){const f=S.after;S.after=null;f()}
+}
+function need(action){ if(S.user){action();return} openLogin(action) }
+
+/* ---------- окна ---------- */
+function open(sel){$(sel).classList.add('on');document.body.style.overflow='hidden';const f=$(sel).querySelector('button,input');f&&f.focus()}
+function closeAll(){$$('.scrim.on').forEach(e=>e.classList.remove('on'));document.body.style.overflow=''}
+function openObj(id){
+  const o=OBJ.find(x=>x.id===id), fav=S.fav.has(id);
+  const area=o.type==='land'?`${o.area/100} соток (${o.area} м²)`:`${o.area} м²`;
+  $('#objModal').innerHTML=`<button class="x" data-close aria-label="Закрыть">×</button>
+  <div class="detail"><div class="pic">${art(o,1)}</div>
+  <div class="info">
+    <div class="price">${priceTxt(o)}</div>
+    ${o.deal==='buy'&&o.type!=='land'?`<div class="hint">${fmt(Math.round(o.price/o.area))} ₽ за м²</div>`:''}
+    <h2 style="font-size:20px;margin-top:10px;letter-spacing:-.01em">${head(o)}</h2>
+    <div class="addr">${o.city}, ${o.dist}, ${o.addr}</div>
+    <div class="params">
+      <div><span>Тип</span><b>${TYPES[o.type]}</b></div>
+      <div><span>Площадь</span><b>${area}</b></div>
+      ${o.rooms?`<div><span>Комнат</span><b>${o.rooms}</b></div>`:''}
+      <div><span>${o.type==='land'?'Назначение':'Этаж'}</span><b>${o.floor}</b></div>
+      ${o.year?`<div><span>Год постройки</span><b>${o.year}</b></div>`:''}
+    </div>
+    <p class="desc">${o.desc}</p>
+    <div class="acts">
+      <button class="btn pri" data-request="${o.id}">Оставить заявку</button>
+      <button class="btn sec" data-fav="${o.id}" aria-pressed="${fav}">${fav?'В избранном':'В избранное'}</button>
+    </div>
+  </div></div>`;
+  open('#objScrim');
+}
+function openReq(oid){
+  const o=oid?OBJ.find(x=>x.id===oid):null;
+  $('#reqBody').innerHTML=`<h2 id="reqH">${o?'Заявка на просмотр':'Оставить заявку'}</h2>
+  <p class="lead">${o?head(o)+', '+o.addr:'Расскажите, что вы ищете - менеджер свяжется с вами в Telegram.'}</p>
+  <form id="reqForm" novalidate>
+    <div class="row"><label class="l" for="rn">Как к вам обращаться</label><input class="t" id="rn" value="${S.user?S.user.name:''}" autocomplete="name"></div>
+    <div class="row"><label class="l" for="rp">Телефон</label><input class="t" id="rp" type="tel" inputmode="tel" placeholder="+7 900 000-00-00" autocomplete="tel"><div class="err" id="rerr"></div></div>
+    <button class="btn pri" style="width:100%" type="submit">Отправить заявку</button>
+    <p class="hint" style="margin-top:10px">Заявка уйдёт менеджеру в Telegram и на почту. В демо данные не отправляются.</p>
+  </form>`;
+  open('#reqScrim');
+  $('#reqForm').onsubmit=e=>{e.preventDefault();
+    const n=$('#rn').value.trim(),p=$('#rp').value.replace(/\D/g,'');
+    if(!n){$('#rerr').textContent='Укажите имя';return}
+    if(p.length<10){$('#rerr').textContent='Введите телефон полностью - не меньше 10 цифр';return}
+    S.reqs.unshift({what:o?head(o)+', '+o.addr:'Общая заявка',date:new Date().toLocaleDateString('ru-RU'),oid:oid||0});save();
+    closeAll();toast('Заявка отправлена. Мы напишем вам в Telegram');
+    if(S.user&&$('#cabinet').classList.contains('on'))renderTab();
+  };
+}
+function toggleFav(id){
+  need(()=>{
+    S.fav.has(id)?S.fav.delete(id):S.fav.add(id);save();
+    toast(S.fav.has(id)?'Добавлено в избранное':'Убрано из избранного');
+    render();
+    if($('#objScrim').classList.contains('on'))openObj(id);
+    if($('#cabinet').classList.contains('on'))renderTab();
+  });
+}
+
+/* ---------- кабинет ---------- */
+function showCab(tab){
+  if(tab)S.tab=tab;
+  $('#catalogView').style.display='none';$('#cabinet').classList.add('on');
+  window.scrollTo(0,0);renderTab();
+}
+function showCat(){$('#cabinet').classList.remove('on');$('#catalogView').style.display='';render()}
+function renderTab(){
+  $$('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===S.tab));
+  const b=$('#tabBody');
+  if(S.tab==='fav'){
+    const items=OBJ.filter(o=>S.fav.has(o.id));
+    b.innerHTML=items.length?`<div class="grid">${items.map(card).join('')}</div>`:`<div class="empty"><b>В избранном пока пусто</b><p>Нажмите сердечко на карточке, и объект появится здесь.</p><button class="btn pri" id="toCat">Открыть каталог</button></div>`;
+  } else if(S.tab==='searches'){
+    b.innerHTML=`<div style="margin-bottom:16px"><button class="btn sec" id="saveSearch">Сохранить текущий поиск</button></div>`+
+    (S.searches.length?`<div class="list">${S.searches.map((s,i)=>`<div class="row-i"><div><b>${s.title}</b><span>${s.sub}</span></div><div style="display:flex;gap:8px"><button class="btn sec sm" data-runs="${i}">Показать</button><button class="btn sec sm" data-dels="${i}">Удалить</button></div></div>`).join('')}</div>`:`<div class="empty"><b>Сохранённых поисков нет</b><p>Настройте фильтры в каталоге и сохраните их - не придётся выбирать заново.</p></div>`);
+  } else if(S.tab==='reqs'){
+    b.innerHTML=S.reqs.length?`<div class="list">${S.reqs.map(r=>`<div class="row-i"><div><b>${r.what}</b><span>Отправлена ${r.date}</span></div><span class="st">Принята</span></div>`).join('')}</div>`:`<div class="empty"><b>Заявок пока нет</b><p>Откройте объект и нажмите «Оставить заявку».</p></div>`;
+  } else {
+    b.innerHTML=`<div class="profile"><div class="ava">${S.user.name[0]}</div><div><b style="font-size:20px">${S.user.name}</b><span class="hint" style="display:block">Вход через Telegram</span></div></div>
+    <div style="margin-top:18px"><button class="btn sec" id="logout">Выйти</button></div>`;
+  }
+}
+function curSearchTitle(){
+  const parts=[S.deal==='buy'?'Купить':'Снять'];
+  if(S.types.size)parts.push([...S.types].map(t=>TYPES[t].toLowerCase()).join(', '));
+  if(S.q)parts.push(S.q);
+  return parts.join(', ');
+}
+function curSearchSub(){
+  const a=[];if(S.rooms.size)a.push([...S.rooms].map(r=>r===4?'4+':r).join(', ')+' комн.');
+  if(S.pMin)a.push('от '+fmt(S.pMin)+' ₽');if(S.pMax)a.push('до '+fmt(S.pMax)+' ₽');if(S.aMin)a.push('от '+S.aMin+' м²');
+  return a.join(' · ')||'Без дополнительных условий';
+}
+
+/* ---------- события ---------- */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('button,a,.pin,[data-close],.scrim');
+  if(!t)return;
+  if(t.classList.contains('scrim')&&e.target===t){closeAll();return}
+  if(t.dataset.close!==undefined){closeAll();return}
+  if(t.dataset.deal){S.deal=t.dataset.deal;render();return}
+  if(t.dataset.type){const k=t.dataset.type;S.types.has(k)?S.types.delete(k):S.types.add(k);renderTop();render();return}
+  if(t.dataset.room){const k=+t.dataset.room;S.rooms.has(k)?S.rooms.delete(k):S.rooms.add(k);renderTop();render();return}
+  if(t.dataset.view){S.view=t.dataset.view;render();return}
+  if(t.dataset.fav){e.stopPropagation();toggleFav(+t.dataset.fav);return}
+  if(t.dataset.open){openObj(+t.dataset.open);return}
+  if(t.dataset.request){const id=+t.dataset.request;closeAll();openReq(id);return}
+  if(t.dataset.tab){S.tab=t.dataset.tab;renderTab();return}
+  if(t.dataset.runs!==undefined){const s=S.searches[+t.dataset.runs];Object.assign(S,s.state,{types:new Set(s.state.types),rooms:new Set(s.state.rooms)});syncInputs();renderTop();showCat();window.scrollTo(0,0);return}
+  if(t.dataset.dels!==undefined){S.searches.splice(+t.dataset.dels,1);save();renderTab();return}
+  switch(t.id){
+    case 'goBtn':document.getElementById('catalog').scrollIntoView();break;
+    case 'resetBtn':case 'emptyReset':resetF();break;
+    case 'loginOpen':openLogin();break;
+    case 'tgStart':loginStep2();break;
+    case 'tgOk':doLogin();break;
+    case 'toCab':showCab('fav');break;
+    case 'toCat':case 'backCat':e.preventDefault();showCat();break;
+    case 'home':e.preventDefault();showCat();window.scrollTo(0,0);break;
+    case 'navReq':e.preventDefault();openReq();break;
+    case 'saveSearch':
+      S.searches.unshift({title:curSearchTitle(),sub:curSearchSub(),state:{deal:S.deal,types:[...S.types],rooms:[...S.rooms],pMin:S.pMin,pMax:S.pMax,aMin:S.aMin,q:S.q,sort:S.sort,view:S.view}});
+      save();toast('Поиск сохранён');renderTab();break;
+    case 'logout':S.user=null;save();renderAuth();showCat();toast('Вы вышли');break;
+  }
+  if(t.dataset.needAuth){e.preventDefault();need(()=>showCab('fav'))}
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeAll();
+  if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('pin')){e.preventDefault();openObj(+e.target.dataset.open)}
+});
+function bindInput(id,key){$(id).addEventListener('input',e=>{S[key]=e.target.value.replace(key==='q'?/$^/:/\D/g,'');if(key!=='q')e.target.value=S[key];render()})}
+bindInput('#qInput','q');bindInput('#pMin','pMin');bindInput('#pMax','pMax');bindInput('#aMin','aMin');
+$('#sortSel').addEventListener('change',e=>{S.sort=e.target.value;render()});
+function syncInputs(){$('#qInput').value=S.q;$('#pMin').value=S.pMin;$('#pMax').value=S.pMax;$('#aMin').value=S.aMin;$('#sortSel').value=S.sort}
+function resetF(){Object.assign(S,{types:new Set(),rooms:new Set(),pMin:'',pMax:'',aMin:'',q:''});syncInputs();renderTop();render()}
+
+/* ---------- оценка стоимости ---------- */
+let calcMode='buy';
+const cf=$('#calcForm'),rub=n=>fmt(Math.round(n))+' ₽',mln=n=>(n/1e6).toLocaleString('ru-RU',{maximumFractionDigits:1});
+const chk=n=>cf.querySelector(`input[name=${n}]:checked`), val=n=>+chk(n).value, txt=n=>chk(n).parentNode.textContent.trim();
+const CM={
+ buy:{t:'Сколько стоит квартира',l:'Выберите параметры - посчитаем примерную цену по сделкам за последние полгода.',r:'Примерная цена',b:'Подобрать такие варианты'},
+ sell:{t:'За сколько можно продать вашу квартиру',l:'Отметьте, какая у вас квартира - покажем, за сколько продавались похожие.',r:'Можно продать примерно за',b:'Оставить заявку на оценку'}
+};
+function calcPrice(){return Math.round(val('city')*val('zone')*val('house')*val('rep')*val('rooms')/50000)*50000}
+function calc(){
+  const m2=val('rooms'),p=calcPrice();
+  $('#rPrice').textContent=rub(p);
+  $('#rRange').textContent=`от ${mln(p*.93)} до ${mln(p*1.07)} млн`;
+  $('#rArea').textContent=`около ${m2} м²`;
+  $('#rM2').textContent=rub(Math.round(p/m2/100)*100);
+  const r=txt('rooms');
+  const w=[r==='Студия'?'студия':r+'-комнатная',chk('city').dataset.n,txt('zone').toLowerCase(),txt('house').toLowerCase(),({'Простой':'простой ремонт','Дизайнерский':'дизайнерский ремонт'}[txt('rep')]||txt('rep').toLowerCase())].join(', ');
+  $('#rSum').textContent=w[0].toUpperCase()+w.slice(1);
+}
+cf.addEventListener('change',calc);calc();
+$$('[data-m]').forEach(b=>b.addEventListener('click',()=>{
+  calcMode=b.dataset.m;const m=CM[calcMode];
+  $$('[data-m]').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  $('#cTitle').textContent=m.t;$('#cLead').textContent=m.l;$('#rLabel').textContent=m.r;$('#rBtn').textContent=m.b;
+}));
+$('#rBtn').addEventListener('click',()=>{
+  if(calcMode==='sell'){openReq();return}
+  const p=calcPrice(),m2=val('rooms'),n=m2>=100?4:m2>=78?3:m2>=56?2:1;
+  Object.assign(S,{deal:'buy',types:new Set(['flat']),rooms:new Set(m2===26?[]:[n]),q:chk('city').dataset.n,pMin:String(Math.round(p*.8/100000)*100000),pMax:String(Math.round(p*1.2/100000)*100000),aMin:''});
+  syncInputs();renderTop();render();$('#catalog').scrollIntoView();toast('Показали варианты в вашем диапазоне');
+});
+
+renderTop();renderAuth();render();
+</script>
+</body>
+</html>
