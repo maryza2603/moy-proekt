@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Распыл - краскопульты и оснастка для покраски</title>
+<meta name="description" content="Демо мини-магазина: каталог, корзина, о нас, обратная связь, контакты.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{
+  --paper:#F1F1EE; --card:#FAFAF8; --ink:#16191C; --steel:#6E767D; --line:#D5D7D3;
+  --brass:#B8862B; --brass-d:#8F6516; --ok:#2F6B4F;
+  --head:'IBM Plex Sans Condensed','Arial Narrow',sans-serif; --body:'IBM Plex Sans',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+
+/* header */
+header.top{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.logo{font:700 26px/1 var(--head);letter-spacing:.01em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:14px;height:14px;background:var(--brass);border-radius:50%;box-shadow:0 0 0 3px var(--paper),0 0 0 4px var(--ink)}
+nav.main{margin-left:auto;display:flex;gap:6px;align-items:center}
+nav.main a,nav.main button{padding:8px 12px;text-decoration:none;font-weight:500;border-radius:6px;background:none;border:0;color:var(--ink)}
+nav.main a:hover,nav.main button:hover{background:#E4E5E1}
+.cart-btn{display:flex;align-items:center;gap:8px;background:var(--ink)!important;color:#fff!important}
+.cart-btn:hover{background:#2c3238!important}
+.cart-btn b{background:var(--brass);color:#fff;border-radius:99px;min-width:22px;height:22px;display:grid;place-items:center;font-size:13px;padding:0 6px}
+
+/* hero */
+.hero{padding:44px 0 56px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:40px;align-items:center}
+.hero h1{font:700 clamp(34px,5vw,56px)/1.05 var(--head);letter-spacing:-.01em;max-width:13ch}
+.hero p.lead{margin:20px 0 28px;max-width:44ch;color:#3b4248;font-size:18px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 22px;border-radius:6px;font-weight:600;text-decoration:none;border:2px solid var(--ink);background:var(--ink);color:#fff;transition:background .15s}
+.btn:hover{background:#2c3238}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:#E4E5E1}
+.facts{display:flex;gap:28px;margin-top:34px;flex-wrap:wrap;color:var(--steel);font-size:14px}
+.facts b{display:block;color:var(--ink);font:600 20px/1.2 var(--head)}
+
+.stage{position:relative;aspect-ratio:1/1;background:
+  radial-gradient(circle,#c9cbc7 1px,transparent 1.5px) 0 0/22px 22px,#FAFAF8;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.stage svg.lines{position:absolute;inset:0;width:100%;height:100%}
+.stage svg.lines line{stroke:var(--ink);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.stage svg.lines circle{fill:var(--brass);stroke:var(--ink);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.tag{position:absolute;font-size:13.5px;line-height:1.35;max-width:38%;color:var(--ink)}
+.tag b{display:block;font:600 15px/1.2 var(--head)}
+.tag span{color:var(--steel)}
+.t1{left:3%;top:3%}.t2{left:57%;top:3%}.t3{left:58%;top:72%}
+.legend{display:none}
+
+/* sections */
+section{padding:64px 0}
+h2{font:700 clamp(28px,3.6vw,40px)/1.1 var(--head);margin-bottom:8px}
+.sub{color:var(--steel);margin-bottom:28px;max-width:60ch}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.chip{padding:8px 16px;border-radius:99px;border:1.5px solid var(--ink);background:transparent;font-weight:500}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;overflow:hidden}
+.card.feat{grid-column:span 2;grid-row:span 1;flex-direction:row}
+.card .pic{aspect-ratio:1/1;background:#EDEEEA;display:grid;place-items:center;color:var(--steel)}
+.card.feat .pic{aspect-ratio:auto;flex:1 1 50%;background:#fff}
+.card.feat .pic img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.card .pic svg{width:46%;height:auto}
+.card .body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card.feat .body{flex:1 1 50%;justify-content:center;padding:22px}
+.card h3{font:600 17px/1.25 var(--head)}
+.card .meta{font-size:13px;color:var(--steel)}
+.card .row{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:10px}
+.price{font:700 21px/1 var(--head)}
+.add{border:2px solid var(--ink);background:transparent;border-radius:6px;padding:8px 12px;font-weight:600;font-size:14px}
+.add:hover{background:var(--ink);color:#fff}
+.add.done{background:var(--ok);border-color:var(--ok);color:#fff}
+
+.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.about p{margin-bottom:14px;max-width:56ch;color:#2b3137}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-content:start}
+.nums div{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px}
+.nums b{display:block;font:700 34px/1 var(--head);color:var(--brass-d)}
+.nums span{font-size:14px;color:var(--steel)}
+
+.feedback{background:#E7E8E4}
+.feedback .wrap{display:grid;grid-template-columns:5fr 6fr;gap:48px}
+form.f{display:grid;gap:14px}
+label{font-size:14px;font-weight:500;display:grid;gap:6px}
+input,textarea{font:inherit;padding:12px 14px;border:1.5px solid var(--steel);border-radius:6px;background:#fff;color:var(--ink);width:100%}
+textarea{min-height:120px;resize:vertical}
+.msg{padding:12px 14px;border-radius:6px;background:#DDEBE3;color:#1d4a35;font-weight:500;display:none}
+.msg.on{display:block}
+
+.contacts .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.contacts dl{display:grid;grid-template-columns:130px 1fr;gap:14px 12px}
+.contacts dt{color:var(--steel)}
+.contacts dd{font-weight:500}
+.map{background:#DADCD6;border:1px solid var(--line);border-radius:8px;min-height:240px;display:grid;place-items:center;color:var(--steel);text-align:center;padding:20px}
+footer{padding:26px 0;border-top:1px solid var(--line);color:var(--steel);font-size:13px}
+
+/* cart drawer */
+.shade{position:fixed;inset:0;background:rgba(22,25,28,.45);z-index:40;display:none}
+.shade.on{display:block}
+aside.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--card);z-index:50;transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.18)}
+aside.drawer.on{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dh h2{font-size:26px;margin:0}
+.x{background:none;border:0;font-size:28px;line-height:1;padding:4px 10px}
+.dbody{flex:1;overflow:auto;padding:8px 20px}
+.empty{color:var(--steel);padding:30px 0}
+.li{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.li b{font:600 16px/1.25 var(--head)}
+.qty{display:flex;align-items:center;gap:8px;margin-top:6px}
+.qty button{width:28px;height:28px;border:1.5px solid var(--ink);background:none;border-radius:5px;font-weight:700}
+.li .s{font:700 18px var(--head);text-align:right}
+.rm{background:none;border:0;color:var(--steel);font-size:13px;text-decoration:underline;text-align:right}
+.dfoot{border-top:1px solid var(--line);padding:16px 20px;display:grid;gap:10px}
+.tot{display:flex;justify-content:space-between;font:700 22px var(--head)}
+.dfoot .btn{width:100%;text-align:center;cursor:pointer}
+.order{display:none;gap:10px}
+.order.on{display:grid}
+
+@media (max-width:980px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .card.feat{grid-column:span 2}
+  .hero .wrap,.about .wrap,.feedback .wrap,.contacts .wrap{grid-template-columns:1fr}
+  .hero .wrap{gap:28px}
+}
+@media (max-width:640px){
+  nav.main a{display:none}
+  .grid{gap:10px}
+  .card.feat{flex-direction:column}
+  .card.feat .pic{aspect-ratio:1/1;flex:none}
+  .tag,.stage svg.lines{display:none}
+  .legend{display:grid;gap:8px;margin-top:14px;font-size:14px}
+  .legend b{font-family:var(--head)}
+  section{padding:48px 0}
+  .contacts dl{grid-template-columns:1fr}
+  .contacts dt{margin-bottom:-8px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}aside.drawer{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top"><i></i>Распыл</a>
+    <nav class="main" aria-label="Разделы">
+      <a href="#catalog">Каталог</a>
+      <a href="#about">О нас</a>
+      <a href="#feedback">Обратная связь</a>
+      <a href="#contacts">Контакты</a>
+      <button class="cart-btn" id="openCart" type="button" aria-label="Открыть корзину">Корзина <b id="cnt">0</b></button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Краскопульты и всё для покраски</h1>
+      <p class="lead">Профессиональные краскопульты, расходники и защита для мастерских и домашних проектов. Заказ собираем в день обращения.</p>
+      <div class="btns">
+        <a class="btn" href="#catalog">Смотреть каталог</a>
+        <a class="btn ghost" href="#feedback">Задать вопрос</a>
+      </div>
+      <div class="facts">
+        <div><b>16 позиций</b>в каталоге</div>
+        <div><b>от 190 ₽</b>расходники</div>
+        <div><b>1-3 дня</b>доставка</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="stage" role="img" aria-label="Краскопульт с нижним бачком: алюминиевый бачок 1 л, латунный быстросъём, давление до 10 бар">
+        <img src="kraskopult.png" alt="" width="800" height="800">
+        <svg class="lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="9" y1="12" x2="20" y2="26"/><circle cx="20" cy="26" r="1.1"/>
+          <line x1="60" y1="12" x2="45" y2="25.5"/><circle cx="45" cy="25.5" r="1.1"/>
+          <line x1="58" y1="74" x2="50" y2="66"/><circle cx="50" cy="66" r="1.1"/>
+        </svg>
+        <div class="tag t1"><b>Латунный быстросъём</b><span>шланг на защёлку, без ключа</span></div>
+        <div class="tag t2"><b>Давление до 10 бар</b><span>маркировка на корпусе</span></div>
+        <div class="tag t3"><b>Бачок 1 л</b><span>алюминий, не боится растворителей</span></div>
+      </div>
+      <div class="legend">
+        <div><b>Латунный быстросъём</b> - шланг на защёлку, без ключа</div>
+        <div><b>Давление до 10 бар</b> - маркировка на корпусе</div>
+        <div><b>Бачок 1 л</b> - алюминий, не боится растворителей</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="catalog">
+  <div class="wrap">
+    <h2>Каталог</h2>
+    <p class="sub">Выберите раздел или листайте всё сразу. Положите нужное в корзину, оформление займёт минуту.</p>
+    <div class="chips" id="chips" role="group" aria-label="Разделы каталога"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div>
+      <h2>О нас</h2>
+      <p>Мы небольшой магазин оснастки для покраски. Начинали с кузовной мастерской, поэтому знаем, чем отличается краскопульт для лака от краскопульта для мастик, и не продаём лишнего.</p>
+      <p>В каталоге только то, что сами используем в работе: краскопульты, подготовка поверхности, защита мастера и мелочи, которые всегда заканчиваются в самый неподходящий момент.</p>
+      <p>Не уверены, что выбрать? Напишите задачу, подскажем модель и расходники под неё.</p>
+    </div>
+    <div class="nums">
+      <div><b>16</b><span>позиций, каждая проверена в работе</span></div>
+      <div><b>1 день</b><span>на сборку и отправку заказа</span></div>
+      <div><b>14 дней</b><span>на возврат, если не подошло</span></div>
+      <div><b>с 9 до 19</b><span>отвечаем на вопросы, пн-сб</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="feedback" id="feedback">
+  <div class="wrap">
+    <div>
+      <h2>Обратная связь</h2>
+      <p class="sub">Опишите задачу или вопрос. Ответим в рабочее время, обычно в течение часа.</p>
+    </div>
+    <form class="f" id="fbForm" novalidate>
+      <label>Ваше имя<input name="name" autocomplete="name" required></label>
+      <label>Телефон или почта<input name="contact" autocomplete="tel" required></label>
+      <label>Сообщение<textarea name="text" required></textarea></label>
+      <button class="btn" type="submit">Отправить</button>
+      <div class="msg" id="fbMsg" role="status">Спасибо, сообщение получено. Это демо: на самом сайте оно придёт вам на почту.</div>
+    </form>
+  </div>
+</section>
+
+<section class="contacts" id="contacts">
+  <div class="wrap">
+    <div>
+      <h2>Контакты</h2>
+      <dl>
+        <dt>Телефон</dt><dd>+7 900 000-00-00</dd>
+        <dt>Почта</dt><dd>shop@example.ru</dd>
+        <dt>Адрес</dt><dd>г. Москва, ул. Примерная, 1 (склад, самовывоз по записи)</dd>
+        <dt>Часы работы</dt><dd>пн-сб, 9:00-19:00</dd>
+        <dt>Доставка</dt><dd>по России, транспортной компанией или почтой</dd>
+      </dl>
+    </div>
+    <div class="map">Здесь будет карта с вашим адресом</div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Демо-версия магазина. Название, цены и контакты условные.</div>
+</footer>
+
+<div class="shade" id="shade"></div>
+<aside class="drawer" id="drawer" aria-label="Корзина" aria-hidden="true">
+  <div class="dh"><h2>Корзина</h2><button class="x" id="closeCart" type="button" aria-label="Закрыть корзину">×</button></div>
+  <div class="dbody" id="dbody"></div>
+  <div class="dfoot" id="dfoot">
+    <div class="tot"><span>Итого</span><span id="total">0 ₽</span></div>
+    <button class="btn" id="goOrder" type="button">Оформить заказ</button>
+    <form class="order" id="orderForm" novalidate>
+      <label>Имя<input name="name" autocomplete="name" required></label>
+      <label>Телефон<input name="phone" autocomplete="tel" required></label>
+      <button class="btn" type="submit">Отправить заявку</button>
+    </form>
+    <div class="msg" id="orderMsg" role="status">Заявка принята. Это демо: на самом сайте заказ придёт вам на почту или в мессенджер, оплата не нужна.</div>
+  </div>
+</aside>
+
+<script>
+const I = {
+  gun:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M10 20h26l6-6h10v8l-6 2v6l-6 4"/><path d="M36 20v8M16 20v-4M10 20h-4"/><rect x="18" y="30" width="14" height="24" rx="2"/></svg>',
+  sand:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="10" y="22" width="44" height="22" rx="3"/><path d="M16 30h.1M24 34h.1M32 30h.1M40 36h.1M48 30h.1M20 38h.1M36 40h.1"/></svg>',
+  bottle:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M26 8h12v10l6 8v28H20V26l6-8z"/><path d="M20 36h24"/></svg>',
+  tools:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M12 52L38 26M34 22l8-8 8 8-8 8z"/><path d="M12 52l6 0 0-6"/></svg>',
+  mask:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M12 24c8-6 32-6 40 0v10c0 10-8 18-20 18S12 44 12 34z"/><circle cx="22" cy="40" r="5"/><circle cx="42" cy="40" r="5"/></svg>',
+  glove:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M20 56V30l-4-8 4-2 4 8V10h4v18V8h4v20V10h4v22V16h4v26l4-8 4 2-6 16v10z"/></svg>',
+  suit:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M22 8l10 6 10-6 12 8-6 10-6-4v32H22V30l-6 4-6-10z"/><path d="M32 14v40"/></svg>',
+  goggles:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><rect x="8" y="22" width="48" height="20" rx="10"/><path d="M32 28v8M8 32H4M60 32h-4"/></svg>',
+  tape:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="9"/></svg>',
+  hose:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M8 48c0-14 16-6 16-18s16-4 16-16M40 14h14M8 48h-2M54 14"/><circle cx="32" cy="32" r="0"/></svg>',
+  filter:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><rect x="20" y="10" width="24" height="12" rx="2"/><rect x="18" y="22" width="28" height="30" rx="4"/><path d="M26 52v6h12v-6M26 32h12M26 40h12"/></svg>',
+  quick:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M10 28h16v8H10zM26 24h12v16H26zM38 28h16v8H38z"/></svg>'
+};
+const CATS = ['Краскопульты','Подготовка','Защита','Оснастка'];
+const P = [
+  {id:1,c:0,n:'Краскопульт с нижним бачком 1 л',m:'для антигравия, мастик и грунтов',p:8900,photo:true},
+  {id:2,c:0,n:'Краскопульт HVLP, верхний бачок 600 мл',m:'для краски и лака, сопло 1,4 мм',p:7400,i:'gun'},
+  {id:3,c:0,n:'Краскопульт LVLP компактный',m:'для локального ремонта',p:5200,i:'gun'},
+  {id:4,c:0,n:'Мини-краскопульт для подкраски',m:'бачок 125 мл',p:3100,i:'gun'},
+  {id:5,c:1,n:'Шлифблок с пылеотводом',m:'подходит для листов 70×125',p:1250,i:'sand'},
+  {id:6,c:1,n:'Набор абразивных кругов P80-P400',m:'50 штук, 150 мм',p:1480,i:'sand'},
+  {id:7,c:1,n:'Обезжириватель универсальный, 1 л',m:'перед грунтом и краской',p:390,i:'bottle'},
+  {id:8,c:1,n:'Набор шпателей, 5 шт',m:'для шпатлёвки и зачистки',p:620,i:'tools'},
+  {id:9,c:2,n:'Респиратор с фильтрами A2P3',m:'для краски и растворителей',p:2650,i:'mask'},
+  {id:10,c:2,n:'Перчатки нитриловые, 100 шт',m:'размеры M, L, XL',p:780,i:'glove'},
+  {id:11,c:2,n:'Комбинезон малярный',m:'с капюшоном, не пылит',p:990,i:'suit'},
+  {id:12,c:2,n:'Очки закрытые',m:'защита от брызг',p:450,i:'goggles'},
+  {id:13,c:3,n:'Маскирующая лента 38 мм',m:'рулон 50 м, до +80 °C',p:190,i:'tape'},
+  {id:14,c:3,n:'Воздушный шланг PU, 10 м',m:'с быстросъёмами',p:1350,i:'hose'},
+  {id:15,c:3,n:'Фильтр-влагоотделитель 1/4"',m:'для чистого воздуха к краскопульту',p:1890,i:'filter'},
+  {id:16,c:3,n:'Быстросъёмные соединения, 3 шт',m:'латунь, 1/4"',p:540,i:'quick'}
+];
+const fmt = n => n.toLocaleString('ru-RU').replace(/ /g,' ') + ' ₽';
+const $ = s => document.querySelector(s);
+let cart = {}, cat = -1;
+
+function renderChips(){
+  const all = [['Все',-1]].concat(CATS.map((c,i)=>[c,i]));
+  $('#chips').innerHTML = all.map(([t,v])=>`<button class="chip" type="button" data-c="${v}" aria-pressed="${v===cat}">${t}</button>`).join('');
+}
+function renderGrid(){
+  const list = P.filter(p => cat===-1 || p.c===cat);
+  $('#grid').innerHTML = list.map(p=>{
+    const pic = p.photo ? '<img src="kraskopult.png" alt="'+p.n+'" loading="lazy">' : I[p.i];
+    return `<article class="card${p.photo?' feat':''}">
+      <div class="pic">${pic}</div>
+      <div class="body">
+        <h3>${p.n}</h3><div class="meta">${p.m}</div>
+        <div class="row"><span class="price">${fmt(p.p)}</span>
+        <button class="add" type="button" data-id="${p.id}">В корзину</button></div>
+      </div></article>`;
+  }).join('');
+}
+function renderCart(){
+  const ids = Object.keys(cart);
+  let n = 0, sum = 0;
+  $('#dbody').innerHTML = ids.length ? ids.map(id=>{
+    const p = P.find(x=>x.id==id), q = cart[id]; n += q; sum += q*p.p;
+    return `<div class="li"><div><b>${p.n}</b>
+      <div class="qty"><button type="button" data-d="-1" data-id="${id}" aria-label="Меньше">−</button><span>${q}</span><button type="button" data-d="1" data-id="${id}" aria-label="Больше">+</button></div></div>
+      <div><div class="s">${fmt(q*p.p)}</div><button class="rm" type="button" data-rm="${id}">убрать</button></div></div>`;
+  }).join('') : '<p class="empty">Пока пусто. Добавьте что-нибудь из каталога.</p>';
+  $('#cnt').textContent = n; $('#total').textContent = fmt(sum);
+  $('#goOrder').style.display = ids.length ? '' : 'none';
+  if(!ids.length){ $('#orderForm').classList.remove('on'); }
+}
+function openCart(o){
+  $('#drawer').classList.toggle('on',o); $('#shade').classList.toggle('on',o);
+  $('#drawer').setAttribute('aria-hidden',!o);
+  if(o) $('#closeCart').focus();
+}
+document.addEventListener('click',e=>{
+  const t = e.target;
+  if(t.dataset.c!==undefined && t.classList.contains('chip')){ cat=+t.dataset.c; renderChips(); renderGrid(); }
+  if(t.classList.contains('add')){
+    const id=t.dataset.id; cart[id]=(cart[id]||0)+1; renderCart();
+    t.classList.add('done'); t.textContent='В корзине ✓';
+    setTimeout(()=>{t.classList.remove('done');t.textContent='В корзину'},1200);
+  }
+  if(t.dataset.d){ const id=t.dataset.id; cart[id]+=+t.dataset.d; if(cart[id]<=0) delete cart[id]; renderCart(); }
+  if(t.dataset.rm){ delete cart[t.dataset.rm]; renderCart(); }
+});
+$('#openCart').onclick=()=>openCart(true);
+$('#closeCart').onclick=()=>openCart(false);
+$('#shade').onclick=()=>openCart(false);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') openCart(false); });
+$('#goOrder').onclick=()=>{ $('#orderForm').classList.add('on'); $('#orderForm input').focus(); };
+$('#orderForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=e.target; if(!f.name.value.trim()||!f.phone.value.trim()){ (f.name.value.trim()?f.phone:f.name).focus(); return; }
+  cart={}; renderCart(); f.reset(); f.classList.remove('on'); $('#orderMsg').classList.add('on');
+  setTimeout(()=>$('#orderMsg').classList.remove('on'),6000);
+});
+$('#fbForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=e.target; for(const k of ['name','contact','text']){ if(!f[k].value.trim()){ f[k].focus(); return; } }
+  f.reset(); $('#fbMsg').classList.add('on');
+});
+renderChips(); renderGrid(); renderCart();
+</script>
+</body>
+</html>
