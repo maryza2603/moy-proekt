@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Сварной двор - сварные изделия на заказ: лофт-мебель, навесы, хозблоки, урны</title>
+<meta name="description" content="Сварочный цех: лофт-мебель, навесы, хозблоки, урны и кровати из металла. Эскиз бесплатно, изготовление и монтаж.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Russo+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sheet:#E2E4E1;      /* листовая сталь */
+  --ink:#15191D;        /* воронёная сталь */
+  --straw:#E3C26A;      /* цвет побежалости: соломенный */
+  --bronze:#B9783A;     /* бронзовый */
+  --violet:#6B5B9A;     /* фиолетовый */
+  --blue:#2D4F9E;       /* синий */
+  --muted:#4A5258;
+  --white:#FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--sheet);color:var(--ink);font:400 17px/1.6 "Onest",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+h1,h2,h3{font-family:"Russo One","Onest",sans-serif;font-weight:400;line-height:1.05;letter-spacing:.005em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.temper{height:10px;background:linear-gradient(90deg,var(--straw),var(--bronze) 33%,var(--violet) 66%,var(--blue))}
+
+/* шапка */
+header{background:var(--ink);color:var(--white)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:66px}
+.logo{font:400 20px "Russo One";text-decoration:none;letter-spacing:.02em}
+.logo i{font-style:normal;color:var(--straw)}
+header nav{display:flex;gap:26px;font-size:15px}
+header nav a{text-decoration:none;opacity:.8}
+header nav a:hover{opacity:1}
+.tel{font-weight:600;text-decoration:none;white-space:nowrap}
+
+/* первый экран */
+.hero{padding:64px 0 0}
+.hero .grid{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:end}
+.hero h1{font-size:clamp(40px,6.4vw,84px);max-width:11ch}
+.hero p.lead{margin-top:24px;max-width:46ch;font-size:19px;color:var(--muted)}
+.seam{display:block;width:100%;height:56px;margin-top:44px}
+.seam path{stroke-dasharray:1400;stroke-dashoffset:1400;animation:weld 2.6s .3s cubic-bezier(.5,0,.2,1) forwards}
+@keyframes weld{to{stroke-dashoffset:0}}
+
+.call{background:var(--ink);color:var(--white);padding:28px;border-radius:4px}
+.call h2{font-size:24px;margin-bottom:6px}
+.call p{font-size:15px;opacity:.75;margin-bottom:18px}
+.call label{display:block;font-size:14px;margin:12px 0 6px;opacity:.85}
+.call input,.call select{width:100%;height:50px;border-radius:3px;border:2px solid #39424A;background:#0F1317;color:var(--white);font:inherit;padding:0 14px}
+.call input:focus,.call select:focus{border-color:var(--straw);outline:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;width:100%;height:54px;margin-top:18px;border:0;border-radius:3px;background:var(--straw);color:var(--ink);font:400 17px "Russo One";letter-spacing:.02em;cursor:pointer;transition:background .15s}
+.btn:hover{background:#EBCF85}
+.call .ok{display:none;margin-top:18px;padding:14px;border-left:4px solid var(--straw);background:#0F1317;font-size:15px}
+.call.sent .ok{display:block}
+.call.sent form{display:none}
+
+/* что делаем */
+section{padding:88px 0}
+.head{max-width:640px;margin-bottom:40px}
+.head h2{font-size:clamp(30px,4vw,48px)}
+.head p{margin-top:14px;color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-radius:4px;overflow:hidden}
+.tile{padding:28px 24px 32px;min-height:420px;display:flex;flex-direction:column}
+.tile svg{width:100%;height:150px;margin-bottom:auto}
+.tile h3{font-size:25px;margin-top:28px}
+.tile p{margin-top:10px;font-size:15.5px}
+.tile .from{margin-top:18px;font-weight:600}
+.t1{background:var(--straw);color:var(--ink)}
+.t2{background:var(--bronze);color:var(--ink)}
+.t3{background:var(--violet);color:var(--white)}
+.t4{background:var(--blue);color:var(--white)}
+
+/* почему мы */
+.why{background:var(--ink);color:var(--white)}
+.why .head p{color:#B7BEC4}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.facts h3{font-size:22px;margin-bottom:10px;color:var(--straw)}
+.facts p{color:#C9CFD4;font-size:16px;max-width:36ch}
+
+/* как работаем */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:s}
+.step{border-top:6px solid var(--ink);padding-top:18px;counter-increment:s}
+.step:nth-child(1){border-color:var(--straw)}
+.step:nth-child(2){border-color:var(--bronze)}
+.step:nth-child(3){border-color:var(--violet)}
+.step:nth-child(4){border-color:var(--blue)}
+.step::before{content:counter(s);font:400 34px "Russo One"}
+.step h3{font-size:21px;margin:8px 0 8px}
+.step p{font-size:15.5px;color:var(--muted)}
+
+/* ориентиры */
+.price{background:#D3D6D2}
+.rows{max-width:760px}
+.row{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:2px solid #B9BDB8;font-size:18px}
+.row b{font-family:"Russo One";font-weight:400;white-space:nowrap}
+.note{margin-top:20px;font-size:15px;color:var(--muted);max-width:60ch}
+
+/* контакты */
+.final{padding:72px 0}
+.final .wrap{display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+.final h2{font-size:clamp(28px,4vw,46px);max-width:15ch}
+.final a.big{font:400 clamp(28px,4vw,46px) "Russo One";text-decoration:none}
+footer{background:var(--ink);color:#9AA2A8;font-size:14px;padding:22px 0}
+
+@media (max-width:980px){
+  .hero .grid{grid-template-columns:1fr}
+  .tiles{grid-template-columns:1fr 1fr}
+  .facts{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  header nav{display:none}
+  .tiles{grid-template-columns:1fr}
+  .tile{min-height:0}
+  .steps{grid-template-columns:1fr}
+  section{padding:60px 0}
+  .row{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  .seam path{animation:none;stroke-dashoffset:0}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">СВАРНОЙ <i>ДВОР</i></a>
+    <nav aria-label="Разделы">
+      <a href="#chto">Что делаем</a>
+      <a href="#kak">Как работаем</a>
+      <a href="#ceny">Цены</a>
+    </nav>
+    <a class="tel" href="tel:+79990000000">+7 (999) 000-00-00</a>
+  </div>
+</header>
+<div class="temper" aria-hidden="true"></div>
+
+<main id="top">
+<div class="hero">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <h1>Варим металл так, чтобы шов был виден</h1>
+        <p class="lead">Лофт-мебель, навесы, хозблоки, урны и кровати. Рисуем эскиз бесплатно, делаем в своём цехе, привозим и ставим.</p>
+      </div>
+
+      <aside class="call" id="zayavka">
+        <h2>Что вам нужно сварить?</h2>
+        <p>Оставьте телефон. Позвоним в течение 15 минут в рабочее время и уточним размеры.</p>
+        <form id="f" novalidate>
+          <label for="what">Изделие</label>
+          <select id="what">
+            <option>Лофт-мебель (стол, стеллаж)</option>
+            <option>Кровать</option>
+            <option>Навес</option>
+            <option>Хозблок</option>
+            <option>Урна</option>
+            <option>Другое</option>
+          </select>
+          <label for="phone">Телефон</label>
+          <input id="phone" type="tel" inputmode="tel" placeholder="+7 ___ ___-__-__" autocomplete="tel" required>
+          <button class="btn" type="submit">Жду звонка</button>
+        </form>
+        <div class="ok" role="status">Заявка принята. Позвоним и уточним размеры. Это демо-сайт, на самом деле заявка никуда не уходит.</div>
+      </aside>
+    </div>
+
+    <svg class="seam" viewBox="0 0 1180 56" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 28 q10 -14 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0" fill="none" stroke="#15191D" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    </svg>
+  </div>
+</div>
+
+<section id="chto">
+  <div class="wrap">
+    <div class="head">
+      <h2>Что делаем</h2>
+      <p>Четыре направления. Цвета плиток - цвета побежалости, которые появляются на стали при нагреве.</p>
+    </div>
+    <div class="tiles">
+      <article class="tile t1">
+        <svg viewBox="0 0 200 150" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" aria-hidden="true">
+          <path d="M20 40h160M30 40v90M170 40v90M30 96h140M60 40v56M140 40v56"/>
+        </svg>
+        <h3>Лофт-мебель</h3>
+        <p>Столы, стеллажи, консоли, каркасы под дерево. Профильная труба, чистый шов, порошковая краска.</p>
+        <div class="from">Столы и стеллажи под ваш размер</div>
+      </article>
+      <article class="tile t2">
+        <svg viewBox="0 0 200 150" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" aria-hidden="true">
+          <path d="M20 120V30M180 120V60M20 82h160M20 60h160M180 60v-10M60 82v38M140 82v38"/>
+        </svg>
+        <h3>Кровати</h3>
+        <p>Каркас с изголовьем и ортопедическим основанием. Не скрипят, держат вес, разбираются для переезда.</p>
+        <div class="from">Любой размер матраса</div>
+      </article>
+      <article class="tile t3">
+        <svg viewBox="0 0 200 150" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" aria-hidden="true">
+          <path d="M10 50 100 20l90 30M25 50v85M175 50v85M25 50h150M60 50v85M100 50v85M140 50v85"/>
+        </svg>
+        <h3>Навесы</h3>
+        <p>Для машин, террас и входных групп. Считаем снеговую нагрузку, ставим на фундамент или анкеры.</p>
+        <div class="from">С монтажом и кровлей</div>
+      </article>
+      <article class="tile t4">
+        <svg viewBox="0 0 200 150" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" aria-hidden="true">
+          <path d="M20 60h160v70H20zM20 60l20-30h120l20 30M80 130V90h40v40M100 90v40"/>
+        </svg>
+        <h3>Хозблоки и урны</h3>
+        <p>Бытовки, сараи, мусорные контейнеры и урны для дворов и парков. Утеплим и обошьём, если нужно.</p>
+        <div class="from">Партии для УК и парков</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="head">
+      <h2>Почему к нам возвращаются</h2>
+    </div>
+    <div class="facts">
+      <div>
+        <h3>Шов делаем на совесть</h3>
+        <p>Зачищаем каждый шов и красим после сварки. Ржавчина не появится через сезон.</p>
+      </div>
+      <div>
+        <h3>Эскиз до оплаты</h3>
+        <p>Сначала рисунок и точные размеры. Вы видите, что получите, и только потом вносите предоплату.</p>
+      </div>
+      <div>
+        <h3>Сроки в договоре</h3>
+        <p>Говорим честно, сколько займёт работа, и записываем срок в договор. Привозим и монтируем сами.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kak">
+  <div class="wrap">
+    <div class="head">
+      <h2>Как проходит заказ</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Звонок</h3><p>Рассказываете, что нужно. Можно прислать фото-пример из интернета.</p></div>
+      <div class="step"><h3>Эскиз и смета</h3><p>Делаем чертёж и называем точную цену. Согласовываем правки.</p></div>
+      <div class="step"><h3>Цех</h3><p>Режем, варим, зачищаем, красим. Присылаем фото процесса.</p></div>
+      <div class="step"><h3>Доставка и монтаж</h3><p>Привозим, ставим, убираем за собой.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="price" id="ceny">
+  <div class="wrap">
+    <div class="head">
+      <h2>Ориентиры по цене</h2>
+      <p>Точную сумму называем после эскиза. Эти цифры - пример, как может выглядеть прайс.</p>
+    </div>
+    <div class="rows">
+      <div class="row"><span>Стол в стиле лофт, 1,4 м</span><b>от 18 000 ₽</b></div>
+      <div class="row"><span>Стеллаж, 5 полок</span><b>от 14 000 ₽</b></div>
+      <div class="row"><span>Кровать с изголовьем</span><b>от 22 000 ₽</b></div>
+      <div class="row"><span>Навес для автомобиля</span><b>от 65 000 ₽</b></div>
+      <div class="row"><span>Хозблок 2 × 3 м</span><b>от 90 000 ₽</b></div>
+      <div class="row"><span>Урна уличная</span><b>от 3 500 ₽</b></div>
+    </div>
+    <p class="note">Цены в демо-версии условные. В рабочем сайте здесь будет ваш настоящий прайс.</p>
+  </div>
+</section>
+
+<div class="final">
+  <div class="wrap">
+    <h2>Покажите картинку, посчитаем цену</h2>
+    <a class="big" href="tel:+79990000000">+7 (999) 000-00-00</a>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">Сварной двор. Демо-сайт: название, цены и телефон условные.</div>
+</footer>
+
+<script>
+document.getElementById('f').addEventListener('submit',function(e){
+  e.preventDefault();
+  var p=document.getElementById('phone');
+  if(p.value.replace(/\D/g,'').length<10){p.focus();p.style.borderColor='#E35D5D';return}
+  document.getElementById('zayavka').classList.add('sent');
+});
+</script>
+</body>
+</html>
